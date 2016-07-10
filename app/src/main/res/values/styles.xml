@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/blue_700</item>
+        <item name="actionBarStyle">@style/AppTheme.ActionBarStyle</item>
+        <item name="colorPrimary">@color/blue_500</item>
+        <item name="colorAccent">@color/blue_500</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:textColor">#000000</item>
+        <item name="alertDialogStyle">@style/AppCompatAlertDialogStyle</item>
+    </style>
+
+    <style name="AppTheme.ActionBarStyle" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>
+        <item name="background">@color/blue_500</item>
+        <item name="elevation">4dp</item>
+    </style>
+
+
+    <style name="AppTheme.ActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="Widget.AppCompat.Button.Colored.blue" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/blue_500</item>
+        <item name="colorAccent">@color/blue_500</item>
+    </style>
+
+    <style name="Widget.AppCompat.Button.Colored.gray" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">#9E9E9E</item>
+        <item name="colorAccent">#9E9E9E</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#FFCC00</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:background">#5fa3d0</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <style name="AppTheme.NoLauncher">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+</resources>

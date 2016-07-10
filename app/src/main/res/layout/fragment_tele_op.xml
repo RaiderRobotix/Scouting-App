@@ -1,0 +1,114 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.dataentry.TeleOpFragment"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/default_padding_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titlePrompt="High shots made"
+        app:initialValue="0"
+        android:id="@+id/high_shots_tele"/>
+
+    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        android:padding="@dimen/default_padding_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titlePrompt="Low shots made"
+        app:initialValue="0"
+        android:layout_below="@id/high_shots_tele"
+        android:id="@+id/low_shots_tele"/>
+
+        <LinearLayout
+            android:layout_below="@id/low_shots_tele"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding_top"
+            android:layout_marginTop="@dimen/default_padding_top"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:id="@+id/scoring_loc_viewgroup">
+        <TextView
+            android:textSize="18sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scoring locations:"
+            />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin">
+
+                <CheckBox
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Outer Works"
+                    android:id="@+id/score_outer"
+                />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/score_outer"
+                    android:text="Courtyard"
+                    android:id="@+id/score_courtyard"
+                    android:textSize="18sp"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Batter"
+                    android:layout_below="@id/score_courtyard"
+                    android:id="@+id/score_batter"
+                    android:textSize="18sp"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/breach_tower"
+        android:layout_below="@id/scoring_loc_viewgroup"
+        android:padding="@dimen/default_padding_bottom"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Breached tower"/>
+
+    <CheckBox
+        android:id="@+id/scale_tower"
+        android:layout_below="@id/breach_tower"
+        android:padding="@dimen/default_padding_bottom"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scaled tower" />
+
+    <Button
+        android:id="@+id/tele_continue"
+        android:layout_below="@id/scale_tower"
+        android:elevation="6dp"
+        android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+        android:textColor="#ffffff"
+        android:text="@string/continue_button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

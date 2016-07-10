@@ -1,0 +1,99 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.dataentry.PrematchFragment"
+    android:id="@+id/pre_frag"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    android:padding="@dimen/default_padding_top"
+    android:fillViewport="true"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scout_name_field"
+            android:hint="@string/scout_name"
+            app:met_floatingLabel="normal"
+            android:paddingTop="@dimen/default_padding_top"
+            android:paddingBottom="@dimen/default_padding_bottom"
+            android:paddingLeft="@dimen/inner_padding_left"
+            android:paddingRight="@dimen/inner_padding_right"
+            android:singleLine="true"/>
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/event_spin"
+            android:hint="@string/event"
+            android:layout_below="@id/scout_name_field"
+            android:paddingTop="@dimen/default_padding_top"
+            android:paddingBottom="@dimen/default_padding_bottom"
+            android:paddingLeft="@dimen/inner_padding_left"
+            android:paddingRight="@dimen/inner_padding_right"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/match_num_field"
+            android:layout_below="@id/event_spin"
+            android:hint="@string/match_number"
+            android:inputType="number"
+            app:met_floatingLabel="normal"
+            android:paddingTop="@dimen/default_padding_top"
+            android:paddingBottom="@dimen/default_padding_bottom"
+            android:paddingLeft="@dimen/inner_padding_left"
+            android:paddingRight="@dimen/inner_padding_right"
+            android:singleLine="true"/>
+
+
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scout_pos_spin"
+            android:hint="@string/scout_position"
+            android:layout_below="@id/match_num_field"
+            android:paddingTop="@dimen/default_padding_top"
+            android:paddingBottom="@dimen/default_padding_bottom"
+            android:paddingLeft="@dimen/inner_padding_left"
+            android:paddingRight="@dimen/inner_padding_right"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/team_num_field"
+            android:layout_below="@id/scout_pos_spin"
+            android:hint="@string/team_number"
+            android:inputType="number"
+            app:met_floatingLabel="normal"
+            android:paddingTop="@dimen/default_padding_top"
+            android:paddingBottom="@dimen/default_padding_bottom"
+            android:paddingLeft="@dimen/inner_padding_left"
+            android:paddingRight="@dimen/inner_padding_right"
+            android:singleLine="true"/>
+
+
+        <Button
+            android:id="@+id/prematch_continue"
+            android:layout_below="@id/team_num_field"
+            android:elevation="6dp"
+            android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+            android:textColor="#ffffff"
+            android:text="@string/continue_button"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

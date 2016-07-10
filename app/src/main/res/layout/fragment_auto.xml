@@ -1,0 +1,67 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.dataentry.AutoFragment"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/default_padding_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titlePrompt="High shots made"
+        app:initialValue="0"
+        android:id="@+id/high_shots_auto"/>
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Low shots made"
+            app:initialValue="0"
+            android:layout_below="@id/high_shots_auto"
+            android:id="@+id/low_shots_auto"/>
+
+        <CheckBox
+            android:id="@+id/reach_defense"
+            android:layout_below="@id/low_shots_auto"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="Reached defense"/>
+
+        <CheckBox
+            android:id="@+id/cross_defense"
+            android:layout_below="@id/reach_defense"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crossed defense" />
+
+        <Button
+            android:id="@+id/auto_continue"
+            android:layout_below="@id/cross_defense"
+            android:elevation="6dp"
+            android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+            android:textColor="#ffffff"
+            android:text="@string/continue_button"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            />
+
+
+    </RelativeLayout>
+
+</ScrollView>

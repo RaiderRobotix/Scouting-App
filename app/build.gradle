@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.0"
+    defaultConfig {
+        applicationId 'org.usfirst.frc.team25.scouting'
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        jackOptions{
+            enabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions{
+        incremental true
+    }
+    compileOptions{
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+    }
+}
+
+repositories{
+    jcenter()
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile files('../libs/commons-codec-1.10.jar')
+    compile files('../libs/TheBlueAllianceAPI.jar')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.github.barteksc:android-pdf-viewer:1.1.2'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.weiwangcn.betterspinner:library-material:1.1.0'
+    compile 'commons-io:commons-io:+'
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.retrofit:retrofit:1.6.0'
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'com.squareup.okhttp3:okhttp:3.0.1'
+}
+

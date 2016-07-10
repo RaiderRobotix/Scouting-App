@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="General"
+        android:layout="@layout/preference_category_normal"/>
+
+    <EditTextPreference
+        android:key="scout_name"
+        android:title="@string/scout_name"
+        android:defaultValue="John Doe" />
+
+    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
+        android:key="shift_dur"
+        android:title="@string/shift_dur"
+        android:defaultValue="10"
+        android:layout="@layout/preference_normal"
+        />
+
+    <ListPreference
+        android:key="pos"
+        android:title="@string/scout_position"
+        android:entries="@array/position_options"
+        android:entryValues="@array/position_options"
+        android:defaultValue="Red 1"
+        android:summary="%s"
+        />
+
+    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
+        android:key="match_num"
+        android:title="@string/match_number"
+        android:defaultValue="1"
+        android:layout="@layout/preference_normal"
+        />
+
+    <ListPreference
+        android:key="match_type"
+        android:title="@string/match_type"
+        android:entryValues="@array/match_types_values"
+        android:entries="@array/match_types"
+
+        android:summary="%s"
+        />
+
+    <ListPreference
+        android:key="event"
+        android:title="@string/event"
+        android:entries="@array/event_options"
+        android:entryValues="@array/event_options"
+        android:defaultValue="Brunswick Eruption"
+        android:summary="%s" />
+
+    <Preference
+        android:key="year"
+        android:title="@string/year"
+        android:defaultValue="2016"
+        android:summary="2016"
+        android:layout="@layout/preference_normal"
+        android:enabled="true"
+        />
+
+    <PreferenceCategory
+        android:title="Data Transfer"
+        android:layout="@layout/preference_category_normal" />
+
+    <Preference
+        android:title="Import match data"
+        android:key="import_data"/>
+
+    <Preference
+        android:key="change_pass"
+        android:title="@string/change_pass"
+        android:shouldDisableView="true"
+        android:defaultValue="da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        />
+
+    <Preference
+        android:key="delete_data"
+        android:title="@string/delete_data"
+        />
+
+
+
+</PreferenceScreen>
