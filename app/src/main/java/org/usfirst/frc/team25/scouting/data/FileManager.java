@@ -59,10 +59,72 @@ public class FileManager {
 
     }
 
-    public static String getFilename(Context c){
+    public static String getDataFilename(Context c){
         Settings set = Settings.newInstance(c);
-        final String fileName = "Scouting - " + set.getScoutPos() + " - " +set.getCurrentEvent() + ".json";
+        final String fileName = "Data - " + set.getScoutPos() + " - " +set.getCurrentEvent() + ".json";
         return fileName;
+    }
+
+    public static String getTeamListFilename(Context c){
+        Settings set = Settings.newInstance(c);
+        final String fileName = "Teams - " +set.getCurrentEvent() + ".csv";
+        return fileName;
+    }
+
+    public static boolean isOnTeamlist(String teamNum, Context c){
+        try{
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+            if(!directory.exists())
+                directory.mkdir();
+            String existingData = "";
+
+            File file = new File(directory, getTeamListFilename(c));
+
+
+            try {
+                FileInputStream inputStream = new FileInputStream(file);
+                BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+                String row = "";
+
+                while ((row = reader.readLine()) != null)
+                    existingData += row;
+                reader.close();
+            }catch (IOException e){
+                Log.i("file export", "no teamlist available");
+            }
+
+            String[] teamList = existingData.split(",");
+            for(String team : teamList)
+                if(team.equals(teamNum))
+                    return true;
+            return false;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static void addToTeamList(String teamNum, Context c){
+        try{
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+            if(!directory.exists())
+                directory.mkdir();
+            String existingData = "";
+
+            File file = new File(directory, getTeamListFilename(c));
+
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(","+teamNum);
+            writer.flush();
+            writer.close();
+            Log.i("file export", "Team list updated successfully");
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public static void saveData(ScoutEntry entry, Context c){
@@ -76,7 +138,7 @@ public class FileManager {
                 directory.mkdir();
             String existingData = "";
 
-            File file = new File(directory, getFilename(c));
+            File file = new File(directory, getDataFilename(c));
 
             try {
                 FileInputStream inputStream = new FileInputStream(file);

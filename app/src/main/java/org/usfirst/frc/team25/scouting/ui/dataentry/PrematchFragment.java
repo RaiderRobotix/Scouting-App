@@ -1,6 +1,8 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -16,9 +18,12 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import org.usfirst.frc.team25.scouting.R;
+import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.PreMatch;
 import org.usfirst.frc.team25.scouting.data.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.Settings;
+
+import java.io.File;
 
 public class PrematchFragment extends Fragment implements  EntryFragment{
 
@@ -26,6 +31,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     MaterialEditText name, matchNum, teamNum;
     MaterialBetterSpinner scoutPos, event;
     ScoutEntry entry;
+
 
     @Override
     public ScoutEntry getEntry() {
@@ -66,7 +72,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean proceed = true;
+               boolean proceed = true;
 
                 if(name.getText().toString().equals("")){
                     name.setError("Scout name required");
@@ -90,11 +96,31 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed=false;
                 }
                 //TODO Pull team numbers from The Blue Alliance for verification
-                if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999){
-                    if(teamNum.getText().toString().equals(""))
+                if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999) {
+                    if (teamNum.getText().toString().equals(""))
                         teamNum.setError("Team number required");
                     else teamNum.setError("Invalid team number");
+                    proceed = false;
+                }
+
+                else if(!FileManager.isOnTeamlist(teamNum.getText().toString(), getActivity())){
                     proceed=false;
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Confirm team number")
+                            .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing this match?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
+                                    continueButton.callOnClick();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .create()
+                            .show();
                 }
 
 

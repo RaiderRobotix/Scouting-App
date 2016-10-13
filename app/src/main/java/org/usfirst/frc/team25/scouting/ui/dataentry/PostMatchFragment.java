@@ -81,6 +81,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 FileManager.saveData(entry, getActivity());
 
                 getActivity().finish();
+                Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
             }
         });
 

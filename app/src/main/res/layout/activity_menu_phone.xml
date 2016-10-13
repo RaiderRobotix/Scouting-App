@@ -203,7 +203,7 @@
         android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
         android:id="@+id/strongholdView"
-        android:src="@drawable/stronghold_logo"
+        android:src="@drawable/steamworks_logo"
 
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="70dp" />

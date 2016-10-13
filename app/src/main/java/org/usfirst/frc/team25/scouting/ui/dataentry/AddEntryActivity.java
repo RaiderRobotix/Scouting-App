@@ -85,7 +85,6 @@ public class AddEntryActivity extends NoBackgroundAppCompatActivity {
 
     @Override
     public void finish() {
-        Toast.makeText(getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
         super.finish();
         Settings set = Settings.newInstance(getBaseContext());
         set.setMatchNum(set.getMatchNum()+1);

@@ -47,6 +47,6 @@ public class RulesActivity extends NoBackgroundAppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setTitle("FIRST Stronghold Rules");
+        setTitle("FIRST Steamworks Rules");
     }
 }

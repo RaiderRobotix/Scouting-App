@@ -51,7 +51,7 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
         rules = (ImageButton) findViewById(R.id.menu3_button);
         settings = (ImageButton) findViewById(R.id.menu4_button);
         status = (TextView) findViewById(R.id.current_info_label);
-        firstLogo = (ImageView) findViewById(R.id.strongholdView);
+        firstLogo = (ImageView) findViewById(R.id.steamworksView);
         raiderLogo = (ImageView) findViewById(R.id.raider_logo_view);
 
         if(!isTablet(getBaseContext())){
@@ -86,7 +86,7 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
                             FileManager.getDirectory());
                     if(!directory.exists())
                         directory.mkdir();
-                    File file = new File(directory, FileManager.getFilename(getBaseContext()));
+                    File file = new File(directory, FileManager.getDataFilename(getBaseContext()));
                     if(file.length()==0)
                         Toast.makeText(getBaseContext(), "Scouting data does not exist", Toast.LENGTH_SHORT).show();
                     else {
