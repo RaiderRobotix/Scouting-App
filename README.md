@@ -11,6 +11,7 @@ Key features:
 
 ##To Do
 **Major Additions/Changes**
+* Read match data impoorted from scouting client
 * Finish `DataDownloader` class with methods to download data and return as a JSON string
   * Alliances and teams for each match
   * Teams at each event
@@ -19,14 +20,13 @@ Key features:
  * Import/export said data via Bluetooth from/to other devices
 * Import and merge JSON scout data from other devices in-app
 * Automate maximum match number based on current event
-* Automate "Current event" `ListPreference` with events for the season
 * Improve speed of saving match data by writing each `ScoutEntry` object individually, without loading the existing data as an `ArrayList`
  * Initialize file with an opening bracket
  * After each entry is written as JSON, write a comma to the file
  * When exporting data, create a temporary file with the closing bracket to complete the JSON array (`]`)
 
 **Minor Changes**
- * Prevent Toast from appearing after discarding data from the Add Entry activity
+
  * Integrate a Preference item to download the data from TBA
  * Integrate the "Import match data" Preference item
  * Change fragments to `ScrollView`s as necessary to ensure mobile compatibility 
