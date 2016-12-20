@@ -84,6 +84,8 @@ public class Settings extends PreferenceFragment {
         return sp.getString("event", "DEFAULT");
     }
 
+    public boolean useTeamList(){ return sp.getBoolean("use_team_list", false);}
+
     public void setCurrentEvent(String event){
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("event", event);

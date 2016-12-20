@@ -3,6 +3,7 @@ package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -20,6 +21,7 @@ public class SettingsFragment extends PreferenceFragment {
     Preference deleteFiles, changePass, year, importData; // Buttons that hold a value, but do not prompt a dialogue
     NumberPickerPreference npp, shiftDur;
     EditTextPreference scoutNameInput;
+    CheckBoxPreference useTeamList;
     Settings set;
 
     public SettingsFragment() {
@@ -43,6 +45,7 @@ public class SettingsFragment extends PreferenceFragment {
         importData = findPreference("import_data");
 
         updateSummary();
+
 
         event.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override

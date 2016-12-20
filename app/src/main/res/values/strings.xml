@@ -41,11 +41,10 @@
     <!--Event Spinner Options-->
     <string-array name="event_options">
         <item>"Mount Olive"</item>
-        <item>"Bridgewater-Raritan"</item>
+        <item>"Montgomery"</item>
         <item>"MAR District Championship</item>
         <item>"St. Louis World Championships"</item>
         <item>"Brunswick Eruption"</item>
-        <item>"Other"</item>
     </string-array>
 
     <!--Match Type Spinner Options-->

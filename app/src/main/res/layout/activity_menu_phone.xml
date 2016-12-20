@@ -202,7 +202,7 @@
         android:layout_marginEnd="45dp"
         android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
-        android:id="@+id/strongholdView"
+        android:id="@+id/steamworksView"
         android:src="@drawable/steamworks_logo"
 
         android:layout_alignParentEnd="true"

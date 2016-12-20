@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
@@ -69,6 +70,13 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
         autoPopulate();
 
+        event.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Settings.newInstance(getActivity()).setCurrentEvent(event.getText().toString());
+            }
+        });
+
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +111,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed = false;
                 }
 
-                else if(!FileManager.isOnTeamlist(teamNum.getText().toString(), getActivity())){
+                else if(Settings.newInstance(getActivity()).useTeamList()&&!FileManager.isOnTeamlist(teamNum.getText().toString(), getActivity())){
                     proceed=false;
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Confirm team number")

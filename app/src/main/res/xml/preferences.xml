@@ -62,6 +62,13 @@
         android:title="Data Transfer"
         android:layout="@layout/preference_category_normal" />
 
+    <CheckBoxPreference
+        android:title="Use team lists"
+
+        android:summary="Verify scout input with predefined team lists for events"
+        android:key="use_team_list"
+        />
+
     <Preference
         android:title="Import match data"
         android:key="import_data"/>
