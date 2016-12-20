@@ -71,6 +71,55 @@ public class FileManager {
         return fileName;
     }
 
+    public static String getMatchListFilename(Context c){
+        Settings set = Settings.newInstance(c);
+        final String fileName = "Matches - " +set.getCurrentEvent() + ".csv";
+        return fileName;
+    }
+
+    public static String getTeamPlaying(Context c, String scoutPos, int matchNum){
+        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+        if(!directory.exists())
+            directory.mkdir();
+
+        File file = new File(directory, getMatchListFilename(c));
+
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+            String row = "";
+            ArrayList<String> rows = new ArrayList<>();
+            while ((row = reader.readLine()) != null)
+                rows.add(row);
+
+            Settings.newInstance(c).setMaxMatchNum(rows.size());
+
+            for (String r : rows ){
+                String[] dataEntries = r.split(",");
+                if(Integer.parseInt(dataEntries[0])==matchNum){
+                    if(scoutPos.equals("Red 1"))
+                        return dataEntries[1];
+                    if(scoutPos.equals("Red 2"))
+                        return dataEntries[2];
+                    if(scoutPos.equals("Red 3"))
+                        return dataEntries[3];
+                    if(scoutPos.equals("Blue 1"))
+                        return dataEntries[4];
+                    if(scoutPos.equals("Blue 2"))
+                        return dataEntries[5];
+                    if(scoutPos.equals("Blue 3"))
+                        return dataEntries[6];
+                }
+
+            }
+            reader.close();
+        }catch (IOException e){
+            Log.i("file export", "no matchlist available");
+        }
+
+        return "";
+    }
+
     public static boolean isOnTeamlist(String teamNum, Context c){
         try{
             File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());

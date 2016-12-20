@@ -45,8 +45,11 @@ public class PostMatch {
             throw new RuntimeException("String values must be set for each Quick Comment in PostMatch");
 
         for(int i = 0; i < quickComments.size(); i++)
-            if(quickComments.get(i).isChecked())
-                comment+= "; " + quickCommentValues[i];
+            if(quickComments.get(i).isChecked()){
+            	if(!comment.equals(""))
+            		comment+=";";
+                comment+= quickCommentValues[i];
+            }
     }
 
     public String getComment() {

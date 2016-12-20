@@ -90,6 +90,16 @@ public class Settings extends PreferenceFragment {
         editor.apply();
     }
 
+    public int getMaxMatchNum(){
+        return sp.getInt("max_match_num", 150);
+    }
+
+    public void setMaxMatchNum(int maxMatchNum){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("max_match_num", maxMatchNum);
+        editor.apply();
+    }
+
     //This is done automatically
     public void setYear(){
         SharedPreferences.Editor editor = sp.edit();

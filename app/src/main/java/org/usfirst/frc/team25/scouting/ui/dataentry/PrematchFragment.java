@@ -167,10 +167,13 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                 teamNum.requestFocus(); //Team number is the next text field after the scout name, since mathNum is always filled in with a value
             }
 
-            if (!set.getScoutPos().equals("DEFAULT"))
+            if (!set.getScoutPos().equals("DEFAULT")){
                 scoutPos.setText(set.getScoutPos());
+                teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
+            }
             if (!set.getCurrentEvent().equals("DEFAULT"))
                 event.setText(set.getCurrentEvent());
+
 
             matchNum.setText(String.valueOf(set.getMatchNum()));
         }

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 
+import org.usfirst.frc.team25.scouting.data.Settings;
+
 /**
  * A {@link android.preference.Preference} that displays a number picker as a dialog.
  */
@@ -31,7 +33,7 @@ public class NumberPickerPreference extends DialogPreference {
     protected View onCreateDialogView() {
         mPicker = new NumberPicker(getContext());
         mPicker.setMinValue(1);
-        mPicker.setMaxValue(200);
+        mPicker.setMaxValue(new Settings().newInstance(getContext()).getMaxMatchNum());
         mPicker.setValue(mNumber);
         return mPicker;
     }
