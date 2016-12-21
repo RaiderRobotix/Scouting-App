@@ -33,7 +33,7 @@ public class NumberPickerPreference extends DialogPreference {
     protected View onCreateDialogView() {
         mPicker = new NumberPicker(getContext());
         mPicker.setMinValue(1);
-        mPicker.setMaxValue(new Settings().newInstance(getContext()).getMaxMatchNum());
+        mPicker.setMaxValue(Settings.newInstance(getContext()).getMaxMatchNum());
         mPicker.setValue(mNumber);
         return mPicker;
     }

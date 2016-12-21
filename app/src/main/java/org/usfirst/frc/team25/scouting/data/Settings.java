@@ -100,6 +100,7 @@ public class Settings extends PreferenceFragment {
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("max_match_num", maxMatchNum);
         editor.apply();
+        Log.i("match_num_set", Integer.toString(maxMatchNum));
     }
 
     //This is done automatically

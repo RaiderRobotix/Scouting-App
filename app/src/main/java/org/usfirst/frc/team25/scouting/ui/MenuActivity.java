@@ -39,7 +39,7 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.i("test", new Task().doInBackground());
+
 
         if (!isTablet(getBaseContext()))
             setContentView(R.layout.activity_menu_phone); //Phone-sized screens have a layout that removes logos, keeping only icons

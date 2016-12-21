@@ -5,6 +5,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.google.gson.Gson;
@@ -65,16 +66,43 @@ public class FileManager {
         return fileName;
     }
 
-    public static String getTeamListFilename(Context c){
+    private static String getTeamListFilename(Context c){
         Settings set = Settings.newInstance(c);
         final String fileName = "Teams - " +set.getCurrentEvent() + ".csv";
         return fileName;
     }
 
-    public static String getMatchListFilename(Context c){
+    private static String getMatchListFilename(Context c){
         Settings set = Settings.newInstance(c);
         final String fileName = "Matches - " +set.getCurrentEvent() + ".csv";
         return fileName;
+    }
+
+    public static int getMaxMatchNum(Context c){
+        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+        if(!directory.exists())
+            directory.mkdir();
+
+        File file = new File(directory, getMatchListFilename(c));
+
+        if(!file.exists())
+            return 150;
+
+
+        int maxMatches = 0;
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+
+            while (( reader.readLine()) != null)
+                maxMatches++;
+
+
+        }catch (IOException e){
+            Log.i("file export", "no matchlist available");
+        }
+
+        return maxMatches;
     }
 
     public static String getTeamPlaying(Context c, String scoutPos, int matchNum){
@@ -128,6 +156,9 @@ public class FileManager {
             String existingData = "";
 
             File file = new File(directory, getTeamListFilename(c));
+
+            if(!file.exists())
+                return true;
 
 
             try {
