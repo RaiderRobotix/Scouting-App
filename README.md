@@ -1,4 +1,4 @@
-# FRC Scouting App
+# FRC Scouting App [![Build Status](https://travis-ci.org/spencerng/Scouting-App.svg?branch=master)](https://travis-ci.org/spencerng/Scouting-App)
 
 Team 25's base scouting app for the 2017 FRC season and beyond
 
