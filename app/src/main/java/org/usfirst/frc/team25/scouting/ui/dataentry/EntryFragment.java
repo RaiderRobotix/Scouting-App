@@ -1,18 +1,21 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
-import org.usfirst.frc.team25.scouting.data.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
 /**
  * Interface that all fragments for data entry implement to ensure successful communication between fragments
  */
 interface EntryFragment {
 
-    // A ScoutEntry container object to hold scouting info, passed around between fragments with setter and getter methods
-    // entry should be a parameter in the constructor, when setEntry is called
+    /** A ScoutEntry container object to hold scouting info, passed around between fragments with setter and getter methods
+     *  Entry should be a parameter in the constructor, when setEntry is called
+     *
+     */
     ScoutEntry entry = new ScoutEntry();
     void setEntry(ScoutEntry entry);
 
-    //Called when a fragment transaction is started to pass onto the next fragment
+    /* Called when a fragment transaction is started to pass data onto the next fragment
+     */
     ScoutEntry getEntry();
 
     /**

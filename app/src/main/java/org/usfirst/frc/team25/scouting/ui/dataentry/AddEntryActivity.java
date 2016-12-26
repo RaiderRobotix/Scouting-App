@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.data.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundAppCompatActivity;
 
@@ -88,5 +87,6 @@ public class AddEntryActivity extends NoBackgroundAppCompatActivity {
         super.finish();
         Settings set = Settings.newInstance(getBaseContext());
         set.setMatchNum(set.getMatchNum()+1);
+
     }
 }

@@ -9,7 +9,10 @@ import android.util.Log;
 
 import org.usfirst.frc.team25.scouting.ui.views.AppCompatPreferenceActivity;
 
-//Activity that holds the fragmetn for settings/preferences
+/**Activity that holds the fragment for settings/preferences
+ *
+ */
+
 public class SettingsActivity extends AppCompatPreferenceActivity implements OnSharedPreferenceChangeListener {
 
     SharedPreferences preferences;

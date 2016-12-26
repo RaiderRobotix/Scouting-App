@@ -28,8 +28,4 @@ Key features:
  * Integrate the "Import match data" Preference item
  * Improve UI (less clutter) in quick comments section
  * "Materialize" main menu icons
- * Fix button sizes on mobile
- * Create additional data verification for maximum match number and team number when adding entries
-  * If match list is present, check team number against spreadsheet with match number and position
-  * Otherwise, check team number against team list
 

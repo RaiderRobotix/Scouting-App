@@ -1,8 +1,6 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +11,8 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.data.ScoutEntry;
-import org.usfirst.frc.team25.scouting.data.TeleOp;
+import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
 
 

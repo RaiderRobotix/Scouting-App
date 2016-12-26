@@ -51,7 +51,7 @@ public class ButtonIncDec extends RelativeLayout {
      */
     public void setValue(int value){
         if(value < 0)
-            return;
+            return; //Value cannot be set less than 0
 
         valueView = (TextView) findViewById(R.id.button_inc_dec_value);
         valueView.setText(String.valueOf(value));

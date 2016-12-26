@@ -20,11 +20,11 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
-import org.usfirst.frc.team25.scouting.data.PreMatch;
-import org.usfirst.frc.team25.scouting.data.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.PreMatch;
+import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.Settings;
 
-import java.io.File;
+import java.io.IOException;
 
 public class PrematchFragment extends Fragment implements  EntryFragment{
 
@@ -81,7 +81,9 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
             @Override
             public void onClick(View view) {
                boolean proceed = true;
-
+                Settings set = Settings.newInstance(getActivity());
+                set.setCurrentEvent(event.getText().toString());
+                set.setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
                 if(name.getText().toString().equals("")){
                     name.setError("Scout name required");
                     proceed = false;
@@ -92,7 +94,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed = false;
                 }
 
-                if(matchNum.getText().toString().equals("") || Integer.parseInt(matchNum.getText().toString()) < 1 || Integer.parseInt(matchNum.getText().toString()) > 200){
+                if(matchNum.getText().toString().equals("") || Integer.parseInt(matchNum.getText().toString()) < 1 || Integer.parseInt(matchNum.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()){
                     if(matchNum.getText().toString().equals(""))
                         matchNum.setError("Match number required");
                     else matchNum.setError("Invalid match number value");
@@ -111,31 +113,70 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed = false;
                 }
 
-                else if(Settings.newInstance(getActivity()).useTeamList()&&!FileManager.isOnTeamlist(teamNum.getText().toString(), getActivity())){
-                    proceed=false;
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("Confirm team number")
-                            .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing this match?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
-                                    continueButton.callOnClick();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
+                else if(Settings.newInstance(getActivity()).useTeamList()){
+                    if(proceed) { //Alert is only displayed after all other errors are fixed
 
-                                }
-                            })
-                            .create()
-                            .show();
+                        try {
+                            if (!FileManager.getTeamPlaying(getActivity(), scoutPos.toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
+                                proceed = false;
+                                new AlertDialog.Builder(getActivity())
+                                        .setTitle("Confirm team number")
+                                        .setMessage("Are you sure that team " + teamNum.getText().toString() + " is " + scoutPos.getText().toString() + " in match " + matchNum.getText().toString() + "?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                saveState();
+
+                                                set.autoSetPreferences(entry.getPreMatch());
+
+                                                hideKeyboard();
+                                                getFragmentManager().beginTransaction()
+                                                        .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
+                                                        .commit();
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        })
+                                        .create()
+                                        .show();
+
+                            }
+                        } catch (IOException e) {
+                            //Match list does not exist; looking for team list
+
+                            e.printStackTrace();
+                            if(!FileManager.isOnTeamlist(teamNum.getText().toString(),getActivity())) {
+                                proceed = false;
+                                new AlertDialog.Builder(getActivity())
+                                        .setTitle("Confirm team number")
+                                        .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing this match?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
+                                                continueButton.callOnClick();
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        })
+                                        .create()
+                                        .show();
+                            }
+                        }
+                    }
+
                 }
 
 
                 if(proceed) {
                     saveState();
-                    Settings set = Settings.newInstance(getActivity());
+
                     set.autoSetPreferences(entry.getPreMatch());
+
                     hideKeyboard();
                     getFragmentManager().beginTransaction()
                             .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
@@ -177,7 +218,11 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
             if (!set.getScoutPos().equals("DEFAULT")){
                 scoutPos.setText(set.getScoutPos());
-                teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
+                try {
+                    teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
             if (!set.getCurrentEvent().equals("DEFAULT"))
                 event.setText(set.getCurrentEvent());
@@ -198,6 +243,9 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         getActivity().setTitle("Add Entry - Pre-Match");
     }
 
+    /** Hides the keyboard in the next fragment
+     *
+     */
     void hideKeyboard(){
         try {
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -5,13 +5,13 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.io.FileUtils;
+import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -105,14 +105,16 @@ public class FileManager {
         return maxMatches;
     }
 
-    public static String getTeamPlaying(Context c, String scoutPos, int matchNum){
+    public static String getTeamPlaying(Context c, String scoutPos, int matchNum) throws IOException{
         File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
         if(!directory.exists())
             directory.mkdir();
 
         File file = new File(directory, getMatchListFilename(c));
 
-        try {
+        if(!file.exists())
+            throw new IOException("Match file does not exist");
+
             FileInputStream inputStream = new FileInputStream(file);
             BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
             String row = "";
@@ -141,13 +143,17 @@ public class FileManager {
 
             }
             reader.close();
-        }catch (IOException e){
-            Log.i("file export", "no matchlist available");
-        }
+
 
         return "";
     }
 
+    /** Checks a team list file to see if a team is playing at the event
+     *
+     * @param teamNum Team number to be checked
+     * @param c
+     * @return <code>true</code> if <code>teamNum</code> is in the list of teams for the current event, <code>false </code> otherwise
+     */
     public static boolean isOnTeamlist(String teamNum, Context c){
         try{
             File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
@@ -185,6 +191,11 @@ public class FileManager {
         return true;
     }
 
+    /** Adds a team number to the list of teams for the current event
+     *
+     * @param teamNum Team number to be added
+     * @param c
+     */
     public static void addToTeamList(String teamNum, Context c){
         try{
             File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
@@ -207,6 +218,11 @@ public class FileManager {
 
     }
 
+    /** Saves a new entry to the JSON data file
+     *
+     * @param entry <code>ScoutEntry</code> object to be saved to data file
+     * @param c Context of current activity
+     */
     public static void saveData(ScoutEntry entry, Context c){
         Gson gson = new Gson();
         List<ScoutEntry> entries = new ArrayList<>();

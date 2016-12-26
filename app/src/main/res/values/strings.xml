@@ -9,7 +9,7 @@
     <string name="default_status">Red 1 - Match 1 - Event</string>
 
     <!--Add Match Interface-->
-    <string name="team_number">Team Number</string>
+    <string name="team_number">Team number</string>
     <string name="team_number_prompt">Enter team number</string>
     <string name="auto">Autonomous</string>
     <string name="tele">Tele-Op</string>
@@ -18,7 +18,7 @@
     <string name="finish_button">Finish</string>
 
     <!--Settings Menu Strings-->
-    <string name="scout_name">Scout Name</string>
+    <string name="scout_name">Scout name</string>
     <string name="match_number">Match number</string>
     <string name="event">Current event</string>
     <string name="match_type">Match type</string>

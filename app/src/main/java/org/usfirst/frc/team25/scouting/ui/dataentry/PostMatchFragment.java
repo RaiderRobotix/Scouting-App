@@ -1,7 +1,5 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,9 +13,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
-import org.usfirst.frc.team25.scouting.data.PostMatch;
-import org.usfirst.frc.team25.scouting.data.ScoutEntry;
-import org.usfirst.frc.team25.scouting.data.Settings;
+import org.usfirst.frc.team25.scouting.data.models.PostMatch;
+import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
 import java.util.ArrayList;
 

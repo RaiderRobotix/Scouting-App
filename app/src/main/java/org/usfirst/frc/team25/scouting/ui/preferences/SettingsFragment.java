@@ -15,7 +15,10 @@ import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
 
-//List of preferences, as defined in res/xml/preferences.xml
+/** List of preferences, as defined in res/xml/preferences.xml
+ *
+ */
+
 public class SettingsFragment extends PreferenceFragment {
 
     ListPreference matchType, event;
@@ -52,9 +55,9 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 npp = (NumberPickerPreference) findPreference("match_num");
-                npp.setValue(1);
+                npp.setValue(1); //Resets match number
 
-                return true;
+                return true;// A false value means the preference change is not saved
             }
         });
 
@@ -63,7 +66,7 @@ public class SettingsFragment extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object o) {
                 npp = (NumberPickerPreference) findPreference("match_num");
                 npp.setValue(1);
-                return true; // A false value means the preference change is not saved
+                return true;
             }
         });
 
@@ -124,7 +127,7 @@ public class SettingsFragment extends PreferenceFragment {
      */
     void updateSummary(){
         try {
-            Settings.newInstance(getActivity()).setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
+            Settings.newInstance(getActivity()).setMaxMatchNum(FileManager.getMaxMatchNum(getActivity())); //Automates maximum match number based on current event
             shiftDur.setSummary(String.valueOf(set.getShiftDur()) + " matches");
             scoutNameInput.setSummary(set.getScoutName());
             npp.setSummary(String.valueOf(set.getMatchNum()));

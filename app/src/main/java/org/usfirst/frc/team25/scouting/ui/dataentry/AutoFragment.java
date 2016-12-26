@@ -11,8 +11,8 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.data.Autonomous;
-import org.usfirst.frc.team25.scouting.data.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.Autonomous;
+import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
 
 public class AutoFragment extends Fragment implements  EntryFragment{

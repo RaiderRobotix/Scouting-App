@@ -27,7 +27,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-//Main activity of the application
+/** The main activity of the application
+ *
+ */
 public class MenuActivity extends NoBackgroundAppCompatActivity {
 
     private ImageButton addEntry, share, rules, settings;
@@ -35,14 +37,17 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
     private ImageView firstLogo, raiderLogo;
 
 
+    //Executes when application is first launched
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-
+        //Phone layout has fixed scaling of text and buttons
         if (!isTablet(getBaseContext()))
-            setContentView(R.layout.activity_menu_phone); //Phone-sized screens have a layout that removes logos, keeping only icons
+            setContentView(R.layout.activity_menu_phone);
+
+
         else setContentView(R.layout.activity_menu);
 
 
@@ -54,10 +59,6 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
         firstLogo = (ImageView) findViewById(R.id.steamworksView);
         raiderLogo = (ImageView) findViewById(R.id.raider_logo_view);
 
-        if(!isTablet(getBaseContext())){
-            raiderLogo.setVisibility(View.INVISIBLE);
-            firstLogo.setVisibility(View.INVISIBLE);
-        }
 
         //Methods that are OnClickListeners for each icon
         entryListen();
@@ -71,6 +72,7 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
         addEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Good model on how to start a new activity
                 Intent i = new Intent(MenuActivity.this, AddEntryActivity.class);
                 startActivity(i);
             }
@@ -169,29 +171,6 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
         return (xlarge || large);
     }
 
-
-
-    private class Task extends AsyncTask <Void, Void, String>{
-
-        @Override
-        protected String doInBackground(Void... voids) {
-
-            try {
-                DataDownloader api = DataDownloader.getInstance();
-                Match match = api.filterMatches(api.getEventMatches("2016pahat"), api.QUALIFIER)[0];
-
-                match.refreshNumbers();
-
-                return "Team number: " + match.getAlliances().getBlueAlliance().getTeamNumbers()[0];
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            return "No internet";
-
-        }
-
-
-    }
 
 
 }

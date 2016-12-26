@@ -6,6 +6,8 @@ import android.preference.PreferenceFragment;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.usfirst.frc.team25.scouting.data.models.PreMatch;
+
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -141,6 +143,7 @@ public class Settings extends PreferenceFragment {
         setCurrentEvent(preMatch.getCurrentEvent());
         setScoutPos(preMatch.getScoutPos());
         setMatchNum(preMatch.getMatchNum());
+
 
     }
 
