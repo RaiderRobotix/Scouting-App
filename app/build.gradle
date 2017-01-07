@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.0"
+    buildToolsVersion '24.0.0'
     defaultConfig {
         applicationId 'org.usfirst.frc.team25.scouting'
-        minSdkVersion 19
-        targetSdkVersion 23
+        minSdkVersion 21
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
         jackOptions{
-            enabled true
+            enabled false
         }
     }
     buildTypes {
@@ -23,8 +23,7 @@ android {
         incremental true
     }
     compileOptions{
-        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
-        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+
     }
 
     productFlavors {
@@ -39,7 +38,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile files('../libs/commons-codec-1.10.jar')
-    compile files('../libs/TheBlueAllianceAPI.jar')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.github.barteksc:android-pdf-viewer:1.1.2'

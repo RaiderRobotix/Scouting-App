@@ -1,10 +1,13 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
-/**
- * Created by sng on 6/30/2016.
+/** Container holding data from the tele-operated period
+ * Includes endgame data
  */
 public class TeleOp {
+
+    private int highShots, lowShots;
+    private boolean scoreOuterWorks, scoreCourtyard, scoreBatter, towerBreached, towerScaled;
 
     public TeleOp(int highShots, int lowShots, boolean scoreOuterWorks, boolean scoreCourtyard,
                   boolean scoreBatter, boolean towerBreached, boolean towerScaled) {
@@ -17,8 +20,6 @@ public class TeleOp {
         this.towerScaled = towerScaled;
     }
 
-    int highShots, lowShots;
-    boolean scoreOuterWorks, scoreCourtyard, scoreBatter, towerBreached, towerScaled;
 
     public int getHighShots() {
         return highShots;

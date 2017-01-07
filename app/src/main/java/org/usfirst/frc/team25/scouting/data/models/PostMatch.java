@@ -5,16 +5,21 @@ import android.widget.CheckBox;
 
 import java.util.ArrayList;
 
-/**
- * Created by sng on 6/30/2016.
+/** Qualitative reflection on the robot's performance after a match
+ *  Not to be used for end game actions
  */
 public class PostMatch {
 
     String comment;
 
 
-    public transient ArrayList<CheckBox> quickComments;
+    private transient ArrayList<CheckBox> quickComments;
 
+
+    /** A list of short human-readable descriptions corresponding to
+     *  CheckBox objects in the XML layout file of the post match fragment
+     */
+    //Transient means the data is not serialized
     final transient  String[] quickCommentValues = {
             "did not do much",
             "accurate shooter",
@@ -44,6 +49,7 @@ public class PostMatch {
         if(quickComments.size()!=quickCommentValues.length)
             throw new RuntimeException("String values must be set for each Quick Comment in PostMatch");
 
+        //Appends the quick comments to the long form comment
         for(int i = 0; i < quickComments.size(); i++)
             if(quickComments.get(i).isChecked()){
             	if(!comment.equals(""))
@@ -56,13 +62,13 @@ public class PostMatch {
         return comment;
     }
 
-
+    //Used to reinitialize PostMatchFragment
     public ArrayList<CheckBox> getQuickComments() {
         return quickComments;
     }
 
     public PostMatch(){
-        //Default empty constructor for Jackson JSON parsing
+        //Default empty constructor for JSON parsing
     }
 
 }

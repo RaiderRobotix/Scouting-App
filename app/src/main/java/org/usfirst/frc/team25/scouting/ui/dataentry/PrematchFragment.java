@@ -6,9 +6,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,6 +55,8 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
+
         final View view = inflater.inflate(R.layout.fragment_prematch, container, false);
         continueButton = (Button) view.findViewById(R.id.prematch_continue);
 
@@ -69,6 +73,15 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         teamNum = (MaterialEditText) view.findViewById(R.id.team_num_field);
 
         autoPopulate();
+
+        if(name.getText().toString().equals(""))
+            name.requestFocus();
+        else if(matchNum.getText().toString().equals(""))
+            matchNum.requestFocus();
+        else if(teamNum.getText().toString().equals(""))
+            teamNum.requestFocus();
+
+
 
         event.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -117,7 +130,9 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     if(proceed) { //Alert is only displayed after all other errors are fixed
 
                         try {
-                            if (!FileManager.getTeamPlaying(getActivity(), scoutPos.toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
+                            if (!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
+                                Log.i("tag", FileManager.getTeamPlaying(getActivity(), scoutPos.toString(), Integer.parseInt(matchNum.getText().toString()))+","+teamNum.getText().toString());
+
                                 proceed = false;
                                 new AlertDialog.Builder(getActivity())
                                         .setTitle("Confirm team number")
@@ -125,8 +140,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 saveState();
-
-                                                set.autoSetPreferences(entry.getPreMatch());
+                                                Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
 
                                                 hideKeyboard();
                                                 getFragmentManager().beginTransaction()
@@ -210,20 +224,25 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         // Pulls data values from preferences to automatically fill fields
         else {
             Settings set = Settings.newInstance(getActivity());
-            //Scout name is prompted for after a shift ends, but not during the first match
-            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
-                name.setText(set.getScoutName());
-                teamNum.requestFocus(); //Team number is the next text field after the scout name, since mathNum is always filled in with a value
-            }
 
             if (!set.getScoutPos().equals("DEFAULT")){
                 scoutPos.setText(set.getScoutPos());
-                try {
-                    teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
-                }catch (IOException e){
-                    e.printStackTrace();
+                if(set.useTeamList()) {
+                    try {
+                        teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
+            //Scout name is prompted for after a shift ends, but not during the first match
+            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
+                name.setText(set.getScoutName());
+
+            }
+
+
             if (!set.getCurrentEvent().equals("DEFAULT"))
                 event.setText(set.getCurrentEvent());
 

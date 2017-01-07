@@ -13,6 +13,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
+import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
@@ -79,6 +80,8 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
                 getActivity().finish();
                 Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
+                Settings set = Settings.newInstance(getActivity());
+                set.setMatchNum(set.getMatchNum()+1);
             }
         });
 

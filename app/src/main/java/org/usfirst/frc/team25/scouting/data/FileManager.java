@@ -23,21 +23,23 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by sng on 6/29/2016.
+/** Class of static methods used for interaction with the file system
+ * TODO make this more generalized
  */
 public class FileManager {
 
-    public static final String DIRECTORY = "Raider Robotix Scouting";
+    public static final String DIRECTORY_DATA = "Raider Robotix Scouting";
 
-    public static String getDirectory(){
-        return DIRECTORY;
-    }
 
-    public static void backup(Context c){
+    /**  Backs up the contents of the main data directory to Documents
+     * 
+     * @param c <code>Context</code> of the running stack
+     */
+    private static void backup(Context c){
         try{
-            File sourceDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
-            File destDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath(), getDirectory()+" - Backup");
+            File sourceDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
+            File destDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath(), DIRECTORY_DATA +" - Backup");
+            
             MediaScannerConnection.scanFile(c, new String[] {destDir.toString()}, null, null);
             FileUtils.copyDirectory(sourceDir, destDir);
             Log.i("backup", "files written to internal storage for backup");
@@ -48,10 +50,15 @@ public class FileManager {
 
     }
 
+    /** Deletes all files, including scout and event data, from the data directory
+     *  Executes a backup as well
+     *  Should not be used until the end of the season
+     * @param c <code>Context</code> of the running stack
+     */
     public static void deleteData(Context c){
         backup(c);
         try {
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
             FileUtils.cleanDirectory(directory);
             Log.i("delete", "files deleted from external storage");
         }catch (Exception e){
@@ -60,26 +67,47 @@ public class FileManager {
 
     }
 
+    /** Generates the filename for collected scouting data,
+     *  based on the current event and scouting position
+     *  Should be consistent with the desktop client
+     * @param c <code>Context</code> of the running stack
+     * @return The filename of the data file for the current event
+     */
     public static String getDataFilename(Context c){
         Settings set = Settings.newInstance(c);
-        final String fileName = "Data - " + set.getScoutPos() + " - " +set.getCurrentEvent() + ".json";
-        return fileName;
+        return "Data - " + set.getScoutPos() + " - " +set.getCurrentEvent() + ".json";
     }
 
+    /** Generates the filename for the general team list, based on the current event
+     *  Should be consistent with the desktop client
+     *
+     * @param c <code>Context</code> of the running stack
+     * @return The filename of the team list file
+     */
     private static String getTeamListFilename(Context c){
         Settings set = Settings.newInstance(c);
-        final String fileName = "Teams - " +set.getCurrentEvent() + ".csv";
-        return fileName;
+        return "Teams - " +set.getCurrentEvent() + ".csv";
     }
 
+    /** Generates the filename for the match list, based on the current event
+     *  Should be consistent with the desktop client
+     *
+     * @param c <code>Context</code> of the running stack
+     * @return The filename of the team list file
+     */
     private static String getMatchListFilename(Context c){
         Settings set = Settings.newInstance(c);
-        final String fileName = "Matches - " +set.getCurrentEvent() + ".csv";
-        return fileName;
+        return "Matches - " +set.getCurrentEvent() + ".csv";
     }
 
+    /** Finds the largest match number for the event, given the match list
+     *
+     * @param c <code>Context</code> of the running stack
+     * @return Number of the last qualification match if a match list is present
+     *         150 otherwise
+     */
     public static int getMaxMatchNum(Context c){
-        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
         if(!directory.exists())
             directory.mkdir();
 
@@ -88,25 +116,31 @@ public class FileManager {
         if(!file.exists())
             return 150;
 
-
         int maxMatches = 0;
         try {
             FileInputStream inputStream = new FileInputStream(file);
             BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
 
             while (( reader.readLine()) != null)
-                maxMatches++;
-
+                maxMatches++; //Incremented for each new line; each line contains match info
 
         }catch (IOException e){
-            Log.i("file export", "no matchlist available");
+            Log.i("file import", "no matchlist available");
         }
 
         return maxMatches;
     }
 
+    /** Finds the current team playing in the match, for the given scouting position
+     *
+     * @param c <code>Context</code> of the running stack
+     * @param scoutPos Current scouting position (Red/Blue, 1-3)
+     * @param matchNum Current match number
+     * @return Team number of the team playing in the current match, if available
+     * @throws IOException when the match list does not exist
+     */
     public static String getTeamPlaying(Context c, String scoutPos, int matchNum) throws IOException{
-        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
         if(!directory.exists())
             directory.mkdir();
 
@@ -115,48 +149,51 @@ public class FileManager {
         if(!file.exists())
             throw new IOException("Match file does not exist");
 
-            FileInputStream inputStream = new FileInputStream(file);
-            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
-            String row = "";
-            ArrayList<String> rows = new ArrayList<>();
-            while ((row = reader.readLine()) != null)
-                rows.add(row);
+        FileInputStream inputStream = new FileInputStream(file);
+        BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
 
-            Settings.newInstance(c).setMaxMatchNum(rows.size());
+        String row;
+        ArrayList<String> rows = new ArrayList<>();
+        while ((row = reader.readLine()) != null)
+            rows.add(row);
 
-            for (String r : rows ){
-                String[] dataEntries = r.split(",");
-                if(Integer.parseInt(dataEntries[0])==matchNum){
-                    if(scoutPos.equals("Red 1"))
-                        return dataEntries[1];
-                    if(scoutPos.equals("Red 2"))
-                        return dataEntries[2];
-                    if(scoutPos.equals("Red 3"))
-                        return dataEntries[3];
-                    if(scoutPos.equals("Blue 1"))
-                        return dataEntries[4];
-                    if(scoutPos.equals("Blue 2"))
-                        return dataEntries[5];
-                    if(scoutPos.equals("Blue 3"))
-                        return dataEntries[6];
-                }
 
+        for (String r : rows ){
+            String[] dataEntries = r.split(",");
+
+            //Each row in match list formatted as [match number], [red 1 team number], [red 2], [red 3], [blue 1], [blue 2], [blue 3]
+            if(Integer.parseInt(dataEntries[0])==matchNum){
+                if(scoutPos.equals("Red 1"))
+                    return dataEntries[1];
+                if(scoutPos.equals("Red 2"))
+                    return dataEntries[2];
+                if(scoutPos.equals("Red 3"))
+                    return dataEntries[3];
+                if(scoutPos.equals("Blue 1"))
+                    return dataEntries[4];
+                if(scoutPos.equals("Blue 2"))
+                    return dataEntries[5];
+                if(scoutPos.equals("Blue 3"))
+                    return dataEntries[6];
             }
-            reader.close();
+
+        }
+        reader.close();
 
 
-        return "";
+
+        return ""; //When the correct match number is not found, for some reason; shouldn't happen
     }
 
     /** Checks a team list file to see if a team is playing at the event
      *
      * @param teamNum Team number to be checked
-     * @param c
+     * @param c <code>Context</code> of the running stack
      * @return <code>true</code> if <code>teamNum</code> is in the list of teams for the current event, <code>false </code> otherwise
      */
     public static boolean isOnTeamlist(String teamNum, Context c){
         try{
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
             if(!directory.exists())
                 directory.mkdir();
             String existingData = "";
@@ -164,7 +201,7 @@ public class FileManager {
             File file = new File(directory, getTeamListFilename(c));
 
             if(!file.exists())
-                return true;
+                return true; //default case to prevent user from being stuck if team list does not exist
 
 
             try {
@@ -179,6 +216,7 @@ public class FileManager {
                 Log.i("file export", "no teamlist available");
             }
 
+            //Team list is a single row, comma separated file of team numbers
             String[] teamList = existingData.split(",");
             for(String team : teamList)
                 if(team.equals(teamNum))
@@ -192,13 +230,14 @@ public class FileManager {
     }
 
     /** Adds a team number to the list of teams for the current event
-     *
+     * Appends the number to the team list file
+     * Creates the file if it does not exist
      * @param teamNum Team number to be added
-     * @param c
+     * @param c <code>Context</code> of the running stack
      */
     public static void addToTeamList(String teamNum, Context c){
         try{
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
             if(!directory.exists())
                 directory.mkdir();
             String existingData = "";
@@ -226,16 +265,17 @@ public class FileManager {
     public static void saveData(ScoutEntry entry, Context c){
         Gson gson = new Gson();
         List<ScoutEntry> entries = new ArrayList<>();
-        Type listEntries = new TypeToken<List<ScoutEntry>>(){}.getType();
+        Type listEntries = new TypeToken<List<ScoutEntry>>(){}.getType(); //Example for deserializing an ArrayList of objects
 
         try{
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), getDirectory());
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
             if(!directory.exists())
                 directory.mkdir();
             String existingData = "";
 
             File file = new File(directory, getDataFilename(c));
 
+            //Reads the raw data
             try {
                 FileInputStream inputStream = new FileInputStream(file);
                 BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
