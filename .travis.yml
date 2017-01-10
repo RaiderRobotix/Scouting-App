@@ -17,6 +17,11 @@ android:
   # - sys-img-armeabi-v7a-android-24
   # - sys-img-x86-android-24
 
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+    
 script:
   - ./gradlew build
 
