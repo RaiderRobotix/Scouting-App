@@ -6,50 +6,90 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class TeleOp {
 
-    public TeleOp(int highShots, int lowShots, boolean scoreOuterWorks, boolean scoreCourtyard,
-                  boolean scoreBatter, boolean towerBreached, boolean towerScaled) {
-        this.highShots = highShots;
-        this.lowShots = lowShots;
-        this.scoreOuterWorks = scoreOuterWorks;
-        this.scoreCourtyard = scoreCourtyard;
-        this.scoreBatter = scoreBatter;
-        this.towerBreached = towerBreached;
-        this.towerScaled = towerScaled;
+    public int getLowGoals() {
+        return lowGoals;
     }
 
-    int highShots, lowShots;
-    boolean scoreOuterWorks, scoreCourtyard, scoreBatter, towerBreached, towerScaled;
-
-    public int getHighShots() {
-        return highShots;
+    public void setLowGoals(int lowGoals) {
+        this.lowGoals = lowGoals;
     }
 
-    public int getLowShots() {
-        return lowShots;
+    public int getHighGoals() {
+        return highGoals;
     }
 
-    public boolean isScoreOuterWorks() {
-        return scoreOuterWorks;
+    public void setHighGoals(int highGoals) {
+        this.highGoals = highGoals;
     }
 
-    public boolean isScoreCourtyard() {
-        return scoreCourtyard;
+    public int getGearsDelivered() {
+        return gearsDelivered;
     }
 
-    public boolean isScoreBatter() {
-        return scoreBatter;
+    public void setGearsDelivered(int gearsDelivered) {
+        this.gearsDelivered = gearsDelivered;
     }
 
-    public boolean isTowerBreached() {
-        return towerBreached;
+    public int getHopppersUsed() {
+        return hopppersUsed;
     }
 
-    public boolean isTowerScaled() {
-        return towerScaled;
+    public void setHopppersUsed(int hopppersUsed) {
+        this.hopppersUsed = hopppersUsed;
     }
 
+    public int getRotorsStarted() {
+        return rotorsStarted;
+    }
 
-    public TeleOp(){
-        //Default empty constructor for Jackson JSON parsing
+    public void setRotorsStarted(int rotorsStarted) {
+        this.rotorsStarted = rotorsStarted;
+    }
+
+    public boolean isAttemptTakeoff() {
+        return attemptTakeoff;
+    }
+
+    public void setAttemptTakeoff(boolean attemptTakeoff) {
+        this.attemptTakeoff = attemptTakeoff;
+    }
+
+    public boolean isReadyTakeoff() {
+        return readyTakeoff;
+    }
+
+    public void setReadyTakeoff(boolean readyTakeoff) {
+        this.readyTakeoff = readyTakeoff;
+    }
+
+    public boolean isUseReturnLoading() {
+        return useReturnLoading;
+    }
+
+    public void setUseReturnLoading(boolean useReturnLoading) {
+        this.useReturnLoading = useReturnLoading;
+    }
+
+    public boolean isUseOverflowLoading() {
+        return useOverflowLoading;
+    }
+
+    public void setUseOverflowLoading(boolean useOverflowLoading) {
+        this.useOverflowLoading = useOverflowLoading;
+    }
+
+    int lowGoals, highGoals, gearsDelivered, hopppersUsed,  rotorsStarted;
+    boolean attemptTakeoff, readyTakeoff, useReturnLoading, useOverflowLoading;
+
+    public TeleOp(int lowGoals, int highGoals, int gearsDelivered, int hopppersUsed, int rotorsStarted, boolean attemptTakeoff, boolean readyTakeoff, boolean useReturnLoading, boolean useOverflowLoading) {
+        this.lowGoals = lowGoals;
+        this.highGoals = highGoals;
+        this.gearsDelivered = gearsDelivered;
+        this.hopppersUsed = hopppersUsed;
+        this.rotorsStarted = rotorsStarted;
+        this.attemptTakeoff = attemptTakeoff;
+        this.readyTakeoff = readyTakeoff;
+        this.useReturnLoading = useReturnLoading;
+        this.useOverflowLoading = useOverflowLoading;
     }
 }

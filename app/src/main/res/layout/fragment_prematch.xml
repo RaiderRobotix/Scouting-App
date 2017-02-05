@@ -1,19 +1,28 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.dataentry.PrematchFragment"
     android:id="@+id/pre_frag"
-    android:layout_margin="@dimen/activity_vertical_margin"
-    android:padding="@dimen/default_padding_top"
+
+
+    android:orientation="vertical"
     android:fillViewport="true"
+    android:background="#ffffff"
     >
+
+    <ScrollView
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
 
 
     <RelativeLayout
+        android:padding="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
@@ -79,21 +88,34 @@
             android:paddingRight="@dimen/inner_padding_right"
             android:singleLine="true"/>
 
+        <CheckBox
+            android:id="@+id/pilot_playing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding_bottom"
+
+            android:textSize="18sp"
+
+            android:layout_below="@id/team_num_field"
+            android:text="This team has a pilot on the airship"/>
+
 
         <Button
             android:id="@+id/prematch_continue"
-            android:layout_below="@id/team_num_field"
+            android:layout_below="@id/pilot_playing"
             android:elevation="6dp"
             android:theme="@style/Widget.AppCompat.Button.Colored.blue"
             android:textColor="#ffffff"
             android:text="@string/continue_button"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"/>
 
 
     </RelativeLayout>
 
 
-
-</android.support.design.widget.CoordinatorLayout>
+    </ScrollView>
+</LinearLayout>

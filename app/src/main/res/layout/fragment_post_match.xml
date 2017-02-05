@@ -9,7 +9,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/robotCommentView">
 
 
 
@@ -18,212 +22,76 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Quick comments"
+            android:text="Robot comment"
             android:layout_margin="@dimen/activity_vertical_margin"
             android:textSize="24sp"
-            android:id="@+id/quick_comment"/>
+            android:id="@+id/robotQuickComment"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/quick_comment"
+            android:layout_below="@id/robotQuickComment"
             android:text="Select these options, then fill in below"
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:textSize="16sp"
             android:textColor="@color/first_gray"
-            android:id="@+id/quick_comment_hint"/>
+            android:id="@+id/robotQuickCommentHint"/>
 
-        <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/quick_comment_hint"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:id="@+id/check_set1">
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Did not do much"
-                android:id="@+id/quick_comment_1_1"/>
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Accurate shooter"
-                android:id="@+id/quick_comment_1_2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/check_set1"
-            android:id="@+id/check_set2"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_vertical_margin">
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:text="Lost communications"
-                android:id="@+id/quick_comment_2_1"/>
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Flipped over"
-                android:id="@+id/quick_comment_2_2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/check_set2"
-            android:id="@+id/check_set3"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_vertical_margin">
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:text="Helped others in alliance"
-                android:id="@+id/quick_comment_3_1"/>
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:text="Played defense"
-                android:id="@+id/quick_comment_3_2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/check_set3"
-            android:id="@+id/check_set4"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_vertical_margin">
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Good human player"
-                android:id="@+id/quick_comment_4_1"/>
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Good design"
-                android:id="@+id/quick_comment_4_2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/check_set4"
-            android:id="@+id/check_set5"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_vertical_margin">
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Very efficient scorer"
-                android:id="@+id/quick_comment_5_1"/>
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:text="Wasted time; inefficient"
-                android:id="@+id/quick_comment_5_2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/check_set5"
-            android:id="@+id/check_set6"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_vertical_margin">
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Good alliance choice"
-                android:id="@+id/quick_comment_6_1"/>
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Bad alliance choice"
-                android:id="@+id/quick_comment_6_2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/check_set6"
-            android:id="@+id/check_set7"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/default_padding_bottom"
-            android:layout_marginTop="@dimen/activity_horizontal_margin">
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:text="Match will be replayed"
-                android:id="@+id/quick_comment_7_1"/>
-
-            <CheckBox
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                android:layout_height="50dp"
-                android:text="Incorrect data entered (specify below)"
-                android:id="@+id/quick_comment_7_2"/>
-
-        </LinearLayout>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Additional comments"
+            android:hint="Additional robot comments"
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_below="@id/check_set7"
+            android:layout_below="@id/robotQuickCommentHint"
             app:met_floatingLabel="normal"
-            android:id="@+id/post_comment"
+            android:id="@+id/robotComment"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pilotCommentView"
+        android:layout_below="@id/robotCommentView">
+
+        <TextView
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Pilot comment"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:textSize="24sp"
+            android:id="@+id/pilotQuickComment"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pilotQuickComment"
+            android:text="Select these options, then fill in below"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:textSize="16sp"
+            android:textColor="@color/first_gray"
+            android:id="@+id/pilotQuickCommentHint"/>
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Additional pilot comments"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_below="@id/pilotQuickCommentHint"
+            app:met_floatingLabel="normal"
+            android:id="@+id/pilotComment"
             />
 
+
+
+    </RelativeLayout>
         <Button
             android:id="@+id/post_finish"
-            android:layout_below="@id/post_comment"
+            android:layout_below="@id/pilotCommentView"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
             android:theme="@style/Widget.AppCompat.Button.Colored.blue"
@@ -234,5 +102,7 @@
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
+
+
 
 </ScrollView>

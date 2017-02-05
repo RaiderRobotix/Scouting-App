@@ -37,6 +37,22 @@ public class Settings extends PreferenceFragment {
         editor.apply();
     }
 
+    public int getLowGoalInc(){ return sp.getInt("low_goal_inc", 3);}
+
+    public void setLowGoalInc(int inc){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("low_gal_inc", inc);
+        editor.apply();
+    }
+
+    public int getHighGoalInc(){ return sp.getInt("high_goal_inc", 6);};
+
+    public void sethighGoalInc(int inc){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("high_gal_inc", inc);
+        editor.apply();
+    }
+
     public String getScoutPos(){
         return sp.getString("pos", "DEFAULT");
     }
@@ -133,6 +149,8 @@ public class Settings extends PreferenceFragment {
         String hash = new String(Hex.encodeHex(DigestUtils.sha1(plainPass))).toLowerCase();
         return (hash.equals(getHashedPass()) || hash.equals("f98960d9aae06c642bae4f24b5152e1bd5cc2c42")); //User-set password or master password will work
     }
+
+
 
     /**
      * Method to intelligently detect changes or irregularities in scouting pattern for the next match

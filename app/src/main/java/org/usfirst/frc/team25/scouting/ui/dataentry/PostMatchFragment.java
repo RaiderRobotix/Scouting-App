@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
+import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
@@ -24,9 +27,30 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
     ScoutEntry entry;
-    MaterialEditText comment;
-    ArrayList<CheckBox> quickComments;
+    MaterialEditText robotComment, pilotComment;
+    RelativeLayout robotCommentView, pilotCommentView;
+    ArrayList<CheckBox> robotQuickComments, pilotQuickComments;
     Button finish;
+
+    final String[] robotQuickCommentValues = {
+            "Accurate high shooter",
+            "Fast high shooter",
+            "Fast cycle time",
+            "High fuel capacity",
+            "Lost communications",
+            "Flipped over",
+            "Helped teammates",
+            "Played defense",
+            "Good human player",
+            "Cause foul (specify below)",
+            "Match to be replayed",
+            "INCORRECT DATA"
+    };
+
+    final String[] pilotQuickCommentValues = {
+            "Dropped a gear from lift",
+            "Quick in retrieving gears"
+    };
 
     public static PostMatchFragment getInstance(ScoutEntry entry){
         PostMatchFragment pmf = new PostMatchFragment();
@@ -46,24 +70,25 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_post_match, container, false);
-        comment = (MaterialEditText) view.findViewById(R.id.post_comment);
 
-        quickComments = new ArrayList<CheckBox>();
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_1_1));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_1_2));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_2_1));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_2_2));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_3_1));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_3_2));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_4_1));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_4_2));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_5_1));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_5_2));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_6_1));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_6_2));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_7_1));
-        quickComments.add((CheckBox) view.findViewById(R.id.quick_comment_7_2));
+        robotComment = (MaterialEditText) view.findViewById(R.id.robotComment);
+        pilotComment = (MaterialEditText) view.findViewById(R.id.pilotComment);
+        robotCommentView = (RelativeLayout) view.findViewById(R.id.robotCommentView);
+        pilotCommentView = (RelativeLayout) view.findViewById(R.id.pilotCommentView);
         finish = (Button) view.findViewById(R.id.post_finish);
+
+        robotQuickComments = new ArrayList<CheckBox>();
+        pilotQuickComments = new ArrayList<CheckBox>();
+
+        if(!entry.getPreMatch().isPilotPlaying()) {
+            ((ViewGroup) pilotCommentView.getParent()).removeView(pilotCommentView);
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) finish.getLayoutParams();
+            params.addRule(RelativeLayout.BELOW, R.id.robotCommentView);
+            finish.setLayoutParams(params);
+        }
+        else generatePilotQuickComments();
+
+        generateRobotQuickComments();
 
         autoPopulate();
 
@@ -77,6 +102,9 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
                 FileManager.saveData(entry, getActivity());
 
+
+                Settings set = Settings.newInstance(getActivity());
+                set.setMatchNum(set.getMatchNum()+1);
                 getActivity().finish();
                 Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
             }
@@ -85,8 +113,135 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         return view;
     }
 
+    void generateRobotQuickComments(){
+
+        int prevId = -1;
+
+        for(int i = 0; i < Math.ceil(robotQuickCommentValues.length/2.0); i++){
+            ArrayList<String> checkSetValues = new ArrayList<>();
+            checkSetValues.add(robotQuickCommentValues[i*2]);
+            try{
+                checkSetValues.add(robotQuickCommentValues[i*2+1]);
+            }catch(IndexOutOfBoundsException e){
+
+            }
+
+            LinearLayout checkSet = new LinearLayout(getActivity());
+            CheckBox leftComment = new CheckBox(getActivity());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(1, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+
+            leftComment.setLayoutParams(params);
+            leftComment.setText(checkSetValues.get(0));
+            leftComment.setPadding(5,5,5,7);
+
+            robotQuickComments.add(leftComment);
+            checkSet.addView(leftComment);
+
+            if(checkSetValues.size()!=1){
+                CheckBox rightComment = new CheckBox(getActivity());
+
+                rightComment.setLayoutParams(params);
+                rightComment.setText(checkSetValues.get(1));
+                rightComment.setPadding(5,5,5,5);
+
+                robotQuickComments.add(rightComment);
+                checkSet.addView(rightComment);
+
+            }
+
+            int currentId = ViewGroup.generateViewId();
+
+            checkSet.setId(currentId);
+
+
+            RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            rlp.setMargins(16,16,16,16);
+
+
+            if(i==0)
+                rlp.addRule(RelativeLayout.BELOW, R.id.robotQuickCommentHint);
+            else rlp.addRule(RelativeLayout.BELOW, prevId);
+
+            prevId = currentId;
+
+            robotCommentView.addView(checkSet, rlp);
+
+
+
+        }
+
+        RelativeLayout.LayoutParams robotCommentParams = (RelativeLayout.LayoutParams) robotComment.getLayoutParams();
+        robotCommentParams.addRule(RelativeLayout.BELOW, prevId);
+
+        robotComment.setLayoutParams(robotCommentParams);
+    }
+
+    void generatePilotQuickComments(){
+
+        int prevId = -1;
+
+        for(int i = 0; i < Math.ceil(pilotQuickCommentValues.length/2.0); i++){
+            ArrayList<String> checkSetValues = new ArrayList<>();
+            checkSetValues.add(pilotQuickCommentValues[i*2]);
+            try{
+                checkSetValues.add(pilotQuickCommentValues[i*2+1]);
+            }catch(IndexOutOfBoundsException e){
+
+            }
+
+            LinearLayout checkSet = new LinearLayout(getActivity());
+            CheckBox leftComment = new CheckBox(getActivity());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(1, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+            leftComment.setPadding(3,3,3,3);
+
+            leftComment.setLayoutParams(params);
+            leftComment.setText(checkSetValues.get(0));
+
+            pilotQuickComments.add(leftComment);
+            checkSet.addView(leftComment);
+
+            if(checkSetValues.size()!=1){
+                CheckBox rightComment = new CheckBox(getActivity());
+
+                rightComment.setLayoutParams(params);
+                rightComment.setText(checkSetValues.get(1));
+                rightComment.setPadding(3,3,3,3);
+
+                pilotQuickComments.add(rightComment);
+                checkSet.addView(rightComment);
+
+            }
+
+            int currentId = ViewGroup.generateViewId();
+
+            checkSet.setId(currentId);
+
+
+            RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            rlp.setMargins(16,16,16,16);
+
+
+            if(i==0)
+                rlp.addRule(RelativeLayout.BELOW, R.id.pilotQuickCommentHint);
+            else rlp.addRule(RelativeLayout.BELOW, prevId);
+
+            prevId = currentId;
+
+            pilotCommentView.addView(checkSet, rlp);
+
+
+
+        }
+
+        RelativeLayout.LayoutParams pilotCommentParams = (RelativeLayout.LayoutParams) pilotComment.getLayoutParams();
+        pilotCommentParams.addRule(RelativeLayout.BELOW, prevId);
+
+        pilotComment.setLayoutParams(pilotCommentParams);
+    }
+
     public void saveState(){
-        entry.setPostMatch(new PostMatch(comment.getText().toString(), quickComments));
+        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), pilotComment.getText().toString(), robotQuickComments,
+                pilotQuickComments, robotQuickCommentValues, pilotQuickCommentValues));
     }
 
 
@@ -94,11 +249,17 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     @Override
     public void autoPopulate() {
         if(entry.getPostMatch()!=null){
-            ArrayList<CheckBox> checkedComments = entry.getPostMatch().getQuickComments();
-            for(int i = 0; i < checkedComments.size(); i++)
-                if(checkedComments.get(i).isChecked())
-                    quickComments.get(i).setChecked(true);
-            comment.setText(entry.getPostMatch().getComment());
+            ArrayList<CheckBox> robotCheckedComments = entry.getPostMatch().getRobotQuickComments();
+            for(int i = 0; i < robotCheckedComments.size(); i++)
+                if(robotCheckedComments.get(i).isChecked())
+                    robotQuickComments.get(i).setChecked(true);
+            robotComment.setText(entry.getPostMatch().getRobotComment());
+
+            ArrayList<CheckBox> pilotCheckedComments = entry.getPostMatch().getPilotQuickComments();
+            for(int i = 0; i < pilotCheckedComments.size(); i++)
+                if(pilotCheckedComments.get(i).isChecked())
+                    pilotQuickComments.get(i).setChecked(true);
+            pilotComment.setText(entry.getPostMatch().getPilotComment());
         }
     }
 

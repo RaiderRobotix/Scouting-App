@@ -52,10 +52,28 @@
     <Preference
         android:key="year"
         android:title="@string/year"
-        android:defaultValue="2016"
-        android:summary="2016"
+        android:defaultValue="2017"
+        android:summary="2017"
         android:layout="@layout/preference_normal"
         android:enabled="true"
+        />
+
+    <PreferenceCategory
+        android:title="FIRST Steamworks"
+        android:layout="@layout/preference_category_normal"/>
+
+    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
+        android:key="low_goal_inc"
+        android:title="Low goal increment"
+        android:defaultValue="10"
+        android:layout="@layout/preference_normal"
+        />
+
+    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
+        android:key="high_goal_inc"
+        android:title="High goal increment"
+        android:defaultValue="2"
+        android:layout="@layout/preference_normal"
         />
 
     <PreferenceCategory
@@ -84,6 +102,18 @@
         android:key="delete_data"
         android:title="@string/delete_data"
         />
+
+    <PreferenceCategory
+        android:title="About"
+        android:layout="@layout/preference_category_normal"/>
+
+    <Preference
+        android:title="Game"
+        android:summary="FIRST Steamworks"/>
+
+    <Preference
+        android:title="Version"
+        android:summary="0.1"/>
 
 
 

@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -31,6 +32,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     Button continueButton;
     MaterialEditText name, matchNum, teamNum;
     MaterialBetterSpinner scoutPos, event;
+    CheckBox pilotPlaying;
     ScoutEntry entry;
 
 
@@ -67,6 +69,8 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         name = (MaterialEditText) view.findViewById(R.id.scout_name_field);
         matchNum = (MaterialEditText) view.findViewById(R.id.match_num_field);
         teamNum = (MaterialEditText) view.findViewById(R.id.team_num_field);
+
+        pilotPlaying = (CheckBox) view.findViewById(R.id.pilot_playing);
 
         autoPopulate();
 
@@ -117,7 +121,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     if(proceed) { //Alert is only displayed after all other errors are fixed
 
                         try {
-                            if (!FileManager.getTeamPlaying(getActivity(), scoutPos.toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
+                            if (!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
                                 proceed = false;
                                 new AlertDialog.Builder(getActivity())
                                         .setTitle("Confirm team number")
@@ -193,18 +197,20 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     @Override
     public void saveState() {
         entry.setPreMatch(new PreMatch(name.getText().toString(), event.getText().toString(), scoutPos.getText().toString(),
-                Integer.parseInt(matchNum.getText().toString()), Integer.parseInt(teamNum.getText().toString())));
+                Integer.parseInt(matchNum.getText().toString()), Integer.parseInt(teamNum.getText().toString()), pilotPlaying.isChecked()));
     }
 
     public void autoPopulate(){
         //Manually filled data overrides preferences
         if(entry.getPreMatch()!=null){
             PreMatch prevPreMatch = entry.getPreMatch();
+
             name.setText(prevPreMatch.getScoutName());
             scoutPos.setText(prevPreMatch.getScoutPos());
             event.setText(prevPreMatch.getCurrentEvent());
             matchNum.setText(String.valueOf(prevPreMatch.getMatchNum()));
             teamNum.setText(String.valueOf(prevPreMatch.getTeamNum()));
+            pilotPlaying.setChecked(prevPreMatch.isPilotPlaying());
         }
 
         // Pulls data values from preferences to automatically fill fields
@@ -218,10 +224,12 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
             if (!set.getScoutPos().equals("DEFAULT")){
                 scoutPos.setText(set.getScoutPos());
-                try {
-                    teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
-                }catch (IOException e){
-                    e.printStackTrace();
+                if(set.useTeamList()){
+                    try {
+                        teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
                 }
             }
             if (!set.getCurrentEvent().equals("DEFAULT"))

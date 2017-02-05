@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Raider Robotix Scouting</string>
+    <string name="app_name">Raider Steamworks Scout</string>
 
     <!--Main Menu-->
     <string name="menu_1">Add Match</string>

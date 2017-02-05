@@ -18,6 +18,7 @@ import org.usfirst.frc.team25.scouting.data.Settings;
 public class NumberPickerPreference extends DialogPreference {
     private NumberPicker mPicker;
     private Integer mNumber = 0;
+    private Integer maxValue = 150;
 
     public NumberPickerPreference(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -33,9 +34,13 @@ public class NumberPickerPreference extends DialogPreference {
     protected View onCreateDialogView() {
         mPicker = new NumberPicker(getContext());
         mPicker.setMinValue(1);
-        mPicker.setMaxValue(Settings.newInstance(getContext()).getMaxMatchNum()); //Automates maximum match number from match list
+        mPicker.setMaxValue(maxValue); //Automates maximum match number from match list
         mPicker.setValue(mNumber);
         return mPicker;
+    }
+
+    public void setMaxValue(int maxValue){
+        this.maxValue = maxValue;
     }
 
     @Override

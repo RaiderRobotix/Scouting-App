@@ -10,60 +10,80 @@ import java.util.ArrayList;
  */
 public class PostMatch {
 
-    String comment;
-
-
-    public transient ArrayList<CheckBox> quickComments;
-
-    final transient  String[] quickCommentValues = {
-            "did not do much",
-            "accurate shooter",
-            "lost communications",
-            "flipped over",
-            "helped teammates",
-            "defense",
-            "good human player",
-            "good driver",
-            "efficient",
-            "inefficient",
-            "good pick",
-            "bad pick",
-            "to be replayed",
-            "INCORRECT DATA"
-    };
-
-    public PostMatch(String comment, ArrayList<CheckBox> quickComments) {
-        this.comment = comment;
-        this.quickComments = quickComments;
+    public PostMatch(String robotComment, String pilotComment, ArrayList<CheckBox> robotQuickComments,
+                     ArrayList<CheckBox> pilotQuickComments,
+                     String[] robotQuickCommentValues, String[] pilotQuickCommentValues) {
+        this.robotComment = robotComment;
+        this.pilotComment = pilotComment;
+        this.robotQuickComments = robotQuickComments;
+        this.pilotQuickComments = pilotQuickComments;
+        this.robotQuickCommentValues = robotQuickCommentValues;
+        this.pilotQuickCommentValues = pilotQuickCommentValues;
     }
 
-    public void finalizeComment() throws RuntimeException{
-        // CheckBoxes added in sequential order
-        // Specific identifiers not necessary since we only want their state, which will not be saved
+    String robotComment, pilotComment;
 
-        if(quickComments.size()!=quickCommentValues.length)
-            throw new RuntimeException("String values must be set for each Quick Comment in PostMatch");
 
-        for(int i = 0; i < quickComments.size(); i++)
-            if(quickComments.get(i).isChecked()){
-            	if(!comment.equals(""))
-            		comment+=";";
-                comment+= quickCommentValues[i];
+    public transient ArrayList<CheckBox> robotQuickComments, pilotQuickComments;
+
+    public String getRobotComment() {
+        return robotComment;
+    }
+
+    public void setRobotComment(String robotComment) {
+        this.robotComment = robotComment;
+    }
+
+    public String getPilotComment() {
+        return pilotComment;
+    }
+
+    public void setPilotComment(String pilotComment) {
+        this.pilotComment = pilotComment;
+    }
+
+    public ArrayList<CheckBox> getRobotQuickComments() {
+        return robotQuickComments;
+    }
+
+    public void setRobotQuickComments(ArrayList<CheckBox> robotQuickComments) {
+        this.robotQuickComments = robotQuickComments;
+    }
+
+    public ArrayList<CheckBox> getPilotQuickComments() {
+        return pilotQuickComments;
+    }
+
+    public void setPilotQuickComments(ArrayList<CheckBox> pilotQuickComments) {
+        this.pilotQuickComments = pilotQuickComments;
+    }
+
+
+
+    transient String[] robotQuickCommentValues, pilotQuickCommentValues;
+
+
+
+
+
+    public void finalizeComment(){
+
+        for(int i = 0; i < robotQuickComments.size(); i++)
+            if(robotQuickComments.get(i).isChecked()){
+            	if(!robotComment.equals(""))
+            		robotComment +=";";
+                robotComment += robotQuickCommentValues[i];
+            }
+
+        for(int i = 0; i < pilotQuickComments.size(); i++)
+            if(pilotQuickComments.get(i).isChecked()){
+                if(!pilotComment.equals(""))
+                    pilotComment +=";";
+                pilotComment += pilotQuickCommentValues[i];
             }
     }
 
-    public String getComment() {
-        return comment;
-    }
 
-
-    public ArrayList<CheckBox> getQuickComments() {
-        return quickComments;
-    }
-
-    public PostMatch(){
-        //Default empty constructor for Jackson JSON parsing
-    }
 
 }
 

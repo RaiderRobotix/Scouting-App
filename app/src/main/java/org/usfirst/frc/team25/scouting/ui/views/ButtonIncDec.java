@@ -19,6 +19,10 @@ public class ButtonIncDec extends RelativeLayout {
 
     private Button incButton, decButton;
     private TextView valueView;
+    private int incDecAmount;
+    private int minValue;
+    private int maxValue;
+
 
     public ButtonIncDec(Context c, AttributeSet attrs){
         super(c, attrs);
@@ -28,6 +32,10 @@ public class ButtonIncDec extends RelativeLayout {
         //XML attributes that can be set in layout files, rather than programmatically
         setValue(typedArray.getInteger(R.styleable.ButtonIncDec_initialValue, 1));
         setTitle(typedArray.getString(R.styleable.ButtonIncDec_titlePrompt));
+        setMinValue(typedArray.getInteger(R.styleable.ButtonIncDec_minValue, 0));
+        setMaxValue(typedArray.getInteger(R.styleable.ButtonIncDec_maxValue, Integer.MAX_VALUE));
+        setIncDecAmount(typedArray.getInteger(R.styleable.ButtonIncDec_incDecAmount, 1));
+
 
         typedArray.recycle();
 
@@ -52,6 +60,10 @@ public class ButtonIncDec extends RelativeLayout {
     public void setValue(int value){
         if(value < 0)
             return; //Value cannot be set less than 0
+        if(value>maxValue) {
+            setValue(maxValue);
+            return;
+        }
 
         valueView = (TextView) findViewById(R.id.button_inc_dec_value);
         valueView.setText(String.valueOf(value));
@@ -66,6 +78,18 @@ public class ButtonIncDec extends RelativeLayout {
         return Integer.parseInt(valueView.getText().toString());
     }
 
+    public void setIncDecAmount(int incDecAmount) {
+        this.incDecAmount = incDecAmount;
+    }
+
+    public void setMinValue(int minValue) {
+        this.minValue = minValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -77,13 +101,14 @@ public class ButtonIncDec extends RelativeLayout {
         incButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValue(getValue()+1);
+                setValue(getValue()+incDecAmount);
+
             }
         });
         decButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValue(getValue()-1);
+                setValue(getValue()-incDecAmount);
             }
         });
     }

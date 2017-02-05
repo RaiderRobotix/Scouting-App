@@ -23,7 +23,7 @@ public class SettingsFragment extends PreferenceFragment {
 
     ListPreference matchType, event;
     Preference deleteFiles, changePass, year, importData; // Buttons that hold a value, but do not prompt a dialogue
-    NumberPickerPreference npp, shiftDur;
+    NumberPickerPreference matchNum, shiftDur, lowGoalInc, highGoalInc;
     EditTextPreference scoutNameInput;
     CheckBoxPreference useTeamList;
     Settings set;
@@ -41,21 +41,28 @@ public class SettingsFragment extends PreferenceFragment {
         shiftDur = (NumberPickerPreference) findPreference("shift_dur");
         scoutNameInput = (EditTextPreference) findPreference("scout_name");
         matchType = (ListPreference) findPreference("match_type");
-        npp = (NumberPickerPreference) findPreference("match_num");
+        matchNum = (NumberPickerPreference) findPreference("match_num");
         event = (ListPreference) findPreference("event");
         deleteFiles = findPreference("delete_data");
         changePass =  findPreference("change_pass");
         year = findPreference("year");
         importData = findPreference("import_data");
+        lowGoalInc =  (NumberPickerPreference) findPreference("low_goal_inc");
+        highGoalInc = (NumberPickerPreference) findPreference("high_goal_inc");
 
         updateSummary();
 
 
+        matchNum.setMaxValue(Settings.newInstance(getActivity()).getMaxMatchNum());
+        shiftDur.setMaxValue(25);
+        lowGoalInc.setMaxValue(100);
+        highGoalInc.setMaxValue(100);
+
         event.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                npp = (NumberPickerPreference) findPreference("match_num");
-                npp.setValue(1); //Resets match number
+                matchNum = (NumberPickerPreference) findPreference("match_num");
+                matchNum.setValue(1); //Resets match number
 
                 return true;// A false value means the preference change is not saved
             }
@@ -64,8 +71,8 @@ public class SettingsFragment extends PreferenceFragment {
         matchType.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                npp = (NumberPickerPreference) findPreference("match_num");
-                npp.setValue(1);
+                matchNum = (NumberPickerPreference) findPreference("match_num");
+                matchNum.setValue(1);
                 return true;
             }
         });
@@ -130,9 +137,11 @@ public class SettingsFragment extends PreferenceFragment {
             Settings.newInstance(getActivity()).setMaxMatchNum(FileManager.getMaxMatchNum(getActivity())); //Automates maximum match number based on current event
             shiftDur.setSummary(String.valueOf(set.getShiftDur()) + " matches");
             scoutNameInput.setSummary(set.getScoutName());
-            npp.setSummary(String.valueOf(set.getMatchNum()));
+            matchNum.setSummary(String.valueOf(set.getMatchNum()));
             year.setSummary(set.getYear());
             set.setYear();
+            lowGoalInc.setSummary("+/- " + String.valueOf(set.getLowGoalInc()) + " goals");
+            highGoalInc.setSummary("+/- " + String.valueOf(set.getHighGoalInc()) + " goals");
         }catch(NullPointerException e){
             e.printStackTrace();
         }

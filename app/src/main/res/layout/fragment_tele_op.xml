@@ -1,4 +1,4 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,42 +6,70 @@
     tools:context=".ui.dataentry.TeleOpFragment"
     android:background="#ffffff">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:padding="@dimen/default_padding_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titlePrompt="High shots made"
+        app:titlePrompt="High goals made"
         app:initialValue="0"
-        android:id="@+id/high_shots_tele"/>
+        android:id="@+id/highGoalsTele"/>
 
     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
         android:padding="@dimen/default_padding_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titlePrompt="Low shots made"
+        app:titlePrompt="Low goals made"
         app:initialValue="0"
-        android:layout_below="@id/high_shots_tele"
-        android:id="@+id/low_shots_tele"/>
+        android:layout_below="@id/highGoalsTele"
+        android:id="@+id/lowGoalsTele"/>
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Gears delivered"
+            app:initialValue="0"
+            android:layout_below="@id/lowGoalsTele"
+            android:id="@+id/gearsTele"/>
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Rotors started"
+            app:initialValue="0"
+            android:layout_below="@id/gearsTele"
+            android:id="@+id/rotorsTele"/>
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Hoppers triggered"
+            app:initialValue="0"
+            android:layout_below="@id/rotorsTele"
+            android:id="@+id/hoppersTele"/>
 
         <LinearLayout
-            android:layout_below="@id/low_shots_tele"
+            android:layout_below="@id/hoppersTele"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/default_padding_top"
             android:layout_marginTop="@dimen/default_padding_top"
             android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:id="@+id/scoring_loc_viewgroup">
+            android:id="@+id/fuelCollectLoc">
         <TextView
             android:textSize="18sp"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scoring locations:"
+            android:text="Fuel collection\nlocations:"
             />
 
             <RelativeLayout
@@ -54,24 +82,18 @@
                     android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Outer Works"
-                    android:id="@+id/score_outer"
+                    android:text="Return loading station"
+                    android:id="@+id/useReturnStation"
                 />
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/score_outer"
-                    android:text="Courtyard"
-                    android:id="@+id/score_courtyard"
+                    android:layout_below="@id/useReturnStation"
+                    android:text="Overflow loading station"
+                    android:id="@+id/useOverflow"
                     android:textSize="18sp"/>
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Batter"
-                    android:layout_below="@id/score_courtyard"
-                    android:id="@+id/score_batter"
-                    android:textSize="18sp"/>
+
 
 
             </RelativeLayout>
@@ -79,29 +101,33 @@
         </LinearLayout>
 
     <CheckBox
-        android:id="@+id/breach_tower"
-        android:layout_below="@id/scoring_loc_viewgroup"
+        android:id="@+id/attemptTakeoff"
+        android:layout_below="@id/fuelCollectLoc"
         android:padding="@dimen/default_padding_bottom"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:textSize="18sp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Breached tower"/>
+
+        android:text="Attempts to get ready for takeoff"/>
 
     <CheckBox
-        android:id="@+id/scale_tower"
-        android:layout_below="@id/breach_tower"
+        android:id="@+id/readyForTakeoff"
+        android:layout_below="@id/attemptTakeoff"
         android:padding="@dimen/default_padding_bottom"
+        android:enabled="false"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scaled tower" />
+        android:text="Successful in attempt" />
+
+        <!--Include cycle options here?-->
 
     <Button
         android:id="@+id/tele_continue"
-        android:layout_below="@id/scale_tower"
+        android:layout_below="@id/readyForTakeoff"
         android:elevation="6dp"
         android:theme="@style/Widget.AppCompat.Button.Colored.blue"
         android:textColor="#ffffff"
@@ -111,4 +137,5 @@
         android:layout_centerHorizontal="true"
         />
     </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>
+</ScrollView>

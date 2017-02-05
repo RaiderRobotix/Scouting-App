@@ -34,7 +34,7 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
 
     private ImageButton addEntry, share, rules, settings;
     private TextView status;
-    private ImageView firstLogo, raiderLogo;
+
 
 
     //Executes when application is first launched
@@ -56,9 +56,6 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
         rules = (ImageButton) findViewById(R.id.menu3_button);
         settings = (ImageButton) findViewById(R.id.menu4_button);
         status = (TextView) findViewById(R.id.current_info_label);
-        firstLogo = (ImageView) findViewById(R.id.steamworksView);
-        raiderLogo = (ImageView) findViewById(R.id.raider_logo_view);
-
 
         //Methods that are OnClickListeners for each icon
         entryListen();

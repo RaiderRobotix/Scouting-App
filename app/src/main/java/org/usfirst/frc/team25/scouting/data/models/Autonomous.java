@@ -6,35 +6,66 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    int highShots, lowShots;
-    boolean reached, crossed;
-
-    public int getHighShots() {
-        return highShots;
+    public Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered) {
+        this.baselineCrossed = baselineCrossed;
+        this.useHoppers = useHoppers;
+        this.highGoals = highGoals;
+        this.lowGoals = lowGoals;
+        this.rotorsStarted = rotorsStarted;
+        this.gearsDelivered = gearsDelivered;
     }
 
-    public int getLowShots() {
-        return lowShots;
+    public boolean isBaselineCrossed() {
+        return baselineCrossed;
     }
 
-    public boolean isReached() {
-        return reached;
+    public void setBaselineCrossed(boolean baselineCrossed) {
+        this.baselineCrossed = baselineCrossed;
     }
 
-    public boolean isCrossed() {
-        return crossed;
+    public boolean isUseHoppers() {
+        return useHoppers;
     }
 
-
-
-    public Autonomous(int highShots, int lowShots, boolean reached, boolean crossed) {
-        this.highShots = highShots;
-        this.lowShots = lowShots;
-        this.reached = reached;
-        this.crossed = crossed;
+    public void setUseHoppers(boolean useHoppers) {
+        this.useHoppers = useHoppers;
     }
 
-    public Autonomous(){
-        //Default empty constructor for JSON parsing
+    public int getHighGoals() {
+        return highGoals;
     }
+
+    public void setHighGoals(int highGoals) {
+        this.highGoals = highGoals;
+    }
+
+    public int getLowGoals() {
+        return lowGoals;
+    }
+
+    public void setLowGoals(int lowGoals) {
+        this.lowGoals = lowGoals;
+    }
+
+    public int getRotorsStarted() {
+        return rotorsStarted;
+    }
+
+    public void setRotorsStarted(int rotorsStarted) {
+        this.rotorsStarted = rotorsStarted;
+    }
+
+    public int getGearsDelivered() {
+        return gearsDelivered;
+    }
+
+    public void setGearsDelivered(int gearsDelivered) {
+        this.gearsDelivered = gearsDelivered;
+    }
+
+    boolean baselineCrossed, useHoppers;
+    int highGoals, lowGoals, rotorsStarted, gearsDelivered;
+
+
+
 }

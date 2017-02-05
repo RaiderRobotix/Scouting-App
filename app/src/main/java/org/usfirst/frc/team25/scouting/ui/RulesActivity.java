@@ -10,6 +10,8 @@ import com.github.barteksc.pdfviewer.ScrollBar;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundAppCompatActivity;
 
+import static com.github.barteksc.pdfviewer.R.styleable.ScrollBar;
+
 // Activity that views the rules menu of the year's game
 public class RulesActivity extends NoBackgroundAppCompatActivity {
 
@@ -17,7 +19,7 @@ public class RulesActivity extends NoBackgroundAppCompatActivity {
     PDFView rulesView;
 
     //File name of the PDF file, placed in the assets folder
-    final String RULES_FILEPATH = "FRC-2016-game-manual.pdf";
+    final String RULES_FILEPATH = "Steamworks Cheatsheet.pdf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,10 @@ public class RulesActivity extends NoBackgroundAppCompatActivity {
                 .load();
 
             //Library object for easy navigation
-            ScrollBar scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
-            rulesView.setScrollBar(scrollBar);
-
+           /* ScrollBar scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
+            rulesView.setScrollBar(scrollBar);*/
         }catch(NullPointerException e){
+
             Toast.makeText(RulesActivity.this, "PDF File not found", Toast.LENGTH_LONG ).show();
             e.printStackTrace();
         }

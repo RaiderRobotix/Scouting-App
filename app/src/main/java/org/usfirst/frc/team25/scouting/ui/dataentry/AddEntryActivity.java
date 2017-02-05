@@ -82,11 +82,4 @@ public class AddEntryActivity extends NoBackgroundAppCompatActivity {
 
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        Settings set = Settings.newInstance(getBaseContext());
-        set.setMatchNum(set.getMatchNum()+1);
-
-    }
 }

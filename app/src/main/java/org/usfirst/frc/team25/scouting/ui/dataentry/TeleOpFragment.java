@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
+import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
@@ -18,10 +20,12 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
 
 public class TeleOpFragment extends Fragment implements EntryFragment{
 
+    //TODO add drag and drop ListView for robot actions during cycle
+
     ScoutEntry entry;
     Button continueButton;
-    ButtonIncDec high, low;
-    CheckBox outer, courtyard, batter, breached, scaled;
+    ButtonIncDec high, low, gears, rotors, hoppers;
+    CheckBox returnLoading, overflowLoading, attemptTakeoff, readyTakeoff;
 
     public static TeleOpFragment getInstance(ScoutEntry entry){
         TeleOpFragment tof = new TeleOpFragment();
@@ -48,33 +52,48 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        high = (ButtonIncDec) view.findViewById(R.id.high_shots_tele);
-        low = (ButtonIncDec) view.findViewById(R.id.low_shots_tele);
-        outer = (CheckBox) view.findViewById(R.id.score_outer);
-        courtyard = (CheckBox) view.findViewById(R.id.score_courtyard);
-        batter = (CheckBox) view.findViewById(R.id.score_batter);
-        breached = (CheckBox) view.findViewById(R.id.breach_tower);
-        scaled = (CheckBox) view.findViewById(R.id.scale_tower);
+        high = (ButtonIncDec) view.findViewById(R.id.highGoalsTele);
+        low = (ButtonIncDec) view.findViewById(R.id.lowGoalsTele);
+        gears = (ButtonIncDec) view.findViewById(R.id.gearsTele);
+        rotors = (ButtonIncDec) view.findViewById(R.id.rotorsTele);
+        hoppers=(ButtonIncDec) view.findViewById(R.id.hoppersTele);
+        returnLoading = (CheckBox) view.findViewById(R.id.useReturnStation);
+        overflowLoading = (CheckBox) view.findViewById(R.id.useOverflow);
+        attemptTakeoff = (CheckBox) view.findViewById(R.id.attemptTakeoff);
+        readyTakeoff = (CheckBox) view.findViewById(R.id.readyForTakeoff);
         continueButton = (Button) view.findViewById(R.id.tele_continue);
-        scaled.setEnabled(false);
 
-        breached.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        Settings set = Settings.newInstance(getActivity());
+
+        high.setIncDecAmount(set.getHighGoalInc());
+        low.setIncDecAmount(set.getLowGoalInc());
+
+        if(!entry.getPreMatch().isPilotPlaying()) {
+            ((ViewGroup) rotors.getParent()).removeView(rotors);
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) hoppers.getLayoutParams();
+            params.addRule(RelativeLayout.BELOW, R.id.gearsTele);
+            hoppers.setLayoutParams(params);
+        }
+
+
+        else rotors.setMaxValue(4-entry.getAuto().getRotorsStarted());
+
+        hoppers.setMaxValue(5 - (entry.getAuto().isUseHoppers() ? 1 : 0));
+
+
+        readyTakeoff.setEnabled(false);
+
+
+
+        attemptTakeoff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b)
-                    scaled.setEnabled(true);
+                    readyTakeoff.setEnabled(true);
                 else{
-                    scaled.setEnabled(false);
-                    scaled.setChecked(false);
+                    readyTakeoff.setEnabled(false);
+                    readyTakeoff.setChecked(false);
                 }
-            }
-        });
-
-        scaled.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!scaled.isEnabled())
-                    Toast.makeText(getActivity(), "Robot must breach tower first", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -94,23 +113,28 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
     @Override
     public void saveState() {
-        entry.setTeleOp(new TeleOp(high.getValue(), low.getValue(), outer.isChecked(),
-                courtyard.isChecked(), batter.isChecked(), breached.isChecked(), scaled.isChecked()));
+        entry.setTeleOp(new TeleOp(low.getValue(), high.getValue(), gears.getValue(), hoppers.getValue(),
+                entry.getPreMatch().isPilotPlaying() ? rotors.getValue() : -1, attemptTakeoff.isChecked(), readyTakeoff.isChecked(),
+                returnLoading.isChecked(), overflowLoading.isChecked()));
     }
 
     @Override
     public void autoPopulate() {
         if(entry.getTeleOp()!=null){
             TeleOp tele = entry.getTeleOp();
-            high.setValue(tele.getHighShots());
-            low.setValue(tele.getLowShots());
-            outer.setChecked(tele.isScoreOuterWorks());
-            batter.setChecked(tele.isScoreBatter());
-            courtyard.setChecked(tele.isScoreCourtyard());
-            breached.setChecked(tele.isTowerBreached());
-            if(tele.isTowerBreached())
-                scaled.setEnabled(true);
-            scaled.setChecked(tele.isTowerScaled());
+            low.setValue(tele.getLowGoals());
+            high.setValue(tele.getHighGoals());
+            gears.setValue(tele.getGearsDelivered());
+            hoppers.setValue(tele.getHopppersUsed());
+            rotors.setValue(tele.getRotorsStarted());
+            attemptTakeoff.setChecked(tele.isAttemptTakeoff());
+
+            returnLoading.setChecked(tele.isUseReturnLoading());
+            overflowLoading.setChecked(tele.isUseOverflowLoading());
+
+            if(tele.isAttemptTakeoff())
+                readyTakeoff.setEnabled(true);
+            readyTakeoff.setChecked(tele.isReadyTakeoff());
         }
     }
 

@@ -1,57 +1,84 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.dataentry.AutoFragment"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="#ffffff">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:padding="@dimen/default_padding_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titlePrompt="High shots made"
-        app:initialValue="0"
-        android:id="@+id/high_shots_auto"/>
+
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="High goals made"
+            app:initialValue="0"
+            android:id="@+id/high_goals_auto"/>
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Low shots made"
+            app:titlePrompt="Low goals made"
             app:initialValue="0"
-            android:layout_below="@id/high_shots_auto"
-            android:id="@+id/low_shots_auto"/>
+            android:layout_below="@id/high_goals_auto"
+            android:id="@+id/low_goals_auto"/>
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Gears delivered"
+            app:initialValue="0"
+            app:maxValue="3"
+            android:layout_below="@id/low_goals_auto"
+            android:id="@+id/gears_auto"/>
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Rotors started"
+            app:initialValue="0"
+            app:maxValue="2"
+            android:layout_below="@id/gears_auto"
+            android:id="@+id/rotors_auto"/>
+
 
         <CheckBox
-            android:id="@+id/reach_defense"
-            android:layout_below="@id/low_shots_auto"
+            android:id="@+id/reach_baseline"
+            android:layout_below="@id/rotors_auto"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="Reached baseline"/>
+
+        <CheckBox
+            android:id="@+id/uses_hoppers"
+            android:layout_below="@id/reach_baseline"
             android:padding="@dimen/default_padding_bottom"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Reached defense"/>
+            android:text="Uses hopper(s)"/>
 
-        <CheckBox
-            android:id="@+id/cross_defense"
-            android:layout_below="@id/reach_defense"
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Crossed defense" />
 
         <Button
             android:id="@+id/auto_continue"
-            android:layout_below="@id/cross_defense"
+            android:layout_below="@id/uses_hoppers"
             android:elevation="6dp"
             android:theme="@style/Widget.AppCompat.Button.Colored.blue"
             android:textColor="#ffffff"
@@ -62,6 +89,8 @@
             />
 
 
+
+
     </RelativeLayout>
 
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>
