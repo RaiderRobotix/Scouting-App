@@ -12,13 +12,6 @@ Key features:
 
 ##To Do
 
-**Changes during build season**
-* Define metrics with setters/getters in `models` package
-* Implement `Views` to collect data in `dataentry` package
-* Update `autoPopulate` methods in entry fragments
-* Update the list of `quickComments` in `PostMatchFragment`
-* Change the game manual in `assets`
-
 **Features to implement**
 * Finish `DataDownloader` class and implement methods from desktop client to download the data from TBA
  * Create methods to save the data
@@ -29,6 +22,5 @@ Key features:
  * When exporting data, create a temporary file with the closing bracket (`]`) to complete the JSON array
 * Integrate a Preference item to download the data from TBA
 * Integrate the "Import match data" Preference item
-* Improve UI (less clutter) in quick comments section
 * "Materialize" main menu icons
 
