@@ -82,7 +82,7 @@ public class MenuActivity extends NoBackgroundAppCompatActivity {
             public void onClick(View view) {
                 try {
                     File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
-                            FileManager.getDirectory());
+                            FileManager.DIRECTORY_DATA);
                     if(!directory.exists())
                         directory.mkdir();
                     File file = new File(directory, FileManager.getDataFilename(getBaseContext()));

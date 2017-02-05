@@ -1,8 +1,8 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
-/**
- * Created by sng on 6/30/2016.
+/** Object model for autonomous period of a match
+ *
  */
 public class Autonomous {
 

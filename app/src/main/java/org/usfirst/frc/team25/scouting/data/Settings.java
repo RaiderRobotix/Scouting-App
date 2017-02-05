@@ -13,14 +13,20 @@ import android.util.Log;
 
 import java.util.Calendar;
 
-/**
- * Created by sng on 6/29/2016.
+/** Object to access SharedPreferences and global user settings
+ *  Must be initialized with a Context
  */
 public class Settings extends PreferenceFragment {
 
     SharedPreferences sp;
 
     // Use getBaseContext() or getActivity() when calling this
+
+    /** Get a new instance of a Settings object to retrieve data
+     *
+     * @param c <code>Context</code> of the running stack
+     * @return A Settings object ot read data from
+     */
     public static Settings newInstance(Context c){
         Settings set = new Settings();
         set.sp = PreferenceManager.getDefaultSharedPreferences(c);
@@ -68,7 +74,7 @@ public class Settings extends PreferenceFragment {
     }
 
     public void setShiftDur(int shiftDur){
-        if(shiftDur <1 || shiftDur > 200)
+        if(shiftDur <1 || shiftDur > 150)
             shiftDur = 1;
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("shift_dur", shiftDur);

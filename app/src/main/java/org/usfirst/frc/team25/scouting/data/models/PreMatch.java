@@ -1,8 +1,8 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
-/**
- * Created by sng on 6/30/2016.
+/** General information about a match and scout before it begins
+ *
  */
 public class PreMatch {
 
@@ -39,9 +39,7 @@ public class PreMatch {
         return currentEvent;
     }
 
-    public String getScoutPos() {
-        return scoutPos;
-    }
+    public String getScoutPos() { return scoutPos; }
 
     public int getMatchNum() {
         return matchNum;

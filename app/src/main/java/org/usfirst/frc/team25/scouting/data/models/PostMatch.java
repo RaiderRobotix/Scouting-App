@@ -5,10 +5,11 @@ import android.widget.CheckBox;
 
 import java.util.ArrayList;
 
-/**
- * Created by sng on 6/30/2016.
+/** Qualitative reflection on the robot's performance after a match
+ *  Not to be used for end game actions
  */
 public class PostMatch {
+
 
     public PostMatch(String robotComment, String pilotComment, ArrayList<CheckBox> robotQuickComments,
                      ArrayList<CheckBox> pilotQuickComments,
@@ -19,6 +20,7 @@ public class PostMatch {
         this.pilotQuickComments = pilotQuickComments;
         this.robotQuickCommentValues = robotQuickCommentValues;
         this.pilotQuickCommentValues = pilotQuickCommentValues;
+
     }
 
     String robotComment, pilotComment;
@@ -81,6 +83,7 @@ public class PostMatch {
                     pilotComment +=";";
                 pilotComment += pilotQuickCommentValues[i];
             }
+
     }
 
 

@@ -1,10 +1,11 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
-/**
- * Created by sng on 6/30/2016.
+/** Container holding data from the tele-operated period
+ * Includes endgame data
  */
 public class TeleOp {
+
 
     public int getLowGoals() {
         return lowGoals;
