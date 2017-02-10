@@ -1,21 +1,33 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+
+import com.mobeta.android.dslv.DragSortListView;
+import com.mobeta.android.dslv.SimpleDragSortCursorAdapter;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 
 public class TeleOpFragment extends Fragment implements EntryFragment{
@@ -24,8 +36,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
     ScoutEntry entry;
     Button continueButton;
-    ButtonIncDec high, low, gears, rotors, hoppers;
+    ButtonIncDec high, low, gears, rotors, hoppers, cycles, highInc, lowInc;
     CheckBox returnLoading, overflowLoading, attemptTakeoff, readyTakeoff;
+    DragSortListView lv;
+    Settings set;
 
     public static TeleOpFragment getInstance(ScoutEntry entry){
         TeleOpFragment tof = new TeleOpFragment();
@@ -52,7 +66,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        high = (ButtonIncDec) view.findViewById(R.id.highGoalsTele);
+       high = (ButtonIncDec) view.findViewById(R.id.highGoalsTele);
         low = (ButtonIncDec) view.findViewById(R.id.lowGoalsTele);
         gears = (ButtonIncDec) view.findViewById(R.id.gearsTele);
         rotors = (ButtonIncDec) view.findViewById(R.id.rotorsTele);
@@ -62,16 +76,24 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         attemptTakeoff = (CheckBox) view.findViewById(R.id.attemptTakeoff);
         readyTakeoff = (CheckBox) view.findViewById(R.id.readyForTakeoff);
         continueButton = (Button) view.findViewById(R.id.tele_continue);
+        cycles = (ButtonIncDec) view.findViewById(R.id.numCycles);
+        highInc = (ButtonIncDec) view.findViewById(R.id.highGoalInc);
+        lowInc = (ButtonIncDec) view.findViewById(R.id.lowGoalInc);
 
-        Settings set = Settings.newInstance(getActivity());
 
-        high.setIncDecAmount(set.getHighGoalInc());
-        low.setIncDecAmount(set.getLowGoalInc());
+
+        set = Settings.newInstance(getActivity());
+
+        high.setIncDecAmount(set.getHighGoalIncTele());
+        low.setIncDecAmount(set.getLowGoalIncTele());
+
+        highInc.setValue(set.getHighGoalIncTele());
+        lowInc.setValue(set.getLowGoalIncTele());
 
         if(!entry.getPreMatch().isPilotPlaying()) {
             ((ViewGroup) rotors.getParent()).removeView(rotors);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) hoppers.getLayoutParams();
-            params.addRule(RelativeLayout.BELOW, R.id.gearsTele);
+          params.addRule(RelativeLayout.BELOW, R.id.gearsTele);
             hoppers.setLayoutParams(params);
         }
 
@@ -100,6 +122,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 saveState();
                 getFragmentManager()
                         .beginTransaction()
@@ -108,14 +131,38 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
             }
         });
 
+        high.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                high.setIncDecAmount(highInc.getValue());
+            }
+        });
+
+        low.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                low.setIncDecAmount(lowInc.getValue());
+            }
+        });
+
+
+
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        set.setLowGoalIncTele(lowInc.getValue());
+        set.setHighGoalIncTele(highInc.getValue());
+        Log.i("tag", "stopped");
+        super.onStop();
     }
 
     @Override
     public void saveState() {
         entry.setTeleOp(new TeleOp(low.getValue(), high.getValue(), gears.getValue(), hoppers.getValue(),
                 entry.getPreMatch().isPilotPlaying() ? rotors.getValue() : -1, attemptTakeoff.isChecked(), readyTakeoff.isChecked(),
-                returnLoading.isChecked(), overflowLoading.isChecked()));
+                returnLoading.isChecked(), overflowLoading.isChecked(), cycles.getValue()));
     }
 
     @Override

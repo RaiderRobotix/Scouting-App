@@ -46,5 +46,6 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.github.woxthebox:draglistview:1.3'
+    compile project(':dragsortlistview')
 }
 

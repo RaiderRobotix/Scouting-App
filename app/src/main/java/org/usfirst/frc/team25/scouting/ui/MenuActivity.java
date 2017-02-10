@@ -4,33 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
-import org.usfirst.frc.team25.scouting.data.thebluealliance.models.Match;
 import org.usfirst.frc.team25.scouting.ui.dataentry.AddEntryActivity;
 import org.usfirst.frc.team25.scouting.ui.preferences.SettingsActivity;
-import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundAppCompatActivity;
+import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 /** The main activity of the application
  *
  */
-public class MenuActivity extends NoBackgroundAppCompatActivity {
+public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
     private ImageButton addEntry, share, rules, settings;
     private TextView status;

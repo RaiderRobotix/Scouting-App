@@ -1,6 +1,8 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
+import com.mobeta.android.dslv.DragSortListView;
+
 /** Container holding data from the tele-operated period
  * Includes endgame data
  */
@@ -79,10 +81,25 @@ public class TeleOp {
         this.useOverflowLoading = useOverflowLoading;
     }
 
-    int lowGoals, highGoals, gearsDelivered, hopppersUsed,  rotorsStarted;
+    public int getNumCycles() {
+        return numCycles;
+    }
+
+    public void setNumCycles(int numCycles) {
+        this.numCycles = numCycles;
+    }
+
+    int lowGoals;
+    int highGoals;
+    int gearsDelivered;
+    int hopppersUsed;
+    int rotorsStarted;
+    int numCycles;
     boolean attemptTakeoff, readyTakeoff, useReturnLoading, useOverflowLoading;
 
-    public TeleOp(int lowGoals, int highGoals, int gearsDelivered, int hopppersUsed, int rotorsStarted, boolean attemptTakeoff, boolean readyTakeoff, boolean useReturnLoading, boolean useOverflowLoading) {
+
+    public TeleOp(int lowGoals, int highGoals, int gearsDelivered, int hopppersUsed, int rotorsStarted, boolean attemptTakeoff, boolean readyTakeoff, boolean useReturnLoading,
+                  boolean useOverflowLoading, int numCycles) {
         this.lowGoals = lowGoals;
         this.highGoals = highGoals;
         this.gearsDelivered = gearsDelivered;
@@ -92,5 +109,6 @@ public class TeleOp {
         this.readyTakeoff = readyTakeoff;
         this.useReturnLoading = useReturnLoading;
         this.useOverflowLoading = useOverflowLoading;
+        this.numCycles = numCycles;
     }
 }

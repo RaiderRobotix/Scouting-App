@@ -43,20 +43,37 @@ public class Settings extends PreferenceFragment {
         editor.apply();
     }
 
-    public int getLowGoalInc(){ return sp.getInt("low_goal_inc", 3);}
+    public int getLowGoalIncAuto(){ return sp.getInt("low_goal_inc_auto", 3);}
 
-    public void setLowGoalInc(int inc){
+    public void setLowGoalIncAuto(int inc){
         SharedPreferences.Editor editor = sp.edit();
-        editor.putInt("low_gal_inc", inc);
+        editor.putInt("low_goal_inc_auto", inc);
         editor.apply();
     }
 
-    public int getHighGoalInc(){ return sp.getInt("high_goal_inc", 6);};
+    public int getLowGoalIncTele(){ return sp.getInt("low_goal_inc_tele", 3);}
 
-    public void sethighGoalInc(int inc){
+    public void setLowGoalIncTele(int inc){
         SharedPreferences.Editor editor = sp.edit();
-        editor.putInt("high_gal_inc", inc);
+        editor.putInt("low_goal_inc_tele", inc);
+        editor.commit();
+    }
+
+    public int getHighGoalIncAuto(){ return sp.getInt("high_goal_inc_auto", 6);};
+
+    public void setHighGoalIncAuto(int inc){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("high_goal_inc_auto", inc);
         editor.apply();
+    }
+
+
+    public int getHighGoalIncTele(){ return sp.getInt("high_goal_inc_tele", 6);};
+
+    public void setHighGoalIncTele(int inc){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("high_goal_inc_tele", inc);
+        editor.commit();
     }
 
     public String getScoutPos(){
@@ -131,7 +148,7 @@ public class Settings extends PreferenceFragment {
     public void setYear(){
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(getYear(), "DEFAULT");
-        editor.commit();
+        editor.apply();
 
     }
 

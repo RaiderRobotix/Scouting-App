@@ -23,7 +23,7 @@ public class SettingsFragment extends PreferenceFragment {
 
     ListPreference matchType, event;
     Preference deleteFiles, changePass, year, importData; // Buttons that hold a value, but do not prompt a dialogue
-    NumberPickerPreference matchNum, shiftDur, lowGoalInc, highGoalInc;
+    NumberPickerPreference matchNum, shiftDur, teleLowGoalInc, teleHighGoalInc, autoLowGoalInc, autoHighGoalInc;
     EditTextPreference scoutNameInput;
     CheckBoxPreference useTeamList;
     Settings set;
@@ -47,16 +47,18 @@ public class SettingsFragment extends PreferenceFragment {
         changePass =  findPreference("change_pass");
         year = findPreference("year");
         importData = findPreference("import_data");
-        lowGoalInc =  (NumberPickerPreference) findPreference("low_goal_inc");
-        highGoalInc = (NumberPickerPreference) findPreference("high_goal_inc");
+        autoLowGoalInc = (NumberPickerPreference) findPreference("low_goal_inc_auto");
+        autoHighGoalInc = (NumberPickerPreference) findPreference("high_goal_inc_auto");
+        teleLowGoalInc =  (NumberPickerPreference) findPreference("low_goal_inc_tele");
+        teleHighGoalInc = (NumberPickerPreference) findPreference("high_goal_inc_tele");
 
         updateSummary();
 
 
         matchNum.setMaxValue(Settings.newInstance(getActivity()).getMaxMatchNum());
         shiftDur.setMaxValue(25);
-        lowGoalInc.setMaxValue(100);
-        highGoalInc.setMaxValue(100);
+        teleLowGoalInc.setMaxValue(100);
+        teleHighGoalInc.setMaxValue(100);
 
         event.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -140,8 +142,10 @@ public class SettingsFragment extends PreferenceFragment {
             matchNum.setSummary(String.valueOf(set.getMatchNum()));
             year.setSummary(set.getYear());
             set.setYear();
-            lowGoalInc.setSummary("+/- " + String.valueOf(set.getLowGoalInc()) + " goals");
-            highGoalInc.setSummary("+/- " + String.valueOf(set.getHighGoalInc()) + " goals");
+            autoLowGoalInc.setSummary("+/- " + String.valueOf(set.getLowGoalIncAuto()) + " goals");
+            autoHighGoalInc.setSummary("+/- " + String.valueOf(set.getHighGoalIncAuto()) + " goals");
+            teleLowGoalInc.setSummary("+/- " + String.valueOf(set.getLowGoalIncTele()) + " goals");
+            teleHighGoalInc.setSummary("+/- " + String.valueOf(set.getHighGoalIncTele()) + " goals");
         }catch(NullPointerException e){
             e.printStackTrace();
         }

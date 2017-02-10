@@ -1,7 +1,6 @@
 package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.os.Bundle;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -11,10 +10,10 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundAppCompatActivity;
+import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
 // Activity in which one password is entered and confirmed, with error text if invalid
-public class EnterPasswordActivity extends NoBackgroundAppCompatActivity {
+public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity {
 
     Button cancel, delete;
     MaterialEditText passwordField;

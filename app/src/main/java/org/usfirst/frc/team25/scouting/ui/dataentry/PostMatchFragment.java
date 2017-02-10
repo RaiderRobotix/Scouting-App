@@ -34,22 +34,25 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
     final String[] robotQuickCommentValues = {
             "Accurate high shooter",
-            "Fast high shooter",
-            "Fast cycle time",
+            "Fast shoot rate",
             "High fuel capacity",
+            "Low accuracy",
+            "Collects fuel from ground",
+            "Collects gears from ground",
+            "Active gear mech. (no pilot interact.)",
+            "Shoots mostly in key",
+            "Shoots outside key",
             "Lost communications",
-            "Flipped over",
-            "Helped teammates",
             "Played defense",
-            "Good human player",
-            "Cause foul (specify below)",
-            "Match to be replayed",
-            "INCORRECT DATA"
+            "Caused foul (specify below)",
+            "INCORRECT DATA (specify below)"
     };
 
     final String[] pilotQuickCommentValues = {
             "Dropped a gear from lift",
-            "Quick in retrieving gears"
+            "Quick in retrieving gears",
+            "Starts rotors quickly",
+            "Caused foul (specify below)"
     };
 
     public static PostMatchFragment getInstance(ScoutEntry entry){

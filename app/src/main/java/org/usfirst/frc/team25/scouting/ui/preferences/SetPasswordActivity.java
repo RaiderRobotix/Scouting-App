@@ -1,22 +1,18 @@
 package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundAppCompatActivity;
+import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
 // Activity that sets a new password
-public class SetPasswordActivity extends NoBackgroundAppCompatActivity {
+public class SetPasswordActivity extends NoBackgroundPortraitAppCompatActivity {
 
     MaterialEditText newPass, confirmPass;
     Button cancel, set;

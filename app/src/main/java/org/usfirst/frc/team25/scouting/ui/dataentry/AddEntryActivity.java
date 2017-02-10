@@ -8,13 +8,12 @@ import android.widget.TextView;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundAppCompatActivity;
+import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
 /**
  * Container for fragments for match data input
  */
-public class AddEntryActivity extends NoBackgroundAppCompatActivity {
+public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
 
     ScoutEntry entry;
 

@@ -63,15 +63,29 @@
         android:layout="@layout/preference_category_normal"/>
 
     <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="low_goal_inc"
-        android:title="Low goal increment"
+        android:key="low_goal_inc_auto"
+        android:title="Auto low goal increment"
         android:defaultValue="10"
         android:layout="@layout/preference_normal"
         />
 
     <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="high_goal_inc"
-        android:title="High goal increment"
+        android:key="high_goal_inc_auto"
+        android:title="Auto high goal increment"
+        android:defaultValue="2"
+        android:layout="@layout/preference_normal"
+        />
+
+    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
+        android:key="low_goal_inc_tele"
+        android:title="Teleop low goal increment"
+        android:defaultValue="10"
+        android:layout="@layout/preference_normal"
+        />
+
+    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
+        android:key="high_goal_inc_tele"
+        android:title="Teleop high goal increment"
         android:defaultValue="2"
         android:layout="@layout/preference_normal"
         />
@@ -113,7 +127,7 @@
 
     <Preference
         android:title="Version"
-        android:summary="0.1"/>
+        android:summary="0.11"/>
 
 
 

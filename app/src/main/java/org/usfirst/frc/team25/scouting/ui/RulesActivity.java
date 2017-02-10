@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.ScrollBar;
 
 
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundAppCompatActivity;
-
-import static com.github.barteksc.pdfviewer.R.styleable.ScrollBar;
+import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
 // Activity that views the rules menu of the year's game
-public class RulesActivity extends NoBackgroundAppCompatActivity {
+public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
 
     //From the PDFView library
     PDFView rulesView;

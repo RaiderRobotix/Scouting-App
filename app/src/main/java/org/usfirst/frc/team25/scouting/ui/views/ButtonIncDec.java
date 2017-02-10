@@ -3,7 +3,9 @@ package org.usfirst.frc.team25.scouting.ui.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -23,6 +25,28 @@ public class ButtonIncDec extends RelativeLayout {
     private int minValue;
     private int maxValue;
 
+    private OnClickListener listener;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(ev.getAction()==MotionEvent.ACTION_UP){
+            if(listener!=null) listener.onClick(this);
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getAction() == KeyEvent.ACTION_UP && (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+            if(listener != null) listener.onClick(this);
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
 
     public ButtonIncDec(Context c, AttributeSet attrs){
         super(c, attrs);
@@ -35,6 +59,7 @@ public class ButtonIncDec extends RelativeLayout {
         setMinValue(typedArray.getInteger(R.styleable.ButtonIncDec_minValue, 0));
         setMaxValue(typedArray.getInteger(R.styleable.ButtonIncDec_maxValue, Integer.MAX_VALUE));
         setIncDecAmount(typedArray.getInteger(R.styleable.ButtonIncDec_incDecAmount, 1));
+
 
 
         typedArray.recycle();
@@ -58,12 +83,11 @@ public class ButtonIncDec extends RelativeLayout {
      * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
      */
     public void setValue(int value){
-        if(value < 0)
-            return; //Value cannot be set less than 0
-        if(value>maxValue) {
-            setValue(maxValue);
-            return;
-        }
+        if(value>maxValue)
+            value = maxValue;
+
+        if(value<minValue)
+            value = minValue;
 
         valueView = (TextView) findViewById(R.id.button_inc_dec_value);
         valueView.setText(String.valueOf(value));
@@ -96,6 +120,7 @@ public class ButtonIncDec extends RelativeLayout {
         valueView = (TextView) findViewById(R.id.button_inc_dec_value);
         incButton = (Button) findViewById(R.id.inc_button);
         decButton = (Button) findViewById(R.id.dec_button);
+
 
         //Listeners to increment and decrement the value with a click
         incButton.setOnClickListener(new OnClickListener() {

@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -56,8 +54,11 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
         Settings set = Settings.newInstance(getActivity());
 
-        highGoals.setIncDecAmount(set.getHighGoalInc());
-        lowGoals.setIncDecAmount(set.getLowGoalInc());
+        highGoals.setIncDecAmount(set.getHighGoalIncAuto());
+        lowGoals.setIncDecAmount(set.getLowGoalIncAuto());
+
+        highGoals.setMaxValue(60);
+        lowGoals.setMaxValue(60);
 
         rotorsStarted.setMaxValue(2);
         gearsDelivered.setMaxValue(3);
