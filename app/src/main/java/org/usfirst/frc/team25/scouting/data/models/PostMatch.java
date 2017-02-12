@@ -4,6 +4,7 @@ import android.widget.CheckBox;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /** Qualitative reflection on the robot's performance after a match
  *  Not to be used for end game actions
@@ -21,12 +22,20 @@ public class PostMatch {
         this.robotQuickCommentValues = robotQuickCommentValues;
         this.pilotQuickCommentValues = pilotQuickCommentValues;
 
+        robotQuickCommentSelections = new HashMap<>();
+        pilotQuickCommentSelections = new HashMap<>();
+
+
+
     }
 
+
     String robotComment, pilotComment;
+    HashMap<String, Boolean> robotQuickCommentSelections, pilotQuickCommentSelections;
 
 
     public transient ArrayList<CheckBox> robotQuickComments, pilotQuickComments;
+    transient String[] robotQuickCommentValues, pilotQuickCommentValues;
 
     public String getRobotComment() {
         return robotComment;
@@ -62,27 +71,37 @@ public class PostMatch {
 
 
 
-    transient String[] robotQuickCommentValues, pilotQuickCommentValues;
-
-
-
-
-
     public void finalizeComment(){
 
-        for(int i = 0; i < robotQuickComments.size(); i++)
-            if(robotQuickComments.get(i).isChecked()){
-            	if(!robotComment.equals(""))
-            		robotComment +=";";
-                robotComment += robotQuickCommentValues[i];
-            }
+        for(String value : robotQuickCommentValues)
+            for(CheckBox cb : robotQuickComments)
+                if(cb.getText().toString().equals(value))
+                    robotQuickCommentSelections.put(value, cb.isChecked());
 
-        for(int i = 0; i < pilotQuickComments.size(); i++)
-            if(pilotQuickComments.get(i).isChecked()){
-                if(!pilotComment.equals(""))
-                    pilotComment +=";";
-                pilotComment += pilotQuickCommentValues[i];
-            }
+        for(String value : pilotQuickCommentValues)
+            for(CheckBox cb : pilotQuickComments)
+                if(cb.getText().toString().equals(value))
+                    pilotQuickCommentSelections.put(value, cb.isChecked());
+
+        String newPilotComment = "";
+
+        for(int i = 0; i < pilotComment.length(); i++) {
+            if(pilotComment.charAt(i)!=',')
+                newPilotComment += pilotComment.charAt(i);
+            else newPilotComment+=';';
+        }
+
+        setPilotComment(newPilotComment);
+
+        String newRobotComment = "";
+
+        for(int i = 0; i < robotComment.length(); i++) {
+            if(robotComment.charAt(i)!=',')
+                newRobotComment += robotComment.charAt(i);
+            else newRobotComment+=';';
+        }
+
+        setRobotComment(newRobotComment);
 
     }
 

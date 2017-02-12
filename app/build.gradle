@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:/Users/sng/Downloads/Key.jks')
+            keyPassword 'Test'
+            storePassword 'Test'
+            keyAlias 'Test'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion '24.0.0'
     defaultConfig {
@@ -18,10 +26,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions{
+    compileOptions {
 
     }
-
     productFlavors {
     }
 }

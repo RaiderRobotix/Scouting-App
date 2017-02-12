@@ -76,7 +76,8 @@
             android:padding="@dimen/default_padding_top"
             android:layout_marginTop="@dimen/default_padding_top"
             android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:id="@+id/fuelCollectLoc">
+            android:id="@+id/fuelCollectLoc"
+            android:visibility="gone">
         <TextView
             android:textSize="18sp"
 

@@ -127,7 +127,7 @@
 
     <Preference
         android:title="Version"
-        android:summary="0.11"/>
+        android:summary="v1.0"/>
 
 
 

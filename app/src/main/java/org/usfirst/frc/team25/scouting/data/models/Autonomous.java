@@ -6,13 +6,14 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    public Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered) {
+    public Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered, boolean shootsFromKey) {
         this.baselineCrossed = baselineCrossed;
         this.useHoppers = useHoppers;
         this.highGoals = highGoals;
         this.lowGoals = lowGoals;
         this.rotorsStarted = rotorsStarted;
         this.gearsDelivered = gearsDelivered;
+        this.shootsFromKey = shootsFromKey;
     }
 
     public boolean isBaselineCrossed() {
@@ -63,7 +64,18 @@ public class Autonomous {
         this.gearsDelivered = gearsDelivered;
     }
 
-    boolean baselineCrossed, useHoppers;
+    boolean baselineCrossed;
+    boolean useHoppers;
+
+    public boolean isShootsFromKey() {
+        return shootsFromKey;
+    }
+
+    public void setShootsFromKey(boolean shootsFromKey) {
+        this.shootsFromKey = shootsFromKey;
+    }
+
+    boolean shootsFromKey;
     int highGoals, lowGoals, rotorsStarted, gearsDelivered;
 
 

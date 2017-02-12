@@ -32,23 +32,21 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     ArrayList<CheckBox> robotQuickComments, pilotQuickComments;
     Button finish;
 
-    final String[] robotQuickCommentValues = {
+    final String[] ROBOT_COMMENT_VALUES = {
             "Accurate high shooter",
             "Fast shoot rate",
-            "High fuel capacity",
             "Low accuracy",
             "Collects fuel from ground",
             "Collects gears from ground",
             "Active gear mech. (no pilot interact.)",
-            "Shoots mostly in key",
-            "Shoots outside key",
-            "Lost communications",
+            "Lost comms.",
             "Played defense",
+            "Slowed by defense",
             "Caused foul (specify below)",
             "INCORRECT DATA (specify below)"
     };
 
-    final String[] pilotQuickCommentValues = {
+    final String[] PILOT_COMMENT_VALUES = {
             "Dropped a gear from lift",
             "Quick in retrieving gears",
             "Starts rotors quickly",
@@ -121,11 +119,11 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         int prevId = -1;
 
-        for(int i = 0; i < Math.ceil(robotQuickCommentValues.length/2.0); i++){
+        for(int i = 0; i < Math.ceil(ROBOT_COMMENT_VALUES.length/2.0); i++){
             ArrayList<String> checkSetValues = new ArrayList<>();
-            checkSetValues.add(robotQuickCommentValues[i*2]);
+            checkSetValues.add(ROBOT_COMMENT_VALUES[i*2]);
             try{
-                checkSetValues.add(robotQuickCommentValues[i*2+1]);
+                checkSetValues.add(ROBOT_COMMENT_VALUES[i*2+1]);
             }catch(IndexOutOfBoundsException e){
 
             }
@@ -184,11 +182,11 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         int prevId = -1;
 
-        for(int i = 0; i < Math.ceil(pilotQuickCommentValues.length/2.0); i++){
+        for(int i = 0; i < Math.ceil(PILOT_COMMENT_VALUES.length/2.0); i++){
             ArrayList<String> checkSetValues = new ArrayList<>();
-            checkSetValues.add(pilotQuickCommentValues[i*2]);
+            checkSetValues.add(PILOT_COMMENT_VALUES[i*2]);
             try{
-                checkSetValues.add(pilotQuickCommentValues[i*2+1]);
+                checkSetValues.add(PILOT_COMMENT_VALUES[i*2+1]);
             }catch(IndexOutOfBoundsException e){
 
             }
@@ -245,7 +243,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
     public void saveState(){
         entry.setPostMatch(new PostMatch(robotComment.getText().toString(), pilotComment.getText().toString(), robotQuickComments,
-                pilotQuickComments, robotQuickCommentValues, pilotQuickCommentValues));
+                pilotQuickComments, ROBOT_COMMENT_VALUES, PILOT_COMMENT_VALUES));
     }
 
 

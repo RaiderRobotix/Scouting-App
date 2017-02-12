@@ -17,7 +17,7 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
 
 public class AutoFragment extends Fragment implements  EntryFragment{
 
-    CheckBox baselineCrossed, useHoppers;
+    CheckBox baselineCrossed, useHoppers, shootsFromKey;
     ButtonIncDec highGoals, lowGoals, rotorsStarted, gearsDelivered;
     Button continueButton;
 
@@ -51,11 +51,14 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         rotorsStarted = (ButtonIncDec) view.findViewById(R.id.rotors_auto);
         gearsDelivered = (ButtonIncDec) view.findViewById(R.id.gears_auto);
         continueButton = (Button) view.findViewById(R.id.auto_continue);
+        shootsFromKey = (CheckBox) view.findViewById(R.id.shootsFromKey);
+
 
         Settings set = Settings.newInstance(getActivity());
 
         highGoals.setIncDecAmount(set.getHighGoalIncAuto());
         lowGoals.setIncDecAmount(set.getLowGoalIncAuto());
+
 
         highGoals.setMaxValue(60);
         lowGoals.setMaxValue(60);
@@ -93,7 +96,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         Settings set = Settings.newInstance(getActivity());
         /*Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered) {*/
        entry.setAuto(new Autonomous(baselineCrossed.isChecked(), useHoppers.isChecked(), highGoals.getValue(), lowGoals.getValue(),
-               entry.getPreMatch().isPilotPlaying() ? rotorsStarted.getValue() : -1, gearsDelivered.getValue()));
+               entry.getPreMatch().isPilotPlaying() ? rotorsStarted.getValue() : -1, gearsDelivered.getValue(), shootsFromKey.isChecked()));
 
     }
 
@@ -124,6 +127,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
             if(rotorsStarted.getValue()==-1)
                 rotorsStarted.setValue(0);
 
+            shootsFromKey.setChecked(prevAuto.isShootsFromKey());
 
         }
     }

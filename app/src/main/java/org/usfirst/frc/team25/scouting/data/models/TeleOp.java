@@ -95,7 +95,8 @@ public class TeleOp {
     int hopppersUsed;
     int rotorsStarted;
     int numCycles;
-    boolean attemptTakeoff, readyTakeoff, useReturnLoading, useOverflowLoading;
+    transient boolean  useReturnLoading, useOverflowLoading;
+    boolean attemptTakeoff, readyTakeoff;
 
 
     public TeleOp(int lowGoals, int highGoals, int gearsDelivered, int hopppersUsed, int rotorsStarted, boolean attemptTakeoff, boolean readyTakeoff, boolean useReturnLoading,

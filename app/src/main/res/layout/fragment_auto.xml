@@ -75,10 +75,21 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="Uses hopper"/>
 
+        <CheckBox
+            android:id="@+id/shootsFromKey"
+            android:layout_below="@id/uses_hoppers"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="Shoots from key"/>
+
 
         <Button
             android:id="@+id/auto_continue"
-            android:layout_below="@id/uses_hoppers"
+            android:layout_below="@id/shootsFromKey"
             android:elevation="6dp"
             android:theme="@style/Widget.AppCompat.Button.Colored.blue"
             android:textColor="#ffffff"
