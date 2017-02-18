@@ -42,6 +42,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             "Lost comms.",
             "Played defense effectively",
             "Slowed by defense",
+            "Slow human player",
             "Caused foul (specify below)",
             "INCORRECT DATA (specify below)"
     };
