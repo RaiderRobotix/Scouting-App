@@ -1,5 +1,7 @@
 # FRC Scouting App [![Build Status](https://travis-ci.org/spencerng/Scouting-App.svg?branch=master)](https://travis-ci.org/spencerng/Scouting-App)
 
+**Note: This branch contains a build with dummy fields intended for FIRST Stronghold. All updates for FIRST Steamworks will be located in the `master` branch until the 2018 kickoff.**
+
 Team 25's base scouting app for the 2017 FRC season and beyond
 
 Key features: 
