@@ -40,7 +40,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             "Collects gears from ground",
             "Active gear mech. (no pilot interact.)",
             "Lost comms.",
-            "Played defense",
+            "Played defense effectively",
             "Slowed by defense",
             "Caused foul (specify below)",
             "INCORRECT DATA (specify below)"
