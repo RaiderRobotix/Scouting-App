@@ -65,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:titlePrompt="Number of cycles (approx.)"
-            app:initialValue="0"
+            app:initialValue="1"
+            app:minValue="1"
             android:layout_below="@id/hoppersTele"
             android:id="@+id/numCycles"/>
 
