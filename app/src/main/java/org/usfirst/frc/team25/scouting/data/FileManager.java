@@ -50,7 +50,7 @@ public class FileManager {
 
     }
 
-    /** Deletes all files, including scout and event data, from the data directory
+    /** Deletes all scouting data from the data directory
      *  Executes a backup as well
      *  Should not be used until the end of the season
      * @param c <code>Context</code> of the running stack
@@ -59,8 +59,12 @@ public class FileManager {
         backup(c);
         try {
             File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-            FileUtils.cleanDirectory(directory);
-            Log.i("delete", "files deleted from external storage");
+            File[] directoryFiles = directory.listFiles();
+            for(File file : directoryFiles)
+                if(file.getName().contains("Data"))
+                    if(file.delete())
+                        Log.i("delete", file.getName() + " deleted");
+
         }catch (Exception e){
             e.printStackTrace();
         }

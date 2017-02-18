@@ -90,6 +90,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         highInc.setValue(set.getHighGoalIncTele());
         lowInc.setValue(set.getLowGoalIncTele());
 
+
         if(!entry.getPreMatch().isPilotPlaying()) {
             ((ViewGroup) rotors.getParent()).removeView(rotors);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) hoppers.getLayoutParams();
@@ -174,6 +175,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
             gears.setValue(tele.getGearsDelivered());
             hoppers.setValue(tele.getHopppersUsed());
             rotors.setValue(tele.getRotorsStarted());
+            cycles.setValue(tele.getNumCycles());
             attemptTakeoff.setChecked(tele.isAttemptTakeoff());
 
             returnLoading.setChecked(tele.isUseReturnLoading());
@@ -183,6 +185,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
                 readyTakeoff.setEnabled(true);
             readyTakeoff.setChecked(tele.isReadyTakeoff());
         }
+        else cycles.setValue(1);
     }
 
     @Override

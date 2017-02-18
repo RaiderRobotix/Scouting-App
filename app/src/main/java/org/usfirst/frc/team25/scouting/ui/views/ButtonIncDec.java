@@ -54,7 +54,7 @@ public class ButtonIncDec extends RelativeLayout {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ButtonIncDec);
 
         //XML attributes that can be set in layout files, rather than programmatically
-        setValue(typedArray.getInteger(R.styleable.ButtonIncDec_initialValue, 1));
+        setValue(typedArray.getInteger(R.styleable.ButtonIncDec_initialValue, 0));
         setTitle(typedArray.getString(R.styleable.ButtonIncDec_titlePrompt));
         setMinValue(typedArray.getInteger(R.styleable.ButtonIncDec_minValue, 0));
         setMaxValue(typedArray.getInteger(R.styleable.ButtonIncDec_maxValue, Integer.MAX_VALUE));
