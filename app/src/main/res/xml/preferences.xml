@@ -37,7 +37,7 @@
         android:title="@string/match_type"
         android:entryValues="@array/match_types_values"
         android:entries="@array/match_types"
-
+        android:defaultValue="Q"
         android:summary="%s"
         />
 

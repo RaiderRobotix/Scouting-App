@@ -122,6 +122,8 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     event.setError("Event required");
                     proceed=false;
                 }
+
+                Log.i("tag",Settings.newInstance(getActivity()).getMatchType());
                 //TODO Pull team numbers from The Blue Alliance for verification
                 if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999) {
                     if (teamNum.getText().toString().equals(""))
@@ -130,7 +132,8 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed = false;
                 }
 
-                else if(Settings.newInstance(getActivity()).useTeamList()&&Settings.newInstance(getActivity()).getMatchType().equals("Qualifier")){
+
+                else if(Settings.newInstance(getActivity()).useTeamList()&&Settings.newInstance(getActivity()).getMatchType().equals("Q")){
                     if(proceed) { //Alert is only displayed after all other errors are fixed
 
                         try {
@@ -233,7 +236,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
             if (!set.getScoutPos().equals("DEFAULT")){
                 scoutPos.setText(set.getScoutPos());
 
-                if(set.useTeamList()&&set.getMatchType().equals("Qualifier")){
+                if(set.useTeamList()&&set.getMatchType().equals("Q")){
                     try {
                         teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
                     }catch (IOException e){
