@@ -1,8 +1,6 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
-import com.mobeta.android.dslv.DragSortListView;
-
 /** Container holding data from the tele-operated period
  * Includes endgame data
  */

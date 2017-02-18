@@ -1,33 +1,21 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
-
-import com.mobeta.android.dslv.DragSortListView;
-import com.mobeta.android.dslv.SimpleDragSortCursorAdapter;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 
 public class TeleOpFragment extends Fragment implements EntryFragment{
@@ -38,7 +26,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
     Button continueButton;
     ButtonIncDec high, low, gears, rotors, hoppers, cycles, highInc, lowInc;
     CheckBox returnLoading, overflowLoading, attemptTakeoff, readyTakeoff;
-    DragSortListView lv;
+
     Settings set;
 
     public static TeleOpFragment getInstance(ScoutEntry entry){

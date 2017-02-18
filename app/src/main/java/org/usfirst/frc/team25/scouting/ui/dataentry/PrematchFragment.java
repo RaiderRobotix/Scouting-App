@@ -130,7 +130,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed = false;
                 }
 
-                else if(Settings.newInstance(getActivity()).useTeamList()){
+                else if(Settings.newInstance(getActivity()).useTeamList()&&Settings.newInstance(getActivity()).getMatchType().equals("Qualifier")){
                     if(proceed) { //Alert is only displayed after all other errors are fixed
 
                         try {
@@ -233,7 +233,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
             if (!set.getScoutPos().equals("DEFAULT")){
                 scoutPos.setText(set.getScoutPos());
 
-                if(set.useTeamList()){
+                if(set.useTeamList()&&set.getMatchType().equals("Qualifier")){
                     try {
                         teamNum.setText(FileManager.getTeamPlaying(getActivity(), set.getScoutPos(), set.getMatchNum()));
                     }catch (IOException e){

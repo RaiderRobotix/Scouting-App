@@ -2,12 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        release {
-            storeFile file('C:/Users/sng/Downloads/Key.jks')
-            keyPassword 'Test'
-            storePassword 'Test'
-            keyAlias 'Test'
-        }
     }
     compileSdkVersion 23
     buildToolsVersion '24.0.0'
@@ -16,7 +10,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
         multiDexEnabled true
 
     }
@@ -53,6 +47,6 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.github.woxthebox:draglistview:1.3'
-    compile project(':dragsortlistview')
+
 }
 
