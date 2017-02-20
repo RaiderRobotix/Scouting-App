@@ -39,11 +39,13 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             "Collects fuel from ground",
             "Collects gears from ground",
             "Active gear mech. (no pilot interact.)",
-            "Lost comms.",
+            "Disabled (lost comms., tipped over, etc.)",
+            "Parts detached",
             "Played defense effectively",
             "Slowed by defense",
             "Slow human player",
             "Caused foul (specify below)",
+            "Do not pick (explain)",
             "INCORRECT DATA (specify below)"
     };
 

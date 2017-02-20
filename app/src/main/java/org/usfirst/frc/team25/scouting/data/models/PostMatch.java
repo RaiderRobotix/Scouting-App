@@ -96,9 +96,9 @@ public class PostMatch {
         String newRobotComment = "";
 
         for(int i = 0; i < robotComment.length(); i++) {
-            if(robotComment.charAt(i)!=',')
-                newRobotComment += robotComment.charAt(i);
-            else newRobotComment+=';';
+            if(robotComment.charAt(i)==','||robotComment.charAt(i)=='\n') //prevent csv problems
+                newRobotComment+=";";
+            else newRobotComment += robotComment.charAt(i);
         }
 
         setRobotComment(newRobotComment);
