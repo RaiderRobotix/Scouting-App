@@ -130,6 +130,8 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
         String info = set.getScoutName() + " - " +
                 set.getScoutPos() + " - Match " + set.getMatchType() +
                 set.getMatchNum();
+        if(info.contains("DEFAULT"))
+            info = "";
         status.setText(info);
 
     }
