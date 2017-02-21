@@ -39,8 +39,9 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             "Collects fuel from ground",
             "Collects gears from ground",
             "Active gear mech. (no pilot interact.)",
-            "Disabled (lost comms., tipped over, etc.)",
+            "Disabled (lost comms, tipped over, etc.)",
             "Parts detached",
+            "Dropped gear (specify auto/tele)",
             "Played defense effectively",
             "Slowed by defense",
             "Slow human player",
@@ -51,7 +52,8 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
     final String[] PILOT_COMMENT_VALUES = {
             "Dropped a gear from lift",
-            "Quick in retrieving gears",
+            "Slow in retrieving gears",
+            "Slow in dropping ropes",
             "Starts rotors quickly",
             "Caused foul (specify below)"
     };

@@ -133,11 +133,11 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                 }
 
 
-                else if(Settings.newInstance(getActivity()).useTeamList()&&Settings.newInstance(getActivity()).getMatchType().equals("Q")){
+                else if(Settings.newInstance(getActivity()).useTeamList()){
                     if(proceed) { //Alert is only displayed after all other errors are fixed
 
                         try {
-                            if (!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
+                            if (Settings.newInstance(getActivity()).getMatchType().equals("Q")&&!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
 
                                 proceed = false;
                                 new AlertDialog.Builder(getActivity())
