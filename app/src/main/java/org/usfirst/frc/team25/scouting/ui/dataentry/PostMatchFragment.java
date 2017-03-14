@@ -34,29 +34,31 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
     final String[] ROBOT_COMMENT_VALUES = {
             "Accurate high shooter",
-            "Fast shoot rate",
             "Collects fuel from ground",
+            "Active gear mech.",
             "Collects gears from ground",
-            "Active gear mech. (no pilot interact.)",
+            "Takes time to get gear from RZ",
             "Takes time to align with lift",
-            "Disabled (lost comms; tipped over; etc.)",
-            "Parts detached",
-            "Dropped gear (specify auto/tele)",
+            "Very fast drive train",
+            "Very slow drive train",
             "Played defense effectively",
             "Slowed by defense",
-            "Didn't face defense",
-            "Slow human player",
-            "Caused foul (specify below)",
+            "Dropped gear (specify # times; locat.)",
+            "Climbs in under 5 seconds",
+            "Rope snapped during takeoff",
+            "Lost comms.",
+            "Robot caused foul (specify below)",
             "Do not pick (explain)",
             "INCORRECT DATA (specify below)"
     };
 
     final String[] PILOT_COMMENT_VALUES = {
-            "Dropped a gear from lift",
-            "Slow in retrieving gears",
+            "Dropped a gear from lift (specify # times)",
+            "Slow in retrieving/putting gears",
             "Slow in dropping ropes",
-            "Starts rotors quickly",
-            "Caused foul (specify below)"
+            "Slow in using reserve gear",
+            "Forgot to turn rotor",
+            "Pilot caused foul (specify below)"
     };
 
     public static PostMatchFragment getInstance(ScoutEntry entry){
@@ -107,13 +109,19 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 pm.finalizeComment();
                 entry.setPostMatch(pm);
 
-                FileManager.saveData(entry, getActivity());
-
-
                 Settings set = Settings.newInstance(getActivity());
+
+                if(set.getMatchType().equals("P"))
+                    Toast.makeText(getActivity().getBaseContext(), "Practice match data NOT saved", Toast.LENGTH_LONG).show();
+                else{
+                    FileManager.saveData(entry, getActivity());
+                    Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
+                }
+
+
                 set.setMatchNum(set.getMatchNum()+1);
                 getActivity().finish();
-                Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
+
 
             }
         });

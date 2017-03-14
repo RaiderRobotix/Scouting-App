@@ -111,10 +111,13 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed = false;
                 }
 
-                if(matchNum.getText().toString().equals("") || Integer.parseInt(matchNum.getText().toString()) < 1 || Integer.parseInt(matchNum.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()){
-                    if(matchNum.getText().toString().equals(""))
-                        matchNum.setError("Match number required");
-                    else matchNum.setError("Invalid match number value");
+                if(matchNum.getText().toString().equals("")) {
+                    matchNum.setError("Match number required");
+                    proceed = false;
+                }
+
+                else if(Integer.parseInt(matchNum.getText().toString()) < 1 || Integer.parseInt(matchNum.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()){
+                    matchNum.setError("Invalid match number value");
                     proceed=false;
                 }
 
