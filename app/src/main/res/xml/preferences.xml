@@ -2,7 +2,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="General"
-        android:layout="@layout/preference_category_normal"/>
+        android:layout="@layout/preference_category_normal"
+        />
 
     <EditTextPreference
         android:key="scout_name"
@@ -45,7 +46,7 @@
         android:key="event"
         android:title="@string/event"
         android:entries="@array/event_options"
-        android:entryValues="@array/event_options"
+        android:entryValues="@array/event_options_values"
         android:defaultValue="Brunswick Eruption"
         android:summary="%s" />
 
@@ -56,6 +57,7 @@
         android:summary="2017"
         android:layout="@layout/preference_normal"
         android:enabled="true"
+
         />
 
     <PreferenceCategory
@@ -127,7 +129,7 @@
 
     <Preference
         android:title="Version"
-        android:summary="v1.1"/>
+        android:summary="v1.11"/>
 
 
 

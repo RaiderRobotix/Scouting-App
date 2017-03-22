@@ -43,7 +43,15 @@
         <item>"Mount Olive"</item>
         <item>"Montgomery"</item>
         <item>"MAR District Championship</item>
-        <item>"St. Louis World Championships"</item>
+        <item>"St. Louis World Championship"</item>
+        <item>"Brunswick Eruption"</item>
+    </string-array>
+
+    <string-array name="event_options_values">
+        <item>"Mount Olive"</item>
+        <item>"Montgomery"</item>
+        <item>"Mid-Atlantic"</item>
+        <item>"Darwin"</item>
         <item>"Brunswick Eruption"</item>
     </string-array>
 

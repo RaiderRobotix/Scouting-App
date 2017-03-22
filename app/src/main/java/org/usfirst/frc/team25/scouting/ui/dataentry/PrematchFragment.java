@@ -67,7 +67,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         scoutPos.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
 
         event = (MaterialBetterSpinner) view.findViewById(R.id.event_spin);
-        event.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.event_options)));
+        event.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.event_options_values)));
         event.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
 
         name = (MaterialEditText) view.findViewById(R.id.scout_name_field);
@@ -126,7 +126,6 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed=false;
                 }
 
-                Log.i("tag",Settings.newInstance(getActivity()).getMatchType());
                 //TODO Pull team numbers from The Blue Alliance for verification
                 if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999) {
                     if (teamNum.getText().toString().equals(""))
@@ -136,11 +135,12 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                 }
 
 
-                else if(Settings.newInstance(getActivity()).useTeamList()){
-                    if(proceed) { //Alert is only displayed after all other errors are fixed
-
+                if(Settings.newInstance(getActivity()).useTeamList()&&proceed){
+                        boolean checkTeamList = false;
                         try {
-                            if (Settings.newInstance(getActivity()).getMatchType().equals("Q")&&!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
+                            if(!Settings.newInstance(getActivity()).getMatchType().equals("Q")) //Non-quals matches don't get checked against match schedule
+                                checkTeamList = true;
+                            else if (!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
 
                                 proceed = false;
                                 new AlertDialog.Builder(getActivity())
@@ -166,33 +166,32 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                                         .show();
 
                             }
+
                         } catch (IOException e) {
                             //Match list does not exist; looking for team list
-
-                            e.printStackTrace();
-                            if(!FileManager.isOnTeamlist(teamNum.getText().toString(),getActivity())) {
-                                proceed = false;
-                                new AlertDialog.Builder(getActivity())
-                                        .setTitle("Confirm team number")
-                                        .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing this match?")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
-                                                continueButton.callOnClick();
-                                            }
-                                        })
-                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                            }
-                                        })
-                                        .create()
-                                        .show();
-                            }
+                            checkTeamList = true;
                         }
-                    }
+                        if(checkTeamList&&!FileManager.isOnTeamlist(teamNum.getText().toString(),getActivity())) {
+                            proceed = false;
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("Confirm team number")
+                                    .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing this match?")
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
+                                            continueButton.callOnClick();
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
 
+                                        }
+                                    })
+                                    .create()
+                                    .show();
+                        }
                 }
+
 
 
                 if(proceed) {
