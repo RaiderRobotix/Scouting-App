@@ -14,6 +14,7 @@ import android.widget.Toast;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
+import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
 import org.usfirst.frc.team25.scouting.ui.dataentry.AddEntryActivity;
 import org.usfirst.frc.team25.scouting.ui.preferences.SettingsActivity;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;

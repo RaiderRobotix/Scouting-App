@@ -152,6 +152,8 @@ public class Settings extends PreferenceFragment {
 
     }
 
+
+
     public String getYear(){
         return String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
     }

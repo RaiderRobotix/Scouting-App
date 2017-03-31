@@ -108,6 +108,11 @@
         android:key="import_data"/>
 
     <Preference
+        android:title="Download match schedule"
+        android:key="download_schedule"
+        android:defaultValue="false"/>
+
+    <Preference
         android:key="change_pass"
         android:title="@string/change_pass"
         android:shouldDisableView="true"
@@ -117,6 +122,7 @@
     <Preference
         android:key="delete_data"
         android:title="@string/delete_data"
+
         />
 
     <PreferenceCategory
@@ -129,7 +135,7 @@
 
     <Preference
         android:title="Version"
-        android:summary="v1.11"/>
+        android:summary="v1.12"/>
 
 
 

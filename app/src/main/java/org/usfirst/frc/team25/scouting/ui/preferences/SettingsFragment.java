@@ -3,16 +3,19 @@ package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
+import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
 import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
 
 /** List of preferences, as defined in res/xml/preferences.xml
@@ -22,7 +25,7 @@ import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
 public class SettingsFragment extends PreferenceFragment {
 
     ListPreference matchType, event;
-    Preference deleteFiles, changePass, year, importData; // Buttons that hold a value, but do not prompt a dialogue
+    Preference deleteFiles, changePass, year, importData, downloadSchedule; // Buttons that hold a value, but do not prompt a dialogue
     NumberPickerPreference matchNum, shiftDur, teleLowGoalInc, teleHighGoalInc, autoLowGoalInc, autoHighGoalInc;
     EditTextPreference scoutNameInput;
     CheckBoxPreference useTeamList;
@@ -47,6 +50,7 @@ public class SettingsFragment extends PreferenceFragment {
         changePass =  findPreference("change_pass");
         year = findPreference("year");
         importData = findPreference("import_data");
+        downloadSchedule = findPreference("download_schedule");
         autoLowGoalInc = (NumberPickerPreference) findPreference("low_goal_inc_auto");
         autoHighGoalInc = (NumberPickerPreference) findPreference("high_goal_inc_auto");
         teleLowGoalInc =  (NumberPickerPreference) findPreference("low_goal_inc_tele");
@@ -129,7 +133,18 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        downloadSchedule.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                new DataDownloader(getActivity()).execute();
+
+                return true;
+            }
+        });
+
     }
+
+
 
     /**
      * Updates preference summary text with their values

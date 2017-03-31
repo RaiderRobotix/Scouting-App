@@ -37,7 +37,7 @@ public class FileManager {
      */
     private static void backup(Context c){
         try{
-            File sourceDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
+            File sourceDir = getDirectory();
             File destDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath(), DIRECTORY_DATA +" - Backup");
             
             MediaScannerConnection.scanFile(c, new String[] {destDir.toString()}, null, null);
@@ -58,8 +58,7 @@ public class FileManager {
     public static void deleteData(Context c){
         backup(c);
         try {
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-            File[] directoryFiles = directory.listFiles();
+            File[] directoryFiles = getDirectory().listFiles();
             for(File file : directoryFiles)
                 if(file.getName().contains("Data"))
                     if(file.delete())
@@ -82,6 +81,10 @@ public class FileManager {
         return "Data - " + set.getScoutPos() + " - " +set.getCurrentEvent() + ".json";
     }
 
+    public static File getDataFilePath(Context c){
+        return new File(getDirectory(), getDataFilename(c));
+    }
+
     /** Generates the filename for the general team list, based on the current event
      *  Should be consistent with the desktop client
      *
@@ -91,6 +94,10 @@ public class FileManager {
     private static String getTeamListFilename(Context c){
         Settings set = Settings.newInstance(c);
         return "Teams - " +set.getCurrentEvent() + ".csv";
+    }
+
+    public static File getTeamListFilePath(Context c){
+        return new File(getDirectory(), getTeamListFilename(c));
     }
 
     /** Generates the filename for the match list, based on the current event
@@ -104,6 +111,10 @@ public class FileManager {
         return "Matches - " +set.getCurrentEvent() + ".csv";
     }
 
+    public static File getMatchListFilePath(Context c){
+        return new File(getDirectory(), getMatchListFilename(c));
+    }
+
     /** Finds the largest match number for the event, given the match list
      *
      * @param c <code>Context</code> of the running stack
@@ -111,11 +122,8 @@ public class FileManager {
      *         150 otherwise
      */
     public static int getMaxMatchNum(Context c){
-        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-        if(!directory.exists())
-            directory.mkdir();
 
-        File file = new File(directory, getMatchListFilename(c));
+        File file = getMatchListFilePath(c);
 
         if(!file.exists())
             return 150;
@@ -144,11 +152,8 @@ public class FileManager {
      * @throws IOException when the match list does not exist
      */
     public static String getTeamPlaying(Context c, String scoutPos, int matchNum) throws IOException{
-        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-        if(!directory.exists())
-            directory.mkdir();
 
-        File file = new File(directory, getMatchListFilename(c));
+        File file = getMatchListFilePath(c);
 
         if(!file.exists())
             throw new IOException("Match file does not exist");
@@ -189,6 +194,18 @@ public class FileManager {
         return ""; //When the correct match number is not found, for some reason; shouldn't happen
     }
 
+    public static boolean teamListExists(Context c){
+
+        File file = getTeamListFilePath(c);
+        return file.exists();
+    }
+
+    public static boolean matchScheduleExists(Context c){
+
+        File file = getMatchListFilePath(c);
+        return file.exists();
+    }
+
     /** Checks a team list file to see if a team is playing at the event
      *
      * @param teamNum Team number to be checked
@@ -197,12 +214,10 @@ public class FileManager {
      */
     public static boolean isOnTeamlist(String teamNum, Context c){
         try{
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-            if(!directory.exists())
-                directory.mkdir();
+
             String existingData = "";
 
-            File file = new File(directory, getTeamListFilename(c));
+            File file = getTeamListFilePath(c);
 
             if(!file.exists())
                 return true; //default case to prevent user from being stuck if team list does not exist
@@ -241,12 +256,10 @@ public class FileManager {
      */
     public static void addToTeamList(String teamNum, Context c){
         try{
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-            if(!directory.exists())
-                directory.mkdir();
+
             String existingData = "";
 
-            File file = new File(directory, getTeamListFilename(c));
+            File file = getTeamListFilePath(c);
 
             FileWriter writer = new FileWriter(file, true);
             writer.write(","+teamNum);
@@ -261,6 +274,36 @@ public class FileManager {
 
     }
 
+    public static void saveFile(File filePath, String contents, Context c){
+        try {
+            filePath.createNewFile();
+            Log.i("file export", "File created");
+
+            FileWriter writer = new FileWriter(filePath, false); // False overwrites, true appends
+            writer.write(contents);
+            writer.flush();
+            writer.close();
+            Log.i("file export", "File written successfully");
+
+            MediaScannerConnection.scanFile(c, new String[]{filePath.toString()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                @Override
+                public void onScanCompleted(String s, Uri uri) {
+                    Log.i("scan", "media scan completed");
+                }
+            }); // Refresh PC connection to view file
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static File getDirectory(){
+        File directory =  new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
+        if(!directory.exists())
+            directory.mkdir();
+        return directory;
+    }
+
     /** Saves a new entry to the JSON data file
      *
      * @param entry <code>ScoutEntry</code> object to be saved to data file
@@ -271,13 +314,10 @@ public class FileManager {
         List<ScoutEntry> entries = new ArrayList<>();
         Type listEntries = new TypeToken<List<ScoutEntry>>(){}.getType(); //Example for deserializing an ArrayList of objects
 
-        try{
-            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-            if(!directory.exists())
-                directory.mkdir();
+
             String existingData = "";
 
-            File file = new File(directory, getDataFilename(c));
+            File file = getDataFilePath(c);
 
             //Reads the raw data
             try {
@@ -303,26 +343,8 @@ public class FileManager {
             String output = gson.toJson(entries);
             Log.i("file export", "File converted to JSON");
 
-            file.createNewFile();
-            Log.i("file export", "File created");
+            saveFile(file, output, c);
 
-            FileWriter writer = new FileWriter(file, false); // False overwrites, true appends
-            writer.write(output);
-            writer.flush();
-            writer.close();
-            Log.i("file export", "File written successfully");
-
-            MediaScannerConnection.scanFile(c, new String[]{file.toString()}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                @Override
-                public void onScanCompleted(String s, Uri uri) {
-                    Log.i("scan", "media scan completed");
-                }
-            }); // Refresh PC connection to view file
-
-        }catch(Exception e){
-            e.printStackTrace();
-
-        }
 
     }
 
