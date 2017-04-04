@@ -216,6 +216,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
                     }
                 }
             }
+            else disablePegButtons();
 
             shootsFromKey.setChecked(prevAuto.isShootsFromKey());
 
