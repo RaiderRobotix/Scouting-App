@@ -19,7 +19,7 @@ import org.usfirst.frc.team25.scouting.R;
  */
 public class ButtonIncDec extends RelativeLayout {
 
-    private Button incButton, decButton;
+    public Button incButton, decButton;
     private TextView valueView;
     private int incDecAmount;
     private int minValue;

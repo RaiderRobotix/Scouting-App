@@ -1,5 +1,7 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import org.usfirst.frc.team25.scouting.R;
@@ -19,6 +23,9 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
     CheckBox baselineCrossed, useHoppers, shootsFromKey;
     ButtonIncDec highGoals, lowGoals, rotorsStarted, gearsDelivered;
+    RadioGroup gearLiftGroup;
+    RadioButton[] pegButtons;
+    String[] pegButtonValues = {"Left", "Center", "Right"};
     Button continueButton;
 
     ScoutEntry entry;
@@ -39,9 +46,23 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
     }
 
+    private void enablePegButtons(){
+        for(RadioButton button : pegButtons)
+            button.setEnabled(true);
+    }
+
+    private void disablePegButtons(){
+        for(RadioButton button : pegButtons) {
+            button.setEnabled(false);
+            button.setChecked(false);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
         baselineCrossed = (CheckBox) view.findViewById(R.id.reach_baseline);
@@ -52,6 +73,13 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         gearsDelivered = (ButtonIncDec) view.findViewById(R.id.gears_auto);
         continueButton = (Button) view.findViewById(R.id.auto_continue);
         shootsFromKey = (CheckBox) view.findViewById(R.id.shootsFromKey);
+
+
+        pegButtons = new RadioButton[3];
+        pegButtons[0] = (RadioButton) view.findViewById(R.id.leftPeg);
+        pegButtons[1] = (RadioButton) view.findViewById(R.id.centerPeg);
+        pegButtons[2] = (RadioButton) view.findViewById(R.id.rightPeg);
+
 
 
         Settings set = Settings.newInstance(getActivity());
@@ -69,22 +97,67 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         if(!entry.getPreMatch().isPilotPlaying()) {
             ((ViewGroup) rotorsStarted.getParent()).removeView(rotorsStarted);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) baselineCrossed.getLayoutParams();
-            params.addRule(RelativeLayout.BELOW, R.id.gears_auto);
+            params.addRule(RelativeLayout.BELOW, R.id.autoGearLocationGroup);
             baselineCrossed.setLayoutParams(params);
         }
 
 
+
         autoPopulate();
+
+        gearsDelivered.decButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(gearsDelivered.getValue()<=1)
+                    disablePegButtons();
+                else enablePegButtons();
+                gearsDelivered.setValue(gearsDelivered.getValue()-1);
+            }
+        });
+
+        gearsDelivered.incButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enablePegButtons();
+                gearsDelivered.setValue(gearsDelivered.getValue()+1);
+            }
+        });
 
 
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveState();
-                getFragmentManager().beginTransaction()
-                        .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
-                        .commit();
+                boolean gearPegSelected = false;
+
+                for(RadioButton button : pegButtons){
+                    if(button.isChecked()){
+                        gearPegSelected = true;
+                        break;
+                    }
+
+                }
+
+                if(gearsDelivered.getValue()>=1&&!gearPegSelected){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select a peg for the auto gear")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+
+                else {
+                    saveState();
+                    getFragmentManager().beginTransaction()
+                            .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
+                            .commit();
+                }
             }
         });
 
@@ -95,8 +168,15 @@ public class AutoFragment extends Fragment implements  EntryFragment{
     public void saveState() {
         Settings set = Settings.newInstance(getActivity());
         /*Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered) {*/
+
+        String gearPeg = "";
+        for(int i = 0; i < 3; i++){
+            if(pegButtons[i].isChecked())
+                gearPeg = pegButtonValues[i];
+        }
+
        entry.setAuto(new Autonomous(baselineCrossed.isChecked(), useHoppers.isChecked(), highGoals.getValue(), lowGoals.getValue(),
-               entry.getPreMatch().isPilotPlaying() ? rotorsStarted.getValue() : -1, gearsDelivered.getValue(), shootsFromKey.isChecked()));
+               entry.getPreMatch().isPilotPlaying() ? rotorsStarted.getValue() : -1, gearsDelivered.getValue(), shootsFromKey.isChecked(), gearPeg));
 
     }
 
@@ -127,9 +207,20 @@ public class AutoFragment extends Fragment implements  EntryFragment{
             if(rotorsStarted.getValue()==-1)
                 rotorsStarted.setValue(0);
 
+            if(prevAuto.getGearsDelivered()>=1){
+                enablePegButtons();
+                for(int i = 0; i < 3; i++){
+                    if(prevAuto.getGearPeg().equals(pegButtonValues[i])){
+                        pegButtons[i].setChecked(true);
+                        break;
+                    }
+                }
+            }
+
             shootsFromKey.setChecked(prevAuto.isShootsFromKey());
 
         }
+        else disablePegButtons();
     }
 
 }
