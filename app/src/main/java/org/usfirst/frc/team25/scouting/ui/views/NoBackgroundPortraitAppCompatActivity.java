@@ -14,7 +14,7 @@ public class NoBackgroundPortraitAppCompatActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme_NoLauncher);
+        setTheme(R.style.AppTheme_NoLauncher_Blue);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
     }

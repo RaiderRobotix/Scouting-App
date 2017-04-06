@@ -94,7 +94,7 @@
             android:layout_below="@id/pilotCommentView"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
-            android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+
             android:textColor="#ffffff"
             android:text="@string/finish_button"
             android:layout_width="150dp"

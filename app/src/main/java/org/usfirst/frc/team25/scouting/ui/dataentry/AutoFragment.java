@@ -154,6 +154,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
                 else {
                     saveState();
+
                     getFragmentManager().beginTransaction()
                             .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
                             .commit();

@@ -15,4 +15,5 @@
     <color name="first_black">#231f20</color>
     <color name="first_gray">#9a989a</color>
     <color name="frc_blue">#009cd7</color>
+    <color name="red_500">#f44336</color>
 </resources>

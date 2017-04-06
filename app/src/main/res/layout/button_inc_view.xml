@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_alignParentStart="true"
@@ -28,7 +29,7 @@
             android:id="@+id/dec_button"
 
             android:elevation="6dp"
-            android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+
             android:text="-"
             android:layout_weight="1"
             android:textColor="#ffffff"
@@ -50,7 +51,7 @@
         <Button
             android:id="@+id/inc_button"
             android:elevation="6dp"
-            android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+
             android:text="+"
             android:textColor="#ffffff"
             android:layout_marginEnd="10dp"

@@ -175,7 +175,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                             proceed = false;
                             new AlertDialog.Builder(getActivity())
                                     .setTitle("Confirm team number")
-                                    .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing this match?")
+                                    .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing at this event?")
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
@@ -198,7 +198,11 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     saveState();
 
                     set.autoSetPreferences(entry.getPreMatch());
-
+                    if(entry.getPreMatch().getTeamNum()==2590)
+                        getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
+                    else if(entry.getPreMatch().getTeamNum()==25)
+                        getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
+                    else getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
                     hideKeyboard();
                     getFragmentManager().beginTransaction()
                             .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")

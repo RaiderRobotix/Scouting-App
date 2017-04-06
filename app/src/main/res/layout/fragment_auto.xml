@@ -131,7 +131,7 @@
             android:id="@+id/auto_continue"
             android:layout_below="@id/shootsFromKey"
             android:elevation="6dp"
-            android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+
             android:textColor="#ffffff"
             android:text="@string/continue_button"
             android:layout_width="150dp"

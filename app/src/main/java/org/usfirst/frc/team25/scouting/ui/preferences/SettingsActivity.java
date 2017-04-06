@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 
+import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
 import org.usfirst.frc.team25.scouting.ui.views.AppCompatPreferenceActivity;
@@ -27,6 +28,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, sf)
                 .commit();
+
+        setTheme(R.style.AppTheme_NoLauncher_Blue);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         preferences.registerOnSharedPreferenceChangeListener(this);

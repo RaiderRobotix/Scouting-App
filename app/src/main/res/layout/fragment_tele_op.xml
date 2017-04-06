@@ -144,7 +144,7 @@
         android:id="@+id/tele_continue"
         android:layout_below="@id/readyForTakeoff"
         android:elevation="6dp"
-        android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+
         android:textColor="#ffffff"
         android:text="@string/continue_button"
         android:layout_width="150dp"

@@ -118,7 +118,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                     Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
                 }
 
-
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
                 set.setMatchNum(set.getMatchNum()+1);
                 getActivity().finish();
 
