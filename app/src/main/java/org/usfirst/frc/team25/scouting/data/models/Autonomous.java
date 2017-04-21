@@ -6,7 +6,8 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    public Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered, boolean shootsFromKey, String gearPeg) {
+    public Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered,
+                      boolean shootsFromKey, String gearPeg, boolean attemptGear, boolean successGear) {
         this.baselineCrossed = baselineCrossed;
         this.useHoppers = useHoppers;
         this.highGoals = highGoals;
@@ -15,6 +16,8 @@ public class Autonomous {
         this.gearsDelivered = gearsDelivered;
         this.shootsFromKey = shootsFromKey;
         this.gearPeg = gearPeg;
+        this.attemptGear = attemptGear;
+        this.successGear = successGear;
     }
 
     public boolean isBaselineCrossed() {
@@ -76,8 +79,28 @@ public class Autonomous {
         this.shootsFromKey = shootsFromKey;
     }
 
-    boolean shootsFromKey;
-    int highGoals, lowGoals, rotorsStarted, gearsDelivered;
+    transient boolean shootsFromKey;
+
+    public boolean isAttemptGear() {
+        return attemptGear;
+    }
+
+    public void setAttemptGear(boolean attemptGear) {
+        this.attemptGear = attemptGear;
+    }
+
+    public boolean isSuccessGear() {
+        return successGear;
+    }
+
+    public void setSuccessGear(boolean successGear) {
+        this.successGear = successGear;
+    }
+
+    boolean attemptGear;
+    boolean successGear;
+    int highGoals, lowGoals;
+    transient int rotorsStarted, gearsDelivered;
 
     public String getGearPeg() {
         return gearPeg;

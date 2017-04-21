@@ -33,7 +33,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
     Button continueButton;
     MaterialEditText name, matchNum, teamNum;
-    MaterialBetterSpinner scoutPos, event;
+    MaterialBetterSpinner scoutPos /*event*/;
     CheckBox pilotPlaying;
     ScoutEntry entry;
 
@@ -66,9 +66,9 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         scoutPos.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.position_options)));
         scoutPos.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
 
-        event = (MaterialBetterSpinner) view.findViewById(R.id.event_spin);
+        /*event = (MaterialBetterSpinner) view.findViewById(R.id.event_spin);
         event.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.event_options_values)));
-        event.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
+        event.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);*/
 
         name = (MaterialEditText) view.findViewById(R.id.scout_name_field);
         matchNum = (MaterialEditText) view.findViewById(R.id.match_num_field);
@@ -87,19 +87,19 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
 
 
-        event.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*event.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Settings.newInstance(getActivity()).setCurrentEvent(event.getText().toString());
             }
-        });
+        });*/
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                boolean proceed = true;
                 Settings set = Settings.newInstance(getActivity());
-                set.setCurrentEvent(event.getText().toString());
+               // set.setCurrentEvent(event.getText().toString());
                 set.setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
                 if(name.getText().toString().equals("")){
                     name.setError("Scout name required");
@@ -121,10 +121,10 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed=false;
                 }
 
-                if(event.getText().toString().equals("")){
+               /* if(event.getText().toString().equals("")){
                     event.setError("Event required");
                     proceed=false;
-                }
+                }*/
 
                 //TODO Pull team numbers from The Blue Alliance for verification
                 if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999) {
@@ -175,7 +175,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                             proceed = false;
                             new AlertDialog.Builder(getActivity())
                                     .setTitle("Confirm team number")
-                                    .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing at this event?")
+                                    .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
@@ -200,6 +200,8 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     set.autoSetPreferences(entry.getPreMatch());
                     if(entry.getPreMatch().getTeamNum()==2590)
                         getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
+                    else if(entry.getPreMatch().getTeamNum()==303)
+                        getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
                     else if(entry.getPreMatch().getTeamNum()==25)
                         getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
                     else getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
@@ -218,7 +220,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
     @Override
     public void saveState() {
-        entry.setPreMatch(new PreMatch(name.getText().toString(), event.getText().toString(), scoutPos.getText().toString(),
+        entry.setPreMatch(new PreMatch(name.getText().toString(), Settings.newInstance(getActivity()).getCurrentEvent(), scoutPos.getText().toString(),
                 Integer.parseInt(matchNum.getText().toString()), Integer.parseInt(teamNum.getText().toString()), pilotPlaying.isChecked()));
     }
 
@@ -229,7 +231,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
             name.setText(prevPreMatch.getScoutName());
             scoutPos.setText(prevPreMatch.getScoutPos());
-            event.setText(prevPreMatch.getCurrentEvent());
+            //event.setText(prevPreMatch.getCurrentEvent());
             matchNum.setText(String.valueOf(prevPreMatch.getMatchNum()));
             teamNum.setText(String.valueOf(prevPreMatch.getTeamNum()));
             pilotPlaying.setChecked(prevPreMatch.isPilotPlaying());
@@ -259,8 +261,8 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
             }
 
 
-            if (!set.getCurrentEvent().equals("DEFAULT"))
-                event.setText(set.getCurrentEvent());
+           /* if (!set.getCurrentEvent().equals("DEFAULT"))
+                event.setText(set.getCurrentEvent());*/
 
 
             matchNum.setText(String.valueOf(set.getMatchNum()));

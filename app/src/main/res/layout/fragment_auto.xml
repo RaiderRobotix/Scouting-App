@@ -39,15 +39,40 @@
             app:initialValue="0"
             app:maxValue="3"
             android:layout_below="@id/low_goals_auto"
-            android:id="@+id/gears_auto"/>
+            android:id="@+id/gears_auto"
+            android:visibility="gone"/>
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/low_goals_auto"
+            android:id="@+id/attemptAutoGear"
+            android:text="Attempted auto gear"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            />
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/attemptAutoGear"
+            android:id="@+id/successAutoGear"
+            android:text="Successful auto gear"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:enabled="false"
+            />
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/gears_auto"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_below="@id/successAutoGear"
+            android:layout_marginLeft="40dp"
+
             android:id="@+id/autoGearLocationGroup"
             android:padding="@dimen/default_padding_bottom"
+
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -62,21 +87,24 @@
                 android:text="Left"
                 android:padding="@dimen/default_padding_bottom"
                 android:id="@+id/leftPeg"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:enabled="false"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Center"
                 android:id="@+id/centerPeg"
                 android:padding="@dimen/default_padding_bottom"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:enabled="false"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Right"
                 android:id="@+id/rightPeg"
                 android:padding="@dimen/default_padding_bottom"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:enabled="false"/>
 
 
         </RadioGroup>
@@ -89,7 +117,8 @@
             app:initialValue="0"
             app:maxValue="2"
             android:layout_below="@id/autoGearLocationGroup"
-            android:id="@+id/rotors_auto"/>
+            android:id="@+id/rotors_auto"
+            android:visibility="gone"/>
 
 
         <CheckBox
@@ -101,8 +130,9 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Reached baseline"/>
+            android:layout_marginTop="5sp"
+            android:text="Reached baseline"
+            />
 
         <CheckBox
             android:id="@+id/uses_hoppers"
@@ -113,7 +143,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Uses hopper"/>
+            android:text="Uses hopper"
+            />
 
         <CheckBox
             android:id="@+id/shootsFromKey"
@@ -124,14 +155,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Shoots from key"/>
+            android:text="Shoots from key"
+            android:visibility="gone"/>
 
 
         <Button
             android:id="@+id/auto_continue"
             android:layout_below="@id/shootsFromKey"
             android:elevation="6dp"
-
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:textColor="#ffffff"
             android:text="@string/continue_button"
             android:layout_width="150dp"

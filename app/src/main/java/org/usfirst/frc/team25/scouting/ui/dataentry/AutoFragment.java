@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -21,11 +23,10 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
 
 public class AutoFragment extends Fragment implements  EntryFragment{
 
-    CheckBox baselineCrossed, useHoppers, shootsFromKey;
+    CheckBox baselineCrossed, useHoppers, shootsFromKey, attemptGear, successGear;
     ButtonIncDec highGoals, lowGoals, rotorsStarted, gearsDelivered;
-    RadioGroup gearLiftGroup;
     RadioButton[] pegButtons;
-    String[] pegButtonValues = {"Left", "Center", "Right"};
+    final String[] pegButtonValues = {"Left", "Center", "Right"};
     Button continueButton;
 
     ScoutEntry entry;
@@ -73,6 +74,8 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         gearsDelivered = (ButtonIncDec) view.findViewById(R.id.gears_auto);
         continueButton = (Button) view.findViewById(R.id.auto_continue);
         shootsFromKey = (CheckBox) view.findViewById(R.id.shootsFromKey);
+        attemptGear = (CheckBox) view.findViewById(R.id.attemptAutoGear);
+        successGear = (CheckBox) view.findViewById(R.id.successAutoGear);
 
 
         pegButtons = new RadioButton[3];
@@ -94,18 +97,65 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         rotorsStarted.setMaxValue(2);
         gearsDelivered.setMaxValue(3);
 
-        if(!entry.getPreMatch().isPilotPlaying()) {
+        /*if(!entry.getPreMatch().isPilotPlaying()) {
             ((ViewGroup) rotorsStarted.getParent()).removeView(rotorsStarted);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) baselineCrossed.getLayoutParams();
             params.addRule(RelativeLayout.BELOW, R.id.autoGearLocationGroup);
             baselineCrossed.setLayoutParams(params);
-        }
+        }*/
+
+        attemptGear.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    successGear.setEnabled(true);
+                    enablePegButtons();
+                }
+                else{
+                    successGear.setChecked(false);
+                    successGear.setEnabled(false);
+                    disablePegButtons();
+                }
+            }
+        });
+
+        successGear.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    baselineCrossed.setChecked(true);
+                    baselineCrossed.setEnabled(false);
+                }
+                else if(!useHoppers.isChecked())
+                    baselineCrossed.setEnabled(true);
+            }
+        });
+
+        useHoppers.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    baselineCrossed.setChecked(true);
+                    baselineCrossed.setEnabled(false);
+                }
+                else if(!successGear.isChecked())
+                    baselineCrossed.setEnabled(true);
+            }
+        });
+
+        baselineCrossed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!baselineCrossed.isEnabled())
+                    Toast.makeText(getActivity(), "If a gear is delivered or a hopper is triggered, the baseline is crossed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
         autoPopulate();
 
-        gearsDelivered.decButton.setOnClickListener(new View.OnClickListener() {
+       /* gearsDelivered.decButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(gearsDelivered.getValue()<=1)
@@ -121,7 +171,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
                 enablePegButtons();
                 gearsDelivered.setValue(gearsDelivered.getValue()+1);
             }
-        });
+        });*/
 
 
 
@@ -138,7 +188,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
                 }
 
-                if(gearsDelivered.getValue()>=1&&!gearPegSelected){
+                if(attemptGear.isChecked()&&!gearPegSelected){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("Select a peg for the auto gear")
                             .setCancelable(false)
@@ -177,7 +227,8 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         }
 
        entry.setAuto(new Autonomous(baselineCrossed.isChecked(), useHoppers.isChecked(), highGoals.getValue(), lowGoals.getValue(),
-               entry.getPreMatch().isPilotPlaying() ? rotorsStarted.getValue() : -1, gearsDelivered.getValue(), shootsFromKey.isChecked(), gearPeg));
+               entry.getPreMatch().isPilotPlaying() ? rotorsStarted.getValue() : -1, gearsDelivered.getValue(), shootsFromKey.isChecked(), gearPeg,
+               attemptGear.isChecked(), successGear.isChecked()));
 
     }
 
@@ -204,11 +255,13 @@ public class AutoFragment extends Fragment implements  EntryFragment{
             useHoppers.setChecked(prevAuto.isUseHoppers());
             rotorsStarted.setValue(prevAuto.getRotorsStarted());
             gearsDelivered.setValue(prevAuto.getGearsDelivered());
+            attemptGear.setChecked(prevAuto.isAttemptGear());
+            successGear.setChecked(prevAuto.isSuccessGear());
 
             if(rotorsStarted.getValue()==-1)
                 rotorsStarted.setValue(0);
 
-            if(prevAuto.getGearsDelivered()>=1){
+            if(attemptGear.isChecked()){
                 enablePegButtons();
                 for(int i = 0; i < 3; i++){
                     if(prevAuto.getGearPeg().equals(pegButtonValues[i])){

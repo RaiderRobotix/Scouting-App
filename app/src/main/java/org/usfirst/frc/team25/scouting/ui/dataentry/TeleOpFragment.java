@@ -1,6 +1,8 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import org.usfirst.frc.team25.scouting.R;
@@ -24,10 +27,25 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
     ScoutEntry entry;
     Button continueButton;
-    ButtonIncDec high, low, gears, rotors, hoppers, cycles, highInc, lowInc;
+    ButtonIncDec high, low, gears, rotors, hoppers, cycles, highInc, lowInc, gearsDropped;
     CheckBox returnLoading, overflowLoading, attemptTakeoff, readyTakeoff;
+    CheckBox[] gearDropLocCheckset = new CheckBox[3];
+    final String[] gearDropLocValues = {"Retrieval zone", "Peg", "Other"};
+
 
     Settings set;
+
+    void enableGearDropLocCheckset(){
+        for(CheckBox cb : gearDropLocCheckset)
+            cb.setEnabled(true);
+    }
+
+    void disableGearDropLocCheckset(){
+        for(CheckBox cb : gearDropLocCheckset) {
+            cb.setEnabled(false);
+            cb.setChecked(false);
+        }
+    }
 
     public static TeleOpFragment getInstance(ScoutEntry entry){
         TeleOpFragment tof = new TeleOpFragment();
@@ -54,7 +72,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-       high = (ButtonIncDec) view.findViewById(R.id.highGoalsTele);
+        high = (ButtonIncDec) view.findViewById(R.id.highGoalsTele);
         low = (ButtonIncDec) view.findViewById(R.id.lowGoalsTele);
         gears = (ButtonIncDec) view.findViewById(R.id.gearsTele);
         rotors = (ButtonIncDec) view.findViewById(R.id.rotorsTele);
@@ -67,6 +85,28 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         cycles = (ButtonIncDec) view.findViewById(R.id.numCycles);
         highInc = (ButtonIncDec) view.findViewById(R.id.highGoalInc);
         lowInc = (ButtonIncDec) view.findViewById(R.id.lowGoalInc);
+        gearsDropped = (ButtonIncDec) view.findViewById(R.id.gearsDroppedTele);
+        gearDropLocCheckset[0] = (CheckBox) view.findViewById(R.id.retrievalZoneDrop);
+        gearDropLocCheckset[1] = (CheckBox) view.findViewById(R.id.pegDrop);
+        gearDropLocCheckset[2] = (CheckBox) view.findViewById(R.id.otherDrop);
+
+        gearsDropped.incButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enableGearDropLocCheckset();
+                gearsDropped.increment();
+                Log.i("tag", new Integer(gearsDropped.getValue()).toString());
+            }
+        });
+
+        gearsDropped.decButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(gearsDropped.getValue()<=1)
+                    disableGearDropLocCheckset();
+                gearsDropped.decrement();
+            }
+        });
 
 
 
@@ -79,15 +119,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         lowInc.setValue(set.getLowGoalIncTele());
 
 
-        if(!entry.getPreMatch().isPilotPlaying()) {
+        /*if(!entry.getPreMatch().isPilotPlaying()) {
             ((ViewGroup) rotors.getParent()).removeView(rotors);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) hoppers.getLayoutParams();
           params.addRule(RelativeLayout.BELOW, R.id.gearsTele);
             hoppers.setLayoutParams(params);
         }
 
-
-        else rotors.setMaxValue(4-entry.getAuto().getRotorsStarted());
+        else rotors.setMaxValue(4-entry.getAuto().getRotorsStarted());*/
 
         hoppers.setMaxValue(5 - (entry.getAuto().isUseHoppers() ? 1 : 0));
 
@@ -111,12 +150,37 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean gearDropLocSelected = false;
 
-                saveState();
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
-                        .commit();
+                for(CheckBox cb : gearDropLocCheckset){
+                    if(cb.isChecked()){
+                        gearDropLocSelected = true;
+                        break;
+                    }
+
+                }
+
+                if(gearsDropped.getValue()>=1 && !gearDropLocSelected){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select location(s) for dropped gear(s)")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+
+                else {
+                    saveState();
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
+                            .commit();
+                }
             }
         });
 
@@ -149,9 +213,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
     @Override
     public void saveState() {
+        String gearDropLoc = "";
+        for(int i = 0; i < gearDropLocCheckset.length; i++)
+            if(gearDropLocCheckset[i].isChecked())
+                gearDropLoc+= gearDropLocValues[i] + "; ";
+
         entry.setTeleOp(new TeleOp(low.getValue(), high.getValue(), gears.getValue(), hoppers.getValue(),
                 entry.getPreMatch().isPilotPlaying() ? rotors.getValue() : -1, attemptTakeoff.isChecked(), readyTakeoff.isChecked(),
-                returnLoading.isChecked(), overflowLoading.isChecked(), cycles.getValue()));
+                returnLoading.isChecked(), overflowLoading.isChecked(), cycles.getValue(), gearsDropped.getValue(), gearDropLoc));
     }
 
     @Override
@@ -165,9 +234,18 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
             rotors.setValue(tele.getRotorsStarted());
             cycles.setValue(tele.getNumCycles());
             attemptTakeoff.setChecked(tele.isAttemptTakeoff());
+            gearsDropped.setValue(tele.getGearsDropped());
 
             returnLoading.setChecked(tele.isUseReturnLoading());
             overflowLoading.setChecked(tele.isUseOverflowLoading());
+
+            if(tele.getGearsDropped()>=1){
+                enableGearDropLocCheckset();
+                for(int i = 0; i < gearDropLocCheckset.length; i++)
+                    if(tele.getGearsDroppedLoc().contains(gearDropLocValues[i]))
+                        gearDropLocCheckset[i].setChecked(true);
+            }
+            else disableGearDropLocCheckset();
 
             if(tele.isAttemptTakeoff())
                 readyTakeoff.setEnabled(true);

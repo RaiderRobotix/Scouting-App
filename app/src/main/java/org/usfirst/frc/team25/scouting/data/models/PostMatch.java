@@ -14,13 +14,14 @@ public class PostMatch {
 
     public PostMatch(String robotComment, String pilotComment, ArrayList<CheckBox> robotQuickComments,
                      ArrayList<CheckBox> pilotQuickComments,
-                     String[] robotQuickCommentValues, String[] pilotQuickCommentValues) {
+                     String[] robotQuickCommentValues, String[] pilotQuickCommentValues, String focus) {
         this.robotComment = robotComment;
         this.pilotComment = pilotComment;
         this.robotQuickComments = robotQuickComments;
         this.pilotQuickComments = pilotQuickComments;
         this.robotQuickCommentValues = robotQuickCommentValues;
         this.pilotQuickCommentValues = pilotQuickCommentValues;
+        this.focus = focus;
 
         robotQuickCommentSelections = new HashMap<>();
         pilotQuickCommentSelections = new HashMap<>();
@@ -30,7 +31,18 @@ public class PostMatch {
     }
 
 
-    String robotComment, pilotComment;
+    String robotComment;
+    String pilotComment;
+
+    public String getFocus() {
+        return focus;
+    }
+
+    public void setFocus(String focus) {
+        this.focus = focus;
+    }
+
+    String focus;
     HashMap<String, Boolean> robotQuickCommentSelections, pilotQuickCommentSelections;
 
 

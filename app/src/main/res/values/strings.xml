@@ -42,8 +42,8 @@
     <string-array name="event_options">
         <item>"Mount Olive"</item>
         <item>"Montgomery"</item>
-        <item>"MAR District Championship</item>
-        <item>"St. Louis World Championship"</item>
+        <item>"Mid-Atlantic District Championship</item>
+        <item>"FIRST Championship"</item>
         <item>"Brunswick Eruption"</item>
     </string-array>
 
@@ -51,7 +51,7 @@
         <item>"Mount Olive"</item>
         <item>"Montgomery"</item>
         <item>"Mid-Atlantic"</item>
-        <item>"Darwin"</item>
+        <item>"Carson"</item>
         <item>"Brunswick Eruption"</item>
     </string-array>
 

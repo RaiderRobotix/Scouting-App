@@ -55,7 +55,8 @@
             android:paddingTop="@dimen/default_padding_top"
             android:paddingBottom="@dimen/default_padding_bottom"
             android:paddingLeft="@dimen/inner_padding_left"
-            android:paddingRight="@dimen/inner_padding_right"/>
+            android:paddingRight="@dimen/inner_padding_right"
+            android:visibility="gone"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"

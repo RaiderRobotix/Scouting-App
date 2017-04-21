@@ -126,15 +126,23 @@ public class ButtonIncDec extends RelativeLayout {
         incButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValue(getValue()+incDecAmount);
+                increment();
 
             }
         });
         decButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setValue(getValue()-incDecAmount);
+                decrement();
             }
         });
+    }
+
+    public void increment(){
+        setValue(getValue()+incDecAmount);
+    }
+
+    public void decrement(){
+        setValue(getValue()-incDecAmount);
     }
 }

@@ -90,15 +90,34 @@ public class TeleOp {
     int lowGoals;
     int highGoals;
     int gearsDelivered;
+
+    public int getGearsDropped() {
+        return gearsDropped;
+    }
+
+    public void setGearsDropped(int gearsDropped) {
+        this.gearsDropped = gearsDropped;
+    }
+
+    public String getGearsDroppedLoc() {
+        return gearsDroppedLoc;
+    }
+
+    public void setGearsDroppedLoc(String gearsDroppedLoc) {
+        this.gearsDroppedLoc = gearsDroppedLoc;
+    }
+
+    int gearsDropped;
+    String gearsDroppedLoc;
     int hopppersUsed;
-    int rotorsStarted;
+    transient int rotorsStarted;
     int numCycles;
     transient boolean  useReturnLoading, useOverflowLoading;
     boolean attemptTakeoff, readyTakeoff;
 
 
     public TeleOp(int lowGoals, int highGoals, int gearsDelivered, int hopppersUsed, int rotorsStarted, boolean attemptTakeoff, boolean readyTakeoff, boolean useReturnLoading,
-                  boolean useOverflowLoading, int numCycles) {
+                  boolean useOverflowLoading, int numCycles, int gearsDropped, String gearsDroppedLoc) {
         this.lowGoals = lowGoals;
         this.highGoals = highGoals;
         this.gearsDelivered = gearsDelivered;
@@ -109,5 +128,7 @@ public class TeleOp {
         this.useReturnLoading = useReturnLoading;
         this.useOverflowLoading = useOverflowLoading;
         this.numCycles = numCycles;
+        this.gearsDropped = gearsDropped;
+        this.gearsDroppedLoc = gearsDroppedLoc;
     }
 }

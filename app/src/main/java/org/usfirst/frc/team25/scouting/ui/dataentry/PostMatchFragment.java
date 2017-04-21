@@ -1,5 +1,7 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -31,25 +34,23 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     RelativeLayout robotCommentView, pilotCommentView;
     ArrayList<CheckBox> robotQuickComments, pilotQuickComments;
     Button finish;
+    RadioButton[] focusButtons = new RadioButton[3];
 
     final String[] ROBOT_COMMENT_VALUES = {
-            "Accurate high shooter",
-            "Collects fuel from ground",
             "Active gear mech.",
-            "Collects gears from ground",
+            "Floor gear pickup",
+            "Fuel intake",
+            "Accurate high shooter",
+            "Climbs in under 7 seconds",
+            "Very slow climb",
             "Takes time to get gear from RZ",
             "Takes time to align with lift",
-            "Very fast drive train",
-            "Very slow drive train",
             "Played defense effectively",
             "Slowed by defense",
-            "Dropped gear (specify # times; locat.)",
-            "Climbs in under 5 seconds",
-            "Rope snapped during takeoff",
             "Lost comms.",
             "Robot caused foul (specify below)",
             "Do not pick (explain)",
-            "INCORRECT DATA (specify below)"
+            "Possible inaccurate data (specify below)"
     };
 
     final String[] PILOT_COMMENT_VALUES = {
@@ -85,6 +86,9 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         robotCommentView = (RelativeLayout) view.findViewById(R.id.robotCommentView);
         pilotCommentView = (RelativeLayout) view.findViewById(R.id.pilotCommentView);
         finish = (Button) view.findViewById(R.id.post_finish);
+        focusButtons[0] = (RadioButton) view.findViewById(R.id.gearFocus);
+        focusButtons[1] = (RadioButton) view.findViewById(R.id.fuelFocus);
+        focusButtons[2] = (RadioButton) view.findViewById(R.id.bothFocus);
 
         robotQuickComments = new ArrayList<CheckBox>();
         pilotQuickComments = new ArrayList<CheckBox>();
@@ -104,23 +108,44 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveState();
-                final PostMatch pm = entry.getPostMatch();
-                pm.finalizeComment();
-                entry.setPostMatch(pm);
+                boolean focusChecked = false;
 
-                Settings set = Settings.newInstance(getActivity());
+                for(RadioButton rb : focusButtons)
+                    if(rb.isChecked())
+                        focusChecked = true;
 
-                if(set.getMatchType().equals("P"))
-                    Toast.makeText(getActivity().getBaseContext(), "Practice match data NOT saved", Toast.LENGTH_LONG).show();
-                else{
-                    FileManager.saveData(entry, getActivity());
-                    Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
+                if(!focusChecked) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select the robot's focus for this match")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
 
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
-                set.setMatchNum(set.getMatchNum()+1);
-                getActivity().finish();
+                else{
+                    saveState();
+                    final PostMatch pm = entry.getPostMatch();
+                    pm.finalizeComment();
+                    entry.setPostMatch(pm);
+
+                    Settings set = Settings.newInstance(getActivity());
+
+                    if (set.getMatchType().equals("P"))
+                        Toast.makeText(getActivity().getBaseContext(), "Practice match data NOT saved", Toast.LENGTH_LONG).show();
+                    else {
+                        FileManager.saveData(entry, getActivity());
+                        Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
+                    }
+
+                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
+                    set.setMatchNum(set.getMatchNum() + 1);
+                    getActivity().finish();
+                }
 
 
             }
@@ -256,8 +281,15 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     }
 
     public void saveState(){
+        String focus = "";
+        for(RadioButton rb : focusButtons)
+            if(rb.isChecked()){
+                focus = (String) rb.getText();
+                break;
+            }
+
         entry.setPostMatch(new PostMatch(robotComment.getText().toString(), pilotComment.getText().toString(), robotQuickComments,
-                pilotQuickComments, ROBOT_COMMENT_VALUES, PILOT_COMMENT_VALUES));
+                pilotQuickComments, ROBOT_COMMENT_VALUES, PILOT_COMMENT_VALUES, focus));
     }
 
 
@@ -276,6 +308,10 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 if(pilotCheckedComments.get(i).isChecked())
                     pilotQuickComments.get(i).setChecked(true);
             pilotComment.setText(entry.getPostMatch().getPilotComment());
+
+            for(RadioButton rb : focusButtons)
+                if(rb.getText().equals(entry.getPostMatch().getFocus()))
+                    rb.setChecked(true);
         }
     }
 

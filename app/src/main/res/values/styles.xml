@@ -67,11 +67,18 @@
         <item name="actionBarStyle">@style/AppTheme.ActionBarStyle</item>
     </style>
 
-    <style name="AppTheme.NoLauncher.Red">
-        <item name="colorPrimary">@color/red_500</item>
-        <item name="colorAccent">@color/red_500</item>
-        <item name="android:colorButtonNormal">@color/red_500</item>
+    <style name="AppTheme.NoLauncher.Green">
+        <item name="colorPrimary">#0d7e7c</item>
+        <item name="colorAccent">#c9c9c9</item>
+        <item name="android:colorButtonNormal">#0d7e7c</item>
     </style>
+
+    <style name="AppTheme.NoLauncher.Red">
+        <item name="colorPrimary">#e91807</item>
+        <item name="colorAccent">#e91807</item>
+        <item name="android:colorButtonNormal">#e91807</item>
+    </style>
+
     <style name="AppTheme.NoLauncher.Raider">
         <item name="colorPrimary">@color/raider_blue</item>
         <item name="colorAccent">@color/raider_accent_yellow</item>

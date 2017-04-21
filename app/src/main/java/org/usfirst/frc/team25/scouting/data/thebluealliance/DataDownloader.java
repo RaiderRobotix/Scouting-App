@@ -34,10 +34,10 @@ import org.usfirst.frc.team25.scouting.data.Sorters;
 
 public class DataDownloader  extends AsyncTask<Void, Void, String>{
 
-        Context c;
-        Settings set;
-    boolean teamListExists, matchScheduleExists;
-    File teamListFilePath, matchListFilePath;
+    private Context c;
+    private Settings set;
+    private boolean teamListExists, matchScheduleExists;
+    private File teamListFilePath, matchListFilePath;
 
         public DataDownloader(Context c){
             this.c = c;
@@ -107,6 +107,8 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                     eventCode = currentYear+"njski";
                 if(currentEvent.equals("Mid-Atlantic"))
                     eventCode = currentYear+"mrcmp";
+                if(currentEvent.equals("Carson"))
+                    eventCode = currentYear+"cars";
 
 
                 if(!eventCode.equals("")) {
