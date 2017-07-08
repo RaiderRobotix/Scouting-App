@@ -1,11 +1,12 @@
 package  org.usfirst.frc.team25.scouting.data;
 
+
+
+import com.thebluealliance.api.v3.models.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-import com.adithyasairam.tba4j.models.Match;
-import com.adithyasairam.tba4j.models.Team;
 
 /**
  * Collection of static methods to sort and filter ArrayLists of object models
@@ -22,7 +23,7 @@ public class Sorters {
 
         Collections.sort(matches, new Comparator<Match>(){
             public int compare(Match m1, Match m2){
-                return m1.match_number - m2.match_number;
+                return m1.getMatchNumber() - m2.getMatchNumber();
             }
         });
         return matches;
@@ -36,7 +37,7 @@ public class Sorters {
 
         Collections.sort(events, new Comparator<Team>(){
             public int compare(Team t1, Team t2){
-                return t1.team_number - t2.team_number;
+                return t1.getTeamNumber() - t2.getTeamNumber();
             }
         });
         return events;
@@ -50,7 +51,7 @@ public class Sorters {
    public static ArrayList<Match> filterQualification(ArrayList<Match> matches){
         for(int i = 0; i < matches.size(); i++){
 
-            if(!matches.get(i).comp_level.equals("qm")){
+            if(!matches.get(i).getCompLevel().equals("qm")){
                 matches.remove(i);
                 i--;
             }

@@ -59,7 +59,7 @@ public class Settings extends PreferenceFragment {
         editor.commit();
     }
 
-    public int getHighGoalIncAuto(){ return sp.getInt("high_goal_inc_auto", 6);};
+    public int getHighGoalIncAuto(){ return sp.getInt("high_goal_inc_auto", 6);}
 
     public void setHighGoalIncAuto(int inc){
         SharedPreferences.Editor editor = sp.edit();
@@ -68,7 +68,7 @@ public class Settings extends PreferenceFragment {
     }
 
 
-    public int getHighGoalIncTele(){ return sp.getInt("high_goal_inc_tele", 6);};
+    public int getHighGoalIncTele(){ return sp.getInt("high_goal_inc_tele", 6);}
 
     public void setHighGoalIncTele(int inc){
         SharedPreferences.Editor editor = sp.edit();
@@ -117,7 +117,7 @@ public class Settings extends PreferenceFragment {
 
     public void setMatchType(String type){
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("pos", type);
+        editor.putString("match_type", type);
         editor.apply();
     }
 
@@ -189,5 +189,16 @@ public class Settings extends PreferenceFragment {
 
 
     }
+
+    public String getAPIKey(){
+        return sp.getString("api_key", "DEFAULT");
+    }
+
+    public void setAPIKey(String key){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("api_key", key);
+        editor.apply();
+    }
+
 
 }

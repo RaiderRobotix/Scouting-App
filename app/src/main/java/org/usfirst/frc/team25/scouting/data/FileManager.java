@@ -78,7 +78,7 @@ public class FileManager {
      */
     public static String getDataFilename(Context c){
         Settings set = Settings.newInstance(c);
-        return "Data - " + set.getScoutPos() + " - " +set.getCurrentEvent() + ".json";
+        return "Data - " + set.getScoutPos() + " - " +set.getYear()+set.getCurrentEvent() + ".json";
     }
 
     public static File getDataFilePath(Context c){
@@ -93,7 +93,7 @@ public class FileManager {
      */
     private static String getTeamListFilename(Context c){
         Settings set = Settings.newInstance(c);
-        return "Teams - " +set.getCurrentEvent() + ".csv";
+        return "Teams - " +set.getYear()+set.getCurrentEvent() + ".csv";
     }
 
     public static File getTeamListFilePath(Context c){
@@ -108,7 +108,7 @@ public class FileManager {
      */
     private static String getMatchListFilename(Context c){
         Settings set = Settings.newInstance(c);
-        return "Matches - " +set.getCurrentEvent() + ".csv";
+        return "Matches - " +set.getYear()+set.getCurrentEvent() + ".csv";
     }
 
     public static File getMatchListFilePath(Context c){

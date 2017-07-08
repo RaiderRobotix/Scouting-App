@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.thebluealliance.api.v3.TBA;
+import com.thebluealliance.api.v3.models.*;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,10 +25,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.adithyasairam.tba4j.Events;
-import com.adithyasairam.tba4j.models.Match;
-import com.adithyasairam.tba4j.models.Team;
-
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.Sorters;
@@ -39,38 +38,40 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
     private boolean teamListExists, matchScheduleExists;
     private File teamListFilePath, matchListFilePath;
 
-        public DataDownloader(Context c){
-            this.c = c;
-            set = Settings.newInstance(c);
-            teamListExists = FileManager.teamListExists(c);
-            teamListFilePath = FileManager.getTeamListFilePath(c);
-            matchScheduleExists = FileManager.matchScheduleExists(c);
-            matchListFilePath = FileManager.getMatchListFilePath(c);
-        }
+    public DataDownloader(Context c){
+        this.c = c;
+        set = Settings.newInstance(c);
+        teamListExists = FileManager.teamListExists(c);
+        teamListFilePath = FileManager.getTeamListFilePath(c);
+        matchScheduleExists = FileManager.matchScheduleExists(c);
+        matchListFilePath = FileManager.getMatchListFilePath(c);
+    }
 
-        private String getTeamList(String eventCode) throws UnknownHostException{
-            String teamList = "";
-            ArrayList<Team> teams = Sorters.sortByTeamNum(new ArrayList<Team>(Arrays.asList(Events.getEventTeamsList(eventCode))));
-            for (Team team : teams)
-                teamList += team.team_number + ",";
-            StringBuilder output = new StringBuilder(teamList);
-            output.setCharAt(output.length() - 1, ' ');
-            return teamList;
-        }
+    private String getTeamList(String eventCode) throws UnknownHostException{
+        String teamList = "";
+        ArrayList<Team> teams = Sorters.sortByTeamNum(new ArrayList<Team>(Arrays.asList(new TBA(set.getAPIKey()).eventRequest.getTeams(eventCode))));
+        for (Team team : teams)
+            teamList += team.getTeamNumber() + ",";
+        StringBuilder output = new StringBuilder(teamList);
+        output.setCharAt(output.length() - 1, ' ');
+        return teamList;
+    }
 
-    /** Generates a file with list of teams playing in each match
+    /** Generates CSV file content with list of teams playing in each match
      * Each line contains comma delimited match number, then team numbers for red alliance, then blue alliance.
-     * @param eventCode Fully qualified event key, i.e. "2016pahat" for Hatsboro-Horsham in 2016
+     * @param eventCode Fully qualified event key, i.e. "2016pahat" for Hatboro-Horsham in 2016
      */
-    private String getMatchList(String eventCode) throws FileNotFoundException, UnknownHostException {
+    private String getMatchList(String eventCode) throws UnknownHostException {
         String matchList = "";
-        for(Match match : Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<Match>(Arrays.asList(Events.getEventMatches(eventCode)))))){
+        for(Match match : Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<Match>(Arrays.asList(new TBA(set.getAPIKey()).eventRequest.getMatches(eventCode)))))){
 
-            matchList+=match.match_number+",";
+            matchList+=match.getMatchNumber()+",";
             for(int i = 0; i < 2; i++) //iterate through two alliances
-                for(int j = 0; j < 3; j++) //iterate through teams in alliance
-                    //A ternary operator is used here for convenience. TODO fix this unreadable mess
-                    matchList+= i==0 ? match.alliances.red.teams[j].split("frc")[1]+",": match.alliances.blue.teams[j].split("frc")[1]+",";
+                for(int j = 0; j < 3; j++){ //iterate through teams in alliance
+                    if(i==0)
+                        matchList+=match.getRedAlliance().getTeamKeys()[j].split("frc")[1]+",";
+                    else matchList+=match.getBlueAlliance().getTeamKeys()[j].split("frc")[1]+",";
+                    }
             matchList+=",\n";
 
 
@@ -101,6 +102,8 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                 String currentEvent = set.getCurrentEvent();
                 String currentYear = set.getYear();
 
+                eventCode = currentYear + currentEvent;
+
                 if(currentEvent.equals("Mount Olive"))
                     eventCode = currentYear+"njfla";
                 if(currentEvent.equals("Montgomery"))
@@ -110,8 +113,16 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                 if(currentEvent.equals("Carson"))
                     eventCode = currentYear+"cars";
 
+                try {
+                    TBA tba = new TBA(set.getAPIKey());
+                    if (tba.dataRequest.getDataTBA("/status").getResponseCode() == 401)
+                        return "Invalid Blue Alliance API key";
+                }catch(NullPointerException e){
+                    return "Invalid Blue Alliance API key";
+                }
 
                 if(!eventCode.equals("")) {
+
                     if(!teamListExists) {
                         String teamList = getTeamList(eventCode);
                         if (teamList.equals(""))

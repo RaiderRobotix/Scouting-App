@@ -103,14 +103,17 @@
         android:key="use_team_list"
         />
 
-    <Preference
-        android:title="Import match data"
-        android:key="import_data"/>
 
     <Preference
         android:title="Download match schedule"
         android:key="download_schedule"
         android:defaultValue="false"/>
+
+    <EditTextPreference
+        android:key="api_key"
+        android:title="Blue Alliance API key"
+        android:summary="Required to download match schedule"
+        />
 
     <Preference
         android:key="change_pass"
@@ -131,11 +134,11 @@
 
     <Preference
         android:title="Game"
-        android:summary="FIRST Steamworks"/>
+        android:key="game" />
 
     <Preference
         android:title="Version"
-        android:summary="v1.3"/>
+        android:key="version" />
 
 
 
