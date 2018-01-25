@@ -53,43 +53,24 @@
     <Preference
         android:key="year"
         android:title="@string/year"
-        android:defaultValue="2017"
-        android:summary="2017"
+        android:defaultValue="2018"
+        android:summary="2018"
         android:layout="@layout/preference_normal"
         android:enabled="true"
 
         />
 
     <PreferenceCategory
-        android:title="FIRST Steamworks"
+        android:title="FIRST Power Up"
         android:layout="@layout/preference_category_normal"/>
 
-    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="low_goal_inc_auto"
-        android:title="Auto low goal increment"
-        android:defaultValue="5"
-        android:layout="@layout/preference_normal"
-        />
-
-    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="high_goal_inc_auto"
-        android:title="Auto high goal increment"
-        android:defaultValue="2"
-        android:layout="@layout/preference_normal"
-        />
-
-    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="low_goal_inc_tele"
-        android:title="Teleop low goal increment"
-        android:defaultValue="10"
-        android:layout="@layout/preference_normal"
-        />
-
-    <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="high_goal_inc_tele"
-        android:title="Teleop high goal increment"
-        android:defaultValue="2"
-        android:layout="@layout/preference_normal"
+    <ListPreference
+        android:key="leftStation"
+        android:title="Left alliance color"
+        android:summary="%s"
+        android:entries="@array/alliance_type"
+        android:entryValues="@array/alliance_type"
+        android:defaultValue="Red Alliance"
         />
 
     <PreferenceCategory

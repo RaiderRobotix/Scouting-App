@@ -99,28 +99,56 @@
             android:paddingRight="@dimen/inner_padding_right"
             android:singleLine="true"/>
 
-        <CheckBox
-            android:id="@+id/pilot_playing"
+
+
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding_bottom"
-
-            android:textSize="18sp"
-
+            android:id="@+id/startingPosition"
             android:layout_below="@id/team_num_field"
-            android:text="This team has a pilot on the airship"/>
+            android:visibility="visible"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Robot startng position (from driver POV)"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:id="@+id/leftStart"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Center"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:id="@+id/centerStart"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:id="@+id/rightStart"/>
 
+        </RadioGroup>
 
         <Button
             android:id="@+id/prematch_continue"
-            android:layout_below="@id/pilot_playing"
+            android:layout_below="@id/startingPosition"
             android:elevation="6dp"
             android:theme="@style/Widget.AppCompat.Button.Colored.blue"
             android:textColor="#ffffff"
             android:text="@string/continue_button"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"/>
 

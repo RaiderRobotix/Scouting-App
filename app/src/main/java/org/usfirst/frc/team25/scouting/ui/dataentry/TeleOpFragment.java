@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -72,23 +70,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        high = (ButtonIncDec) view.findViewById(R.id.highGoalsTele);
-        low = (ButtonIncDec) view.findViewById(R.id.lowGoalsTele);
-        gears = (ButtonIncDec) view.findViewById(R.id.gearsTele);
-        rotors = (ButtonIncDec) view.findViewById(R.id.rotorsTele);
-        hoppers=(ButtonIncDec) view.findViewById(R.id.hoppersTele);
-        returnLoading = (CheckBox) view.findViewById(R.id.useReturnStation);
-        overflowLoading = (CheckBox) view.findViewById(R.id.useOverflow);
-        attemptTakeoff = (CheckBox) view.findViewById(R.id.attemptTakeoff);
-        readyTakeoff = (CheckBox) view.findViewById(R.id.readyForTakeoff);
+        high = (ButtonIncDec) view.findViewById(R.id.own_switch_tele);
+        low = (ButtonIncDec) view.findViewById(R.id.scale_tele);
+        gears = (ButtonIncDec) view.findViewById(R.id.opponent_switch_tele);
+        attemptTakeoff = (CheckBox) view.findViewById(R.id.attempt_rung_climb);
+        readyTakeoff = (CheckBox) view.findViewById(R.id.success_rung_climb);
         continueButton = (Button) view.findViewById(R.id.tele_continue);
-        cycles = (ButtonIncDec) view.findViewById(R.id.numCycles);
-        highInc = (ButtonIncDec) view.findViewById(R.id.highGoalInc);
-        lowInc = (ButtonIncDec) view.findViewById(R.id.lowGoalInc);
-        gearsDropped = (ButtonIncDec) view.findViewById(R.id.gearsDroppedTele);
-        gearDropLocCheckset[0] = (CheckBox) view.findViewById(R.id.retrievalZoneDrop);
-        gearDropLocCheckset[1] = (CheckBox) view.findViewById(R.id.pegDrop);
-        gearDropLocCheckset[2] = (CheckBox) view.findViewById(R.id.otherDrop);
+
+
 
         gearsDropped.incButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,7 +208,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
                 gearDropLoc+= gearDropLocValues[i] + "; ";
 
         entry.setTeleOp(new TeleOp(low.getValue(), high.getValue(), gears.getValue(), hoppers.getValue(),
-                entry.getPreMatch().isPilotPlaying() ? rotors.getValue() : -1, attemptTakeoff.isChecked(), readyTakeoff.isChecked(),
+                 -1, attemptTakeoff.isChecked(), readyTakeoff.isChecked(),
                 returnLoading.isChecked(), overflowLoading.isChecked(), cycles.getValue(), gearsDropped.getValue(), gearDropLoc));
     }
 

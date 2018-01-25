@@ -34,7 +34,6 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     Button continueButton;
     MaterialEditText name, matchNum, teamNum;
     MaterialBetterSpinner scoutPos /*event*/;
-    CheckBox pilotPlaying;
     ScoutEntry entry;
 
 
@@ -73,8 +72,6 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         name = (MaterialEditText) view.findViewById(R.id.scout_name_field);
         matchNum = (MaterialEditText) view.findViewById(R.id.match_num_field);
         teamNum = (MaterialEditText) view.findViewById(R.id.team_num_field);
-
-        pilotPlaying = (CheckBox) view.findViewById(R.id.pilot_playing);
 
         autoPopulate();
 
@@ -126,7 +123,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     proceed=false;
                 }*/
 
-                //TODO Pull team numbers from The Blue Alliance for verification
+
                 if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999) {
                     if (teamNum.getText().toString().equals(""))
                         teamNum.setError("Team number required");
@@ -221,7 +218,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     @Override
     public void saveState() {
         entry.setPreMatch(new PreMatch(name.getText().toString(), Settings.newInstance(getActivity()).getCurrentEvent(), scoutPos.getText().toString(),
-                Integer.parseInt(matchNum.getText().toString()), Integer.parseInt(teamNum.getText().toString()), pilotPlaying.isChecked()));
+                Integer.parseInt(matchNum.getText().toString()), Integer.parseInt(teamNum.getText().toString())));
     }
 
     public void autoPopulate(){
@@ -234,7 +231,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
             //event.setText(prevPreMatch.getCurrentEvent());
             matchNum.setText(String.valueOf(prevPreMatch.getMatchNum()));
             teamNum.setText(String.valueOf(prevPreMatch.getTeamNum()));
-            pilotPlaying.setChecked(prevPreMatch.isPilotPlaying());
+
         }
 
         // Pulls data values from preferences to automatically fill fields

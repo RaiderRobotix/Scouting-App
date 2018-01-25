@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.github.barteksc.pdfviewer.PDFView;
 
 
+import org.usfirst.frc.team25.scouting.Constants;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
@@ -16,7 +17,7 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
     PDFView rulesView;
 
     //File name of the PDF file, placed in the assets folder
-    final String RULES_FILEPATH = "Steamworks Cheatsheet.pdf";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +25,10 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
         setContentView(R.layout.activity_rules);
 
 
-        rulesView = (PDFView) findViewById(R.id.pdfView);
+        rulesView = findViewById(R.id.pdfView);
 
         try {
-            rulesView.fromAsset(RULES_FILEPATH)
+            rulesView.fromAsset(Constants.RULES_FILEPATH)
                 .defaultPage(1)
                 .showMinimap(false)
                 .swipeVertical(true)
@@ -46,6 +47,6 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setTitle("FIRST Steamworks Rules");
+        setTitle(Constants.GAME + " Rules");
     }
 }

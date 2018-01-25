@@ -93,7 +93,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         robotQuickComments = new ArrayList<CheckBox>();
         pilotQuickComments = new ArrayList<CheckBox>();
 
-        if(!entry.getPreMatch().isPilotPlaying()) {
+        if(true) {
             ((ViewGroup) pilotCommentView.getParent()).removeView(pilotCommentView);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) finish.getLayoutParams();
             params.addRule(RelativeLayout.BELOW, R.id.robotCommentView);

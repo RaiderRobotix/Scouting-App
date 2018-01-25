@@ -1,6 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:dslv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,184 +13,112 @@
         android:layout_height="wrap_content">
 
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:padding="@dimen/default_padding_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titlePrompt="High goals made"
-        app:initialValue="0"
-        android:id="@+id/highGoalsTele"/>
-
-    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-        android:padding="@dimen/default_padding_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titlePrompt="Low goals made"
-        app:initialValue="0"
-        android:layout_below="@id/highGoalsTele"
-        android:id="@+id/lowGoalsTele"/>
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titlePrompt="Gears delivered"
-            app:initialValue="0"
-            android:layout_below="@id/lowGoalsTele"
-            android:id="@+id/gearsTele"/>
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titlePrompt="Gears dropped (unintentionally)"
-            app:initialValue="0"
-            android:layout_below="@id/gearsTele"
-            android:id="@+id/gearsDroppedTele"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dropped gear location(s)"
-            android:id="@+id/dropGearLocText"
+            android:text="Plate configuration from your POV (tap to change)"
+            android:id="@+id/field_config_text"
             android:textSize="19sp"
-            android:layout_below="@id/gearsDroppedTele"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:padding="@dimen/inner_components_spacing"/>
 
-        <RelativeLayout
+
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:id="@+id/dropGearLoc"
-            android:layout_below="@id/dropGearLocText">
+            android:layout_height="100dp"
+            android:src="@drawable/team_25_logo"
+            android:layout_below="@id/field_config_text"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:id="@+id/field_config_image"/>
 
+    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/default_padding_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titlePrompt="Cubes on own switch"
+        app:initialValue="0"
+        android:layout_below="@id/field_config_image"
+        android:id="@+id/own_switch_tele"/>
 
+    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        android:padding="@dimen/default_padding_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titlePrompt="Cubes on scale"
+        app:initialValue="0"
+        android:layout_below="@id/own_switch_tele"
+        android:id="@+id/scale_tele"/>
 
-            <CheckBox
-                android:textSize="18sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Retrieval zone"
-                android:enabled="false"
-                android:id="@+id/retrievalZoneDrop"
-                android:padding="@dimen/inner_components_spacing"
-                />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/retrievalZoneDrop"
-                android:text="Airship peg"
-                android:id="@+id/pegDrop"
-                android:textSize="18sp"
-                android:enabled="false"
-                android:padding="@dimen/inner_components_spacing"/>
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/pegDrop"
-                android:text="Other"
-                android:id="@+id/otherDrop"
-                android:enabled="false"
-                android:textSize="18sp"
-                android:padding="@dimen/inner_components_spacing"/>
-
-
-
-        </RelativeLayout>
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Rotors started"
+            app:titlePrompt="Cubes on opponent switch"
             app:initialValue="0"
-            android:layout_below="@id/dropGearLoc"
-            android:id="@+id/rotorsTele"
-            android:visibility="gone"/>
+            android:layout_below="@id/scale_tele"
+            android:id="@+id/opponent_switch_tele"/>
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Hoppers triggered"
+            app:titlePrompt="Cubes delivered to exchange"
             app:initialValue="0"
-            android:layout_below="@id/rotorsTele"
-            android:id="@+id/hoppersTele"/>
+            android:layout_below="@id/opponent_switch_tele"
+            android:id="@+id/exchange_tele"/>
+
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Number of cycles"
-            app:initialValue="1"
-            app:minValue="1"
-            android:layout_below="@id/hoppersTele"
-            android:id="@+id/numCycles"/>
-
-        <LinearLayout
-            android:layout_below="@id/numCycles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding_top"
-            android:layout_marginTop="@dimen/default_padding_top"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:id="@+id/fuelCollectLoc"
-            android:visibility="gone">
-        <TextView
-            android:textSize="18sp"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fuel collection\nlocations:"
+            app:titlePrompt="Cubes dropped on field"
+            app:initialValue="0"
+            android:layout_below="@id/exchange_tele"
+            android:id="@+id/cubes_dropped_tele"
             />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin">
-
-                <CheckBox
-                    android:textSize="18sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Return loading station"
-                    android:id="@+id/useReturnStation"
-                />
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/useReturnStation"
-                    android:text="Overflow loading station"
-                    android:id="@+id/useOverflow"
-                    android:textSize="18sp"/>
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Average cube pickup/drop time (seconds)"
+            app:initialValue="0"
+            android:layout_below="@id/cubes_dropped_tele"
+            android:id="@+id/cycle_time"
+            />
 
 
+        <CheckBox
+            android:id="@+id/park_platform"
+            android:layout_below="@id/cycle_time"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-            </RelativeLayout>
-
-        </LinearLayout>
+            android:text="Parked on platform"/>
 
     <CheckBox
-        android:id="@+id/attemptTakeoff"
-        android:layout_below="@id/fuelCollectLoc"
+        android:id="@+id/attempt_rung_climb"
+        android:layout_below="@id/park_platform"
         android:padding="@dimen/default_padding_bottom"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:textSize="18sp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Attempts to get ready for takeoff"/>
+        android:text="Attempts to climb on rung"/>
 
     <CheckBox
-        android:id="@+id/readyForTakeoff"
-        android:layout_below="@id/attemptTakeoff"
+        android:id="@+id/success_rung_climb"
+        android:layout_below="@id/attempt_rung_climb"
         android:padding="@dimen/default_padding_bottom"
         android:enabled="false"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -200,11 +127,21 @@
         android:layout_height="wrap_content"
         android:text="Successful in attempt" />
 
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Climbs assisted"
+            app:initialValue="0"
+            app:maxValue="2"
+            android:layout_below="@id/success_rung_climb"
+            android:id="@+id/climbs_assisted"
+            />
         <!--Include cycle options here?-->
 
     <Button
         android:id="@+id/tele_continue"
-        android:layout_below="@id/readyForTakeoff"
+        android:layout_below="@id/climbs_assisted"
         android:elevation="6dp"
 
         android:textColor="#ffffff"
@@ -215,26 +152,6 @@
         android:layout_centerHorizontal="true"
         />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tele_continue"
-            android:layout_marginTop="20dp"
-            android:padding="2dp"
-            app:titlePrompt="High goal increment"
-            app:minValue="1"
-            android:id="@+id/highGoalInc"/>
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/highGoalInc"
-            android:layout_marginTop="20dp"
-            app:titlePrompt="Low goal increment"
-            app:minValue="1"
-            android:layout_margin="3dp"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/lowGoalInc"/>
 
 
 

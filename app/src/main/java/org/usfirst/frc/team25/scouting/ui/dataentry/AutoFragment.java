@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
@@ -66,22 +64,10 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
-        baselineCrossed = (CheckBox) view.findViewById(R.id.reach_baseline);
-        useHoppers = (CheckBox) view.findViewById(R.id.uses_hoppers);
-        highGoals = (ButtonIncDec) view.findViewById(R.id.high_goals_auto);
-        lowGoals = (ButtonIncDec) view.findViewById(R.id.low_goals_auto);
-        rotorsStarted = (ButtonIncDec) view.findViewById(R.id.rotors_auto);
-        gearsDelivered = (ButtonIncDec) view.findViewById(R.id.gears_auto);
+        baselineCrossed = (CheckBox) view.findViewById(R.id.reach_auto_line);
+
+        lowGoals = (ButtonIncDec) view.findViewById(R.id.own_scale_auto);
         continueButton = (Button) view.findViewById(R.id.auto_continue);
-        shootsFromKey = (CheckBox) view.findViewById(R.id.shootsFromKey);
-        attemptGear = (CheckBox) view.findViewById(R.id.attemptAutoGear);
-        successGear = (CheckBox) view.findViewById(R.id.successAutoGear);
-
-
-        pegButtons = new RadioButton[3];
-        pegButtons[0] = (RadioButton) view.findViewById(R.id.leftPeg);
-        pegButtons[1] = (RadioButton) view.findViewById(R.id.centerPeg);
-        pegButtons[2] = (RadioButton) view.findViewById(R.id.rightPeg);
 
 
 
@@ -227,7 +213,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         }
 
        entry.setAuto(new Autonomous(baselineCrossed.isChecked(), useHoppers.isChecked(), highGoals.getValue(), lowGoals.getValue(),
-               entry.getPreMatch().isPilotPlaying() ? rotorsStarted.getValue() : -1, gearsDelivered.getValue(), shootsFromKey.isChecked(), gearPeg,
+               -1, gearsDelivered.getValue(), shootsFromKey.isChecked(), gearPeg,
                attemptGear.isChecked(), successGear.isChecked()));
 
     }

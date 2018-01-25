@@ -18,112 +18,32 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="High goals made"
+            app:titlePrompt="Cubes on own switch plate"
             app:initialValue="0"
-            android:id="@+id/high_goals_auto"/>
+            android:id="@+id/own_switch_auto"/>
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Low goals made"
+            app:titlePrompt="Cubes on own scale plate"
             app:initialValue="0"
-            android:layout_below="@id/high_goals_auto"
-            android:id="@+id/low_goals_auto"/>
+            android:layout_below="@id/own_switch_auto"
+            android:id="@+id/own_scale_auto"/>
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Gears delivered"
+            app:titlePrompt="Cubes delivered to exchange"
             app:initialValue="0"
-            app:maxValue="3"
-            android:layout_below="@id/low_goals_auto"
-            android:id="@+id/gears_auto"
-            android:visibility="gone"/>
-
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/low_goals_auto"
-            android:id="@+id/attemptAutoGear"
-            android:text="Attempted auto gear"
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:textSize="18sp"
-            />
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/attemptAutoGear"
-            android:id="@+id/successAutoGear"
-            android:text="Successful auto gear"
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:textSize="18sp"
-            android:enabled="false"
+            android:layout_below="@id/own_scale_auto"
+            android:id="@+id/exchange_auto"
             />
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/successAutoGear"
-            android:layout_marginLeft="40dp"
-
-            android:id="@+id/autoGearLocationGroup"
-            android:padding="@dimen/default_padding_bottom"
-
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gear delivery peg location"
-                android:textSize="18sp"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Left"
-                android:padding="@dimen/default_padding_bottom"
-                android:id="@+id/leftPeg"
-                android:textSize="18sp"
-                android:enabled="false"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Center"
-                android:id="@+id/centerPeg"
-                android:padding="@dimen/default_padding_bottom"
-                android:textSize="18sp"
-                android:enabled="false"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Right"
-                android:id="@+id/rightPeg"
-                android:padding="@dimen/default_padding_bottom"
-                android:textSize="18sp"
-                android:enabled="false"/>
-
-
-        </RadioGroup>
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titlePrompt="Rotors started"
-            app:initialValue="0"
-            app:maxValue="2"
-            android:layout_below="@id/autoGearLocationGroup"
-            android:id="@+id/rotors_auto"
-            android:visibility="gone"/>
-
-
         <CheckBox
-            android:id="@+id/reach_baseline"
-            android:layout_below="@id/rotors_auto"
+            android:id="@+id/reach_auto_line"
+            android:layout_below="@id/exchange_auto"
             android:padding="@dimen/default_padding_bottom"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textSize="18sp"
@@ -131,37 +51,96 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
-            android:text="Reached baseline"
+            android:text="Reached auto line"
             />
 
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Cubes picked up from power cube pile"
+            app:initialValue="0"
+            android:layout_below="@id/reach_auto_line"
+            android:id="@+id/power_cube_pile_pickup_auto"
+            />
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Cubes picked up from next to switch"
+            app:initialValue="0"
+            android:layout_below="@id/power_cube_pile_pickup_auto"
+            android:id="@+id/six_switch_auto"
+            />
+
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Cubes dropped on field"
+            app:initialValue="0"
+            android:layout_below="@id/six_switch_auto"
+            android:id="@+id/cubes_dropped_auto"
+            />
+
+
         <CheckBox
-            android:id="@+id/uses_hoppers"
-            android:layout_below="@id/reach_baseline"
+            android:id="@+id/cubes_wrong_plate_auto"
+            android:layout_below="@id/cubes_dropped_auto"
             android:padding="@dimen/default_padding_bottom"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textSize="18sp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Uses hopper"
+            android:layout_marginTop="5sp"
+            android:text="Cubes dropped on opponent plate"
+            />
+        <CheckBox
+            android:id="@+id/switch_wrong_plate_auto"
+            android:layout_below="@id/cubes_wrong_plate_auto"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="50dp"
+            android:textSize="18sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Switch plate"
+            android:enabled="false"
+            />
+        <CheckBox
+            android:id="@+id/scale_wrong_plate_auto"
+            android:layout_below="@id/switch_wrong_plate_auto"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="50dp"
+            android:textSize="18sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scale plate"
+            android:enabled="false"
             />
 
         <CheckBox
-            android:id="@+id/shootsFromKey"
-            android:layout_below="@id/uses_hoppers"
+            android:id="@+id/null_territory_auto_foul"
+            android:layout_below="@id/scale_wrong_plate_auto"
             android:padding="@dimen/default_padding_bottom"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textSize="18sp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Shoots from key"
-            android:visibility="gone"/>
+            android:layout_marginTop="5sp"
+            android:text="Passed null territory or went into opponent's null territory"
+            />
 
+        <!--More metrics: cubes picked up from power cube pile, six next to switch -->
 
         <Button
             android:id="@+id/auto_continue"
-            android:layout_below="@id/shootsFromKey"
+            android:layout_below="@id/null_territory_auto_foul"
             android:elevation="6dp"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:textColor="#ffffff"

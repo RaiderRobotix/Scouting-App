@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+    <style name="AppTheme" parent="@style/Base.Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/blue_700</item>
         <item name="android:windowBackground">@null</item>

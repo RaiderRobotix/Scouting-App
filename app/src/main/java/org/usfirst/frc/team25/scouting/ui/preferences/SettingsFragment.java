@@ -19,15 +19,17 @@ import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
 import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
 
+import java.util.List;
+
 /** List of preferences, as defined in res/xml/preferences.xml
  *
  */
 
 public class SettingsFragment extends PreferenceFragment {
 
-    ListPreference matchType, event;
-    Preference deleteFiles, changePass, year, importData, downloadSchedule, game, version; // Buttons that hold a value, but do not prompt a dialogue
-    NumberPickerPreference matchNum, shiftDur, teleLowGoalInc, teleHighGoalInc, autoLowGoalInc, autoHighGoalInc;
+    ListPreference matchType, event, leftStation;
+    Preference deleteFiles, changePass, year, downloadSchedule, game, version; // Buttons that hold a value, but do not prompt a dialogue
+    NumberPickerPreference matchNum, shiftDur;
     EditTextPreference scoutNameInput;
     CheckBoxPreference useTeamList;
     Settings set;
@@ -51,12 +53,9 @@ public class SettingsFragment extends PreferenceFragment {
         changePass =  findPreference("change_pass");
         year = findPreference("year");
         downloadSchedule = findPreference("download_schedule");
-        autoLowGoalInc = (NumberPickerPreference) findPreference("low_goal_inc_auto");
-        autoHighGoalInc = (NumberPickerPreference) findPreference("high_goal_inc_auto");
-        teleLowGoalInc =  (NumberPickerPreference) findPreference("low_goal_inc_tele");
-        teleHighGoalInc = (NumberPickerPreference) findPreference("high_goal_inc_tele");
         game = findPreference("game");
         version = findPreference("version");
+        leftStation = (ListPreference) findPreference("leftStation");
 
         updateSummary();
 
@@ -65,8 +64,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         matchNum.setMaxValue(Settings.newInstance(getActivity()).getMaxMatchNum());
         shiftDur.setMaxValue(25);
-        teleLowGoalInc.setMaxValue(100);
-        teleHighGoalInc.setMaxValue(100);
+
 
         event.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -156,10 +154,7 @@ public class SettingsFragment extends PreferenceFragment {
             matchNum.setSummary(String.valueOf(set.getMatchNum()));
             year.setSummary(set.getYear());
             set.setYear();
-            autoLowGoalInc.setSummary("+/- " + String.valueOf(set.getLowGoalIncAuto()) + " goals");
-            autoHighGoalInc.setSummary("+/- " + String.valueOf(set.getHighGoalIncAuto()) + " goals");
-            teleLowGoalInc.setSummary("+/- " + String.valueOf(set.getLowGoalIncTele()) + " goals");
-            teleHighGoalInc.setSummary("+/- " + String.valueOf(set.getHighGoalIncTele()) + " goals");
+            leftStation.setSummary(leftStation.getValue());
         }catch(NullPointerException e){
             e.printStackTrace();
         }

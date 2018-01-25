@@ -30,7 +30,7 @@
             android:layout_height="150dp"
             android:layout_centerInParent="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/circle_icon_white"
 
@@ -73,7 +73,7 @@
             android:layout_height="150dp"
 
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
+
             android:src="@drawable/share_icon"
             android:scaleType="centerInside"
             android:background="@android:color/transparent" />
@@ -109,7 +109,7 @@
             android:layout_height="150dp"
 
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
+
             android:src="@drawable/book_icon"
 
             android:scaleType="centerInside"
@@ -148,7 +148,7 @@
             android:layout_height="150dp"
 
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
+
             android:src="@drawable/settings_icon"
             android:scaleType="centerInside"
             android:background="@android:color/transparent" />
@@ -189,19 +189,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/menu4"
         android:layout_above="@+id/current_info_label"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true">
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_width="175dp"
+            android:layout_height="match_parent"
 
-            android:id="@+id/steamworksView"
-            android:src="@drawable/steamworks_logo"
-            android:textAlignment="center"
-            android:layout_alignParentEnd="true"
+            android:id="@+id/raiderRobotixLogo"
+            android:src="@drawable/team_25_logo"
+
+            android:layout_marginRight="30dp"
             />
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/raiderRobotixLogo"
+            android:id="@+id/powerUpView"
+            android:src="@drawable/power_up_logo"
+
+
+            />
+        </RelativeLayout>
 
     </RelativeLayout>
 

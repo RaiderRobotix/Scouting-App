@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Raider Steamworks Scout</string>
+    <string name="app_name">Raider Power Up Scout</string>
 
     <!--Main Menu-->
     <string name="menu_1">Add Match</string>
@@ -71,6 +71,12 @@
         <item>"SF"</item>
         <item>"F"</item>
     </string-array>
+
+    <string-array name="alliance_type">
+        <item>"Red Alliance"</item>
+        <item>"Blue Alliance"</item>
+    </string-array>
+
     <string name="delete_files_prompt">Delete scouting data?</string>
     <string name="delete_files_warn">Warning: This action cannot be reversed. Do you really want to delete all scouting data from this device?</string>
     <string name="delete_button">Delete</string>

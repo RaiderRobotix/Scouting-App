@@ -14,6 +14,65 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Frequent cube pickup location(s)"
+            android:id="@+id/dropGearLocText"
+            android:textSize="19sp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/inner_components_spacing"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:id="@+id/dropGearLoc"
+            android:layout_below="@id/dropGearLocText">
+
+
+
+            <CheckBox
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Portal"
+                android:id="@+id/portal_pickup_tele"
+                android:padding="@dimen/inner_components_spacing"
+                />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/portal_pickup_tele"
+                android:text="Exchange"
+                android:id="@+id/exchange_pickup_tele"
+                android:textSize="18sp"
+                android:padding="@dimen/inner_components_spacing"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/exchange_pickup_tele"
+                android:text="Power cube pile"
+                android:id="@+id/power_cube_pile_pickup_tele"
+                android:textSize="18sp"
+                android:padding="@dimen/inner_components_spacing"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/power_cube_pile_pickup_tele"
+                android:text="Next to switch/other locations"
+                android:id="@+id/other_pickup_tele"
+                android:textSize="18sp"
+                android:padding="@dimen/inner_components_spacing"/>
+
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Tele-Op primary focus"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
