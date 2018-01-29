@@ -214,7 +214,7 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/raiderRobotixLogo"
             android:id="@+id/powerUpView"
-            android:src="@drawable/power_up_logo"
+            android:src="@drawable/first_power_up_logo"
 
 
             />

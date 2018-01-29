@@ -14,8 +14,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Frequent cube pickup location(s)"
-            android:id="@+id/dropGearLocText"
+            android:text="Tele-Op primary focus(es)"
+            android:id="@+id/teleop_focus_text"
             android:textSize="19sp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:padding="@dimen/inner_components_spacing"/>
@@ -25,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:id="@+id/dropGearLoc"
-            android:layout_below="@id/dropGearLocText">
+            android:id="@+id/teleop_focus"
+            android:layout_below="@id/teleop_focus_text">
 
 
 
@@ -34,88 +34,55 @@
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Portal"
-                android:id="@+id/portal_pickup_tele"
+                android:text="Own switch"
+                android:id="@+id/own_switch_focus"
                 android:padding="@dimen/inner_components_spacing"
                 />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/portal_pickup_tele"
-                android:text="Exchange"
-                android:id="@+id/exchange_pickup_tele"
+                android:layout_below="@id/own_switch_focus"
+                android:text="Opponent switch"
+                android:id="@+id/opponent_switch_focus"
                 android:textSize="18sp"
                 android:padding="@dimen/inner_components_spacing"/>
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/exchange_pickup_tele"
-                android:text="Power cube pile"
-                android:id="@+id/power_cube_pile_pickup_tele"
+                android:layout_below="@id/opponent_switch_focus"
+                android:text="Scale"
+                android:id="@+id/scale_focus"
                 android:textSize="18sp"
                 android:padding="@dimen/inner_components_spacing"/>
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/power_cube_pile_pickup_tele"
-                android:text="Next to switch/other locations"
-                android:id="@+id/other_pickup_tele"
+                android:layout_below="@id/scale_focus"
+                android:text="Vault"
+                android:id="@+id/vault_focus"
                 android:textSize="18sp"
                 android:padding="@dimen/inner_components_spacing"/>
-
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vault_focus"
+                android:text="Defense"
+                android:id="@+id/defense_focus"
+                android:textSize="18sp"
+                android:padding="@dimen/inner_components_spacing"/>
 
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tele-Op primary focus"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:textSize="20sp"
-            android:id="@+id/focusText"
-            />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/focusText"
-            android:id="@+id/focusButtonGroup"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gears"
-                android:id="@+id/gearFocus"
-                android:padding="@dimen/default_padding_bottom"
-                android:textSize="18sp"
-                />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fuel"
-                android:id="@+id/fuelFocus"
-                android:padding="@dimen/default_padding_bottom"
-                android:textSize="18sp"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Both"
-                android:id="@+id/bothFocus"
-                android:padding="@dimen/default_padding_bottom"
-                android:textSize="18sp"/>
-        </RadioGroup>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/focusButtonGroup"
-        android:id="@+id/robotCommentView">
+        android:layout_below="@id/teleop_focus"
+        android:id="@+id/robotDriverCommentView">
 
 
 
@@ -124,76 +91,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Robot comment"
+            android:text="Robot and driver comments"
             android:layout_margin="@dimen/activity_vertical_margin"
             android:textSize="24sp"
-            android:id="@+id/robotQuickComment"/>
+            android:id="@+id/robotDriverQuickComment"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/robotQuickComment"
+            android:layout_below="@id/robotDriverQuickComment"
             android:text="Select these options, then fill in below"
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:textSize="16sp"
             android:textColor="@color/first_gray"
-            android:id="@+id/robotQuickCommentHint"/>
+            android:id="@+id/robotDriverQuickCommentHint"/>
 
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Additional robot comments"
+            android:hint="Additional robot and driver comments"
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_below="@id/robotQuickCommentHint"
+            android:layout_below="@id/robotDriverQuickCommentHint"
             app:met_floatingLabel="normal"
-            android:id="@+id/robotComment"
+            android:id="@+id/robotDriverComment"
             />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pilotCommentView"
-        android:layout_below="@id/robotCommentView">
-
-        <TextView
-            android:layout_alignParentTop="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Pilot comment"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:textSize="24sp"
-            android:id="@+id/pilotQuickComment"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pilotQuickComment"
-            android:text="Select these options, then fill in below"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:textSize="16sp"
-            android:textColor="@color/first_gray"
-            android:id="@+id/pilotQuickCommentHint"/>
-
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Additional pilot comments"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:layout_below="@id/pilotQuickCommentHint"
-            app:met_floatingLabel="normal"
-            android:id="@+id/pilotComment"
-            />
 
 
 
-    </RelativeLayout>
+
         <Button
             android:id="@+id/post_finish"
-            android:layout_below="@id/pilotCommentView"
+            android:layout_below="@id/robotDriverCommentView"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
 

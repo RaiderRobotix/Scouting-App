@@ -6,12 +6,11 @@
     tools:context=".ui.dataentry.TeleOpFragment"
     android:background="#ffffff">
 
-
+<!--time to score first cube-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
 
     <RelativeLayout
@@ -30,20 +29,30 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:src="@drawable/team_25_logo"
+            android:layout_height="200dp"
+            android:src="@drawable/path4156"
             android:layout_below="@id/field_config_text"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:id="@+id/field_config_image"/>
 
-    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Time to score first cube (seconds)"
+            app:initialValue="0"
+            android:layout_below="@id/field_config_image"
+            android:id="@+id/first_cube_time"
+            />
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:padding="@dimen/default_padding_bottom"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:titlePrompt="Cubes on own switch"
         app:initialValue="0"
-        android:layout_below="@id/field_config_image"
+        android:layout_below="@id/first_cube_time"
         android:id="@+id/own_switch_tele"/>
 
     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
@@ -76,7 +85,7 @@
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Cubes dropped on field"
+            app:titlePrompt="Cubes dropped accidentally"
             app:initialValue="0"
             android:layout_below="@id/exchange_tele"
             android:id="@+id/cubes_dropped_tele"
@@ -92,10 +101,30 @@
             android:id="@+id/cycle_time"
             />
 
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Fouls committed in teleop"
+            app:initialValue="0"
+            android:layout_below="@id/cycle_time"
+            android:id="@+id/fouls_committed"
+            />
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePrompt="Tech fouls committed"
+            app:initialValue="0"
+            android:layout_below="@id/fouls_committed"
+            android:id="@+id/tech_fouls_committed"
+            />
+
 
         <CheckBox
             android:id="@+id/park_platform"
-            android:layout_below="@id/cycle_time"
+            android:layout_below="@id/tech_fouls_committed"
             android:padding="@dimen/default_padding_bottom"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textSize="18sp"
@@ -148,7 +177,7 @@
         android:text="@string/continue_button"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_centerHorizontal="true"
         />
 

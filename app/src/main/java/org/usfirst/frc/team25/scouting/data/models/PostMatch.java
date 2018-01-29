@@ -14,7 +14,7 @@ public class PostMatch {
 
     public PostMatch(String robotComment, String pilotComment, ArrayList<CheckBox> robotQuickComments,
                      ArrayList<CheckBox> pilotQuickComments,
-                     String[] robotQuickCommentValues, String[] pilotQuickCommentValues, String focus) {
+                     String[] robotQuickCommentValues, String focus) {
         this.robotComment = robotComment;
         this.pilotComment = pilotComment;
         this.robotQuickComments = robotQuickComments;
@@ -90,20 +90,20 @@ public class PostMatch {
                 if(cb.getText().toString().equals(value))
                     robotQuickCommentSelections.put(value, cb.isChecked());
 
-        for(String value : pilotQuickCommentValues)
-            for(CheckBox cb : pilotQuickComments)
-                if(cb.getText().toString().equals(value))
-                    pilotQuickCommentSelections.put(value, cb.isChecked());
+//        for(String value : pilotQuickCommentValues)
+//            for(CheckBox cb : pilotQuickComments)
+//                if(cb.getText().toString().equals(value))
+//                    pilotQuickCommentSelections.put(value, cb.isChecked());
 
-        String newPilotComment = "";
-
-        for(int i = 0; i < pilotComment.length(); i++) {
-            if(pilotComment.charAt(i)!=',')
-                newPilotComment += pilotComment.charAt(i);
-            else newPilotComment+=';';
-        }
-
-        setPilotComment(newPilotComment);
+//        String newPilotComment = "";
+//
+//        for(int i = 0; i < pilotComment.length(); i++) {
+//            if(pilotComment.charAt(i)!=',')
+//                newPilotComment += pilotComment.charAt(i);
+//            else newPilotComment+=';';
+//        }
+//
+//        setPilotComment(newPilotComment);
 
         String newRobotComment = "";
 

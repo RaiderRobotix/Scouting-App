@@ -34,33 +34,23 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     RelativeLayout robotCommentView, pilotCommentView;
     ArrayList<CheckBox> robotQuickComments, pilotQuickComments;
     Button finish;
-    RadioButton[] focusButtons = new RadioButton[3];
+    CheckBox[] focusButtons = new CheckBox[5];
 
     final String[] ROBOT_COMMENT_VALUES = {
-            "Active gear mech.",
-            "Floor gear pickup",
-            "Fuel intake",
-            "Accurate high shooter",
-            "Climbs in under 7 seconds",
+            "Cube intake/arm",
+            "Shoots cubes",
             "Very slow climb",
-            "Takes time to get gear from RZ",
-            "Takes time to align with lift",
+            "Slow ground pickup",
+            "Slow portal pickup",
             "Played defense effectively",
             "Slowed by defense",
             "Lost comms.",
-            "Robot caused foul (specify below)",
+            "Efficient cycler",
+            "Caused excessive fouls (explain below)",
             "Do not pick (explain)",
             "Possible inaccurate data (specify below)"
     };
 
-    final String[] PILOT_COMMENT_VALUES = {
-            "Dropped a gear from lift (specify # times)",
-            "Slow in retrieving/putting gears",
-            "Slow in dropping ropes",
-            "Slow in using reserve gear",
-            "Forgot to turn rotor",
-            "Pilot caused foul (specify below)"
-    };
 
     public static PostMatchFragment getInstance(ScoutEntry entry){
         PostMatchFragment pmf = new PostMatchFragment();
@@ -81,25 +71,20 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_post_match, container, false);
 
-        robotComment = (MaterialEditText) view.findViewById(R.id.robotComment);
-        pilotComment = (MaterialEditText) view.findViewById(R.id.pilotComment);
-        robotCommentView = (RelativeLayout) view.findViewById(R.id.robotCommentView);
-        pilotCommentView = (RelativeLayout) view.findViewById(R.id.pilotCommentView);
+        robotComment = (MaterialEditText) view.findViewById(R.id.robotDriverComment);
+
+        robotCommentView = (RelativeLayout) view.findViewById(R.id.robotDriverCommentView);
+
         finish = (Button) view.findViewById(R.id.post_finish);
-        focusButtons[0] = (RadioButton) view.findViewById(R.id.gearFocus);
-        focusButtons[1] = (RadioButton) view.findViewById(R.id.fuelFocus);
-        focusButtons[2] = (RadioButton) view.findViewById(R.id.bothFocus);
+        focusButtons[0] =  view.findViewById(R.id.own_switch_focus);
+        focusButtons[1] = view.findViewById(R.id.opponent_switch_focus);
+        focusButtons[2] = view.findViewById(R.id.scale_focus);
+        focusButtons[3] = view.findViewById(R.id.vault_focus);
+        focusButtons[4] = view.findViewById(R.id.defense_focus);
 
         robotQuickComments = new ArrayList<CheckBox>();
         pilotQuickComments = new ArrayList<CheckBox>();
 
-        if(true) {
-            ((ViewGroup) pilotCommentView.getParent()).removeView(pilotCommentView);
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) finish.getLayoutParams();
-            params.addRule(RelativeLayout.BELOW, R.id.robotCommentView);
-            finish.setLayoutParams(params);
-        }
-        else generatePilotQuickComments();
 
         generateRobotQuickComments();
 
@@ -110,8 +95,8 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             public void onClick(View view) {
                 boolean focusChecked = false;
 
-                for(RadioButton rb : focusButtons)
-                    if(rb.isChecked())
+                for(CheckBox cb : focusButtons)
+                    if(cb.isChecked())
                         focusChecked = true;
 
                 if(!focusChecked) {
@@ -200,7 +185,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
             if(i==0)
-                rlp.addRule(RelativeLayout.BELOW, R.id.robotQuickCommentHint);
+                rlp.addRule(RelativeLayout.BELOW, R.id.robotDriverQuickCommentHint);
             else rlp.addRule(RelativeLayout.BELOW, prevId);
 
             prevId = currentId;
@@ -217,79 +202,20 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         robotComment.setLayoutParams(robotCommentParams);
     }
 
-    void generatePilotQuickComments(){
-
-        int prevId = -1;
-
-        for(int i = 0; i < Math.ceil(PILOT_COMMENT_VALUES.length/2.0); i++){
-            ArrayList<String> checkSetValues = new ArrayList<>();
-            checkSetValues.add(PILOT_COMMENT_VALUES[i*2]);
-            try{
-                checkSetValues.add(PILOT_COMMENT_VALUES[i*2+1]);
-            }catch(IndexOutOfBoundsException e){
-
-            }
-
-            LinearLayout checkSet = new LinearLayout(getActivity());
-            CheckBox leftComment = new CheckBox(getActivity());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(1, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-            leftComment.setPadding(3,3,3,3);
-
-            leftComment.setLayoutParams(params);
-            leftComment.setText(checkSetValues.get(0));
-
-            pilotQuickComments.add(leftComment);
-            checkSet.addView(leftComment);
-
-            if(checkSetValues.size()!=1){
-                CheckBox rightComment = new CheckBox(getActivity());
-
-                rightComment.setLayoutParams(params);
-                rightComment.setText(checkSetValues.get(1));
-                rightComment.setPadding(3,3,3,3);
-
-                pilotQuickComments.add(rightComment);
-                checkSet.addView(rightComment);
-
-            }
-
-            int currentId = ViewGroup.generateViewId();
-
-            checkSet.setId(currentId);
-
-
-            RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            rlp.setMargins(16,16,16,16);
-
-
-            if(i==0)
-                rlp.addRule(RelativeLayout.BELOW, R.id.pilotQuickCommentHint);
-            else rlp.addRule(RelativeLayout.BELOW, prevId);
-
-            prevId = currentId;
-
-            pilotCommentView.addView(checkSet, rlp);
 
 
 
-        }
-
-        RelativeLayout.LayoutParams pilotCommentParams = (RelativeLayout.LayoutParams) pilotComment.getLayoutParams();
-        pilotCommentParams.addRule(RelativeLayout.BELOW, prevId);
-
-        pilotComment.setLayoutParams(pilotCommentParams);
-    }
 
     public void saveState(){
         String focus = "";
-        for(RadioButton rb : focusButtons)
-            if(rb.isChecked()){
-                focus = (String) rb.getText();
+        for(CheckBox cb : focusButtons)
+            if(cb.isChecked()){
+                focus = (String) cb.getText();
                 break;
             }
 
-        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), pilotComment.getText().toString(), robotQuickComments,
-                pilotQuickComments, ROBOT_COMMENT_VALUES, PILOT_COMMENT_VALUES, focus));
+        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), "", robotQuickComments,
+                null, ROBOT_COMMENT_VALUES,  focus));
     }
 
 
@@ -309,9 +235,9 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                     pilotQuickComments.get(i).setChecked(true);
             pilotComment.setText(entry.getPostMatch().getPilotComment());
 
-            for(RadioButton rb : focusButtons)
-                if(rb.getText().equals(entry.getPostMatch().getFocus()))
-                    rb.setChecked(true);
+            for(CheckBox cb : focusButtons)
+                if(cb.getText().equals(entry.getPostMatch().getFocus()))
+                    cb.setChecked(true);
         }
     }
 

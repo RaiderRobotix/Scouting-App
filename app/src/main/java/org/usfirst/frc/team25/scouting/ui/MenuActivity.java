@@ -38,7 +38,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
 
         //Phone layout has fixed scaling of text and buttons
-        if (!isTablet(getBaseContext()))
+       if (!isTablet(getBaseContext()))
             setContentView(R.layout.activity_menu_phone);
 
 

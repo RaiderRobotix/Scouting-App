@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
-            android:text="Cubes dropped on opponent plate"
+            android:text="Cube(s) dropped on opponent plate(s)"
             />
         <CheckBox
             android:id="@+id/switch_wrong_plate_auto"
