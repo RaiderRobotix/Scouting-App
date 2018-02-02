@@ -18,6 +18,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Plate configuration from your POV (tap to change)"
@@ -30,23 +31,23 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:src="@drawable/path4156"
+            android:src="@drawable/blue_left_lll"
             android:layout_below="@id/field_config_text"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:id="@+id/field_config_image"/>
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-            android:padding="@dimen/default_padding_bottom"
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Time to score first cube (seconds)"
-            app:initialValue="0"
+            app:titlePromptTimer="Time to score"
+            android:padding="8dp"
             android:layout_below="@id/field_config_image"
             android:id="@+id/first_cube_time"
-            />
+            app:buttonIncDecAmount="0.5"/>
+
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:padding="@dimen/default_padding_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,15 +92,14 @@
             android:id="@+id/cubes_dropped_tele"
             />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
-            android:padding="@dimen/default_padding_bottom"
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Average cube pickup/drop time (seconds)"
-            app:initialValue="0"
+            app:titlePromptTimer="Time to score"
+            android:padding="8dp"
             android:layout_below="@id/cubes_dropped_tele"
             android:id="@+id/cycle_time"
-            />
+            app:buttonIncDecAmount="0.5"/>
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
             android:padding="@dimen/default_padding_bottom"
@@ -107,6 +107,7 @@
             android:layout_height="wrap_content"
             app:titlePrompt="Fouls committed in teleop"
             app:initialValue="0"
+            android:visibility="gone"
             android:layout_below="@id/cycle_time"
             android:id="@+id/fouls_committed"
             />
@@ -117,6 +118,7 @@
             android:layout_height="wrap_content"
             app:titlePrompt="Tech fouls committed"
             app:initialValue="0"
+            android:visibility="gone"
             android:layout_below="@id/fouls_committed"
             android:id="@+id/tech_fouls_committed"
             />

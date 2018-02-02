@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ButtonTimer">
+        <attr name="titlePromptTimer" format="string"/>
+        <attr name="initialValueTimer" format="float"/>
+        <attr name="minValueTimer" format="float"/>
+        <attr name="maxValueTimer" format="float"/>
+        <attr name="timerCountInterval" format="float"/>
+        <attr name="buttonIncDecAmount" format="float"/>
+
+    </declare-styleable>
+
+</resources>

@@ -158,7 +158,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
             leftComment.setLayoutParams(params);
             leftComment.setText(checkSetValues.get(0));
-            leftComment.setPadding(5,5,5,7);
+            leftComment.setPadding(3,3,3,5);
 
             robotQuickComments.add(leftComment);
             checkSet.addView(leftComment);
@@ -168,7 +168,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
                 rightComment.setLayoutParams(params);
                 rightComment.setText(checkSetValues.get(1));
-                rightComment.setPadding(5,5,5,5);
+                rightComment.setPadding(3,3,3,5);
 
                 robotQuickComments.add(rightComment);
                 checkSet.addView(rightComment);
