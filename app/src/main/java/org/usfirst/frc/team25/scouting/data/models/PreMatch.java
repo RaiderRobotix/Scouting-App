@@ -6,30 +6,24 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class PreMatch {
 
-    public PreMatch(String scoutName, String currentEvent, String scoutPos, int matchNum, int teamNum) {
+    public PreMatch(String scoutName, String scoutPos, int matchNum, int teamNum, String startingPos) {
         this.scoutName = scoutName;
-        this.currentEvent = currentEvent;
         this.scoutPos = scoutPos;
         this.matchNum = matchNum;
         this.teamNum = teamNum;
+        this.startingPos = startingPos;
     }
 
-    String scoutName, currentEvent, scoutPos;
-    int matchNum, teamNum;
-    boolean pilotPlaying;
-
-
-
-
+    private String scoutName;
+    private String scoutPos;
+    private String startingPos;
+    private int matchNum, teamNum;
 
 
     public String getScoutName() {
         return scoutName;
     }
 
-    public String getCurrentEvent() {
-        return currentEvent;
-    }
 
     public String getScoutPos() { return scoutPos; }
 
@@ -39,6 +33,10 @@ public class PreMatch {
 
     public int getTeamNum() {
         return teamNum;
+    }
+
+    public String getStartingPos() {
+        return startingPos;
     }
 
     public PreMatch(){

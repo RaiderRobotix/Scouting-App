@@ -17,10 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
             android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titlePromptTimer="Time to deliver first cube"
+            android:padding="8dp"
+
+            android:id="@+id/first_cube_time"
+            app:buttonIncDecAmount="0.5"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/first_cube_time"
             android:text="Plate configuration from your POV (tap to change)"
             android:id="@+id/field_config_text"
             android:textSize="19sp"
@@ -37,23 +47,15 @@
             android:id="@+id/field_config_image"/>
 
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titlePromptTimer="Time to score"
-            android:padding="8dp"
-            android:layout_below="@id/field_config_image"
-            android:id="@+id/first_cube_time"
-            app:buttonIncDecAmount="0.5"/>
-
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+            android:layout_below="@id/field_config_image"
         android:padding="@dimen/default_padding_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:titlePrompt="Cubes on own switch"
         app:initialValue="0"
-        android:layout_below="@id/first_cube_time"
+
         android:id="@+id/own_switch_tele"/>
 
     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
@@ -95,7 +97,7 @@
         <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePromptTimer="Time to score"
+            app:titlePromptTimer="Average cycle time"
             android:padding="8dp"
             android:layout_below="@id/cubes_dropped_tele"
             android:id="@+id/cycle_time"
@@ -168,11 +170,86 @@
             android:layout_below="@id/success_rung_climb"
             android:id="@+id/climbs_assisted"
             />
-        <!--Include cycle options here?-->
+
+        <CheckBox
+            android:id="@+id/climb_other_robot"
+            android:layout_below="@id/climbs_assisted"
+            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Climbs on other robots"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/climb_other_robot_type_group"
+            android:layout_below="@id/climb_other_robot"
+            android:visibility="visible"
+            android:layout_marginLeft="35dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type of robot climbed on"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ramp bot"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:id="@+id/ramp_bot_type"
+                android:enabled="false"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Robot with rung"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:enabled="false"
+                android:id="@+id/robot_rung_type"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Iron cross"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:enabled="false"
+                android:id="@+id/iron_cross_type"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other: "
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:enabled="false"
+                android:id="@+id/other_type"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:enabled="false"
+                    android:layout_width="200dp"
+                    android:id="@+id/other_robot_type_text"
+                    android:hint="Other robot type"
+                    app:met_floatingLabel="none"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+        </RadioGroup>
+
 
     <Button
         android:id="@+id/tele_continue"
-        android:layout_below="@id/climbs_assisted"
+        android:layout_below="@id/climb_other_robot_type_group"
         android:elevation="6dp"
 
         android:textColor="#ffffff"
@@ -182,8 +259,6 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_centerHorizontal="true"
         />
-
-
 
 
 

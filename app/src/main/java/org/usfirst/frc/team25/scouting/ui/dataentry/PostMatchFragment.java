@@ -37,16 +37,21 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     CheckBox[] focusButtons = new CheckBox[5];
 
     final String[] ROBOT_COMMENT_VALUES = {
-            "Cube intake/arm",
+            "Cube intake/pickup",
             "Shoots cubes",
-            "Very slow climb",
-            "Slow ground pickup",
-            "Slow portal pickup",
+            "Slow climb",
+            "Ramp bot",
+            "Has rung on robot",
+            "Iron cross robot",
+            "Plays strategically",
+            "More cubes uneeded",
+            "Attains cubes slowly",
             "Played defense effectively",
             "Slowed by defense",
             "Lost comms.",
             "Efficient cycler",
-            "Caused excessive fouls (explain below)",
+            "Tipped over",
+            "Caused (tech) fouls (explain below)",
             "Do not pick (explain)",
             "Possible inaccurate data (specify below)"
     };

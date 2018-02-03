@@ -55,7 +55,6 @@
         android:title="@string/year"
         android:defaultValue="2018"
         android:summary="2018"
-        android:layout="@layout/preference_normal"
         android:enabled="true"
 
         />

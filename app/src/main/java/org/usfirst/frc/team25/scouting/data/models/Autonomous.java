@@ -6,111 +6,68 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    public Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered,
-                      boolean shootsFromKey, String gearPeg, boolean attemptGear, boolean successGear) {
-        this.baselineCrossed = baselineCrossed;
-        this.useHoppers = useHoppers;
-        this.highGoals = highGoals;
-        this.lowGoals = lowGoals;
-        this.rotorsStarted = rotorsStarted;
-        this.gearsDelivered = gearsDelivered;
-        this.shootsFromKey = shootsFromKey;
-        this.gearPeg = gearPeg;
-        this.attemptGear = attemptGear;
-        this.successGear = successGear;
+    public int getSwitchCubes() {
+        return switchCubes;
     }
 
-    public boolean isBaselineCrossed() {
-        return baselineCrossed;
+    public int getScaleCubes() {
+        return scaleCubes;
     }
 
-    public void setBaselineCrossed(boolean baselineCrossed) {
-        this.baselineCrossed = baselineCrossed;
+    public int getExchangeCubes() {
+        return exchangeCubes;
     }
 
-    public boolean isUseHoppers() {
-        return useHoppers;
+    public int getPowerCubePilePickup() {
+        return powerCubePilePickup;
     }
 
-    public void setUseHoppers(boolean useHoppers) {
-        this.useHoppers = useHoppers;
+    public int getSwitchAdjacentPickup() {
+        return switchAdjacentPickup;
     }
 
-    public int getHighGoals() {
-        return highGoals;
+    public int getCubesDropped() {
+        return cubesDropped;
     }
 
-    public void setHighGoals(int highGoals) {
-        this.highGoals = highGoals;
+    public boolean isAutoLineCross() {
+        return autoLineCross;
     }
 
-    public int getLowGoals() {
-        return lowGoals;
+    public boolean isNullTerritoryFoul() {
+        return nullTerritoryFoul;
     }
 
-    public void setLowGoals(int lowGoals) {
-        this.lowGoals = lowGoals;
+    public boolean isCubeDropOpponentSwitchPlate() {
+        return cubeDropOpponentSwitchPlate;
     }
 
-    public int getRotorsStarted() {
-        return rotorsStarted;
+    public boolean isCubeDropOpponentScalePlate() {
+        return isCubeDropOpponentScalePlate;
     }
 
-    public void setRotorsStarted(int rotorsStarted) {
-        this.rotorsStarted = rotorsStarted;
+    private int switchCubes, scaleCubes, exchangeCubes, powerCubePilePickup,
+            switchAdjacentPickup, cubesDropped;
+    private boolean autoLineCross;
+    private boolean nullTerritoryFoul;
+    private boolean cubeDropOpponentSwitchPlate;
+    private boolean isCubeDropOpponentScalePlate;
+
+    public Autonomous(int switchCubes, int scaleCubes, int exchangeCubes, int powerCubePilePickup, int switchAdjacentPickup,
+                      int cubesDropped, boolean autoLineCross, boolean nullTerritoryFoul, boolean cubeDropOpponentSwitchPlate, boolean isCubeDropOpponentScalePlate) {
+        this.switchCubes = switchCubes;
+        this.scaleCubes = scaleCubes;
+        this.exchangeCubes = exchangeCubes;
+        this.powerCubePilePickup = powerCubePilePickup;
+        this.switchAdjacentPickup = switchAdjacentPickup;
+        this.cubesDropped = cubesDropped;
+        this.autoLineCross = autoLineCross;
+        this.nullTerritoryFoul = nullTerritoryFoul;
+        this.cubeDropOpponentSwitchPlate = cubeDropOpponentSwitchPlate;
+        this.isCubeDropOpponentScalePlate = isCubeDropOpponentScalePlate;
     }
 
-    public int getGearsDelivered() {
-        return gearsDelivered;
-    }
 
-    public void setGearsDelivered(int gearsDelivered) {
-        this.gearsDelivered = gearsDelivered;
-    }
-
-    boolean baselineCrossed;
-    boolean useHoppers;
-
-    public boolean isShootsFromKey() {
-        return shootsFromKey;
-    }
-
-    public void setShootsFromKey(boolean shootsFromKey) {
-        this.shootsFromKey = shootsFromKey;
-    }
-
-    transient boolean shootsFromKey;
-
-    public boolean isAttemptGear() {
-        return attemptGear;
-    }
-
-    public void setAttemptGear(boolean attemptGear) {
-        this.attemptGear = attemptGear;
-    }
-
-    public boolean isSuccessGear() {
-        return successGear;
-    }
-
-    public void setSuccessGear(boolean successGear) {
-        this.successGear = successGear;
-    }
-
-    boolean attemptGear;
-    boolean successGear;
-    int highGoals, lowGoals;
-    transient int rotorsStarted, gearsDelivered;
-
-    public String getGearPeg() {
-        return gearPeg;
-    }
-
-    public void setGearPeg(String gearPeg) {
-        this.gearPeg = gearPeg;
-    }
-
-    String gearPeg;
 
 
 

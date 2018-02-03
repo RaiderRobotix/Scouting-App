@@ -12,27 +12,24 @@ import java.util.HashMap;
 public class PostMatch {
 
 
-    public PostMatch(String robotComment, String pilotComment, ArrayList<CheckBox> robotQuickComments,
-                     ArrayList<CheckBox> pilotQuickComments,
-                     String[] robotQuickCommentValues, String focus) {
+    public PostMatch(String robotComment, ArrayList<CheckBox> robotQuickComments,
+                     String[] robotQuickCommentValues, String focus, int teamOneCompare, int teamTwoCompare, String comparison) {
         this.robotComment = robotComment;
         this.pilotComment = pilotComment;
         this.robotQuickComments = robotQuickComments;
-        this.pilotQuickComments = pilotQuickComments;
         this.robotQuickCommentValues = robotQuickCommentValues;
-        this.pilotQuickCommentValues = pilotQuickCommentValues;
         this.focus = focus;
-
-        robotQuickCommentSelections = new HashMap<>();
-        pilotQuickCommentSelections = new HashMap<>();
-
-
+        this.teamOneCompare = teamOneCompare;
+        this.teamTwoCompare = teamTwoCompare;
+        this.comparison = comparison;
+        robotQuickCommentSelections = new HashMap<>();;
 
     }
 
-
-    String robotComment;
-    String pilotComment;
+    private int teamOneCompare, teamTwoCompare;
+    private String comparison;
+    private String robotComment;
+    private String pilotComment;
 
     public String getFocus() {
         return focus;
@@ -43,11 +40,11 @@ public class PostMatch {
     }
 
     String focus;
-    HashMap<String, Boolean> robotQuickCommentSelections, pilotQuickCommentSelections;
+    HashMap<String, Boolean> robotQuickCommentSelections;
 
 
-    public transient ArrayList<CheckBox> robotQuickComments, pilotQuickComments;
-    transient String[] robotQuickCommentValues, pilotQuickCommentValues;
+    public transient ArrayList<CheckBox> robotQuickComments;
+    transient String[] robotQuickCommentValues;
 
     public String getRobotComment() {
         return robotComment;
@@ -57,13 +54,6 @@ public class PostMatch {
         this.robotComment = robotComment;
     }
 
-    public String getPilotComment() {
-        return pilotComment;
-    }
-
-    public void setPilotComment(String pilotComment) {
-        this.pilotComment = pilotComment;
-    }
 
     public ArrayList<CheckBox> getRobotQuickComments() {
         return robotQuickComments;
@@ -73,15 +63,6 @@ public class PostMatch {
         this.robotQuickComments = robotQuickComments;
     }
 
-    public ArrayList<CheckBox> getPilotQuickComments() {
-        return pilotQuickComments;
-    }
-
-    public void setPilotQuickComments(ArrayList<CheckBox> pilotQuickComments) {
-        this.pilotQuickComments = pilotQuickComments;
-    }
-
-
 
     public void finalizeComment(){
 
@@ -89,21 +70,6 @@ public class PostMatch {
             for(CheckBox cb : robotQuickComments)
                 if(cb.getText().toString().equals(value))
                     robotQuickCommentSelections.put(value, cb.isChecked());
-
-//        for(String value : pilotQuickCommentValues)
-//            for(CheckBox cb : pilotQuickComments)
-//                if(cb.getText().toString().equals(value))
-//                    pilotQuickCommentSelections.put(value, cb.isChecked());
-
-//        String newPilotComment = "";
-//
-//        for(int i = 0; i < pilotComment.length(); i++) {
-//            if(pilotComment.charAt(i)!=',')
-//                newPilotComment += pilotComment.charAt(i);
-//            else newPilotComment+=';';
-//        }
-//
-//        setPilotComment(newPilotComment);
 
         String newRobotComment = "";
 

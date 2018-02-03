@@ -183,7 +183,6 @@ public class Settings extends PreferenceFragment {
      */
     public void autoSetPreferences(PreMatch preMatch){
         setScoutName(preMatch.getScoutName());
-        setCurrentEvent(preMatch.getCurrentEvent());
         setScoutPos(preMatch.getScoutPos());
         setMatchNum(preMatch.getMatchNum());
 

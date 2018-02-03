@@ -160,12 +160,15 @@ public class ButtonTimer extends RelativeLayout {
             public void onClick(View view) {
                 if(isTimerStart){ //timer already started, need to stop
                     startStopButton.setText("Start");
-
+                    incButton.setEnabled(true);
+                    decButton.setEnabled(true);
                 }
                 else{ // starts timer
                     startStopButton.setText(("Stop"));
                     setValue(0f);
                     runTimer();
+                    incButton.setEnabled(false);
+                    decButton.setEnabled(false);
                 }
                 isTimerStart = !isTimerStart;
             }
