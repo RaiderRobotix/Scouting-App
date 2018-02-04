@@ -137,7 +137,7 @@ public class ButtonTimer extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-
+        runTimer();
         isTimerStart = false;
 
 
@@ -166,7 +166,7 @@ public class ButtonTimer extends RelativeLayout {
                 else{ // starts timer
                     startStopButton.setText(("Stop"));
                     setValue(0f);
-                    runTimer();
+
                     incButton.setEnabled(false);
                     decButton.setEnabled(false);
                 }

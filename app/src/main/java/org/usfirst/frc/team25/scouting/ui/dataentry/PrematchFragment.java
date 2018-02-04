@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -33,8 +34,9 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
     Button continueButton;
     MaterialEditText name, matchNum, teamNum;
-    MaterialBetterSpinner scoutPos /*event*/;
+    MaterialBetterSpinner scoutPos;
     ScoutEntry entry;
+    RadioButton[] startingPositions = new RadioButton[3];
 
 
     @Override
@@ -65,13 +67,12 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
         scoutPos.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.position_options)));
         scoutPos.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
 
-        /*event = (MaterialBetterSpinner) view.findViewById(R.id.event_spin);
-        event.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.event_options_values)));
-        event.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);*/
-
         name = (MaterialEditText) view.findViewById(R.id.scout_name_field);
         matchNum = (MaterialEditText) view.findViewById(R.id.match_num_field);
         teamNum = (MaterialEditText) view.findViewById(R.id.team_num_field);
+        startingPositions[0] = view.findViewById(R.id.leftStart);
+        startingPositions[1] = view.findViewById(R.id.centerStart);
+        startingPositions[2] = view.findViewById(R.id.rightStart);
 
         autoPopulate();
 
@@ -130,6 +131,26 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
                     else teamNum.setError("Invalid team number");
                     proceed = false;
                 }
+                boolean aButtonSelected = false;
+                for(RadioButton button : startingPositions){
+                    if(button.isChecked())
+                        aButtonSelected = true;
+                }
+
+                if(proceed&&!aButtonSelected){
+                    proceed = false;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select robot starting position")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+
 
 
                 if(Settings.newInstance(getActivity()).useTeamList()&&proceed){
@@ -217,8 +238,12 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
     @Override
     public void saveState() {
-        entry.setPreMatch(new PreMatch(name.getText().toString(), Settings.newInstance(getActivity()).getCurrentEvent(), scoutPos.getText().toString(),
-                Integer.parseInt(matchNum.getText().toString()), Integer.parseInt(teamNum.getText().toString())));
+        String startPos = "";
+        for(RadioButton button : startingPositions)
+            if(button.isChecked())
+                startPos = (String) button.getText();
+        entry.setPreMatch(new PreMatch(name.getText().toString(), scoutPos.getText().toString(),
+                Integer.parseInt(matchNum.getText().toString()), Integer.parseInt(teamNum.getText().toString()), startPos));
     }
 
     public void autoPopulate(){
@@ -228,10 +253,11 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
             name.setText(prevPreMatch.getScoutName());
             scoutPos.setText(prevPreMatch.getScoutPos());
-            //event.setText(prevPreMatch.getCurrentEvent());
             matchNum.setText(String.valueOf(prevPreMatch.getMatchNum()));
             teamNum.setText(String.valueOf(prevPreMatch.getTeamNum()));
-
+            for(RadioButton button : startingPositions)
+                if(button.getText().equals(prevPreMatch.getStartingPos()))
+                    button.setChecked(true);
         }
 
         // Pulls data values from preferences to automatically fill fields

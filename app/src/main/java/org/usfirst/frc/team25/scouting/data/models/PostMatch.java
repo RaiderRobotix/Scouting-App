@@ -13,9 +13,9 @@ public class PostMatch {
 
 
     public PostMatch(String robotComment, ArrayList<CheckBox> robotQuickComments,
-                     String[] robotQuickCommentValues, String focus, int teamOneCompare, int teamTwoCompare, String comparison) {
+                     String[] robotQuickCommentValues, String focus, int teamOneCompare,
+                     int teamTwoCompare, String comparison, int pickNumber) {
         this.robotComment = robotComment;
-        this.pilotComment = pilotComment;
         this.robotQuickComments = robotQuickComments;
         this.robotQuickCommentValues = robotQuickCommentValues;
         this.focus = focus;
@@ -23,13 +23,38 @@ public class PostMatch {
         this.teamTwoCompare = teamTwoCompare;
         this.comparison = comparison;
         robotQuickCommentSelections = new HashMap<>();;
+        this.pickNumber = pickNumber;
 
     }
 
-    private int teamOneCompare, teamTwoCompare;
+    public int getTeamOneCompare() {
+        return teamOneCompare;
+    }
+
+    public int getTeamTwoCompare() {
+        return teamTwoCompare;
+    }
+
+    public int getPickNumber() {
+        return pickNumber;
+    }
+
+    public String getComparison() {
+        return comparison;
+    }
+
+    public HashMap<String, Boolean> getRobotQuickCommentSelections() {
+        return robotQuickCommentSelections;
+    }
+
+    public String[] getRobotQuickCommentValues() {
+        return robotQuickCommentValues;
+    }
+
+    private int teamOneCompare, teamTwoCompare, pickNumber;
     private String comparison;
     private String robotComment;
-    private String pilotComment;
+
 
     public String getFocus() {
         return focus;

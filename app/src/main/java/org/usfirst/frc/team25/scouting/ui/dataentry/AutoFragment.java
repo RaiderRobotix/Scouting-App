@@ -4,14 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -21,11 +20,15 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
 
 public class AutoFragment extends Fragment implements  EntryFragment{
 
-    CheckBox baselineCrossed, useHoppers, shootsFromKey, attemptGear, successGear;
-    ButtonIncDec highGoals, lowGoals, rotorsStarted, gearsDelivered;
+    ButtonIncDec ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
+        switchAdjacentPickup, cubesDropped;
+    CheckBox reachAutoLine, cubesOpponentPlate, opponentSwitchPlate,
+            opponentScalePlate, nullTerritoryFoul;
     Button continueButton;
 
     ScoutEntry entry;
+
+
 
     @Override
     public ScoutEntry getEntry() {
@@ -43,40 +46,136 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
     }
 
+    public boolean shouldDisableReachAutoLine(){
+        return ownSwitchCubes.getValue()>0||ownScaleCubes.getValue()>0||switchAdjacentPickup
+                .getValue()>0||cubesOpponentPlate.isChecked()||nullTerritoryFoul.isChecked();
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
-        baselineCrossed = (CheckBox) view.findViewById(R.id.reach_auto_line);
 
-        lowGoals = (ButtonIncDec) view.findViewById(R.id.own_scale_auto);
+        ownScaleCubes = view.findViewById(R.id.own_scale_auto);
+        ownSwitchCubes = view.findViewById(R.id.own_switch_auto);
+        exchangeCubes = view.findViewById(R.id.exchange_auto);
+        reachAutoLine = view.findViewById(R.id.reach_auto_line);
+        powerCubePilePickup = view.findViewById(R.id.power_cube_pile_pickup_auto);
+        switchAdjacentPickup = view.findViewById(R.id.six_switch_pickup_auto);
+        cubesDropped = view.findViewById(R.id.cubes_dropped_auto);
+        cubesOpponentPlate = view.findViewById(R.id.cubes_wrong_plate_auto);
+        opponentScalePlate = view.findViewById(R.id.scale_wrong_plate_auto);
+        opponentSwitchPlate = view.findViewById(R.id.switch_wrong_plate_auto);
+        nullTerritoryFoul = view.findViewById(R.id.null_territory_auto_foul);
+
         continueButton = (Button) view.findViewById(R.id.auto_continue);
-
-
-
-
-
-
 
 
         autoPopulate();
 
 
+
+
+        nullTerritoryFoul.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                    disableReachAutoLine();
+                else if(!shouldDisableReachAutoLine())
+                    enableReachAutoLine();
+            }
+        });
+
+        ownScaleCubes.incButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ownScaleCubes.increment();
+                disableReachAutoLine();
+            }
+        });
+        ownScaleCubes.decButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ownScaleCubes.decrement();
+                if(ownScaleCubes.getValue()<1&&!shouldDisableReachAutoLine())
+                    enableReachAutoLine();
+            }
+        });
+
+
+        ownSwitchCubes.incButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ownSwitchCubes.increment();
+                disableReachAutoLine();
+            }
+        });
+        ownSwitchCubes.decButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ownSwitchCubes.decrement();
+                if(ownSwitchCubes.getValue()<1&&!shouldDisableReachAutoLine())
+                    enableReachAutoLine();
+            }
+        });
+
+        switchAdjacentPickup.incButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchAdjacentPickup.increment();
+                disableReachAutoLine();
+            }
+        });
+        switchAdjacentPickup.decButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchAdjacentPickup.decrement();
+                if(switchAdjacentPickup.getValue()<1&&!shouldDisableReachAutoLine())
+                    enableReachAutoLine();
+            }
+        });
+
+        cubesOpponentPlate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    disableReachAutoLine();
+                    enableOpponentPlateLocationCheckboxes(true);
+                }
+                else if(!shouldDisableReachAutoLine()) {
+                    enableReachAutoLine();
+                    enableOpponentPlateLocationCheckboxes(false);
+                }
+                else enableOpponentPlateLocationCheckboxes(false);
+            }
+        });
+
+
+
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean gearPegSelected = false;
+                if(cubesOpponentPlate.isChecked()&&!(opponentSwitchPlate.isChecked()
+                        ||opponentScalePlate.isChecked())){
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Select where the robot dropped cubes on its opponents' plate(s)")
+                            .setMessage("Scale and/or own switch")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-
+                                }
+                            })
+                            .show();
+                }
+                else {
                     saveState();
 
                     getFragmentManager().beginTransaction()
                             .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
                             .commit();
+                }
 
             }
         });
@@ -84,18 +183,45 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         return view;
     }
 
+
+    public void disableReachAutoLine(){
+
+        reachAutoLine.setChecked(true);
+        reachAutoLine.setEnabled(false);
+
+    }
+
+    public void enableReachAutoLine(){
+        reachAutoLine.setEnabled(true);
+    }
+
+    public void enableOpponentPlateLocationCheckboxes(boolean enable){
+
+        if(enable) {// checked
+            opponentSwitchPlate.setEnabled(true);
+            opponentScalePlate.setEnabled(true);
+        }
+        else{
+            opponentSwitchPlate.setEnabled(false);
+            opponentScalePlate.setEnabled(false);
+            opponentScalePlate.setChecked(false);
+            opponentSwitchPlate.setChecked(false);
+        }
+    }
+
     @Override
     public void saveState() {
         Settings set = Settings.newInstance(getActivity());
-        /*Autonomous(boolean baselineCrossed, boolean useHoppers, int highGoals, int lowGoals, int rotorsStarted, int gearsDelivered) {*/
-
-
-
-    /*   entry.setAuto(new Autonomous(baselineCrossed.isChecked(), useHoppers.isChecked(), 0, 0,
-               -1, gearsDelivered.getValue(), shootsFromKey.isChecked(), "1",
-               attemptGear.isChecked(), successGear.isChecked()));*/
+        entry.setAuto(new Autonomous(ownSwitchCubes.getValue(), ownScaleCubes.getValue(),
+                exchangeCubes.getValue(),
+                powerCubePilePickup.getValue(),
+                switchAdjacentPickup.getValue(),
+                cubesDropped.getValue(), reachAutoLine.isChecked(), nullTerritoryFoul.isChecked(),
+                opponentSwitchPlate.isChecked(), opponentScalePlate.isChecked()));
 
     }
+
+
 
     @Override
     public void setEntry(ScoutEntry entry) {
@@ -113,22 +239,24 @@ public class AutoFragment extends Fragment implements  EntryFragment{
     @Override
     public void autoPopulate() {
         if(entry.getAuto()!=null){
+
+
+
             Autonomous prevAuto = entry.getAuto();
-            highGoals.setValue(prevAuto.getHighGoals());
-            lowGoals.setValue(prevAuto.getLowGoals());
-            baselineCrossed.setChecked(prevAuto.isBaselineCrossed());
-            useHoppers.setChecked(prevAuto.isUseHoppers());
-            rotorsStarted.setValue(prevAuto.getRotorsStarted());
-            gearsDelivered.setValue(prevAuto.getGearsDelivered());
-            attemptGear.setChecked(prevAuto.isAttemptGear());
-            successGear.setChecked(prevAuto.isSuccessGear());
-
-            if(rotorsStarted.getValue()==-1)
-                rotorsStarted.setValue(0);
-
-
-
-            shootsFromKey.setChecked(prevAuto.isShootsFromKey());
+            enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate()||prevAuto.isCubeDropOpponentSwitchPlate());
+            cubesOpponentPlate.setChecked(prevAuto.isCubeDropOpponentScalePlate()||prevAuto.isCubeDropOpponentSwitchPlate());
+            ownSwitchCubes.setValue(prevAuto.getSwitchCubes());
+            ownScaleCubes.setValue(prevAuto.getScaleCubes());
+            exchangeCubes.setValue(prevAuto.getExchangeCubes());
+            reachAutoLine.setChecked(prevAuto.isAutoLineCross());
+            powerCubePilePickup.setValue(prevAuto.getPowerCubePilePickup());
+            switchAdjacentPickup.setValue(prevAuto.getSwitchAdjacentPickup());
+            cubesDropped.setValue(prevAuto.getCubesDropped());
+            opponentSwitchPlate.setChecked(prevAuto.isCubeDropOpponentSwitchPlate());
+            opponentScalePlate.setChecked(prevAuto.isCubeDropOpponentScalePlate());
+            nullTerritoryFoul.setChecked(prevAuto.isNullTerritoryFoul());
+            if(shouldDisableReachAutoLine())
+                disableReachAutoLine();
 
         }
 

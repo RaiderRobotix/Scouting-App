@@ -11,39 +11,40 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonTimer;
 
 
 public class TeleOpFragment extends Fragment implements EntryFragment{
 
-    //TODO add drag and drop ListView for robot actions during cycle
-
     ScoutEntry entry;
+    ImageView fieldImage;
     Button continueButton;
-    ButtonIncDec high, low, gears, rotors, hoppers, cycles, highInc, lowInc, gearsDropped;
-    CheckBox returnLoading, overflowLoading, attemptTakeoff, readyTakeoff;
-    CheckBox[] gearDropLocCheckset = new CheckBox[3];
-    final String[] gearDropLocValues = {"Retrieval zone", "Peg", "Other"};
+    ButtonIncDec ownSwitchCubes, scaleCubes, opponentSwtichCubes, exchangeCubes,
+        cubesDropped, climbsAssisted;
+    CheckBox attemptRumgClimb, successRungClimb, parked, climbsOtherRobots;
+    ButtonTimer firstCubeTime, cycleTime;
+    EditText climbOtherRobotTypeOtherField;
+    RadioButton[] climbOtherRobotType = new RadioButton[4];
+    int fieldConfigIndex = 0;
+    final int[] redLeftFieldConfig = {R.drawable.red_left_lll, R.drawable.red_left_lrl,
+            R.drawable.red_left_rlr, R.drawable.red_left_rrr};
+    final int[] blueLeftFieldConfig = {R.drawable.blue_left_rrr, R.drawable.blue_left_rlr,
+            R.drawable.blue_left_lrl, R.drawable.blue_left_lll};
+    RadioGroup otherRobotTypeGroup;
 
 
     Settings set;
 
-    void enableGearDropLocCheckset(){
-        for(CheckBox cb : gearDropLocCheckset)
-            cb.setEnabled(true);
-    }
-
-    void disableGearDropLocCheckset(){
-        for(CheckBox cb : gearDropLocCheckset) {
-            cb.setEnabled(false);
-            cb.setChecked(false);
-        }
-    }
 
     public static TeleOpFragment getInstance(ScoutEntry entry){
         TeleOpFragment tof = new TeleOpFragment();
@@ -70,59 +71,112 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        high = (ButtonIncDec) view.findViewById(R.id.own_switch_tele);
-        low = (ButtonIncDec) view.findViewById(R.id.scale_tele);
-        gears = (ButtonIncDec) view.findViewById(R.id.opponent_switch_tele);
-        attemptTakeoff = (CheckBox) view.findViewById(R.id.attempt_rung_climb);
-        readyTakeoff = (CheckBox) view.findViewById(R.id.success_rung_climb);
+        ownSwitchCubes = (ButtonIncDec) view.findViewById(R.id.own_switch_tele);
+        scaleCubes = (ButtonIncDec) view.findViewById(R.id.scale_tele);
+        opponentSwtichCubes = (ButtonIncDec) view.findViewById(R.id.opponent_switch_tele);
+        attemptRumgClimb = (CheckBox) view.findViewById(R.id.attempt_rung_climb);
+        successRungClimb = (CheckBox) view.findViewById(R.id.success_rung_climb);
         continueButton = (Button) view.findViewById(R.id.tele_continue);
+        fieldImage = view.findViewById(R.id.field_config_image);
+        firstCubeTime = view.findViewById(R.id.first_cube_time);
+        exchangeCubes = view.findViewById(R.id.exchange_tele);
+        cubesDropped = view.findViewById(R.id.cubes_dropped_tele);
+        cycleTime = view.findViewById(R.id.cycle_time);
+        parked = view.findViewById(R.id.park_platform);
+        climbsAssisted = view.findViewById(R.id.climbs_assisted);
+        climbsOtherRobots = view.findViewById(R.id.climb_other_robot);
+        climbOtherRobotType[0] = view.findViewById(R.id.ramp_bot_type);
+        climbOtherRobotType[1]=view.findViewById(R.id.robot_rung_type);
+        climbOtherRobotType[2]=view.findViewById(R.id.iron_cross_type);
+        climbOtherRobotType[3]=view.findViewById(R.id.other_type);
+        otherRobotTypeGroup = view.findViewById(R.id.climb_other_robot_type_group);
+        climbOtherRobotTypeOtherField = view.findViewById(R.id.other_robot_type_text);
 
 
+        Settings set = Settings.newInstance(getActivity());
 
-       /* gearsDropped.incButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableGearDropLocCheckset();
-                gearsDropped.increment();
-                Log.i("tag", new Integer(gearsDropped.getValue()).toString());
-            }
-        });*/
+        climbOtherRobotTypeOtherField.setEnabled(false);
 
-      /*  gearsDropped.decButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(gearsDropped.getValue()<=1)
-                    disableGearDropLocCheckset();
-                gearsDropped.decrement();
-            }
-        });*/
-
-
-
-        /*if(!entry.getPreMatch().isPilotPlaying()) {
-            ((ViewGroup) rotors.getParent()).removeView(rotors);
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) hoppers.getLayoutParams();
-          params.addRule(RelativeLayout.BELOW, R.id.gearsTele);
-            hoppers.setLayoutParams(params);
-        }
-
-        else rotors.setMaxValue(4-entry.getAuto().getRotorsStarted());*/
-
-       // hoppers.setMaxValue(5 - (entry.getAuto().isUseHoppers() ? 1 : 0));
-
-
-        readyTakeoff.setEnabled(false);
-
-
-
-        attemptTakeoff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        climbOtherRobotType[3].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
-                    readyTakeoff.setEnabled(true);
+                if(b){
+                    for(int i = 0; i < 3; i++)
+                        climbOtherRobotType[i].setChecked(false);
+                    climbOtherRobotTypeOtherField.setEnabled(true);
+                }
+            }
+        });
+
+
+
+        for(int i = 0; i < 3; i++)
+            climbOtherRobotType[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    climbOtherRobotType[3].setChecked(false);
+                    climbOtherRobotTypeOtherField.setText("");
+                    climbOtherRobotTypeOtherField.setEnabled(false);
+                }
+            });
+
+        if(set.getLeftAlliance().equals("Red Alliance"))
+            fieldImage.setImageResource(redLeftFieldConfig[0]);
+        else fieldImage.setImageResource(blueLeftFieldConfig[0]);
+
+        fieldImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(set.getLeftAlliance().equals("Red Alliance"))
+                    fieldImage.setImageResource(redLeftFieldConfig[++fieldConfigIndex%4]);
+                else fieldImage.setImageResource(blueLeftFieldConfig[++fieldConfigIndex%4]);
+            }
+        });
+
+        successRungClimb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    parked.setChecked(false);
+                    parked.setEnabled(false);
+                    disableOtherRobotTypeGroup();
+                    climbsOtherRobots.setEnabled(false);
+                    climbsOtherRobots.setChecked(false);
+                }
                 else{
-                    readyTakeoff.setEnabled(false);
-                    readyTakeoff.setChecked(false);
+                    parked.setEnabled(true);
+                    climbsOtherRobots.setEnabled(true);
+                }
+            }
+        });
+
+        attemptRumgClimb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b&&!climbsOtherRobots.isChecked())
+                    successRungClimb.setEnabled(true);
+                else{
+                    successRungClimb.setEnabled(false);
+                    successRungClimb.setChecked(false);
+                }
+            }
+        });
+
+        climbsOtherRobots.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    enableOtherRobotTypeGroup();
+                    successRungClimb.setEnabled(false);
+                    successRungClimb.setChecked(false);
+                    parked.setChecked(false);
+                    parked.setEnabled(false);
+                }
+                else {
+                    disableOtherRobotTypeGroup();
+                    parked.setEnabled(true);
+                    if(attemptRumgClimb.isChecked())
+                        successRungClimb.setEnabled(true);
                 }
             }
         });
@@ -130,21 +184,50 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean gearDropLocSelected = false;
-
-
-                saveState();
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
-                        .commit();
+                if(climbsOtherRobots.isChecked()&&!(climbOtherRobotType[0].isChecked() ||climbOtherRobotType[1].isChecked()
+                        ||climbOtherRobotType[2].isChecked() ||
+                        (climbOtherRobotType[3].isChecked()&&!climbOtherRobotTypeOtherField.getText().toString().isEmpty()))){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select or fill in type of robot climbed on")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+                else{
+                    saveState();
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
+                            .commit();
+                }
             }
             });
 
 
 
 
+
+
         return view;
+    }
+
+    public void enableOtherRobotTypeGroup(){
+        for(RadioButton button : climbOtherRobotType)
+            button.setEnabled(true);
+    }
+
+    public void disableOtherRobotTypeGroup(){
+        for(RadioButton button : climbOtherRobotType){
+            button.setEnabled(false);
+            button.setChecked(false);
+        }
+        climbOtherRobotTypeOtherField.setEnabled(false);
+        climbOtherRobotTypeOtherField.setText("");
     }
 
     @Override
@@ -157,45 +240,56 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
     @Override
     public void saveState() {
-        String gearDropLoc = "";
-/*        for(int i = 0; i < gearDropLocCheckset.length; i++)
-            if(gearDropLocCheckset[i].isChecked())
-                gearDropLoc+= gearDropLocValues[i] + "; ";*/
+        String climbOtherRobotTypeStr = "";
+        for(int i = 0; i < 3; i++)
+            if(climbOtherRobotType[i].isChecked())
+                climbOtherRobotTypeStr = (String) climbOtherRobotType[i].getText();
+        if(climbOtherRobotType[3].isChecked())
+            climbOtherRobotTypeStr = climbOtherRobotTypeOtherField.getText().toString();
 
-        entry.setTeleOp(new TeleOp(1, 1, 1   , 1,
-                 -1, attemptTakeoff.isChecked(), readyTakeoff.isChecked(),
-                true, true, 1, 1, "na"));
+        //Always from red driver POV, depicting red plates
+        String[] fieldLayoutValues = {"lll", "lrl", "rlr", "rrr"};
+
+        entry.setTeleOp(new TeleOp(firstCubeTime.getValue(), cycleTime.getValue(), ownSwitchCubes.getValue(),
+               scaleCubes.getValue(), opponentSwtichCubes.getValue(), exchangeCubes.getValue(), cubesDropped.getValue(),
+                climbsAssisted.getValue(), parked.isChecked(), attemptRumgClimb.isChecked(), successRungClimb.isChecked(),
+                climbsOtherRobots.isChecked(), climbOtherRobotTypeStr, fieldLayoutValues[fieldConfigIndex%4]));
+
     }
 
     @Override
     public void autoPopulate() {
         if(entry.getTeleOp()!=null){
             TeleOp tele = entry.getTeleOp();
-            low.setValue(tele.getLowGoals());
-            high.setValue(tele.getHighGoals());
-            gears.setValue(tele.getGearsDelivered());
-            hoppers.setValue(tele.getHopppersUsed());
-            rotors.setValue(tele.getRotorsStarted());
-            cycles.setValue(tele.getNumCycles());
-            attemptTakeoff.setChecked(tele.isAttemptTakeoff());
-            gearsDropped.setValue(tele.getGearsDropped());
+            firstCubeTime.setValue(tele.getFirstCubeTime());
+            cycleTime.setValue(tele.getCycleTime());
+            ownSwitchCubes.setValue(tele.getOwnSwitchCubes());
+            scaleCubes.setValue(tele.getScaleCubes());
+            opponentSwtichCubes.setValue(tele.getOpponentSwitchCubes());
+            exchangeCubes.setValue(tele.getExchangeCubes());
+            cubesDropped.setValue(tele.getCubesDropped());
+            climbsAssisted.setValue(tele.getClimbsAssisted());
+            parked.setChecked(tele.isParked());
+            attemptRumgClimb.setChecked(tele.isAttemptRungClimb());
+            successRungClimb.setChecked(tele.isSuccessfulRungClimb());
+            climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
 
-            returnLoading.setChecked(tele.isUseReturnLoading());
-            overflowLoading.setChecked(tele.isUseOverflowLoading());
-
-            if(tele.getGearsDropped()>=1){
-                enableGearDropLocCheckset();
-                for(int i = 0; i < gearDropLocCheckset.length; i++)
-                    if(tele.getGearsDroppedLoc().contains(gearDropLocValues[i]))
-                        gearDropLocCheckset[i].setChecked(true);
+            if(!tele.getOtherRobotClimbType().equals("")){
+                boolean otherChecked = true;
+                for(RadioButton button : climbOtherRobotType)
+                    if(button.getText().equals(tele.getOtherRobotClimbType())) {
+                        button.setChecked(true);
+                        otherChecked = false;
+                    }
+                if(otherChecked) {
+                    climbOtherRobotType[3].setChecked(true);
+                    Log.i("tag", tele.getOtherRobotClimbType());
+                    climbOtherRobotTypeOtherField.setText(tele.getOtherRobotClimbType());
+                }
             }
-            else disableGearDropLocCheckset();
 
-            if(tele.isAttemptTakeoff())
-                readyTakeoff.setEnabled(true);
-            readyTakeoff.setChecked(tele.isReadyTakeoff());
+
         }
-//        else cycles.setValue(1);
     }
 
     @Override

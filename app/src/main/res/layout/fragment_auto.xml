@@ -71,7 +71,7 @@
             app:titlePrompt="Cubes picked up from next to switch"
             app:initialValue="0"
             android:layout_below="@id/power_cube_pile_pickup_auto"
-            android:id="@+id/six_switch_auto"
+            android:id="@+id/six_switch_pickup_auto"
             />
 
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             app:titlePrompt="Cubes dropped on field"
             app:initialValue="0"
-            android:layout_below="@id/six_switch_auto"
+            android:layout_below="@id/six_switch_pickup_auto"
             android:id="@+id/cubes_dropped_auto"
             />
 
@@ -107,7 +107,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Switch plate"
+            android:text="Opponent plate of own switch"
             android:enabled="false"
             />
         <CheckBox
@@ -119,7 +119,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scale plate"
+            android:text="Opponent scale plate"
             android:enabled="false"
             />
 

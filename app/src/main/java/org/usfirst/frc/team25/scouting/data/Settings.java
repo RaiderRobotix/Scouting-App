@@ -199,5 +199,7 @@ public class Settings extends PreferenceFragment {
         editor.apply();
     }
 
+    public String getLeftAlliance() { return sp.getString("leftStation", "Red Alliance");}
+
 
 }

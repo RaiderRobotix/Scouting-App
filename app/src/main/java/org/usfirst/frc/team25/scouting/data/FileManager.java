@@ -323,7 +323,7 @@ public class FileManager {
             try {
                 FileInputStream inputStream = new FileInputStream(file);
                 BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
-                String row = "";
+                String row;
 
 
                 while ((row = reader.readLine()) != null)
@@ -344,6 +344,41 @@ public class FileManager {
             Log.i("file export", "File converted to JSON");
 
             saveFile(file, output, c);
+
+
+    }
+
+    public static int getPrevTeamNumber(Context c) {
+        Gson gson = new Gson();
+        List<ScoutEntry> entries;
+        Type listEntries = new TypeToken<List<ScoutEntry>>() {
+        }.getType(); //Example for deserializing an ArrayList of objects
+
+
+        String existingData = "";
+
+        File file = getDataFilePath(c);
+
+        //Reads the raw data
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+            String row ;
+
+
+            while ((row = reader.readLine()) != null)
+                existingData += row;
+            reader.close();
+        } catch (IOException e) {
+            return 0;
+        }
+
+        if (!existingData.equals("")) {
+            Log.i("file export", "Attempting to parse data");
+            entries = gson.fromJson(existingData, listEntries);
+            return entries.get(entries.size()-1).getPreMatch().getTeamNum();
+        }
+        else return 0;
 
 
     }
