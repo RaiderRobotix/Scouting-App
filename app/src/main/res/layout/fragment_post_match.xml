@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.dataentry.PostMatchFragment"
-    android:background="#ffffff"
+    android:background="#f5f5f5"
     android:fillViewport="true">
 
     <RelativeLayout

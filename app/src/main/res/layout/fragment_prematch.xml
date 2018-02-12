@@ -10,7 +10,7 @@
 
     android:orientation="vertical"
     android:fillViewport="true"
-    android:background="#ffffff"
+    android:background="#f5f5f5"
     >
 
     <ScrollView
