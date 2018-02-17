@@ -19,11 +19,11 @@ android:
     - tools
     - platform-tools
     - build-tools-26.0.2
-    - android-26
+    - android-27
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-    - addon-google_apis-google-26
+    - addon-google_apis-google-27
 install: nvm install 7
 before_script:
   - chmod +x gradlew
