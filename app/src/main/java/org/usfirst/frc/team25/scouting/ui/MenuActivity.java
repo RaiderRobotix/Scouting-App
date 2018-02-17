@@ -16,13 +16,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.kohsuke.github.GHRelease;
+import org.kohsuke.github.GitHub;
+import org.kohsuke.github.GitHubBuilder;
 import org.usfirst.frc.team25.scouting.Constants;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
 import org.usfirst.frc.team25.scouting.ui.dataentry.AddEntryActivity;
-import org.usfirst.frc.team25.scouting.ui.dataentry.AutoFragment;
 import org.usfirst.frc.team25.scouting.ui.preferences.SettingsActivity;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
@@ -31,7 +32,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
 
 /** The main activity of the application
@@ -120,13 +120,18 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
                 startActivity(i);
             }
         });
+        checkUpdate();
+
 
     }
 
     public void checkUpdate(){
-      /*  try {
-            GitHub gh = GitHub.connect();
+       try {
+
+           GitHub gh = GitHub.connect("team25scoutingsystem@gmail.com", "BarnacleBoy25");
+
             GHRelease latestRelease = gh.getRepository(Constants.REPOSITORY_NAME).getLatestRelease();
+            Toast.makeText(getApplicationContext(), latestRelease.getUrl().toString(), Toast.LENGTH_LONG);
             if(!latestRelease.getTagName().equals("v"+Constants.VERSION))
                 new AlertDialog.Builder(getApplicationContext())
                         .setTitle("App update available")
@@ -143,8 +148,8 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
                         })
                         .create()
                         .show();
-        }catch(IOException e){
-
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -249,7 +254,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
                 fos.close();
                 is.close();
 
-                OpenNewVersion(PATH, fileName);
+                openNewVersion(PATH, fileName);
 
                 flag = true;
             } catch (Exception e) {
@@ -257,11 +262,11 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
             }
             return flag;
 
-        }*/
+        }
 
     }
 
-    void OpenNewVersion(String location, String fileName) {
+    void openNewVersion(String location, String fileName) {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(new File(location + fileName)),
@@ -293,6 +298,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
      */
     @Override
     public void onResume() {
+        Log.i("release", System.getProperty("user.home"));
         updateStatus();
         setTitle("Raider Robotix Scouting");
         super.onResume();

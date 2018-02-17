@@ -6,6 +6,7 @@ import android.preference.PreferenceFragment;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 
 import android.preference.PreferenceManager;
@@ -190,7 +191,7 @@ public class Settings extends PreferenceFragment {
     }
 
     public String getAPIKey(){
-        return sp.getString("api_key", "DEFAULT");
+        return getString(R.string.tba_api_key);
     }
 
     public void setAPIKey(String key){

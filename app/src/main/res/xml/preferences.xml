@@ -89,11 +89,11 @@
         android:key="download_schedule"
         android:defaultValue="false"/>
 
-    <EditTextPreference
+   <!-- <EditTextPreference
         android:key="api_key"
         android:title="Blue Alliance API key"
         android:summary="Required to download match schedule"
-        />
+        />-->
 
     <Preference
         android:key="change_pass"
