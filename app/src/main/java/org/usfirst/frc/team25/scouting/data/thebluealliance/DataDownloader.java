@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.Sorters;
@@ -35,12 +36,14 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
 
     private Context c;
     private Settings set;
+    private String apiKey;
     private boolean teamListExists, matchScheduleExists;
     private File teamListFilePath, matchListFilePath;
 
     public DataDownloader(Context c){
         this.c = c;
         set = Settings.newInstance(c);
+        apiKey = c.getResources().getString(R.string.tba_api_key);
         teamListExists = FileManager.teamListExists(c);
         teamListFilePath = FileManager.getTeamListFilePath(c);
         matchScheduleExists = FileManager.matchScheduleExists(c);
@@ -49,7 +52,7 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
 
     private String getTeamList(String eventCode) throws UnknownHostException{
         String teamList = "";
-        ArrayList<Team> teams = Sorters.sortByTeamNum(new ArrayList<Team>(Arrays.asList(new TBA(set.getAPIKey()).eventRequest.getTeams(eventCode))));
+        ArrayList<Team> teams = Sorters.sortByTeamNum(new ArrayList<Team>(Arrays.asList(new TBA(apiKey).eventRequest.getTeams(eventCode))));
         for (Team team : teams)
             teamList += team.getTeamNumber() + ",";
         StringBuilder output = new StringBuilder(teamList);
@@ -63,7 +66,7 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
      */
     private String getMatchList(String eventCode) throws UnknownHostException {
         String matchList = "";
-        for(Match match : Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<Match>(Arrays.asList(new TBA(set.getAPIKey()).eventRequest.getMatches(eventCode)))))){
+        for(Match match : Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<Match>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode)))))){
 
             matchList+=match.getMatchNumber()+",";
             for(int i = 0; i < 2; i++) //iterate through two alliances
@@ -114,7 +117,7 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                     eventCode = currentYear+"cars";
 
                 try {
-                    TBA tba = new TBA(set.getAPIKey());
+                    TBA tba = new TBA(apiKey);
                     if (tba.dataRequest.getDataTBA("/status").getResponseCode() == 401)
                         return "Invalid Blue Alliance API key";
                 }catch(NullPointerException e){

@@ -131,9 +131,7 @@ public class SettingsFragment extends PreferenceFragment {
         downloadSchedule.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if(set.getAPIKey().equals("DEFAULT"))
-                    Toast.makeText(getActivity(), "Blue Alliance API key required", Toast.LENGTH_SHORT).show();
-                else new DataDownloader(getActivity()).execute();
+                new DataDownloader(getActivity()).execute();
 
                 return true;
             }
