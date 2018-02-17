@@ -60,7 +60,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.github.woxthebox:draglistview:1.3'
-   // oompile 'com.android.support:multidex:1.0.2'
+    compile 'com.android.support:multidex:1.0.2'
     compile files('../libs/TBA-APIv3-Java-Library.jar')
     compile (group: 'org.kohsuke', name: 'github-api', version: '1.92'){
         exclude module: 'commons-io:commons-io:+'
