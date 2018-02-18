@@ -72,6 +72,15 @@
         android:defaultValue="Red Alliance"
         />
 
+    <org.usfirst.frc.team25.scouting.ui.views.DecimalPickerPreference
+        android:key="timer_manual_inc"
+        android:title="Timer manual increment amount"
+        android:defaultValue="4"
+        android:layout="@layout/preference_normal"
+        />
+
+
+
     <PreferenceCategory
         android:title="Data Transfer"
         android:layout="@layout/preference_category_normal" />

@@ -27,7 +27,7 @@
             />
 
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
             android:padding="@dimen/default_padding_bottom"
 
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_below="@id/reach_auto_line"
             android:id="@+id/own_switch_auto"/>
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:layout_below="@id/own_switch_auto"
             android:id="@+id/own_scale_auto"/>
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:id="@+id/exchange_auto"
             />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
 
 
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
             android:id="@+id/power_cube_pile_pickup_auto"
             />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -70,9 +70,9 @@ public class ButtonTimer extends RelativeLayout {
         titleView = (TextView) findViewById(R.id.button_timer_title);
 
 
-        setValue(typedArray.getInteger(R.styleable.ButtonTimer_initialValueTimer, 0));
+        setValue(typedArray.getFloat(R.styleable.ButtonTimer_initialValueTimer, 0));
         setTitle(typedArray.getString(R.styleable.ButtonTimer_titlePromptTimer));
-        setMinValue(typedArray.getInteger(R.styleable.ButtonTimer_minValueTimer, 0));
+        setMinValue(typedArray.getFloat(R.styleable.ButtonTimer_minValueTimer, 0));
         setMaxValue(typedArray.getFloat(R.styleable.ButtonTimer_maxValueTimer, Float.MAX_VALUE));
         setIncDecAmount(typedArray.getFloat(R.styleable.ButtonTimer_buttonIncDecAmount, 0.5f));
 

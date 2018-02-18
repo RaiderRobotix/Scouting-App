@@ -115,6 +115,8 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                     eventCode = currentYear+"mrcmp";
                 if(currentEvent.equals("Carson"))
                     eventCode = currentYear+"cars";
+                if(currentEvent.equals("Week 0"))
+                    eventCode = currentYear+"week0";
 
                 try {
                     TBA tba = new TBA(apiKey);

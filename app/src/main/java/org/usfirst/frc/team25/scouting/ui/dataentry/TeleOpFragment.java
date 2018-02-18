@@ -20,7 +20,7 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonTimer;
 
 
@@ -29,10 +29,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
     ScoutEntry entry;
     ImageView fieldImage;
     Button continueButton;
-    ButtonIncDec ownSwitchCubes, scaleCubes, opponentSwtichCubes, exchangeCubes,
+    ButtonIncDecInt ownSwitchCubes, scaleCubes, opponentSwtichCubes, exchangeCubes,
         cubesDropped, climbsAssisted;
     CheckBox attemptRumgClimb, successRungClimb, parked, climbsOtherRobots;
-    ButtonTimer firstCubeTime, cycleTime;
+    ButtonTimer firstCubeTime, cycleTime, timerIncAmount;
     EditText climbOtherRobotTypeOtherField;
     RadioButton[] climbOtherRobotType = new RadioButton[4];
     int fieldConfigIndex = 0;
@@ -71,9 +71,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        ownSwitchCubes = (ButtonIncDec) view.findViewById(R.id.own_switch_tele);
-        scaleCubes = (ButtonIncDec) view.findViewById(R.id.scale_tele);
-        opponentSwtichCubes = (ButtonIncDec) view.findViewById(R.id.opponent_switch_tele);
+        ownSwitchCubes = (ButtonIncDecInt) view.findViewById(R.id.own_switch_tele);
+        scaleCubes = (ButtonIncDecInt) view.findViewById(R.id.scale_tele);
+        opponentSwtichCubes = (ButtonIncDecInt) view.findViewById(R.id.opponent_switch_tele);
         attemptRumgClimb = (CheckBox) view.findViewById(R.id.attempt_rung_climb);
         successRungClimb = (CheckBox) view.findViewById(R.id.success_rung_climb);
         continueButton = (Button) view.findViewById(R.id.tele_continue);
@@ -91,9 +91,18 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         climbOtherRobotType[3]=view.findViewById(R.id.other_type);
         otherRobotTypeGroup = view.findViewById(R.id.climb_other_robot_type_group);
         climbOtherRobotTypeOtherField = view.findViewById(R.id.other_robot_type_text);
+        timerIncAmount = view.findViewById(R.id.timer_manual_inc);
+
+        timerIncAmount.startStopButton.setVisibility(View.GONE);
 
 
-        Settings set = Settings.newInstance(getActivity());
+        set = Settings.newInstance(getActivity());
+
+
+        firstCubeTime.setIncDecAmount((float) set.getTimerManualInc());
+        cycleTime.setIncDecAmount((float) set.getTimerManualInc());
+
+        timerIncAmount.setValue(set.getTimerManualInc());
 
         climbOtherRobotTypeOtherField.setEnabled(false);
 
@@ -108,7 +117,19 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
             }
         });
 
+        cycleTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cycleTime.setIncDecAmount(timerIncAmount.getValue());
+            }
+        });
 
+        firstCubeTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstCubeTime.setIncDecAmount(timerIncAmount.getValue());
+            }
+        });
 
         for(int i = 0; i < 3; i++)
             climbOtherRobotType[i].setOnClickListener(new View.OnClickListener() {
@@ -232,8 +253,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
     @Override
     public void onStop() {
-/*        set.setLowGoalIncTele(lowInc.getValue());
-        set.setHighGoalIncTele(highInc.getValue());*/
+        set.setTimerManualInc(timerIncAmount.getValue());
         Log.i("tag", "stopped");
         super.onStop();
     }

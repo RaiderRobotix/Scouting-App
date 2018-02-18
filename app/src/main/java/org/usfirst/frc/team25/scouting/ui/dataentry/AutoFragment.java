@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +15,11 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDec;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
 
 public class AutoFragment extends Fragment implements  EntryFragment{
 
-    ButtonIncDec ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
+    ButtonIncDecInt ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
         switchAdjacentPickup, cubesDropped;
     CheckBox reachAutoLine, cubesOpponentPlate, opponentSwitchPlate,
             opponentScalePlate, nullTerritoryFoul;

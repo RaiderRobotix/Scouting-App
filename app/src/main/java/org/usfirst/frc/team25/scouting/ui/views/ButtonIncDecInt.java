@@ -17,7 +17,7 @@ import org.usfirst.frc.team25.scouting.R;
  * Custom ViewGroup to increment or decrement a value with two buttons and a label, placed to the left.
  * Minimum value is 0, with methods to set label text and initial value.
  */
-public class ButtonIncDec extends RelativeLayout {
+public class ButtonIncDecInt extends RelativeLayout {
 
     public Button incButton, decButton;
     private TextView valueView;
@@ -48,17 +48,17 @@ public class ButtonIncDec extends RelativeLayout {
         this.listener = listener;
     }
 
-    public ButtonIncDec(Context c, AttributeSet attrs){
+    public ButtonIncDecInt(Context c, AttributeSet attrs){
         super(c, attrs);
         initializeViews(c);
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ButtonIncDec);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ButtonIncDecInt);
 
         //XML attributes that can be set in layout files, rather than programmatically
-        setValue(typedArray.getInteger(R.styleable.ButtonIncDec_initialValue, 0));
-        setTitle(typedArray.getString(R.styleable.ButtonIncDec_titlePrompt));
-        setMinValue(typedArray.getInteger(R.styleable.ButtonIncDec_minValue, 0));
-        setMaxValue(typedArray.getInteger(R.styleable.ButtonIncDec_maxValue, Integer.MAX_VALUE));
-        setIncDecAmount(typedArray.getInteger(R.styleable.ButtonIncDec_incDecAmount, 1));
+        setValue(typedArray.getInteger(R.styleable.ButtonIncDecInt_initialValue, 0));
+        setTitle(typedArray.getString(R.styleable.ButtonIncDecInt_titlePrompt));
+        setMinValue(typedArray.getInteger(R.styleable.ButtonIncDecInt_minValue, 0));
+        setMaxValue(typedArray.getInteger(R.styleable.ButtonIncDecInt_maxValue, Integer.MAX_VALUE));
+        setIncDecAmount(typedArray.getInteger(R.styleable.ButtonIncDecInt_incDecAmount, 1));
 
 
 

@@ -17,6 +17,7 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
+import org.usfirst.frc.team25.scouting.ui.views.DecimalPickerPreference;
 import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class SettingsFragment extends PreferenceFragment {
     ListPreference matchType, event, leftStation;
     Preference deleteFiles, changePass, year, downloadSchedule, game, version; // Buttons that hold a value, but do not prompt a dialogue
     NumberPickerPreference matchNum, shiftDur;
+    DecimalPickerPreference timerManualInc;
     EditTextPreference scoutNameInput;
     CheckBoxPreference useTeamList;
     Settings set;
@@ -56,6 +58,7 @@ public class SettingsFragment extends PreferenceFragment {
         game = findPreference("game");
         version = findPreference("version");
         leftStation = (ListPreference) findPreference("leftStation");
+        timerManualInc = (DecimalPickerPreference) findPreference("timer_manual_inc");
 
         updateSummary();
 
@@ -75,6 +78,8 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;// A false value means the preference change is not saved
             }
         });
+
+
 
         matchType.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -153,6 +158,7 @@ public class SettingsFragment extends PreferenceFragment {
             year.setSummary(set.getYear());
             set.setYear();
             leftStation.setSummary(leftStation.getValue());
+            timerManualInc.setSummary(set.getTimerManualInc() + " sec");
         }catch(NullPointerException e){
             e.printStackTrace();
         }
