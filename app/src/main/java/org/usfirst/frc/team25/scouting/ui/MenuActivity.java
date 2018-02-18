@@ -159,7 +159,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
     public void checkUpdate(){
        try {
 
-           GitHub gh = GitHub.connect("team25scoutingsystem@gmail.com", "BarnacleBoy25");
+           GitHub gh = GitHub.connect("team25scoutingsystem@gmail.com", "password");
 
             GHRelease latestRelease = gh.getRepository(Constants.REPOSITORY_NAME).getLatestRelease();
             Toast.makeText(getApplicationContext(), latestRelease.getUrl().toString(), Toast.LENGTH_LONG);
