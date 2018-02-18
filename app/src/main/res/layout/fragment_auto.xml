@@ -112,6 +112,7 @@
             android:layout_height="wrap_content"
             app:titlePrompt="Cubes picked up from power cube pile"
             app:initialValue="0"
+            app:maxValue="10"
             android:layout_below="@id/scale_wrong_plate_auto"
             android:id="@+id/power_cube_pile_pickup_auto"
             />
@@ -122,6 +123,7 @@
             android:layout_height="wrap_content"
             app:titlePrompt="Cubes picked up from next to switch"
             app:initialValue="0"
+            app:maxValue="6"
             android:layout_below="@id/power_cube_pile_pickup_auto"
             android:id="@+id/six_switch_pickup_auto"
             />
