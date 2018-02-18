@@ -308,6 +308,17 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
                 }
             }
 
+            String[] fieldLayoutValues = {"lll", "lrl", "rlr", "rrr"};
+
+            fieldConfigIndex = 0;
+
+            for(int i = 0; i < fieldLayoutValues.length; i++)
+                if(fieldLayoutValues[i].equals(tele.getFieldLayout()))
+                    fieldConfigIndex = i;
+
+            if(set.getLeftAlliance().equals("Red Alliance"))
+                fieldImage.setImageResource(redLeftFieldConfig[fieldConfigIndex]);
+            else fieldImage.setImageResource(blueLeftFieldConfig[fieldConfigIndex]);
 
         }
     }
