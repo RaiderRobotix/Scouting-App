@@ -267,7 +267,7 @@
                 app:buttonIncDecAmount="0.1"
                 app:minValueTimer="0.1"
                 app:maxValueTimer="2.0"
-                app:titlePromptTimer="Average cycle time" />
+                app:titlePromptTimer="Timer manual increment" />
 
 
         </RelativeLayout>
