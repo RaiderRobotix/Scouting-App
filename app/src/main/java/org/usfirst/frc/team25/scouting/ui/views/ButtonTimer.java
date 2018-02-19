@@ -3,12 +3,10 @@ package org.usfirst.frc.team25.scouting.ui.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,7 +15,6 @@ import org.usfirst.frc.team25.scouting.R;
 
 import java.math.BigDecimal;
 import java.time.Clock;
-import java.util.Timer;
 
 /**
  * Created by sng on 1/31/2018.
@@ -25,9 +22,11 @@ import java.util.Timer;
 
 public class ButtonTimer extends RelativeLayout {
 
-    public Button incButton, decButton, startStopButton;
+    private final Button incButton;
+    private final Button decButton;
+    public final Button startStopButton;
     private TextView valueView;
-    private TextView titleView;
+    private final TextView titleView;
     private float incDecAmount;
     private float minValue;
     private float maxValue;
@@ -63,16 +62,16 @@ public class ButtonTimer extends RelativeLayout {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ButtonTimer);
 
         //XML attributes that can be set in layout files, rather than programmatically
-        valueView = (TextView) findViewById(R.id.button_timer_value);
-        incButton = (Button) findViewById(R.id.timer_inc_button);
-        decButton = (Button) findViewById(R.id.timer_dec_button);
-        startStopButton = (Button) findViewById(R.id.start_stop_button);
-        titleView = (TextView) findViewById(R.id.button_timer_title);
+        valueView = findViewById(R.id.button_timer_value);
+        incButton = findViewById(R.id.timer_inc_button);
+        decButton = findViewById(R.id.timer_dec_button);
+        startStopButton = findViewById(R.id.start_stop_button);
+        titleView = findViewById(R.id.button_timer_title);
 
 
-        setValue(typedArray.getInteger(R.styleable.ButtonTimer_initialValueTimer, 0));
+        setValue(typedArray.getFloat(R.styleable.ButtonTimer_initialValueTimer, 0));
         setTitle(typedArray.getString(R.styleable.ButtonTimer_titlePromptTimer));
-        setMinValue(typedArray.getInteger(R.styleable.ButtonTimer_minValueTimer, 0));
+        setMinValue(typedArray.getFloat(R.styleable.ButtonTimer_minValueTimer, 0));
         setMaxValue(typedArray.getFloat(R.styleable.ButtonTimer_maxValueTimer, Float.MAX_VALUE));
         setIncDecAmount(typedArray.getFloat(R.styleable.ButtonTimer_buttonIncDecAmount, 0.5f));
 
@@ -90,7 +89,7 @@ public class ButtonTimer extends RelativeLayout {
     /**
      * @param title - title of the left TextView
      */
-    public void setTitle(CharSequence title){
+    private void setTitle(CharSequence title){
         titleView.setText(title);
     }
 
@@ -116,7 +115,7 @@ public class ButtonTimer extends RelativeLayout {
      * @return Float value of the displayed number
      */
     public float getValue(){
-        valueView = (TextView) findViewById(R.id.button_timer_value);
+        valueView = findViewById(R.id.button_timer_value);
         String value = valueView.getText().toString().split(" ")[0];
         return Float.parseFloat(value);
     }
@@ -125,11 +124,11 @@ public class ButtonTimer extends RelativeLayout {
         this.incDecAmount = incDecAmount;
     }
 
-    public void setMinValue(float minValue) {
+    private void setMinValue(float minValue) {
         this.minValue = minValue;
     }
 
-    public void setMaxValue(float maxValue) {
+    private void setMaxValue(float maxValue) {
         this.maxValue = maxValue;
     }
 
@@ -143,39 +142,28 @@ public class ButtonTimer extends RelativeLayout {
 
 
         //Listeners to increment and decrement the value with a click
-        incButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) { increment(); }
-        });
-        decButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                decrement();
-            }
-        });
+        incButton.setOnClickListener(view -> increment());
+        decButton.setOnClickListener(view -> decrement());
 
         //Essentially acts like a toggle, starting and stopping the timer
-        startStopButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isTimerStart){ //timer already started, need to stop
-                    startStopButton.setText("Start");
-                    incButton.setEnabled(true);
-                    decButton.setEnabled(true);
-                }
-                else{ // starts timer
-                    startStopButton.setText(("Stop"));
-                    setValue(0f);
-
-                    incButton.setEnabled(false);
-                    decButton.setEnabled(false);
-                }
-                isTimerStart = !isTimerStart;
+        startStopButton.setOnClickListener(view -> {
+            if(isTimerStart){ //timer already started, need to stop
+                startStopButton.setText("Start");
+                incButton.setEnabled(true);
+                decButton.setEnabled(true);
             }
+            else{ // starts timer
+                startStopButton.setText(("Stop"));
+                setValue(0f);
+
+                incButton.setEnabled(false);
+                decButton.setEnabled(false);
+            }
+            isTimerStart = !isTimerStart;
         });
     }
 
-    public void runTimer(){
+    private void runTimer(){
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -188,11 +176,11 @@ public class ButtonTimer extends RelativeLayout {
 
     }
 
-    public void increment(){
+    private void increment(){
         setValue(getValue()+incDecAmount);
     }
 
-    public void decrement(){
+    private void decrement(){
         setValue(getValue()-incDecAmount);
     }
 }

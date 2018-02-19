@@ -8,8 +8,6 @@ import android.util.Log;
 
 
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
 import org.usfirst.frc.team25.scouting.ui.views.AppCompatPreferenceActivity;
 
 /**Activity that holds the fragment for settings/preferences
@@ -18,8 +16,8 @@ import org.usfirst.frc.team25.scouting.ui.views.AppCompatPreferenceActivity;
 
 public class SettingsActivity extends AppCompatPreferenceActivity implements OnSharedPreferenceChangeListener {
 
-    SharedPreferences preferences;
-    SettingsFragment sf;
+    private SharedPreferences preferences;
+    private SettingsFragment sf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

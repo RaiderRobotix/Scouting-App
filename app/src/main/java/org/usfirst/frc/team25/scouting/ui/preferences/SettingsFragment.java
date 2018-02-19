@@ -3,13 +3,11 @@ package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.usfirst.frc.team25.scouting.Constants;
@@ -17,9 +15,8 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
+import org.usfirst.frc.team25.scouting.ui.views.DecimalPickerPreference;
 import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
-
-import java.util.List;
 
 /** List of preferences, as defined in res/xml/preferences.xml
  *
@@ -27,12 +24,21 @@ import java.util.List;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    ListPreference matchType, event, leftStation;
-    Preference deleteFiles, changePass, year, downloadSchedule, game, version; // Buttons that hold a value, but do not prompt a dialogue
-    NumberPickerPreference matchNum, shiftDur;
-    EditTextPreference scoutNameInput;
+    private ListPreference matchType;
+    private ListPreference event;
+    private ListPreference leftStation;
+    private Preference deleteFiles;
+    private Preference changePass;
+    private Preference year;
+    private Preference downloadSchedule;
+    private Preference game;
+    private Preference version; // Buttons that hold a value, but do not prompt a dialogue
+    private NumberPickerPreference matchNum;
+    private NumberPickerPreference shiftDur;
+    private DecimalPickerPreference timerManualInc;
+    private EditTextPreference scoutNameInput;
     CheckBoxPreference useTeamList;
-    Settings set;
+    private Settings set;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -56,6 +62,7 @@ public class SettingsFragment extends PreferenceFragment {
         game = findPreference("game");
         version = findPreference("version");
         leftStation = (ListPreference) findPreference("leftStation");
+        timerManualInc = (DecimalPickerPreference) findPreference("timer_manual_inc");
 
         updateSummary();
 
@@ -66,75 +73,59 @@ public class SettingsFragment extends PreferenceFragment {
         shiftDur.setMaxValue(25);
 
 
-        event.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                matchNum = (NumberPickerPreference) findPreference("match_num");
-                matchNum.setValue(1); //Resets match number
+        event.setOnPreferenceChangeListener((preference, o) -> {
+            matchNum = (NumberPickerPreference) findPreference("match_num");
+            matchNum.setValue(1); //Resets match number
 
-                return true;// A false value means the preference change is not saved
-            }
-        });
-
-        matchType.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                matchNum = (NumberPickerPreference) findPreference("match_num");
-                matchNum.setValue(1);
-                return true;
-            }
+            return true;// A false value means the preference change is not saved
         });
 
 
-        deleteFiles.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                if(set.getHashedPass().equals("DEFAULT"))
-                    Toast.makeText(getActivity(), "Password needs to be set before deleting data", Toast.LENGTH_SHORT ).show();
 
-                else {
-                    Intent i = new Intent(getActivity(), EnterPasswordActivity.class);
-                    startActivity(i);
-                }
-
-                return true;
-            }
+        matchType.setOnPreferenceChangeListener((preference, o) -> {
+            matchNum = (NumberPickerPreference) findPreference("match_num");
+            matchNum.setValue(1);
+            return true;
         });
 
 
-        changePass.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Intent i;
-                if(set.getHashedPass().equals("DEFAULT"))
-                    i = new Intent(getActivity(), SetPasswordActivity.class);
+        deleteFiles.setOnPreferenceClickListener(preference -> {
+            if(set.getHashedPass().equals("DEFAULT"))
+                Toast.makeText(getActivity(), "Password needs to be set before deleting data", Toast.LENGTH_SHORT ).show();
 
-                else i = new Intent(getActivity(), ConfirmPasswordActivity.class);
-
+            else {
+                Intent i = new Intent(getActivity(), EnterPasswordActivity.class);
                 startActivity(i);
-
-                return true;
             }
-        });
 
-        year.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Toast.makeText(getActivity(), "Year automatically updated", Toast.LENGTH_SHORT).show();
-                return true;
-            }
+            return true;
         });
 
 
+        changePass.setOnPreferenceClickListener(preference -> {
+            Intent i;
+            if(set.getHashedPass().equals("DEFAULT"))
+                i = new Intent(getActivity(), SetPasswordActivity.class);
+
+            else i = new Intent(getActivity(), ConfirmPasswordActivity.class);
+
+            startActivity(i);
+
+            return true;
+        });
+
+        year.setOnPreferenceClickListener(preference -> {
+            Toast.makeText(getActivity(), "Year automatically updated", Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
 
-        downloadSchedule.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                new DataDownloader(getActivity()).execute();
 
-                return true;
-            }
+
+        downloadSchedule.setOnPreferenceClickListener(preference -> {
+            new DataDownloader(getActivity()).execute();
+
+            return true;
         });
 
     }
@@ -153,6 +144,7 @@ public class SettingsFragment extends PreferenceFragment {
             year.setSummary(set.getYear());
             set.setYear();
             leftStation.setSummary(leftStation.getValue());
+            timerManualInc.setSummary(set.getTimerManualInc() + " sec");
         }catch(NullPointerException e){
             e.printStackTrace();
         }

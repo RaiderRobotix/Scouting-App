@@ -15,7 +15,7 @@ import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatAct
  */
 public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
 
-    ScoutEntry entry;
+    private ScoutEntry entry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +38,10 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
 
         if(pre!=null && pre.isVisible()){
             Snackbar backWarn = Snackbar.make(findViewById(R.id.add_entry), "Back button disabled", Snackbar.LENGTH_LONG) // Essentially the Snackbar is shown, but its color is changed first
-                    .setAction("DISCARD DATA", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            finish();
-                        }
-                    })
+                    .setAction("DISCARD DATA", view -> finish())
                     .setActionTextColor(getResources().getColor(R.color.raider_accent_yellow));
             View view = backWarn.getView();
-            TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+            TextView tv = view.findViewById(android.support.design.R.id.snackbar_text);
             tv.setTextColor(Color.WHITE);
             backWarn.show();
 

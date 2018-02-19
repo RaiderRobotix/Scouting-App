@@ -10,16 +10,16 @@ import android.widget.NumberPicker;
 /**
  * A {@link android.preference.Preference} that displays a number picker as a dialog.
  */
-public class NumberPickerPreference extends DialogPreference {
+public class DecimalPickerPreference extends DialogPreference {
     private NumberPicker mPicker;
-    private Integer mNumber = 0;
-    private Integer maxValue = 150;
 
-    public NumberPickerPreference(Context context, AttributeSet attrs) {
+    private Integer mNumber = 0;
+
+    public DecimalPickerPreference(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public NumberPickerPreference(Context context, AttributeSet attrs, int defStyle) {
+    public DecimalPickerPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setPositiveButtonText(android.R.string.ok);
         setNegativeButtonText(android.R.string.cancel);
@@ -28,15 +28,20 @@ public class NumberPickerPreference extends DialogPreference {
     @Override
     protected View onCreateDialogView() {
         mPicker = new NumberPicker(getContext());
-        mPicker.setMinValue(1);
-        mPicker.setMaxValue(maxValue); //Automates maximum match number from match list
+        String[] values = {"0.1 sec", "0.2 sec", "0.3 sec", "0.4 sec", "0.5 sec", "0.6 sec", "0.7 sec",
+        "0.8 sec", "0.9 sec", "1 sec","1.1 sec", "1.2 sec", "1.3 sec", "1.4 sec", "1.5 sec", "1.6 sec", "1.7 sec",
+                "1.8 sec", "1.9 sec", "2 sec"};
+        mPicker.setMinValue(0);
+        mPicker.setMaxValue(values.length-1); //Automates maximum match number from match list
         mPicker.setValue(mNumber);
+        mPicker.setDisplayedValues(values);
+        mPicker.setWrapSelectorWheel(false);
+        mPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
         return mPicker;
     }
 
-    public void setMaxValue(int maxValue){
-        this.maxValue = maxValue;
-    }
+
 
     @Override
     protected void onDialogClosed(boolean positiveResult) {
@@ -53,7 +58,7 @@ public class NumberPickerPreference extends DialogPreference {
         setValue(restoreValue ? getPersistedInt(mNumber) : (Integer) defaultValue);
     }
 
-    public void setValue(int value) {
+    private void setValue(int value) {
         if (shouldPersist()) {
             persistInt(value);
         }

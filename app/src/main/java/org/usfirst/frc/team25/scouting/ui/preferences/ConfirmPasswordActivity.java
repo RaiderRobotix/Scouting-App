@@ -19,26 +19,23 @@ public class ConfirmPasswordActivity extends EnterPasswordActivity {
         setTitle("Change Password");
         //noinspection ConstantConditions
         findViewById(R.id.delete_warning).setVisibility(View.INVISIBLE);
-        TextView title = (TextView) findViewById(R.id.enter_password_label);
+        TextView title = findViewById(R.id.enter_password_label);
 
 
         title.setText(R.string.confirm_old_pass);
         delete.setText(R.string.confirm_button);
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String password = passwordField.getText().toString();
+        delete.setOnClickListener(view -> {
+            String password = passwordField.getText().toString();
 
-                if(Settings.newInstance(getBaseContext()).matchesPassword(password)){
-                    finish();
-                    Intent i = new Intent(getBaseContext(), SetPasswordActivity.class);
-                    startActivity(i);
-                }
-
-                else passwordField.setError("Incorrect password");
-
+            if(Settings.newInstance(getBaseContext()).matchesPassword(password)){
+                finish();
+                Intent i = new Intent(getBaseContext(), SetPasswordActivity.class);
+                startActivity(i);
             }
+
+            else passwordField.setError("Incorrect password");
+
         });
     }
 }

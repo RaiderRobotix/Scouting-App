@@ -2,20 +2,15 @@ package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.RadioButton;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
@@ -32,11 +27,13 @@ import java.io.IOException;
 
 public class PrematchFragment extends Fragment implements  EntryFragment{
 
-    Button continueButton;
-    MaterialEditText name, matchNum, teamNum;
-    MaterialBetterSpinner scoutPos;
-    ScoutEntry entry;
-    RadioButton[] startingPositions = new RadioButton[3];
+    private Button continueButton;
+    private MaterialEditText name;
+    private MaterialEditText matchNum;
+    private MaterialEditText teamNum;
+    private MaterialBetterSpinner scoutPos;
+    private ScoutEntry entry;
+    private final RadioButton[] startingPositions = new RadioButton[3];
 
 
     @Override
@@ -61,15 +58,15 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
 
 
         final View view = inflater.inflate(R.layout.fragment_prematch, container, false);
-        continueButton = (Button) view.findViewById(R.id.prematch_continue);
+        continueButton = view.findViewById(R.id.prematch_continue);
 
-        scoutPos = (MaterialBetterSpinner) view.findViewById(R.id.scout_pos_spin);
+        scoutPos = view.findViewById(R.id.scout_pos_spin);
         scoutPos.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.position_options)));
         scoutPos.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
 
-        name = (MaterialEditText) view.findViewById(R.id.scout_name_field);
-        matchNum = (MaterialEditText) view.findViewById(R.id.match_num_field);
-        teamNum = (MaterialEditText) view.findViewById(R.id.team_num_field);
+        name = view.findViewById(R.id.scout_name_field);
+        matchNum = view.findViewById(R.id.match_num_field);
+        teamNum = view.findViewById(R.id.team_num_field);
         startingPositions[0] = view.findViewById(R.id.leftStart);
         startingPositions[1] = view.findViewById(R.id.centerStart);
         startingPositions[2] = view.findViewById(R.id.rightStart);
@@ -92,143 +89,130 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
             }
         });*/
 
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               boolean proceed = true;
-                Settings set = Settings.newInstance(getActivity());
-               // set.setCurrentEvent(event.getText().toString());
-                set.setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
-                if(name.getText().toString().equals("")){
-                    name.setError("Scout name required");
-                    proceed = false;
-                }
+        continueButton.setOnClickListener(view1 -> {
+           boolean proceed = true;
+            Settings set = Settings.newInstance(getActivity());
+           // set.setCurrentEvent(event.getText().toString());
+            set.setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
+            if(name.getText().toString().equals("")){
+                name.setError("Scout name required");
+                proceed = false;
+            }
 
-                if(scoutPos.getText().toString().equals("")){
-                    scoutPos.setError("Scout position required");
-                    proceed = false;
-                }
+            if(scoutPos.getText().toString().equals("")){
+                scoutPos.setError("Scout position required");
+                proceed = false;
+            }
 
-                if(matchNum.getText().toString().equals("")) {
-                    matchNum.setError("Match number required");
-                    proceed = false;
-                }
+            if(matchNum.getText().toString().equals("")) {
+                matchNum.setError("Match number required");
+                proceed = false;
+            }
 
-                else if(Integer.parseInt(matchNum.getText().toString()) < 1 || Integer.parseInt(matchNum.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()){
-                    matchNum.setError("Invalid match number value");
-                    proceed=false;
-                }
+            else if(Integer.parseInt(matchNum.getText().toString()) < 1 || Integer.parseInt(matchNum.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()){
+                matchNum.setError("Invalid match number value");
+                proceed=false;
+            }
 
-               /* if(event.getText().toString().equals("")){
-                    event.setError("Event required");
-                    proceed=false;
-                }*/
+           /* if(event.getText().toString().equals("")){
+                event.setError("Event required");
+                proceed=false;
+            }*/
 
 
-                if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999) {
-                    if (teamNum.getText().toString().equals(""))
-                        teamNum.setError("Team number required");
-                    else teamNum.setError("Invalid team number");
-                    proceed = false;
-                }
-                boolean aButtonSelected = false;
-                for(RadioButton button : startingPositions){
-                    if(button.isChecked())
-                        aButtonSelected = true;
-                }
+            if(teamNum.getText().toString().equals("") || Integer.parseInt(teamNum.getText().toString()) < 1 || Integer.parseInt(teamNum.getText().toString()) > 9999) {
+                if (teamNum.getText().toString().equals(""))
+                    teamNum.setError("Team number required");
+                else teamNum.setError("Invalid team number");
+                proceed = false;
+            }
+            boolean aButtonSelected = false;
+            for(RadioButton button : startingPositions){
+                if(button.isChecked())
+                    aButtonSelected = true;
+            }
 
-                if(proceed&&!aButtonSelected){
-                    proceed = false;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Select robot starting position")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
+            if(proceed&&!aButtonSelected){
+                proceed = false;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select robot starting position")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, id) -> {
+                            //do things
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
 
 
 
-                if(Settings.newInstance(getActivity()).useTeamList()&&proceed){
-                        boolean checkTeamList = false;
-                        try {
-                            if(!Settings.newInstance(getActivity()).getMatchType().equals("Q")) //Non-quals matches don't get checked against match schedule
-                                checkTeamList = true;
-                            else if (!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
-
-                                proceed = false;
-                                new AlertDialog.Builder(getActivity())
-                                        .setTitle("Confirm team number")
-                                        .setMessage("Are you sure that team " + teamNum.getText().toString() + " is " + scoutPos.getText().toString() + " in match " + matchNum.getText().toString() + "?")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                saveState();
-                                                Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
-
-                                                hideKeyboard();
-                                                getFragmentManager().beginTransaction()
-                                                        .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
-                                                        .commit();
-                                            }
-                                        })
-                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                            }
-                                        })
-                                        .create()
-                                        .show();
-
-                            }
-
-                        } catch (IOException e) {
-                            //Match list does not exist; looking for team list
+            if(Settings.newInstance(getActivity()).useTeamList()&&proceed){
+                    boolean checkTeamList = false;
+                    try {
+                        if(!Settings.newInstance(getActivity()).getMatchType().equals("Q")) //Non-quals matches don't get checked against match schedule
                             checkTeamList = true;
-                        }
-                        if(checkTeamList&&!FileManager.isOnTeamlist(teamNum.getText().toString(),getActivity())) {
+                        else if (!FileManager.getTeamPlaying(getActivity(), scoutPos.getText().toString(), Integer.parseInt(matchNum.getText().toString())).equals(teamNum.getText().toString())) {
+
                             proceed = false;
                             new AlertDialog.Builder(getActivity())
                                     .setTitle("Confirm team number")
-                                    .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
-                                            continueButton.callOnClick();
-                                        }
-                                    })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
+                                    .setMessage("Are you sure that team " + teamNum.getText().toString() + " is " + scoutPos.getText().toString() + " in match " + matchNum.getText().toString() + "?")
+                                    .setPositiveButton("Yes", (dialog, which) -> {
+                                        saveState();
+                                        Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
 
-                                        }
+                                        hideKeyboard();
+                                        getFragmentManager().beginTransaction()
+                                                .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
+                                                .commit();
+                                    })
+                                    .setNegativeButton("No", (dialog, which) -> {
+
                                     })
                                     .create()
                                     .show();
+
                         }
-                }
+
+                    } catch (IOException e) {
+                        //Match list does not exist; looking for team list
+                        checkTeamList = true;
+                    }
+                    if(checkTeamList&&!FileManager.isOnTeamlist(teamNum.getText().toString(),getActivity())) {
+                        proceed = false;
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Confirm team number")
+                                .setMessage("Are you sure that team " + teamNum.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
+                                .setPositiveButton("Yes", (dialog, which) -> {
+                                    FileManager.addToTeamList(teamNum.getText().toString(), getActivity());
+                                    continueButton.callOnClick();
+                                })
+                                .setNegativeButton("No", (dialog, which) -> {
+
+                                })
+                                .create()
+                                .show();
+                    }
+            }
 
 
 
-                if(proceed) {
-                    saveState();
+            if(proceed) {
+                saveState();
 
-                    set.autoSetPreferences(entry.getPreMatch());
-                    if(entry.getPreMatch().getTeamNum()==2590)
-                        getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
-                    else if(entry.getPreMatch().getTeamNum()==303)
-                        getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
-                    else if(entry.getPreMatch().getTeamNum()==25)
-                        getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
-                    else getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
-                    hideKeyboard();
-                    getFragmentManager().beginTransaction()
-                            .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
-                            .commit();
+                set.autoSetPreferences(entry.getPreMatch());
+                if(entry.getPreMatch().getTeamNum()==2590)
+                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
+                else if(entry.getPreMatch().getTeamNum()==303)
+                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
+                else if(entry.getPreMatch().getTeamNum()==25)
+                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
+                else getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
+                hideKeyboard();
+                getFragmentManager().beginTransaction()
+                        .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
+                        .commit();
 
-                }
             }
         });
 
@@ -306,7 +290,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     /** Hides the keyboard in the next fragment
      *
      */
-    void hideKeyboard(){
+    private void hideKeyboard(){
         try {
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

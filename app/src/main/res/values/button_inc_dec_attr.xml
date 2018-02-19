@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ButtonIncDec">
+    <declare-styleable name="ButtonIncDecInt">
         <attr name="titlePrompt" format="string"/>
         <attr name="initialValue" format="integer"/>
         <attr name="minValue" format="integer"/>

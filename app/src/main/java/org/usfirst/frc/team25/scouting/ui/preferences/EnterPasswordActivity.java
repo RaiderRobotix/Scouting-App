@@ -1,7 +1,6 @@
 package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -15,7 +14,8 @@ import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatAct
 // Activity in which one password is entered and confirmed, with error text if invalid
 public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity {
 
-    Button cancel, delete;
+    private Button cancel;
+    Button delete;
     MaterialEditText passwordField;
 
     @Override
@@ -24,32 +24,24 @@ public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity
         setTitle("Delete Files");
         setContentView(R.layout.activity_enter_password);
 
-        cancel = (Button) findViewById(R.id.cancel_delete_button);
-        delete = (Button) findViewById(R.id.delete_file_button);
-        passwordField = (MaterialEditText) findViewById(R.id.delete_password_box);
+        cancel = findViewById(R.id.cancel_delete_button);
+        delete = findViewById(R.id.delete_file_button);
+        passwordField = findViewById(R.id.delete_password_box);
 
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        cancel.setOnClickListener(view -> finish());
+
+        delete.setOnClickListener(view -> {
+            String password = passwordField.getText().toString();
+            if(Settings.newInstance(getBaseContext()).matchesPassword(password)){
+
+                FileManager.deleteData(getBaseContext());
+                Toast.makeText(EnterPasswordActivity.this, "Scouting data deleted", Toast.LENGTH_SHORT ).show();
                 finish();
             }
-        });
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String password = passwordField.getText().toString();
-                if(Settings.newInstance(getBaseContext()).matchesPassword(password)){
+            else passwordField.setError("Incorrect password");
 
-                    FileManager.deleteData(getBaseContext());
-                    Toast.makeText(EnterPasswordActivity.this, "Scouting data deleted", Toast.LENGTH_SHORT ).show();
-                    finish();
-                }
-
-                else passwordField.setError("Incorrect password");
-
-            }
         });
     }
 }

@@ -81,10 +81,19 @@ public class TeleOp {
         this.fieldLayout = fieldLayout;
     }
 
-    private float firstCubeTime, cycleTime;
-    private int ownSwitchCubes, scaleCubes, opponentSwitchCubes,
-            exchangeCubes, cubesDropped, climbsAssisted;
-    private boolean parked, attemptRungClimb, successfulRungClimb, otherRobotClimb;
-    private String otherRobotClimbType, fieldLayout;
+    private final float firstCubeTime;
+    private final float cycleTime;
+    private final int ownSwitchCubes;
+    private final int scaleCubes;
+    private final int opponentSwitchCubes;
+    private final int exchangeCubes;
+    private final int cubesDropped;
+    private final int climbsAssisted;
+    private final boolean parked;
+    private final boolean attemptRungClimb;
+    private final boolean successfulRungClimb;
+    private final boolean otherRobotClimb;
+    private final String otherRobotClimbType;
+    private final String fieldLayout;
 
 }

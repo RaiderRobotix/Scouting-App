@@ -46,12 +46,16 @@ public class Autonomous {
         return isCubeDropOpponentScalePlate;
     }
 
-    private int switchCubes, scaleCubes, exchangeCubes, powerCubePilePickup,
-            switchAdjacentPickup, cubesDropped;
-    private boolean autoLineCross;
-    private boolean nullTerritoryFoul;
-    private boolean cubeDropOpponentSwitchPlate;
-    private boolean isCubeDropOpponentScalePlate;
+    private final int switchCubes;
+    private final int scaleCubes;
+    private final int exchangeCubes;
+    private final int powerCubePilePickup;
+    private final int switchAdjacentPickup;
+    private final int cubesDropped;
+    private final boolean autoLineCross;
+    private final boolean nullTerritoryFoul;
+    private final boolean cubeDropOpponentSwitchPlate;
+    private final boolean isCubeDropOpponentScalePlate;
 
     public Autonomous(int switchCubes, int scaleCubes, int exchangeCubes, int powerCubePilePickup, int switchAdjacentPickup,
                       int cubesDropped, boolean autoLineCross, boolean nullTerritoryFoul, boolean cubeDropOpponentSwitchPlate, boolean isCubeDropOpponentScalePlate) {

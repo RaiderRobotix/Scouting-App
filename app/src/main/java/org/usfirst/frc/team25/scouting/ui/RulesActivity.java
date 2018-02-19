@@ -14,7 +14,7 @@ import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatAct
 public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
 
     //From the PDFView library
-    PDFView rulesView;
+    private PDFView rulesView;
 
     //File name of the PDF file, placed in the assets folder
 

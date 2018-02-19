@@ -45,6 +45,7 @@
         <item>"Mid-Atlantic District Championship</item>
         <item>"FIRST Championship"</item>
         <item>"Brunswick Eruption"</item>
+        <item>"Week 0"</item>
     </string-array>
 
     <string-array name="event_options_values">
@@ -53,6 +54,7 @@
         <item>"mrcmp"</item>
         <item>"cars"</item>
         <item>"njbe"</item>
+        <item>"week0</item>
     </string-array>
 
     <!--Match Type Spinner Options-->

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,16 +28,16 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
 
-    ScoutEntry entry;
-    MaterialEditText robotComment;
-    RelativeLayout robotCommentView;
-    ArrayList<CheckBox> robotQuickComments;
-    Button finish;
-    CheckBox[] focusButtons = new CheckBox[5];
-    RadioButton[] comparisonButtons = new RadioButton[3];
-    RadioButton[] pickNumberButtons = new RadioButton[3];
+    private ScoutEntry entry;
+    private MaterialEditText robotComment;
+    private RelativeLayout robotCommentView;
+    private ArrayList<CheckBox> robotQuickComments;
+    private Button finish;
+    private final CheckBox[] focusButtons = new CheckBox[5];
+    private final RadioButton[] comparisonButtons = new RadioButton[3];
+    private final RadioButton[] pickNumberButtons = new RadioButton[3];
 
-    final String[] ROBOT_COMMENT_VALUES = {
+    private final String[] ROBOT_COMMENT_VALUES = {
             "Cube intake/pickup",
             "Shoots cubes",
             "Slow climb",
@@ -75,11 +74,11 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_post_match, container, false);
 
-        robotComment = (MaterialEditText) view.findViewById(R.id.robotDriverComment);
+        robotComment = view.findViewById(R.id.robotDriverComment);
 
-        robotCommentView = (RelativeLayout) view.findViewById(R.id.robotDriverCommentView);
+        robotCommentView = view.findViewById(R.id.robotDriverCommentView);
 
-        finish = (Button) view.findViewById(R.id.post_finish);
+        finish = view.findViewById(R.id.post_finish);
         focusButtons[0] =  view.findViewById(R.id.own_switch_focus);
         focusButtons[1] = view.findViewById(R.id.opponent_switch_focus);
         focusButtons[2] = view.findViewById(R.id.scale_focus);
@@ -102,96 +101,87 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             view.findViewById(R.id.prev_team_comparison_group).setVisibility(View.GONE);
         }
 
-        robotQuickComments = new ArrayList<CheckBox>();
+        robotQuickComments = new ArrayList<>();
 
         generateRobotQuickComments();
 
         autoPopulate();
 
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean focusChecked = false;
-                boolean comparisonSelected = false;
-                boolean pickNumberSelected = false;
+        finish.setOnClickListener(view1 -> {
+            boolean focusChecked = false;
+            boolean comparisonSelected = false;
+            boolean pickNumberSelected = false;
 
-                for(CheckBox cb : focusButtons)
-                    if(cb.isChecked())
-                        focusChecked = true;
-                for(RadioButton button : comparisonButtons)
-                    if(button.isChecked())
-                        comparisonSelected = true;
-                for(RadioButton button : pickNumberButtons)
-                    if(button.isChecked())
-                        pickNumberSelected = true;
+            for(CheckBox cb : focusButtons)
+                if(cb.isChecked())
+                    focusChecked = true;
+            for(RadioButton button : comparisonButtons)
+                if(button.isChecked())
+                    comparisonSelected = true;
+            for(RadioButton button : pickNumberButtons)
+                if(button.isChecked())
+                    pickNumberSelected = true;
 
-                if(!focusChecked) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Select the robot's focus for this match")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-
-                else if(!comparisonSelected){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Compare the robot to the previous one or select no opinion")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-
-                else if(!pickNumberSelected) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Select which pick this robot would be")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-
-                else{
-                    saveState();
-                    final PostMatch pm = entry.getPostMatch();
-                    pm.finalizeComment();
-                    entry.setPostMatch(pm);
-
-                    Settings set = Settings.newInstance(getActivity());
-
-                    if (set.getMatchType().equals("P"))
-                        Toast.makeText(getActivity().getBaseContext(), "Practice match data NOT saved", Toast.LENGTH_LONG).show();
-                    else {
-                        FileManager.saveData(entry, getActivity());
-                        Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
-                    }
-
-                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
-                    set.setMatchNum(set.getMatchNum() + 1);
-                    getActivity().finish();
-                }
-
-
+            if(!focusChecked) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select the robot's focus for this match")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, id) -> {
+                            //do things
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
+
+            else if(!comparisonSelected){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Compare the robot to the previous one or select no opinion")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, id) -> {
+                            //do things
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+            else if(!pickNumberSelected) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select which pick this robot would be")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, id) -> {
+                            //do things
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+            else{
+                saveState();
+                final PostMatch pm = entry.getPostMatch();
+                pm.finalizeComment();
+                entry.setPostMatch(pm);
+
+                Settings set = Settings.newInstance(getActivity());
+
+                if (set.getMatchType().equals("P"))
+                    Toast.makeText(getActivity().getBaseContext(), "Practice match data NOT saved", Toast.LENGTH_LONG).show();
+                else {
+                    FileManager.saveData(entry, getActivity());
+                    Toast.makeText(getActivity().getBaseContext(), "Match data saved", Toast.LENGTH_LONG).show();
+                }
+
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
+                set.setMatchNum(set.getMatchNum() + 1);
+                getActivity().finish();
+            }
+
+
         });
 
         return view;
     }
 
-    void generateRobotQuickComments(){
+    private void generateRobotQuickComments(){
 
         int prevId = -1;
 
@@ -259,12 +249,12 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
     public void saveState(){
-        String focus = "";
+        StringBuilder focus = new StringBuilder();
         for(CheckBox cb : focusButtons)
             if(cb.isChecked()){
-                if(!focus.equals(""))
-                    focus+="; ";
-                focus += (String) cb.getText();
+                if(!focus.toString().equals(""))
+                    focus.append("; ");
+                focus.append((String) cb.getText());
             }
         String comparison = "";
         String[] comparisonValues = {">", "<", "="};
@@ -278,7 +268,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 pickNumber=2-i;
 
        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), robotQuickComments,
-               ROBOT_COMMENT_VALUES, focus, entry.getPreMatch().getTeamNum(),
+               ROBOT_COMMENT_VALUES, focus.toString(), entry.getPreMatch().getTeamNum(),
                FileManager.getPrevTeamNumber(getActivity()), comparison, pickNumber));
     }
 

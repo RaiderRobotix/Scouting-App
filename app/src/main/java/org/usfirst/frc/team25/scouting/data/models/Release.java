@@ -14,8 +14,8 @@ public class Release {
         return assets;
     }
 
-    String tag_name;
-    Asset[] assets;
+    private String tag_name;
+    private Asset[] assets;
 
     public class Asset{
         public String getBrowser_download_url() {

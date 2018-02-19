@@ -2,7 +2,6 @@ package org.usfirst.frc.team25.scouting.data;
 
 import android.content.Context;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
@@ -81,7 +80,7 @@ public class FileManager {
         return "Data - " + set.getScoutPos() + " - " +set.getYear()+set.getCurrentEvent() + ".json";
     }
 
-    public static File getDataFilePath(Context c){
+    private static File getDataFilePath(Context c){
         return new File(getDirectory(), getDataFilename(c));
     }
 
@@ -215,7 +214,7 @@ public class FileManager {
     public static boolean isOnTeamlist(String teamNum, Context c){
         try{
 
-            String existingData = "";
+            StringBuilder existingData = new StringBuilder();
 
             File file = getTeamListFilePath(c);
 
@@ -226,17 +225,17 @@ public class FileManager {
             try {
                 FileInputStream inputStream = new FileInputStream(file);
                 BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
-                String row = "";
+                String row;
 
                 while ((row = reader.readLine()) != null)
-                    existingData += row;
+                    existingData.append(row);
                 reader.close();
             }catch (IOException e){
                 Log.i("file export", "no teamlist available");
             }
 
             //Team list is a single row, comma separated file of team numbers
-            String[] teamList = existingData.split(",");
+            String[] teamList = existingData.toString().split(",");
             for(String team : teamList)
                 if(team.equals(teamNum))
                     return true;
@@ -285,19 +284,14 @@ public class FileManager {
             writer.close();
             Log.i("file export", "File written successfully");
 
-            MediaScannerConnection.scanFile(c, new String[]{filePath.toString()}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                @Override
-                public void onScanCompleted(String s, Uri uri) {
-                    Log.i("scan", "media scan completed");
-                }
-            }); // Refresh PC connection to view file
+            MediaScannerConnection.scanFile(c, new String[]{filePath.toString()}, null, (s, uri) -> Log.i("scan", "media scan completed")); // Refresh PC connection to view file
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
 
-    public static File getDirectory(){
+    private static File getDirectory(){
         File directory =  new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
         if(!directory.exists())
             directory.mkdir();
@@ -315,7 +309,7 @@ public class FileManager {
         Type listEntries = new TypeToken<List<ScoutEntry>>(){}.getType(); //Example for deserializing an ArrayList of objects
 
 
-            String existingData = "";
+            StringBuilder existingData = new StringBuilder();
 
             File file = getDataFilePath(c);
 
@@ -327,15 +321,15 @@ public class FileManager {
 
 
                 while ((row = reader.readLine()) != null)
-                    existingData += row;
+                    existingData.append(row);
                 reader.close();
             }catch (IOException e){
                 Log.i("file export", "no previously existing data");
             }
 
-            if(!existingData.equals("")) {
+            if(!existingData.toString().equals("")) {
                 Log.i("file export", "Attempting to parse data");
-                entries = gson.fromJson(existingData, listEntries);
+                entries = gson.fromJson(existingData.toString(), listEntries);
             }
 
             entries.add(entry);
@@ -355,7 +349,7 @@ public class FileManager {
         }.getType(); //Example for deserializing an ArrayList of objects
 
 
-        String existingData = "";
+        StringBuilder existingData = new StringBuilder();
 
         File file = getDataFilePath(c);
 
@@ -367,15 +361,15 @@ public class FileManager {
 
 
             while ((row = reader.readLine()) != null)
-                existingData += row;
+                existingData.append(row);
             reader.close();
         } catch (IOException e) {
             return 0;
         }
 
-        if (!existingData.equals("")) {
+        if (!existingData.toString().equals("")) {
             Log.i("file export", "Attempting to parse data");
-            entries = gson.fromJson(existingData, listEntries);
+            entries = gson.fromJson(existingData.toString(), listEntries);
             return entries.get(entries.size()-1).getPreMatch().getTeamNum();
         }
         else return 0;

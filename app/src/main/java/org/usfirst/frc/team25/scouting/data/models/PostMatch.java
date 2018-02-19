@@ -22,7 +22,7 @@ public class PostMatch {
         this.teamOneCompare = teamOneCompare;
         this.teamTwoCompare = teamTwoCompare;
         this.comparison = comparison;
-        robotQuickCommentSelections = new HashMap<>();;
+        robotQuickCommentSelections = new HashMap<>();
         this.pickNumber = pickNumber;
 
     }
@@ -51,8 +51,10 @@ public class PostMatch {
         return robotQuickCommentValues;
     }
 
-    private int teamOneCompare, teamTwoCompare, pickNumber;
-    private String comparison;
+    private final int teamOneCompare;
+    private final int teamTwoCompare;
+    private final int pickNumber;
+    private final String comparison;
     private String robotComment;
 
 
@@ -64,18 +66,18 @@ public class PostMatch {
         this.focus = focus;
     }
 
-    String focus;
-    HashMap<String, Boolean> robotQuickCommentSelections;
+    private String focus;
+    private final HashMap<String, Boolean> robotQuickCommentSelections;
 
 
-    public transient ArrayList<CheckBox> robotQuickComments;
-    transient String[] robotQuickCommentValues;
+    private transient ArrayList<CheckBox> robotQuickComments;
+    private final transient String[] robotQuickCommentValues;
 
     public String getRobotComment() {
         return robotComment;
     }
 
-    public void setRobotComment(String robotComment) {
+    private void setRobotComment(String robotComment) {
         this.robotComment = robotComment;
     }
 
@@ -96,15 +98,15 @@ public class PostMatch {
                 if(cb.getText().toString().equals(value))
                     robotQuickCommentSelections.put(value, cb.isChecked());
 
-        String newRobotComment = "";
+        StringBuilder newRobotComment = new StringBuilder();
 
         for(int i = 0; i < robotComment.length(); i++) {
             if(robotComment.charAt(i)==','||robotComment.charAt(i)=='\n') //prevent csv problems
-                newRobotComment+=";";
-            else newRobotComment += robotComment.charAt(i);
+                newRobotComment.append(";");
+            else newRobotComment.append(robotComment.charAt(i));
         }
 
-        setRobotComment(newRobotComment);
+        setRobotComment(newRobotComment.toString());
 
     }
 

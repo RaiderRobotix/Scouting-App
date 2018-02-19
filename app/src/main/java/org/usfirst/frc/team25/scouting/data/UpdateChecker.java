@@ -3,24 +3,17 @@ package org.usfirst.frc.team25.scouting.data;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.kohsuke.github.GHRelease;
-import org.kohsuke.github.GitHub;
 import org.usfirst.frc.team25.scouting.Constants;
 import org.usfirst.frc.team25.scouting.data.models.Release;
-import org.usfirst.frc.team25.scouting.ui.MenuActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,9 +30,9 @@ import java.net.URL;
 
 public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
 
-    Context context;
+    private final Context context;
 
-    Release release;
+    private Release release;
 
     public UpdateChecker(Context c) {
         this.context = c;
@@ -52,17 +45,8 @@ public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
             new AlertDialog.Builder(context)
                     .setTitle("App update available")
                     .setMessage("A new version of the app is available. Would you like to update it now?")
-                    .setPositiveButton("Get update", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            new AppDownloader(context, release.getAssets()[0]).execute();
-                        }
-
-                    })
-                    .setNegativeButton("Remind me later", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context, "Reminder set for next app launch", Toast.LENGTH_SHORT).show();
-                        }
-                    })
+                    .setPositiveButton("Get update", (dialog, which) -> new AppDownloader(context, release.getAssets()[0]).execute())
+                    .setNegativeButton("Remind me later", (dialog, which) -> Toast.makeText(context, "Reminder set for next app launch", Toast.LENGTH_SHORT).show())
                     .create()
                     .show();
     }
@@ -106,10 +90,10 @@ public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
 
 
 class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
-    ProgressDialog bar;
-    Context context;
-    String location;
-    Release.Asset asset;
+    private ProgressDialog bar;
+    private final Context context;
+    private String location;
+    private final Release.Asset asset;
 
     AppDownloader(Context c, Release.Asset asset){
         this.context = c;
@@ -135,7 +119,7 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
         bar.setIndeterminate(false);
         bar.setMax(100);
         bar.setProgress(progress[0]);
-        String msg = "";
+        String msg;
         if(progress[0]>99){
 
             msg="Finishing... ";
@@ -184,13 +168,12 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
 
             byte[] buffer = new byte[1024];
 
-            int len1 = 0;
+            int len1;
             int per = 0;
             int downloaded = 0;
             while ((len1 = is.read(buffer)) != -1) {
                 fos.write(buffer, 0, len1);
                 downloaded += len1;
-                per = (int) (downloaded * 100 / total_size);
             }
             fos.close();
             is.close();
@@ -205,7 +188,7 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
         }
     }
 
-    void openNewVersion(java.lang.String location, java.lang.String fileName) {
+    private void openNewVersion(java.lang.String location, java.lang.String fileName) {
         Uri uri = Uri.parse("file://" + location + fileName);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
