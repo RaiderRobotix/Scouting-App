@@ -13,12 +13,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.gson.Gson;
 
 import org.kohsuke.github.GHRelease;
 import org.kohsuke.github.GitHub;
@@ -27,16 +31,21 @@ import org.usfirst.frc.team25.scouting.Constants;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
+import org.usfirst.frc.team25.scouting.data.UpdateChecker;
+import org.usfirst.frc.team25.scouting.data.models.Release;
 import org.usfirst.frc.team25.scouting.ui.dataentry.AddEntryActivity;
 import org.usfirst.frc.team25.scouting.ui.preferences.SettingsActivity;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 
 /** The main activity of the application
  *
@@ -45,7 +54,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
     private ImageButton addEntry, share, rules, settings;
     private TextView status;
-    ProgressDialog bar;
+
 
 
 
@@ -54,7 +63,8 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
         //Phone layout has fixed scaling of text and buttons
        if (!isTablet(getBaseContext()))
@@ -124,7 +134,9 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
                 startActivity(i);
             }
         });
-        checkUpdate();
+
+
+        new UpdateChecker(MenuActivity.this).execute();
         verifyStoragePermissions(this);
 
     }
@@ -156,156 +168,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
         }
     }
 
-    public void checkUpdate(){
-       try {
 
-           GitHub gh = GitHub.connect("team25scoutingsystem@gmail.com", "BarnacleBoy25");
-
-            GHRelease latestRelease = gh.getRepository(Constants.REPOSITORY_NAME).getLatestRelease();
-            Toast.makeText(getApplicationContext(), latestRelease.getUrl().toString(), Toast.LENGTH_LONG);
-            if(!latestRelease.getTagName().equals("v"+Constants.VERSION))
-                new AlertDialog.Builder(getApplicationContext())
-                        .setTitle("App update available")
-                        .setMessage("A new version of the app is available. Would you like to update it now?")
-                        .setPositiveButton("Get update", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                new DownloadNewVersion().execute();
-                            }
-                        })
-                        .setNegativeButton("Remind me later", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
-                        .create()
-                        .show();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    class DownloadNewVersion extends AsyncTask<String,Integer,Boolean> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            bar = new ProgressDialog(MenuActivity.this);
-            bar.setCancelable(false);
-
-            bar.setMessage("Downloading...");
-
-            bar.setIndeterminate(true);
-            bar.setCanceledOnTouchOutside(false);
-            bar.show();
-
-        }
-
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-
-            bar.setIndeterminate(false);
-            bar.setMax(100);
-            bar.setProgress(progress[0]);
-            String msg = "";
-            if(progress[0]>99){
-
-                msg="Finishing... ";
-
-            }else {
-
-                msg="Downloading... "+progress[0]+"%";
-            }
-            bar.setMessage(msg);
-
-        }
-        @Override
-        protected void onPostExecute(Boolean result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-
-            bar.dismiss();
-
-            if(result){
-
-                Toast.makeText(getApplicationContext(),"Update Done",
-                        Toast.LENGTH_SHORT).show();
-
-            }else{
-
-                Toast.makeText(getApplicationContext(),"Error: Try Again",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-
-        }
-
-        @Override
-        protected Boolean doInBackground(String... arg0) {
-            Boolean flag = false;
-
-            try {
-                GitHub gh = GitHub.connect();
-                GHRelease latestRelease = gh.getRepository(Constants.REPOSITORY_NAME).getLatestRelease();
-                URL url = latestRelease.getAssets().get(0).getUrl();
-
-                HttpURLConnection c = (HttpURLConnection) url.openConnection();
-                c.setRequestMethod("GET");
-                c.setDoOutput(true);
-                c.connect();
-
-
-                String PATH = Environment.getExternalStorageDirectory()+"/Download/";
-                File file = new File(PATH);
-                file.mkdirs();
-
-                String fileName = latestRelease.getAssets().get(0).getName();
-
-                File outputFile = new File(file,fileName);
-
-                if(outputFile.exists()){
-                    outputFile.delete();
-                }
-
-                FileOutputStream fos = new FileOutputStream(outputFile);
-                InputStream is = c.getInputStream();
-
-                int total_size = 1431692;//size of apk
-
-                byte[] buffer = new byte[1024];
-
-                int len1 = 0;
-                int per = 0;
-                int downloaded=0;
-                while ((len1 = is.read(buffer)) != -1) {
-                    fos.write(buffer, 0, len1);
-                    downloaded +=len1;
-                    per = (int) (downloaded * 100 / total_size);
-                }
-                fos.close();
-                is.close();
-
-                openNewVersion(PATH, fileName);
-
-                flag = true;
-            } catch (Exception e) {
-                flag = false;
-            }
-            return flag;
-
-        }
-
-    }
-
-    void openNewVersion(String location, String fileName) {
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(location + fileName)),
-                "application/vnd.android.package-archive");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
-    }
 
 
 

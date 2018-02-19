@@ -28,6 +28,15 @@
         <activity android:name=".ui.preferences.SetPasswordActivity" />
         <activity android:name=".ui.preferences.ConfirmPasswordActivity" />
         <activity android:name=".ui.dataentry.AddEntryActivity"/>
+        <provider
+            android:name=".data.models.GenericFileProvider"
+            android:authorities="${applicationId}.data.models.GenericFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>
