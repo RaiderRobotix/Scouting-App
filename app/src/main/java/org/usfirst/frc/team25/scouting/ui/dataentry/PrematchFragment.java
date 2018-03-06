@@ -290,7 +290,7 @@ public class PrematchFragment extends Fragment implements  EntryFragment{
     /** Hides the keyboard in the next fragment
      *
      */
-    private void hideKeyboard(){
+    public void hideKeyboard(){
         try {
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
