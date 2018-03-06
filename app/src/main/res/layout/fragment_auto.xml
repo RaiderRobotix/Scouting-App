@@ -32,7 +32,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Cubes on own switch plate"
+            app:titlePrompt="Own switch plate cubes"
             app:initialValue="0"
             android:layout_below="@id/reach_auto_line"
             android:id="@+id/own_switch_auto"/>
@@ -41,7 +41,7 @@
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Cubes on own scale plate"
+            app:titlePrompt="Own scale plate cubes"
             app:initialValue="0"
             android:layout_below="@id/own_switch_auto"
             android:id="@+id/own_scale_auto"/>
@@ -50,7 +50,7 @@
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Cubes delivered to exchange"
+            app:titlePrompt="Exchange cubes"
             app:initialValue="0"
             android:layout_below="@id/own_scale_auto"
             android:id="@+id/exchange_auto"
@@ -60,7 +60,7 @@
             android:padding="@dimen/default_padding_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titlePrompt="Cubes dropped on field"
+            app:titlePrompt="Accidentally dropped cubes"
             app:initialValue="0"
             android:layout_below="@id/exchange_auto"
             android:id="@+id/cubes_dropped_auto"

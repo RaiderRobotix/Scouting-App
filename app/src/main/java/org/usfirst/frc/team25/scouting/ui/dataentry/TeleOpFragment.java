@@ -41,10 +41,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
     private ButtonTimer cycleTime;
     private ButtonTimer timerIncAmount;
     private EditText climbOtherRobotTypeOtherField;
-    private final RadioButton[] climbOtherRobotType = new RadioButton[4];
+    private final RadioButton[] climbOtherRobotType = new RadioButton[5];
     private int fieldConfigIndex = 0;
-    private final int[] redLeftFieldConfig = {R.drawable.red_left_lll, R.drawable.red_left_lrl,
-            R.drawable.red_left_rlr, R.drawable.red_left_rrr};
+    private final int[] redLeftFieldConfig = {R.drawable.red_left_rrr, R.drawable.red_left_rlr,
+            R.drawable.red_left_lrl, R.drawable.red_left_lll};
     private final int[] blueLeftFieldConfig = {R.drawable.blue_left_rrr, R.drawable.blue_left_rlr,
             R.drawable.blue_left_lrl, R.drawable.blue_left_lll};
     private RadioGroup otherRobotTypeGroup;
@@ -95,7 +95,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         climbOtherRobotType[0] = view.findViewById(R.id.ramp_bot_type);
         climbOtherRobotType[1]=view.findViewById(R.id.robot_rung_type);
         climbOtherRobotType[2]=view.findViewById(R.id.iron_cross_type);
-        climbOtherRobotType[3]=view.findViewById(R.id.other_type);
+        climbOtherRobotType[3]=view.findViewById(R.id.single_lift_type);
+        climbOtherRobotType[4]=view.findViewById(R.id.other_type);
         otherRobotTypeGroup = view.findViewById(R.id.climb_other_robot_type_group);
         climbOtherRobotTypeOtherField = view.findViewById(R.id.other_robot_type_text);
         timerIncAmount = view.findViewById(R.id.timer_manual_inc);
@@ -242,7 +243,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
             climbOtherRobotTypeStr = climbOtherRobotTypeOtherField.getText().toString();
 
         //Always from red driver POV, depicting red plates
-        String[] fieldLayoutValues = {"lll", "lrl", "rlr", "rrr"};
+        String[] fieldLayoutValues = {"RRR", "RLR", "LRL", "LLL"};
 
         entry.setTeleOp(new TeleOp(firstCubeTime.getValue(), cycleTime.getValue(), ownSwitchCubes.getValue(),
                scaleCubes.getValue(), opponentSwtichCubes.getValue(), exchangeCubes.getValue(), cubesDropped.getValue(),
@@ -282,7 +283,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
                 }
             }
 
-            String[] fieldLayoutValues = {"lll", "lrl", "rlr", "rrr"};
+            String[] fieldLayoutValues = {"RRR", "RLR", "LRL", "LLL"};
 
             fieldConfigIndex = 0;
 

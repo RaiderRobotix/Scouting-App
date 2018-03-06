@@ -38,15 +38,15 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
 
     private final String[] ROBOT_COMMENT_VALUES = {
-            "Cube intake/pickup",
+            "No cube intake",
             "Shoots cubes",
-            "Slow climb",
+            "Slow to climb",
             "Ramp bot",
             "Has rung on robot",
-            "Iron cross robot",
+            "Can lift other robots",
             "Plays strategically",
             "More cubes unneeded",
-            "Attains cubes slowly",
+            "Climb/park unneeded (levitate used and others climbed)",
             "Played defense effectively",
             "Lost communication",
             "Tipped over",

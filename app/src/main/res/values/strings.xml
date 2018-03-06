@@ -61,17 +61,17 @@
     <string-array name="match_types">
         <item>"Practice"</item>
         <item>"Qualifier"</item>
-        <item>"Quarter Final"</item>
+        <!--<item>"Quarter Final"</item>
         <item>"Semi Final"</item>
-        <item>"Final"</item>
+        <item>"Final"</item>-->
     </string-array>
 
     <string-array name="match_types_values">
         <item>"P"</item>
         <item>"Q"</item>
-        <item>"QF"</item>
+        <!--<item>"QF"</item>
         <item>"SF"</item>
-        <item>"F"</item>
+        <item>"F"</item>-->
     </string-array>
 
     <string-array name="alliance_type">
