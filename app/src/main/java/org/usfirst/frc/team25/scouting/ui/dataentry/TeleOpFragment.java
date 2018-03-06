@@ -184,8 +184,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         continueButton.setOnClickListener(view1 -> {
             if(climbsOtherRobots.isChecked()&&!(climbOtherRobotType[0].isChecked() ||climbOtherRobotType[1].isChecked()
-                    ||climbOtherRobotType[2].isChecked() ||
-                    (climbOtherRobotType[3].isChecked()&&!climbOtherRobotTypeOtherField.getText().toString().isEmpty()))){
+                    ||climbOtherRobotType[2].isChecked() ||climbOtherRobotType[3].isChecked() ||
+                    (climbOtherRobotType[4].isChecked()&&!climbOtherRobotTypeOtherField.getText().toString().isEmpty()))){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select or fill in type of robot climbed on")
                         .setCancelable(false)

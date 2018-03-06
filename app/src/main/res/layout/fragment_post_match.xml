@@ -132,7 +132,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="For our playoff alliance, I would rather pick"
+                android:text="For playoffs, I would rather pick"
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"
 
@@ -191,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:text="A good second/third pick"
+                android:text="A good second pick"
                 android:textSize="18sp"
                 android:padding="8dp"
                 android:id="@+id/second_pick"/>
