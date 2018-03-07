@@ -82,7 +82,7 @@ public class TeleOp {
     }
 
     private final float firstCubeTime;
-    private final float cycleTime;
+    private transient final float cycleTime;
     private final int ownSwitchCubes;
     private final int scaleCubes;
     private final int opponentSwitchCubes;

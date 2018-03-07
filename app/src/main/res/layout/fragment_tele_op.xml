@@ -55,7 +55,7 @@
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
 
-                app:titlePrompt="Cubes on own switch" />
+                app:titlePrompt="Own switch cubes" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/scale_tele"
@@ -64,7 +64,7 @@
                 android:layout_below="@id/own_switch_tele"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Cubes on scale" />
+                app:titlePrompt="Scale cubes" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/opponent_switch_tele"
@@ -73,7 +73,7 @@
                 android:layout_below="@id/scale_tele"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Cubes on opponent switch" />
+                app:titlePrompt="Opponent switch cubes" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/exchange_tele"
@@ -82,7 +82,7 @@
                 android:layout_below="@id/opponent_switch_tele"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Cubes delivered to exchange" />
+                app:titlePrompt="Exchange cubes" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/cubes_dropped_tele"
@@ -91,7 +91,7 @@
                 android:layout_below="@id/exchange_tele"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Cubes dropped accidentally" />
+                app:titlePrompt="Accidentally dropped cubes" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
                 android:id="@+id/cycle_time"
@@ -100,6 +100,7 @@
                 android:layout_below="@id/cubes_dropped_tele"
                 android:padding="8dp"
                 app:buttonIncDecAmount="0.5"
+                android:visibility="gone"
                 app:titlePromptTimer="Average cycle time" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
@@ -220,7 +221,14 @@
                     android:padding="8dp"
                     android:text="Iron cross"
                     android:textSize="18sp" />
-
+                <RadioButton
+                    android:id="@+id/single_lift_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:padding="8dp"
+                    android:text="Single lift"
+                    android:textSize="18sp" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
