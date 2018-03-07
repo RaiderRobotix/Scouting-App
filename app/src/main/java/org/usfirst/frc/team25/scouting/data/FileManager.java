@@ -99,6 +99,15 @@ public class FileManager {
         return new File(getDirectory(), getTeamListFilename(c));
     }
 
+    private static String getScoreBreakdownFilename(Context c){
+        Settings set = Settings.newInstance(c);
+        return "ScoreBreakdown - " +set.getYear()+set.getCurrentEvent() + ".json";
+    }
+
+    public static File getScoreBreakdownFilePath(Context c){
+        return new File(getDirectory(), getScoreBreakdownFilename(c));
+    }
+
     /** Generates the filename for the match list, based on the current event
      *  Should be consistent with the desktop client
      *

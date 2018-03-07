@@ -5,10 +5,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.thebluealliance.api.v3.TBA;
 import com.thebluealliance.api.v3.models.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,7 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
     private final boolean matchScheduleExists;
     private final File teamListFilePath;
     private final File matchListFilePath;
+    private final File scoreBreakdownFilePath;
 
     public DataDownloader(Context c){
         this.c = c;
@@ -38,9 +41,10 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
         teamListFilePath = FileManager.getTeamListFilePath(c);
         matchScheduleExists = FileManager.matchScheduleExists(c);
         matchListFilePath = FileManager.getMatchListFilePath(c);
+        scoreBreakdownFilePath = FileManager.getScoreBreakdownFilePath(c);
     }
 
-    private String getTeamList(String eventCode) {
+    private String getTeamList(String eventCode) throws IOException {
         StringBuilder teamList = new StringBuilder();
         ArrayList<Team> teams = Sorters.sortByTeamNum(new ArrayList<>(Arrays.asList(new TBA(apiKey).eventRequest.getTeams(eventCode))));
         for (Team team : teams)
@@ -54,7 +58,7 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
      * Each line contains comma delimited match number, then team numbers for red alliance, then blue alliance.
      * @param eventCode Fully qualified event key, i.e. "2016pahat" for Hatboro-Horsham in 2016
      */
-    private String getMatchList(String eventCode) {
+    private String getMatchList(String eventCode) throws IOException{
         StringBuilder matchList = new StringBuilder();
         for(Match match : Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode)))))){
 
@@ -72,6 +76,10 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
 
         return matchList.toString();
 
+    }
+
+    private String getEventMatchData(String eventCode) throws IOException{
+        return new Gson().toJson(Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<Match>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode))))));
     }
 
     @Override
@@ -106,6 +114,8 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                     eventCode = currentYear + "cars";
                 if (currentEvent.equals("Week 0"))
                     eventCode = currentYear + "week0";
+                if (currentEvent.equals("Brunswick Eruption"))
+                    eventCode = currentYear + "njbe";
 
                 try {
                     TBA tba = new TBA(apiKey);
@@ -116,6 +126,12 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                 }
 
                 if (!eventCode.equals("")) {
+
+                    try{
+                        FileManager.saveFile(scoreBreakdownFilePath, getEventMatchData(eventCode), c);
+                    }catch (IOException e){
+
+                    }
 
                     if (!teamListExists) {
                         String teamList = getTeamList(eventCode);
@@ -131,7 +147,9 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
                             FileManager.saveFile(matchListFilePath, matchList, c);
                             return "Match schedule downloaded";
                         }
-                    } else return "Match schedule already exists";
+                    }
+
+                    else return "Match schedule already exists";
 
 
                 }
