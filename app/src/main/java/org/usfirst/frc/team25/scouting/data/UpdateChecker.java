@@ -73,7 +73,7 @@ public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
             this.release = new Gson().fromJson(respStr, Release.class);
 
 
-            if (!release.getTag_name().equals("v" + Constants.VERSION))
+            if (!release.getTag_name().equals("v" + Constants.VERSION_NUMBER))
                 return true;
             else new File(Environment.getExternalStorageDirectory() + "/Download/" + release.getAssets()[0].getName()).delete();
 

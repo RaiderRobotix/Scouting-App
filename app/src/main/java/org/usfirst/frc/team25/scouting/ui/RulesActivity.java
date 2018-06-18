@@ -16,9 +16,6 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
     //From the PDFView library
     private PDFView rulesView;
 
-    //File name of the PDF file, placed in the assets folder
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +31,6 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
                 .swipeVertical(true)
                 .load();
 
-            //Library object for easy navigation
-           /* ScrollBar scrollBar = (ScrollBar) findViewById(R.id.scrollBar);
-            rulesView.setScrollBar(scrollBar);*/
         }catch(NullPointerException e){
 
             Toast.makeText(RulesActivity.this, "PDF File not found", Toast.LENGTH_LONG ).show();
@@ -47,6 +41,6 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setTitle(Constants.GAME + " Rules");
+        setTitle(Constants.GAME_NAME + " Rules");
     }
 }

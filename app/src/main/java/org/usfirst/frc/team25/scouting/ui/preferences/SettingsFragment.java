@@ -66,8 +66,8 @@ public class SettingsFragment extends PreferenceFragment {
 
         updateSummary();
 
-        game.setSummary(Constants.GAME);
-        version.setSummary("v"+Constants.VERSION);
+        game.setSummary(Constants.GAME_NAME);
+        version.setSummary("v"+Constants.VERSION_NUMBER);
 
         matchNum.setMaxValue(Settings.newInstance(getActivity()).getMaxMatchNum());
         shiftDur.setMaxValue(25);
