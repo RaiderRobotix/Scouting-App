@@ -27,8 +27,7 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
     private final Context c;
     private final Settings set;
     private final String apiKey;
-    private final boolean teamListExists;
-    private final boolean matchScheduleExists;
+
     private final File teamListFilePath;
     private final File matchListFilePath;
     private final File scoreBreakdownFilePath;
@@ -37,9 +36,7 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
         this.c = c;
         set = Settings.newInstance(c);
         apiKey = c.getResources().getString(R.string.tba_api_key);
-        teamListExists = FileManager.teamListExists(c);
         teamListFilePath = FileManager.getTeamListFilePath(c);
-        matchScheduleExists = FileManager.matchScheduleExists(c);
         matchListFilePath = FileManager.getMatchListFilePath(c);
         scoreBreakdownFilePath = FileManager.getScoreBreakdownFilePath(c);
     }
@@ -133,13 +130,13 @@ public class DataDownloader  extends AsyncTask<Void, Void, String>{
 
                     }
 
-                    if (!teamListExists) {
+                    if (!FileManager.teamListExists(c)) {
                         String teamList = getTeamList(eventCode);
                         if (teamList.equals(""))
                             return "Event data not found on The Blue Alliance";
                         else FileManager.saveFile(teamListFilePath, teamList, c);
                     }
-                    if (!matchScheduleExists) {
+                    if (!FileManager.matchScheduleExists(c)) {
                         String matchList = getMatchList(eventCode);
                         if (matchList.equals(""))
                             return "Only team list downloaded";

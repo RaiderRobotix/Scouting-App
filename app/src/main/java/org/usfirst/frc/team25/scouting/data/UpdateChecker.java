@@ -60,20 +60,20 @@ public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
             con.setRequestMethod("GET");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            java.lang.String inputLine;
+            String inputLine;
             StringBuilder response = new StringBuilder();
             while ((inputLine = in.readLine()) != null)
                 response.append(inputLine);
 
             in.close();
 
-            java.lang.String respStr = response.toString();
+            String respStr = response.toString();
 
 
             this.release = new Gson().fromJson(respStr, Release.class);
 
 
-            if (!release.getTag_name().equals("v" + Constants.VERSION_NUMBER))
+            if (!release.getTagName().equals("v" + Constants.VERSION_NUMBER))
                 return true;
             else new File(Environment.getExternalStorageDirectory() + "/Download/" + release.getAssets()[0].getName()).delete();
 
@@ -135,7 +135,7 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
     @Override
     protected Boolean doInBackground(String... strings) {
         try {
-            URL url = new URL(asset.getBrowser_download_url());
+            URL url = new URL(asset.getBrowserDownloadUrl());
 
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestMethod("GET");

@@ -31,7 +31,6 @@ public class ButtonTimer extends RelativeLayout {
     private float minValue;
     private float maxValue;
     private boolean isTimerStart;
-    private Clock timer;
 
     private OnClickListener listener;
 
@@ -75,8 +74,6 @@ public class ButtonTimer extends RelativeLayout {
         setMaxValue(typedArray.getFloat(R.styleable.ButtonTimer_maxValueTimer, Float.MAX_VALUE));
         setIncDecAmount(typedArray.getFloat(R.styleable.ButtonTimer_buttonIncDecAmount, 0.5f));
 
-
-
         typedArray.recycle();
 
     }
@@ -105,6 +102,8 @@ public class ButtonTimer extends RelativeLayout {
 
         BigDecimal bd = new BigDecimal(value);
 
+
+        //Rounds the decimal to the tenths place
         String displayText = bd.setScale(1, BigDecimal.ROUND_HALF_EVEN).toPlainString() + " sec";
         valueView = findViewById(R.id.button_timer_value);
         valueView.setText(displayText);
@@ -138,7 +137,6 @@ public class ButtonTimer extends RelativeLayout {
 
         runTimer();
         isTimerStart = false;
-
 
 
         //Listeners to increment and decrement the value with a click

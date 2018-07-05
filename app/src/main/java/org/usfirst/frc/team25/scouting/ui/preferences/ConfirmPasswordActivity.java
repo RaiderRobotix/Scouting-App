@@ -10,6 +10,9 @@ import org.usfirst.frc.team25.scouting.data.Settings;
 
 /**
  * Activity that prompts users to enter the old password before setting a new one
+ * This activity follows the same layout and behavior of the EnterPasswordActivity, only with
+ * different button labels and confirm/delete button behavior
+ * @see EnterPasswordActivity
  */
 public class ConfirmPasswordActivity extends EnterPasswordActivity {
 
@@ -17,7 +20,6 @@ public class ConfirmPasswordActivity extends EnterPasswordActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Change Password");
-        //noinspection ConstantConditions
         findViewById(R.id.delete_warning).setVisibility(View.INVISIBLE);
         TextView title = findViewById(R.id.enter_password_label);
 

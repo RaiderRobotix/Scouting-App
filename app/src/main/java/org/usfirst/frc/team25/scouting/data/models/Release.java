@@ -6,7 +6,7 @@ package org.usfirst.frc.team25.scouting.data.models;
 
 public class Release {
 
-    public String getTag_name() {
+    public String getTagName() {
         return tag_name;
     }
 
@@ -18,7 +18,7 @@ public class Release {
     private Asset[] assets;
 
     public class Asset{
-        public String getBrowser_download_url() {
+        public String getBrowserDownloadUrl() {
             return browser_download_url;
         }
 

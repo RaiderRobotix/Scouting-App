@@ -10,7 +10,9 @@ import org.usfirst.frc.team25.scouting.Constants;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
-// Activity that views the rules menu of the year's game
+/** Allows users to view the rules and fouls cheatsheet of the current year's game
+ *
+ */
 public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
 
     //From the PDFView library
@@ -25,7 +27,7 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
         rulesView = findViewById(R.id.pdfView);
 
         try {
-            rulesView.fromAsset(Constants.RULES_FILEPATH)
+            rulesView.fromAsset(Constants.RULES_FILEPATH) //ensure that the PDF in /assets is replaced
                 .defaultPage(1)
                 .showMinimap(false)
                 .swipeVertical(true)
