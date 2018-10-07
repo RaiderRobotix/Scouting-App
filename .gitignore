@@ -6,6 +6,8 @@
 .DS_Store
 /build
 /captures
+/build
+app/build/*
 app/src/main/res/values/secret.xml
 *.apk
 *.ini
