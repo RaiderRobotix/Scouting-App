@@ -2,7 +2,7 @@ language: android
 jdk: oraclejdk8
 sudo: required
 env:
-  - BUILD_TOOLS_VERSION=27.0.3
+  - BUILD_TOOLS_VERSION=28.0.2
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
