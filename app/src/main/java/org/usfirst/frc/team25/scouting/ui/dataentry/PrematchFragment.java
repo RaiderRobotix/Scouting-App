@@ -205,11 +205,17 @@ public class PrematchFragment extends Fragment implements EntryFragment {
             case 2590:
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
                 break;
+            case 225:
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
+                break;
             case 303:
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
                 break;
             case 25:
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
+                break;
+            case 1923:
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Black);
                 break;
             default:
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
@@ -286,6 +292,4 @@ public class PrematchFragment extends Fragment implements EntryFragment {
             e.printStackTrace();
         }
     }
-
-
 }

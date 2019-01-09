@@ -88,6 +88,12 @@
         <item name="actionBarStyle">@style/AppTheme.ActionBarStyleRed</item>
     </style>
 
+    <style name="AppTheme.NoLauncher.Black">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorAccent">#DDDDDD</item>
+        <item name="android:colorButtonNormal">#000000</item>
+    </style>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 

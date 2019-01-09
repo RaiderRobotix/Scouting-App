@@ -209,7 +209,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/raiderRobotixLogo"
-                android:src="@drawable/first_power_up_logo"
+                android:src="@drawable/deep_space_logo"
 
 
                 />

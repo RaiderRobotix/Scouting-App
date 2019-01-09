@@ -180,7 +180,7 @@
             android:layout_centerVertical="true"
             android:layout_marginBottom="20dp"
 
-            android:src="@drawable/power_up_logo"
+            android:src="@drawable/deep_space_logo"
             android:textAlignment="center" />
     </RelativeLayout>
 
