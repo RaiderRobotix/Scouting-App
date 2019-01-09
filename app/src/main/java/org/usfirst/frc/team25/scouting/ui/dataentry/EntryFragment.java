@@ -7,16 +7,17 @@ import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
  */
 interface EntryFragment {
 
-    /** A ScoutEntry container object to hold scouting info, passed around between fragments with setter and getter methods
-     *  Entry should be a parameter in the constructor, when setEntry is called
-     *
+    /**
+     * A ScoutEntry container object to hold scouting info, passed around between fragments with setter and getter methods
+     * Entry should be a parameter in the constructor, when setEntry is called
      */
     ScoutEntry entry = new ScoutEntry();
-    void setEntry(ScoutEntry entry);
 
     /* Called when a fragment transaction is started to pass data onto the next fragment
      */
     ScoutEntry getEntry();
+
+    void setEntry(ScoutEntry entry);
 
     /**
      * Method that finds if the data for the fragment that is held in <code>entry</code> is <code>null</code>.

@@ -2,22 +2,22 @@ package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.ui.views.AppCompatPreferenceActivity;
 
-/**Activity that holds the fragment for settings/preferences
- *
+/**
+ * Activity that holds the fragment for settings/preferences
  */
 
 public class SettingsActivity extends AppCompatPreferenceActivity implements OnSharedPreferenceChangeListener {
 
     private SharedPreferences preferences;
     private SettingsFragment sf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

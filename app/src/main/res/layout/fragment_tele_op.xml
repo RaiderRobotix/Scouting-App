@@ -99,8 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cubes_dropped_tele"
                 android:padding="8dp"
-                app:buttonIncDecAmount="0.5"
                 android:visibility="gone"
+                app:buttonIncDecAmount="0.5"
                 app:titlePromptTimer="Average cycle time" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
@@ -221,6 +221,7 @@
                     android:padding="8dp"
                     android:text="Iron cross"
                     android:textSize="18sp" />
+
                 <RadioButton
                     android:id="@+id/single_lift_type"
                     android:layout_width="wrap_content"
@@ -229,6 +230,7 @@
                     android:padding="8dp"
                     android:text="Single lift"
                     android:textSize="18sp" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -273,8 +275,8 @@
                 android:layout_below="@id/tele_continue"
                 android:padding="8dp"
                 app:buttonIncDecAmount="0.1"
-                app:minValueTimer="0.1"
                 app:maxValueTimer="2.0"
+                app:minValueTimer="0.1"
                 app:titlePromptTimer="Timer manual increment" />
 
 

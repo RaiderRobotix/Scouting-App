@@ -3,8 +3,9 @@ package org.usfirst.frc.team25.scouting.data.models;
 
 import java.io.Serializable;
 
-/** Container object for all parts of a match
- *  To be serialized into JSON
+/**
+ * Container object for all parts of a match
+ * To be serialized into JSON
  */
 public class ScoutEntry implements Serializable {
 
@@ -14,7 +15,8 @@ public class ScoutEntry implements Serializable {
     private PostMatch postMatch;
 
     //Actual member variables will be set using setters as data is filled in
-    public ScoutEntry() {}
+    public ScoutEntry() {
+    }
 
     public PreMatch getPreMatch() {
         return preMatch;

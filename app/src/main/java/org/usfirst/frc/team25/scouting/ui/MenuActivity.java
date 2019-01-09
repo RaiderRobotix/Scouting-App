@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,18 +25,38 @@ import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatAct
 
 import java.io.File;
 
-/** The main activity of the application.
- *  Responsible for displaying the info bar, game logo, and linking to the four main submenus
- *
+/**
+ * The main activity of the application.
+ * Responsible for displaying the info bar, game logo, and linking to the four main submenus
  */
 public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
-    private TextView status;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static final String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+    private TextView status;
+
+    /**
+     * Checks if the app has permission to write to device storage
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity
+     */
+    private static void verifyStoragePermissions(Activity activity) {
+        // Check if the app havs write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // App doesn't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
 
     //Executes when application is first launched
     @Override
@@ -49,10 +68,10 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
         StrictMode.setVmPolicy(builder.build());
 
         //Phone layout has fixed scaling of text and buttons, no Raider Robotix Logo
-       if (!isTablet(getBaseContext()))
+        if (!isTablet(getBaseContext()))
             setContentView(R.layout.activity_menu_phone);
 
-       else setContentView(R.layout.activity_menu);
+        else setContentView(R.layout.activity_menu);
 
 
         ImageButton addEntry = findViewById(R.id.menu1_button);
@@ -72,10 +91,10 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
             try {
                 File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
                         FileManager.DIRECTORY_DATA);
-                if(!directory.exists())
+                if (!directory.exists())
                     directory.mkdir();
                 File file = new File(directory, FileManager.getDataFilename(getBaseContext()));
-                if(file.length()==0)
+                if (file.length() == 0)
                     Toast.makeText(getBaseContext(), "Scouting data does not exist", Toast.LENGTH_SHORT).show();
                 else {
                     Intent shareIntent = new Intent();
@@ -87,7 +106,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
                 }
 
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
 
             }
@@ -110,40 +129,20 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
     }
 
-    /**
-     * Checks if the app has permission to write to device storage
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    private static void verifyStoragePermissions(Activity activity) {
-        // Check if the app havs write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // App doesn't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
-
     private void updateStatus() {
         Settings set = Settings.newInstance(getBaseContext());
 
         String info = set.getScoutName() + " - " +
                 set.getScoutPos() + " - Match " + set.getMatchType() +
                 set.getMatchNum();
-        if(info.contains("DEFAULT")) //App settings not yet changed
+        if (info.contains("DEFAULT")) //App settings not yet changed
             info = "";
         status.setText(info);
 
     }
 
-    /** Sets the title and info bar upon resuming the activity
-     *
+    /**
+     * Sets the title and info bar upon resuming the activity
      */
     @Override
     public void onResume() {
@@ -158,7 +157,8 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
         Toast.makeText(this, "Back button currently disabled", Toast.LENGTH_LONG).show();
     }
 
-    /** Determines if the app is running on a tablet or a phone
+    /**
+     * Determines if the app is running on a tablet or a phone
      *
      * @param context Context of the current activity
      * @return True if the device is a tablet, false otherwise

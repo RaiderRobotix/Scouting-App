@@ -18,12 +18,13 @@ import org.usfirst.frc.team25.scouting.data.thebluealliance.DataDownloader;
 import org.usfirst.frc.team25.scouting.ui.views.DecimalPickerPreference;
 import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
 
-/** List of preferences, as defined in res/xml/preferences.xml
- *
+/**
+ * List of preferences, as defined in res/xml/preferences.xml
  */
 
 public class SettingsFragment extends PreferenceFragment {
 
+    CheckBoxPreference useTeamList;
     private ListPreference matchType;
     private ListPreference event;
     private ListPreference leftStation;
@@ -37,7 +38,6 @@ public class SettingsFragment extends PreferenceFragment {
     private NumberPickerPreference shiftDur;
     private DecimalPickerPreference timerManualInc;
     private EditTextPreference scoutNameInput;
-    CheckBoxPreference useTeamList;
     private Settings set;
 
     public SettingsFragment() {
@@ -45,7 +45,7 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         set = Settings.newInstance(getActivity());
@@ -56,7 +56,7 @@ public class SettingsFragment extends PreferenceFragment {
         matchNum = (NumberPickerPreference) findPreference("match_num");
         event = (ListPreference) findPreference("event");
         deleteFiles = findPreference("delete_data");
-        changePass =  findPreference("change_pass");
+        changePass = findPreference("change_pass");
         year = findPreference("year");
         downloadSchedule = findPreference("download_schedule");
         game = findPreference("game");
@@ -67,7 +67,7 @@ public class SettingsFragment extends PreferenceFragment {
         updateSummary();
 
         game.setSummary(Constants.GAME_NAME);
-        version.setSummary("v"+Constants.VERSION_NUMBER);
+        version.setSummary("v" + Constants.VERSION_NUMBER);
 
         matchNum.setMaxValue(Settings.newInstance(getActivity()).getMaxMatchNum());
         shiftDur.setMaxValue(25);
@@ -81,7 +81,6 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
 
-
         matchType.setOnPreferenceChangeListener((preference, o) -> {
             matchNum = (NumberPickerPreference) findPreference("match_num");
             matchNum.setValue(1);
@@ -90,8 +89,8 @@ public class SettingsFragment extends PreferenceFragment {
 
 
         deleteFiles.setOnPreferenceClickListener(preference -> {
-            if(set.getHashedPass().equals("DEFAULT"))
-                Toast.makeText(getActivity(), "Password needs to be set before deleting data", Toast.LENGTH_SHORT ).show();
+            if (set.getHashedPass().equals("DEFAULT"))
+                Toast.makeText(getActivity(), "Password needs to be set before deleting data", Toast.LENGTH_SHORT).show();
 
             else {
                 Intent i = new Intent(getActivity(), EnterPasswordActivity.class);
@@ -104,7 +103,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         changePass.setOnPreferenceClickListener(preference -> {
             Intent i;
-            if(set.getHashedPass().equals("DEFAULT"))
+            if (set.getHashedPass().equals("DEFAULT"))
                 i = new Intent(getActivity(), SetPasswordActivity.class);
 
             else i = new Intent(getActivity(), ConfirmPasswordActivity.class);
@@ -120,8 +119,6 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
 
-
-
         downloadSchedule.setOnPreferenceClickListener(preference -> {
             new DataDownloader(getActivity()).execute();
 
@@ -131,11 +128,10 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
 
-
     /**
      * Updates preference summary text with their values
      */
-    void updateSummary(){
+    void updateSummary() {
         try {
             Settings.newInstance(getActivity()).setMaxMatchNum(FileManager.getMaxMatchNum(getActivity())); //Automates maximum match number based on current event
             shiftDur.setSummary(String.valueOf(set.getShiftDur()) + " matches");
@@ -145,7 +141,7 @@ public class SettingsFragment extends PreferenceFragment {
             set.setYear();
             leftStation.setSummary(leftStation.getValue());
             timerManualInc.setSummary(set.getTimerManualInc() + " sec");
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 

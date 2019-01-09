@@ -1,11 +1,15 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
-/** General information about a match and scout before it begins
- *
+/**
+ * General information about a match and scout before it begins
  */
 public class PreMatch {
 
+    private String scoutName;
+    private String scoutPos;
+    private String startingPos;
+    private int matchNum, teamNum;
     public PreMatch(String scoutName, String scoutPos, int matchNum, int teamNum, String startingPos) {
         this.scoutName = scoutName;
         this.scoutPos = scoutPos;
@@ -14,18 +18,18 @@ public class PreMatch {
         this.startingPos = startingPos;
     }
 
-    private String scoutName;
-    private String scoutPos;
-    private String startingPos;
-    private int matchNum, teamNum;
 
+    public PreMatch() {
+        //Default empty constructor for JSON parsing
+    }
 
     public String getScoutName() {
         return scoutName;
     }
 
-
-    public String getScoutPos() { return scoutPos; }
+    public String getScoutPos() {
+        return scoutPos;
+    }
 
     public int getMatchNum() {
         return matchNum;
@@ -37,9 +41,5 @@ public class PreMatch {
 
     public String getStartingPos() {
         return startingPos;
-    }
-
-    public PreMatch(){
-        //Default empty constructor for JSON parsing
     }
 }

@@ -34,7 +34,7 @@ public class NumberPickerPreference extends DialogPreference {
         return mPicker;
     }
 
-    public void setMaxValue(int maxValue){
+    public void setMaxValue(int maxValue) {
         this.maxValue = maxValue;
     }
 

@@ -28,7 +28,7 @@ import java.net.URL;
  */
 
 
-public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
+public class UpdateChecker extends AsyncTask<String, Integer, Boolean> {
 
     private final Context context;
 
@@ -75,9 +75,10 @@ public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
 
             if (!release.getTagName().equals("v" + Constants.VERSION_NUMBER))
                 return true;
-            else new File(Environment.getExternalStorageDirectory() + "/Download/" + release.getAssets()[0].getName()).delete();
+            else
+                new File(Environment.getExternalStorageDirectory() + "/Download/" + release.getAssets()[0].getName()).delete();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -86,16 +87,13 @@ public class UpdateChecker extends AsyncTask<String,Integer,Boolean> {
 }
 
 
-
-
-
-class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
-    private ProgressDialog bar;
+class AppDownloader extends AsyncTask<String, Integer, Boolean> {
     private final Context context;
-    private String location;
     private final Release.Asset asset;
+    private ProgressDialog bar;
+    private String location;
 
-    AppDownloader(Context c, Release.Asset asset){
+    AppDownloader(Context c, Release.Asset asset) {
         this.context = c;
         this.asset = asset;
     }
@@ -120,13 +118,13 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
         bar.setMax(100);
         bar.setProgress(progress[0]);
         String msg;
-        if(progress[0]>99){
+        if (progress[0] > 99) {
 
-            msg="Finishing... ";
+            msg = "Finishing... ";
 
-        }else {
+        } else {
 
-            msg="Downloading... "+progress[0]+"%";
+            msg = "Downloading... " + progress[0] + "%";
         }
         bar.setMessage(msg);
 
@@ -157,7 +155,7 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
 
             FileOutputStream fos = new FileOutputStream(outputFile);
 
-            if(c.getResponseCode()>=400 && c.getResponseCode() <= 499){
+            if (c.getResponseCode() >= 400 && c.getResponseCode() <= 499) {
                 Log.i("tag", " " + c.getResponseCode());
                 Log.i("tag", " " + c.getURL());
                 throw new Exception("Bad authorization");
@@ -182,7 +180,7 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
             this.location = PATH + fileName;
 
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -198,7 +196,6 @@ class AppDownloader extends  AsyncTask<String, Integer, Boolean>{
 
 
     }
-
 
 
     @Override

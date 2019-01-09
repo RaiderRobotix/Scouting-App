@@ -26,28 +26,7 @@ public class ButtonIncDecInt extends RelativeLayout {
 
     private OnClickListener listener;
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(ev.getAction()==MotionEvent.ACTION_UP){
-            if(listener!=null) listener.onClick(this);
-        }
-
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if(event.getAction() == KeyEvent.ACTION_UP && (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-            if(listener != null) listener.onClick(this);
-        }
-        return super.dispatchKeyEvent(event);
-    }
-
-    public void setOnClickListener(OnClickListener listener) {
-        this.listener = listener;
-    }
-
-    public ButtonIncDecInt(Context c, AttributeSet attrs){
+    public ButtonIncDecInt(Context c, AttributeSet attrs) {
         super(c, attrs);
         initializeViews(c);
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ButtonIncDecInt);
@@ -60,12 +39,32 @@ public class ButtonIncDecInt extends RelativeLayout {
         setIncDecAmount(typedArray.getInteger(R.styleable.ButtonIncDecInt_incDecAmount, 1));
 
 
-
         typedArray.recycle();
 
     }
 
-    private void initializeViews(Context c){
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            if (listener != null) listener.onClick(this);
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_UP && (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+            if (listener != null) listener.onClick(this);
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
+
+    private void initializeViews(Context c) {
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.button_inc_view, this);
     }
@@ -73,32 +72,31 @@ public class ButtonIncDecInt extends RelativeLayout {
     /**
      * @param title - title of the left TextView
      */
-    private void setTitle(CharSequence title){
+    private void setTitle(CharSequence title) {
         TextView titleView = findViewById(R.id.button_inc_dec_title);
         titleView.setText(title);
     }
 
     /**
+     * @return Integer value of the displayed number
+     */
+    public int getValue() {
+        valueView = findViewById(R.id.button_inc_dec_value);
+        return Integer.parseInt(valueView.getText().toString());
+    }
+
+    /**
      * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
      */
-    public void setValue(int value){
-        if(value>maxValue)
+    public void setValue(int value) {
+        if (value > maxValue)
             value = maxValue;
 
-        if(value<minValue)
+        if (value < minValue)
             value = minValue;
 
         valueView = findViewById(R.id.button_inc_dec_value);
         valueView.setText(String.valueOf(value));
-    }
-
-    /**
-     *
-     * @return Integer value of the displayed number
-     */
-    public int getValue(){
-        valueView = findViewById(R.id.button_inc_dec_value);
-        return Integer.parseInt(valueView.getText().toString());
     }
 
     private void setIncDecAmount(int incDecAmount) {
@@ -126,11 +124,11 @@ public class ButtonIncDecInt extends RelativeLayout {
         decButton.setOnClickListener(view -> decrement());
     }
 
-    public void increment(){
-        setValue(getValue()+incDecAmount);
+    public void increment() {
+        setValue(getValue() + incDecAmount);
     }
 
-    public void decrement(){
-        setValue(getValue()-incDecAmount);
+    public void decrement() {
+        setValue(getValue() - incDecAmount);
     }
 }

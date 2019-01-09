@@ -29,10 +29,10 @@ public class DecimalPickerPreference extends DialogPreference {
     protected View onCreateDialogView() {
         mPicker = new NumberPicker(getContext());
         String[] values = {"0.1 sec", "0.2 sec", "0.3 sec", "0.4 sec", "0.5 sec", "0.6 sec", "0.7 sec",
-        "0.8 sec", "0.9 sec", "1 sec","1.1 sec", "1.2 sec", "1.3 sec", "1.4 sec", "1.5 sec", "1.6 sec", "1.7 sec",
+                "0.8 sec", "0.9 sec", "1 sec", "1.1 sec", "1.2 sec", "1.3 sec", "1.4 sec", "1.5 sec", "1.6 sec", "1.7 sec",
                 "1.8 sec", "1.9 sec", "2 sec"};
         mPicker.setMinValue(0);
-        mPicker.setMaxValue(values.length-1); //Automates maximum match number from match list
+        mPicker.setMaxValue(values.length - 1); //Automates maximum match number from match list
         mPicker.setValue(mNumber);
         mPicker.setDisplayedValues(values);
         mPicker.setWrapSelectorWheel(false);
@@ -40,7 +40,6 @@ public class DecimalPickerPreference extends DialogPreference {
 
         return mPicker;
     }
-
 
 
     @Override

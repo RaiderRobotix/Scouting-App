@@ -1,115 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="General"
         android:layout="@layout/preference_category_normal"
-        />
+        android:title="General" />
 
     <EditTextPreference
+        android:defaultValue="John Doe"
         android:key="scout_name"
-        android:title="@string/scout_name"
-        android:defaultValue="John Doe" />
+        android:title="@string/scout_name" />
 
     <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="shift_dur"
-        android:title="@string/shift_dur"
         android:defaultValue="10"
+        android:key="shift_dur"
         android:layout="@layout/preference_normal"
-        />
+        android:title="@string/shift_dur" />
 
     <ListPreference
-        android:key="pos"
-        android:title="@string/scout_position"
+        android:defaultValue="Red 1"
         android:entries="@array/position_options"
         android:entryValues="@array/position_options"
-        android:defaultValue="Red 1"
+        android:key="pos"
         android:summary="%s"
-        />
+        android:title="@string/scout_position" />
 
     <org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference
-        android:key="match_num"
-        android:title="@string/match_number"
         android:defaultValue="1"
+        android:key="match_num"
         android:layout="@layout/preference_normal"
-        />
+        android:title="@string/match_number" />
 
     <ListPreference
-        android:key="match_type"
-        android:title="@string/match_type"
-        android:entryValues="@array/match_types_values"
-        android:entries="@array/match_types"
         android:defaultValue="Q"
+        android:entries="@array/match_types"
+        android:entryValues="@array/match_types_values"
+        android:key="match_type"
         android:summary="%s"
-        />
+        android:title="@string/match_type" />
 
     <ListPreference
-        android:key="event"
-        android:title="@string/event"
+        android:defaultValue="Brunswick Eruption"
         android:entries="@array/event_options"
         android:entryValues="@array/event_options_values"
-        android:defaultValue="Brunswick Eruption"
-        android:summary="%s" />
+        android:key="event"
+        android:summary="%s"
+        android:title="@string/event" />
 
     <Preference
-        android:key="year"
-        android:title="@string/year"
         android:defaultValue="2018"
-        android:summary="2018"
         android:enabled="true"
+        android:key="year"
+        android:summary="2018"
+        android:title="@string/year"
 
         />
 
     <PreferenceCategory
-        android:title="FIRST Power Up"
-        android:layout="@layout/preference_category_normal"/>
+        android:layout="@layout/preference_category_normal"
+        android:title="FIRST Power Up" />
 
     <ListPreference
-        android:key="leftStation"
-        android:title="Left alliance color"
-        android:summary="%s"
+        android:defaultValue="Red Alliance"
         android:entries="@array/alliance_type"
         android:entryValues="@array/alliance_type"
-        android:defaultValue="Red Alliance"
-        />
+        android:key="leftStation"
+        android:summary="%s"
+        android:title="Left alliance color" />
 
     <org.usfirst.frc.team25.scouting.ui.views.DecimalPickerPreference
-        android:key="timer_manual_inc"
-        android:title="Timer manual increment amount"
         android:defaultValue="4"
+        android:key="timer_manual_inc"
         android:layout="@layout/preference_normal"
-        />
-
+        android:title="Timer manual increment amount" />
 
 
     <PreferenceCategory
-        android:title="Data Transfer"
-        android:layout="@layout/preference_category_normal" />
+        android:layout="@layout/preference_category_normal"
+        android:title="Data Transfer" />
 
     <CheckBoxPreference
-        android:title="Use team lists"
+        android:key="use_team_list"
 
         android:summary="Verify scout input with predefined team lists for events"
-        android:key="use_team_list"
-        />
+        android:title="Use team lists" />
 
 
     <Preference
-        android:title="Download match schedule"
+        android:defaultValue="false"
         android:key="download_schedule"
-        android:defaultValue="false"/>
+        android:title="Download match schedule" />
 
-   <!-- <EditTextPreference
-        android:key="api_key"
-        android:title="Blue Alliance API key"
-        android:summary="Required to download match schedule"
-        />-->
+    <!-- <EditTextPreference
+         android:key="api_key"
+         android:title="Blue Alliance API key"
+         android:summary="Required to download match schedule"
+         />-->
 
     <Preference
-        android:key="change_pass"
-        android:title="@string/change_pass"
-        android:shouldDisableView="true"
         android:defaultValue="da39a3ee5e6b4b0d3255bfef95601890afd80709"
-        />
+        android:key="change_pass"
+        android:shouldDisableView="true"
+        android:title="@string/change_pass" />
 
     <Preference
         android:key="delete_data"
@@ -118,17 +108,16 @@
         />
 
     <PreferenceCategory
-        android:title="About"
-        android:layout="@layout/preference_category_normal"/>
+        android:layout="@layout/preference_category_normal"
+        android:title="About" />
 
     <Preference
-        android:title="Game"
-        android:key="game" />
+        android:key="game"
+        android:title="Game" />
 
     <Preference
-        android:title="Version"
-        android:key="version" />
-
+        android:key="version"
+        android:title="Version" />
 
 
 </PreferenceScreen>

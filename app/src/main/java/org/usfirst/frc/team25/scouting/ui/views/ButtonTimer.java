@@ -14,7 +14,6 @@ import android.widget.TextView;
 import org.usfirst.frc.team25.scouting.R;
 
 import java.math.BigDecimal;
-import java.time.Clock;
 
 /**
  * Created by sng on 1/31/2018.
@@ -22,11 +21,11 @@ import java.time.Clock;
 
 public class ButtonTimer extends RelativeLayout {
 
+    public final Button startStopButton;
     private final Button incButton;
     private final Button decButton;
-    public final Button startStopButton;
-    private TextView valueView;
     private final TextView titleView;
+    private TextView valueView;
     private float incDecAmount;
     private float minValue;
     private float maxValue;
@@ -34,28 +33,7 @@ public class ButtonTimer extends RelativeLayout {
 
     private OnClickListener listener;
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(ev.getAction()==MotionEvent.ACTION_UP){
-            if(listener!=null) listener.onClick(this);
-        }
-
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if(event.getAction() == KeyEvent.ACTION_UP && (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-            if(listener != null) listener.onClick(this);
-        }
-        return super.dispatchKeyEvent(event);
-    }
-
-    public void setOnClickListener(OnClickListener listener) {
-        this.listener = listener;
-    }
-
-    public ButtonTimer(Context c, AttributeSet attrs){
+    public ButtonTimer(Context c, AttributeSet attrs) {
         super(c, attrs);
         initializeViews(c);
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ButtonTimer);
@@ -78,7 +56,28 @@ public class ButtonTimer extends RelativeLayout {
 
     }
 
-    private void initializeViews(Context c){
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            if (listener != null) listener.onClick(this);
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_UP && (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+            if (listener != null) listener.onClick(this);
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
+
+    private void initializeViews(Context c) {
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.button_timer_view, this);
     }
@@ -86,18 +85,27 @@ public class ButtonTimer extends RelativeLayout {
     /**
      * @param title - title of the left TextView
      */
-    private void setTitle(CharSequence title){
+    private void setTitle(CharSequence title) {
         titleView.setText(title);
+    }
+
+    /**
+     * @return Float value of the displayed number
+     */
+    public float getValue() {
+        valueView = findViewById(R.id.button_timer_value);
+        String value = valueView.getText().toString().split(" ")[0];
+        return Float.parseFloat(value);
     }
 
     /**
      * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
      */
-    public void setValue(float value){
-        if(value>maxValue)
+    public void setValue(float value) {
+        if (value > maxValue)
             value = maxValue;
 
-        if(value<minValue)
+        if (value < minValue)
             value = minValue;
 
         BigDecimal bd = new BigDecimal(value);
@@ -107,16 +115,6 @@ public class ButtonTimer extends RelativeLayout {
         String displayText = bd.setScale(1, BigDecimal.ROUND_HALF_EVEN).toPlainString() + " sec";
         valueView = findViewById(R.id.button_timer_value);
         valueView.setText(displayText);
-    }
-
-    /**
-     *
-     * @return Float value of the displayed number
-     */
-    public float getValue(){
-        valueView = findViewById(R.id.button_timer_value);
-        String value = valueView.getText().toString().split(" ")[0];
-        return Float.parseFloat(value);
     }
 
     public void setIncDecAmount(float incDecAmount) {
@@ -145,12 +143,11 @@ public class ButtonTimer extends RelativeLayout {
 
         //Essentially acts like a toggle, starting and stopping the timer
         startStopButton.setOnClickListener(view -> {
-            if(isTimerStart){ //timer already started, need to stop
+            if (isTimerStart) { //timer already started, need to stop
                 startStopButton.setText("Start");
                 incButton.setEnabled(true);
                 decButton.setEnabled(true);
-            }
-            else{ // starts timer
+            } else { // starts timer
                 startStopButton.setText(("Stop"));
                 setValue(0f);
 
@@ -161,24 +158,24 @@ public class ButtonTimer extends RelativeLayout {
         });
     }
 
-    private void runTimer(){
+    private void runTimer() {
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if(isTimerStart)
-                    setValue(getValue()+0.1f);
+                if (isTimerStart)
+                    setValue(getValue() + 0.1f);
                 handler.postDelayed(this, 100);
             }
         });
 
     }
 
-    private void increment(){
-        setValue(getValue()+incDecAmount);
+    private void increment() {
+        setValue(getValue() + incDecAmount);
     }
 
-    private void decrement(){
-        setValue(getValue()-incDecAmount);
+    private void decrement() {
+        setValue(getValue() - incDecAmount);
     }
 }

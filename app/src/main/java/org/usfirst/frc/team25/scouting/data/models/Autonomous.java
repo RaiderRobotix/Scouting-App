@@ -1,10 +1,35 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
-/** Object model for autonomous period of a match
- *
+/**
+ * Object model for autonomous period of a match
  */
 public class Autonomous {
+
+    private final int switchCubes;
+    private final int scaleCubes;
+    private final int exchangeCubes;
+    private final int powerCubePilePickup;
+    private final int switchAdjacentPickup;
+    private final int cubesDropped;
+    private final boolean autoLineCross;
+    private final boolean nullTerritoryFoul;
+    private final boolean cubeDropOpponentSwitchPlate;
+    private final boolean isCubeDropOpponentScalePlate;
+
+    public Autonomous(int switchCubes, int scaleCubes, int exchangeCubes, int powerCubePilePickup, int switchAdjacentPickup,
+                      int cubesDropped, boolean autoLineCross, boolean nullTerritoryFoul, boolean cubeDropOpponentSwitchPlate, boolean isCubeDropOpponentScalePlate) {
+        this.switchCubes = switchCubes;
+        this.scaleCubes = scaleCubes;
+        this.exchangeCubes = exchangeCubes;
+        this.powerCubePilePickup = powerCubePilePickup;
+        this.switchAdjacentPickup = switchAdjacentPickup;
+        this.cubesDropped = cubesDropped;
+        this.autoLineCross = autoLineCross;
+        this.nullTerritoryFoul = nullTerritoryFoul;
+        this.cubeDropOpponentSwitchPlate = cubeDropOpponentSwitchPlate;
+        this.isCubeDropOpponentScalePlate = isCubeDropOpponentScalePlate;
+    }
 
     public int getSwitchCubes() {
         return switchCubes;
@@ -45,34 +70,6 @@ public class Autonomous {
     public boolean isCubeDropOpponentScalePlate() {
         return isCubeDropOpponentScalePlate;
     }
-
-    private final int switchCubes;
-    private final int scaleCubes;
-    private final int exchangeCubes;
-    private final int powerCubePilePickup;
-    private final int switchAdjacentPickup;
-    private final int cubesDropped;
-    private final boolean autoLineCross;
-    private final boolean nullTerritoryFoul;
-    private final boolean cubeDropOpponentSwitchPlate;
-    private final boolean isCubeDropOpponentScalePlate;
-
-    public Autonomous(int switchCubes, int scaleCubes, int exchangeCubes, int powerCubePilePickup, int switchAdjacentPickup,
-                      int cubesDropped, boolean autoLineCross, boolean nullTerritoryFoul, boolean cubeDropOpponentSwitchPlate, boolean isCubeDropOpponentScalePlate) {
-        this.switchCubes = switchCubes;
-        this.scaleCubes = scaleCubes;
-        this.exchangeCubes = exchangeCubes;
-        this.powerCubePilePickup = powerCubePilePickup;
-        this.switchAdjacentPickup = switchAdjacentPickup;
-        this.cubesDropped = cubesDropped;
-        this.autoLineCross = autoLineCross;
-        this.nullTerritoryFoul = nullTerritoryFoul;
-        this.cubeDropOpponentSwitchPlate = cubeDropOpponentSwitchPlate;
-        this.isCubeDropOpponentScalePlate = isCubeDropOpponentScalePlate;
-    }
-
-
-
 
 
 }

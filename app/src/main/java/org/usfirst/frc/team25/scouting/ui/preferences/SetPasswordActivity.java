@@ -37,12 +37,11 @@ public class SetPasswordActivity extends NoBackgroundPortraitAppCompatActivity {
             if (newPass.getText().toString().equals(""))
                 newPass.setError("Password cannot be empty");
 
-            else if(newPass.getText().toString().equals(confirmPass.getText().toString())){
+            else if (newPass.getText().toString().equals(confirmPass.getText().toString())) {
                 Settings.newInstance(getBaseContext()).setPassword(newPass.getText().toString());
-                Toast.makeText(SetPasswordActivity.this, "Password changed", Toast.LENGTH_SHORT ).show();
+                Toast.makeText(SetPasswordActivity.this, "Password changed", Toast.LENGTH_SHORT).show();
                 finish();
-            }
-            else confirmPass.setError("Passwords mismatch");
+            } else confirmPass.setError("Passwords mismatch");
         });
     }
 }

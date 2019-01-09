@@ -24,8 +24,13 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonTimer;
 
 
-public class TeleOpFragment extends Fragment implements EntryFragment{
+public class TeleOpFragment extends Fragment implements EntryFragment {
 
+    private final RadioButton[] climbOtherRobotType = new RadioButton[5];
+    private final int[] redLeftFieldConfig = {R.drawable.red_left_rrr, R.drawable.red_left_rlr,
+            R.drawable.red_left_lrl, R.drawable.red_left_lll};
+    private final int[] blueLeftFieldConfig = {R.drawable.blue_left_rrr, R.drawable.blue_left_rlr,
+            R.drawable.blue_left_lrl, R.drawable.blue_left_lll};
     private ScoutEntry entry;
     private ImageView fieldImage;
     private Button continueButton;
@@ -43,26 +48,21 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
     private ButtonTimer cycleTime;
     private ButtonTimer timerIncAmount;
     private EditText climbOtherRobotTypeOtherField;
-    private final RadioButton[] climbOtherRobotType = new RadioButton[5];
     private int fieldConfigIndex = 0;
-    private final int[] redLeftFieldConfig = {R.drawable.red_left_rrr, R.drawable.red_left_rlr,
-            R.drawable.red_left_lrl, R.drawable.red_left_lll};
-    private final int[] blueLeftFieldConfig = {R.drawable.blue_left_rrr, R.drawable.blue_left_rlr,
-            R.drawable.blue_left_lrl, R.drawable.blue_left_lll};
     private RadioGroup otherRobotTypeGroup;
 
 
     private Settings set;
 
 
-    public static TeleOpFragment getInstance(ScoutEntry entry){
+    public TeleOpFragment() {
+        // Required empty public constructor
+    }
+
+    public static TeleOpFragment getInstance(ScoutEntry entry) {
         TeleOpFragment tof = new TeleOpFragment();
         tof.setEntry(entry);
         return tof;
-    }
-
-    public TeleOpFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -95,10 +95,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
         climbsOtherRobots = view.findViewById(R.id.climb_other_robot);
         climbOtherRobotType[0] = view.findViewById(R.id.ramp_bot_type);
-        climbOtherRobotType[1]=view.findViewById(R.id.robot_rung_type);
-        climbOtherRobotType[2]=view.findViewById(R.id.iron_cross_type);
-        climbOtherRobotType[3]=view.findViewById(R.id.single_lift_type);
-        climbOtherRobotType[4]=view.findViewById(R.id.other_type);
+        climbOtherRobotType[1] = view.findViewById(R.id.robot_rung_type);
+        climbOtherRobotType[2] = view.findViewById(R.id.iron_cross_type);
+        climbOtherRobotType[3] = view.findViewById(R.id.single_lift_type);
+        climbOtherRobotType[4] = view.findViewById(R.id.other_type);
         otherRobotTypeGroup = view.findViewById(R.id.climb_other_robot_type_group);
         climbOtherRobotTypeOtherField = view.findViewById(R.id.other_robot_type_text);
         timerIncAmount = view.findViewById(R.id.timer_manual_inc);
@@ -117,8 +117,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         climbOtherRobotTypeOtherField.setEnabled(false);
 
         climbOtherRobotType[4].setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b){
-                for(int i = 0; i < 4; i++)
+            if (b) {
+                for (int i = 0; i < 4; i++)
                     climbOtherRobotType[i].setChecked(false);
                 climbOtherRobotTypeOtherField.setEnabled(true);
             }
@@ -128,67 +128,65 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
         firstCubeTime.setOnClickListener(view14 -> firstCubeTime.setIncDecAmount(timerIncAmount.getValue()));
 
-        for(int i = 0; i < climbOtherRobotType.length-1; i++)
+        for (int i = 0; i < climbOtherRobotType.length - 1; i++)
             climbOtherRobotType[i].setOnClickListener(view13 -> {
-                climbOtherRobotType[climbOtherRobotType.length-1].setChecked(false);
+                climbOtherRobotType[climbOtherRobotType.length - 1].setChecked(false);
                 climbOtherRobotTypeOtherField.setText("");
                 climbOtherRobotTypeOtherField.setEnabled(false);
             });
 
-        if(set.getLeftAlliance().equals("Red Alliance"))
+        if (set.getLeftAlliance().equals("Red Alliance"))
             fieldImage.setImageResource(redLeftFieldConfig[0]);
         else fieldImage.setImageResource(blueLeftFieldConfig[0]);
 
         fieldImage.setOnClickListener(view12 -> {
-            if(set.getLeftAlliance().equals("Red Alliance"))
-                fieldImage.setImageResource(redLeftFieldConfig[++fieldConfigIndex%4]);
-            else fieldImage.setImageResource(blueLeftFieldConfig[++fieldConfigIndex%4]);
+            if (set.getLeftAlliance().equals("Red Alliance"))
+                fieldImage.setImageResource(redLeftFieldConfig[++fieldConfigIndex % 4]);
+            else fieldImage.setImageResource(blueLeftFieldConfig[++fieldConfigIndex % 4]);
         });
 
         successRungClimb.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b){
+            if (b) {
                 parked.setChecked(false);
                 parked.setEnabled(false);
                 disableOtherRobotTypeGroup();
                 climbsOtherRobots.setEnabled(false);
                 climbsOtherRobots.setChecked(false);
-            }
-            else{
+            } else {
                 parked.setEnabled(true);
                 climbsOtherRobots.setEnabled(true);
             }
         });
 
         attemptRumgClimb.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b&&!climbsOtherRobots.isChecked())
+            if (b && !climbsOtherRobots.isChecked())
                 successRungClimb.setEnabled(true);
-            else{
+            else {
                 successRungClimb.setEnabled(false);
                 successRungClimb.setChecked(false);
             }
         });
 
         climbsOtherRobots.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b) {
+            if (b) {
                 enableOtherRobotTypeGroup();
                 successRungClimb.setEnabled(false);
                 successRungClimb.setChecked(false);
                 parked.setChecked(false);
                 parked.setEnabled(false);
-            }
-            else {
+            } else {
                 disableOtherRobotTypeGroup();
                 parked.setEnabled(true);
-                if(attemptRumgClimb.isChecked())
+                if (attemptRumgClimb.isChecked())
                     successRungClimb.setEnabled(true);
             }
         });
 
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();
-            if(climbsOtherRobots.isChecked()&&!(climbOtherRobotType[0].isChecked() ||climbOtherRobotType[1].isChecked()
-                    ||climbOtherRobotType[2].isChecked() ||climbOtherRobotType[3].isChecked() ||
-                    (climbOtherRobotType[4].isChecked()&&!climbOtherRobotTypeOtherField.getText().toString().isEmpty()))){
+            if (climbsOtherRobots.isChecked() && !(climbOtherRobotType[0].isChecked() || climbOtherRobotType[1].isChecked()
+                    || climbOtherRobotType[2].isChecked() || climbOtherRobotType[3].isChecked() ||
+                    (climbOtherRobotType[4].isChecked() && !climbOtherRobotTypeOtherField.getText().toString().isEmpty()))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select or fill in type of robot climbed on")
                         .setCancelable(false)
@@ -197,8 +195,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
-            else{
+            } else {
                 saveState();
                 getFragmentManager()
                         .beginTransaction()
@@ -209,20 +206,16 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
         });
 
 
-
-
-
-
         return view;
     }
 
-    private void enableOtherRobotTypeGroup(){
-        for(RadioButton button : climbOtherRobotType)
+    private void enableOtherRobotTypeGroup() {
+        for (RadioButton button : climbOtherRobotType)
             button.setEnabled(true);
     }
 
-    private void disableOtherRobotTypeGroup(){
-        for(RadioButton button : climbOtherRobotType){
+    private void disableOtherRobotTypeGroup() {
+        for (RadioButton button : climbOtherRobotType) {
             button.setEnabled(false);
             button.setChecked(false);
         }
@@ -240,34 +233,34 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
     @Override
     public void saveState() {
         String climbOtherRobotTypeStr = "";
-        for(int i = 0; i <climbOtherRobotType.length-1; i++)
-            if(climbOtherRobotType[i].isChecked())
+        for (int i = 0; i < climbOtherRobotType.length - 1; i++)
+            if (climbOtherRobotType[i].isChecked())
                 climbOtherRobotTypeStr = (String) climbOtherRobotType[i].getText();
-        if(climbOtherRobotType[climbOtherRobotType.length-1].isChecked())
+        if (climbOtherRobotType[climbOtherRobotType.length - 1].isChecked())
             climbOtherRobotTypeStr = climbOtherRobotTypeOtherField.getText().toString();
 
         //Always from red driver POV, depicting red plates
         String[] fieldLayoutValues = {"RRR", "RLR", "LRL", "LLL"};
 
         entry.setTeleOp(new TeleOp(firstCubeTime.getValue(), cycleTime.getValue(), ownSwitchCubes.getValue(),
-               scaleCubes.getValue(), opponentSwtichCubes.getValue(), exchangeCubes.getValue(), cubesDropped.getValue(),
+                scaleCubes.getValue(), opponentSwtichCubes.getValue(), exchangeCubes.getValue(), cubesDropped.getValue(),
                 climbsAssisted.getValue(), parked.isChecked(), attemptRumgClimb.isChecked(), successRungClimb.isChecked(),
-                climbsOtherRobots.isChecked(), climbOtherRobotTypeStr, fieldLayoutValues[fieldConfigIndex%4]));
+                climbsOtherRobots.isChecked(), climbOtherRobotTypeStr, fieldLayoutValues[fieldConfigIndex % 4]));
 
     }
 
-    public void hideKeyboard(){
+    public void hideKeyboard() {
         try {
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void autoPopulate() {
-        if(entry.getTeleOp()!=null){
+        if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
             firstCubeTime.setValue(tele.getFirstCubeTime());
             cycleTime.setValue(tele.getCycleTime());
@@ -282,15 +275,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
             successRungClimb.setChecked(tele.isSuccessfulRungClimb());
             climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
 
-            if(!tele.getOtherRobotClimbType().equals("")){
+            if (!tele.getOtherRobotClimbType().equals("")) {
                 boolean otherChecked = true;
-                for(RadioButton button : climbOtherRobotType)
-                    if(button.getText().equals(tele.getOtherRobotClimbType())) {
+                for (RadioButton button : climbOtherRobotType)
+                    if (button.getText().equals(tele.getOtherRobotClimbType())) {
                         button.setChecked(true);
                         otherChecked = false;
                     }
-                if(otherChecked) {
-                    climbOtherRobotType[climbOtherRobotType.length-1].setChecked(true);
+                if (otherChecked) {
+                    climbOtherRobotType[climbOtherRobotType.length - 1].setChecked(true);
                     Log.i("tag", tele.getOtherRobotClimbType());
                     climbOtherRobotTypeOtherField.setText(tele.getOtherRobotClimbType());
                 }
@@ -300,11 +293,11 @@ public class TeleOpFragment extends Fragment implements EntryFragment{
 
             fieldConfigIndex = 0;
 
-            for(int i = 0; i < fieldLayoutValues.length; i++)
-                if(fieldLayoutValues[i].equals(tele.getFieldLayout()))
+            for (int i = 0; i < fieldLayoutValues.length; i++)
+                if (fieldLayoutValues[i].equals(tele.getFieldLayout()))
                     fieldConfigIndex = i;
 
-            if(set.getLeftAlliance().equals("Red Alliance"))
+            if (set.getLeftAlliance().equals("Red Alliance"))
                 fieldImage.setImageResource(redLeftFieldConfig[fieldConfigIndex]);
             else fieldImage.setImageResource(blueLeftFieldConfig[fieldConfigIndex]);
 

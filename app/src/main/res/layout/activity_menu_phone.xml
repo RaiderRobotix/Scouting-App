@@ -2,43 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFFFFF"
+    android:id="@+id/main_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+
     android:paddingTop="@dimen/activity_vertical_margin"
-
-    android:id="@+id/main_menu"
     tools:context="org.usfirst.frc.team25.scouting.ui.MenuActivity">
-
 
 
     <RelativeLayout
         android:id="@+id/menu1"
-        android:layout_marginTop="20dp"
         android:layout_width="120dp"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="20dp">
 
         <ImageButton
             android:id="@+id/menu1_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerInParent="true"
             android:layout_alignParentTop="true"
-
             android:layout_centerHorizontal="true"
-            android:background="@drawable/circle_icon_white"
 
-            android:src="@drawable/circle_icon"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_icon_white"
 
             android:scaleType="centerInside"
 
-            />
+            android:src="@drawable/circle_icon"
 
+            />
 
 
         <TextView
@@ -48,23 +45,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/menu1_button"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
+            android:enabled="true"
             android:text="@string/menu_1"
 
-            android:textStyle="normal"
+            android:textAlignment="center"
+            android:textColor="@color/bright_foreground_material_light"
             android:textSize="@dimen/abc_text_size_large_material"
-            android:enabled="true"
-            android:textColor="@color/bright_foreground_material_light" />
+            android:textStyle="normal" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:layout_marginTop="20dp"
         android:id="@+id/menu2"
         android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_height="wrap_content">
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginTop="20dp">
 
         <ImageButton
             android:id="@+id/menu2_button"
@@ -73,9 +70,9 @@
 
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/share_icon"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:background="@android:color/transparent" />
+            android:src="@drawable/share_icon" />
 
         <TextView
             android:id="@+id/menu2_label"
@@ -84,36 +81,35 @@
             android:layout_below="@+id/menu2_button"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textAlignment="center"
+            android:enabled="true"
             android:text="@string/menu_2"
 
-            android:textStyle="normal"
+            android:textAlignment="center"
+            android:textColor="@color/bright_foreground_material_light"
             android:textSize="@dimen/abc_text_size_large_material"
-            android:enabled="true"
-            android:textColor="@color/bright_foreground_material_light" />
+            android:textStyle="normal" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginTop="20dp"
+        android:id="@+id/menu3"
         android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/menu1"
-        android:layout_height="wrap_content"
-        android:id="@+id/menu3">
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="20dp">
 
         <ImageButton
             android:id="@+id/menu3_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
 
-            android:src="@drawable/book_icon"
-            android:scaleType="centerInside"
             android:background="@null"
-            />
+            android:scaleType="centerInside"
+            android:src="@drawable/book_icon" />
 
         <TextView
             android:id="@+id/menu3_label"
@@ -121,36 +117,36 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/menu3_button"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
+            android:enabled="true"
             android:text="@string/menu_3"
 
-            android:textStyle="normal"
+            android:textAlignment="center"
+            android:textColor="@color/bright_foreground_material_light"
             android:textSize="@dimen/abc_text_size_large_material"
-            android:enabled="true"
-            android:textColor="@color/bright_foreground_material_light" />
+            android:textStyle="normal" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/menu2"
         android:id="@+id/menu4"
         android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_height="wrap_content">
+        android:layout_below="@+id/menu2"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginTop="20dp">
 
 
         <ImageButton
             android:id="@+id/menu4_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
 
-            android:src="@drawable/settings_icon"
+            android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:background="@android:color/transparent" />
+            android:src="@drawable/settings_icon" />
 
         <TextView
             android:id="@+id/menu4_label"
@@ -158,13 +154,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/menu4_button"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
+            android:enabled="true"
             android:text="@string/menu_4"
 
-            android:textStyle="normal"
+            android:textAlignment="center"
+            android:textColor="@color/bright_foreground_material_light"
             android:textSize="@dimen/abc_text_size_large_material"
-            android:enabled="true"
-            android:textColor="@color/bright_foreground_material_light" />
+            android:textStyle="normal" />
 
     </RelativeLayout>
 
@@ -176,28 +172,29 @@
 
 
         <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-
-
-            android:layout_centerVertical="true"
             android:id="@+id/powerUpView"
+            android:layout_width="fill_parent"
+
+
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="20dp"
+
             android:src="@drawable/power_up_logo"
-
-            android:textAlignment="center"
-            android:layout_marginBottom="20dp" />
+            android:textAlignment="center" />
     </RelativeLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/default_status"
-        android:textAlignment="center"
+    <TextView
         android:id="@+id/current_info_label"
-        android:layout_marginBottom="15dp"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:textColor="@color/bright_foreground_material_light" />
+        android:layout_marginBottom="15dp"
+        android:text="@string/default_status"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/bright_foreground_material_light"
+        android:textSize="20sp" />
 </RelativeLayout>

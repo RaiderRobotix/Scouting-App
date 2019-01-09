@@ -1,8 +1,8 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.AlertDialog;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,16 +27,9 @@ import java.util.ArrayList;
 public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
-
-    private ScoutEntry entry;
-    private MaterialEditText robotComment;
-    private RelativeLayout robotCommentView;
-    private ArrayList<CheckBox> robotQuickComments;
-    private Button finish;
     private final CheckBox[] focusButtons = new CheckBox[5];
     private final RadioButton[] comparisonButtons = new RadioButton[3];
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
-
     private final String[] ROBOT_COMMENT_VALUES = {
             "No cube intake",
             "Shoots cubes",
@@ -53,19 +46,24 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             "Caused (tech) fouls (explain below)",
             "Possible inaccurate data (specify below)"
     };
+    private ScoutEntry entry;
+    private MaterialEditText robotComment;
+    private RelativeLayout robotCommentView;
+    private ArrayList<CheckBox> robotQuickComments;
+    private Button finish;
 
-
-    public static PostMatchFragment getInstance(ScoutEntry entry){
+    public static PostMatchFragment getInstance(ScoutEntry entry) {
         PostMatchFragment pmf = new PostMatchFragment();
         pmf.setEntry(entry);
         return pmf;
     }
 
-    public void setEntry(ScoutEntry entry) {
-        this.entry = entry;
-    }
     public ScoutEntry getEntry() {
         return entry;
+    }
+
+    public void setEntry(ScoutEntry entry) {
+        this.entry = entry;
     }
 
     @Override
@@ -79,7 +77,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         robotCommentView = view.findViewById(R.id.robotDriverCommentView);
 
         finish = view.findViewById(R.id.post_finish);
-        focusButtons[0] =  view.findViewById(R.id.own_switch_focus);
+        focusButtons[0] = view.findViewById(R.id.own_switch_focus);
         focusButtons[1] = view.findViewById(R.id.opponent_switch_focus);
         focusButtons[2] = view.findViewById(R.id.scale_focus);
         focusButtons[3] = view.findViewById(R.id.vault_focus);
@@ -96,7 +94,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         comparisonButtons[0].setText("Team " + entry.getPreMatch().getTeamNum() + " (current robot scouted)");
         comparisonButtons[1].setText("Team " + prevTeamNum + " (previous robot scouted)");
 
-        if(prevTeamNum==0){
+        if (prevTeamNum == 0) {
             comparisonButtons[2].setChecked(true);
             view.findViewById(R.id.prev_team_comparison_group).setVisibility(View.GONE);
         }
@@ -112,17 +110,17 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             boolean comparisonSelected = false;
             boolean pickNumberSelected = false;
 
-            for(CheckBox cb : focusButtons)
-                if(cb.isChecked())
+            for (CheckBox cb : focusButtons)
+                if (cb.isChecked())
                     focusChecked = true;
-            for(RadioButton button : comparisonButtons)
-                if(button.isChecked())
+            for (RadioButton button : comparisonButtons)
+                if (button.isChecked())
                     comparisonSelected = true;
-            for(RadioButton button : pickNumberButtons)
-                if(button.isChecked())
+            for (RadioButton button : pickNumberButtons)
+                if (button.isChecked())
                     pickNumberSelected = true;
 
-            if(!focusChecked) {
+            if (!focusChecked) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select the robot's focus for this match")
                         .setCancelable(false)
@@ -131,9 +129,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
-
-            else if(!comparisonSelected){
+            } else if (!comparisonSelected) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Compare the robot to the previous one or select no opinion")
                         .setCancelable(false)
@@ -142,9 +138,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
-
-            else if(!pickNumberSelected) {
+            } else if (!pickNumberSelected) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select which pick this robot would be")
                         .setCancelable(false)
@@ -153,9 +147,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
-
-            else{
+            } else {
                 saveState();
                 final PostMatch pm = entry.getPostMatch();
                 pm.finalizeComment();
@@ -181,16 +173,16 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    private void generateRobotQuickComments(){
+    private void generateRobotQuickComments() {
 
         int prevId = -1;
 
-        for(int i = 0; i < Math.ceil(ROBOT_COMMENT_VALUES.length/2.0); i++){
+        for (int i = 0; i < Math.ceil(ROBOT_COMMENT_VALUES.length / 2.0); i++) {
             ArrayList<String> checkSetValues = new ArrayList<>();
-            checkSetValues.add(ROBOT_COMMENT_VALUES[i*2]);
-            try{
-                checkSetValues.add(ROBOT_COMMENT_VALUES[i*2+1]);
-            }catch(IndexOutOfBoundsException e){
+            checkSetValues.add(ROBOT_COMMENT_VALUES[i * 2]);
+            try {
+                checkSetValues.add(ROBOT_COMMENT_VALUES[i * 2 + 1]);
+            } catch (IndexOutOfBoundsException e) {
 
             }
 
@@ -200,17 +192,17 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
             leftComment.setLayoutParams(params);
             leftComment.setText(checkSetValues.get(0));
-            leftComment.setPadding(5,3,3,5);
+            leftComment.setPadding(5, 3, 3, 5);
 
             robotQuickComments.add(leftComment);
             checkSet.addView(leftComment);
 
-            if(checkSetValues.size()!=1){
+            if (checkSetValues.size() != 1) {
                 CheckBox rightComment = new CheckBox(getActivity());
 
                 rightComment.setLayoutParams(params);
                 rightComment.setText(checkSetValues.get(1));
-                rightComment.setPadding(3,3,5,5);
+                rightComment.setPadding(3, 3, 5, 5);
 
                 robotQuickComments.add(rightComment);
                 checkSet.addView(rightComment);
@@ -223,17 +215,16 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
             RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            rlp.setMargins(10,10,10,10);
+            rlp.setMargins(10, 10, 10, 10);
 
 
-            if(i==0)
+            if (i == 0)
                 rlp.addRule(RelativeLayout.BELOW, R.id.robotDriverQuickCommentHint);
             else rlp.addRule(RelativeLayout.BELOW, prevId);
 
             prevId = currentId;
 
             robotCommentView.addView(checkSet, rlp);
-
 
 
         }
@@ -245,58 +236,54 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     }
 
 
-
-
-
-    public void saveState(){
+    public void saveState() {
         StringBuilder focus = new StringBuilder();
-        for(CheckBox cb : focusButtons)
-            if(cb.isChecked()){
-                if(!focus.toString().equals(""))
+        for (CheckBox cb : focusButtons)
+            if (cb.isChecked()) {
+                if (!focus.toString().equals(""))
                     focus.append("; ");
                 focus.append((String) cb.getText());
             }
         String comparison = "";
         String[] comparisonValues = {">", "<", "="};
-        for(int i = 0; i < comparisonButtons.length; i++)
-            if(comparisonButtons[i].isChecked())
+        for (int i = 0; i < comparisonButtons.length; i++)
+            if (comparisonButtons[i].isChecked())
                 comparison = comparisonValues[i];
 
         int pickNumber = -1;
-        for(int i = 0; i<pickNumberButtons.length; i++)
-            if(pickNumberButtons[i].isChecked())
-                pickNumber=2-i;
+        for (int i = 0; i < pickNumberButtons.length; i++)
+            if (pickNumberButtons[i].isChecked())
+                pickNumber = 2 - i;
 
-       entry.setPostMatch(new PostMatch(robotComment.getText().toString(), robotQuickComments,
-               ROBOT_COMMENT_VALUES, focus.toString(), entry.getPreMatch().getTeamNum(),
-               FileManager.getPrevTeamNumber(getActivity()), comparison, pickNumber));
+        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), robotQuickComments,
+                ROBOT_COMMENT_VALUES, focus.toString(), entry.getPreMatch().getTeamNum(),
+                FileManager.getPrevTeamNumber(getActivity()), comparison, pickNumber));
     }
-
 
 
     @Override
     public void autoPopulate() {
-        if(entry.getPostMatch()!=null){
+        if (entry.getPostMatch() != null) {
             ArrayList<CheckBox> robotCheckedComments = entry.getPostMatch().getRobotQuickComments();
-            for(int i = 0; i < robotCheckedComments.size(); i++)
-                if(robotCheckedComments.get(i).isChecked())
+            for (int i = 0; i < robotCheckedComments.size(); i++)
+                if (robotCheckedComments.get(i).isChecked())
                     robotQuickComments.get(i).setChecked(true);
             robotComment.setText(entry.getPostMatch().getRobotComment());
 
 
-            for(CheckBox cb : focusButtons)
-                for(String item : entry.getPostMatch().getFocus().split("; "))
-                    if(cb.getText().equals(item))
+            for (CheckBox cb : focusButtons)
+                for (String item : entry.getPostMatch().getFocus().split("; "))
+                    if (cb.getText().equals(item))
                         cb.setChecked(true);
 
             String[] comparisonValues = {">", "<", "="};
-            for(int i = 0; i < comparisonValues.length; i++)
-                if(entry.getPostMatch().getComparison().equals(comparisonValues[i]))
+            for (int i = 0; i < comparisonValues.length; i++)
+                if (entry.getPostMatch().getComparison().equals(comparisonValues[i]))
                     comparisonButtons[i].setChecked(true);
 
-            try{
-                pickNumberButtons[2-entry.getPostMatch().getPickNumber()].setChecked(true);
-            }catch (Exception e){
+            try {
+                pickNumberButtons[2 - entry.getPostMatch().getPickNumber()].setChecked(true);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

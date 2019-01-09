@@ -9,12 +9,12 @@ import org.usfirst.frc.team25.scouting.R;
 /**
  * Default activity that all activities extend from, removes splash screen background; forces portrait mode
  */
-public class NoBackgroundPortraitAppCompatActivity extends AppCompatActivity{
+public class NoBackgroundPortraitAppCompatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_NoLauncher_Blue);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
     }
 }

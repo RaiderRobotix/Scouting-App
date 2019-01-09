@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
 
     tools:context="org.usfirst.frc.team25.scouting.ui.RulesActivity">
 
     <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pdfView"/>
+        android:layout_height="match_parent" />
 
     <com.github.barteksc.pdfviewer.ScrollBar
         android:id="@+id/scrollBar"
         android:layout_width="15dp"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="@android:color/transparent"
         app:sb_handlerColor="#000000"
         app:sb_indicatorColor="#000000"
-        app:sb_indicatorTextColor="#ffffff"/>
+        app:sb_indicatorTextColor="#ffffff" />
 
 
 </RelativeLayout>

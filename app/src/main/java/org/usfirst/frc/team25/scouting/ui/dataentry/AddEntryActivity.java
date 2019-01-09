@@ -31,12 +31,12 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        PrematchFragment pre =(PrematchFragment) getFragmentManager().findFragmentByTag("PREMATCH");
+        PrematchFragment pre = (PrematchFragment) getFragmentManager().findFragmentByTag("PREMATCH");
         AutoFragment auto = (AutoFragment) getFragmentManager().findFragmentByTag("AUTO");
         TeleOpFragment tele = (TeleOpFragment) getFragmentManager().findFragmentByTag("TELEOP");
         PostMatchFragment post = (PostMatchFragment) getFragmentManager().findFragmentByTag("POST");
 
-        if(pre!=null && pre.isVisible()){
+        if (pre != null && pre.isVisible()) {
             Snackbar backWarn = Snackbar.make(findViewById(R.id.add_entry), "Back button disabled", Snackbar.LENGTH_LONG) // Essentially the Snackbar is shown, but its color is changed first
                     .setAction("DISCARD DATA", view -> finish())
                     .setActionTextColor(getResources().getColor(R.color.raider_accent_yellow));
@@ -45,27 +45,21 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
             tv.setTextColor(Color.WHITE);
             backWarn.show();
 
-        }
-
-        else if(auto!=null && auto.isVisible()){
+        } else if (auto != null && auto.isVisible()) {
             auto.saveState();
             getFragmentManager()
                     .beginTransaction()
                     .replace(android.R.id.content, PrematchFragment.getInstance(auto.getEntry()), "PREMATCH")
                     .commit();
 
-        }
-
-        else if(tele!=null && tele.isVisible()){
+        } else if (tele != null && tele.isVisible()) {
             tele.saveState();
             getFragmentManager()
                     .beginTransaction()
                     .replace(android.R.id.content, AutoFragment.getInstance(tele.getEntry()), "AUTO")
                     .commit();
 
-        }
-
-        else if(post!=null && post.isVisible()){
+        } else if (post != null && post.isVisible()) {
             post.saveState();
             getFragmentManager()
                     .beginTransaction()

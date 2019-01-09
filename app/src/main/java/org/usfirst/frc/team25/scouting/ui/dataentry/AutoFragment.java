@@ -1,8 +1,8 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.AlertDialog;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,46 +15,42 @@ import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
 
-public class AutoFragment extends Fragment implements  EntryFragment{
+public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecInt ownSwitchCubes;
-    private ButtonIncDecInt ownScaleCubes;
-    private ButtonIncDecInt exchangeCubes;
-    private ButtonIncDecInt powerCubePilePickup;
-    private ButtonIncDecInt switchAdjacentPickup;
-    private ButtonIncDecInt cubesDropped;
-    private CheckBox reachAutoLine;
-    private CheckBox cubesOpponentPlate;
-    private CheckBox opponentSwitchPlate;
-    private CheckBox opponentScalePlate;
-    private CheckBox nullTerritoryFoul;
+    private ButtonIncDecInt ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
+            switchAdjacentPickup, cubesDropped;
+    private CheckBox reachAutoLine, cubesOpponentPlate, opponentSwitchPlate,
+            opponentScalePlate, nullTerritoryFoul;
     private Button continueButton;
 
     private ScoutEntry entry;
 
-
-
-    @Override
-    public ScoutEntry getEntry() {
-        return entry;
-    }
-
-    public static AutoFragment getInstance(ScoutEntry entry){
-        AutoFragment af = new AutoFragment();
-        af.setEntry(entry);
-        return af;
-    }
 
     public AutoFragment() {
         // Required empty public constructor
 
     }
 
-    private boolean shouldDisableReachAutoLine(){
-        return ownSwitchCubes.getValue()>0||ownScaleCubes.getValue()>0||switchAdjacentPickup
-                .getValue()>0||cubesOpponentPlate.isChecked()||nullTerritoryFoul.isChecked();
+    public static AutoFragment getInstance(ScoutEntry entry) {
+        AutoFragment af = new AutoFragment();
+        af.setEntry(entry);
+        return af;
     }
 
+    @Override
+    public ScoutEntry getEntry() {
+        return entry;
+    }
+
+    @Override
+    public void setEntry(ScoutEntry entry) {
+        this.entry = entry;
+    }
+
+    private boolean shouldDisableReachAutoLine() {
+        return ownSwitchCubes.getValue() > 0 || ownScaleCubes.getValue() > 0 || switchAdjacentPickup
+                .getValue() > 0 || cubesOpponentPlate.isChecked() || nullTerritoryFoul.isChecked();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,12 +75,10 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         autoPopulate();
 
 
-
-
         nullTerritoryFoul.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b)
+            if (b)
                 disableReachAutoLine();
-            else if(!shouldDisableReachAutoLine())
+            else if (!shouldDisableReachAutoLine())
                 enableReachAutoLine();
         });
 
@@ -94,7 +88,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         });
         ownScaleCubes.decButton.setOnClickListener(view16 -> {
             ownScaleCubes.decrement();
-            if(ownScaleCubes.getValue()<1&&!shouldDisableReachAutoLine())
+            if (ownScaleCubes.getValue() < 1 && !shouldDisableReachAutoLine())
                 enableReachAutoLine();
         });
 
@@ -105,7 +99,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         });
         ownSwitchCubes.decButton.setOnClickListener(view14 -> {
             ownSwitchCubes.decrement();
-            if(ownSwitchCubes.getValue()<1&&!shouldDisableReachAutoLine())
+            if (ownSwitchCubes.getValue() < 1 && !shouldDisableReachAutoLine())
                 enableReachAutoLine();
         });
 
@@ -115,27 +109,24 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         });
         switchAdjacentPickup.decButton.setOnClickListener(view12 -> {
             switchAdjacentPickup.decrement();
-            if(switchAdjacentPickup.getValue()<1&&!shouldDisableReachAutoLine())
+            if (switchAdjacentPickup.getValue() < 1 && !shouldDisableReachAutoLine())
                 enableReachAutoLine();
         });
 
         cubesOpponentPlate.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b){
+            if (b) {
                 disableReachAutoLine();
                 enableOpponentPlateLocationCheckboxes(true);
-            }
-            else if(!shouldDisableReachAutoLine()) {
+            } else if (!shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
                 enableOpponentPlateLocationCheckboxes(false);
-            }
-            else enableOpponentPlateLocationCheckboxes(false);
+            } else enableOpponentPlateLocationCheckboxes(false);
         });
 
 
-
         continueButton.setOnClickListener(view1 -> {
-            if(cubesOpponentPlate.isChecked()&&!(opponentSwitchPlate.isChecked()
-                    ||opponentScalePlate.isChecked())){
+            if (cubesOpponentPlate.isChecked() && !(opponentSwitchPlate.isChecked()
+                    || opponentScalePlate.isChecked())) {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Select where the robot dropped cubes on its opponents' plate(s)")
                         .setMessage("Scale and/or own switch")
@@ -143,8 +134,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
                         })
                         .show();
-            }
-            else {
+            } else {
                 saveState();
 
                 getFragmentManager().beginTransaction()
@@ -157,25 +147,23 @@ public class AutoFragment extends Fragment implements  EntryFragment{
         return view;
     }
 
-
-    private void disableReachAutoLine(){
+    private void disableReachAutoLine() {
 
         reachAutoLine.setChecked(true);
         reachAutoLine.setEnabled(false);
 
     }
 
-    private void enableReachAutoLine(){
+    private void enableReachAutoLine() {
         reachAutoLine.setEnabled(true);
     }
 
-    private void enableOpponentPlateLocationCheckboxes(boolean enable){
+    private void enableOpponentPlateLocationCheckboxes(boolean enable) {
 
-        if(enable) {// checked
+        if (enable) {// checked
             opponentSwitchPlate.setEnabled(true);
             opponentScalePlate.setEnabled(true);
-        }
-        else{
+        } else {
             opponentSwitchPlate.setEnabled(false);
             opponentScalePlate.setEnabled(false);
             opponentScalePlate.setChecked(false);
@@ -195,13 +183,6 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
     }
 
-
-
-    @Override
-    public void setEntry(ScoutEntry entry) {
-        this.entry = entry;
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -212,13 +193,12 @@ public class AutoFragment extends Fragment implements  EntryFragment{
 
     @Override
     public void autoPopulate() {
-        if(entry.getAuto()!=null){
-
+        if (entry.getAuto() != null) {
 
 
             Autonomous prevAuto = entry.getAuto();
-            enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate()||prevAuto.isCubeDropOpponentSwitchPlate());
-            cubesOpponentPlate.setChecked(prevAuto.isCubeDropOpponentScalePlate()||prevAuto.isCubeDropOpponentSwitchPlate());
+            enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
+            cubesOpponentPlate.setChecked(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
             ownSwitchCubes.setValue(prevAuto.getSwitchCubes());
             ownScaleCubes.setValue(prevAuto.getScaleCubes());
             exchangeCubes.setValue(prevAuto.getExchangeCubes());
@@ -229,7 +209,7 @@ public class AutoFragment extends Fragment implements  EntryFragment{
             opponentSwitchPlate.setChecked(prevAuto.isCubeDropOpponentSwitchPlate());
             opponentScalePlate.setChecked(prevAuto.isCubeDropOpponentScalePlate());
             nullTerritoryFoul.setChecked(prevAuto.isNullTerritoryFoul());
-            if(shouldDisableReachAutoLine())
+            if (shouldDisableReachAutoLine())
                 disableReachAutoLine();
 
         }

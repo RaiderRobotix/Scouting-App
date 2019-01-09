@@ -1,17 +1,15 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pre_frag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.dataentry.PrematchFragment"
-    android:id="@+id/pre_frag"
-
-
-    android:orientation="vertical"
-    android:fillViewport="true"
     android:background="#f5f5f5"
-    >
+
+
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context=".ui.dataentry.PrematchFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,140 +17,138 @@
         android:layout_height="match_parent">
 
 
-
-
-    <RelativeLayout
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
-
-        <!-- Dummy item to prevent EditText from receiving focus -->
-        <LinearLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:layout_width="0px"
-            android:layout_height="0px"/>
-
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/scout_name_field"
-            android:hint="@string/scout_name"
-            app:met_floatingLabel="normal"
-            android:paddingTop="@dimen/default_padding_top"
-            android:paddingBottom="@dimen/default_padding_bottom"
-            android:paddingLeft="@dimen/inner_padding_left"
-            android:paddingRight="@dimen/inner_padding_right"
-            android:singleLine="true"/>
+            android:layout_margin="16dp"
+            android:padding="8dp">
 
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/event_spin"
-            android:hint="@string/event"
-            android:layout_below="@id/scout_name_field"
-            android:paddingTop="@dimen/default_padding_top"
-            android:paddingBottom="@dimen/default_padding_bottom"
-            android:paddingLeft="@dimen/inner_padding_left"
-            android:paddingRight="@dimen/inner_padding_right"
-            android:visibility="gone"/>
+            <!-- Dummy item to prevent EditText from receiving focus -->
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/match_num_field"
-            android:layout_below="@id/event_spin"
-            android:hint="@string/match_number"
-            android:inputType="number"
-            app:met_floatingLabel="normal"
-            android:paddingTop="@dimen/default_padding_top"
-            android:paddingBottom="@dimen/default_padding_bottom"
-            android:paddingLeft="@dimen/inner_padding_left"
-            android:paddingRight="@dimen/inner_padding_right"
-            android:singleLine="true"/>
-
-
-
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scout_pos_spin"
-            android:hint="@string/scout_position"
-            android:layout_below="@id/match_num_field"
-            android:paddingTop="@dimen/default_padding_top"
-            android:paddingBottom="@dimen/default_padding_bottom"
-            android:paddingLeft="@dimen/inner_padding_left"
-            android:paddingRight="@dimen/inner_padding_right"/>
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/team_num_field"
-            android:layout_below="@id/scout_pos_spin"
-            android:hint="@string/team_number"
-            android:inputType="number"
-            app:met_floatingLabel="normal"
-            android:paddingTop="@dimen/default_padding_top"
-            android:paddingBottom="@dimen/default_padding_bottom"
-            android:paddingLeft="@dimen/inner_padding_left"
-            android:paddingRight="@dimen/inner_padding_right"
-            android:singleLine="true"/>
-
-
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/startingPosition"
-            android:layout_below="@id/team_num_field"
-            android:visibility="visible"
-            >
-            <TextView
-                android:layout_width="wrap_content"
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/scout_name_field"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Robot starting position (from driver POV)"
-                android:textSize="18sp"
-                android:layout_marginTop="10dp"
-                />
-            <RadioButton
-                android:layout_width="wrap_content"
+                android:hint="@string/scout_name"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:paddingLeft="@dimen/inner_padding_left"
+                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingTop="@dimen/default_padding_top"
+                android:singleLine="true"
+                app:met_floatingLabel="normal" />
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/event_spin"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Left"
-                android:textSize="18sp"
-                android:padding="8dp"
-                android:id="@+id/leftStart"/>
-            <RadioButton
-                android:layout_width="wrap_content"
+                android:layout_below="@id/scout_name_field"
+                android:hint="@string/event"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:paddingLeft="@dimen/inner_padding_left"
+                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingTop="@dimen/default_padding_top"
+                android:visibility="gone" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/match_num_field"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Center"
-                android:textSize="18sp"
-                android:padding="8dp"
-                android:id="@+id/centerStart"/>
-            <RadioButton
-                android:layout_width="wrap_content"
+                android:layout_below="@id/event_spin"
+                android:hint="@string/match_number"
+                android:inputType="number"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:paddingLeft="@dimen/inner_padding_left"
+                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingTop="@dimen/default_padding_top"
+                android:singleLine="true"
+                app:met_floatingLabel="normal" />
+
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/scout_pos_spin"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Right"
-                android:textSize="18sp"
-                android:padding="8dp"
-                android:id="@+id/rightStart"/>
+                android:layout_below="@id/match_num_field"
+                android:hint="@string/scout_position"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:paddingLeft="@dimen/inner_padding_left"
+                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingTop="@dimen/default_padding_top" />
 
-        </RadioGroup>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/team_num_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scout_pos_spin"
+                android:hint="@string/team_number"
+                android:inputType="number"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:paddingLeft="@dimen/inner_padding_left"
+                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingTop="@dimen/default_padding_top"
+                android:singleLine="true"
+                app:met_floatingLabel="normal" />
 
-        <Button
-            android:id="@+id/prematch_continue"
-            android:layout_below="@id/startingPosition"
-            android:elevation="6dp"
-            android:theme="@style/Widget.AppCompat.Button.Colored.blue"
-            android:textColor="#ffffff"
-            android:text="@string/continue_button"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"/>
+
+            <RadioGroup
+                android:id="@+id/startingPosition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/team_num_field"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Robot starting position (from driver POV)"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/leftStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Left"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/centerStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Center"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rightStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Right"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/prematch_continue"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/startingPosition"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:elevation="6dp"
+                android:text="@string/continue_button"
+                android:textColor="#ffffff"
+                android:theme="@style/Widget.AppCompat.Button.Colored.blue" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
     </ScrollView>
 </LinearLayout>

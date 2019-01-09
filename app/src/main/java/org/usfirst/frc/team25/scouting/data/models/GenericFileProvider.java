@@ -6,4 +6,5 @@ import android.support.v4.content.FileProvider;
  * Created by sng on 2/18/2018.
  */
 
-public class GenericFileProvider extends FileProvider {}
+public class GenericFileProvider extends FileProvider {
+}
