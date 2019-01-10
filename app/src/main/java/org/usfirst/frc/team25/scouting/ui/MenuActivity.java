@@ -74,10 +74,10 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
         else setContentView(R.layout.activity_menu);
 
 
-        ImageButton addEntry = findViewById(R.id.menu1_button);
-        ImageButton share = findViewById(R.id.menu2_button);
-        ImageButton rules = findViewById(R.id.menu3_button);
-        ImageButton settings = findViewById(R.id.menu4_button);
+        ImageButton addEntry = findViewById(R.id.add_entry_button);
+        ImageButton share = findViewById(R.id.export_data_button);
+        ImageButton rules = findViewById(R.id.rules_button);
+        ImageButton settings = findViewById(R.id.settings_button);
         status = findViewById(R.id.current_info_label);
 
         addEntry.setOnClickListener(view -> {

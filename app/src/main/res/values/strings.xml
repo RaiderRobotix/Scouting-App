@@ -79,6 +79,7 @@
         <item>"Blue Alliance"</item>
     </string-array>
 
+    <!--Settings menu strings -->
     <string name="delete_files_prompt">Delete scouting data?</string>
     <string name="delete_files_warn">Warning: This action cannot be reversed. Do you really want to delete all scouting data from this device?</string>
     <string name="delete_button">Delete</string>
@@ -87,12 +88,18 @@
     <string name="confirm_pass_hint">Confirm new password</string>
     <string name="cancel_button">Cancel</string>
 
-
+    <!-- Change password submenu -->
     <string name="confirm_old_pass">Confirm old password</string>
     <string name="confirm_button">Confirm</string>
     <string name="set_pass_prompt">Set new password</string>
     <string name="set_button">Set </string>
     <string name="continue_button">Continue</string>
+
+    <!-- Custom views -->
+    <string name="button_timer_start">Start</string>
+    <string name="minus_button">-</string>
+    <string name="plus_button">+</string>
+    <string name="button_timer_default_val">0.00 sec</string>
 
 
 </resources>
