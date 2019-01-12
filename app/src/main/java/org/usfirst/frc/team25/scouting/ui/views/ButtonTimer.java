@@ -79,7 +79,7 @@ public class ButtonTimer extends RelativeLayout {
 
     private void initializeViews(Context c) {
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.button_timer_view, this);
+        inflater.inflate(R.layout.view_button_timer, this);
     }
 
     /**

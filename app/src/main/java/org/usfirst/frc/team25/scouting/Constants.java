@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Constants {
 
-    public static final String GAME_NAME = "FIRST Power Up";
+    public static final String GAME_NAME = "Destination: Deep Space";
 
     /**
      * Follows a modified version of {@link <a href="https://semver.org/">Semantic Versioning</a>}, where
@@ -17,11 +17,11 @@ public class Constants {
      * Version 1.0 was created for the 2017 FRC season (FIRST Steamworks).
      */
     public static final double VERSION_NUMBER = 2.12;
-    public static final String RULES_FILEPATH = "Power Up Cheatsheet.pdf";
+    public static final String RULES_FILEPATH = "Deep Space Cheatsheet.pdf";
     /**
      * Contains the GitHub username of the repository owner, followed by a forward slash
      * and the repository name ("Scouting-App")
      */
-    public static final String REPOSITORY_NAME = "spencerng/Scouting-App";
+    public static final String REPOSITORY_NAME = "RaiderRobotix/Scouting-App";
     public static HashMap<String, String> EVENT_KEY = new HashMap<>();
 }

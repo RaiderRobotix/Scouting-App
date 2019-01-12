@@ -1,4 +1,4 @@
-# FRC Scouting App [![Build Status](https://travis-ci.org/spencerng/Scouting-App.svg?branch=master)](https://travis-ci.org/spencerng/Scouting-App)
+# FRC Scouting App [![Build Status](https://travis-ci.org/RaiderRobotix/Scouting-App.svg?branch=master)](https://travis-ci.org/RaiderRobotix/Scouting-App)
 
 Team 25's base scouting app for the 2017 FRC season and beyond
 
@@ -35,10 +35,10 @@ A cheat sheet of the game rules (usually the one created by Andy Smith from Team
 * **Current event** - current event that is being scouted. It is critical that this does not change throughout an event, as the event data is downloaded for and the file to which data is saved is dependent on this value.
 * **Year** - current season, automatically updated based on the system calendar. The downloaded event data is dependent on this value.
 
-#### Game-specific settings (*FIRST* Power Up)
+#### Game-specific settings (Destination: Deep Space)
 
 * **Left alliance color** - the left alliance station color, from the scouter's point of view. Determines the orientation of the plate lighting graphic when adding match data.
-* **Timer increment amount** - adjusts the precision of manual timer increments when adding match data. Also changeable in the data entry interface
+
 
 #### Data transfer
 
@@ -65,46 +65,22 @@ Contains all information that can be obtained before the match starts, with all 
 
 Changing the scout name, match number, and scouting position will save those settings for future matches.
 
-#### Autonomous
+#### Sandstorm
 
-Contains all robot actions during autonomous. Usually specific to each game, though tasks may be similar between seasons (such as reaching a baseline/auto line)
+Contains all robot actions during the sandstorm. Usually specific to each game, though tasks may be similar between seasons (such as reaching a baseline/auto line)
 
-* Reached auto line
-* Own switch plate cubes
-* Own scale plate cubes
-* Exchange cubes
-* Accidentally dropped cubes
-* Cube(s) dropped on opponent plate(s) - selecting this enables the below two options to be selected
-  * Opponent plate of own switch
-  * Opponent scale plate
-* Cubes picked up from power cube pile
-* Cubes picked up from next to switch
-* Passed null territory or went into opponent's null territory
 
 #### Tele-Op
 
 Contains all robot actions during tele-op, including the endgame. Also includes general field info that must be determined during the match, not before or after, as well as increment adjustment settings.
 
-* Time to deliver first cube - how long a robot takes to complete its first full cycle. The timer is started at the beginning of tele-op if the robot ends autonomous with no cube in its intake, or when it first releases a cube. The timer is ended once the robot delivers the first cube it picks up in tele-op.
-* Plate configuration - a grpahic is displayed with a valid field lighting configuration. Tap the image to cycle through the four different possibilities, then leave the one that matches with the field
-* Own switch cubes
-* Scale cubes
-* Opponent switch cubes
-* Exchange cubes
-* Dropped cubes
-* Parked on platform
-* Attempts to climb on rung - selecting this option enables the successful in attempt input.
-* Successful in attempt - selecting this option disables the parked input.
-* Climbs assisted
-* Climbs on other robot - selecting this enables type of robot climbed on, which must be filled in
-* Type of robot climbed on (ramp bot, robot with rung, iron cross, single lift, other)
-* Timer manual increment - provides an easy way to modify the setting without exiting to the settings menu
+
 
 #### Postmatch
 
 Contains subjective options that reflect on the robot's performance as a whole
 
-* Tele-op primary focus(es) (own switch, opponent switch, scale, vault, defense)
+* Tele-op primary focus(es) 
 * Robot and driver comments - contain common, "quick" comments as well as a free-response input
 * Pick number - would the robot be a good 1st, 2nd, or not a good pick? Criteria changes throughout the season, as the level of competition increases.
 * Robot comparison - prompts the scout to compare the robot playing in the current match to the one that he/she scouted in the previous match. Prompt is hidden during the first match.

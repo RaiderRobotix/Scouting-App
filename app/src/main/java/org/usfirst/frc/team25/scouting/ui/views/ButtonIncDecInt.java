@@ -66,7 +66,7 @@ public class ButtonIncDecInt extends RelativeLayout {
 
     private void initializeViews(Context c) {
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.button_inc_view, this);
+        inflater.inflate(R.layout.view_button_inc_dec, this);
     }
 
     /**
