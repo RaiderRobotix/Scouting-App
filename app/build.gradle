@@ -9,7 +9,7 @@ android {
           abortOnError false
     }
     compileSdkVersion 27
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId 'org.usfirst.frc.team25.scouting'
         minSdkVersion 21
