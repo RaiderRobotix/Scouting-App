@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.usfirst.frc.team25.scouting.Constants;
+import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Release;
 
 import java.io.BufferedReader;
@@ -55,7 +55,8 @@ public class UpdateChecker extends AsyncTask<String, Integer, Boolean> {
     protected java.lang.Boolean doInBackground(java.lang.String... arg0) {
 
         try {
-            URL url = new URL("https://api.github.com/repos/" + Constants.REPOSITORY_NAME + "/releases/latest");
+            URL url = new URL("https://api.github.com/repos/"
+                    + context.getString(R.string.repository_name) + "/releases/latest");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
@@ -73,10 +74,11 @@ public class UpdateChecker extends AsyncTask<String, Integer, Boolean> {
             this.release = new Gson().fromJson(respStr, Release.class);
 
 
-            if (!release.getTagName().equals("v" + Constants.VERSION_NUMBER))
+            if (!release.getTagName().equals(context.getString(R.string.version_number))) {
                 return true;
-            else
+            } else {
                 new File(Environment.getExternalStorageDirectory() + "/Download/" + release.getAssets()[0].getName()).delete();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

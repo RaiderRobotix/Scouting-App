@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 
-import org.usfirst.frc.team25.scouting.Constants;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatActivity;
 
@@ -26,7 +25,7 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
         rulesView = findViewById(R.id.pdfView);
 
         try {
-            rulesView.fromAsset(Constants.RULES_FILEPATH) //ensure that the PDF in /assets is replaced
+            rulesView.fromAsset(getString(R.string.cheatsheet_filename))
                     .defaultPage(1)
                     .showMinimap(false)
                     .swipeVertical(true)
@@ -34,7 +33,8 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
 
         } catch (NullPointerException e) {
 
-            Toast.makeText(RulesActivity.this, "PDF File not found", Toast.LENGTH_LONG).show();
+            Toast.makeText(RulesActivity.this, "PDF File not found", Toast.LENGTH_LONG)
+                    .show();
             e.printStackTrace();
         }
     }
@@ -42,6 +42,6 @@ public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setTitle(Constants.GAME_NAME + " Rules");
+        setTitle(getString(R.string.game_name) + " Rules");
     }
 }

@@ -45,7 +45,7 @@
             android:layout_below="@id/add_entry_button"
             android:layout_centerHorizontal="true"
             android:enabled="true"
-            android:text="@string/menu_1"
+            android:text="@string/add_match_menu_label"
 
             android:textAlignment="center"
             android:textColor="@color/bright_foreground_material_light"
@@ -80,7 +80,7 @@
             android:layout_below="@+id/export_data_button"
             android:layout_centerHorizontal="true"
             android:enabled="true"
-            android:text="@string/menu_2"
+            android:text="@string/export_data_menu_label"
 
             android:textAlignment="center"
             android:textColor="@color/bright_foreground_material_light"
@@ -117,7 +117,7 @@
             android:layout_below="@+id/rules_button"
             android:layout_centerHorizontal="true"
             android:enabled="true"
-            android:text="@string/menu_3"
+            android:text="@string/rules_menu_label"
 
             android:textAlignment="center"
             android:textColor="@color/bright_foreground_material_light"
@@ -154,7 +154,7 @@
             android:layout_below="@+id/settings_button"
             android:layout_centerHorizontal="true"
             android:enabled="true"
-            android:text="@string/menu_4"
+            android:text="@string/settings_menu_label"
 
             android:textAlignment="center"
             android:textColor="@color/bright_foreground_material_light"

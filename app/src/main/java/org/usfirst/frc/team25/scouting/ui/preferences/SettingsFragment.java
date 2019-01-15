@@ -10,7 +10,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
-import org.usfirst.frc.team25.scouting.Constants;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -66,8 +65,8 @@ public class SettingsFragment extends PreferenceFragment {
 
         updateSummary();
 
-        game.setSummary(Constants.GAME_NAME);
-        version.setSummary("v" + Constants.VERSION_NUMBER);
+        game.setSummary(getString(R.string.game_name));
+        version.setSummary(getString(R.string.version_number));
 
         matchNum.setMaxValue(Settings.newInstance(getActivity()).getMaxMatchNum());
         shiftDur.setMaxValue(25);
