@@ -1,0 +1,126 @@
+<resources>
+
+    <!-- Versioning constants -->
+    <string name="app_name">Raider Deep Space Scout</string>
+    <string name="game_name">Destination: Deep Space</string>
+
+    <!--Follows a modified version of Semantic Versioning, where
+        there is no dot separator between minor and patch version numbers. Patch versions are incremented whenever
+        a bug is fixed or non-metric related features are added, minor versions when metrics are added/removed,
+        and major versions between seasons. If a release is the first minor version (e.g. v2.1),
+        note that there is no trailing zero for the patch version. Tags on GitHub follow the same scheme,
+        except the letter "v" is appended to the version number.
+        Version 1.0 was created for the 2017 FRC season (FIRST Steamworks).-->
+    <string name="version_number">v2.12</string>
+
+    <!-- Name of the cheatsheet file in /assets-->
+    <string name="cheatsheet_filename">Deep Space Cheatsheet.pdf</string>
+
+    <!-- Contains the GitHub username of the repository owner, followed by a forward slash
+         and the repository name ("Scouting-App")-->
+    <string name="repository_name">RaiderRobotix/Scouting-App</string>
+
+
+    <!--Main Menu-->
+    <string name="add_match_menu_label">Add Match</string>
+    <string name="export_data_menu_label">Export Data</string>
+    <string name="rules_menu_label">Rules</string>
+    <string name="settings_menu_label">Settings</string>
+    <string name="default_status">Red 1 - Match 1 - Event</string>
+
+    <!--Add Match Interface-->
+    <string name="team_number">Team number</string>
+    <string name="team_number_prompt">Enter team number</string>
+    <string name="auto">Autonomous</string>
+    <string name="tele">Tele-Op</string>
+    <string name="post">Post Game</string>
+
+    <string name="finish_button">Finish</string>
+
+    <!--Settings Menu Strings-->
+    <string name="scout_name">Scout name</string>
+    <string name="match_number">Match number</string>
+    <string name="event">Current event</string>
+    <string name="match_type">Match type</string>
+    <string name="scout_position">Scouting position</string>
+    <string name="year">Current year</string>
+    <string name="change_pass">Change password</string>
+    <string name="delete_data">Delete scouting data</string>
+    <string name="shift_dur">Shift duration</string>
+
+    <!--Scout Position Spinner Options-->
+    <string-array name="position_options">
+        <item>"Red 1"</item>
+        <item>"Red 2"</item>
+        <item>"Red 3"</item>
+        <item>"Blue 1"</item>
+        <item>"Blue 2"</item>
+        <item>"Blue 3"</item>
+    </string-array>
+
+    <!--Event Spinner Options-->
+    <string-array name="event_options">
+        <item>"Mount Olive"</item>
+        <item>"Montgomery"</item>
+        <item>"Mid-Atlantic District Championship</item>
+        <item>"FIRST Championship"</item>
+        <item>"Brunswick Eruption"</item>
+        <item>"Week 0"</item>
+    </string-array>
+
+    <string-array name="event_options_values">
+        <item>"njfla"</item>
+        <item>"njski"</item>
+        <item>"mrcmp"</item>
+        <item>"cars"</item>
+        <item>"njbe"</item>
+        <item>"week0</item>
+    </string-array>
+
+    <!--Match Type Spinner Options-->
+    <string-array name="match_types">
+        <item>"Practice"</item>
+        <item>"Qualifier"</item>
+        <!--<item>"Quarter Final"</item>
+        <item>"Semi Final"</item>
+        <item>"Final"</item>-->
+    </string-array>
+
+    <string-array name="match_types_values">
+        <item>"P"</item>
+        <item>"Q"</item>
+        <!--<item>"QF"</item>
+        <item>"SF"</item>
+        <item>"F"</item>-->
+    </string-array>
+
+    <string-array name="alliance_type">
+        <item>"Red Alliance"</item>
+        <item>"Blue Alliance"</item>
+    </string-array>
+
+    <!--Settings menu strings -->
+    <string name="delete_files_prompt">Delete scouting data?</string>
+    <string name="delete_files_warn">Warning: This action cannot be reversed. Do you really want to delete all scouting data from this device?</string>
+    <string name="delete_button">Delete</string>
+    <string name="password_prompt">Enter password</string>
+    <string name="new_pass_hint">Enter new password</string>
+    <string name="confirm_pass_hint">Confirm new password</string>
+    <string name="cancel_button">Cancel</string>
+
+    <!-- Change password submenu -->
+    <string name="confirm_old_pass">Confirm old password</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="set_pass_prompt">Set new password</string>
+    <string name="set_button">Set</string>
+    <string name="continue_button">Continue</string>
+
+    <!-- Custom views -->
+    <string name="button_timer_start">Start</string>
+    <string name="minus_button">-</string>
+    <string name="plus_button">+</string>
+    <string name="button_timer_default_val">0.00 sec</string>
+
+</resources>
+
+
