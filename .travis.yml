@@ -33,8 +33,8 @@ android:
     - addon-google_apis-google-27
 install: nvm install 7
 before_script:
-# Create and start emulator.
-- echo no | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-- emulator -avd test -no-window &
-- android-wait-for-emulator
-- adb shell input keyevent 82 &
+  # Create and start emulator.
+  - echo no | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI
+  - emulator -avd test -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
