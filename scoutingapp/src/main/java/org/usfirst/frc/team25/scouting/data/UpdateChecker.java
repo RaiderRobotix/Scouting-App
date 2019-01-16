@@ -25,6 +25,7 @@ import java.net.URL;
 
 /**
  * Created by sng on 2/18/2018.
+ * Checks for scouting app updates via GitHub releases
  */
 
 
@@ -36,19 +37,6 @@ public class UpdateChecker extends AsyncTask<String, Integer, Boolean> {
 
     public UpdateChecker(Context c) {
         this.context = c;
-    }
-
-    @Override
-    protected void onPostExecute(Boolean result) {
-
-        if (result)
-            new AlertDialog.Builder(context)
-                    .setTitle("App update available")
-                    .setMessage("A new version of the app is available. Would you like to update it now?")
-                    .setPositiveButton("Get update", (dialog, which) -> new AppDownloader(context, release.getAssets()[0]).execute())
-                    .setNegativeButton("Remind me later", (dialog, which) -> Toast.makeText(context, "Reminder set for next app launch", Toast.LENGTH_SHORT).show())
-                    .create()
-                    .show();
     }
 
     @Override
@@ -77,22 +65,45 @@ public class UpdateChecker extends AsyncTask<String, Integer, Boolean> {
             if (!release.getTagName().equals(context.getString(R.string.version_number))) {
                 return true;
             } else {
-                new File(Environment.getExternalStorageDirectory() + "/Download/" + release.getAssets()[0].getName()).delete();
+                new File(Environment.getExternalStorageDirectory() + "/Download/" +
+                        release.getAssets()[0].getName()).delete();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+
+        // Returns if download was successful or not
         return false;
     }
+
+    @Override
+    protected void onPostExecute(Boolean result) {
+
+        if (result) {
+            new AlertDialog.Builder(context)
+                    .setTitle("App update available")
+                    .setMessage("A new version of the app is available. Would you like to update " +
+                            "it now?")
+                    .setPositiveButton("Get update", (dialog, which) ->
+                            new AppDownloader(context, release.getAssets()[0]).execute())
+                    .setNegativeButton("Remind me later", (dialog, which) ->
+                            Toast.makeText(context, "Reminder set for next app launch",
+                                    Toast.LENGTH_SHORT).show())
+                    .create()
+                    .show();
+        }
+    }
+
+
 }
 
 
 class AppDownloader extends AsyncTask<String, Integer, Boolean> {
     private final Context context;
     private final Release.Asset asset;
-    private ProgressDialog bar;
+    private ProgressDialog progressBar;
     private String location;
 
     AppDownloader(Context c, Release.Asset asset) {
@@ -103,22 +114,22 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        bar = new ProgressDialog(context);
-        bar.setCancelable(false);
+        progressBar = new ProgressDialog(context);
+        progressBar.setCancelable(false);
 
-        bar.setMessage("Downloading...");
+        progressBar.setMessage("Downloading...");
 
-        bar.setIndeterminate(true);
-        bar.setCanceledOnTouchOutside(false);
-        bar.show();
+        progressBar.setIndeterminate(true);
+        progressBar.setCanceledOnTouchOutside(false);
+        progressBar.show();
     }
 
     protected void onProgressUpdate(Integer... progress) {
         super.onProgressUpdate(progress);
 
-        bar.setIndeterminate(false);
-        bar.setMax(100);
-        bar.setProgress(progress[0]);
+        progressBar.setIndeterminate(false);
+        progressBar.setMax(100);
+        progressBar.setProgress(progress[0]);
         String msg;
         if (progress[0] > 99) {
 
@@ -128,7 +139,7 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
 
             msg = "Downloading... " + progress[0] + "%";
         }
-        bar.setMessage(msg);
+        progressBar.setMessage(msg);
 
     }
 
@@ -143,11 +154,11 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
             c.connect();
 
 
-            java.lang.String PATH = Environment.getExternalStorageDirectory() + "/Download/";
-            File file = new File(PATH);
+            String downloadPath = Environment.getExternalStorageDirectory() + "/Download/";
+            File file = new File(downloadPath);
             file.mkdirs();
 
-            java.lang.String fileName = asset.getName();
+            String fileName = asset.getName();
 
             File outputFile = new File(file, fileName);
 
@@ -164,7 +175,7 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
             }
             InputStream is = c.getInputStream();
 
-            int total_size = 1431692;//size of apk
+            int totalSize = 1431692;//size of apk
 
             byte[] buffer = new byte[1024];
 
@@ -178,8 +189,8 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
             fos.close();
             is.close();
 
-            openNewVersion(PATH, fileName);
-            this.location = PATH + fileName;
+            openNewVersion(downloadPath, fileName);
+            this.location = downloadPath + fileName;
 
             return true;
         } catch (Exception e) {
@@ -188,23 +199,20 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
         }
     }
 
-    private void openNewVersion(java.lang.String location, java.lang.String fileName) {
+    private void openNewVersion(String location, String fileName) {
         Uri uri = Uri.parse("file://" + location + fileName);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
 
         context.startActivity(intent);
-
-
     }
 
 
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        bar.dismiss();
-        //new File(location).delete();
+        progressBar.dismiss();
     }
 }
 

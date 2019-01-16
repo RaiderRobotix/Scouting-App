@@ -13,7 +13,8 @@ import android.widget.TextView;
 import org.usfirst.frc.team25.scouting.R;
 
 /**
- * Custom ViewGroup to increment or decrement a value with two buttons and a label, placed to the left.
+ * Custom ViewGroup to increment or decrement a value with two buttons and a label, placed to the
+ * left.
  * Minimum value is 0, with methods to set label text and initial value.
  */
 public class ButtonIncDecInt extends RelativeLayout {
@@ -27,7 +28,8 @@ public class ButtonIncDecInt extends RelativeLayout {
     public ButtonIncDecInt(Context c, AttributeSet attrs) {
         super(c, attrs);
         initializeViews(c);
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ButtonIncDecInt);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
+                R.styleable.ButtonIncDecInt);
 
         //XML attributes that can be set in layout files, rather than programmatically
         setValue(typedArray.getInteger(R.styleable.ButtonIncDecInt_initialValue, 0));
@@ -40,13 +42,10 @@ public class ButtonIncDecInt extends RelativeLayout {
 
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_UP) {
-            if (listener != null) listener.onClick(this);
-        }
-
-        return super.dispatchTouchEvent(ev);
+    private void initializeViews(Context c) {
+        LayoutInflater inflater =
+                (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.view_button_inc_dec, this);
     }
 
     @Override
@@ -62,9 +61,13 @@ public class ButtonIncDecInt extends RelativeLayout {
         this.listener = listener;
     }
 
-    private void initializeViews(Context c) {
-        LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.view_button_inc_dec, this);
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_UP && listener != null) {
+            listener.onClick(this);
+        }
+
+        return super.dispatchTouchEvent(ev);
     }
 
     /**

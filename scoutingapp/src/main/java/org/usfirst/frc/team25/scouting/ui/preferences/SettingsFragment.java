@@ -3,7 +3,6 @@ package org.usfirst.frc.team25.scouting.ui.preferences;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -23,40 +22,35 @@ import org.usfirst.frc.team25.scouting.ui.views.NumberPickerPreference;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    CheckBoxPreference useTeamList;
-    private ListPreference matchType;
-    private ListPreference event;
     private ListPreference leftStation;
-    private Preference deleteFiles;
-    private Preference changePass;
     private Preference year;
-    private Preference downloadSchedule;
-    private Preference game;
-    private Preference version; // Buttons that hold a value, but do not prompt a dialogue
-    private NumberPickerPreference matchNum;
-    private NumberPickerPreference shiftDur;
+    private NumberPickerPreference matchNum, shiftDur;
     private DecimalPickerPreference timerManualInc;
     private EditTextPreference scoutNameInput;
-    private Settings set;
+    private Settings settings;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         addPreferencesFromResource(R.xml.preferences);
-        set = Settings.newInstance(getActivity());
+        settings = Settings.newInstance(getActivity());
 
         shiftDur = (NumberPickerPreference) findPreference("shift_dur");
         scoutNameInput = (EditTextPreference) findPreference("scout_name");
-        matchType = (ListPreference) findPreference("match_type");
+        ListPreference matchType = (ListPreference) findPreference("match_type");
         matchNum = (NumberPickerPreference) findPreference("match_num");
-        event = (ListPreference) findPreference("event");
-        deleteFiles = findPreference("delete_data");
-        changePass = findPreference("change_pass");
+        ListPreference event = (ListPreference) findPreference("event");
+        Preference deleteFiles = findPreference("delete_data");
+        Preference changePass = findPreference("change_pass");
         year = findPreference("year");
-        downloadSchedule = findPreference("download_schedule");
-        game = findPreference("game");
-        version = findPreference("version");
+
+        Preference downloadSchedule = findPreference("download_schedule");
+        Preference game = findPreference("game");
+        // Buttons that hold a value, but do not prompt a dialogue
+        Preference version = findPreference("version");
         leftStation = (ListPreference) findPreference("leftStation");
+
         timerManualInc = (DecimalPickerPreference) findPreference("timer_manual_inc");
 
         updateSummary();
@@ -72,7 +66,8 @@ public class SettingsFragment extends PreferenceFragment {
             matchNum = (NumberPickerPreference) findPreference("match_num");
             matchNum.setValue(1); //Resets match number
 
-            return true;// A false value means the preference change is not saved
+            return true;
+            // A false value means the preference change is not saved
         });
 
 
@@ -84,8 +79,9 @@ public class SettingsFragment extends PreferenceFragment {
 
 
         deleteFiles.setOnPreferenceClickListener(preference -> {
-            if (set.getHashedPass().equals("DEFAULT"))
-                Toast.makeText(getActivity(), "Password needs to be set before deleting data", Toast.LENGTH_SHORT).show();
+            if (settings.getHashedPass().equals("DEFAULT"))
+                Toast.makeText(getActivity(), "Password needs to be settings before deleting data",
+                        Toast.LENGTH_SHORT).show();
 
             else {
                 Intent i = new Intent(getActivity(), EnterPasswordActivity.class);
@@ -98,11 +94,11 @@ public class SettingsFragment extends PreferenceFragment {
 
         changePass.setOnPreferenceClickListener(preference -> {
             Intent i;
-            if (set.getHashedPass().equals("DEFAULT"))
+            if (settings.getHashedPass().equals("DEFAULT")) {
                 i = new Intent(getActivity(), SetPasswordActivity.class);
-
-            else i = new Intent(getActivity(), ConfirmPasswordActivity.class);
-
+            } else {
+                i = new Intent(getActivity(), ConfirmPasswordActivity.class);
+            }
             startActivity(i);
 
             return true;
@@ -128,14 +124,18 @@ public class SettingsFragment extends PreferenceFragment {
      */
     void updateSummary() {
         try {
-            Settings.newInstance(getActivity()).setMaxMatchNum(FileManager.getMaxMatchNum(getActivity())); //Automates maximum match number based on current event
-            shiftDur.setSummary(String.valueOf(set.getShiftDur()) + " matches");
-            scoutNameInput.setSummary(set.getScoutName());
-            matchNum.setSummary(String.valueOf(set.getMatchNum()));
-            year.setSummary(set.getYear());
-            set.setYear();
+
+            //Automates maximum match number based on current event
+            Settings.newInstance(getActivity()).setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
+
+            shiftDur.setSummary(String.valueOf(settings.getShiftDur()) + " matches");
+            scoutNameInput.setSummary(settings.getScoutName());
+            matchNum.setSummary(String.valueOf(settings.getMatchNum()));
+            year.setSummary(settings.getYear());
+            settings.setYear();
             leftStation.setSummary(leftStation.getValue());
-            timerManualInc.setSummary(set.getTimerManualInc() + " sec");
+            timerManualInc.setSummary(settings.getTimerManualInc() + " sec");
+
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

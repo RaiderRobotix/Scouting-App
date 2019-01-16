@@ -31,7 +31,7 @@ import java.io.File;
  */
 public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
-    private TextView status;
+    private TextView statusText;
 
     //Executes when application is first launched
     @Override
@@ -49,19 +49,19 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
             setContentView(R.layout.activity_menu);
         }
 
-        ImageButton addEntry = findViewById(R.id.add_entry_button);
-        ImageButton share = findViewById(R.id.export_data_button);
-        ImageButton rules = findViewById(R.id.rules_button);
-        ImageButton settings = findViewById(R.id.settings_button);
-        status = findViewById(R.id.current_info_label);
+        ImageButton addEntryButton = findViewById(R.id.add_entry_button);
+        ImageButton shareButton = findViewById(R.id.export_data_button);
+        ImageButton rulesButton = findViewById(R.id.rules_button);
+        ImageButton settingsButton = findViewById(R.id.settings_button);
+        statusText = findViewById(R.id.current_info_label);
 
-        addEntry.setOnClickListener(view -> {
+        addEntryButton.setOnClickListener(view -> {
             //Good model on how to start a new activity
             Intent i = new Intent(MenuActivity.this, AddEntryActivity.class);
             startActivity(i);
         });
 
-        share.setOnClickListener(view -> {
+        shareButton.setOnClickListener(view -> {
             try {
                 File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
                         FileManager.DIRECTORY_DATA);
@@ -92,13 +92,13 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
             }
         });
 
-        rules.setOnClickListener(view -> {
+        rulesButton.setOnClickListener(view -> {
             Intent i = new Intent(MenuActivity.this, RulesActivity.class);
             startActivity(i);
 
         });
 
-        settings.setOnClickListener(view -> {
+        settingsButton.setOnClickListener(view -> {
             Intent i = new Intent(MenuActivity.this, SettingsActivity.class);
             startActivity(i);
         });
@@ -169,7 +169,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
                 set.getScoutName() + " - " + set.getScoutPos() + " - Match " + set.getMatchType() + set.getMatchNum();
         if (info.contains("DEFAULT")) //App settings not yet changed
             info = "";
-        status.setText(info);
+        statusText.setText(info);
     }
 
 

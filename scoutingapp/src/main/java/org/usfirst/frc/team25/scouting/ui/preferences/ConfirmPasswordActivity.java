@@ -11,7 +11,7 @@ import org.usfirst.frc.team25.scouting.data.Settings;
 /**
  * Activity that prompts users to enter the old password before setting a new one
  * This activity follows the same layout and behavior of the EnterPasswordActivity, only with
- * different button labels and confirm/delete button behavior
+ * different button labels and confirm/deleteButton button behavior
  *
  * @see EnterPasswordActivity
  */
@@ -26,9 +26,9 @@ public class ConfirmPasswordActivity extends EnterPasswordActivity {
 
 
         title.setText(R.string.confirm_old_pass);
-        delete.setText(R.string.confirm_button);
+        deleteButton.setText(R.string.confirm_button);
 
-        delete.setOnClickListener(view -> {
+        deleteButton.setOnClickListener(view -> {
             String password = passwordField.getText().toString();
 
             if (Settings.newInstance(getBaseContext()).matchesPassword(password)) {

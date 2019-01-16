@@ -13,15 +13,13 @@ import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatAct
  */
 public class RulesActivity extends NoBackgroundPortraitAppCompatActivity {
 
-    //From the PDFView library
-    private PDFView rulesView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
 
-        rulesView = findViewById(R.id.pdfView);
+        PDFView rulesView = findViewById(R.id.pdfView);
 
         try {
             rulesView.fromAsset(getString(R.string.cheatsheet_filename))

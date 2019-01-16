@@ -13,10 +13,8 @@ import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatAct
 // Activity that sets a new password
 public class SetPasswordActivity extends NoBackgroundPortraitAppCompatActivity {
 
-    private MaterialEditText newPass;
-    private MaterialEditText confirmPass;
-    private Button cancel;
-    private Button set;
+    private MaterialEditText newPassswordField;
+    private MaterialEditText confirmPasswordField;
 
 
     @Override
@@ -26,22 +24,23 @@ public class SetPasswordActivity extends NoBackgroundPortraitAppCompatActivity {
         setTitle("Change Password");
         setContentView(R.layout.activity_set_password);
 
-        newPass = findViewById(R.id.new_pass_box);
-        confirmPass = findViewById(R.id.confirm_new_pass_box);
-        cancel = findViewById(R.id.cancel_button);
-        set = findViewById(R.id.set_pass_button);
+        newPassswordField = findViewById(R.id.new_pass_box);
+        confirmPasswordField = findViewById(R.id.confirm_new_pass_box);
+        Button cancelButton = findViewById(R.id.cancel_button);
+        Button setPasswordButton = findViewById(R.id.set_pass_button);
 
-        cancel.setOnClickListener(view -> finish());
+        cancelButton.setOnClickListener(view -> finish());
 
-        set.setOnClickListener(view -> {
-            if (newPass.getText().toString().equals(""))
-                newPass.setError("Password cannot be empty");
-
-            else if (newPass.getText().toString().equals(confirmPass.getText().toString())) {
-                Settings.newInstance(getBaseContext()).setPassword(newPass.getText().toString());
+        setPasswordButton.setOnClickListener(view -> {
+            if (newPassswordField.getText().toString().equals("")) {
+                newPassswordField.setError("Password cannot be empty");
+            } else if (newPassswordField.getText().toString().equals(confirmPasswordField.getText().toString())) {
+                Settings.newInstance(getBaseContext()).setPassword(newPassswordField.getText().toString());
                 Toast.makeText(SetPasswordActivity.this, "Password changed", Toast.LENGTH_SHORT).show();
                 finish();
-            } else confirmPass.setError("Passwords mismatch");
+            } else {
+                confirmPasswordField.setError("Passwords mismatch");
+            }
         });
     }
 }

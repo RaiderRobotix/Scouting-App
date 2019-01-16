@@ -15,21 +15,21 @@ import org.usfirst.frc.team25.scouting.ui.views.AppCompatPreferenceActivity;
 
 public class SettingsActivity extends AppCompatPreferenceActivity implements OnSharedPreferenceChangeListener {
 
-    private SharedPreferences preferences;
-    private SettingsFragment sf;
+    private SettingsFragment settingsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        sf = new SettingsFragment();
+        settingsFragment = new SettingsFragment();
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, sf)
+                .replace(android.R.id.content, settingsFragment)
                 .commit();
 
         setTheme(R.style.AppTheme_NoLauncher_Blue);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         preferences.registerOnSharedPreferenceChangeListener(this);
         setTitle("Settings");
     }
@@ -39,7 +39,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements OnS
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.i("prefs", "Settings successfully changed");
 
-        sf.updateSummary();
+        settingsFragment.updateSummary();
     }
 
     @Override

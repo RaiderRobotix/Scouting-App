@@ -26,15 +26,11 @@ public class AutoFragment extends Fragment implements EntryFragment {
     private ScoutEntry entry;
 
 
-    public AutoFragment() {
-        // Required empty public constructor
-
-    }
 
     public static AutoFragment getInstance(ScoutEntry entry) {
-        AutoFragment af = new AutoFragment();
-        af.setEntry(entry);
-        return af;
+        AutoFragment autoFragment = new AutoFragment();
+        autoFragment.setEntry(entry);
+        return autoFragment;
     }
 
     @Override
@@ -53,7 +49,8 @@ public class AutoFragment extends Fragment implements EntryFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
@@ -120,7 +117,9 @@ public class AutoFragment extends Fragment implements EntryFragment {
             } else if (!shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
                 enableOpponentPlateLocationCheckboxes(false);
-            } else enableOpponentPlateLocationCheckboxes(false);
+            } else {
+                enableOpponentPlateLocationCheckboxes(false);
+            }
         });
 
 
@@ -187,14 +186,12 @@ public class AutoFragment extends Fragment implements EntryFragment {
     public void onResume() {
         super.onResume();
 
-        getActivity().setTitle("Add Entry - Autonomous");
-
+        getActivity().setTitle("Add Entry - Sandstorm");
     }
 
     @Override
     public void autoPopulate() {
         if (entry.getAuto() != null) {
-
 
             Autonomous prevAuto = entry.getAuto();
             enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());

@@ -38,7 +38,8 @@ public class FileManager {
     private static void backup(Context c) {
         try {
             File sourceDir = getDirectory();
-            File destDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath(), DIRECTORY_DATA + " - Backup");
+            File destDir =
+                    new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath(), DIRECTORY_DATA + " - Backup");
 
             MediaScannerConnection.scanFile(c, new String[]{destDir.toString()}, null, null);
             FileUtils.copyDirectory(sourceDir, destDir);
@@ -72,17 +73,12 @@ public class FileManager {
 
     }
 
-    /**
-     * Generates the filename for collected scouting data,
-     * based on the current event and scouting position
-     * Should be consistent with the desktop client
-     *
-     * @param c <code>Context</code> of the running stack
-     * @return The filename of the data file for the current event
-     */
-    public static String getDataFilename(Context c) {
-        Settings set = Settings.newInstance(c);
-        return "Data - " + set.getScoutPos() + " - " + set.getYear() + set.getCurrentEvent() + ".json";
+    private static File getDirectory() {
+        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+                DIRECTORY_DATA);
+        if (!directory.exists())
+            directory.mkdir();
+        return directory;
     }
 
     private static File getDataFilePath(Context c) {
@@ -279,8 +275,6 @@ public class FileManager {
     public static void addToTeamList(String teamNum, Context c) {
         try {
 
-            String existingData = "";
-
             File file = getTeamListFilePath(c);
 
             FileWriter writer = new FileWriter(file, true);
@@ -316,11 +310,18 @@ public class FileManager {
 
     }
 
-    private static File getDirectory() {
-        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DIRECTORY_DATA);
-        if (!directory.exists())
-            directory.mkdir();
-        return directory;
+    /**
+     * Generates the filename for collected scouting data,
+     * based on the current event and scouting position
+     * Should be consistent with the desktop client
+     *
+     * @param c <code>Context</code> of the running stack
+     * @return The filename of the data file for the current event
+     */
+    public static String getDataFilename(Context c) {
+        Settings set = Settings.newInstance(c);
+        return "Data - " + set.getScoutPos() + " - " + set.getYear() + set.getCurrentEvent() +
+                ".json";
     }
 
     /**
@@ -354,7 +355,7 @@ public class FileManager {
             Log.i("file export", "no previously existing data");
         }
 
-        if (!existingData.toString().equals("")) {
+        if (existingData.length() != 0) {
             Log.i("file export", "Attempting to parse data");
             entries = gson.fromJson(existingData.toString(), listEntries);
         }

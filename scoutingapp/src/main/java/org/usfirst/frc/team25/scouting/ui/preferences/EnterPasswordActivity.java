@@ -14,9 +14,9 @@ import org.usfirst.frc.team25.scouting.ui.views.NoBackgroundPortraitAppCompatAct
 // Activity in which one password is entered and confirmed, with error text if invalid
 public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity {
 
-    Button delete;
+    Button deleteButton;
     MaterialEditText passwordField;
-    private Button cancel;
+    private Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +24,14 @@ public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity
         setTitle("Delete Files");
         setContentView(R.layout.activity_enter_password);
 
-        cancel = findViewById(R.id.cancel_delete_button);
-        delete = findViewById(R.id.delete_file_button);
+        cancelButton = findViewById(R.id.cancel_delete_button);
+        deleteButton = findViewById(R.id.delete_file_button);
         passwordField = findViewById(R.id.delete_password_box);
 
 
-        cancel.setOnClickListener(view -> finish());
+        cancelButton.setOnClickListener(view -> finish());
 
-        delete.setOnClickListener(view -> {
+        deleteButton.setOnClickListener(view -> {
             String password = passwordField.getText().toString();
             if (Settings.newInstance(getBaseContext()).matchesPassword(password)) {
 
