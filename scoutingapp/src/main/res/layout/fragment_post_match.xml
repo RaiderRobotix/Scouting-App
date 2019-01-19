@@ -1,0 +1,227 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:fillViewport="true"
+    tools:context=".ui.dataentry.PostmatchFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/teleop_focus_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/inner_components_spacing"
+            android:text="Tele-Op primary focus(es)"
+            android:textSize="19sp" />
+
+        <RelativeLayout
+            android:id="@+id/teleop_focus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teleop_focus_text"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="@dimen/activity_vertical_margin">
+
+
+            <CheckBox
+                android:id="@+id/own_switch_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="Own switch"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/opponent_switch_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/own_switch_focus"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="Opponent switch"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/scale_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/opponent_switch_focus"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="Scale"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/vault_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scale_focus"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="Vault"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/defense_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vault_focus"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="Defense"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/robotDriverCommentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teleop_focus"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
+
+
+            <TextView
+                android:id="@+id/robotDriverQuickComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="Robot and driver comments"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/robotDriverQuickCommentHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/robotDriverQuickComment"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:text="Select these options, then fill in below"
+                android:textColor="@color/first_gray"
+                android:textSize="16sp" />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/robotDriverComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/robotDriverQuickCommentHint"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:hint="Additional robot and driver comments"
+                app:met_floatingLabel="normal" />
+        </RelativeLayout>
+
+
+        <RadioGroup
+            android:id="@+id/prev_team_comparison_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/robotDriverCommentView"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="For playoffs, I would rather pick"
+                android:textSize="18sp"
+
+                />
+
+            <RadioButton
+                android:id="@+id/current_team_comparison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="8dp"
+                android:text="Team 25 (current robot scouted)"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/prev_team_comparison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="8dp"
+                android:text="Team 1 (previous robot scouted)"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/either_team_comparison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="8dp"
+                android:text="Either team/no opinion"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/pick_number_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prev_team_comparison_group"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="This robot is..."
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/first_pick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="8dp"
+                android:text="A good first pick"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/second_pick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="8dp"
+                android:text="A good second pick"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/dnp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:padding="8dp"
+                android:text="Not a good pick"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/post_finish"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/pick_number_group"
+
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:elevation="6dp"
+            android:text="@string/finish_button"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+
+
+</ScrollView>
