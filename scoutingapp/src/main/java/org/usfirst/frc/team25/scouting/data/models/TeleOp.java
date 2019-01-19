@@ -7,7 +7,6 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class TeleOp {
 
-    private final float firstCubeTime;
     private transient final float cycleTime;
     private final int ownSwitchCubes;
     private final int scaleCubes;
@@ -20,15 +19,8 @@ public class TeleOp {
     private final boolean successfulRungClimb;
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
-    private final String fieldLayout;
 
-    public TeleOp(float firstCubeTime, float cycleTime, int ownSwitchCubes, int scaleCubes,
-                  int opponentSwitchCubes, int exchangeCubes, int cubesDropped,
-                  int climbsAssisted, boolean parked, boolean attemptRungClimb,
-                  boolean successfulRungClimb, boolean otherRobotClimb,
-                  String otherRobotClimbType, String fieldLayout) {
-
-        this.firstCubeTime = firstCubeTime;
+    public TeleOp(float cycleTime, int ownSwitchCubes, int scaleCubes, int opponentSwitchCubes, int exchangeCubes, int cubesDropped, int climbsAssisted, boolean parked, boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb, String otherRobotClimbType) {
         this.cycleTime = cycleTime;
         this.ownSwitchCubes = ownSwitchCubes;
         this.scaleCubes = scaleCubes;
@@ -41,12 +33,8 @@ public class TeleOp {
         this.successfulRungClimb = successfulRungClimb;
         this.otherRobotClimb = otherRobotClimb;
         this.otherRobotClimbType = otherRobotClimbType;
-        this.fieldLayout = fieldLayout;
     }
 
-    public float getFirstCubeTime() {
-        return firstCubeTime;
-    }
 
     public float getCycleTime() {
         return cycleTime;
@@ -96,8 +84,5 @@ public class TeleOp {
         return otherRobotClimbType;
     }
 
-    public String getFieldLayout() {
-        return fieldLayout;
-    }
 
 }

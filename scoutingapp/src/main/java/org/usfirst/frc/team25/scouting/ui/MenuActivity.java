@@ -33,6 +33,28 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
     private TextView statusText;
 
+    /**
+     * Checks if the app has permission to write to device storage
+     * If the app does not has permission then the user will be prompted to grant permissions
+     *
+     * @param activity
+     */
+    private static void verifyStoragePermissions(Activity activity) {
+        // Check if the app has write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+
+            // App doesn't have permission so prompt the user
+            int requestStorageCode = 1;
+            String[] storagePermissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+            ActivityCompat.requestPermissions(activity, storagePermissions, requestStorageCode);
+        }
+    }
+
     //Executes when application is first launched
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,28 +144,6 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
         boolean isLarge =
                 ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
         return (isXlarge || isLarge);
-    }
-
-    /**
-     * Checks if the app has permission to write to device storage
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    private static void verifyStoragePermissions(Activity activity) {
-        // Check if the app has write permission
-        int permission = ActivityCompat.checkSelfPermission(activity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-
-            // App doesn't have permission so prompt the user
-            int requestStorageCode = 1;
-            String[] storagePermissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-            ActivityCompat.requestPermissions(activity, storagePermissions, requestStorageCode);
-        }
     }
 
     // Back button disabled to prevent accidental pressing

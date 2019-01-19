@@ -6,7 +6,7 @@
         android:title="General" />
 
     <EditTextPreference
-        android:defaultValue="John Doe"
+        android:defaultValue="Dean Kamen"
         android:key="scout_name"
         android:title="@string/scout_name" />
 
@@ -57,7 +57,7 @@
 
     <PreferenceCategory
         android:layout="@layout/preference_category_normal"
-        android:title="FIRST Power Up" />
+        android:title="FIRST Destination: Deep Space" />
 
     <ListPreference
         android:defaultValue="Red Alliance"
@@ -80,7 +80,7 @@
 
     <CheckBoxPreference
         android:key="use_team_list"
-
+        android:defaultValue="true"
         android:summary="Verify scout input with predefined team lists for events"
         android:title="Use team lists" />
 

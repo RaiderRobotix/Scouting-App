@@ -153,7 +153,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
 
                         proceed = false;
                         new AlertDialog.Builder(getActivity())
-                                .setTitle("Confirm team number")
+                                .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
                                 .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is " +
                                         scoutPosSpinner.getText().toString() + " in match " + matchNumField.getText().toString() + "?")
                                 .setPositiveButton("Yes", (dialog, which) -> {
@@ -183,7 +183,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                         getActivity())) {
                     proceed = false;
                     new AlertDialog.Builder(getActivity())
-                            .setTitle("Confirm team number")
+                            .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
                             .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
                             .setPositiveButton("Yes", (dialog, which) -> {
                                 FileManager.addToTeamList(teamNumField.getText().toString(),

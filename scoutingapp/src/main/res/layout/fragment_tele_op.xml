@@ -17,41 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
-                android:id="@+id/first_cube_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:padding="8dp"
-
-                app:buttonIncDecAmount="0.5"
-                app:titlePromptTimer="Time to deliver first cube" />
-
-            <TextView
-                android:id="@+id/field_config_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/first_cube_time"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:padding="@dimen/inner_components_spacing"
-                android:text="Plate configuration from your POV (tap to change)"
-                android:textSize="19sp" />
-
-
-            <ImageView
-                android:id="@+id/field_config_image"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_below="@id/field_config_text"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:src="@drawable/blue_left_lll" />
-
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/own_switch_tele"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/field_config_image"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
 
