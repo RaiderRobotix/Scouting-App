@@ -19,46 +19,45 @@
 
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/own_switch_tele"
+                android:id="@+id/cargo_ship_hatches"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-
-                app:titlePrompt="Own switch cubes" />
+                app:titlePrompt="Cargo ship - hatches" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/scale_tele"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/own_switch_tele"
+                android:layout_below="@id/cargo_ship_hatches"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Scale cubes" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/opponent_switch_tele"
+                android:id="@+id/rocket_cargo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scale_tele"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Opponent switch cubes" />
+                app:titlePrompt="Rocket - cargo" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/exchange_tele"
+                android:id="@+id/cargo_ship_cargo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/opponent_switch_tele"
+                android:layout_below="@id/rocket_cargo"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Exchange cubes" />
+                app:titlePrompt="Cargo ship - cargo" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/cubes_dropped_tele"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/exchange_tele"
+                android:layout_below="@id/cargo_ship_cargo"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Accidentally dropped cubes" />

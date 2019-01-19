@@ -8,9 +8,9 @@ package org.usfirst.frc.team25.scouting.data.models;
 public class TeleOp {
 
     private transient final float cycleTime;
-    private final int ownSwitchCubes;
+    private final int cargoShipHatches;
     private final int scaleCubes;
-    private final int opponentSwitchCubes;
+    private final int rocketCargo;
     private final int exchangeCubes;
     private final int cubesDropped;
     private final int climbsAssisted;
@@ -20,11 +20,11 @@ public class TeleOp {
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
 
-    public TeleOp(float cycleTime, int ownSwitchCubes, int scaleCubes, int opponentSwitchCubes, int exchangeCubes, int cubesDropped, int climbsAssisted, boolean parked, boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb, String otherRobotClimbType) {
+    public TeleOp(float cycleTime, int cargoShipHatches, int scaleCubes, int rocketCargo, int exchangeCubes, int cubesDropped, int climbsAssisted, boolean parked, boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb, String otherRobotClimbType) {
         this.cycleTime = cycleTime;
-        this.ownSwitchCubes = ownSwitchCubes;
+        this.cargoShipHatches = cargoShipHatches;
         this.scaleCubes = scaleCubes;
-        this.opponentSwitchCubes = opponentSwitchCubes;
+        this.rocketCargo = rocketCargo;
         this.exchangeCubes = exchangeCubes;
         this.cubesDropped = cubesDropped;
         this.climbsAssisted = climbsAssisted;
@@ -40,16 +40,16 @@ public class TeleOp {
         return cycleTime;
     }
 
-    public int getOwnSwitchCubes() {
-        return ownSwitchCubes;
+    public int getCargoShipHatches() {
+        return cargoShipHatches;
     }
 
     public int getScaleCubes() {
         return scaleCubes;
     }
 
-    public int getOpponentSwitchCubes() {
-        return opponentSwitchCubes;
+    public int getRocketCargo() {
+        return rocketCargo;
     }
 
     public int getExchangeCubes() {
