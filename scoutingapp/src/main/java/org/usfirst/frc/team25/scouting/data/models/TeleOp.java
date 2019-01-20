@@ -20,7 +20,10 @@ public class TeleOp {
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
 
-    public TeleOp(float cycleTime, int cargoShipHatches, int scaleCubes, int rocketCargo, int exchangeCubes, int cubesDropped, int climbsAssisted, boolean parked, boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb, String otherRobotClimbType) {
+    public TeleOp(float cycleTime, int cargoShipHatches, int scaleCubes, int rocketCargo,
+                  int exchangeCubes, int cubesDropped, int climbsAssisted, boolean parked,
+                  boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb,
+                  String otherRobotClimbType) {
         this.cycleTime = cycleTime;
         this.cargoShipHatches = cargoShipHatches;
         this.scaleCubes = scaleCubes;

@@ -16,7 +16,6 @@ public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity
 
     Button deleteButton;
     MaterialEditText passwordField;
-    private Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,7 @@ public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity
         setTitle("Delete Files");
         setContentView(R.layout.activity_enter_password);
 
-        cancelButton = findViewById(R.id.cancel_delete_button);
+        Button cancelButton = findViewById(R.id.cancel_delete_button);
         deleteButton = findViewById(R.id.delete_file_button);
         passwordField = findViewById(R.id.delete_password_box);
 

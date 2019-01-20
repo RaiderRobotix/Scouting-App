@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -27,12 +26,7 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonTimer;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private final RadioButton[] climbOtherRobotType = new RadioButton[5];
-    private final int[] redLeftFieldConfig = {R.drawable.red_left_rrr, R.drawable.red_left_rlr,
-            R.drawable.red_left_lrl, R.drawable.red_left_lll};
-    private final int[] blueLeftFieldConfig = {R.drawable.blue_left_rrr, R.drawable.blue_left_rlr,
-            R.drawable.blue_left_lrl, R.drawable.blue_left_lll};
     private ScoutEntry entry;
-    private ImageView fieldImage;
     private ButtonIncDecInt cargoShipHatches;
     private ButtonIncDecInt scaleCubes;
     private ButtonIncDecInt rocketCargo;
@@ -43,11 +37,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private CheckBox successRungClimb;
     private CheckBox parked;
     private CheckBox climbsOtherRobots;
-    private ButtonTimer firstCubeTime;
     private ButtonTimer cycleTime;
     private ButtonTimer timerIncAmount;
     private EditText climbOtherRobotTypeOtherField;
-    private int fieldConfigIndex;
 
 
     private Settings set;
@@ -74,8 +66,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
-
-        fieldConfigIndex = 0;
 
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
         scaleCubes = view.findViewById(R.id.scale_tele);
