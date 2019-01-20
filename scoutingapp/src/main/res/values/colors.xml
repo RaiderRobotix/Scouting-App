@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">#3F51B5</color>
+    <color name="color_primary_dark">#003C96</color>
+    <color name="color_accent">#FF4081</color>
+
+    <color name="blue_500">#2196F3</color>
+    <color name="blue_700">#1976d2</color>
+
+    <color name="raider_blue">#003C96</color>
+    <color name="raider_accent_yellow">#f0ff00</color>
+
+    <color name="first_red">#ed1c24</color>
+    <color name="first_blue">#0066b3</color>
+    <color name="first_black">#231f20</color>
+    <color name="first_gray">#9a989a</color>
+    <color name="frc_blue">#009cd7</color>
+    <color name="red_500">#f44336</color>
+</resources>

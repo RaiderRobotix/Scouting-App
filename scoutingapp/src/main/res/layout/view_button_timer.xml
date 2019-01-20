@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/button_timer_title"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="0.5"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/start_stop_button"
+
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="13dp"
+                android:layout_weight="1.1"
+                android:elevation="6dp"
+                android:text="@string/button_timer_start"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+
+            <Button
+                android:id="@+id/timer_dec_button"
+
+                android:layout_width="0dip"
+
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.65"
+                android:elevation="6dp"
+                android:text="@string/minus_button"
+                android:textColor="#ffffff" />
+
+
+            <TextView
+                android:id="@+id/button_timer_value"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.75"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/button_timer_default_val"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/timer_inc_button"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.65"
+                android:elevation="6dp"
+                android:text="@string/plus_button"
+                android:textColor="#ffffff" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</merge>
