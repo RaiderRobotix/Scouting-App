@@ -33,8 +33,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecInt cargoShipCargo;
     private ButtonIncDecInt hatchesDropped;
     private ButtonIncDecInt climbsAssisted;
-    private CheckBox attemptRumgClimb;
-    private CheckBox successRungClimb;
+    private CheckBox attemptHabClimb;
+    private CheckBox successHabClimb;
     private CheckBox parked;
     private CheckBox climbsOtherRobots;
     private ButtonTimer cycleTime;
@@ -70,13 +70,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
         rocketHatches = view.findViewById(R.id.rocket_hatches);
         rocketCargo = view.findViewById(R.id.rocket_cargo);
-        attemptRumgClimb = view.findViewById(R.id.attempt_rung_climb);
-        successRungClimb = view.findViewById(R.id.success_rung_climb);
+        attemptHabClimb = view.findViewById(R.id.teleop_attempt_hab_climb);
+        successHabClimb = view.findViewById(R.id.success_hab_climb);
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo);
         hatchesDropped = view.findViewById(R.id.hatches_dropped);
-        parked = view.findViewById(R.id.park_platform);
+
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
         climbsOtherRobots = view.findViewById(R.id.climb_other_robot);
         climbOtherRobotType[0] = view.findViewById(R.id.ramp_bot_type);
@@ -124,7 +124,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         });
 
 
-        successRungClimb.setOnCheckedChangeListener((compoundButton, b) -> {
+        successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 parked.setChecked(false);
                 parked.setEnabled(false);
@@ -137,27 +137,28 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             }
         });
 
-        attemptRumgClimb.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b && !climbsOtherRobots.isChecked())
-                successRungClimb.setEnabled(true);
-            else {
-                successRungClimb.setEnabled(false);
-                successRungClimb.setChecked(false);
+        attemptHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b && !climbsOtherRobots.isChecked()) {
+                successHabClimb.setEnabled(true);
+            } else {
+                successHabClimb.setEnabled(false);
+                successHabClimb.setChecked(false);
             }
         });
 
         climbsOtherRobots.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 enableOtherRobotTypeGroup();
-                successRungClimb.setEnabled(false);
-                successRungClimb.setChecked(false);
+                successHabClimb.setEnabled(false);
+                successHabClimb.setChecked(false);
                 parked.setChecked(false);
                 parked.setEnabled(false);
             } else {
                 disableOtherRobotTypeGroup();
                 parked.setEnabled(true);
-                if (attemptRumgClimb.isChecked())
-                    successRungClimb.setEnabled(true);
+                if (attemptHabClimb.isChecked()) {
+                    successHabClimb.setEnabled(true);
+                }
             }
         });
 
@@ -231,8 +232,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             hatchesDropped.setValue(tele.getHatchesDropped());
             climbsAssisted.setValue(tele.getClimbsAssisted());
             parked.setChecked(tele.isParked());
-            attemptRumgClimb.setChecked(tele.isAttemptRungClimb());
-            successRungClimb.setChecked(tele.isSuccessfulRungClimb());
+            attemptHabClimb.setChecked(tele.isAttemptRungClimb());
+            successHabClimb.setChecked(tele.isSuccessfulRungClimb());
             climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
 
             if (tele.getOtherRobotClimbType().length() != 0) {
@@ -269,8 +270,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
                 rocketHatches.getValue(), rocketCargo.getValue(), cargoShipCargo.getValue(),
                 hatchesDropped.getValue(),
-                climbsAssisted.getValue(), parked.isChecked(), attemptRumgClimb.isChecked(),
-                successRungClimb.isChecked(),
+                climbsAssisted.getValue(), parked.isChecked(), attemptHabClimb.isChecked(),
+                successHabClimb.isChecked(),
                 climbsOtherRobots.isChecked(), climbOtherRobotTypeStr));
     }
 
