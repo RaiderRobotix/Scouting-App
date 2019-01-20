@@ -6,7 +6,6 @@
     android:background="#f5f5f5"
     tools:context=".ui.dataentry.TeleOpFragment">
 
-    <!--time to score first cube-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,47 +36,40 @@
 
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/rocket_cargo"
+                android:id="@+id/cargo_ship_cargo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rocket_hatches"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Rocket - cargo" />
-
-            <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/cargo_ship_cargo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rocket_cargo"
-                android:padding="@dimen/default_padding_bottom"
-                app:initialValue="0"
                 app:titlePrompt="Cargo ship - cargo" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/hatches_dropped"
+                android:id="@+id/rocket_cargo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cargo_ship_cargo"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Accidentally dropped hatches" />
+                app:titlePrompt="Rocket - cargo" />
 
-            <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
-                android:id="@+id/cycle_time"
+
+            <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+                android:id="@+id/hatches_dropped"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/hatches_dropped"
-                android:padding="8dp"
-                android:visibility="gone"
-                app:buttonIncDecAmount="0.5"
-                app:titlePromptTimer="Average cycle time" />
+                android:layout_below="@id/rocket_cargo"
+                android:padding="@dimen/default_padding_bottom"
+                app:initialValue="0"
+                app:titlePrompt="Accidentally dropped hatches" />
+
+
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/fouls_committed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cycle_time"
+                android:layout_below="@id/hatches_dropped"
                 android:padding="@dimen/default_padding_bottom"
                 android:visibility="gone"
                 app:initialValue="0"
@@ -99,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tech_fouls_committed"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:padding="@dimen/default_padding_bottom"
                 android:text="Parked on platform"
 
@@ -110,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/park_platform"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
 
                 android:padding="@dimen/default_padding_bottom"
                 android:text="Attempts to climb on rung"
@@ -122,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/attempt_rung_climb"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:enabled="false"
                 android:padding="@dimen/default_padding_bottom"
                 android:text="Successful in attempt"
@@ -143,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/climbs_assisted"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:padding="@dimen/default_padding_bottom"
                 android:text="Climbs on other robots"
 

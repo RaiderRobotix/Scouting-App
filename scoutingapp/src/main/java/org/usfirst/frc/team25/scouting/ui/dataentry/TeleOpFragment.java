@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -27,27 +26,20 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonTimer;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private final RadioButton[] climbOtherRobotType = new RadioButton[5];
-    private final int[] redLeftFieldConfig = {R.drawable.red_left_rrr, R.drawable.red_left_rlr,
-            R.drawable.red_left_lrl, R.drawable.red_left_lll};
-    private final int[] blueLeftFieldConfig = {R.drawable.blue_left_rrr, R.drawable.blue_left_rlr,
-            R.drawable.blue_left_lrl, R.drawable.blue_left_lll};
     private ScoutEntry entry;
-    private ImageView fieldImage;
     private ButtonIncDecInt cargoShipHatches;
     private ButtonIncDecInt rocketHatches;
     private ButtonIncDecInt rocketCargo;
     private ButtonIncDecInt cargoShipCargo;
-    private ButtonIncDecInt cubesDropped;
+    private ButtonIncDecInt hatchesDropped;
     private ButtonIncDecInt climbsAssisted;
     private CheckBox attemptRumgClimb;
     private CheckBox successRungClimb;
     private CheckBox parked;
     private CheckBox climbsOtherRobots;
-    private ButtonTimer firstCubeTime;
     private ButtonTimer cycleTime;
     private ButtonTimer timerIncAmount;
     private EditText climbOtherRobotTypeOtherField;
-    private int fieldConfigIndex;
 
 
     private Settings set;
@@ -75,8 +67,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        fieldConfigIndex = 0;
-
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
         rocketHatches = view.findViewById(R.id.rocket_hatches);
         rocketCargo = view.findViewById(R.id.rocket_cargo);
@@ -85,8 +75,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo);
-        cubesDropped = view.findViewById(R.id.hatches_dropped);
-        cycleTime = view.findViewById(R.id.cycle_time);
+        hatchesDropped = view.findViewById(R.id.hatches_dropped);
         parked = view.findViewById(R.id.park_platform);
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
         climbsOtherRobots = view.findViewById(R.id.climb_other_robot);
@@ -235,12 +224,11 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     public void autoPopulate() {
         if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
-            cycleTime.setValue(tele.getCycleTime());
             cargoShipHatches.setValue(tele.getCargoShipHatches());
             rocketHatches.setValue(tele.getCargoShipCargo());
             rocketCargo.setValue(tele.getRocketCargo());
             cargoShipCargo.setValue(tele.getRocketHatches());
-            cubesDropped.setValue(tele.getHatchesDropped());
+            hatchesDropped.setValue(tele.getHatchesDropped());
             climbsAssisted.setValue(tele.getClimbsAssisted());
             parked.setChecked(tele.isParked());
             attemptRumgClimb.setChecked(tele.isAttemptRungClimb());
@@ -278,10 +266,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         }
 
 
-        entry.setTeleOp(new TeleOp(cycleTime.getValue(),
-                cargoShipHatches.getValue(),
+        entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
                 rocketHatches.getValue(), rocketCargo.getValue(), cargoShipCargo.getValue(),
-                cubesDropped.getValue(),
+                hatchesDropped.getValue(),
                 climbsAssisted.getValue(), parked.isChecked(), attemptRumgClimb.isChecked(),
                 successRungClimb.isChecked(),
                 climbsOtherRobots.isChecked(), climbOtherRobotTypeStr));

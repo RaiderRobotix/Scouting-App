@@ -7,7 +7,6 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class TeleOp {
 
-    private transient final float cycleTime;
     private final int cargoShipHatches;
     private final int cargoShipCargo;
     private final int rocketCargo;
@@ -20,8 +19,12 @@ public class TeleOp {
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
 
-    public TeleOp(float cycleTime, int cargoShipHatches, int cargoShipCargo, int rocketCargo, int rocketHatches, int hatchesDropped, int climbsAssisted, boolean parked, boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb, String otherRobotClimbType) {
-        this.cycleTime = cycleTime;
+
+    public TeleOp(int cargoShipHatches, int rocketHatches, int rocketCargo,
+                  int cargoShipCargo, int hatchesDropped, int climbsAssisted, boolean parked,
+                  boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb,
+                  String otherRobotClimbType) {
+
         this.cargoShipHatches = cargoShipHatches;
         this.cargoShipCargo = cargoShipCargo;
         this.rocketCargo = rocketCargo;
@@ -35,10 +38,6 @@ public class TeleOp {
         this.otherRobotClimbType = otherRobotClimbType;
     }
 
-
-    public float getCycleTime() {
-        return cycleTime;
-    }
 
     public int getCargoShipHatches() {
         return cargoShipHatches;

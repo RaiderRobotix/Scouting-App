@@ -22,7 +22,8 @@ import java.math.BigDecimal;
 public class ButtonTimer extends RelativeLayout {
 
     public final Button startStopButton, incButton, decButton;
-    private TextView titleView, valueView;
+    private final TextView titleView;
+    private TextView valueView;
     private float incDecAmount, minValue, maxValue;
     private boolean isTimerStart;
 

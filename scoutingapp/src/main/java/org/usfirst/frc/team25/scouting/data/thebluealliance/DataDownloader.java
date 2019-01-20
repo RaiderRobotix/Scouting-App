@@ -128,7 +128,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
     }
 
     private String getEventMatchData(String eventCode) throws IOException {
-        return new Gson().toJson(Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<Match>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode))))));
+        return new Gson().toJson(Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode))))));
     }
 
     @Override

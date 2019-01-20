@@ -104,7 +104,6 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
     private final Context context;
     private final Release.Asset asset;
     private ProgressDialog progressBar;
-    private String location;
 
     AppDownloader(Context c, Release.Asset asset) {
         this.context = c;
@@ -175,12 +174,10 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
             }
             InputStream is = c.getInputStream();
 
-            int totalSize = 1431692;//size of apk
 
             byte[] buffer = new byte[1024];
 
             int len1;
-            int per = 0;
             int downloaded = 0;
             while ((len1 = is.read(buffer)) != -1) {
                 fos.write(buffer, 0, len1);
@@ -190,7 +187,6 @@ class AppDownloader extends AsyncTask<String, Integer, Boolean> {
             is.close();
 
             openNewVersion(downloadPath, fileName);
-            this.location = downloadPath + fileName;
 
             return true;
         } catch (Exception e) {

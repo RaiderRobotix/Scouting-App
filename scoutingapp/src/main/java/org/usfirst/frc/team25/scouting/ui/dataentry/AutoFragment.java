@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
@@ -21,7 +20,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
             switchAdjacentPickup, cubesDropped;
     private CheckBox reachAutoLine, cubesOpponentPlate, opponentSwitchPlate,
             opponentScalePlate, nullTerritoryFoul;
-    private Button continueButton;
 
     private ScoutEntry entry;
 
@@ -66,7 +64,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         opponentSwitchPlate = view.findViewById(R.id.switch_wrong_plate_auto);
         nullTerritoryFoul = view.findViewById(R.id.null_territory_auto_foul);
 
-        continueButton = view.findViewById(R.id.auto_continue);
+        Button continueButton = view.findViewById(R.id.auto_continue);
 
 
         autoPopulate();
@@ -172,7 +170,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        Settings set = Settings.newInstance(getActivity());
         entry.setAuto(new Autonomous(ownSwitchCubes.getValue(), ownScaleCubes.getValue(),
                 exchangeCubes.getValue(),
                 powerCubePilePickup.getValue(),
