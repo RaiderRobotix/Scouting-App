@@ -34,7 +34,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ScoutEntry entry;
     private ImageView fieldImage;
     private ButtonIncDecInt cargoShipHatches;
-    private ButtonIncDecInt scaleCubes;
+    private ButtonIncDecInt rocketHatches;
     private ButtonIncDecInt rocketCargo;
     private ButtonIncDecInt cargoShipCargo;
     private ButtonIncDecInt cubesDropped;
@@ -78,14 +78,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         fieldConfigIndex = 0;
 
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
-        scaleCubes = view.findViewById(R.id.scale_tele);
+        rocketHatches = view.findViewById(R.id.rocket_hatches);
         rocketCargo = view.findViewById(R.id.rocket_cargo);
         attemptRumgClimb = view.findViewById(R.id.attempt_rung_climb);
         successRungClimb = view.findViewById(R.id.success_rung_climb);
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo);
-        cubesDropped = view.findViewById(R.id.cubes_dropped_tele);
+        cubesDropped = view.findViewById(R.id.hatches_dropped);
         cycleTime = view.findViewById(R.id.cycle_time);
         parked = view.findViewById(R.id.park_platform);
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
@@ -237,10 +237,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             TeleOp tele = entry.getTeleOp();
             cycleTime.setValue(tele.getCycleTime());
             cargoShipHatches.setValue(tele.getCargoShipHatches());
-            scaleCubes.setValue(tele.getScaleCubes());
+            rocketHatches.setValue(tele.getCargoShipCargo());
             rocketCargo.setValue(tele.getRocketCargo());
-            cargoShipCargo.setValue(tele.getExchangeCubes());
-            cubesDropped.setValue(tele.getCubesDropped());
+            cargoShipCargo.setValue(tele.getRocketHatches());
+            cubesDropped.setValue(tele.getHatchesDropped());
             climbsAssisted.setValue(tele.getClimbsAssisted());
             parked.setChecked(tele.isParked());
             attemptRumgClimb.setChecked(tele.isAttemptRungClimb());
@@ -280,7 +280,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         entry.setTeleOp(new TeleOp(cycleTime.getValue(),
                 cargoShipHatches.getValue(),
-                scaleCubes.getValue(), rocketCargo.getValue(), cargoShipCargo.getValue(),
+                rocketHatches.getValue(), rocketCargo.getValue(), cargoShipCargo.getValue(),
                 cubesDropped.getValue(),
                 climbsAssisted.getValue(), parked.isChecked(), attemptRumgClimb.isChecked(),
                 successRungClimb.isChecked(),

@@ -9,10 +9,7 @@ android {
           abortOnError false
     }
     compileSdkVersion 27
-<<<<<<< HEAD:app/build.gradle
-=======
     buildToolsVersion '28.0.3'
->>>>>>> origin:scoutingapp/build.gradle
     defaultConfig {
         applicationId 'org.usfirst.frc.team25.scouting'
         minSdkVersion 21

@@ -9,10 +9,10 @@ public class TeleOp {
 
     private transient final float cycleTime;
     private final int cargoShipHatches;
-    private final int scaleCubes;
+    private final int cargoShipCargo;
     private final int rocketCargo;
-    private final int exchangeCubes;
-    private final int cubesDropped;
+    private final int rocketHatches;
+    private final int hatchesDropped;
     private final int climbsAssisted;
     private final boolean parked;
     private final boolean attemptRungClimb;
@@ -20,13 +20,13 @@ public class TeleOp {
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
 
-    public TeleOp(float cycleTime, int cargoShipHatches, int scaleCubes, int rocketCargo, int exchangeCubes, int cubesDropped, int climbsAssisted, boolean parked, boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb, String otherRobotClimbType) {
+    public TeleOp(float cycleTime, int cargoShipHatches, int cargoShipCargo, int rocketCargo, int rocketHatches, int hatchesDropped, int climbsAssisted, boolean parked, boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb, String otherRobotClimbType) {
         this.cycleTime = cycleTime;
         this.cargoShipHatches = cargoShipHatches;
-        this.scaleCubes = scaleCubes;
+        this.cargoShipCargo = cargoShipCargo;
         this.rocketCargo = rocketCargo;
-        this.exchangeCubes = exchangeCubes;
-        this.cubesDropped = cubesDropped;
+        this.rocketHatches = rocketHatches;
+        this.hatchesDropped = hatchesDropped;
         this.climbsAssisted = climbsAssisted;
         this.parked = parked;
         this.attemptRungClimb = attemptRungClimb;
@@ -44,20 +44,20 @@ public class TeleOp {
         return cargoShipHatches;
     }
 
-    public int getScaleCubes() {
-        return scaleCubes;
+    public int getCargoShipCargo() {
+        return cargoShipCargo;
     }
 
     public int getRocketCargo() {
         return rocketCargo;
     }
 
-    public int getExchangeCubes() {
-        return exchangeCubes;
+    public int getRocketHatches() {
+        return rocketHatches;
     }
 
-    public int getCubesDropped() {
-        return cubesDropped;
+    public int getHatchesDropped() {
+        return hatchesDropped;
     }
 
     public int getClimbsAssisted() {

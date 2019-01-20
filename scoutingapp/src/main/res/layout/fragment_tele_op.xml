@@ -27,19 +27,20 @@
                 app:titlePrompt="Cargo ship - hatches" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/scale_tele"
+                android:id="@+id/rocket_hatches"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cargo_ship_hatches"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Scale cubes" />
+                app:titlePrompt="Rocket - hatches" />
+
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/rocket_cargo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/scale_tele"
+                android:layout_below="@id/rocket_hatches"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Rocket - cargo" />
@@ -54,19 +55,19 @@
                 app:titlePrompt="Cargo ship - cargo" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
-                android:id="@+id/cubes_dropped_tele"
+                android:id="@+id/hatches_dropped"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cargo_ship_cargo"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
-                app:titlePrompt="Accidentally dropped cubes" />
+                app:titlePrompt="Accidentally dropped hatches" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
                 android:id="@+id/cycle_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cubes_dropped_tele"
+                android:layout_below="@id/hatches_dropped"
                 android:padding="8dp"
                 android:visibility="gone"
                 app:buttonIncDecAmount="0.5"
