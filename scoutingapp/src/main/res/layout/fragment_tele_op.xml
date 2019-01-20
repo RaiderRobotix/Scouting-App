@@ -63,6 +63,14 @@
                 app:initialValue="0"
                 app:titlePrompt="Accidentally dropped hatches" />
 
+            <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+                android:id="@+id/cargo_dropped"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hatches_dropped"
+                android:padding="@dimen/default_padding_bottom"
+                app:initialValue="0"
+                app:titlePrompt="Accidentally dropped cargo" />
 
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
@@ -87,48 +95,76 @@
 
 
             <CheckBox
-                android:id="@+id/park_platform"
+                android:id="@+id/teleop_attempt_hab_climb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tech_fouls_committed"
+                android:layout_below="@id/cargo_dropped"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+
                 android:padding="@dimen/default_padding_bottom"
-                android:text="Parked on platform"
+                android:text="Attempts to climb"
 
                 android:textSize="18sp" />
 
             <CheckBox
-                android:id="@+id/attempt_rung_climb"
+                android:id="@+id/success_hab_climb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/park_platform"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-
-                android:padding="@dimen/default_padding_bottom"
-                android:text="Attempts to climb on rung"
-
-                android:textSize="18sp" />
-
-            <CheckBox
-                android:id="@+id/success_rung_climb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/attempt_rung_climb"
+                android:layout_below="@id/hab_climb_level"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:enabled="false"
                 android:padding="@dimen/default_padding_bottom"
-                android:text="Successful in attempt"
+                android:text="Successful in hab climb"
                 android:textSize="18sp" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
                 android:id="@+id/climbs_assisted"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/success_rung_climb"
+                android:layout_below="@id/success_hab_climb"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:maxValue="2"
                 app:titlePrompt="Climbs assisted" />
+
+            <RadioGroup
+                android:id="@+id/hab_climb_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/teleop_attempt_hab_climb"
+                android:layout_marginLeft="45dp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RadioButton
+                    android:id="@+id/hab_level_option_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:padding="8dp"
+                    android:text="HAB Level 1"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/hab_level_option_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:padding="8dp"
+                    android:text="HAB Level 2"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/hab_level_option_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:padding="8dp"
+                    android:text="HAB Level 3"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
 
             <CheckBox
                 android:id="@+id/climb_other_robot"
