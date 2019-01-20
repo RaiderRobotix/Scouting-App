@@ -5,9 +5,8 @@
 /.idea/libraries
 /.idea/caches
 .DS_Store
-/build
 /captures
 /build
-/scoutingapp/build/*
+/scoutingapp/build
 *.apk
 *.ini
