@@ -48,6 +48,26 @@ public class ButtonIncDecInt extends RelativeLayout {
         inflater.inflate(R.layout.view_button_inc_dec, this);
     }
 
+    /**
+     * @param title - title of the left TextView
+     */
+    private void setTitle(CharSequence title) {
+        TextView titleView = findViewById(R.id.button_inc_dec_title);
+        titleView.setText(title);
+    }
+
+    private void setMinValue(int minValue) {
+        this.minValue = minValue;
+    }
+
+    private void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    private void setIncDecAmount(int incDecAmount) {
+        this.incDecAmount = incDecAmount;
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP && (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && listener != null) {
@@ -55,10 +75,6 @@ public class ButtonIncDecInt extends RelativeLayout {
         }
 
         return super.dispatchKeyEvent(event);
-    }
-
-    public void setOnClickListener(OnClickListener listener) {
-        this.listener = listener;
     }
 
     @Override
@@ -70,46 +86,8 @@ public class ButtonIncDecInt extends RelativeLayout {
         return super.dispatchTouchEvent(ev);
     }
 
-    /**
-     * @param title - title of the left TextView
-     */
-    private void setTitle(CharSequence title) {
-        TextView titleView = findViewById(R.id.button_inc_dec_title);
-        titleView.setText(title);
-    }
-
-    /**
-     * @return Integer value of the displayed number
-     */
-    public int getValue() {
-        valueView = findViewById(R.id.button_inc_dec_value);
-        return Integer.parseInt(valueView.getText().toString());
-    }
-
-    /**
-     * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
-     */
-    public void setValue(int value) {
-        if (value > maxValue)
-            value = maxValue;
-
-        if (value < minValue)
-            value = minValue;
-
-        valueView = findViewById(R.id.button_inc_dec_value);
-        valueView.setText(String.valueOf(value));
-    }
-
-    private void setIncDecAmount(int incDecAmount) {
-        this.incDecAmount = incDecAmount;
-    }
-
-    private void setMinValue(int minValue) {
-        this.minValue = minValue;
-    }
-
-    private void setMaxValue(int maxValue) {
-        this.maxValue = maxValue;
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -131,5 +109,29 @@ public class ButtonIncDecInt extends RelativeLayout {
 
     public void decrement() {
         setValue(getValue() - incDecAmount);
+    }
+
+    /**
+     * @return Integer value of the displayed number
+     */
+    public int getValue() {
+        valueView = findViewById(R.id.button_inc_dec_value);
+        return Integer.parseInt(valueView.getText().toString());
+    }
+
+    /**
+     * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
+     */
+    public void setValue(int value) {
+        if (value > maxValue) {
+            value = maxValue;
+        }
+
+        if (value < minValue) {
+            value = minValue;
+        }
+
+        valueView = findViewById(R.id.button_inc_dec_value);
+        valueView.setText(String.valueOf(value));
     }
 }

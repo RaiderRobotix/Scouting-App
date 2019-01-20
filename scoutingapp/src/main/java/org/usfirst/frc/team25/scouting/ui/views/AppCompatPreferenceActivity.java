@@ -1,7 +1,9 @@
 package org.usfirst.frc.team25.scouting.ui.views;
 
 
-// Imported from https://android.googlesource.com/platform/development/+/master/samples/Support7Demos/src/com/example/android/supportv7/app/AppCompatPreferenceActivity.java
+// Imported from https://android.googlesource
+// .com/platform/development/+/master/samples/Support7Demos/src/com/example/android/supportv7/app
+// /AppCompatPreferenceActivity.java
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -37,23 +39,40 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        getDelegate().onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getDelegate().onDestroy();
+    }
+
+    private AppCompatDelegate getDelegate() {
+        if (mDelegate == null) {
+            mDelegate = AppCompatDelegate.create(this, null);
+        }
+        return mDelegate;
+    }
+
+    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         getDelegate().onPostCreate(savedInstanceState);
     }
 
-    public ActionBar getSupportActionBar() {
-        return getDelegate().getSupportActionBar();
-    }
-
-    public void setSupportActionBar(@Nullable Toolbar toolbar) {
-        getDelegate().setSupportActionBar(toolbar);
-    }
-
-    @SuppressWarnings("NullableProblems")
     @Override
-    public MenuInflater getMenuInflater() {
-        return getDelegate().getMenuInflater();
+    protected void onPostResume() {
+        super.onPostResume();
+        getDelegate().onPostResume();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        getDelegate().onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -76,10 +95,14 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
         getDelegate().addContentView(view, params);
     }
 
+    public void invalidateOptionsMenu() {
+        getDelegate().invalidateOptionsMenu();
+    }
+
+    @SuppressWarnings("NullableProblems")
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        getDelegate().onPostResume();
+    public MenuInflater getMenuInflater() {
+        return getDelegate().getMenuInflater();
     }
 
     @Override
@@ -88,32 +111,11 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
         getDelegate().setTitle(title);
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        getDelegate().onConfigurationChanged(newConfig);
+    public ActionBar getSupportActionBar() {
+        return getDelegate().getSupportActionBar();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        getDelegate().onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        getDelegate().onDestroy();
-    }
-
-    public void invalidateOptionsMenu() {
-        getDelegate().invalidateOptionsMenu();
-    }
-
-    private AppCompatDelegate getDelegate() {
-        if (mDelegate == null) {
-            mDelegate = AppCompatDelegate.create(this, null);
-        }
-        return mDelegate;
+    public void setSupportActionBar(@Nullable Toolbar toolbar) {
+        getDelegate().setSupportActionBar(toolbar);
     }
 }

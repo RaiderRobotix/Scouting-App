@@ -54,11 +54,6 @@ public class DecimalPickerPreference extends DialogPreference {
         }
     }
 
-    @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        setValue(restoreValue ? getPersistedInt(mNumber) : (Integer) defaultValue);
-    }
-
     private void setValue(int value) {
         if (shouldPersist()) {
             persistInt(value);
@@ -73,5 +68,10 @@ public class DecimalPickerPreference extends DialogPreference {
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
         return a.getInt(index, 0);
+    }
+
+    @Override
+    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+        setValue(restoreValue ? getPersistedInt(mNumber) : (Integer) defaultValue);
     }
 }

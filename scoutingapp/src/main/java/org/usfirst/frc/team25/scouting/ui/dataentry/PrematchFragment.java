@@ -48,6 +48,66 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         this.entry = entry;
     }
 
+    public void autoPopulate() {
+
+        //Manually filled data overrides preferences
+        if (entry.getPreMatch() != null) {
+            PreMatch prevPreMatch = entry.getPreMatch();
+
+            nameField.setText(prevPreMatch.getScoutName());
+            scoutPosSpinner.setText(prevPreMatch.getScoutPos());
+            matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
+            teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
+            for (RadioButton button : startingPositionButtons) {
+                if (button.getText().equals(prevPreMatch.getStartingPos())) {
+                    button.setChecked(true);
+                }
+            }
+        }
+
+        // Pulls data values from preferences to automatically fill fields
+        else {
+            Settings set = Settings.newInstance(getActivity());
+
+            if (!set.getScoutPos().equals("DEFAULT")) {
+                scoutPosSpinner.setText(set.getScoutPos());
+
+                if (set.useTeamList() && set.getMatchType().equals("Q")) {
+                    try {
+                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
+                                set.getScoutPos(), set.getMatchNum()));
+                    } catch (IOException e) {
+
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            //Scout nameField is prompted for after a shift ends, but not during the first match
+            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
+                nameField.setText(set.getScoutName());
+
+            }
+
+            matchNumField.setText(String.valueOf(set.getMatchNum()));
+        }
+    }
+
+    @Override
+    public void saveState() {
+        String startPos = "";
+        for (RadioButton button : startingPositionButtons) {
+            if (button.isChecked()) {
+                startPos = (String) button.getText();
+            }
+        }
+
+        entry.setPreMatch(new PreMatch(nameField.getText().toString(),
+                scoutPosSpinner.getText().toString(),
+                Integer.parseInt(matchNumField.getText().toString()),
+                Integer.parseInt(teamNumField.getText().toString()), startPos));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -123,8 +183,9 @@ public class PrematchFragment extends Fragment implements EntryFragment {
             boolean aButtonSelected = false;
 
             for (RadioButton button : startingPositionButtons) {
-                if (button.isChecked())
+                if (button.isChecked()) {
                     aButtonSelected = true;
+                }
             }
 
             if (proceed && !aButtonSelected) {
@@ -218,6 +279,26 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Add Entry - Pre-Match");
+    }
+
+    /**
+     * Hides the keyboard in the next fragment
+     */
+    private void hideKeyboard() {
+        try {
+            InputMethodManager inputManager =
+                    (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken()
+                    , InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void autoSetTheme() {
         switch (entry.getPreMatch().getTeamNum()) {
             case 2590:
@@ -238,84 +319,6 @@ public class PrematchFragment extends Fragment implements EntryFragment {
             default:
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
                 break;
-        }
-    }
-
-    public void autoPopulate() {
-
-        //Manually filled data overrides preferences
-        if (entry.getPreMatch() != null) {
-            PreMatch prevPreMatch = entry.getPreMatch();
-
-            nameField.setText(prevPreMatch.getScoutName());
-            scoutPosSpinner.setText(prevPreMatch.getScoutPos());
-            matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
-            teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
-            for (RadioButton button : startingPositionButtons)
-                if (button.getText().equals(prevPreMatch.getStartingPos()))
-                    button.setChecked(true);
-        }
-
-        // Pulls data values from preferences to automatically fill fields
-        else {
-            Settings set = Settings.newInstance(getActivity());
-
-            if (!set.getScoutPos().equals("DEFAULT")) {
-                scoutPosSpinner.setText(set.getScoutPos());
-
-                if (set.useTeamList() && set.getMatchType().equals("Q")) {
-                    try {
-                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
-                                set.getScoutPos(), set.getMatchNum()));
-                    } catch (IOException e) {
-
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            //Scout nameField is prompted for after a shift ends, but not during the first match
-            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
-                nameField.setText(set.getScoutName());
-
-            }
-
-            matchNumField.setText(String.valueOf(set.getMatchNum()));
-        }
-    }
-
-    @Override
-    public void saveState() {
-        String startPos = "";
-        for (RadioButton button : startingPositionButtons) {
-            if (button.isChecked()) {
-                startPos = (String) button.getText();
-            }
-        }
-
-        entry.setPreMatch(new PreMatch(nameField.getText().toString(),
-                scoutPosSpinner.getText().toString(),
-                Integer.parseInt(matchNumField.getText().toString()),
-                Integer.parseInt(teamNumField.getText().toString()), startPos));
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().setTitle("Add Entry - Pre-Match");
-    }
-
-    /**
-     * Hides the keyboard in the next fragment
-     */
-    private void hideKeyboard() {
-        try {
-            InputMethodManager inputManager =
-                    (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken()
-                    , InputMethodManager.HIDE_NOT_ALWAYS);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
         }
     }
 

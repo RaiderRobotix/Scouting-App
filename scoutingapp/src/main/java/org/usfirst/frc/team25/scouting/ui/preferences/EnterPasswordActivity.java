@@ -35,9 +35,12 @@ public class EnterPasswordActivity extends NoBackgroundPortraitAppCompatActivity
             if (Settings.newInstance(getBaseContext()).matchesPassword(password)) {
 
                 FileManager.deleteData(getBaseContext());
-                Toast.makeText(EnterPasswordActivity.this, "Scouting data deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EnterPasswordActivity.this, "Scouting data deleted",
+                        Toast.LENGTH_SHORT).show();
                 finish();
-            } else passwordField.setError("Incorrect password");
+            } else {
+                passwordField.setError("Incorrect password");
+            }
 
         });
     }

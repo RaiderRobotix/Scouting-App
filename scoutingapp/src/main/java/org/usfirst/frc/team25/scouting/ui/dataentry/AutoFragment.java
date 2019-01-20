@@ -24,7 +24,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
     private ScoutEntry entry;
 
 
-
     public static AutoFragment getInstance(ScoutEntry entry) {
         AutoFragment autoFragment = new AutoFragment();
         autoFragment.setEntry(entry);
@@ -41,9 +40,40 @@ public class AutoFragment extends Fragment implements EntryFragment {
         this.entry = entry;
     }
 
-    private boolean shouldDisableReachAutoLine() {
-        return ownSwitchCubes.getValue() > 0 || ownScaleCubes.getValue() > 0 || switchAdjacentPickup
-                .getValue() > 0 || cubesOpponentPlate.isChecked() || nullTerritoryFoul.isChecked();
+    @Override
+    public void autoPopulate() {
+        if (entry.getAuto() != null) {
+
+            Autonomous prevAuto = entry.getAuto();
+            enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
+            cubesOpponentPlate.setChecked(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
+            ownSwitchCubes.setValue(prevAuto.getSwitchCubes());
+            ownScaleCubes.setValue(prevAuto.getScaleCubes());
+            exchangeCubes.setValue(prevAuto.getExchangeCubes());
+            reachAutoLine.setChecked(prevAuto.isAutoLineCross());
+            powerCubePilePickup.setValue(prevAuto.getPowerCubePilePickup());
+            switchAdjacentPickup.setValue(prevAuto.getSwitchAdjacentPickup());
+            cubesDropped.setValue(prevAuto.getCubesDropped());
+            opponentSwitchPlate.setChecked(prevAuto.isCubeDropOpponentSwitchPlate());
+            opponentScalePlate.setChecked(prevAuto.isCubeDropOpponentScalePlate());
+            nullTerritoryFoul.setChecked(prevAuto.isNullTerritoryFoul());
+            if (shouldDisableReachAutoLine()) {
+                disableReachAutoLine();
+            }
+
+        }
+
+    }
+
+    @Override
+    public void saveState() {
+        entry.setAuto(new Autonomous(ownSwitchCubes.getValue(), ownScaleCubes.getValue(),
+                exchangeCubes.getValue(),
+                powerCubePilePickup.getValue(),
+                switchAdjacentPickup.getValue(),
+                cubesDropped.getValue(), reachAutoLine.isChecked(), nullTerritoryFoul.isChecked(),
+                opponentSwitchPlate.isChecked(), opponentScalePlate.isChecked()));
+
     }
 
     @Override
@@ -71,10 +101,11 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
         nullTerritoryFoul.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b)
+            if (b) {
                 disableReachAutoLine();
-            else if (!shouldDisableReachAutoLine())
+            } else if (!shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
+            }
         });
 
         ownScaleCubes.incButton.setOnClickListener(view17 -> {
@@ -83,8 +114,9 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         ownScaleCubes.decButton.setOnClickListener(view16 -> {
             ownScaleCubes.decrement();
-            if (ownScaleCubes.getValue() < 1 && !shouldDisableReachAutoLine())
+            if (ownScaleCubes.getValue() < 1 && !shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
+            }
         });
 
 
@@ -94,8 +126,9 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         ownSwitchCubes.decButton.setOnClickListener(view14 -> {
             ownSwitchCubes.decrement();
-            if (ownSwitchCubes.getValue() < 1 && !shouldDisableReachAutoLine())
+            if (ownSwitchCubes.getValue() < 1 && !shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
+            }
         });
 
         switchAdjacentPickup.incButton.setOnClickListener(view13 -> {
@@ -104,8 +137,9 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         switchAdjacentPickup.decButton.setOnClickListener(view12 -> {
             switchAdjacentPickup.decrement();
-            if (switchAdjacentPickup.getValue() < 1 && !shouldDisableReachAutoLine())
+            if (switchAdjacentPickup.getValue() < 1 && !shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
+            }
         });
 
         cubesOpponentPlate.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -151,6 +185,11 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     }
 
+    private boolean shouldDisableReachAutoLine() {
+        return ownSwitchCubes.getValue() > 0 || ownScaleCubes.getValue() > 0 || switchAdjacentPickup
+                .getValue() > 0 || cubesOpponentPlate.isChecked() || nullTerritoryFoul.isChecked();
+    }
+
     private void enableReachAutoLine() {
         reachAutoLine.setEnabled(true);
     }
@@ -169,45 +208,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
     }
 
     @Override
-    public void saveState() {
-        entry.setAuto(new Autonomous(ownSwitchCubes.getValue(), ownScaleCubes.getValue(),
-                exchangeCubes.getValue(),
-                powerCubePilePickup.getValue(),
-                switchAdjacentPickup.getValue(),
-                cubesDropped.getValue(), reachAutoLine.isChecked(), nullTerritoryFoul.isChecked(),
-                opponentSwitchPlate.isChecked(), opponentScalePlate.isChecked()));
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
 
         getActivity().setTitle("Add Entry - Sandstorm");
-    }
-
-    @Override
-    public void autoPopulate() {
-        if (entry.getAuto() != null) {
-
-            Autonomous prevAuto = entry.getAuto();
-            enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
-            cubesOpponentPlate.setChecked(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
-            ownSwitchCubes.setValue(prevAuto.getSwitchCubes());
-            ownScaleCubes.setValue(prevAuto.getScaleCubes());
-            exchangeCubes.setValue(prevAuto.getExchangeCubes());
-            reachAutoLine.setChecked(prevAuto.isAutoLineCross());
-            powerCubePilePickup.setValue(prevAuto.getPowerCubePilePickup());
-            switchAdjacentPickup.setValue(prevAuto.getSwitchAdjacentPickup());
-            cubesDropped.setValue(prevAuto.getCubesDropped());
-            opponentSwitchPlate.setChecked(prevAuto.isCubeDropOpponentSwitchPlate());
-            opponentScalePlate.setChecked(prevAuto.isCubeDropOpponentScalePlate());
-            nullTerritoryFoul.setChecked(prevAuto.isNullTerritoryFoul());
-            if (shouldDisableReachAutoLine())
-                disableReachAutoLine();
-
-        }
-
     }
 
 }

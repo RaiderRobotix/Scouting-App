@@ -10,7 +10,9 @@ public class PreMatch {
     private String scoutPos;
     private String startingPos;
     private int matchNum, teamNum;
-    public PreMatch(String scoutName, String scoutPos, int matchNum, int teamNum, String startingPos) {
+
+    public PreMatch(String scoutName, String scoutPos, int matchNum, int teamNum,
+                    String startingPos) {
         this.scoutName = scoutName;
         this.scoutPos = scoutPos;
         this.matchNum = matchNum;

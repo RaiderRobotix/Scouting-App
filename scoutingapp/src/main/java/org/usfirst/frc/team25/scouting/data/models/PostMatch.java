@@ -21,6 +21,7 @@ public class PostMatch {
     private String robotComment;
     private String focus;
     private transient ArrayList<CheckBox> robotQuickComments;
+
     public PostMatch(String robotComment, ArrayList<CheckBox> robotQuickComments,
                      String[] robotQuickCommentValues, String focus, int teamOneCompare,
                      int teamTwoCompare, String comparison, int pickNumber) {
@@ -88,17 +89,24 @@ public class PostMatch {
 
     public void finalizeComment() {
 
-        for (String value : robotQuickCommentValues)
-            for (CheckBox cb : robotQuickComments)
-                if (cb.getText().toString().equals(value))
+        for (String value : robotQuickCommentValues) {
+            for (CheckBox cb : robotQuickComments) {
+                if (cb.getText().toString().equals(value)) {
                     robotQuickCommentSelections.put(value, cb.isChecked());
+                }
+            }
+        }
 
         StringBuilder newRobotComment = new StringBuilder();
 
         for (int i = 0; i < robotComment.length(); i++) {
-            if (robotComment.charAt(i) == ',' || robotComment.charAt(i) == '\n') //prevent csv problems
+            if (robotComment.charAt(i) == ',' || robotComment.charAt(i) == '\n') //prevent csv
+            // problems
+            {
                 newRobotComment.append(";");
-            else newRobotComment.append(robotComment.charAt(i));
+            } else {
+                newRobotComment.append(robotComment.charAt(i));
+            }
         }
 
         setRobotComment(newRobotComment.toString());

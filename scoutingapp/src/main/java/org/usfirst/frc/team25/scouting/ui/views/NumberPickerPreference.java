@@ -35,10 +35,6 @@ public class NumberPickerPreference extends DialogPreference {
         return mPicker;
     }
 
-    public void setMaxValue(int maxValue) {
-        this.maxValue = maxValue;
-    }
-
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         if (positiveResult) {
@@ -47,11 +43,6 @@ public class NumberPickerPreference extends DialogPreference {
             setValue(mPicker.getValue());
 
         }
-    }
-
-    @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        setValue(restoreValue ? getPersistedInt(mNumber) : (Integer) defaultValue);
     }
 
     public void setValue(int value) {
@@ -65,8 +56,17 @@ public class NumberPickerPreference extends DialogPreference {
         }
     }
 
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
         return a.getInt(index, 0);
+    }
+
+    @Override
+    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+        setValue(restoreValue ? getPersistedInt(mNumber) : (Integer) defaultValue);
     }
 }

@@ -62,6 +62,61 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     }
 
     @Override
+    public void autoPopulate() {
+        if (entry.getTeleOp() != null) {
+            TeleOp tele = entry.getTeleOp();
+            cargoShipHatches.setValue(tele.getCargoShipHatches());
+            rocketHatches.setValue(tele.getCargoShipCargo());
+            rocketCargo.setValue(tele.getRocketCargo());
+            cargoShipCargo.setValue(tele.getRocketHatches());
+            hatchesDropped.setValue(tele.getHatchesDropped());
+            climbsAssisted.setValue(tele.getClimbsAssisted());
+            parked.setChecked(tele.isParked());
+            attemptHabClimb.setChecked(tele.isAttemptRungClimb());
+            successHabClimb.setChecked(tele.isSuccessfulRungClimb());
+            climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
+
+            if (tele.getOtherRobotClimbType().length() != 0) {
+                boolean otherChecked = true;
+                for (RadioButton button : climbOtherRobotType) {
+                    if (button.getText().equals(tele.getOtherRobotClimbType())) {
+                        button.setChecked(true);
+                        otherChecked = false;
+                    }
+                }
+                if (otherChecked) {
+                    climbOtherRobotType[climbOtherRobotType.length - 1].setChecked(true);
+                    climbOtherRobotTypeOtherField.setText(tele.getOtherRobotClimbType());
+                }
+            }
+
+
+        }
+    }
+
+    @Override
+    public void saveState() {
+        String climbOtherRobotTypeStr = "";
+        for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
+            if (climbOtherRobotType[i].isChecked()) {
+                climbOtherRobotTypeStr = (String) climbOtherRobotType[i].getText();
+            }
+        }
+
+        if (climbOtherRobotType[climbOtherRobotType.length - 1].isChecked()) {
+            climbOtherRobotTypeStr = climbOtherRobotTypeOtherField.getText().toString();
+        }
+
+
+        entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
+                rocketHatches.getValue(), rocketCargo.getValue(), cargoShipCargo.getValue(),
+                hatchesDropped.getValue(),
+                climbsAssisted.getValue(), parked.isChecked(), attemptHabClimb.isChecked(),
+                successHabClimb.isChecked(),
+                climbsOtherRobots.isChecked(), climbOtherRobotTypeStr));
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -189,11 +244,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    private void enableOtherRobotTypeGroup() {
-        for (RadioButton button : climbOtherRobotType)
-            button.setEnabled(true);
-    }
-
     private void disableOtherRobotTypeGroup() {
         for (RadioButton button : climbOtherRobotType) {
             button.setEnabled(false);
@@ -203,11 +253,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         climbOtherRobotTypeOtherField.setText("");
     }
 
-    @Override
-    public void onStop() {
-        set.setTimerManualInc(timerIncAmount.getValue());
-        Log.i("tag", "stopped");
-        super.onStop();
+    private void enableOtherRobotTypeGroup() {
+        for (RadioButton button : climbOtherRobotType) {
+            button.setEnabled(true);
+        }
     }
 
     public void hideKeyboard() {
@@ -222,63 +271,16 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     }
 
     @Override
-    public void autoPopulate() {
-        if (entry.getTeleOp() != null) {
-            TeleOp tele = entry.getTeleOp();
-            cargoShipHatches.setValue(tele.getCargoShipHatches());
-            rocketHatches.setValue(tele.getCargoShipCargo());
-            rocketCargo.setValue(tele.getRocketCargo());
-            cargoShipCargo.setValue(tele.getRocketHatches());
-            hatchesDropped.setValue(tele.getHatchesDropped());
-            climbsAssisted.setValue(tele.getClimbsAssisted());
-            parked.setChecked(tele.isParked());
-            attemptHabClimb.setChecked(tele.isAttemptRungClimb());
-            successHabClimb.setChecked(tele.isSuccessfulRungClimb());
-            climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
-
-            if (tele.getOtherRobotClimbType().length() != 0) {
-                boolean otherChecked = true;
-                for (RadioButton button : climbOtherRobotType)
-                    if (button.getText().equals(tele.getOtherRobotClimbType())) {
-                        button.setChecked(true);
-                        otherChecked = false;
-                    }
-                if (otherChecked) {
-                    climbOtherRobotType[climbOtherRobotType.length - 1].setChecked(true);
-                    climbOtherRobotTypeOtherField.setText(tele.getOtherRobotClimbType());
-                }
-            }
-
-
-        }
-    }
-
-    @Override
-    public void saveState() {
-        String climbOtherRobotTypeStr = "";
-        for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
-            if (climbOtherRobotType[i].isChecked()) {
-                climbOtherRobotTypeStr = (String) climbOtherRobotType[i].getText();
-            }
-        }
-
-        if (climbOtherRobotType[climbOtherRobotType.length - 1].isChecked()) {
-            climbOtherRobotTypeStr = climbOtherRobotTypeOtherField.getText().toString();
-        }
-
-
-        entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
-                rocketHatches.getValue(), rocketCargo.getValue(), cargoShipCargo.getValue(),
-                hatchesDropped.getValue(),
-                climbsAssisted.getValue(), parked.isChecked(), attemptHabClimb.isChecked(),
-                successHabClimb.isChecked(),
-                climbsOtherRobots.isChecked(), climbOtherRobotTypeStr));
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         getActivity().setTitle("Add Entry - Tele-Op");
         autoPopulate();
+    }
+
+    @Override
+    public void onStop() {
+        set.setTimerManualInc(timerIncAmount.getValue());
+        Log.i("tag", "stopped");
+        super.onStop();
     }
 }
