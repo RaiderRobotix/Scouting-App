@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
@@ -31,6 +33,8 @@ public class PrematchFragment extends Fragment implements EntryFragment {
     private MaterialEditText nameField, matchNumField, teamNumField;
     private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
+    private CheckBox robotNoShow;
+    private RadioButton[] startingLevelButtons;
 
 
     public static PrematchFragment getInstance(ScoutEntry entry) {
@@ -121,7 +125,11 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 android.R.layout.simple_dropdown_item_1line,
                 getResources().getStringArray(R.array.position_options)));
         scoutPosSpinner.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
+        robotNoShow = view.findViewById(R.id.robot_no_show_checkpoint);
 
+        startingLevelButtons = new RadioButton[2];
+        startingLevelButtons[0] = view.findViewById(R.id.hab_level_1);
+        startingLevelButtons[1] = view.findViewById(R.id.hab_level_2);
         nameField = view.findViewById(R.id.scout_name_field);
         matchNumField = view.findViewById(R.id.match_num_field);
         teamNumField = view.findViewById(R.id.team_num_field);
@@ -275,7 +283,47 @@ public class PrematchFragment extends Fragment implements EntryFragment {
 
             }
         });
+        startingLevelButtons[1].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    startingPositionButtons[1].setEnabled(false);
+                    startingPositionButtons[1].setChecked(false);
+                }
+              else {
+                  startingPositionButtons[1].setEnabled(true);
+                }
 
+            }
+
+        });
+        robotNoShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                   for(RadioButton button:startingPositionButtons) {
+                       button.setEnabled(false);
+                       button.setChecked(false);
+                   }
+                   for(RadioButton button2:startingLevelButtons){
+                       button2.setEnabled(false);
+                       button2.setChecked(false);
+                   }
+
+
+
+                }
+                else{
+                    for(RadioButton button:startingPositionButtons){
+                        button.setEnabled(true);
+                    }
+                    for (RadioButton button2:startingLevelButtons){
+                        button2.setEnabled(true);
+                    }
+                }
+
+            }
+        });
         return view;
     }
 
@@ -311,6 +359,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
                 break;
             case 25:
+
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
                 break;
             case 1923:
