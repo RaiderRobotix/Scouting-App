@@ -35,9 +35,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecInt climbsAssisted;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
-    private CheckBox parked;
     private CheckBox climbsOtherRobots;
-    private ButtonTimer cycleTime;
     private ButtonTimer timerIncAmount;
     private EditText climbOtherRobotTypeOtherField;
 
@@ -71,9 +69,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             cargoShipCargo.setValue(tele.getRocketHatches());
             hatchesDropped.setValue(tele.getHatchesDropped());
             climbsAssisted.setValue(tele.getClimbsAssisted());
-            parked.setChecked(tele.isParked());
-            attemptHabClimb.setChecked(tele.isAttemptRungClimb());
-            successHabClimb.setChecked(tele.isSuccessfulRungClimb());
+            attemptHabClimb.setChecked(tele.isAttemptHabClimb());
+            successHabClimb.setChecked(tele.isSuccessfulHabClimb());
             climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
 
             if (tele.getOtherRobotClimbType().length() != 0) {
@@ -111,7 +108,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
                 rocketHatches.getValue(), rocketCargo.getValue(), cargoShipCargo.getValue(),
                 hatchesDropped.getValue(),
-                climbsAssisted.getValue(), parked.isChecked(), attemptHabClimb.isChecked(),
+                climbsAssisted.getValue(), attemptHabClimb.isChecked(),
                 successHabClimb.isChecked(),
                 climbsOtherRobots.isChecked(), climbOtherRobotTypeStr));
     }
@@ -125,8 +122,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
         rocketHatches = view.findViewById(R.id.rocket_hatches);
         rocketCargo = view.findViewById(R.id.rocket_cargo);
-        attemptHabClimb = view.findViewById(R.id.teleop_attempt_hab_climb);
-        successHabClimb = view.findViewById(R.id.success_hab_climb);
+        attemptHabClimb = view.findViewById(R.id.teleop_attempt_hab_climb_checkbox);
+        successHabClimb = view.findViewById(R.id.teleop_success_hab_climb_checkbox);
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo);
@@ -149,14 +146,11 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         set = Settings.newInstance(getActivity());
 
 
-        cycleTime.setIncDecAmount(set.getTimerManualInc());
 
         timerIncAmount.setValue(set.getTimerManualInc());
 
         climbOtherRobotTypeOtherField.setEnabled(false);
 
-
-        cycleTime.setOnClickListener(view15 -> cycleTime.setIncDecAmount(timerIncAmount.getValue()));
 
 
         for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
@@ -181,13 +175,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                parked.setChecked(false);
-                parked.setEnabled(false);
                 disableOtherRobotTypeGroup();
                 climbsOtherRobots.setEnabled(false);
                 climbsOtherRobots.setChecked(false);
             } else {
-                parked.setEnabled(true);
                 climbsOtherRobots.setEnabled(true);
             }
         });
@@ -206,14 +197,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 enableOtherRobotTypeGroup();
                 successHabClimb.setEnabled(false);
                 successHabClimb.setChecked(false);
-                parked.setChecked(false);
-                parked.setEnabled(false);
             } else {
                 disableOtherRobotTypeGroup();
-                parked.setEnabled(true);
                 if (attemptHabClimb.isChecked()) {
                     successHabClimb.setEnabled(true);
                 }
+
             }
         });
 
