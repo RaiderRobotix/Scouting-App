@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -114,21 +113,26 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
         rocketHatches = view.findViewById(R.id.rocket_hatches);
         rocketCargo = view.findViewById(R.id.rocket_cargo);
         attemptHabClimb = view.findViewById(R.id.teleop_attempt_hab_climb_checkbox);
         successHabClimb = view.findViewById(R.id.teleop_success_hab_climb_checkbox);
-        Button continueButton = view.findViewById(R.id.tele_continue);
-        RadioGroup attemptHabClimbLevel = view.findViewById(R.id.teleop_attempt_hab_climb_level);
-        RadioGroup successHabClimbLevel = view.findViewById(R.id.teleop_success_hab_climb_level);
-
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo);
         hatchesDropped = view.findViewById(R.id.hatches_dropped);
-
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
         climbsOtherRobots = view.findViewById(R.id.climb_other_robot);
+        Button continueButton = view.findViewById(R.id.tele_continue);
+
+        attemptHabClimbLevel = new RadioButton[3];
+        attemptHabClimbLevel[0] = view.findViewById(R.id.attempt_hab_level_option_1);
+        attemptHabClimbLevel[1] = view.findViewById(R.id.attempt_hab_level_option_2);
+        attemptHabClimbLevel[2] = view.findViewById(R.id.attempt_hab_level_option_3);
+
+        successHabClimbLevel = new RadioButton[3];
+        successHabClimbLevel[0] = view.findViewById(R.id.success_hab_level_option_1);
+        successHabClimbLevel[1] = view.findViewById(R.id.success_hab_level_option_2);
+        successHabClimbLevel[2] = view.findViewById(R.id.success_hab_level_option_3);
 
         climbOtherRobotType = new RadioButton[5];
         climbOtherRobotType[0] = view.findViewById(R.id.ramp_bot_type);
@@ -136,7 +140,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         climbOtherRobotType[2] = view.findViewById(R.id.iron_cross_type);
         climbOtherRobotType[3] = view.findViewById(R.id.single_lift_type);
         climbOtherRobotType[4] = view.findViewById(R.id.other_type);
-        
+
 
         climbOtherRobotTypeOtherField = view.findViewById(R.id.other_robot_type_text);
         timerIncAmount = view.findViewById(R.id.timer_manual_inc);
@@ -179,7 +183,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 disableOtherRobotTypeGroup();
                 climbsOtherRobots.setEnabled(false);
                 climbsOtherRobots.setChecked(false);
-                for (RadioGroup button : successHabClimbLevel) {
+                for (RadioButton button : successHabClimbLevel) {
                     button.setEnabled(true);
                 }
             } else {
