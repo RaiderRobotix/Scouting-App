@@ -18,7 +18,7 @@
 
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/cargo_ship_hatches"
+                android:id="@+id/teleop_cargo_ship_hatches"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/default_padding_bottom"
@@ -26,48 +26,48 @@
                 app:titlePrompt="Cargo ship - hatches" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/rocket_hatches"
+                android:id="@+id/teleop_rocket_hatches"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cargo_ship_hatches"
+                android:layout_below="@id/teleop_cargo_ship_hatches"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Rocket - hatches" />
 
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/cargo_ship_cargo"
+                android:id="@+id/teleop_cargo_ship_cargo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rocket_hatches"
+                android:layout_below="@id/teleop_rocket_hatches"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Cargo ship - cargo" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/rocket_cargo"
+                android:id="@+id/teleop_rocket_cargo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cargo_ship_cargo"
+                android:layout_below="@id/teleop_cargo_ship_cargo"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Rocket - cargo" />
 
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/hatches_dropped"
+                android:id="@+id/teleop_hatches_dropped"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rocket_cargo"
+                android:layout_below="@id/teleop_rocket_cargo"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Accidentally dropped hatches" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/cargo_dropped"
+                android:id="@+id/teleop_cargo_dropped"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/hatches_dropped"
+                android:layout_below="@id/teleop_hatches_dropped"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Accidentally dropped cargo" />
@@ -77,7 +77,7 @@
                 android:id="@+id/fouls_committed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/hatches_dropped"
+                android:layout_below="@id/teleop_hatches_dropped"
                 android:padding="@dimen/default_padding_bottom"
                 android:visibility="gone"
                 app:initialValue="0"
@@ -98,7 +98,7 @@
                 android:id="@+id/attempt_hab_climb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cargo_dropped"
+                android:layout_below="@id/teleop_cargo_dropped"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
 
                 android:padding="@dimen/default_padding_bottom"
@@ -137,7 +137,7 @@
                 android:visibility="visible">
 
                 <RadioButton
-                    android:id="@+id/attempt_hab_level_option_1"
+                    android:id="@+id/attempt_hab_level_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -146,7 +146,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/attempt_hab_level_option_2"
+                    android:id="@+id/attempt_hab_level_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -155,7 +155,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/attempt_hab_level_option_3"
+                    android:id="@+id/attempt_hab_level_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -175,7 +175,7 @@
                 android:visibility="visible">
 
                 <RadioButton
-                    android:id="@+id/success_hab_level_option_1"
+                    android:id="@+id/success_hab_level_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -184,7 +184,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/success_hab_level_option_2"
+                    android:id="@+id/success_hab_level_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -193,7 +193,7 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/success_hab_level_option_3"
+                    android:id="@+id/success_hab_level_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
