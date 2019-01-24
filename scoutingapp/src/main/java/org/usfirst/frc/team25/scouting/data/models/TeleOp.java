@@ -16,13 +16,13 @@ public class TeleOp {
     private final int attemptHabClimbLevel;
     private final int successHabClimbLevel;
     private final boolean attemptHabClimb;
-    private final boolean successfulHabClimb;
+    private final boolean successHabClimb;
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
 
     public TeleOp(int cargoShipHatches, int cargoShipCargo, int rocketCargo, int rocketHatches,
                   int hatchesDropped, int climbsAssisted, int attemptHabClimbLevel,
-                  int successHabClimbLevel, boolean attemptHabClimb, boolean successfulHabClimb,
+                  int successHabClimbLevel, boolean attemptHabClimb, boolean successHabClimb,
                   boolean otherRobotClimb, String otherRobotClimbType) {
         this.cargoShipHatches = cargoShipHatches;
         this.cargoShipCargo = cargoShipCargo;
@@ -33,7 +33,7 @@ public class TeleOp {
         this.attemptHabClimbLevel = attemptHabClimbLevel;
         this.successHabClimbLevel = successHabClimbLevel;
         this.attemptHabClimb = attemptHabClimb;
-        this.successfulHabClimb = successfulHabClimb;
+        this.successHabClimb = successHabClimb;
         this.otherRobotClimb = otherRobotClimb;
         this.otherRobotClimbType = otherRobotClimbType;
     }
@@ -74,8 +74,8 @@ public class TeleOp {
         return attemptHabClimb;
     }
 
-    public boolean isSuccessfulHabClimb() {
-        return successfulHabClimb;
+    public boolean isSuccessHabClimb() {
+        return successHabClimb;
     }
 
     public boolean isOtherRobotClimb() {
