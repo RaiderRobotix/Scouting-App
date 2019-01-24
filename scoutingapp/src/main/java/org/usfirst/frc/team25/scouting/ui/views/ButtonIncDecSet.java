@@ -17,26 +17,26 @@ import org.usfirst.frc.team25.scouting.R;
  * left.
  * Minimum value is 0, with methods to set label text and initial value.
  */
-public class ButtonIncDecInt extends RelativeLayout {
+public class ButtonIncDecSet extends RelativeLayout {
 
     public Button incButton, decButton;
-    private TextView valueView;
-    private int incDecAmount, minValue, maxValue;
+    protected int incDecAmount, minValue, maxValue;
+    protected TextView valueView;
 
     private OnClickListener listener;
 
-    public ButtonIncDecInt(Context c, AttributeSet attrs) {
+    public ButtonIncDecSet(Context c, AttributeSet attrs) {
         super(c, attrs);
         initializeViews(c);
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
-                R.styleable.ButtonIncDecInt);
+                R.styleable.ButtonIncDecSet);
 
         //XML attributes that can be set in layout files, rather than programmatically
-        setValue(typedArray.getInteger(R.styleable.ButtonIncDecInt_initialValue, 0));
-        setTitle(typedArray.getString(R.styleable.ButtonIncDecInt_titlePrompt));
-        setMinValue(typedArray.getInteger(R.styleable.ButtonIncDecInt_minValue, 0));
-        setMaxValue(typedArray.getInteger(R.styleable.ButtonIncDecInt_maxValue, Integer.MAX_VALUE));
-        setIncDecAmount(typedArray.getInteger(R.styleable.ButtonIncDecInt_incDecAmount, 1));
+        setValue(typedArray.getInteger(R.styleable.ButtonIncDecSet_initialValueSet, 0));
+        setMinValue(typedArray.getInteger(R.styleable.ButtonIncDecSet_minValueSet, 0));
+        setMaxValue(typedArray.getInteger(R.styleable.ButtonIncDecSet_maxValueSet,
+                Integer.MAX_VALUE));
+        setIncDecAmount(typedArray.getInteger(R.styleable.ButtonIncDecSet_incDecAmountSet, 1));
 
         typedArray.recycle();
 
@@ -45,15 +45,7 @@ public class ButtonIncDecInt extends RelativeLayout {
     private void initializeViews(Context c) {
         LayoutInflater inflater =
                 (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.view_button_inc_dec, this);
-    }
-
-    /**
-     * @param title - title of the left TextView
-     */
-    private void setTitle(CharSequence title) {
-        TextView titleView = findViewById(R.id.button_inc_dec_title);
-        titleView.setText(title);
+        inflater.inflate(R.layout.view_button_inc_dec_set, this);
     }
 
     private void setMinValue(int minValue) {

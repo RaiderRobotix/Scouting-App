@@ -26,7 +26,7 @@
             android:textSize="18sp" />
 
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/own_switch_auto"
 
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             app:initialValue="0"
             app:titlePrompt="Own switch plate cubes" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/own_scale_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:initialValue="0"
             app:titlePrompt="Own scale plate cubes" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/exchange_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             app:initialValue="0"
             app:titlePrompt="Exchange cubes" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/cubes_dropped_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             android:textSize="18sp" />
 
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/power_cube_pile_pickup_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             app:maxValue="10"
             app:titlePrompt="Cubes picked up from power cube pile" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/six_switch_pickup_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

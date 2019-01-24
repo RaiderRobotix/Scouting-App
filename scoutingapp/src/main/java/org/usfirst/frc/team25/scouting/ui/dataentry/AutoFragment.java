@@ -12,11 +12,11 @@ import android.widget.CheckBox;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecInt ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
+    private ButtonIncDecView ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
             switchAdjacentPickup, cubesDropped;
     private CheckBox reachAutoLine, cubesOpponentPlate, opponentSwitchPlate,
             opponentScalePlate, nullTerritoryFoul;

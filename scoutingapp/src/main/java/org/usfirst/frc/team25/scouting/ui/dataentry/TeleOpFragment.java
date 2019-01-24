@@ -18,7 +18,7 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonTimer;
 
 
@@ -28,12 +28,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private RadioButton[] attemptHabClimbLevel;
     private RadioButton[] successHabClimbLevel;
     private ScoutEntry entry;
-    private ButtonIncDecInt cargoShipHatches;
-    private ButtonIncDecInt rocketHatches;
-    private ButtonIncDecInt rocketCargo;
-    private ButtonIncDecInt cargoShipCargo;
-    private ButtonIncDecInt hatchesDropped;
-    private ButtonIncDecInt climbsAssisted;
+    private ButtonIncDecView cargoShipHatches;
+    private ButtonIncDecView rocketHatches;
+    private ButtonIncDecView rocketCargo;
+    private ButtonIncDecView cargoShipCargo;
+    private ButtonIncDecView hatchesDropped;
+    private ButtonIncDecView climbsAssisted;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
     private CheckBox climbsOtherRobots;
@@ -113,8 +113,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
         rocketHatches = view.findViewById(R.id.rocket_hatches);
         rocketCargo = view.findViewById(R.id.rocket_cargo);
-        attemptHabClimb = view.findViewById(R.id.teleop_attempt_hab_climb_checkbox);
-        successHabClimb = view.findViewById(R.id.teleop_success_hab_climb_checkbox);
+        attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
+        successHabClimb = view.findViewById(R.id.success_hab_climb);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo);
         hatchesDropped = view.findViewById(R.id.hatches_dropped);
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
@@ -262,7 +262,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         }
 
 
-
+        //TODO reimplement this
      /*   entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
                 cargoShipCargo.getValue(),
                 rocketHatches.getValue(),
