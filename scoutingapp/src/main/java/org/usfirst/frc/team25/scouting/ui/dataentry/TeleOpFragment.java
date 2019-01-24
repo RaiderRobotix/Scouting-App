@@ -122,14 +122,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         attemptHabClimbLevel = new RadioButton[3];
-        attemptHabClimbLevel[0] = view.findViewById(R.id.attempt_hab_level_option_1);
-        attemptHabClimbLevel[1] = view.findViewById(R.id.attempt_hab_level_option_2);
-        attemptHabClimbLevel[2] = view.findViewById(R.id.attempt_hab_level_option_3);
+        attemptHabClimbLevel[0] = view.findViewById(R.id.attempt_hab_level_1);
+        attemptHabClimbLevel[1] = view.findViewById(R.id.attempt_hab_level_2);
+        attemptHabClimbLevel[2] = view.findViewById(R.id.attempt_hab_level_3);
 
         successHabClimbLevel = new RadioButton[3];
-        successHabClimbLevel[0] = view.findViewById(R.id.success_hab_level_option_1);
-        successHabClimbLevel[1] = view.findViewById(R.id.success_hab_level_option_2);
-        successHabClimbLevel[2] = view.findViewById(R.id.success_hab_level_option_3);
+        successHabClimbLevel[0] = view.findViewById(R.id.success_hab_level_1);
+        successHabClimbLevel[1] = view.findViewById(R.id.success_hab_level_2);
+        successHabClimbLevel[2] = view.findViewById(R.id.success_hab_level_3);
 
         climbOtherRobotType = new RadioButton[5];
         climbOtherRobotType[0] = view.findViewById(R.id.ramp_bot_type);
