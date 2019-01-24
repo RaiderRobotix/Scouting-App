@@ -82,17 +82,17 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
-        ownScaleCubes = view.findViewById(R.id.own_scale_auto);
-        ownSwitchCubes = view.findViewById(R.id.own_switch_auto);
-        exchangeCubes = view.findViewById(R.id.exchange_auto);
-        reachAutoLine = view.findViewById(R.id.reach_auto_line);
+        ownScaleCubes = view.findViewById(R.id.hatch_panels_delivered);
+        ownSwitchCubes = view.findViewById(R.id.cargo_delivered);
+        exchangeCubes = view.findViewById(R.id.cargo_dropped);
+        reachAutoLine = view.findViewById(R.id.reach_HAB_line);
         powerCubePilePickup = view.findViewById(R.id.power_cube_pile_pickup_auto);
         switchAdjacentPickup = view.findViewById(R.id.six_switch_pickup_auto);
-        cubesDropped = view.findViewById(R.id.cubes_dropped_auto);
+        cubesDropped = view.findViewById(R.id.hatches_dropped);
         cubesOpponentPlate = view.findViewById(R.id.cubes_wrong_plate_auto);
         opponentScalePlate = view.findViewById(R.id.scale_wrong_plate_auto);
         opponentSwitchPlate = view.findViewById(R.id.switch_wrong_plate_auto);
-        nullTerritoryFoul = view.findViewById(R.id.null_territory_auto_foul);
+        nullTerritoryFoul = view.findViewById(R.id.opponent_cargo_ship_line);
 
         Button continueButton = view.findViewById(R.id.auto_continue);
 
