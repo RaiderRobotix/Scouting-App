@@ -37,9 +37,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
     private CheckBox climbsOtherRobots;
-    private CheckBox hatchLevelThreeCapable;
-    private CheckBox hatchLevelTwoCapable;
-    private CheckBox hatchLevelOneCapable;
     private ButtonTimer timerIncAmount;
     private EditText climbOtherRobotTypeOtherField;
 
@@ -266,7 +263,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
 
 
-      /*  entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
+     /*   entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
                 cargoShipCargo.getValue(),
                 rocketHatches.getValue(),
                 rocketCargo.getValue(),
