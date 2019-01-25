@@ -7,11 +7,11 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class TeleOp {
 
-    private final int cargoShipHatches;
-    private final int cargoShipCargo;
-    private final int rocketCargo;
-    private final int rocketHatches;
-    private final int hatchesDropped;
+    private final int CargoShipHatchesTeleop;
+    private final int CargoShipCargoTeleop;
+    private final int RocketCargoTeleop;
+    private final int RocketHatchesTeleop;
+    private final int HatchesDroppedTeleop;
     private final int climbsAssisted;
     private final int attemptHabClimbLevel;
     private final int successHabClimbLevel;
@@ -20,15 +20,16 @@ public class TeleOp {
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
 
-    public TeleOp(int cargoShipHatches, int cargoShipCargo, int rocketCargo, int rocketHatches,
-                  int hatchesDropped, int climbsAssisted, int attemptHabClimbLevel,
+    public TeleOp(int CargoShipHatchesTeleop, int CargoShipCargoTeleop, int RocketCargoTeleop,
+                  int RocketHatchesTeleop,
+                  int HatchesDroppedTeleop, int climbsAssisted, int attemptHabClimbLevel,
                   int successHabClimbLevel, boolean attemptHabClimb, boolean successHabClimb,
                   boolean otherRobotClimb, String otherRobotClimbType) {
-        this.cargoShipHatches = cargoShipHatches;
-        this.cargoShipCargo = cargoShipCargo;
-        this.rocketCargo = rocketCargo;
-        this.rocketHatches = rocketHatches;
-        this.hatchesDropped = hatchesDropped;
+        this.CargoShipHatchesTeleop = CargoShipHatchesTeleop;
+        this.CargoShipCargoTeleop = CargoShipCargoTeleop;
+        this.RocketCargoTeleop = RocketCargoTeleop;
+        this.RocketHatchesTeleop = RocketHatchesTeleop;
+        this.HatchesDroppedTeleop = HatchesDroppedTeleop;
         this.climbsAssisted = climbsAssisted;
         this.attemptHabClimbLevel = attemptHabClimbLevel;
         this.successHabClimbLevel = successHabClimbLevel;
@@ -38,24 +39,24 @@ public class TeleOp {
         this.otherRobotClimbType = otherRobotClimbType;
     }
 
-    public int getCargoShipHatches() {
-        return cargoShipHatches;
+    public int getCargoShipHatchesTeleop() {
+        return CargoShipHatchesTeleop;
     }
 
-    public int getCargoShipCargo() {
-        return cargoShipCargo;
+    public int getCargoShipCargoTeleop() {
+        return CargoShipCargoTeleop;
     }
 
-    public int getRocketCargo() {
-        return rocketCargo;
+    public int getRocketCargoTeleop() {
+        return RocketCargoTeleop;
     }
 
-    public int getRocketHatches() {
-        return rocketHatches;
+    public int getRocketHatchesTeleop() {
+        return RocketHatchesTeleop;
     }
 
-    public int getHatchesDropped() {
-        return hatchesDropped;
+    public int getHatchesDroppedTeleop() {
+        return HatchesDroppedTeleop;
     }
 
     public int getClimbsAssisted() {

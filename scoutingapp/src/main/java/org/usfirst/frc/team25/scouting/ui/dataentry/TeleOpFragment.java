@@ -64,14 +64,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     public void autoPopulate() {
         if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
-            cargoShipHatches.setValue(tele.getCargoShipHatches());
-            rocketHatches.setValue(tele.getCargoShipCargo());
-            rocketCargo.setValue(tele.getRocketCargo());
-            cargoShipCargo.setValue(tele.getRocketHatches());
-            hatchesDropped.setValue(tele.getHatchesDropped());
+            cargoShipHatches.setValue(tele.getCargoShipHatchesTeleop());
+            rocketHatches.setValue(tele.getCargoShipCargoTeleop());
+            rocketCargo.setValue(tele.getRocketCargoTeleop());
+            cargoShipCargo.setValue(tele.getRocketHatchesTeleop());
+            hatchesDropped.setValue(tele.getHatchesDroppedTeleop());
             climbsAssisted.setValue(tele.getClimbsAssisted());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
-            successHabClimb.setChecked(tele.isSuccessfulHabClimb());
+            successHabClimb.setChecked(tele.isSuccessHabClimb());
             climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
 
             if (tele.getOtherRobotClimbType().length() != 0) {
@@ -94,12 +94,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
     public int getHabClimbLevel(RadioButton[] habLevelArray) {
         int i;
-        for (i = 0; i > 3; i++) {
+        for (i = 0; i < habLevelArray.length; i++) {
             if (habLevelArray[i].isChecked()) {
                 return i + 1;
             }
-            System.out.println("getHabLevelClimb method executed, " + i + 1 + " was the " +
-                    "registered choice");
         }
         return 0;
     }
@@ -110,13 +108,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches);
-        rocketHatches = view.findViewById(R.id.rocket_hatches);
-        rocketCargo = view.findViewById(R.id.rocket_cargo);
+        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_teleop);
+        rocketHatches = view.findViewById(R.id.rocket_hatches_teleop);
+        rocketCargo = view.findViewById(R.id.rocket_cargo_teleop);
         attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
         successHabClimb = view.findViewById(R.id.success_hab_climb);
-        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo);
-        hatchesDropped = view.findViewById(R.id.hatches_dropped);
+        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
+        hatchesDropped = view.findViewById(R.id.hatches_dropped_teleop);
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
         climbsOtherRobots = view.findViewById(R.id.climb_other_robot);
         Button continueButton = view.findViewById(R.id.tele_continue);
