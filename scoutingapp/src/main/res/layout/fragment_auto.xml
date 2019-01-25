@@ -13,7 +13,7 @@
 
 
         <CheckBox
-            android:id="@+id/reach_HAB_line"
+            android:id="@+id/reach_hab_line"
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
@@ -27,38 +27,37 @@
 
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_delivered"
-
+            android:id="@+id/rocket_cargo_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reach_HAB_line"
+            android:layout_below="@id/reach_hab_line"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Cargo delivered" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatch_panels_delivered"
+            android:id="@+id/hatches_delivered_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_delivered"
+            android:layout_below="@id/rocket_cargo_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Hatch panels delivered" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_dropped"
+            android:id="@+id/cargo_dropped_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hatch_panels_delivered"
+            android:layout_below="@id/hatches_delivered_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Cargo dropped" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_dropped"
+            android:id="@+id/hatches_dropped_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped"
+            android:layout_below="@id/cargo_dropped_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Hatch panels dropped" />
@@ -68,7 +67,7 @@
             android:id="@+id/cubes_wrong_plate_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped"
+            android:layout_below="@id/hatches_dropped_auto"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
 
             android:layout_marginTop="5sp"
@@ -131,7 +130,7 @@
 
             android:layout_marginTop="5sp"
             android:padding="@dimen/default_padding_bottom"
-            android:text="Opponent cargo ship line cross"
+            android:text="Crossed opponent cargo ship line"
             android:textSize="18sp" />
 
         <!--More metrics: cubes picked up from power cube pile, six next to switch -->
