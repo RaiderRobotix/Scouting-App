@@ -27,28 +27,69 @@
 
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/rocket_cargo_auto"
+            android:id="@+id/cargo_ship_cargo_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reach_hab_line"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Cargo delivered" />
+            app:titlePrompt="Cargo to Cargo Ship" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_delivered_auto"
+            android:id="@+id/rocket_cargo_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_ship_cargo_auto"
+            android:padding="@dimen/default_padding_bottom"
+            app:initialValue="0"
+            app:titlePrompt="Cargo to Rocket" />
+
+
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+            android:id="@+id/rocket_hatches_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rocket_cargo_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Hatch panels delivered" />
+            app:titlePrompt="Hatch Panels to Rocket" />
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+            android:id="@+id/cargo_ship_hatches_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rocket_hatches_auto"
+            android:padding="@dimen/default_padding_bottom"
+            app:initialValue="0"
+            app:titlePrompt="Hatch Panels to Cargo Ship" />
+
+        <CheckBox
+            android:id="@+id/hatches_front_cargo_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_ship_hatches_auto"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="0dp"
+            android:padding="8dp"
+            android:text="Hatches to Front Cargo Ship" />
+
+        <CheckBox
+            android:id="@+id/hatches_side_cargo_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below = "@id/hatches_front_cargo_auto"
+            android:padding="8dp"
+            android:layout_marginLeft="50dp"
+            android:text="Hatches to Side Cargo Ship"
+
+            />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/cargo_dropped_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_delivered_auto"
+            android:layout_below="@id/hatches_side_cargo_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Cargo dropped" />
@@ -58,74 +99,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cargo_dropped_auto"
+            android:layout_marginTop="-1dp"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Hatch panels dropped" />
-
-
-        <CheckBox
-            android:id="@+id/cubes_wrong_plate_auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_auto"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-
-            android:layout_marginTop="5sp"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Cube(s) dropped on opponent plate(s)"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/switch_wrong_plate_auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cubes_wrong_plate_auto"
-            android:layout_marginLeft="50dp"
-
-            android:enabled="false"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Opponent plate of own switch"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/scale_wrong_plate_auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/switch_wrong_plate_auto"
-            android:layout_marginLeft="50dp"
-
-            android:enabled="false"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Opponent scale plate"
-            android:textSize="18sp" />
-
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/power_cube_pile_pickup_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/scale_wrong_plate_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:maxValue="10"
-            app:titlePrompt="Cubes picked up from power cube pile" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/six_switch_pickup_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/power_cube_pile_pickup_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:maxValue="6"
-            app:titlePrompt="Cubes picked up from next to switch" />
-
 
         <CheckBox
             android:id="@+id/opponent_cargo_ship_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/six_switch_pickup_auto"
+            android:layout_below="@id/hatches_dropped_auto"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
 
             android:layout_marginTop="5sp"
@@ -134,6 +117,7 @@
             android:textSize="18sp" />
 
         <!--More metrics: cubes picked up from power cube pile, six next to switch -->
+
 
         <Button
             android:id="@+id/auto_continue"
