@@ -41,13 +41,13 @@
                 android:id="@+id/cargo_ship_hatches_teleop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_padding_bottom"
                 android:layout_below="@id/level_one_layout_teleop"
+                android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Cargo ship - hatches" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/rocket_hatches_teleop"
+                android:id="@+id/rocket_level_one_hatches_teleop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cargo_ship_hatches_teleop"
@@ -60,13 +60,13 @@
                 android:id="@+id/cargo_ship_cargo_teleop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rocket_hatches_teleop"
+                android:layout_below="@id/rocket_level_one_hatches_teleop"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Cargo ship - cargo" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/rocket_cargo_teleop"
+                android:id="@+id/rocket_level_one_cargo_teleop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cargo_ship_cargo_teleop"
@@ -79,20 +79,19 @@
                 android:id="@+id/hatches_dropped_teleop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rocket_cargo_teleop"
+                android:layout_below="@id/rocket_level_one_cargo_teleop"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Accidentally dropped hatches" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-                android:id="@+id/teleop_cargo_dropped"
+                android:id="@+id/cargo_dropped_teleop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/hatches_dropped_teleop"
                 android:padding="@dimen/default_padding_bottom"
                 app:initialValue="0"
                 app:titlePrompt="Accidentally dropped cargo" />
-
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
                 android:id="@+id/fouls_committed"
@@ -114,17 +113,14 @@
                 app:initialValue="0"
                 app:titlePrompt="Tech fouls committed" />
 
-
             <CheckBox
                 android:id="@+id/attempt_hab_climb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/teleop_cargo_dropped"
+                android:layout_below="@id/cargo_dropped_teleop"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-
                 android:padding="@dimen/default_padding_bottom"
                 android:text="Attempts to climb"
-
                 android:textSize="18sp" />
 
             <CheckBox
@@ -224,119 +220,20 @@
 
             </RadioGroup>
 
-
-            <CheckBox
-                android:id="@+id/climb_other_robot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/climbs_assisted"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:padding="@dimen/default_padding_bottom"
-                android:text="Climbs on other robots"
-
-                android:textSize="18sp" />
-
-            <RadioGroup
-                android:id="@+id/climb_other_robot_type_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/climb_other_robot"
-                android:layout_marginLeft="35dp"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Type of robot climbed on"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/ramp_bot_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:padding="8dp"
-                    android:text="Ramp bot"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/robot_rung_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:padding="8dp"
-                    android:text="Robot with rung"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/iron_cross_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:padding="8dp"
-                    android:text="Iron cross"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/single_lift_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:padding="8dp"
-                    android:text="Single lift"
-                    android:textSize="18sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/other_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:padding="8dp"
-                        android:text="Other: "
-                        android:textSize="18sp" />
-
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/other_robot_type_text"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="Other robot type"
-                        app:met_floatingLabel="none" />
-                </LinearLayout>
-
-            </RadioGroup>
-
-
             <Button
                 android:id="@+id/tele_continue"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
 
-                android:layout_below="@id/climb_other_robot_type_group"
+                android:layout_below="@id/climbs_assisted"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/activity_horizontal_margin"
                 android:elevation="6dp"
                 android:text="@string/continue_button"
                 android:textColor="#ffffff" />
 
-            <org.usfirst.frc.team25.scouting.ui.views.ButtonTimer
-                android:id="@+id/timer_manual_inc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tele_continue"
-                android:padding="8dp"
-                app:buttonIncDecAmount="0.1"
-                app:maxValueTimer="2.0"
-                app:minValueTimer="0.1"
-                app:titlePromptTimer="Timer manual increment" />
-
-
         </RelativeLayout>
+
     </LinearLayout>
+
 </ScrollView>

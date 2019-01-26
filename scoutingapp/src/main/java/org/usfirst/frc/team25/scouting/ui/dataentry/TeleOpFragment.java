@@ -38,8 +38,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecView climbsAssisted;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
-    private CheckBox climbsOtherRobots;                 //Remove
-    private EditText teamNumberThatAssistedClimb;         //Change to Team # who assisted climb
+    private CheckBox climbAssisted;
+    private EditText teamNumberThatAssistedClimb;
     private RadioButton[] highestAssistedClimbLevel;
     private Settings set;
 
@@ -72,8 +72,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             climbsAssisted.setValue(tele.getOtherRobotClimbsAssisted());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
-            climbsOtherRobots.setChecked(tele.isClimbAssisted());
-
+            climbAssisted.setChecked(tele.isClimbAssisted());
+            teamNumberThatAssistedClimb.setEnabled(false);
         }
     }
 
@@ -94,14 +94,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_teleop);
-        rocketLevelOneHatches = view.findViewById(R.id.rocket_hatches_teleop);
-        rocketLevelOneCargo = view.findViewById(R.id.rocket_cargo_teleop);
+        rocketLevelOneHatches = view.findViewById(R.id.rocket_level_one_hatches_teleop);
+        rocketLevelOneCargo = view.findViewById(R.id.rocket_level_one_cargo_teleop);
+
         attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
         successHabClimb = view.findViewById(R.id.success_hab_climb);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
         hatchesDropped = view.findViewById(R.id.hatches_dropped_teleop);
         climbsAssisted = view.findViewById(R.id.climbs_assisted);
-        climbsOtherRobots = view.findViewById(R.id.climb_other_robot);
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         attemptHabClimbLevel = new RadioButton[3];
@@ -114,88 +114,32 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         successHabClimbLevel[1] = view.findViewById(R.id.success_hab_level_2);
         successHabClimbLevel[2] = view.findViewById(R.id.success_hab_level_3);
 
-        climbOtherRobotType = new RadioButton[5];
-        climbOtherRobotType[0] = view.findViewById(R.id.ramp_bot_type);
-        climbOtherRobotType[1] = view.findViewById(R.id.robot_rung_type);
-        climbOtherRobotType[2] = view.findViewById(R.id.iron_cross_type);
-        climbOtherRobotType[3] = view.findViewById(R.id.single_lift_type);
-        climbOtherRobotType[4] = view.findViewById(R.id.other_type);
-
-        teamNumberThatAssistedClimb = view.findViewById(R.id.other_robot_type_text);
-
         set = Settings.newInstance(getActivity());
-
-        teamNumberThatAssistedClimb.setEnabled(false);
-
-        for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
-            climbOtherRobotType[i].setOnClickListener(view13 -> {
-                climbOtherRobotType[climbOtherRobotType.length - 1].setChecked(false);
-                teamNumberThatAssistedClimb.setText("");
-                teamNumberThatAssistedClimb.setEnabled(false);
-            });
-        }
-
-        // Special exception for the "other" radio button
-        climbOtherRobotType[climbOtherRobotType.length - 1].setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b) {
-                for (int i = 0; i < 4; i++) {
-                    climbOtherRobotType[i].setChecked(false);
-                }
-
-                teamNumberThatAssistedClimb.setEnabled(true);
-            }
-        });
-
 
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                disableRadioGroup(climbOtherRobotType);
-                climbsOtherRobots.setEnabled(false);
-                climbsOtherRobots.setChecked(false);
-                for (RadioButton button : successHabClimbLevel) {
-                    button.setEnabled(true);
-                }
+                enableRadioGroup(successHabClimbLevel);
             } else {
-                climbsOtherRobots.setEnabled(true);
-                for (RadioButton button : successHabClimbLevel) {
-                    button.setEnabled(false);
-                }
+                disableRadioGroup(successHabClimbLevel);
             }
         });
 
         attemptHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b && !climbsOtherRobots.isChecked()) {
-                successHabClimb.setEnabled(true);
-                for (RadioButton button : attemptHabClimbLevel) {
-                    button.setEnabled(true);
-                }
-            } else {
-                successHabClimb.setEnabled(false);
-                successHabClimb.setChecked(false);
-                for (RadioButton button : attemptHabClimbLevel) {
-                    button.setEnabled(false);
-                    button.setChecked(false);
-                }
-            }
-        });
-
-        climbsOtherRobots.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                enableRadioGroup(climbOtherRobotType);
+                successHabClimb.setEnabled(true);
+                enableRadioGroup(successHabClimbLevel);
+                enableRadioGroup(attemptHabClimbLevel);
+            } else {
                 successHabClimb.setEnabled(false);
                 successHabClimb.setChecked(false);
-            } else {
-                disableRadioGroup(climbOtherRobotType);
-                if (attemptHabClimb.isChecked()) {
-                    successHabClimb.setEnabled(true);
-                }
-
+                disableRadioGroup(attemptHabClimbLevel);
+                disableRadioGroup(successHabClimbLevel);
             }
         });
 
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();
-            if (climbsOtherRobots.isChecked() && !(climbOtherRobotType[0].isChecked() || climbOtherRobotType[1].isChecked()
+            if (climbAssisted.isChecked() && !(climbOtherRobotType[0].isChecked() || climbOtherRobotType[1].isChecked()
                     || climbOtherRobotType[2].isChecked() || climbOtherRobotType[3].isChecked() ||
                     (climbOtherRobotType[4].isChecked() && !teamNumberThatAssistedClimb.getText().toString().isEmpty()))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
