@@ -22,7 +22,6 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
-    private RadioButton[] climbOtherRobotType;              //Remove this
     private RadioButton[] attemptHabClimbLevel;
     private RadioButton[] successHabClimbLevel;
     private ScoutEntry entry;
@@ -38,7 +37,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecView climbsAssisted;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
-    private CheckBox climbAssisted;
+    private CheckBox otherRobotClimbsAssisted;
     private EditText teamNumberThatAssistedClimb;
     private RadioButton[] highestAssistedClimbLevel;
     private Settings set;
@@ -72,7 +71,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             climbsAssisted.setValue(tele.getOtherRobotClimbsAssisted());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
-            climbAssisted.setChecked(tele.isClimbAssisted());
+            otherRobotClimbsAssisted.setChecked(tele.isClimbAssisted());
             teamNumberThatAssistedClimb.setEnabled(false);
         }
     }
@@ -118,9 +117,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                enableRadioGroup(successHabClimbLevel);
+                successHabClimb.setEnabled(true);
             } else {
                 disableRadioGroup(successHabClimbLevel);
+                successHabClimb.setEnabled(false);
             }
         });
 
@@ -139,11 +139,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();
-            if (climbAssisted.isChecked() && !(climbOtherRobotType[0].isChecked() || climbOtherRobotType[1].isChecked()
-                    || climbOtherRobotType[2].isChecked() || climbOtherRobotType[3].isChecked() ||
-                    (climbOtherRobotType[4].isChecked() && !teamNumberThatAssistedClimb.getText().toString().isEmpty()))) {
+            if (false/*otherRobotClimbsAssisted.isChecked() && teamNumberThatAssistedClimb
+            .getText().toString().isEmpty()*/) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select or fill in type of robot climbed on")
+                builder.setTitle("Fill in the team number")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
                             //do things
@@ -156,7 +155,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                         .beginTransaction()
                         .replace(android.R.id.content, PostmatchFragment.getInstance(entry), "POST")
                         .commit();
-
             }
         });
 
@@ -179,16 +177,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        String climbOtherRobotTypeStr = "";
-        for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
-            if (climbOtherRobotType[i].isChecked()) {
-                climbOtherRobotTypeStr = (String) climbOtherRobotType[i].getText();
-            }
-        }
-
-        if (climbOtherRobotType[climbOtherRobotType.length - 1].isChecked()) {
-            climbOtherRobotTypeStr = teamNumberThatAssistedClimb.getText().toString();
-        }
 
 
         //TODO reimplement this
