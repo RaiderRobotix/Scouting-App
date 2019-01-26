@@ -46,10 +46,16 @@ public class AutoFragment extends Fragment implements EntryFragment {
         if (entry.getAuto() != null) {
 
             Autonomous prevAuto = entry.getAuto();
-            cargoToCargoShip.setValue(prevAuto.getSwitchCubes());
-            hatchPanelsToRocket.setValue(prevAuto.getScaleCubes());
-            reachHabLine.setChecked(prevAuto.isAutoLineCross());
-            opponentCargoShipLineFoul.setChecked(prevAuto.isNullTerritoryFoul());
+            cargoToCargoShip.setValue(prevAuto.getCargoToCargoShip());
+            cargoToRocket.setValue(prevAuto.getCargoToRocket());
+            hatchPanelsToRocket.setValue(prevAuto.getHatchPanelsToRocket());
+            hatchesToCargoShip.setValue(prevAuto.getHatchesToCargoShip());
+            hatchesDropped.setValue(prevAuto.getHatchesDropped());
+            cargoDropped.setValue(prevAuto.getCargoDropped());
+            hatchesSideCargo.setChecked(prevAuto.isHatchesSideCargo());
+            hatchesFrontCargo.setChecked(prevAuto.isHatchesFrontCargo());
+            reachHabLine.setChecked(prevAuto.isReachHabLine());
+            opponentCargoShipLineFoul.setChecked(prevAuto.isOpponentCargoShipLineFoul());
             if (shouldDisableReachAutoLine()) {
                 disableReachAutoLine();
             }
@@ -60,12 +66,12 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        /*entry.setAuto(new Autonomous(cargoDelivered.getValue(), hatchPanelsDelivered.getValue(),
-                exchangeCubes.getValue(),
-                powerCubePilePickup.getValue(),
-                switchAdjacentPickup.getValue(),
-                cubesDropped.getValue(), reachHabLine.isChecked(), nullTerritoryFoul.isChecked(),opponentSwitchPlate.isChecked(),
-                opponentScalePlate.isChecked()));*/
+        entry.setAuto(new Autonomous(cargoToRocket.getValue(), hatchPanelsToRocket.getValue(),
+                hatchesToCargoShip.getValue(),
+                cargoToCargoShip.getValue(),
+                hatchesDropped.getValue(),
+                cargoDropped.getValue(), reachHabLine.isChecked(), opponentCargoShipLineFoul.isChecked(),hatchesSideCargo.isChecked(),
+                hatchesFrontCargo.isChecked()));
 
     }
 
