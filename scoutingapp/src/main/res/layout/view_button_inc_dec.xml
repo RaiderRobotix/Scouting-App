@@ -19,48 +19,11 @@
             android:textColor="#000000"
             android:textSize="18sp" />
 
-        <LinearLayout
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+            android:id="@+id/button_inc_dec_set"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-
-            <Button
-                android:id="@+id/dec_button"
-
-                android:layout_width="0dip"
-
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:elevation="6dp"
-                android:text="-"
-                android:textColor="#ffffff" />
-
-
-            <TextView
-                android:id="@+id/button_inc_dec_value"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.75"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textColor="#000000" />
-
-            <Button
-                android:id="@+id/inc_button"
-                android:layout_width="0dip"
-
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:elevation="6dp"
-                android:text="+"
-                android:textColor="#ffffff" />
-
-
-        </LinearLayout>
+            android:layout_weight="1" />
 
     </LinearLayout>
 

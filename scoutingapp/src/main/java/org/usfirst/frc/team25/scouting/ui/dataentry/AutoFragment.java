@@ -12,13 +12,13 @@ import android.widget.CheckBox;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecInt ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
+    private ButtonIncDecView cargoDelivered, hatchPanelsDelivered, exchangeCubes, powerCubePilePickup,
             switchAdjacentPickup, cubesDropped;
-    private CheckBox reachAutoLine, cubesOpponentPlate, opponentSwitchPlate,
+    private CheckBox reachHABLine, cubesOpponentPlate, opponentSwitchPlate,
             opponentScalePlate, nullTerritoryFoul;
 
     private ScoutEntry entry;
@@ -47,10 +47,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
             Autonomous prevAuto = entry.getAuto();
             enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
             cubesOpponentPlate.setChecked(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
-            ownSwitchCubes.setValue(prevAuto.getSwitchCubes());
-            ownScaleCubes.setValue(prevAuto.getScaleCubes());
+            cargoDelivered.setValue(prevAuto.getSwitchCubes());
+            hatchPanelsDelivered.setValue(prevAuto.getScaleCubes());
             exchangeCubes.setValue(prevAuto.getExchangeCubes());
-            reachAutoLine.setChecked(prevAuto.isAutoLineCross());
+            reachHABLine.setChecked(prevAuto.isAutoLineCross());
             powerCubePilePickup.setValue(prevAuto.getPowerCubePilePickup());
             switchAdjacentPickup.setValue(prevAuto.getSwitchAdjacentPickup());
             cubesDropped.setValue(prevAuto.getCubesDropped());
@@ -67,11 +67,11 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        entry.setAuto(new Autonomous(ownSwitchCubes.getValue(), ownScaleCubes.getValue(),
+        entry.setAuto(new Autonomous(cargoDelivered.getValue(), hatchPanelsDelivered.getValue(),
                 exchangeCubes.getValue(),
                 powerCubePilePickup.getValue(),
                 switchAdjacentPickup.getValue(),
-                cubesDropped.getValue(), reachAutoLine.isChecked(), nullTerritoryFoul.isChecked(),
+                cubesDropped.getValue(), reachHABLine.isChecked(), nullTerritoryFoul.isChecked(),
                 opponentSwitchPlate.isChecked(), opponentScalePlate.isChecked()));
 
     }
@@ -82,17 +82,17 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
-        ownScaleCubes = view.findViewById(R.id.own_scale_auto);
-        ownSwitchCubes = view.findViewById(R.id.own_switch_auto);
-        exchangeCubes = view.findViewById(R.id.exchange_auto);
-        reachAutoLine = view.findViewById(R.id.reach_auto_line);
+        hatchPanelsDelivered = view.findViewById(R.id.hatches_delivered_auto);
+        cargoDelivered = view.findViewById(R.id.rocket_cargo_auto);
+        exchangeCubes = view.findViewById(R.id.cargo_dropped_auto);
+        reachHABLine = view.findViewById(R.id.reach_hab_line);
         powerCubePilePickup = view.findViewById(R.id.power_cube_pile_pickup_auto);
         switchAdjacentPickup = view.findViewById(R.id.six_switch_pickup_auto);
-        cubesDropped = view.findViewById(R.id.cubes_dropped_auto);
+        cubesDropped = view.findViewById(R.id.hatches_dropped_auto);
         cubesOpponentPlate = view.findViewById(R.id.cubes_wrong_plate_auto);
         opponentScalePlate = view.findViewById(R.id.scale_wrong_plate_auto);
         opponentSwitchPlate = view.findViewById(R.id.switch_wrong_plate_auto);
-        nullTerritoryFoul = view.findViewById(R.id.null_territory_auto_foul);
+        nullTerritoryFoul = view.findViewById(R.id.opponent_cargo_ship_line);
 
         Button continueButton = view.findViewById(R.id.auto_continue);
 
@@ -108,25 +108,25 @@ public class AutoFragment extends Fragment implements EntryFragment {
             }
         });
 
-        ownScaleCubes.incButton.setOnClickListener(view17 -> {
-            ownScaleCubes.increment();
+        hatchPanelsDelivered.incButton.setOnClickListener(view17 -> {
+            hatchPanelsDelivered.increment();
             disableReachAutoLine();
         });
-        ownScaleCubes.decButton.setOnClickListener(view16 -> {
-            ownScaleCubes.decrement();
-            if (ownScaleCubes.getValue() < 1 && !shouldDisableReachAutoLine()) {
+        hatchPanelsDelivered.decButton.setOnClickListener(view16 -> {
+            hatchPanelsDelivered.decrement();
+            if (hatchPanelsDelivered.getValue() < 1 && !shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
             }
         });
 
 
-        ownSwitchCubes.incButton.setOnClickListener(view15 -> {
-            ownSwitchCubes.increment();
+        cargoDelivered.incButton.setOnClickListener(view15 -> {
+            cargoDelivered.increment();
             disableReachAutoLine();
         });
-        ownSwitchCubes.decButton.setOnClickListener(view14 -> {
-            ownSwitchCubes.decrement();
-            if (ownSwitchCubes.getValue() < 1 && !shouldDisableReachAutoLine()) {
+        cargoDelivered.decButton.setOnClickListener(view14 -> {
+            cargoDelivered.decrement();
+            if (cargoDelivered.getValue() < 1 && !shouldDisableReachAutoLine()) {
                 enableReachAutoLine();
             }
         });
@@ -180,18 +180,18 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     private void disableReachAutoLine() {
 
-        reachAutoLine.setChecked(true);
-        reachAutoLine.setEnabled(false);
+        reachHABLine.setChecked(true);
+        reachHABLine.setEnabled(false);
 
     }
 
     private boolean shouldDisableReachAutoLine() {
-        return ownSwitchCubes.getValue() > 0 || ownScaleCubes.getValue() > 0 || switchAdjacentPickup
+        return cargoDelivered.getValue() > 0 || hatchPanelsDelivered.getValue() > 0 || switchAdjacentPickup
                 .getValue() > 0 || cubesOpponentPlate.isChecked() || nullTerritoryFoul.isChecked();
     }
 
     private void enableReachAutoLine() {
-        reachAutoLine.setEnabled(true);
+        reachHABLine.setEnabled(true);
     }
 
     private void enableOpponentPlateLocationCheckboxes(boolean enable) {

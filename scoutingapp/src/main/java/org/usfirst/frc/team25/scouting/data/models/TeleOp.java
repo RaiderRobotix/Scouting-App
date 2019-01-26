@@ -7,72 +7,76 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class TeleOp {
 
-    private final int cargoShipHatches;
-    private final int cargoShipCargo;
-    private final int rocketCargo;
-    private final int rocketHatches;
-    private final int hatchesDropped;
+    private final int CargoShipHatchesTeleop;
+    private final int CargoShipCargoTeleop;
+    private final int RocketCargoTeleop;
+    private final int RocketHatchesTeleop;
+    private final int HatchesDroppedTeleop;
     private final int climbsAssisted;
-    private final boolean parked;
-    private final boolean attemptRungClimb;
-    private final boolean successfulRungClimb;
+    private final int attemptHabClimbLevel;
+    private final int successHabClimbLevel;
+    private final boolean attemptHabClimb;
+    private final boolean successHabClimb;
     private final boolean otherRobotClimb;
     private final String otherRobotClimbType;
 
-
-    public TeleOp(int cargoShipHatches, int rocketHatches, int rocketCargo,
-                  int cargoShipCargo, int hatchesDropped, int climbsAssisted, boolean parked,
-                  boolean attemptRungClimb, boolean successfulRungClimb, boolean otherRobotClimb,
-                  String otherRobotClimbType) {
-
-        this.cargoShipHatches = cargoShipHatches;
-        this.cargoShipCargo = cargoShipCargo;
-        this.rocketCargo = rocketCargo;
-        this.rocketHatches = rocketHatches;
-        this.hatchesDropped = hatchesDropped;
+    public TeleOp(int CargoShipHatchesTeleop, int CargoShipCargoTeleop, int RocketCargoTeleop,
+                  int RocketHatchesTeleop,
+                  int HatchesDroppedTeleop, int climbsAssisted, int attemptHabClimbLevel,
+                  int successHabClimbLevel, boolean attemptHabClimb, boolean successHabClimb,
+                  boolean otherRobotClimb, String otherRobotClimbType) {
+        this.CargoShipHatchesTeleop = CargoShipHatchesTeleop;
+        this.CargoShipCargoTeleop = CargoShipCargoTeleop;
+        this.RocketCargoTeleop = RocketCargoTeleop;
+        this.RocketHatchesTeleop = RocketHatchesTeleop;
+        this.HatchesDroppedTeleop = HatchesDroppedTeleop;
         this.climbsAssisted = climbsAssisted;
-        this.parked = parked;
-        this.attemptRungClimb = attemptRungClimb;
-        this.successfulRungClimb = successfulRungClimb;
+        this.attemptHabClimbLevel = attemptHabClimbLevel;
+        this.successHabClimbLevel = successHabClimbLevel;
+        this.attemptHabClimb = attemptHabClimb;
+        this.successHabClimb = successHabClimb;
         this.otherRobotClimb = otherRobotClimb;
         this.otherRobotClimbType = otherRobotClimbType;
     }
 
-
-    public int getCargoShipHatches() {
-        return cargoShipHatches;
+    public int getCargoShipHatchesTeleop() {
+        return CargoShipHatchesTeleop;
     }
 
-    public int getCargoShipCargo() {
-        return cargoShipCargo;
+    public int getCargoShipCargoTeleop() {
+        return CargoShipCargoTeleop;
     }
 
-    public int getRocketCargo() {
-        return rocketCargo;
+    public int getRocketCargoTeleop() {
+        return RocketCargoTeleop;
     }
 
-    public int getRocketHatches() {
-        return rocketHatches;
+    public int getRocketHatchesTeleop() {
+        return RocketHatchesTeleop;
     }
 
-    public int getHatchesDropped() {
-        return hatchesDropped;
+    public int getHatchesDroppedTeleop() {
+        return HatchesDroppedTeleop;
     }
 
     public int getClimbsAssisted() {
         return climbsAssisted;
     }
 
-    public boolean isParked() {
-        return parked;
+    public int getAttemptHabClimbLevel() {
+        return attemptHabClimbLevel;
     }
 
-    public boolean isAttemptRungClimb() {
-        return attemptRungClimb;
+    public int getSuccessHabClimbLevel() {
+        return successHabClimbLevel;
     }
 
-    public boolean isSuccessfulRungClimb() {
-        return successfulRungClimb;
+    public boolean isAttemptHabClimb() {
+        return attemptHabClimb;
+    }
+
+    public boolean isSuccessHabClimb() {
+        return successHabClimb;
     }
 
     public boolean isOtherRobotClimb() {
@@ -82,6 +86,4 @@ public class TeleOp {
     public String getOtherRobotClimbType() {
         return otherRobotClimbType;
     }
-
-
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ButtonIncDecSet">
+        <attr name="initialValueSet" format="integer" />
+        <attr name="minValueSet" format="integer" />
+        <attr name="maxValueSet" format="integer" />
+        <attr name="incDecAmountSet" format="integer" />
+
+    </declare-styleable>
+
+</resources>
