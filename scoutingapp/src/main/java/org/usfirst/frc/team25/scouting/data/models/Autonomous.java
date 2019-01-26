@@ -17,22 +17,6 @@ public class Autonomous {
     private final boolean cubeDropOpponentSwitchPlate;
     private final boolean isCubeDropOpponentScalePlate;
 
-    public Autonomous(int switchCubes, int scaleCubes, int exchangeCubes, int powerCubePilePickup
-            , int switchAdjacentPickup,
-                      int cubesDropped, boolean autoLineCross, boolean nullTerritoryFoul,
-                      boolean cubeDropOpponentSwitchPlate, boolean isCubeDropOpponentScalePlate) {
-        this.switchCubes = switchCubes;
-        this.scaleCubes = scaleCubes;
-        this.exchangeCubes = exchangeCubes;
-        this.powerCubePilePickup = powerCubePilePickup;
-        this.switchAdjacentPickup = switchAdjacentPickup;
-        this.cubesDropped = cubesDropped;
-        this.autoLineCross = autoLineCross;
-        this.nullTerritoryFoul = nullTerritoryFoul;
-        this.cubeDropOpponentSwitchPlate = cubeDropOpponentSwitchPlate;
-        this.isCubeDropOpponentScalePlate = isCubeDropOpponentScalePlate;
-    }
-
     public int getSwitchCubes() {
         return switchCubes;
     }
@@ -73,5 +57,19 @@ public class Autonomous {
         return isCubeDropOpponentScalePlate;
     }
 
-
+    public Autonomous(int switchCubes, int scaleCubes, int exchangeCubes, int powerCubePilePickup
+            , int switchAdjacentPickup, int cubesDropped, boolean autoLineCross,
+                      boolean nullTerritoryFoul, boolean cubeDropOpponentSwitchPlate,
+                      boolean isCubeDropOpponentScalePlate) {
+        this.switchCubes = switchCubes;
+        this.scaleCubes = scaleCubes;
+        this.exchangeCubes = exchangeCubes;
+        this.powerCubePilePickup = powerCubePilePickup;
+        this.switchAdjacentPickup = switchAdjacentPickup;
+        this.cubesDropped = cubesDropped;
+        this.autoLineCross = autoLineCross;
+        this.nullTerritoryFoul = nullTerritoryFoul;
+        this.cubeDropOpponentSwitchPlate = cubeDropOpponentSwitchPlate;
+        this.isCubeDropOpponentScalePlate = isCubeDropOpponentScalePlate;
+    }
 }
