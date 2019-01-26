@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/attempt_hab_climb"
                 android:layout_marginLeft="45dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:visibility="visible">
 
                 <RadioButton
@@ -163,8 +163,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:padding="8dp"
-                    android:text="HAB Level 1"
-                    android:textSize="18sp" />
+                    android:text="Level 1"
+                    android:textSize="18dp" />
 
                 <RadioButton
                     android:id="@+id/attempt_hab_level_2"
@@ -172,8 +172,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:padding="8dp"
-                    android:text="HAB Level 2"
-                    android:textSize="18sp" />
+                    android:text="Level 2"
+                    android:textSize="18dp" />
 
                 <RadioButton
                     android:id="@+id/attempt_hab_level_3"
@@ -181,8 +181,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:padding="8dp"
-                    android:text="HAB Level 3"
-                    android:textSize="18sp" />
+                    android:text="Level 3"
+                    android:textSize="18dp" />
 
             </RadioGroup>
 

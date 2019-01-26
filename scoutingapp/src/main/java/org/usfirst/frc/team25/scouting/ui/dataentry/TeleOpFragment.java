@@ -24,23 +24,26 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonTimer;
 
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
-    private RadioButton[] climbOtherRobotType;
+    private RadioButton[] climbOtherRobotType;              //Remove this
     private RadioButton[] attemptHabClimbLevel;
     private RadioButton[] successHabClimbLevel;
     private ScoutEntry entry;
     private ButtonIncDecView cargoShipHatches;
-    private ButtonIncDecView rocketHatches;
-    private ButtonIncDecView rocketCargo;
     private ButtonIncDecView cargoShipCargo;
+    private ButtonIncDecView rocketLevelOneHatches;
+    private ButtonIncDecView rocketLevelOneCargo;
+    private ButtonIncDecView rocketLevelTwoHatches;
+    private ButtonIncDecView rocketLevelTwoCargo;
+    private ButtonIncDecView rocketLevelThreeHatches;
+    private ButtonIncDecView rocketLevelThreeCargo;
     private ButtonIncDecView hatchesDropped;
     private ButtonIncDecView climbsAssisted;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
-    private CheckBox climbsOtherRobots;
-    private ButtonTimer timerIncAmount;
-    private EditText climbOtherRobotTypeOtherField;
-
-
+    private CheckBox climbsOtherRobots;                 //Remove
+    private ButtonTimer timerIncAmount;                 //Remove?
+    private EditText teamNumberThatAssistedClimb;         //Change to Team # who assisted climb
+    private RadioButton[] highestAssistedClimbLevel;
     private Settings set;
 
 
@@ -64,30 +67,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     public void autoPopulate() {
         if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
-            cargoShipHatches.setValue(tele.getCargoShipHatchesTeleop());
-            rocketHatches.setValue(tele.getCargoShipCargoTeleop());
-            rocketCargo.setValue(tele.getRocketCargoTeleop());
-            cargoShipCargo.setValue(tele.getRocketHatchesTeleop());
-            hatchesDropped.setValue(tele.getHatchesDroppedTeleop());
-            climbsAssisted.setValue(tele.getClimbsAssisted());
+            cargoShipHatches.setValue(tele.getCargoShipHatches());
+            rocketLevelOneHatches.setValue(tele.getCargoShipCargo());
+            rocketLevelOneCargo.setValue(tele.getRocketLevelOneCargo());
+            cargoShipCargo.setValue(tele.getRocketLevelOneHatches());
+            hatchesDropped.setValue(tele.getHatchesDropped());
+            climbsAssisted.setValue(tele.getOtherRobotClimbsAssisted());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
-            climbsOtherRobots.setChecked(tele.isOtherRobotClimb());
-
-            if (tele.getOtherRobotClimbType().length() != 0) {
-                boolean otherChecked = true;
-                for (RadioButton button : climbOtherRobotType) {
-                    if (button.getText().equals(tele.getOtherRobotClimbType())) {
-                        button.setChecked(true);
-                        otherChecked = false;
-                    }
-                }
-                if (otherChecked) {
-                    climbOtherRobotType[climbOtherRobotType.length - 1].setChecked(true);
-                    climbOtherRobotTypeOtherField.setText(tele.getOtherRobotClimbType());
-                }
-            }
-
+            climbsOtherRobots.setChecked(tele.isClimbAssisted());
 
         }
     }
@@ -103,14 +91,43 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     }
 
     @Override
+    public void saveState() {
+        String climbOtherRobotTypeStr = "";
+        for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
+            if (climbOtherRobotType[i].isChecked()) {
+                climbOtherRobotTypeStr = (String) climbOtherRobotType[i].getText();
+            }
+        }
+
+        if (climbOtherRobotType[climbOtherRobotType.length - 1].isChecked()) {
+            climbOtherRobotTypeStr = teamNumberThatAssistedClimb.getText().toString();
+        }
+
+
+        //TODO reimplement this
+     /*   entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
+                cargoShipCargo.getValue(),
+                rocketLevelOneHatches.getValue(),
+                rocketLevelOneCargo.getValue(),
+                cargoShipCargo.getValue(),
+                hatchesDropped.getValue(),
+                climbsAssisted.getValue(),
+                getHabClimbLevel(attemptHabClimbLevel),
+                getHabClimbLevel(successHabClimbLevel),
+                attemptHabClimb.isChecked(),
+                successHabClimb.isChecked(),
+                climbsOtherRobots.isChecked())); */
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_teleop);
-        rocketHatches = view.findViewById(R.id.rocket_hatches_teleop);
-        rocketCargo = view.findViewById(R.id.rocket_cargo_teleop);
+        rocketLevelOneHatches = view.findViewById(R.id.rocket_hatches_teleop);
+        rocketLevelOneCargo = view.findViewById(R.id.rocket_cargo_teleop);
         attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
         successHabClimb = view.findViewById(R.id.success_hab_climb);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
@@ -137,7 +154,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         climbOtherRobotType[4] = view.findViewById(R.id.other_type);
 
 
-        climbOtherRobotTypeOtherField = view.findViewById(R.id.other_robot_type_text);
+        teamNumberThatAssistedClimb = view.findViewById(R.id.other_robot_type_text);
         timerIncAmount = view.findViewById(R.id.timer_manual_inc);
 
         timerIncAmount.startStopButton.setVisibility(View.GONE);
@@ -149,15 +166,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         timerIncAmount.setValue(set.getTimerManualInc());
 
-        climbOtherRobotTypeOtherField.setEnabled(false);
+        teamNumberThatAssistedClimb.setEnabled(false);
 
 
 
         for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
             climbOtherRobotType[i].setOnClickListener(view13 -> {
                 climbOtherRobotType[climbOtherRobotType.length - 1].setChecked(false);
-                climbOtherRobotTypeOtherField.setText("");
-                climbOtherRobotTypeOtherField.setEnabled(false);
+                teamNumberThatAssistedClimb.setText("");
+                teamNumberThatAssistedClimb.setEnabled(false);
             });
         }
 
@@ -168,7 +185,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                     climbOtherRobotType[i].setChecked(false);
                 }
 
-                climbOtherRobotTypeOtherField.setEnabled(true);
+                teamNumberThatAssistedClimb.setEnabled(true);
             }
         });
 
@@ -223,7 +240,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             hideKeyboard();
             if (climbsOtherRobots.isChecked() && !(climbOtherRobotType[0].isChecked() || climbOtherRobotType[1].isChecked()
                     || climbOtherRobotType[2].isChecked() || climbOtherRobotType[3].isChecked() ||
-                    (climbOtherRobotType[4].isChecked() && !climbOtherRobotTypeOtherField.getText().toString().isEmpty()))) {
+                    (climbOtherRobotType[4].isChecked() && !teamNumberThatAssistedClimb.getText().toString().isEmpty()))) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select or fill in type of robot climbed on")
                         .setCancelable(false)
@@ -246,42 +263,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    @Override
-    public void saveState() {
-        String climbOtherRobotTypeStr = "";
-        for (int i = 0; i < climbOtherRobotType.length - 1; i++) {
-            if (climbOtherRobotType[i].isChecked()) {
-                climbOtherRobotTypeStr = (String) climbOtherRobotType[i].getText();
-            }
-        }
-
-        if (climbOtherRobotType[climbOtherRobotType.length - 1].isChecked()) {
-            climbOtherRobotTypeStr = climbOtherRobotTypeOtherField.getText().toString();
-        }
-
-
-        //TODO reimplement this
-     /*   entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
-                cargoShipCargo.getValue(),
-                rocketHatches.getValue(),
-                rocketCargo.getValue(),
-                cargoShipCargo.getValue(),
-                hatchesDropped.getValue(),
-                climbsAssisted.getValue(),
-                getHabClimbLevel(attemptHabClimbLevel),
-                getHabClimbLevel(successHabClimbLevel),
-                attemptHabClimb.isChecked(),
-                successHabClimb.isChecked(),
-                climbsOtherRobots.isChecked())); */
-    }
-
     private void disableOtherRobotTypeGroup() {
         for (RadioButton button : climbOtherRobotType) {
             button.setEnabled(false);
             button.setChecked(false);
         }
-        climbOtherRobotTypeOtherField.setEnabled(false);
-        climbOtherRobotTypeOtherField.setText("");
+        teamNumberThatAssistedClimb.setEnabled(false);
+        teamNumberThatAssistedClimb.setText("");
     }
 
     private void enableOtherRobotTypeGroup() {
