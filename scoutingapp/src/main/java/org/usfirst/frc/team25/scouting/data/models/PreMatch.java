@@ -10,19 +10,18 @@ public class PreMatch {
     private String scoutPos;
     private String startingPos;
     private int matchNum, teamNum;
+    private int startingLevel;
+    private boolean robotNoShow;
 
-    public PreMatch(String scoutName, String scoutPos, int matchNum, int teamNum,
-                    String startingPos) {
+    public PreMatch(String scoutName, String scoutPos, String startingPos, int matchNum,
+                    int teamNum, int startingLevel, boolean robotNoShow) {
         this.scoutName = scoutName;
         this.scoutPos = scoutPos;
+        this.startingPos = startingPos;
         this.matchNum = matchNum;
         this.teamNum = teamNum;
-        this.startingPos = startingPos;
-    }
-
-
-    public PreMatch() {
-        //Default empty constructor for JSON parsing
+        this.startingLevel = startingLevel;
+        this.robotNoShow = robotNoShow;
     }
 
     public String getScoutName() {
@@ -33,6 +32,10 @@ public class PreMatch {
         return scoutPos;
     }
 
+    public String getStartingPos() {
+        return startingPos;
+    }
+
     public int getMatchNum() {
         return matchNum;
     }
@@ -41,7 +44,19 @@ public class PreMatch {
         return teamNum;
     }
 
-    public String getStartingPos() {
-        return startingPos;
+    public int getStartingLevel() {
+        return startingLevel;
     }
+
+    public boolean isRobotNoShow() {
+        return robotNoShow;
+    }
+
+
+
+
+
+
+
+
 }
