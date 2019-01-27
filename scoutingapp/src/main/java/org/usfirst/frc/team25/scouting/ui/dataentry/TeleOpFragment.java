@@ -26,8 +26,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private RadioButton[] attemptHabClimbLevel;
     private RadioButton[] successHabClimbLevel;
     private ScoutEntry entry;
-    private ButtonIncDecView cargoShipHatches;
-    private ButtonIncDecView cargoShipCargo;
+    private ButtonIncDecSet cargoShipHatches;
+    private ButtonIncDecSet cargoShipCargo;
     private ButtonIncDecSet rocketLevelOneHatches;
     private ButtonIncDecSet rocketLevelOneCargo;
     private ButtonIncDecSet rocketLevelTwoHatches;
@@ -64,15 +64,21 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     public void autoPopulate() {
         if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
+
             cargoShipHatches.setValue(tele.getCargoShipHatches());
             rocketLevelOneHatches.setValue(tele.getCargoShipCargo());
             rocketLevelOneCargo.setValue(tele.getRocketLevelOneCargo());
             cargoShipCargo.setValue(tele.getRocketLevelOneHatches());
+            rocketLevelTwoCargo.setValue(tele.getRocketLevelTwoCargo());
+            rocketLevelTwoHatches.setValue(tele.getRocketLevelTwoHatches());
+            rocketLevelThreeCargo.setValue(tele.getRocketLevelThreeCargo());
+            rocketLevelThreeHatches.setValue(tele.getRocketLevelThreeHatches());
+
             hatchesDropped.setValue(tele.getHatchesDropped());
             climbsAssisted.setValue(tele.getOtherRobotClimbsAssisted());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
-            otherRobotClimbsAssisted.setChecked(tele.isClimbAssistedByAllies());
+            otherRobotClimbsAssisted.setChecked(tele.isClimbAssistedByPartners());
             teamNumberThatAssistedClimb.setEnabled(false);
         }
     }
@@ -95,6 +101,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_teleop);
         rocketLevelOneHatches = view.findViewById(R.id.rocket_level_one_hatches_teleop);
         rocketLevelOneCargo = view.findViewById(R.id.rocket_level_one_cargo_teleop);
+        rocketLevelTwoHatches = view.findViewById(R.id.rocket_level_two_hatches_teleop);
+        rocketLevelTwoCargo = view.findViewById(R.id.rocket_level_two_cargo_teleop);
+        rocketLevelThreeHatches = view.findViewById(R.id.rocket_level_three_hatches_teleop);
+        rocketLevelThreeCargo = view.findViewById(R.id.rocket_level_three_cargo_teleop);
 
         attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
         successHabClimb = view.findViewById(R.id.success_hab_climb);
@@ -117,10 +127,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                successHabClimb.setEnabled(true);
+                enableRadioGroup(successHabClimbLevel);
             } else {
                 disableRadioGroup(successHabClimbLevel);
-                successHabClimb.setEnabled(false);
             }
         });
 

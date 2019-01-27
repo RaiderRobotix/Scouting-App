@@ -105,15 +105,17 @@
                     android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="Rocket level 1"
+                    android:text="Rocket level 2"
                     android:textSize="18sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/rocket_level_two_cargo_teleop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/rocket_level_two_hatches_teleop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5" />
@@ -131,15 +133,17 @@
                     android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="Rocket level 1"
+                    android:text="Rocket level 3"
                     android:textSize="18sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                     android:layout_width="0dp"
+                    android:id="@+id/rocket_level_three_cargo_teleop"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/rocket_level_three_hatches_teleop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5" />
@@ -157,47 +161,31 @@
                     android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="Rocket level 1"
+                    android:text="Cargo ship"
                     android:textSize="18sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:id="@+id/cargo_ship_cargo_teleop"
                     android:layout_weight="1.5" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:id="@+id/cargo_ship_hatches_teleop"
                     android:layout_weight="1.5" />
+
             </LinearLayout>
+
         </LinearLayout>
-
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_ship_hatches_teleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/level_one_layout_teleop"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo ship - hatches" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_ship_cargo_teleop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_ship_hatches_teleop"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo ship - cargo" />
-
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/hatches_dropped_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_ship_cargo_teleop"
             android:padding="@dimen/default_padding_bottom"
+            android:layout_below="@id/level_one_layout_teleop"
             app:initialValue="0"
             app:titlePrompt="Accidentally dropped hatches" />
 
