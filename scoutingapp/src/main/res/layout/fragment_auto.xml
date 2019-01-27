@@ -33,7 +33,7 @@
             android:layout_below="@id/reach_hab_line"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Cargo to Cargo Ship" />
+            app:titlePrompt="Cargo Ship - Cargo" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/rocket_cargo_auto"
@@ -42,7 +42,7 @@
             android:layout_below="@id/cargo_ship_cargo_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Cargo to Rocket" />
+            app:titlePrompt="Rocket - Cargo" />
 
 
 
@@ -53,7 +53,7 @@
             android:layout_below="@id/rocket_cargo_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Hatch Panels to Rocket" />
+            app:titlePrompt="Rocket - Hatches" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/cargo_ship_hatches_auto"
@@ -62,7 +62,7 @@
             android:layout_below="@id/rocket_hatches_auto"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Hatch Panels to Cargo Ship" />
+            app:titlePrompt="Cargo Ship - Hatches" />
 
         <CheckBox
             android:id="@+id/hatches_front_cargo_auto"
@@ -72,7 +72,8 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="0dp"
             android:padding="8dp"
-            android:text="Hatches to Front Cargo Ship" />
+            android:textSize="18sp"
+            android:text="Front cargo ship" />
 
         <CheckBox
             android:id="@+id/hatches_side_cargo_auto"
@@ -81,7 +82,8 @@
             android:layout_below = "@id/hatches_front_cargo_auto"
             android:padding="8dp"
             android:layout_marginLeft="50dp"
-            android:text="Hatches to Side Cargo Ship"
+            android:textSize="18dp"
+            android:text="Side cargo ship"
 
             />
 
@@ -102,7 +104,7 @@
             android:layout_marginTop="-1dp"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Hatch panels dropped" />
+            app:titlePrompt="Hatches dropped" />
 
         <CheckBox
             android:id="@+id/opponent_cargo_ship_line"

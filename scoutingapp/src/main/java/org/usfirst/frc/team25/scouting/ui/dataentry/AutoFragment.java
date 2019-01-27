@@ -3,6 +3,7 @@ package org.usfirst.frc.team25.scouting.ui.dataentry;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,11 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecView cargoToRocket, hatchPanelsToRocket, hatchesToCargoShip, cargoToCargoShip,
+    private ButtonIncDecView rocketCargo, rocketHatches, cargoShipHatches, cargoShipCargo,
             hatchesDropped, cargoDropped;
 
-    private CheckBox reachHabLine , opponentCargoShipLineFoul, hatchesSideCargo, hatchesFrontCargo;
+    private CheckBox reachHabLine, opponentCargoShipLineFoul, sideCargoShipHatchCapable,
+            frontCargoShipHatchCapable;
 
 
     private ScoutEntry entry;
@@ -46,18 +48,18 @@ public class AutoFragment extends Fragment implements EntryFragment {
         if (entry.getAuto() != null) {
 
             Autonomous prevAuto = entry.getAuto();
-            cargoToCargoShip.setValue(prevAuto.getCargoToCargoShip());
-            cargoToRocket.setValue(prevAuto.getCargoToRocket());
-            hatchPanelsToRocket.setValue(prevAuto.getHatchPanelsToRocket());
-            hatchesToCargoShip.setValue(prevAuto.getHatchesToCargoShip());
+            cargoShipCargo.setValue(prevAuto.getCargoToCargoShip());
+            rocketCargo.setValue(prevAuto.getCargoToRocket());
+            rocketHatches.setValue(prevAuto.getHatchPanelsToRocket());
+            cargoShipHatches.setValue(prevAuto.getHatchesToCargoShip());
             hatchesDropped.setValue(prevAuto.getHatchesDropped());
             cargoDropped.setValue(prevAuto.getCargoDropped());
-            hatchesSideCargo.setChecked(prevAuto.isHatchesSideCargo());
-            hatchesFrontCargo.setChecked(prevAuto.isHatchesFrontCargo());
+            sideCargoShipHatchCapable.setChecked(prevAuto.isHatchesSideCargo());
+            frontCargoShipHatchCapable.setChecked(prevAuto.isHatchesFrontCargo());
             reachHabLine.setChecked(prevAuto.isReachHabLine());
             opponentCargoShipLineFoul.setChecked(prevAuto.isOpponentCargoShipLineFoul());
-            if (shouldDisableReachAutoLine()) {
-                disableReachAutoLine();
+            if (shouldDisableReachHabLine()) {
+                disableReachHabLine();
             }
 
         }
@@ -66,12 +68,13 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        entry.setAuto(new Autonomous(cargoToRocket.getValue(), hatchPanelsToRocket.getValue(),
-                hatchesToCargoShip.getValue(),
-                cargoToCargoShip.getValue(),
+        entry.setAuto(new Autonomous(rocketCargo.getValue(), rocketHatches.getValue(),
+                cargoShipHatches.getValue(),
+                cargoShipCargo.getValue(),
                 hatchesDropped.getValue(),
-                cargoDropped.getValue(), reachHabLine.isChecked(), opponentCargoShipLineFoul.isChecked(),hatchesSideCargo.isChecked(),
-                hatchesFrontCargo.isChecked()));
+                cargoDropped.getValue(), reachHabLine.isChecked(),
+                opponentCargoShipLineFoul.isChecked(), sideCargoShipHatchCapable.isChecked(),
+                frontCargoShipHatchCapable.isChecked()));
 
     }
 
@@ -82,79 +85,83 @@ public class AutoFragment extends Fragment implements EntryFragment {
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
 
-        cargoToRocket = view.findViewById(R.id.rocket_cargo_auto);
-        cargoToCargoShip = view.findViewById(R.id.cargo_ship_cargo_auto);
+        rocketCargo = view.findViewById(R.id.rocket_cargo_auto);
+        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
         cargoDropped = view.findViewById(R.id.cargo_dropped_auto);
         reachHabLine = view.findViewById(R.id.reach_hab_line);
         hatchesDropped = view.findViewById(R.id.hatches_dropped_auto);
         opponentCargoShipLineFoul = view.findViewById(R.id.opponent_cargo_ship_line);
-        hatchesFrontCargo = view.findViewById(R.id.hatches_front_cargo_auto);
-        hatchesSideCargo = view.findViewById(R.id.hatches_side_cargo_auto);
-        hatchesToCargoShip = view.findViewById(R.id.cargo_ship_hatches_auto);
-        hatchPanelsToRocket = view.findViewById(R.id.rocket_hatches_auto);
+        frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
+        sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
+        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
+        rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
 
 
         Button continueButton = view.findViewById(R.id.auto_continue);
 
 
         autoPopulate();
+        disableHatchPlacement();
 
 
         opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                disableReachAutoLine();
-            } else if (!shouldDisableReachAutoLine()) {
-                enableReachAutoLine();
+                disableReachHabLine();
+            } else if (!shouldDisableReachHabLine()) {
+                enableReachHabLine();
             }
         });
 
-        hatchPanelsToRocket.incButton.setOnClickListener(view17 -> {
-            hatchPanelsToRocket.increment();
-            disableReachAutoLine();
+        rocketHatches.incButton.setOnClickListener(view17 -> {
+            rocketHatches.increment();
+            disableReachHabLine();
         });
-        hatchPanelsToRocket.decButton.setOnClickListener(view16 -> {
-            hatchPanelsToRocket.decrement();
-            if (hatchPanelsToRocket.getValue() < 1 && !shouldDisableReachAutoLine()) {
-                enableReachAutoLine();
+        rocketHatches.decButton.setOnClickListener(view16 -> {
+            rocketHatches.decrement();
+            if (rocketHatches.getValue() < 1 && !shouldDisableReachHabLine()) {
+                enableReachHabLine();
             }
         });
 
-        hatchesToCargoShip.incButton.setOnClickListener(view17 -> {
-            hatchesToCargoShip.increment();
-            disableReachAutoLine();
+        cargoShipHatches.incButton.setOnClickListener(view17 -> {
+            cargoShipHatches.increment();
+            disableReachHabLine();
+            enableHatchPlacement();
         });
-        hatchesToCargoShip.decButton.setOnClickListener(view16 -> {
-            hatchesToCargoShip.decrement();
-            if (hatchesToCargoShip.getValue() < 1 && !shouldDisableReachAutoLine()) {
-                enableReachAutoLine();
+        cargoShipHatches.decButton.setOnClickListener(view16 -> {
+            cargoShipHatches.decrement();
+            if (cargoShipHatches.getValue() < 1 && !shouldDisableReachHabLine()) {
+                enableReachHabLine();
             }
         });
 
-        cargoToRocket.incButton.setOnClickListener(view15 -> {
-            cargoToRocket.increment();
-            disableReachAutoLine();
+        rocketCargo.incButton.setOnClickListener(view15 -> {
+            rocketCargo.increment();
+            disableReachHabLine();
         });
-        cargoToRocket.decButton.setOnClickListener(view14 -> {cargoToRocket.decrement();
-            if (cargoToRocket.getValue() < 1 && !shouldDisableReachAutoLine()) {
-                enableReachAutoLine();
+        rocketCargo.decButton.setOnClickListener(view14 -> {
+            rocketCargo.decrement();
+            if (rocketCargo.getValue() < 1 && !shouldDisableReachHabLine()) {
+                enableReachHabLine();
             }
         });
-        cargoToCargoShip.incButton.setOnClickListener(view15 -> {
-            cargoToCargoShip.increment();
-            disableReachAutoLine();
+        cargoShipCargo.incButton.setOnClickListener(view15 -> {
+            cargoShipCargo.increment();
+            disableReachHabLine();
         });
-        cargoToCargoShip.decButton.setOnClickListener(view14 -> {cargoToCargoShip.decrement();
-            if (cargoToCargoShip.getValue() < 1 && !shouldDisableReachAutoLine()) {
-                enableReachAutoLine();
+        cargoShipCargo.decButton.setOnClickListener(view14 -> {
+            cargoShipCargo.decrement();
+            if (cargoShipCargo.getValue() < 1 && !shouldDisableReachHabLine()) {
+                enableReachHabLine();
             }
         });
 
 
         continueButton.setOnClickListener(view1 -> {
-            if ((hatchesToCargoShip.getValue() > 0 && !hatchesFrontCargo.isChecked() &&
-                    !hatchesSideCargo.isChecked())) {
+            if (cargoShipHatches.getValue() > 0 && !frontCargoShipHatchCapable.isChecked() &&
+                    !sideCargoShipHatchCapable.isChecked()) {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Select where/how many hatches were placed")
+                        .setTitle("Select where hatches were placed")
                         .setMessage("Front and/or side of cargo ship")
                         .setPositiveButton("OK", (dialogInterface, i) -> {
 
@@ -172,21 +179,31 @@ public class AutoFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    private void disableReachAutoLine() {
+    private void disableReachHabLine() {
 
         reachHabLine.setChecked(true);
         reachHabLine.setEnabled(false);
 
     }
 
-    private boolean shouldDisableReachAutoLine() {
-        return cargoToRocket.getValue() > 0 || cargoToCargoShip.getValue() > 0
-                || hatchPanelsToRocket.getValue() > 0 || hatchesSideCargo.isChecked() ||
-                hatchesFrontCargo.isChecked() ||  opponentCargoShipLineFoul.isChecked();
+    private boolean shouldDisableReachHabLine() {
+        return rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
+                || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
+                frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked();
     }
 
-    private void enableReachAutoLine() {
+    private void enableReachHabLine() {
         reachHabLine.setEnabled(true);
+    }
+
+    private void enableHatchPlacement() {
+        frontCargoShipHatchCapable.setEnabled(true);
+        sideCargoShipHatchCapable.setEnabled(true);
+    }
+
+    private void disableHatchPlacement() {
+        frontCargoShipHatchCapable.setEnabled(false);
+        sideCargoShipHatchCapable.setEnabled(false);
     }
 
     @Override
