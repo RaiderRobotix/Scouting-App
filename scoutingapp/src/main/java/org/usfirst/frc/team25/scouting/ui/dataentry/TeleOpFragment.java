@@ -17,6 +17,7 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 
@@ -27,12 +28,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ScoutEntry entry;
     private ButtonIncDecView cargoShipHatches;
     private ButtonIncDecView cargoShipCargo;
-    private ButtonIncDecView rocketLevelOneHatches;
-    private ButtonIncDecView rocketLevelOneCargo;
-    private ButtonIncDecView rocketLevelTwoHatches;
-    private ButtonIncDecView rocketLevelTwoCargo;
-    private ButtonIncDecView rocketLevelThreeHatches;
-    private ButtonIncDecView rocketLevelThreeCargo;
+    private ButtonIncDecSet rocketLevelOneHatches;
+    private ButtonIncDecSet rocketLevelOneCargo;
+    private ButtonIncDecSet rocketLevelTwoHatches;
+    private ButtonIncDecSet rocketLevelTwoCargo;
+    private ButtonIncDecSet rocketLevelThreeHatches;
+    private ButtonIncDecSet rocketLevelThreeCargo;
     private ButtonIncDecView hatchesDropped;
     private ButtonIncDecView climbsAssisted;
     private CheckBox attemptHabClimb;
@@ -71,14 +72,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             climbsAssisted.setValue(tele.getOtherRobotClimbsAssisted());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
-            otherRobotClimbsAssisted.setChecked(tele.isClimbAssisted());
+            otherRobotClimbsAssisted.setChecked(tele.isClimbAssistedByAllies());
             teamNumberThatAssistedClimb.setEnabled(false);
         }
     }
 
     public int getRadioButtonSelected(RadioButton[] habLevelArray) {
-        int i;
-        for (i = 0; i < habLevelArray.length; i++) {
+        for (int i = 0; i < habLevelArray.length; i++) {
             if (habLevelArray[i].isChecked()) {
                 return i + 1;
             }
@@ -127,7 +127,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         attemptHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 successHabClimb.setEnabled(true);
-                enableRadioGroup(successHabClimbLevel);
                 enableRadioGroup(attemptHabClimbLevel);
             } else {
                 successHabClimb.setEnabled(false);
@@ -142,7 +141,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             if (false/*otherRobotClimbsAssisted.isChecked() && teamNumberThatAssistedClimb
             .getText().toString().isEmpty()*/) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Fill in the team number")
+                builder.setTitle("Fill in any empty fields")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
                             //do things

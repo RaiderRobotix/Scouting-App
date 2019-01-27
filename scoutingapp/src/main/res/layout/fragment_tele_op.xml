@@ -41,12 +41,12 @@
                         android:visibility="invisible" />
 
                     <TextView
-
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="Rocket level 1"
                         android:textSize="18sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -66,8 +66,8 @@
                     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        />
+                        android:id="@+id/rocket_level_one_cargo_teleop"
+                        app:initialValueSet="0" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -80,15 +80,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Cargo"
+                        android:text="Hatches"
                         android:textAlignment="center"
                         android:textSize="18sp" />
 
                     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                        android:id="@+id/rocket_level_one_hatches_teleop"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:initialValueSet="0" />
 
-                        />
                 </LinearLayout>
             </LinearLayout>
 
@@ -182,39 +183,20 @@
             app:titlePrompt="Cargo ship - hatches" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/rocket_level_one_hatches_teleop"
+            android:id="@+id/cargo_ship_cargo_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cargo_ship_hatches_teleop"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Rocket - hatches" />
-
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_ship_cargo_teleop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rocket_level_one_hatches_teleop"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
             app:titlePrompt="Cargo ship - cargo" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/rocket_level_one_cargo_teleop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_ship_cargo_teleop"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Rocket - cargo" />
 
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/hatches_dropped_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rocket_level_one_cargo_teleop"
+            android:layout_below="@id/cargo_ship_cargo_teleop"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Accidentally dropped hatches" />
