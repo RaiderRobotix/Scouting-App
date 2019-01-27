@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -19,6 +20,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.rengwuxian.materialedittext.Colors;
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -130,7 +132,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 android.R.layout.simple_dropdown_item_1line,
                 getResources().getStringArray(R.array.position_options)));
         scoutPosSpinner.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
-        robotNoShow = view.findViewById(R.id.robot_no_show_checkpoint);
+        robotNoShow = view.findViewById(R.id.robot_no_show_checkbox);
 
         startingLevelButtons = new RadioButton[2];
         startingLevelButtons[0] = view.findViewById(R.id.hab_level_1);
@@ -265,13 +267,16 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                         .setPositiveButton("Yes", ((dialogInterface, i) -> {
                             //when all the checks have passed that means the robot has not showed
                             // up so save the data and send them to menu screen
-
+                            entry.setAuto(new Autonomous(0,0,0,0,0,0,
+                                    false, false, false,false  ));
+                           // entry.setPostMatch(new PostMatch(null, new ArrayList<>(), ));
                         }));
                 View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
                 builder.setView(dialogBox);
                 AlertDialog alertDialog = builder.show();
-                alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-                        .setEnabled(false);
+                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                button.setEnabled(false);
+                button.setTextColor(Color.parseColor("#c3c3c3"));
                 EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
                 yesConfirmation.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -290,9 +295,11 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                         if (editable.toString().equals("YES")) {
                             alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
                                     .setEnabled(true);
+                            button.setTextColor(Color.parseColor("#000000"));
                         } else {
                             alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
                                     .setEnabled(false);
+                            button.setTextColor(Color.parseColor("#c3c3c3"));
                         }
 
                     }
