@@ -3,7 +3,12 @@ package org.usfirst.frc.team25.scouting.ui.dataentry;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.Layout;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -21,6 +28,7 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
+import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
@@ -158,7 +166,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
 
             // Sequentially verifies that user inputted a value
             if (nameField.getText().toString().equals("")) {
-                nameField.setError("Scout nameField required");
+                nameField.setError("Scout name required");
                 proceed = false;
             }
 
@@ -188,24 +196,78 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 proceed = false;
             }
 
-            boolean aButtonSelected = false;
-
+            boolean startingPositionSelected = false;
+            boolean startingLevelSelected = false;
             for (RadioButton button : startingPositionButtons) {
                 if (button.isChecked()) {
-                    aButtonSelected = true;
+                    startingPositionSelected = true;
+                }
+            }
+            for (RadioButton button2 : startingLevelButtons) {
+                if (button2.isChecked()) {
+                    startingLevelSelected = true;
                 }
             }
 
-            if (proceed && !aButtonSelected) {
+
+            if (proceed && !robotNoShow.isChecked() && !(startingLevelSelected && startingPositionSelected)) {
                 proceed = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select robot starting position")
+                builder.setTitle("Select robot starting level/position")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
                             //do things
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+            }
+            if (proceed && robotNoShow.isChecked()) {
+                proceed = false;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setNegativeButton("No", ((dialogInterface, i) -> {
+                }))
+                        .setPositiveButton("Yes", ((dialogInterface, i) -> {
+                            //when all the checks have passed that means the robot has not showed
+                            // up so save the data and send them to menu screen
+
+                        }));
+                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
+                builder.setView(dialogBox);
+                AlertDialog alertDialog = builder.show();
+                alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                        .setEnabled(false);
+                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
+                yesConfirmation.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
+                                                  int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        if (editable.toString().equals("YES")) {
+                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                                    .setEnabled(true);
+                        } else {
+                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                                    .setEnabled(false);
+                        }
+
+                    }
+
+                });
+
+
+                final MaterialEditText input = new MaterialEditText(getActivity());
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+
             }
 
             // If all normal checks pass, verify against team lists or match schedule
@@ -286,12 +348,11 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         startingLevelButtons[1].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+                if (b) {
                     startingPositionButtons[1].setEnabled(false);
                     startingPositionButtons[1].setChecked(false);
-                }
-              else {
-                  startingPositionButtons[1].setEnabled(true);
+                } else {
+                    startingPositionButtons[1].setEnabled(true);
                 }
 
             }
@@ -300,24 +361,22 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         robotNoShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                   for(RadioButton button:startingPositionButtons) {
-                       button.setEnabled(false);
-                       button.setChecked(false);
-                   }
-                   for(RadioButton button2:startingLevelButtons){
-                       button2.setEnabled(false);
-                       button2.setChecked(false);
-                   }
+                if (b) {
 
+                    for (RadioButton button2 : startingLevelButtons) {
+                        button2.setEnabled(false);
+                        button2.setChecked(false);
+                    }
+                    for (RadioButton button : startingPositionButtons) {
+                        button.setEnabled(false);
+                        button.setChecked(false);
+                    }
 
-
-                }
-                else{
-                    for(RadioButton button:startingPositionButtons){
+                } else {
+                    for (RadioButton button : startingPositionButtons) {
                         button.setEnabled(true);
                     }
-                    for (RadioButton button2:startingLevelButtons){
+                    for (RadioButton button2 : startingLevelButtons) {
                         button2.setEnabled(true);
                     }
                 }
