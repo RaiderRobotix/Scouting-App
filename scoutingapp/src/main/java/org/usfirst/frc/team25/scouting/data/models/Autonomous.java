@@ -6,16 +6,16 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    private final int rocketCargo;
-    private final int rocketHatches;
-    private final int cargoShipHatches;
-    private final int cargoShipCargo;
-    private final int hatchesDropped;
-    private final int cargoDropped;
-    private final boolean reachHabLine;
-    private final boolean opponentCargoShipLineFoul;
-    private final boolean sideCargoShipHatchCapable;
-    private final boolean frontCargoShipHatchCapable;
+    private int rocketCargo;
+    private int rocketHatches;
+    private int cargoShipHatches;
+    private int cargoShipCargo;
+    private int hatchesDropped;
+    private int cargoDropped;
+    private boolean reachHabLine;
+    private boolean opponentCargoShipLineFoul;
+    private boolean sideCargoShipHatchCapable;
+    private boolean frontCargoShipHatchCapable;
 
     public int getRocketCargo() {
         return rocketCargo;

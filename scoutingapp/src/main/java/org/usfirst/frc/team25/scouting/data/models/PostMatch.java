@@ -12,12 +12,12 @@ import java.util.HashMap;
 public class PostMatch {
 
 
-    private final int teamOneCompare;
-    private final int teamTwoCompare;
-    private final int pickNumber;
-    private final String comparison;
-    private final HashMap<String, Boolean> robotQuickCommentSelections;
-    private final transient String[] robotQuickCommentValues;
+    private int teamOneCompare;
+    private int teamTwoCompare;
+    private int pickNumber;
+    private String comparison;
+    private HashMap<String, Boolean> robotQuickCommentSelections;
+    private transient String[] robotQuickCommentValues;
     private String robotComment;
     private String focus;
     private transient ArrayList<CheckBox> robotQuickComments;
