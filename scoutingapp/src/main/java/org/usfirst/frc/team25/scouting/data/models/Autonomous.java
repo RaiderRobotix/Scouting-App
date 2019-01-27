@@ -6,31 +6,31 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    private final int cargoToRocket;
-    private final int hatchPanelsToRocket;
-    private final int hatchesToCargoShip;
-    private final int cargoToCargoShip;
+    private final int rocketCargo;
+    private final int rocketHatches;
+    private final int cargoShipHatches;
+    private final int cargoShipCargo;
     private final int hatchesDropped;
     private final int cargoDropped;
     private final boolean reachHabLine;
     private final boolean opponentCargoShipLineFoul;
-    private final boolean hatchesSideCargo;
-    private final boolean hatchesFrontCargo;
+    private final boolean sideCargoShipHatchCapable;
+    private final boolean frontCargoShipHatchCapable;
 
-    public int getCargoToRocket() {
-        return cargoToRocket;
+    public int getRocketCargo() {
+        return rocketCargo;
     }
 
-    public int getHatchPanelsToRocket() {
-        return hatchPanelsToRocket;
+    public int getRocketHatches() {
+        return rocketHatches;
     }
 
-    public int getHatchesToCargoShip() {
-        return hatchesToCargoShip;
+    public int getCargoShipHatches() {
+        return cargoShipHatches;
     }
 
-    public int getCargoToCargoShip() {
-        return cargoToCargoShip;
+    public int getCargoShipCargo() {
+        return cargoShipCargo;
     }
 
     public int getHatchesDropped() {
@@ -49,27 +49,31 @@ public class Autonomous {
         return opponentCargoShipLineFoul;
     }
 
-    public boolean isHatchesSideCargo() {
-        return hatchesSideCargo;
+    public boolean isSideCargoShipHatchCapable() {
+        return sideCargoShipHatchCapable;
     }
 
-    public boolean isHatchesFrontCargo() {
-        return hatchesFrontCargo;
+    public boolean isFrontCargoShipHatchCapable() {
+        return frontCargoShipHatchCapable;
     }
 
-    public Autonomous(int cargoToRocket, int hatchPanelsToRocket, int hatchesToCargoShip,
-                      int cargoToCargoShip, int hatchesDropped, int cargoDropped,
+
+
+
+
+    public Autonomous(int rocketCargo, int rocketHatches, int cargoShipHatches,
+                      int cargoShipCargo, int hatchesDropped, int cargoDropped,
                       boolean reachHabLine, boolean opponentCargoShipLineFoul,
-                      boolean hatchesSideCargo, boolean hatchesFrontCargo) {
-        this.cargoToRocket = cargoToRocket;
-        this.hatchPanelsToRocket = hatchPanelsToRocket;
-        this.hatchesToCargoShip = hatchesToCargoShip;
-        this.cargoToCargoShip = cargoToCargoShip;
+                      boolean sideCargoShipHatchCapable, boolean frontCargoShipHatchCapable) {
+        this.rocketCargo = rocketCargo;
+        this.rocketHatches = rocketHatches;
+        this.cargoShipHatches = cargoShipHatches;
+        this.cargoShipCargo = cargoShipCargo;
         this.hatchesDropped = hatchesDropped;
         this.cargoDropped = cargoDropped;
         this.reachHabLine = reachHabLine;
         this.opponentCargoShipLineFoul = opponentCargoShipLineFoul;
-        this.hatchesSideCargo = hatchesSideCargo;
-        this.hatchesFrontCargo = hatchesFrontCargo;
+        this.sideCargoShipHatchCapable = sideCargoShipHatchCapable;
+        this.frontCargoShipHatchCapable = frontCargoShipHatchCapable;
     }
 }

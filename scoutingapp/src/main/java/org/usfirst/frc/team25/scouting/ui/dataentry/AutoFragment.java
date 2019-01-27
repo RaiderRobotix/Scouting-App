@@ -48,14 +48,14 @@ public class AutoFragment extends Fragment implements EntryFragment {
         if (entry.getAuto() != null) {
 
             Autonomous prevAuto = entry.getAuto();
-            cargoShipCargo.setValue(prevAuto.getCargoToCargoShip());
-            rocketCargo.setValue(prevAuto.getCargoToRocket());
-            rocketHatches.setValue(prevAuto.getHatchPanelsToRocket());
-            cargoShipHatches.setValue(prevAuto.getHatchesToCargoShip());
+            cargoShipCargo.setValue(prevAuto.getCargoShipCargo());
+            rocketCargo.setValue(prevAuto.getRocketCargo());
+            rocketHatches.setValue(prevAuto.getRocketHatches());
+            cargoShipHatches.setValue(prevAuto.getCargoShipHatches());
             hatchesDropped.setValue(prevAuto.getHatchesDropped());
             cargoDropped.setValue(prevAuto.getCargoDropped());
-            sideCargoShipHatchCapable.setChecked(prevAuto.isHatchesSideCargo());
-            frontCargoShipHatchCapable.setChecked(prevAuto.isHatchesFrontCargo());
+            sideCargoShipHatchCapable.setChecked(prevAuto.isSideCargoShipHatchCapable());
+            frontCargoShipHatchCapable.setChecked(prevAuto.isFrontCargoShipHatchCapable());
             reachHabLine.setChecked(prevAuto.isReachHabLine());
             opponentCargoShipLineFoul.setChecked(prevAuto.isOpponentCargoShipLineFoul());
             if (shouldDisableReachHabLine()) {
