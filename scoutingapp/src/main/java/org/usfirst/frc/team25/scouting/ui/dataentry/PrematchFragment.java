@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -28,7 +26,6 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
@@ -155,6 +152,45 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         } else if (teamNumField.getText().toString().equals("")) {
             teamNumField.requestFocus();
         }
+
+        startingLevelButtons[1].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    startingPositionButtons[1].setEnabled(false);
+                    startingPositionButtons[1].setChecked(false);
+                } else {
+                    startingPositionButtons[1].setEnabled(true);
+                }
+
+            }
+
+        });
+        robotNoShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+
+                    for (RadioButton button2 : startingLevelButtons) {
+                        button2.setEnabled(false);
+                        button2.setChecked(false);
+                    }
+                    for (RadioButton button : startingPositionButtons) {
+                        button.setEnabled(false);
+                        button.setChecked(false);
+                    }
+
+                } else {
+                    for (RadioButton button : startingPositionButtons) {
+                        button.setEnabled(true);
+                    }
+                    for (RadioButton button2 : startingLevelButtons) {
+                        button2.setEnabled(true);
+                    }
+                }
+
+            }
+        });
 
 
         continueButton.setOnClickListener(view1 -> {
@@ -345,44 +381,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
 
             }
         });
-        startingLevelButtons[1].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    startingPositionButtons[1].setEnabled(false);
-                    startingPositionButtons[1].setChecked(false);
-                } else {
-                    startingPositionButtons[1].setEnabled(true);
-                }
 
-            }
-
-        });
-        robotNoShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-
-                    for (RadioButton button2 : startingLevelButtons) {
-                        button2.setEnabled(false);
-                        button2.setChecked(false);
-                    }
-                    for (RadioButton button : startingPositionButtons) {
-                        button.setEnabled(false);
-                        button.setChecked(false);
-                    }
-
-                } else {
-                    for (RadioButton button : startingPositionButtons) {
-                        button.setEnabled(true);
-                    }
-                    for (RadioButton button2 : startingLevelButtons) {
-                        button2.setEnabled(true);
-                    }
-                }
-
-            }
-        });
         return view;
     }
 
