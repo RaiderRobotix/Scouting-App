@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import com.rengwuxian.materialedittext.Colors;
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -267,9 +265,9 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                         .setPositiveButton("Yes", ((dialogInterface, i) -> {
                             //when all the checks have passed that means the robot has not showed
                             // up so save the data and send them to menu screen
-                            entry.setAuto(new Autonomous(0,0,0,0,0,0,
-                                    false, false, false,false  ));
-                           // entry.setPostMatch(new PostMatch(null, new ArrayList<>(), ));
+
+                            saveState();
+                            continueToAuto();
                         }));
                 View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
                 builder.setView(dialogBox);
@@ -307,10 +305,6 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 });
 
 
-                final MaterialEditText input = new MaterialEditText(getActivity());
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-
-
             }
 
             // If all normal checks pass, verify against team lists or match schedule
@@ -332,14 +326,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                                         scoutPosSpinner.getText().toString() + " in match " + matchNumField.getText().toString() + "?")
                                 .setPositiveButton("Yes", (dialog, which) -> {
 
-                                    saveState();
-                                    Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
-
-                                    hideKeyboard();
-                                    getFragmentManager().beginTransaction()
-                                            .replace(android.R.id.content,
-                                                    AutoFragment.getInstance(entry), "AUTO")
-                                            .commit();
+                                    continueToAuto();
                                 })
                                 .setNegativeButton("No", (dialog, which) -> {
                                     // do nothing
@@ -375,21 +362,27 @@ public class PrematchFragment extends Fragment implements EntryFragment {
 
 
             if (proceed) {
-                saveState();
-
-                set.autoSetPreferences(entry.getPreMatch());
-
-                autoSetTheme();
-
-                hideKeyboard();
-                getFragmentManager().beginTransaction()
-                        .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
-                        .commit();
+                continueToAuto();
 
             }
         });
 
         return view;
+    }
+
+    private void continueToAuto() {
+
+
+        saveState();
+
+        Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
+
+        autoSetTheme();
+
+        hideKeyboard();
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
+                .commit();
     }
 
     @Override

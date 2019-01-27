@@ -243,6 +243,7 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
                             Toast.LENGTH_LONG).show();
                 }
 
+
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
                 set.setMatchNum(set.getMatchNum() + 1);
                 getActivity().finish();
