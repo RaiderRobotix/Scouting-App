@@ -16,7 +16,6 @@
 
         android:layout_height="match_parent">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,12 +120,14 @@
                     android:layout_height="wrap_content"
                     android:text="Level 1"
                     android:textSize="18sp"
-                    android:id="@+id/hab_level_1" />
+                    android:id="@+id/hab_level_1"
+                    android:padding="8dp"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Level 2"
                     android:textSize="18sp"
+                    android:padding="8dp"
                     android:id="@+id/hab_level_2"/>
             </RadioGroup>
 

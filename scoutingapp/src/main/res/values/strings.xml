@@ -120,6 +120,7 @@
     <string name="minus_button">-</string>
     <string name="plus_button">+</string>
     <string name="button_timer_default_val">0.00 sec</string>
+    <string name="robot_show_show_confirmation">Are you sure the match has started and the robot is not on the field? If so, type &quot;YES&quot; below.</string>
 
 </resources>
 
