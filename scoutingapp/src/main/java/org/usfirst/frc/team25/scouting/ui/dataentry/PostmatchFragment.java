@@ -157,6 +157,7 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
         pickNumberButtons[1] = view.findViewById(R.id.second_pick);
         pickNumberButtons[2] = view.findViewById(R.id.dnp);
 
+
         int prevTeamNum = FileManager.getPrevTeamNumber(getActivity());
 
         String currentRobotCompareStr = "Team " + entry.getPreMatch().getTeamNum() + " (current " +
@@ -199,7 +200,7 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
                 }
             }
 
-            if (!focusChecked) {
+            if (!focusChecked && !entry.getPreMatch().isRobotNoShow()) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select the robot's focus for this match")
                         .setCancelable(false)
@@ -251,6 +252,12 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
 
 
         });
+
+        if (entry.getPreMatch().isRobotNoShow()) {
+            comparisonButtons[1].setChecked(true);
+            pickNumberButtons[2].setChecked(true);
+            finish.callOnClick();
+        }
 
         return view;
     }

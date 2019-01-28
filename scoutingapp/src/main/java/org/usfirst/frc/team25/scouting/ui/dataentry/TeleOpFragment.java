@@ -123,6 +123,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         successHabClimbLevel[1] = view.findViewById(R.id.success_hab_level_2);
         successHabClimbLevel[2] = view.findViewById(R.id.success_hab_level_3);
 
+
         set = Settings.newInstance(getActivity());
 
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -165,6 +166,11 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                         .commit();
             }
         });
+
+        if (entry.getPreMatch().isRobotNoShow()) {
+            continueButton.callOnClick();
+
+        }
 
 
         return view;

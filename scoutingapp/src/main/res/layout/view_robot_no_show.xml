@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/org.usfirst.frc.team25.scouting.ui.views"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,6 +17,7 @@
         android:hint="Enter text here"
         android:layout_marginTop="10dp"
         android:id="@+id/yes_text_input"
+        android:singleLine="true"
         />
 
 

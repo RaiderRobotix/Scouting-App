@@ -99,6 +99,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         Button continueButton = view.findViewById(R.id.auto_continue);
 
 
+
         autoPopulate();
         disableHatchPlacement();
 
@@ -174,6 +175,11 @@ public class AutoFragment extends Fragment implements EntryFragment {
             }
 
         });
+
+        if (entry.getPreMatch().isRobotNoShow()) {
+            continueButton.callOnClick();
+
+        }
 
         return view;
     }
