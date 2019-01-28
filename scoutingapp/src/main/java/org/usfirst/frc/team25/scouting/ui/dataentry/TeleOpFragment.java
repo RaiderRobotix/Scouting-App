@@ -35,10 +35,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecSet rocketLevelThreeHatches;
     private ButtonIncDecSet rocketLevelThreeCargo;
     private ButtonIncDecView hatchesDropped;
-    private ButtonIncDecView climbsAssisted;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
-    private CheckBox otherRobotClimbsAssisted;
+    private ButtonIncDecView numberOfPartnerClimbsAssisted;
+    private CheckBox climbAssistedByPartners;
     private EditText teamNumberThatAssistedClimb;
     private RadioButton[] highestAssistedClimbLevel;
     private Settings set;
@@ -74,22 +74,25 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             rocketLevelThreeCargo.setValue(tele.getRocketLevelThreeCargo());
             rocketLevelThreeHatches.setValue(tele.getRocketLevelThreeHatches());
 
+
+            climbAssistedByPartners.setChecked(tele.isClimbAssistedByPartners());
             hatchesDropped.setValue(tele.getHatchesDropped());
-            climbsAssisted.setValue(tele.getOtherRobotClimbsAssisted());
+            teamNumberThatAssistedClimb.setText(tele.getAssistingClimbTeamNumber());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
-            otherRobotClimbsAssisted.setChecked(tele.isClimbAssistedByPartners());
             teamNumberThatAssistedClimb.setEnabled(false);
         }
     }
 
-    public static int getRadioButtonSelected(RadioButton[] habLevelArray) {
-        for (int i = 0; i < habLevelArray.length; i++) {
-            if (habLevelArray[i].isChecked()) {
-                return i + 1;
+
+
+    public static RadioButton getRadioButtonSelected(RadioButton[] radioButtonGroup) {
+        for (int i = 0; i < radioButtonGroup.length; i++) {
+            if (radioButtonGroup[i].isChecked()) {
+                return radioButtonGroup[i + 1];
             }
         }
-        return 0;
+        return null;
     }
 
     @Override
@@ -106,11 +109,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         rocketLevelThreeHatches = view.findViewById(R.id.rocket_level_three_hatches_teleop);
         rocketLevelThreeCargo = view.findViewById(R.id.rocket_level_three_cargo_teleop);
 
+        teamNumberThatAssistedClimb = view.findViewById(R.id.team_number_text_input);
+        climbAssistedByPartners =
+                view.findViewById(R.id.climb_assisted_by_alliance_partner_checkbox);
+        numberOfPartnerClimbsAssisted = view.findViewById(R.id.alliance_partner_climbs_assisted);
         attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
         successHabClimb = view.findViewById(R.id.success_hab_climb);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
         hatchesDropped = view.findViewById(R.id.hatches_dropped_teleop);
-        climbsAssisted = view.findViewById(R.id.climbs_assisted);
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         attemptHabClimbLevel = new RadioButton[3];
@@ -123,6 +129,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         successHabClimbLevel[1] = view.findViewById(R.id.success_hab_level_2);
         successHabClimbLevel[2] = view.findViewById(R.id.success_hab_level_3);
 
+        highestAssistedClimbLevel = new RadioButton[2];
+        highestAssistedClimbLevel[0] = view.findViewById(R.id.highest_assisted_climb_one);
+        highestAssistedClimbLevel[1] = view.findViewById(R.id.highest_assisted_climb_two);
 
         set = Settings.newInstance(getActivity());
 
@@ -154,7 +163,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 builder.setTitle("Fill in any empty fields")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
-                            //do things
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
@@ -167,13 +175,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             }
         });
 
-        if (entry.getPreMatch().isRobotNoShow()) {
-            continueButton.callOnClick();
-
-        }
-
 
         return view;
+    }
+
+    private void enableRadioGroup(RadioButton[] groupToEnable) {
+        for (RadioButton button : groupToEnable) {
+            button.setEnabled(true);
+        }
     }
 
     private void disableRadioGroup(RadioButton[] groupToEnable) {
@@ -183,11 +192,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         }
     }
 
-    private void enableRadioGroup(RadioButton[] groupToEnable) {
-        for (RadioButton button : groupToEnable) {
-            button.setEnabled(true);
-        }
-    }
+
 
     @Override
     public void saveState() {
