@@ -359,7 +359,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:padding="8dp"
-                android:text="HAB Level 1"
+                android:text="Level 1"
                 android:textSize="18sp" />
 
             <RadioButton
@@ -368,7 +368,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:padding="8dp"
-                android:text="HAB Level 2"
+                android:text="Level 2"
                 android:textSize="18sp" />
 
             <RadioButton
@@ -377,7 +377,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:padding="8dp"
-                android:text="HAB Level 3"
+                android:text="Level 3"
                 android:textSize="18sp" />
 
         </RadioGroup>

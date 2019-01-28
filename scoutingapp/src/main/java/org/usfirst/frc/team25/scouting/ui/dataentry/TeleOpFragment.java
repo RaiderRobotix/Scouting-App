@@ -50,6 +50,24 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return tof;
     }
 
+    public static int getRadioButtonSelectedWithInteger(RadioButton[] habLevelArray) {
+        for (int i = 0; i < habLevelArray.length; i++) {
+            if (habLevelArray[i].isChecked()) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
+    public static RadioButton getRadioButtonSelected(RadioButton[] radioButtonGroup) {
+        for (int i = 0; i < radioButtonGroup.length; i++) {
+            if (radioButtonGroup[i].isChecked()) {
+                return radioButtonGroup[i + 1];
+            }
+        }
+        return null;
+    }
+
     @Override
     public ScoutEntry getEntry() {
         return entry;
@@ -82,17 +100,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             successHabClimb.setChecked(tele.isSuccessHabClimb());
             teamNumberThatAssistedClimb.setEnabled(false);
         }
-    }
-
-
-
-    public static RadioButton getRadioButtonSelected(RadioButton[] radioButtonGroup) {
-        for (int i = 0; i < radioButtonGroup.length; i++) {
-            if (radioButtonGroup[i].isChecked()) {
-                return radioButtonGroup[i + 1];
-            }
-        }
-        return null;
     }
 
     @Override
@@ -175,24 +182,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             }
         });
 
+        if (entry.getPreMatch().isRobotNoShow()) {
+            continueButton.callOnClick();
+        }
 
         return view;
     }
-
-    private void enableRadioGroup(RadioButton[] groupToEnable) {
-        for (RadioButton button : groupToEnable) {
-            button.setEnabled(true);
-        }
-    }
-
-    private void disableRadioGroup(RadioButton[] groupToEnable) {
-        for (RadioButton button : groupToEnable) {
-            button.setEnabled(false);
-            button.setChecked(false);
-        }
-    }
-
-
 
     @Override
     public void saveState() {
@@ -211,6 +206,19 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 attemptHabClimb.isChecked(),
                 successHabClimb.isChecked(),
                 climbsOtherRobots.isChecked())); */
+    }
+
+    private void enableRadioGroup(RadioButton[] groupToEnable) {
+        for (RadioButton button : groupToEnable) {
+            button.setEnabled(true);
+        }
+    }
+
+    private void disableRadioGroup(RadioButton[] groupToEnable) {
+        for (RadioButton button : groupToEnable) {
+            button.setEnabled(false);
+            button.setChecked(false);
+        }
     }
 
     public void hideKeyboard() {
