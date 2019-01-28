@@ -83,7 +83,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         }
     }
 
-    public int getRadioButtonSelected(RadioButton[] habLevelArray) {
+    public static int getRadioButtonSelected(RadioButton[] habLevelArray) {
         for (int i = 0; i < habLevelArray.length; i++) {
             if (habLevelArray[i].isChecked()) {
                 return i + 1;

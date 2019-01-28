@@ -72,6 +72,17 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                     button.setChecked(true);
                 }
             }
+           for (RadioButton button : startingLevelButtons) {
+                if (button.getText().toString().equals(Integer.toString(prevPreMatch.getStartingLevel()))){
+
+                    button.setChecked(true);
+                }
+            }
+            if (robotNoShow.isChecked()) {
+                    robotNoShow.setChecked(true);
+
+            }
+
         }
 
         // Pulls data values from preferences to automatically fill fields
@@ -111,11 +122,15 @@ public class PrematchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        entry.setPreMatch(new PreMatch(nameField.getText().toString(),
-                scoutPosSpinner.getText().toString(),
-                Integer.parseInt(matchNumField.getText().toString()),
-                Integer.parseInt(teamNumField.getText().toString()), startPos));
-    }
+            entry.setPreMatch(new PreMatch(nameField.getText().toString(),
+                    scoutPosSpinner.getText().toString(),
+                    startPos,
+                    Integer.parseInt(matchNumField.getText().toString()),
+                    Integer.parseInt(teamNumField.getText().toString()),
+                    TeleOpFragment.getRadioButtonSelected(startingLevelButtons),
+                    robotNoShow.isChecked()
+            ));
+        }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -152,45 +167,6 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         } else if (teamNumField.getText().toString().equals("")) {
             teamNumField.requestFocus();
         }
-
-        startingLevelButtons[1].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    startingPositionButtons[1].setEnabled(false);
-                    startingPositionButtons[1].setChecked(false);
-                } else {
-                    startingPositionButtons[1].setEnabled(true);
-                }
-
-            }
-
-        });
-        robotNoShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-
-                    for (RadioButton button2 : startingLevelButtons) {
-                        button2.setEnabled(false);
-                        button2.setChecked(false);
-                    }
-                    for (RadioButton button : startingPositionButtons) {
-                        button.setEnabled(false);
-                        button.setChecked(false);
-                    }
-
-                } else {
-                    for (RadioButton button : startingPositionButtons) {
-                        button.setEnabled(true);
-                    }
-                    for (RadioButton button2 : startingLevelButtons) {
-                        button2.setEnabled(true);
-                    }
-                }
-
-            }
-        });
 
 
         continueButton.setOnClickListener(view1 -> {
@@ -246,40 +222,41 @@ public class PrematchFragment extends Fragment implements EntryFragment {
             }
 
 
-            if (proceed && !robotNoShow.isChecked() && !(startingLevelSelected && startingPositionSelected)) {
-                proceed = false;
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select robot starting level/position")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", (dialog, id) -> {
-                            //do things
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-            if (proceed && robotNoShow.isChecked()) {
-                proceed = false;
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setNegativeButton("No", ((dialogInterface, i) -> {
-                }))
-                        .setPositiveButton("Yes", ((dialogInterface, i) -> {
-                            //when all the checks have passed that means the robot has not showed
-                            // up so save the data and send them to menu screen
-
-                            saveState();
-                            continueToAuto();
-                        }));
-                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
-                builder.setView(dialogBox);
-                AlertDialog alertDialog = builder.show();
-                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                button.setEnabled(false);
-                button.setTextColor(Color.parseColor("#c3c3c3"));
-                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
-                yesConfirmation.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
-                                                  int i2) {
+                if (proceed && !robotNoShow.isChecked() && !(startingLevelSelected && startingPositionSelected)) {
+                    proceed = false;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select robot starting level/position")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", (dialog, id) -> {
+                                //do things
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+                if (proceed && robotNoShow.isChecked()) {
+                    proceed = false;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setNegativeButton("No", ((dialogInterface, i) -> {
+                    }))
+                            .setPositiveButton("Yes", ((dialogInterface, i) -> {
+                                //when all the checks have passed that means the robot has not
+                                // showed
+                                // up so save the data and send them to menu screen
+                                entry.setAuto(new Autonomous(0, 0, 0, 0, 0, 0,
+                                        false, false, false, false));
+                                // entry.setPostMatch(new PostMatch(null, new ArrayList<>(), ));
+                            }));
+                    View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
+                    builder.setView(dialogBox);
+                    AlertDialog alertDialog = builder.show();
+                    Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                    button.setEnabled(false);
+                    button.setTextColor(Color.parseColor("#c3c3c3"));
+                    EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
+                    yesConfirmation.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1,
+                                                      int i2) {
 
                     }
 
@@ -326,6 +303,20 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                                         scoutPosSpinner.getText().toString() + " in match " + matchNumField.getText().toString() + "?")
                                 .setPositiveButton("Yes", (dialog, which) -> {
 
+                                        saveState();
+                                        Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
+
+                                        hideKeyboard();
+                                        getFragmentManager().beginTransaction()
+                                                .replace(android.R.id.content,
+                                                        AutoFragment.getInstance(entry), "AUTO")
+                                                .commit();
+                                    })
+                                    .setNegativeButton("No", (dialog, which) -> {
+                                        // do nothing
+                                    })
+                                    .create()
+                                    .show();
                                     continueToAuto();
                                 })
                                 .setNegativeButton("No", (dialog, which) -> {
@@ -334,31 +325,31 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                                 .create()
                                 .show();
 
+                        }
+
+                    } catch (IOException e) {
+                        //Match list does not exist; looking for team list
+                        checkTeamList = true;
                     }
+                    if (checkTeamList && !FileManager.isOnTeamlist(teamNumField.getText().toString(),
+                            getActivity())) {
+                        proceed = false;
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
+                                .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
+                                .setPositiveButton("Yes", (dialog, which) -> {
+                                    FileManager.addToTeamList(teamNumField.getText().toString(),
+                                            getActivity());
 
-                } catch (IOException e) {
-                    //Match list does not exist; looking for team list
-                    checkTeamList = true;
+                                    continueButton.callOnClick();
+                                })
+                                .setNegativeButton("No", (dialog, which) -> {
+
+                                })
+                                .create()
+                                .show();
+                    }
                 }
-                if (checkTeamList && !FileManager.isOnTeamlist(teamNumField.getText().toString(),
-                        getActivity())) {
-                    proceed = false;
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
-                            .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
-                            .setPositiveButton("Yes", (dialog, which) -> {
-                                FileManager.addToTeamList(teamNumField.getText().toString(),
-                                        getActivity());
-
-                                continueButton.callOnClick();
-                            })
-                            .setNegativeButton("No", (dialog, which) -> {
-
-                            })
-                            .create()
-                            .show();
-                }
-            }
 
 
             if (proceed) {
@@ -385,25 +376,25 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 .commit();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().setTitle("Add Entry - Pre-Match");
-    }
-
-    /**
-     * Hides the keyboard in the next fragment
-     */
-    private void hideKeyboard() {
-        try {
-            InputMethodManager inputManager =
-                    (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken()
-                    , InputMethodManager.HIDE_NOT_ALWAYS);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        @Override
+        public void onResume () {
+            super.onResume();
+            getActivity().setTitle("Add Entry - Pre-Match");
         }
-    }
+
+        /**
+         * Hides the keyboard in the next fragment
+         */
+        private void hideKeyboard () {
+            try {
+                InputMethodManager inputManager =
+                        (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken()
+                        , InputMethodManager.HIDE_NOT_ALWAYS);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
 
     private void autoSetTheme() {
         switch (entry.getPreMatch().getTeamNum()) {
@@ -418,15 +409,15 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 break;
             case 25:
 
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
-                break;
-            case 1923:
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Black);
-                break;
-            default:
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
-                break;
+                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
+                    break;
+                case 1923:
+                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Black);
+                    break;
+                default:
+                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
+                    break;
+            }
         }
-    }
 
 }
