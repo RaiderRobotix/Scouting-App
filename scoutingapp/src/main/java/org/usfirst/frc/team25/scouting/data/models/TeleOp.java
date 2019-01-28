@@ -24,7 +24,7 @@ public class TeleOp {
     private final boolean attemptHabClimb;
     private final boolean successHabClimb;
     private final int assistingClimbTeamNumber;
-    private final int otherRobotClimbsAssisted;
+    private final int numberOfPartnerClimbsAssisted;
     private final int highestClimbAssisted;
 
     public TeleOp(int cargoShipHatches, int cargoShipCargo, int rocketLevelOneCargo,
@@ -32,7 +32,7 @@ public class TeleOp {
                   int rocketLevelThreeCargo, int rocketLevelThreeHatches, int hatchesDropped,
                   int cargoDropped, boolean climbAssistedByPartners, int attemptHabClimbLevel,
                   int successHabClimbLevel, boolean attemptHabClimb, boolean successHabClimb,
-                  int assistingClimbTeamNumber, int otherRobotClimbsAssisted,
+                  int assistingClimbTeamNumber, int NumberOfPartnerClimbsAssisted,
                   int highestClimbAssisted) {
         this.cargoShipHatches = cargoShipHatches;
         this.cargoShipCargo = cargoShipCargo;
@@ -50,7 +50,7 @@ public class TeleOp {
         this.attemptHabClimb = attemptHabClimb;
         this.successHabClimb = successHabClimb;
         this.assistingClimbTeamNumber = assistingClimbTeamNumber;
-        this.otherRobotClimbsAssisted = otherRobotClimbsAssisted;
+        this.numberOfPartnerClimbsAssisted = NumberOfPartnerClimbsAssisted;
         this.highestClimbAssisted = highestClimbAssisted;
     }
 
@@ -118,8 +118,8 @@ public class TeleOp {
         return assistingClimbTeamNumber;
     }
 
-    public int getOtherRobotClimbsAssisted() {
-        return otherRobotClimbsAssisted;
+    public int getNumberOfPartnerClimbsAssisted() {
+        return numberOfPartnerClimbsAssisted;
     }
 
     public int getHighestClimbAssisted() {
