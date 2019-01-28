@@ -129,7 +129,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                     startPos,
                     Integer.parseInt(matchNumField.getText().toString()),
                     Integer.parseInt(teamNumField.getText().toString()),
-                    TeleOpFragment.getRadioButtonSelected(startingLevelButtons),
+                    TeleOpFragment.getRadioButtonSelectedWithInteger(startingLevelButtons),
                     robotNoShow.isChecked()
             ));
         }

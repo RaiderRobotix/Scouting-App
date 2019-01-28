@@ -101,7 +101,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 climbsOtherRobots.isChecked())); */
     }
 
-    public int getRadioButtonSelectedWithInteger(RadioButton[] habLevelArray) {
+    public static int getRadioButtonSelectedWithInteger(RadioButton[] habLevelArray) {
         for (int i = 0; i < habLevelArray.length; i++) {
             if (habLevelArray[i].isChecked()) {
                 return i + 1;
