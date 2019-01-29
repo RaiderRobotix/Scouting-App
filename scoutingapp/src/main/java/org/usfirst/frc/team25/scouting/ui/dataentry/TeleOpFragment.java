@@ -23,9 +23,9 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
+    private ScoutEntry entry;
     private RadioButton[] attemptHabClimbLevel;
     private RadioButton[] successHabClimbLevel;
-    private ScoutEntry entry;
     private ButtonIncDecSet cargoShipHatches;
     private ButtonIncDecSet cargoShipCargo;
     private ButtonIncDecSet rocketLevelOneHatches;
@@ -35,6 +35,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecSet rocketLevelThreeHatches;
     private ButtonIncDecSet rocketLevelThreeCargo;
     private ButtonIncDecView hatchesDropped;
+    private ButtonIncDecView cargoDropped;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
     private ButtonIncDecView partnerClimbsAssisted;
@@ -48,25 +49,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         TeleOpFragment tof = new TeleOpFragment();
         tof.setEntry(entry);
         return tof;
-    }
-
-    public static int getHabLevelSelected(RadioButton[] habLevelArray) {
-        for (int i = 0; i < habLevelArray.length; i++) {
-            if (habLevelArray[i].isChecked()) {
-                return i + 1;
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public ScoutEntry getEntry() {
-        return entry;
-    }
-
-    @Override
-    public void setEntry(ScoutEntry entry) {
-        this.entry = entry;
     }
 
     @Override
@@ -83,14 +65,73 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             rocketLevelThreeCargo.setValue(tele.getRocketLevelThreeCargo());
             rocketLevelThreeHatches.setValue(tele.getRocketLevelThreeHatches());
 
-
             climbAssistedByPartners.setChecked(tele.isClimbAssistedByPartners());
+            partnerClimbsAssisted.setValue(tele.getNumberOfPartnerClimbsAssisted());
             hatchesDropped.setValue(tele.getHatchesDropped());
+            cargoDropped.setValue(tele.getCargoDropped());
             teamNumberThatAssistedClimb.setText(tele.getAssistingClimbTeamNumber());
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
             teamNumberThatAssistedClimb.setEnabled(false);
+
+            if (!(tele.getAttemptHabClimbLevel() == 0)) {
+                for (RadioButton button : attemptHabClimbLevel) {
+                    if (button.getText().equals(tele.getAttemptHabClimbLevel())) {
+                        button.setChecked(true);
+                    }
+                }
+            }
+
+            if (!(tele.getSuccessHabClimbLevel() == 0)) {
+                for (RadioButton button : successHabClimbLevel) {
+                    if (button.getText().equals(tele.getAttemptHabClimbLevel())) {
+                        button.setChecked(true);
+                    }
+                }
+            }
+
+            if (!(tele.getHighestClimbAssisted() == 0)) {
+                for (RadioButton button : successHabClimbLevel) {
+                    if (button.getText().equals(tele.getAttemptHabClimbLevel())) {
+                        button.setChecked(true);
+                    }
+                }
+            }
+
         }
+    }
+
+    @Override
+    public void saveState() {
+        
+        entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
+                cargoShipCargo.getValue(),
+                rocketLevelOneCargo.getValue(),
+                rocketLevelOneHatches.getValue(),
+                rocketLevelTwoCargo.getValue(),
+                rocketLevelTwoHatches.getValue(),
+                rocketLevelThreeCargo.getValue(),
+                rocketLevelThreeHatches.getValue(),
+                hatchesDropped.getValue(),
+                cargoDropped.getValue(),
+                climbAssistedByPartners.isChecked(),
+                getHabLevelSelectedTripleOption(attemptHabClimbLevel),
+                getHabLevelSelectedTripleOption(successHabClimbLevel),
+                attemptHabClimb.isChecked(),
+                successHabClimb.isChecked(),
+                getIntegerFromTextBox(teamNumberThatAssistedClimb),
+                partnerClimbsAssisted.getValue(),
+                getHighestHabLevelSelected(highestAssistedClimbLevel)));
+    }
+
+    @Override
+    public ScoutEntry getEntry() {
+        return entry;
+    }
+
+    @Override
+    public void setEntry(ScoutEntry entry) {
+        this.entry = entry;
     }
 
     @Override
@@ -115,6 +156,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         successHabClimb = view.findViewById(R.id.success_hab_climb);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
         hatchesDropped = view.findViewById(R.id.hatches_dropped_teleop);
+        cargoDropped = view.findViewById(R.id.cargo_dropped_teleop);
         Button continueButton = view.findViewById(R.id.tele_continue);
 
         attemptHabClimbLevel = new RadioButton[3];
@@ -180,6 +222,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
+    public static int getHabLevelSelectedTripleOption(RadioButton[] habLevelArray) {
+        for (int i = 0; i < habLevelArray.length; i++) {
+            if (habLevelArray[i].isChecked()) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
     private void radioButtonEnable(RadioButton[] groupToEnableOrDisable, boolean modeSelected) {
         if (modeSelected) {
             for (RadioButton button : groupToEnableOrDisable) {
@@ -194,23 +245,25 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
     }
 
-    @Override
-    public void saveState() {
+    Integer getIntegerFromTextBox(EditText numberEditText) {
+        Integer integer;
 
+        if (numberEditText.getText().equals("")) {
+            integer = 0;
+        } else {
+            integer = Integer.parseInt(numberEditText.getText().toString());
+        }
 
-        //TODO reimplement this
-     /*   entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
-                cargoShipCargo.getValue(),
-                rocketLevelOneHatches.getValue(),
-                rocketLevelOneCargo.getValue(),
-                cargoShipCargo.getValue(),
-                hatchesDropped.getValue(),
-                climbsAssisted.getValue(),
-                getHabLevelSelected(attemptHabClimbLevel),
-                getHabLevelSelected(successHabClimbLevel),
-                attemptHabClimb.isChecked(),
-                successHabClimb.isChecked(),
-                climbsOtherRobots.isChecked())); */
+        return integer;
+    }
+
+    public static int getHighestHabLevelSelected(RadioButton[] highestHabLevelArray) {
+        for (int i = 1; i < 3; i++) {
+            if (highestHabLevelArray[i].isChecked()) {
+                return i + 1;
+            }
+        }
+        return 0;
     }
 
     public void hideKeyboard() {
