@@ -103,7 +103,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        
+
         entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
                 cargoShipCargo.getValue(),
                 rocketLevelOneCargo.getValue(),
@@ -246,9 +246,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     }
 
     Integer getIntegerFromTextBox(EditText numberEditText) {
-        Integer integer;
+        int integer;
 
-        if (numberEditText.getText().equals("")) {
+        if (numberEditText.getText().toString().equals("")) {
             integer = 0;
         } else {
             integer = Integer.parseInt(numberEditText.getText().toString());
@@ -258,7 +258,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     }
 
     public static int getHighestHabLevelSelected(RadioButton[] highestHabLevelArray) {
-        for (int i = 1; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             if (highestHabLevelArray[i].isChecked()) {
                 return i + 1;
             }

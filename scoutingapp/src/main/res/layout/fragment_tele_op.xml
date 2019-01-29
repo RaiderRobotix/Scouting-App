@@ -323,7 +323,6 @@
                 android:hint="Team Number"
                 android:inputType="phone"
                 android:padding="8dp"
-                android:text="Team Number that assisted climb"
                 android:textSize="18sp"
                 app:met_floatingLabel="normal" />
 
