@@ -37,7 +37,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecView hatchesDropped;
     private CheckBox attemptHabClimb;
     private CheckBox successHabClimb;
-    private ButtonIncDecView numberOfPartnerClimbsAssisted;
+    private ButtonIncDecView partnerClimbsAssisted;
     private CheckBox climbAssistedByPartners;
     private EditText teamNumberThatAssistedClimb;
     private RadioButton[] highestAssistedClimbLevel;
@@ -50,22 +50,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return tof;
     }
 
-    public static int getRadioButtonSelectedWithInteger(RadioButton[] habLevelArray) {
+    public static int getHabLevelSelected(RadioButton[] habLevelArray) {
         for (int i = 0; i < habLevelArray.length; i++) {
             if (habLevelArray[i].isChecked()) {
                 return i + 1;
             }
         }
         return 0;
-    }
-
-    public static RadioButton getRadioButtonSelected(RadioButton[] radioButtonGroup) {
-        for (int i = 0; i < radioButtonGroup.length; i++) {
-            if (radioButtonGroup[i].isChecked()) {
-                return radioButtonGroup[i + 1];
-            }
-        }
-        return null;
     }
 
     @Override
@@ -119,7 +110,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         teamNumberThatAssistedClimb = view.findViewById(R.id.team_number_text_input);
         climbAssistedByPartners =
                 view.findViewById(R.id.climb_assisted_by_alliance_partner_checkbox);
-        numberOfPartnerClimbsAssisted = view.findViewById(R.id.alliance_partner_climbs_assisted);
+        partnerClimbsAssisted = view.findViewById(R.id.alliance_partner_climbs_assisted);
         attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
         successHabClimb = view.findViewById(R.id.success_hab_climb);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
@@ -144,21 +135,21 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                enableRadioGroup(successHabClimbLevel);
+                radioButtonEnable(successHabClimbLevel, true);
             } else {
-                disableRadioGroup(successHabClimbLevel);
+                radioButtonEnable(successHabClimbLevel, false);
             }
         });
 
         attemptHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 successHabClimb.setEnabled(true);
-                enableRadioGroup(attemptHabClimbLevel);
+                radioButtonEnable(attemptHabClimbLevel, true);
             } else {
                 successHabClimb.setEnabled(false);
                 successHabClimb.setChecked(false);
-                disableRadioGroup(attemptHabClimbLevel);
-                disableRadioGroup(successHabClimbLevel);
+                radioButtonEnable(attemptHabClimbLevel, false);
+                radioButtonEnable(successHabClimbLevel, false);
             }
         });
 
@@ -189,6 +180,20 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
+    private void radioButtonEnable(RadioButton[] groupToEnableOrDisable, boolean modeSelected) {
+        if (modeSelected) {
+            for (RadioButton button : groupToEnableOrDisable) {
+                button.setEnabled(true);
+            }
+        } else {
+            for (RadioButton button : groupToEnableOrDisable) {
+                button.setEnabled(false);
+                button.setChecked(false);
+            }
+        }
+
+    }
+
     @Override
     public void saveState() {
 
@@ -201,24 +206,11 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 cargoShipCargo.getValue(),
                 hatchesDropped.getValue(),
                 climbsAssisted.getValue(),
-                getRadioButtonSelected(attemptHabClimbLevel),
-                getRadioButtonSelected(successHabClimbLevel),
+                getHabLevelSelected(attemptHabClimbLevel),
+                getHabLevelSelected(successHabClimbLevel),
                 attemptHabClimb.isChecked(),
                 successHabClimb.isChecked(),
                 climbsOtherRobots.isChecked())); */
-    }
-
-    private void enableRadioGroup(RadioButton[] groupToEnable) {
-        for (RadioButton button : groupToEnable) {
-            button.setEnabled(true);
-        }
-    }
-
-    private void disableRadioGroup(RadioButton[] groupToEnable) {
-        for (RadioButton button : groupToEnable) {
-            button.setEnabled(false);
-            button.setChecked(false);
-        }
     }
 
     public void hideKeyboard() {

@@ -243,7 +243,7 @@
             android:id="@+id/alliance_partner_climbs_assisted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/success_hab_climb_level"
+            android:layout_below="@id/climb_assisted_checkbox_textview_layout"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:maxValue="2"
@@ -255,14 +255,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/alliance_partner_climbs_assisted"
             android:layout_marginStart="16dp"
-            android:text="Highest assisted climb level" />
+            android:padding="8dp"
+            android:text="Highest assisted climb level"
+            android:textSize="18sp" />
 
         <RadioGroup
             android:id="@+id/highest_climb_assist_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/highest_climb_assisted_text_view"
-            android:layout_marginStart="16dp"
+            android:layout_marginLeft="45dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -271,7 +273,8 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:padding="8dp"
-                android:text="Level 2" />
+                android:text="Level 2"
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/highest_assisted_climb_two"
@@ -284,27 +287,46 @@
 
         </RadioGroup>
 
-        <CheckBox
-            android:id="@+id/climb_assisted_by_alliance_partner_checkbox"
+        <TextView
+            android:id="@+id/climb_assisted_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/highest_climb_assist_radio_group"
-            android:layout_marginStart="16dp"
-            android:padding="8dp"
-            android:text="Climb assisted by alliance partner" />
+            android:layout_below="@id/success_hab_climb_level"
+            android:layout_marginLeft="15dp"
+            android:text="Climb assisted?"
+            android:textSize="18sp" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/team_number_text_input"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@id/climb_assisted_by_alliance_partner_checkbox"
-            android:layout_marginLeft="19dp"
-            android:enabled="false"
-            android:hint="Team Number"
-            android:inputType="number"
-            android:padding="8dp"
-            android:text="Team Number that assisted climb"
-            app:met_floatingLabel="normal" />
+            android:id="@+id/climb_assisted_checkbox_textview_layout"
+            android:layout_height="58dp"
+            android:layout_below="@id/climb_assisted_textview"
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/climb_assisted_by_alliance_partner_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/highest_climb_assist_radio_group"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="40dp"
+                android:enabled="true"
+                android:padding="8dp" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/team_number_text_input"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:enabled="false"
+                android:hint="Team Number"
+                android:inputType="number"
+                android:padding="8dp"
+                android:text="Team Number that assisted climb"
+                app:met_floatingLabel="normal" />
+
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/attempt_hab_climb_level"
@@ -386,7 +408,7 @@
             android:id="@+id/tele_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/team_number_text_input"
+            android:layout_below="@id/highest_climb_assist_radio_group"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
