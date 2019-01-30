@@ -202,22 +202,30 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         //Finish this climbing metric button
 
-        partnerClimbsAssisted.decButton.setOnClickListener(view1 -> {
+        partnerClimbsAssisted.incButton.setOnClickListener(view1 -> {
             if ((partnerClimbsAssisted.getValue() >= 0) && (partnerClimbsAssisted.getValue() <= 2)) {
                 radioButtonEnable(highestAssistedClimbLevel, true);
-                partnerClimbsAssisted.decrement();
-            } else {
+            }
+            if (partnerClimbsAssisted.getValue() == 0) {
                 radioButtonEnable(highestAssistedClimbLevel, false);
             }
+            if (partnerClimbsAssisted.getValue() > 3) {
+                partnerClimbsAssisted.setValue(2);
+            }
+            partnerClimbsAssisted.increment();
         });
 
         partnerClimbsAssisted.decButton.setOnClickListener(view2 -> {
             if ((partnerClimbsAssisted.getValue() >= 0) && (partnerClimbsAssisted.getValue() <= 2)) {
                 radioButtonEnable(highestAssistedClimbLevel, true);
-                partnerClimbsAssisted.increment();
-            } else {
+            }
+            if (partnerClimbsAssisted.getValue() == 0) {
                 radioButtonEnable(highestAssistedClimbLevel, false);
             }
+            if (partnerClimbsAssisted.getValue() > 3) {
+                partnerClimbsAssisted.setValue(2);
+            }
+            partnerClimbsAssisted.decrement();
         });
 
 
