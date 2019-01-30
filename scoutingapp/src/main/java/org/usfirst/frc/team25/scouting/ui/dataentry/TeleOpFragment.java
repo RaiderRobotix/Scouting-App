@@ -20,6 +20,8 @@ import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
+//Add onclicklistener and if statement for climbsAssisted to decide if the radio group should be
+// enabled
 
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
@@ -69,34 +71,28 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             partnerClimbsAssisted.setValue(tele.getNumberOfPartnerClimbsAssisted());
             hatchesDropped.setValue(tele.getHatchesDropped());
             cargoDropped.setValue(tele.getCargoDropped());
-            teamNumberThatAssistedClimb.setText(tele.getAssistingClimbTeamNumber());
+            teamNumberThatAssistedClimb.setText(Integer.toString(tele.getAssistingClimbTeamNumber()));
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
-            teamNumberThatAssistedClimb.setEnabled(false);
 
-            if (!(tele.getAttemptHabClimbLevel() == 0)) {
-                for (RadioButton button : attemptHabClimbLevel) {
-                    if (button.getText().equals(tele.getAttemptHabClimbLevel())) {
-                        button.setChecked(true);
+            for (int i = 1; i <= highestAssistedClimbLevel.length; i++) {
+                if (i == tele.getHighestClimbAssisted()) {
+                    highestAssistedClimbLevel[i - 1].setChecked(true);
                     }
                 }
-            }
 
-            if (!(tele.getSuccessHabClimbLevel() == 0)) {
-                for (RadioButton button : successHabClimbLevel) {
-                    if (button.getText().equals(tele.getAttemptHabClimbLevel())) {
-                        button.setChecked(true);
+            for (int i = 1; i <= successHabClimbLevel.length; i++) {
+                if (i == tele.getSuccessHabClimbLevel()) {
+                    successHabClimbLevel[i - 1].setChecked(true);
                     }
                 }
-            }
 
-            if (!(tele.getHighestClimbAssisted() == 0)) {
-                for (RadioButton button : successHabClimbLevel) {
-                    if (button.getText().equals(tele.getAttemptHabClimbLevel())) {
-                        button.setChecked(true);
+            for (int i = 1; i <= attemptHabClimbLevel.length; i++) {
+                if (i == tele.getAttemptHabClimbLevel()) {
+                    attemptHabClimbLevel[i - 1].setChecked(true);
                     }
                 }
-            }
+
 
         }
     }
@@ -194,6 +190,37 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 radioButtonEnable(successHabClimbLevel, false);
             }
         });
+
+        climbAssistedByPartners.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                teamNumberThatAssistedClimb.setEnabled(true);
+            } else {
+                teamNumberThatAssistedClimb.setEnabled(false);
+                teamNumberThatAssistedClimb.setText("");
+            }
+        });
+
+        //Finish this climbing metric button
+
+        partnerClimbsAssisted.decButton.setOnClickListener(view1 -> {
+            if ((partnerClimbsAssisted.getValue() >= 0) && (partnerClimbsAssisted.getValue() <= 2)) {
+                radioButtonEnable(highestAssistedClimbLevel, true);
+                partnerClimbsAssisted.decrement();
+            } else {
+                radioButtonEnable(highestAssistedClimbLevel, false);
+            }
+        });
+
+        partnerClimbsAssisted.decButton.setOnClickListener(view2 -> {
+            if ((partnerClimbsAssisted.getValue() >= 0) && (partnerClimbsAssisted.getValue() <= 2)) {
+                radioButtonEnable(highestAssistedClimbLevel, true);
+                partnerClimbsAssisted.increment();
+            } else {
+                radioButtonEnable(highestAssistedClimbLevel, false);
+            }
+        });
+
+
 
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();

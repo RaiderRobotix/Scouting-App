@@ -287,21 +287,12 @@
 
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/climb_assisted_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/success_hab_climb_level"
-            android:layout_marginLeft="15dp"
-            android:text="Climb assisted?"
-            android:textSize="18sp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:id="@+id/climb_assisted_checkbox_textview_layout"
-            android:layout_height="58dp"
-            android:layout_below="@id/climb_assisted_textview"
-            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/success_hab_climb_level"
+            android:layout_marginStart="16dp"
             android:orientation="horizontal">
 
             <CheckBox
@@ -309,20 +300,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/highest_climb_assist_radio_group"
-                android:layout_marginStart="16dp"
                 android:layout_marginBottom="40dp"
                 android:enabled="true"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:text="Climb Assisted?"
+                android:textSize="18sp" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/team_number_text_input"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:enabled="false"
                 android:hint="Team Number"
                 android:inputType="phone"
-                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="22dp"
+
                 android:textSize="18sp"
                 app:met_floatingLabel="normal" />
 
