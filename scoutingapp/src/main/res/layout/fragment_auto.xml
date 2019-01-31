@@ -96,29 +96,73 @@
             app:initialValue="0"
             app:titlePrompt="Cargo dropped" />
 
+        <CheckBox
+            android:id="@+id/cargo_dropped_cargo_ship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_dropped_auto"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="50dp"
+            android:padding="@dimen/default_padding_bottom"
+            android:text="Cargo Ship"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/cargo_dropped_rocket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cargo_dropped_cargo_ship"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="50dp"
+            android:padding="@dimen/default_padding_bottom"
+            android:text="Rocket"
+            android:textSize="18sp" />
+
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/hatches_dropped_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_auto"
+            android:layout_below="@id/cargo_dropped_rocket"
             android:layout_marginTop="-1dp"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Hatches dropped" />
 
         <CheckBox
-            android:id="@+id/opponent_cargo_ship_line"
+            android:id="@+id/hatches_dropped_cargo_ship"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hatches_dropped_auto"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="50dp"
+            android:padding="@dimen/default_padding_bottom"
+            android:text="Cargo Ship"
+            android:textSize="18sp" />
 
+        <CheckBox
+            android:id="@+id/hatches_dropped_rocket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hatches_dropped_cargo_ship"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="50dp"
+            android:padding="@dimen/default_padding_bottom"
+            android:text="Rocket"
+            android:textSize="18sp" />
+
+
+        <CheckBox
+             android:id="@+id/opponent_cargo_ship_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hatches_dropped_rocket"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="5sp"
             android:padding="@dimen/default_padding_bottom"
             android:text="Crossed opponent cargo ship line"
             android:textSize="18sp" />
 
-        <!--More metrics: cubes picked up from power cube pile, six next to switch -->
+
 
 
         <Button

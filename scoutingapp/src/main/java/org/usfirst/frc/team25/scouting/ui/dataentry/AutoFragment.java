@@ -20,7 +20,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             hatchesDropped, cargoDropped;
 
     private CheckBox reachHabLine, opponentCargoShipLineFoul, sideCargoShipHatchCapable,
-            frontCargoShipHatchCapable;
+            frontCargoShipHatchCapable, cargoDroppedCargoShip, cargoDroppedRocket, hatchesDroppedCargoShip, hatchesDroppedRocket;
 
 
     private ScoutEntry entry;
@@ -57,9 +57,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
             frontCargoShipHatchCapable.setChecked(prevAuto.isFrontCargoShipHatchCapable());
             reachHabLine.setChecked(prevAuto.isReachHabLine());
             opponentCargoShipLineFoul.setChecked(prevAuto.isOpponentCargoShipLineFoul());
-            if (shouldDisableReachHabLine()) {
-                disableReachHabLine();
-            }
+            cargoDroppedCargoShip.setChecked(prevAuto.isCargoDroppedCargoShip());
+            cargoDroppedRocket.setChecked(prevAuto.isCargoDroppedRocket());
+            hatchesDroppedCargoShip.setChecked(prevAuto.isHatchesDroppedCargoShip());
+            hatchesDroppedRocket.setChecked(prevAuto.isHatchesDroppedRocket());
 
         }
 
@@ -73,8 +74,9 @@ public class AutoFragment extends Fragment implements EntryFragment {
                 hatchesDropped.getValue(),
                 cargoDropped.getValue(), reachHabLine.isChecked(),
                 opponentCargoShipLineFoul.isChecked(), sideCargoShipHatchCapable.isChecked(),
-                frontCargoShipHatchCapable.isChecked()));
-
+                frontCargoShipHatchCapable.isChecked(), cargoDroppedCargoShip.isChecked(),
+                cargoDroppedRocket.isChecked(), hatchesDroppedRocket.isChecked(),
+                hatchesDroppedCargoShip.isChecked()));
     }
 
     @Override
@@ -94,6 +96,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
         sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
         rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
+        cargoDroppedCargoShip = view.findViewById(R.id.cargo_dropped_cargo_ship);
+        cargoDroppedRocket = view.findViewById(R.id.cargo_dropped_rocket);
+        hatchesDroppedCargoShip = view.findViewById(R.id.hatches_dropped_cargo_ship);
+        hatchesDroppedRocket = view.findViewById(R.id.hatches_dropped_rocket);
 
 
         Button continueButton = view.findViewById(R.id.auto_continue);
@@ -101,15 +107,14 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
         autoPopulate();
-        disableHatchPlacement();
+        Constants();
 
 
         opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 disableReachHabLine();
-            } else if (!shouldDisableReachHabLine()) {
-                enableReachHabLine();
             }
+            shouldDisableReachHabLine();
         });
 
         rocketHatches.incButton.setOnClickListener(view17 -> {
@@ -118,9 +123,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         rocketHatches.decButton.setOnClickListener(view16 -> {
             rocketHatches.decrement();
-            if (rocketHatches.getValue() < 1 && !shouldDisableReachHabLine()) {
-                enableReachHabLine();
-            }
+            shouldDisableReachHabLine();
         });
 
         cargoShipHatches.incButton.setOnClickListener(view17 -> {
@@ -130,9 +133,8 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         cargoShipHatches.decButton.setOnClickListener(view16 -> {
             cargoShipHatches.decrement();
-            if (cargoShipHatches.getValue() < 1 && !shouldDisableReachHabLine()) {
-                enableReachHabLine();
-            }
+            shouldDisableReachHabLine();
+            enableHatchPlacement();
         });
 
         rocketCargo.incButton.setOnClickListener(view15 -> {
@@ -141,9 +143,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         rocketCargo.decButton.setOnClickListener(view14 -> {
             rocketCargo.decrement();
-            if (rocketCargo.getValue() < 1 && !shouldDisableReachHabLine()) {
-                enableReachHabLine();
-            }
+           shouldDisableReachHabLine();
         });
         cargoShipCargo.incButton.setOnClickListener(view15 -> {
             cargoShipCargo.increment();
@@ -151,9 +151,26 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         cargoShipCargo.decButton.setOnClickListener(view14 -> {
             cargoShipCargo.decrement();
-            if (cargoShipCargo.getValue() < 1 && !shouldDisableReachHabLine()) {
-                enableReachHabLine();
-            }
+            shouldDisableReachHabLine();
+        });
+
+        hatchesDropped.incButton.setOnClickListener(view15 -> {
+            hatchesDropped.increment();
+            hatchesDropped();
+        });
+
+        hatchesDropped.decButton.setOnClickListener(view15 -> {
+            hatchesDropped.decrement();
+            hatchesDropped();
+        });
+        cargoDropped.incButton.setOnClickListener(view15 -> {
+            cargoDropped.increment();
+            cargoDropped();
+        });
+
+        cargoDropped.decButton.setOnClickListener(view15 -> {
+            cargoDropped.decrement();
+            cargoDropped();
         });
 
 
@@ -191,25 +208,67 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     }
 
-    private boolean shouldDisableReachHabLine() {
-        return rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
+    private void shouldDisableReachHabLine() {
+        if(rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
                 || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
-                frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked();
-    }
-
-    private void enableReachHabLine() {
-        reachHabLine.setEnabled(true);
+                frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()){
+            reachHabLine.setChecked(true);
+            reachHabLine.setEnabled(false);
+        }
+        else{
+            reachHabLine.setEnabled(true);
+            reachHabLine.setChecked(false);
+        }
     }
 
     private void enableHatchPlacement() {
-        frontCargoShipHatchCapable.setEnabled(true);
-        sideCargoShipHatchCapable.setEnabled(true);
+
+        if(cargoShipHatches.getValue() > 0) {
+            frontCargoShipHatchCapable.setEnabled(true);
+            sideCargoShipHatchCapable.setEnabled(true);
+        }
+        else{
+            frontCargoShipHatchCapable.setEnabled(false);
+            sideCargoShipHatchCapable.setEnabled(false);
+            frontCargoShipHatchCapable.setChecked(false);
+            sideCargoShipHatchCapable.setChecked(false);
+        }
     }
 
-    private void disableHatchPlacement() {
-        frontCargoShipHatchCapable.setEnabled(false);
-        sideCargoShipHatchCapable.setEnabled(false);
+    private void hatchesDropped() {
+        if(hatchesDropped.getValue() > 0){
+            hatchesDroppedCargoShip.setEnabled(true);
+            hatchesDroppedRocket.setEnabled(true);
+        }
+        else{
+            hatchesDroppedCargoShip.setEnabled(false);
+            hatchesDroppedRocket.setEnabled(false);
+            hatchesDroppedCargoShip.setChecked(false);
+            hatchesDroppedRocket.setChecked(false);
+        }
     }
+private void cargoDropped() {
+        if(cargoDropped.getValue() > 0){
+            cargoDroppedRocket.setEnabled(true);
+            cargoDroppedCargoShip.setEnabled(true);
+    }
+    else{
+        cargoDroppedRocket.setEnabled(false);
+        cargoDroppedCargoShip.setEnabled(false);
+        cargoDroppedRocket.setChecked(false);
+        cargoDroppedCargoShip.setChecked(false);
+        }
+}
+
+private void Constants(){
+        cargoDroppedCargoShip.setEnabled(false);
+        cargoDroppedRocket.setEnabled(false);
+        hatchesDroppedCargoShip.setEnabled(false);
+        hatchesDroppedRocket.setEnabled(false);
+        sideCargoShipHatchCapable.setEnabled(false);
+        frontCargoShipHatchCapable.setEnabled(false);
+        reachHabLine.setChecked(false);
+}
 
     @Override
     public void onResume() {
