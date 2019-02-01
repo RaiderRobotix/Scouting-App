@@ -111,10 +111,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
         opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b) {
-                disableReachHabLine();
-            }
-            shouldDisableReachHabLine();
+            reachHabLineState();
         });
 
         rocketHatches.incButton.setOnClickListener(view17 -> {
@@ -123,7 +120,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         rocketHatches.decButton.setOnClickListener(view16 -> {
             rocketHatches.decrement();
-            shouldDisableReachHabLine();
+            reachHabLineState();
         });
 
         cargoShipHatches.incButton.setOnClickListener(view17 -> {
@@ -133,7 +130,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         cargoShipHatches.decButton.setOnClickListener(view16 -> {
             cargoShipHatches.decrement();
-            shouldDisableReachHabLine();
+            reachHabLineState();
             enableHatchPlacement();
         });
 
@@ -143,7 +140,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         rocketCargo.decButton.setOnClickListener(view14 -> {
             rocketCargo.decrement();
-           shouldDisableReachHabLine();
+           reachHabLineState();
         });
         cargoShipCargo.incButton.setOnClickListener(view15 -> {
             cargoShipCargo.increment();
@@ -151,26 +148,26 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         cargoShipCargo.decButton.setOnClickListener(view14 -> {
             cargoShipCargo.decrement();
-            shouldDisableReachHabLine();
+            reachHabLineState();
         });
 
         hatchesDropped.incButton.setOnClickListener(view15 -> {
             hatchesDropped.increment();
-            hatchesDropped();
+            hatchesDroppedLocation();
         });
 
         hatchesDropped.decButton.setOnClickListener(view15 -> {
             hatchesDropped.decrement();
-            hatchesDropped();
+            hatchesDroppedLocation();
         });
         cargoDropped.incButton.setOnClickListener(view15 -> {
             cargoDropped.increment();
-            cargoDropped();
+            cargoDroppedLocation();
         });
 
         cargoDropped.decButton.setOnClickListener(view15 -> {
             cargoDropped.decrement();
-            cargoDropped();
+            cargoDroppedLocation();
         });
 
 
@@ -208,7 +205,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     }
 
-    private void shouldDisableReachHabLine() {
+    private void reachHabLineState() {
         if(rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
                 || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
                 frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()){
@@ -235,7 +232,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         }
     }
 
-    private void hatchesDropped() {
+    private void hatchesDroppedLocation() {
         if(hatchesDropped.getValue() > 0){
             hatchesDroppedCargoShip.setEnabled(true);
             hatchesDroppedRocket.setEnabled(true);
@@ -247,7 +244,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             hatchesDroppedRocket.setChecked(false);
         }
     }
-private void cargoDropped() {
+private void cargoDroppedLocation() {
         if(cargoDropped.getValue() > 0){
             cargoDroppedRocket.setEnabled(true);
             cargoDroppedCargoShip.setEnabled(true);

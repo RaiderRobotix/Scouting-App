@@ -104,7 +104,7 @@
             android:layout_marginTop="5sp"
             android:layout_marginLeft="50dp"
             android:padding="@dimen/default_padding_bottom"
-            android:text="Cargo Ship"
+            android:text="Cargo ship"
             android:textSize="18sp" />
 
         <CheckBox
@@ -136,7 +136,7 @@
             android:layout_marginTop="5sp"
             android:layout_marginLeft="50dp"
             android:padding="@dimen/default_padding_bottom"
-            android:text="Cargo Ship"
+            android:text="Cargo ship"
             android:textSize="18sp" />
 
         <CheckBox
