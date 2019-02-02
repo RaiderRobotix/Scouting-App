@@ -339,8 +339,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 }
             }
             for (RadioButton button : startingLevelButtons) {
-                if (button.getText().toString().equals(Integer.toString(prevPreMatch.getStartingLevel()))) {
-
+                if (button.getText().toString().contains(Integer.toString(prevPreMatch.getStartingLevel()))) {
                     button.setChecked(true);
                 }
             }
