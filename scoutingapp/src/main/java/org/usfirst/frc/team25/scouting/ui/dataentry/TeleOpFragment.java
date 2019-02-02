@@ -100,6 +100,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                     }
                 }
 
+            if (partnerClimbsAssisted.getValue() >= 1) {
+                radioButtonEnable(highestAssistedClimbLevel, true);
+            }
 
         }
     }
@@ -118,13 +121,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 hatchesDropped.getValue(),
                 cargoDropped.getValue(),
                 climbAssistedByPartners.isChecked(),
-                getHabLevelSelectedTripleOption(attemptHabClimbLevel),
-                getHabLevelSelectedTripleOption(successHabClimbLevel),
+                getHabLevelSelected(attemptHabClimbLevel),
+                getHabLevelSelected(successHabClimbLevel),
                 attemptHabClimb.isChecked(),
                 successHabClimb.isChecked(),
                 getIntegerFromTextBox(teamNumberThatAssistedClimb),
                 partnerClimbsAssisted.getValue(),
                 getHighestHabLevelSelected(highestAssistedClimbLevel)));
+
     }
 
     @Override
@@ -262,7 +266,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
      * @param habLevelArray Provide a RadioButtonGroup with three hab level options
      * @return integer Returns integer value corresponding to hab levels 1,2, and 3
      */
-    public static int getHabLevelSelectedTripleOption(RadioButton[] habLevelArray) {
+    public static int getHabLevelSelected(RadioButton[] habLevelArray) {
         for (int i = 0; i < habLevelArray.length; i++) {
             if (habLevelArray[i].isChecked()) {
                 return i + 1;
