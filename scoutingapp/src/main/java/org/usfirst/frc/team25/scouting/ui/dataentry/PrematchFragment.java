@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -34,13 +35,14 @@ import java.io.IOException;
 public class PrematchFragment extends Fragment implements EntryFragment {
 
     private RadioButton[] startingPositionButtons;
+    private RadioButton[] startingLevelButtons;
+    private RadioGroup startingLevelButtonsGroup;
+    private RadioGroup startingPositionButtonsGroup;
     private Button continueButton;
     private MaterialEditText nameField, matchNumField, teamNumField;
     private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
     private CheckBox robotNoShow;
-    private RadioButton[] startingLevelButtons;
-
 
     public static PrematchFragment getInstance(ScoutEntry entry) {
         PrematchFragment prematchFragment = new PrematchFragment();
@@ -81,6 +83,8 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         startingPositionButtons[0] = view.findViewById(R.id.leftStart);
         startingPositionButtons[1] = view.findViewById(R.id.centerStart);
         startingPositionButtons[2] = view.findViewById(R.id.rightStart);
+        startingLevelButtonsGroup = view.findViewById(R.id.starting_level);
+        startingPositionButtonsGroup = view.findViewById(R.id.starting_position);
 
         autoPopulate();
 
@@ -111,22 +115,15 @@ public class PrematchFragment extends Fragment implements EntryFragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
 
-                    for (RadioButton button2 : startingLevelButtons) {
-                        button2.setEnabled(false);
-                        button2.setChecked(false);
-                    }
-                    for (RadioButton button : startingPositionButtons) {
-                        button.setEnabled(false);
-                        button.setChecked(false);
-                    }
+                    TeleOpFragment.radioButtonEnable(startingLevelButtonsGroup, false);
+                    startingLevelButtonsGroup.clearCheck();
+
+                    TeleOpFragment.radioButtonEnable(startingPositionButtonsGroup, false);
+                    startingPositionButtonsGroup.clearCheck();
 
                 } else {
-                    for (RadioButton button : startingPositionButtons) {
-                        button.setEnabled(true);
-                    }
-                    for (RadioButton button2 : startingLevelButtons) {
-                        button2.setEnabled(true);
-                    }
+                    TeleOpFragment.radioButtonEnable(startingPositionButtonsGroup, true);
+                    TeleOpFragment.radioButtonEnable(startingLevelButtonsGroup, true);
                 }
 
             }
@@ -339,9 +336,9 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                 }
             }
             for (RadioButton button : startingLevelButtons) {
-                if (button.getText().toString().equals(Integer.toString(prevPreMatch.getStartingLevel()))) {
-
+                if (button.getText().toString().contains(Integer.toString(prevPreMatch.getStartingLevel()))) {
                     button.setChecked(true);
+                    startingPositionButtons[1].setEnabled(false);
                 }
             }
             if (robotNoShow.isChecked()) {
