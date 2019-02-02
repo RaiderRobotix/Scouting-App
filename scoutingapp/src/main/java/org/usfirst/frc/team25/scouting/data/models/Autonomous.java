@@ -61,22 +61,6 @@ public class Autonomous {
         return frontCargoShipHatchCapable;
     }
 
-    public boolean isCargoDroppedCargoShip() {
-        return cargoDroppedCargoShip;
-    }
-
-    public boolean isCargoDroppedRocket() {
-        return cargoDroppedRocket;
-    }
-
-    public boolean isHatchesDroppedRocket() {
-        return hatchesDroppedRocket;
-    }
-
-    public boolean isHatchesDroppedCargoShip() {
-        return hatchesDroppedCargoShip;
-    }
-
     public Autonomous(int rocketCargo, int rocketHatches, int cargoShipHatches,
                       int cargoShipCargo, int hatchesDropped, int cargoDropped,
                       boolean reachHabLine, boolean opponentCargoShipLineFoul,
@@ -97,5 +81,21 @@ public class Autonomous {
         this.cargoDroppedRocket = cargoDroppedRocket;
         this.hatchesDroppedRocket = hatchesDroppedRocket;
         this.hatchesDroppedCargoShip = hatchesDroppedCargoShip;
+    }
+
+    public boolean isCargoDroppedCargoShip() {
+        return cargoDroppedCargoShip;
+    }
+
+    public boolean isCargoDroppedRocket() {
+        return cargoDroppedRocket;
+    }
+
+    public boolean isHatchesDroppedRocket() {
+        return hatchesDroppedRocket;
+    }
+
+    public boolean isHatchesDroppedCargoShip() {
+        return hatchesDroppedCargoShip;
     }
 }
