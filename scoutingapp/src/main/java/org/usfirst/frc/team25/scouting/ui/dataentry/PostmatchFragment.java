@@ -172,7 +172,7 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
         comparisonButtons[1].setText(prevRobotCompareStr);
 
         // No previous data found, so remove it as an option
-        if (prevTeamNum == 0) {
+        if (prevTeamNum == 0 || this.entry.getPreMatch().getScoutName().equals(FileManager.getPrevScoutName(getActivity()))) {
             comparisonButtons[2].setChecked(true);
             view.findViewById(R.id.prev_team_comparison_group).setVisibility(View.GONE);
         }

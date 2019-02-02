@@ -70,9 +70,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
 
-        autoPopulate();
-        Constants();
-
 
         opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> {
             reachHabLineState();
@@ -134,6 +131,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             cargoDroppedLocation();
         });
 
+        autoPopulate();
 
         continueButton.setOnClickListener(view1 -> {
             if (cargoShipHatches.getValue() > 0 && !frontCargoShipHatchCapable.isChecked() &&
@@ -182,6 +180,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
             hatchesDroppedCargoShip.setChecked(prevAuto.isHatchesDroppedCargoShip());
             hatchesDroppedRocket.setChecked(prevAuto.isHatchesDroppedRocket());
 
+            enableHatchPlacement();
+            cargoDroppedLocation();
+            hatchesDroppedLocation();
+
         }
 
     }
@@ -204,16 +206,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
         reachHabLine.setChecked(true);
         reachHabLine.setEnabled(false);
 
-    }
-
-    private void Constants() {
-        cargoDroppedCargoShip.setEnabled(false);
-        cargoDroppedRocket.setEnabled(false);
-        hatchesDroppedCargoShip.setEnabled(false);
-        hatchesDroppedRocket.setEnabled(false);
-        sideCargoShipHatchCapable.setEnabled(false);
-        frontCargoShipHatchCapable.setEnabled(false);
-        reachHabLine.setChecked(false);
     }
 
     private void reachHabLineState() {
