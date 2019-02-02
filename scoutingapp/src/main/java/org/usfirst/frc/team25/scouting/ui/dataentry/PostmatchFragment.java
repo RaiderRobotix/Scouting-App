@@ -31,20 +31,24 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
     private final RadioButton[] comparisonButtons = new RadioButton[3];
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
     private final String[] ROBOT_COMMENT_VALUES = {
-            "No cube intake",
-            "Shoots cubes",
-            "Slow to climb",
-            "Ramp bot",
-            "Has rung on robot",
-            "Can lift other robots",
-            "Plays strategically",
-            "More cubes unneeded",
-            "Climb/park unneeded (levitate used and others climbed)",
-            "Played defense effectively",
-            "Lost communication",
+            "Scoring potential reached",
+            "Shoots cargo",
+            "Slow hatch panel intake",
+            "Slow cargo intake",
+            "poor/inefficient robot",
+            "Cargo floor intake",
+            "Low objectives only",
+            "Higher rocket levels significantly slower",
+            "Struggles to place in far rocket side",
+            "Fast HAB climb",
+            "Poorly-secured hatches",
+            "Places extra cargo in bays",
+            "Effective defense",
+            "Lost communications",
             "Tipped over",
-            "Caused (tech) fouls (explain below)",
-            "Possible inaccurate data (specify below)"
+            "Commits (tech) fouls (explain)",
+            "Do not pick (explain)",
+            "Possible inaccurate data (specify)"
     };
     private ScoutEntry entry;
     private MaterialEditText robotComment;

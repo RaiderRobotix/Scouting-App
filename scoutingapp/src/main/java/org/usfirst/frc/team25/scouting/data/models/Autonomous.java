@@ -16,6 +16,10 @@ public class Autonomous {
     private boolean opponentCargoShipLineFoul;
     private boolean sideCargoShipHatchCapable;
     private boolean frontCargoShipHatchCapable;
+    private boolean cargoDroppedCargoShip;
+    private boolean cargoDroppedRocket;
+    private boolean hatchesDroppedRocket;
+    private boolean hatchesDroppedCargoShip;
 
     public int getRocketCargo() {
         return rocketCargo;
@@ -57,14 +61,28 @@ public class Autonomous {
         return frontCargoShipHatchCapable;
     }
 
+    public boolean isCargoDroppedCargoShip() {
+        return cargoDroppedCargoShip;
+    }
 
+    public boolean isCargoDroppedRocket() {
+        return cargoDroppedRocket;
+    }
 
+    public boolean isHatchesDroppedRocket() {
+        return hatchesDroppedRocket;
+    }
 
+    public boolean isHatchesDroppedCargoShip() {
+        return hatchesDroppedCargoShip;
+    }
 
     public Autonomous(int rocketCargo, int rocketHatches, int cargoShipHatches,
                       int cargoShipCargo, int hatchesDropped, int cargoDropped,
                       boolean reachHabLine, boolean opponentCargoShipLineFoul,
-                      boolean sideCargoShipHatchCapable, boolean frontCargoShipHatchCapable) {
+                      boolean sideCargoShipHatchCapable, boolean frontCargoShipHatchCapable,
+                      boolean cargoDroppedCargoShip, boolean cargoDroppedRocket,
+                      boolean hatchesDroppedRocket, boolean hatchesDroppedCargoShip) {
         this.rocketCargo = rocketCargo;
         this.rocketHatches = rocketHatches;
         this.cargoShipHatches = cargoShipHatches;
@@ -75,5 +93,9 @@ public class Autonomous {
         this.opponentCargoShipLineFoul = opponentCargoShipLineFoul;
         this.sideCargoShipHatchCapable = sideCargoShipHatchCapable;
         this.frontCargoShipHatchCapable = frontCargoShipHatchCapable;
+        this.cargoDroppedCargoShip = cargoDroppedCargoShip;
+        this.cargoDroppedRocket = cargoDroppedRocket;
+        this.hatchesDroppedRocket = hatchesDroppedRocket;
+        this.hatchesDroppedCargoShip = hatchesDroppedCargoShip;
     }
 }

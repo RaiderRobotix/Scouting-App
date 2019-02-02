@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/inner_components_spacing"
-                android:text="Own switch"
+                android:text="Hatch Panels"
                 android:textSize="18sp" />
 
             <CheckBox
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/own_switch_focus"
                 android:padding="@dimen/inner_components_spacing"
-                android:text="Opponent switch"
+                android:text="Cargo"
                 android:textSize="18sp" />
 
             <CheckBox
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/opponent_switch_focus"
                 android:padding="@dimen/inner_components_spacing"
-                android:text="Scale"
+                android:text="Cargo Ship"
                 android:textSize="18sp" />
 
             <CheckBox
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scale_focus"
                 android:padding="@dimen/inner_components_spacing"
-                android:text="Vault"
+                android:text="Rocket"
                 android:textSize="18sp" />
 
             <CheckBox
