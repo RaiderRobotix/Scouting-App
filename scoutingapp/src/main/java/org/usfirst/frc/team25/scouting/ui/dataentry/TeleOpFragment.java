@@ -138,8 +138,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
     }
 
-    //get child count in regular for loop
-    private void radioButtonEnable(RadioGroup groupToEnableOrDisable, boolean modeSelected) {
+    public static void radioButtonEnable(RadioGroup groupToEnableOrDisable, boolean modeSelected) {
         if (modeSelected) {
             for (int i = 0; i < groupToEnableOrDisable.getChildCount(); i++) {
                 groupToEnableOrDisable.getChildAt(i).setEnabled(true);
