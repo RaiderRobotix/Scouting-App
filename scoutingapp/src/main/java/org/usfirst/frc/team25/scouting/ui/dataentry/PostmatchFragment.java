@@ -149,11 +149,11 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
         robotCommentView = view.findViewById(R.id.robotDriverCommentView);
 
         Button finish = view.findViewById(R.id.post_finish);
-        focusButtons[0] = view.findViewById(R.id.own_switch_focus);
-        focusButtons[1] = view.findViewById(R.id.opponent_switch_focus);
-        focusButtons[2] = view.findViewById(R.id.scale_focus);
-        focusButtons[3] = view.findViewById(R.id.vault_focus);
-        focusButtons[4] = view.findViewById(R.id.defense_focus);
+        focusButtons[0] = view.findViewById(R.id.teleop_focus_hatches);
+        focusButtons[1] = view.findViewById(R.id.teleop_focus_cargo);
+        focusButtons[2] = view.findViewById(R.id.teleop_focus_cargo_ship);
+        focusButtons[3] = view.findViewById(R.id.teleop_focus_rocket);
+        focusButtons[4] = view.findViewById(R.id.teleop_focus_defense);
         comparisonButtons[0] = view.findViewById(R.id.current_team_comparison);
         comparisonButtons[1] = view.findViewById(R.id.prev_team_comparison);
         comparisonButtons[2] = view.findViewById(R.id.either_team_comparison);
