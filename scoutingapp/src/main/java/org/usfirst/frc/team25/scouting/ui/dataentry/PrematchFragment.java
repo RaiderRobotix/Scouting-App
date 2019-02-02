@@ -34,13 +34,12 @@ import java.io.IOException;
 public class PrematchFragment extends Fragment implements EntryFragment {
 
     private RadioButton[] startingPositionButtons;
+    private RadioButton[] startingLevelButtons;
     private Button continueButton;
     private MaterialEditText nameField, matchNumField, teamNumField;
     private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
     private CheckBox robotNoShow;
-    private RadioButton[] startingLevelButtons;
-
 
     public static PrematchFragment getInstance(ScoutEntry entry) {
         PrematchFragment prematchFragment = new PrematchFragment();
