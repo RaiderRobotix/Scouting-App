@@ -220,7 +220,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 teamNumberThatAssistedClimb.setEnabled(true);
             } else {
                 teamNumberThatAssistedClimb.setEnabled(false);
-                teamNumberThatAssistedClimb.setText("0");
+                teamNumberThatAssistedClimb.setText("");
             }
         });
 
@@ -245,11 +245,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();
             if (climbAssistedByPartners.isChecked() && teamNumberThatAssistedClimb
-                    .getText().toString().isEmpty() || partnerClimbsAssisted.getValue() >= 1 && !checkIfButtonIsChecked(highestAssistedClimbLevel)
+                    .getText().toString().isEmpty() || partnerClimbsAssisted.getValue() >= 1 &&
+                    !checkIfButtonIsChecked(highestAssistedClimbLevel)
                     || attemptHabClimb.isChecked() && !checkIfButtonIsChecked(attemptHabClimbLevel) || successHabClimb.isChecked()
                     && !checkIfButtonIsChecked(successHabClimbLevel)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Please fill in any empty fields")
+                builder.setTitle("Please fill in any empty HAB climb fields")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
                         });
