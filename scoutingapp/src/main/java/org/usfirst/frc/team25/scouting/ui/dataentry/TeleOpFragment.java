@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -20,13 +21,15 @@ import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
-//Fix autoPopuate for EditText for team number that assisted climb
-
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
     private RadioButton[] attemptHabClimbLevel;
     private RadioButton[] successHabClimbLevel;
+    private RadioButton[] highestAssistedClimbLevel;
+    private RadioGroup attemptHabClimbLevelGroup;
+    private RadioGroup successHabClimbLevelGroup;
+    private RadioGroup highestAssistedClimbLevelGroup;
     private ButtonIncDecSet cargoShipHatches;
     private ButtonIncDecSet cargoShipCargo;
     private ButtonIncDecSet rocketLevelOneHatches;
@@ -42,7 +45,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ButtonIncDecView partnerClimbsAssisted;
     private CheckBox climbAssistedByPartners;
     private EditText teamNumberThatAssistedClimb;
-    private RadioButton[] highestAssistedClimbLevel;
     private Settings set;
 
 
@@ -83,9 +85,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
 
-            if (isEmpty(teamNumberThatAssistedClimb)) {
-                teamNumberThatAssistedClimb.setText("");
-            } else {
+            if (tele.getAssistingClimbTeamNumber() != 0) {
                 teamNumberThatAssistedClimb.setText(Integer.toString(tele.getAssistingClimbTeamNumber()));
             }
 
@@ -108,7 +108,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 }
 
             if (partnerClimbsAssisted.getValue() >= 1) {
-                radioButtonEnable(highestAssistedClimbLevel, true);
+                radioButtonEnable(highestAssistedClimbLevelGroup, highestAssistedClimbLevel, true);
             }
 
         }
@@ -138,23 +138,18 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
     }
 
-    public static boolean isEmpty(EditText textBoxToBeChecked) {
-        return textBoxToBeChecked.getText() == null || textBoxToBeChecked.getText().toString().equals("") || textBoxToBeChecked.getText().toString().isEmpty();
-    }
-
-    private void radioButtonEnable(RadioButton[] groupToEnableOrDisable, boolean modeSelected) {
+    private void radioButtonEnable(RadioGroup groupToEnableOrDisable,
+                                   RadioButton[] buttonsToEnableOrDisable, boolean modeSelected) {
         if (modeSelected) {
-            for (RadioButton button : groupToEnableOrDisable) {
+            for (RadioButton button : buttonsToEnableOrDisable) {
                 button.setEnabled(true);
             }
         } else {
-            for (RadioButton button : groupToEnableOrDisable) {
+            for (RadioButton button : buttonsToEnableOrDisable) {
                 button.setEnabled(false);
-                button.setChecked(false);
-
+                groupToEnableOrDisable.clearCheck();
             }
         }
-
     }
 
     @Override
@@ -181,6 +176,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         hatchesDropped = view.findViewById(R.id.hatches_dropped_teleop);
         cargoDropped = view.findViewById(R.id.cargo_dropped_teleop);
         Button continueButton = view.findViewById(R.id.tele_continue);
+        attemptHabClimbLevelGroup = view.findViewById(R.id.attempt_hab_climb_level);
+        successHabClimbLevelGroup = view.findViewById(R.id.success_hab_climb_level);
+        highestAssistedClimbLevelGroup = view.findViewById(R.id.highest_climb_assist_radio_group);
 
         attemptHabClimbLevel = new RadioButton[3];
         attemptHabClimbLevel[0] = view.findViewById(R.id.attempt_hab_level_1);
@@ -200,21 +198,21 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                radioButtonEnable(successHabClimbLevel, true);
+                radioButtonEnable(successHabClimbLevelGroup, successHabClimbLevel, true);
             } else {
-                radioButtonEnable(successHabClimbLevel, false);
+                radioButtonEnable(successHabClimbLevelGroup, successHabClimbLevel, false);
             }
         });
 
         attemptHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 successHabClimb.setEnabled(true);
-                radioButtonEnable(attemptHabClimbLevel, true);
+                radioButtonEnable(attemptHabClimbLevelGroup, attemptHabClimbLevel, true);
             } else {
                 successHabClimb.setEnabled(false);
                 successHabClimb.setChecked(false);
-                radioButtonEnable(attemptHabClimbLevel, false);
-                radioButtonEnable(successHabClimbLevel, false);
+                radioButtonEnable(attemptHabClimbLevelGroup, attemptHabClimbLevel, false);
+                radioButtonEnable(successHabClimbLevelGroup, successHabClimbLevel, false);
             }
         });
 
@@ -223,23 +221,24 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 teamNumberThatAssistedClimb.setEnabled(true);
             } else {
                 teamNumberThatAssistedClimb.setEnabled(false);
-                teamNumberThatAssistedClimb.setText(null);
+                teamNumberThatAssistedClimb.setText("0");
             }
         });
 
 
         partnerClimbsAssisted.decButton.setOnClickListener(view1 -> {
             if (partnerClimbsAssisted.getValue() == 1) {
-                radioButtonEnable(highestAssistedClimbLevel, false);
+                radioButtonEnable(highestAssistedClimbLevelGroup, highestAssistedClimbLevel, false);
             }
             partnerClimbsAssisted.decrement();
         });
 
         partnerClimbsAssisted.incButton.setOnClickListener(view2 -> {
             if (partnerClimbsAssisted.getValue() >= 0) {
-                radioButtonEnable(highestAssistedClimbLevel, true);
+                radioButtonEnable(highestAssistedClimbLevelGroup, highestAssistedClimbLevel, true);
             }
             partnerClimbsAssisted.increment();
+
         });
 
 
@@ -247,9 +246,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();
             if (climbAssistedByPartners.isChecked() && teamNumberThatAssistedClimb
-                    .getText().toString().isEmpty() || partnerClimbsAssisted.getValue() >= 1 && !checkIfButtonIsPressed(highestAssistedClimbLevel)
-                    || attemptHabClimb.isChecked() && !checkIfButtonIsPressed(attemptHabClimbLevel) || successHabClimb.isChecked()
-                    && !checkIfButtonIsPressed(successHabClimbLevel)) {
+                    .getText().toString().isEmpty() || partnerClimbsAssisted.getValue() >= 1 && !checkIfButtonIsChecked(highestAssistedClimbLevel)
+                    || attemptHabClimb.isChecked() && !checkIfButtonIsChecked(attemptHabClimbLevel) || successHabClimb.isChecked()
+                    && !checkIfButtonIsChecked(successHabClimbLevel)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Please fill in any empty fields")
                         .setCancelable(false)
@@ -273,6 +272,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
+    private static boolean checkIfButtonIsChecked(RadioButton[] groupToCheck) {
+        for (RadioButton button : groupToCheck) {
+            if (button.isChecked()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * A method that receives a RadioButton array and returns an integer corresponding to the hab
      * level selected
@@ -287,15 +295,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             }
         }
         return 0;
-    }
-
-    private static boolean checkIfButtonIsPressed(RadioButton[] groupToCheck) {
-        for (RadioButton button : groupToCheck) {
-            if (button.isChecked()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     int getIntegerFromTextBox(EditText numberEditText) {
@@ -313,6 +312,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             }
         }
         return 0;
+    }
+
+    public static boolean isEmpty(EditText textBoxToBeChecked) {
+        return textBoxToBeChecked.getText() == null || textBoxToBeChecked.getText().toString().equals("") || textBoxToBeChecked.getText().toString().isEmpty();
     }
 
     public void hideKeyboard() {
