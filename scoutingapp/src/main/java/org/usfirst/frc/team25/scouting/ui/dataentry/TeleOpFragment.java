@@ -20,6 +20,8 @@ import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
+//Fix autoPopuate for EditText for team number that assisted climb
+
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
@@ -78,9 +80,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             partnerClimbsAssisted.setValue(tele.getNumberOfPartnerClimbsAssisted());
             hatchesDropped.setValue(tele.getHatchesDropped());
             cargoDropped.setValue(tele.getCargoDropped());
-            teamNumberThatAssistedClimb.setText(Integer.toString(tele.getAssistingClimbTeamNumber()));
             attemptHabClimb.setChecked(tele.isAttemptHabClimb());
             successHabClimb.setChecked(tele.isSuccessHabClimb());
+
+            if (isEmpty(teamNumberThatAssistedClimb)) {
+                teamNumberThatAssistedClimb.setText("");
+            } else {
+                teamNumberThatAssistedClimb.setText(Integer.toString(tele.getAssistingClimbTeamNumber()));
+            }
 
             for (int i = 2; i <= 3; i++) {
                 if (i == tele.getHighestClimbAssisted()) {
@@ -128,6 +135,25 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 getIntegerFromTextBox(teamNumberThatAssistedClimb),
                 partnerClimbsAssisted.getValue(),
                 getHighestHabLevelSelected(highestAssistedClimbLevel)));
+
+    }
+
+    public static boolean isEmpty(EditText textBoxToBeChecked) {
+        return textBoxToBeChecked.getText() == null || textBoxToBeChecked.getText().toString().equals("") || textBoxToBeChecked.getText().toString().isEmpty();
+    }
+
+    private void radioButtonEnable(RadioButton[] groupToEnableOrDisable, boolean modeSelected) {
+        if (modeSelected) {
+            for (RadioButton button : groupToEnableOrDisable) {
+                button.setEnabled(true);
+            }
+        } else {
+            for (RadioButton button : groupToEnableOrDisable) {
+                button.setEnabled(false);
+                button.setChecked(false);
+
+            }
+        }
 
     }
 
@@ -197,7 +223,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 teamNumberThatAssistedClimb.setEnabled(true);
             } else {
                 teamNumberThatAssistedClimb.setEnabled(false);
-                teamNumberThatAssistedClimb.setText("");
+                teamNumberThatAssistedClimb.setText(null);
             }
         });
 
@@ -220,10 +246,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();
-            if (false/*otherRobotClimbsAssisted.isChecked() && teamNumberThatAssistedClimb
-            .getText().toString().isEmpty()*/) {
+            if (climbAssistedByPartners.isChecked() && teamNumberThatAssistedClimb
+                    .getText().toString().isEmpty() || partnerClimbsAssisted.getValue() >= 1 && !checkIfButtonIsPressed(highestAssistedClimbLevel)
+                    || attemptHabClimb.isChecked() && !checkIfButtonIsPressed(attemptHabClimbLevel) || successHabClimb.isChecked()
+                    && !checkIfButtonIsPressed(successHabClimbLevel)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Fill in any empty fields")
+                builder.setTitle("Please fill in any empty fields")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
                         });
@@ -245,20 +273,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    private void radioButtonEnable(RadioButton[] groupToEnableOrDisable, boolean modeSelected) {
-        if (modeSelected) {
-            for (RadioButton button : groupToEnableOrDisable) {
-                button.setEnabled(true);
-            }
-        } else {
-            for (RadioButton button : groupToEnableOrDisable) {
-                button.setEnabled(false);
-                button.setChecked(false);
-            }
-        }
-
-    }
-
     /**
      * A method that receives a RadioButton array and returns an integer corresponding to the hab
      * level selected
@@ -275,8 +289,17 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return 0;
     }
 
+    private static boolean checkIfButtonIsPressed(RadioButton[] groupToCheck) {
+        for (RadioButton button : groupToCheck) {
+            if (button.isChecked()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     int getIntegerFromTextBox(EditText numberEditText) {
-        if (numberEditText.getText().toString().isEmpty()) {
+        if (isEmpty(numberEditText)) {
             return 0;
         } else {
             return Integer.parseInt(numberEditText.getText().toString());

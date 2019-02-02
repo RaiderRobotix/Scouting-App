@@ -310,6 +310,7 @@
                 android:layout_marginBottom="-15dp"
                 android:hint="Assisting team's number"
                 android:inputType="number"
+                android:text=""
                 android:padding="8dp"
                 app:met_floatingLabel="normal" />
 
