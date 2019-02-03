@@ -93,19 +93,19 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 if (i == tele.getHighestClimbAssisted()) {
                     highestAssistedClimbLevel[i - 2].setChecked(true);
                 }
-                }
+            }
 
             for (int i = 1; i <= successHabClimbLevel.length; i++) {
                 if (i == tele.getSuccessHabClimbLevel()) {
                     successHabClimbLevel[i - 1].setChecked(true);
-                    }
                 }
+            }
 
             for (int i = 1; i <= attemptHabClimbLevel.length; i++) {
                 if (i == tele.getAttemptHabClimbLevel()) {
                     attemptHabClimbLevel[i - 1].setChecked(true);
-                    }
                 }
+            }
 
             if (partnerClimbsAssisted.getValue() >= 1) {
                 radioButtonEnable(highestAssistedClimbLevelGroup, true);
@@ -195,13 +195,22 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         set = Settings.newInstance(getActivity());
 
+
+        for (int i = 0; i < attemptHabClimbLevel.length; i++) {
+            attemptHabClimbLevel[i].setOnClickListener(view1 -> {
+                autoDisableSuccessGroup();
+            });
+        }
+
         successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 radioButtonEnable(successHabClimbLevelGroup, true);
+                autoDisableSuccessGroup();
             } else {
                 radioButtonEnable(successHabClimbLevelGroup, false);
             }
         });
+
 
         attemptHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
@@ -214,6 +223,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 radioButtonEnable(successHabClimbLevelGroup, false);
             }
         });
+
 
         climbAssistedByPartners.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
@@ -239,7 +249,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             partnerClimbsAssisted.increment();
 
         });
-
 
 
         continueButton.setOnClickListener(view1 -> {
@@ -280,6 +289,29 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         }
         return false;
     }
+
+    private void autoDisableSuccessGroup() {
+        int attemptLevel = -1;
+        for (int i = 0; i < attemptHabClimbLevel.length; i++) {
+            if (attemptHabClimbLevel[i].isChecked()) {
+                attemptLevel = i;
+            }
+
+        }
+        if (successHabClimb.isChecked()) {
+            for (int j = 0; j < successHabClimbLevel.length; j++) {
+                if (j > attemptLevel) {
+                    successHabClimbLevel[j].setEnabled(false);
+                    if (successHabClimbLevel[j].isChecked()) {
+                        successHabClimbLevelGroup.clearCheck();
+                    }
+                } else {
+                    successHabClimbLevel[j].setEnabled(true);
+                }
+            }
+        }
+    }
+
 
     /**
      * A method that receives a RadioButton array and returns an integer corresponding to the hab

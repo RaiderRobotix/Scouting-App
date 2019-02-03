@@ -44,7 +44,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="Rocket level 1"
+                        android:text="Rocket level 3"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -66,7 +66,7 @@
                     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rocket_level_one_cargo_teleop"
+                        android:id="@+id/rocket_level_three_cargo_teleop"
                         app:initialValueSet="0" />
                 </LinearLayout>
 
@@ -85,7 +85,7 @@
                         android:textSize="18sp" />
 
                     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/rocket_level_one_hatches_teleop"
+                        android:id="@+id/rocket_level_three_hatches_teleop"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:initialValueSet="0" />
@@ -127,23 +127,23 @@
                 android:layout_marginEnd="10dp">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="Rocket level 3"
+                    android:text="Rocket level 1"
                     android:textSize="18sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                     android:layout_width="0dp"
-                    android:id="@+id/rocket_level_three_cargo_teleop"
+                    android:id="@+id/rocket_level_one_cargo_teleop"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/rocket_level_three_hatches_teleop"
+                    android:id="@+id/rocket_level_one_hatches_teleop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5" />
