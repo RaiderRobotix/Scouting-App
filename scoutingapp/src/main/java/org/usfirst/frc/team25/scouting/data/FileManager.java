@@ -405,7 +405,6 @@ public class FileManager {
             BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
             String row;
 
-
             while ((row = reader.readLine()) != null) {
                 existingData.append(row);
             }
@@ -420,6 +419,56 @@ public class FileManager {
             return entries.get(entries.size() - 1).getPreMatch().getTeamNum();
         } else {
             return 0;
+        }
+
+
+    }
+
+    public static String getPrevScoutName(Context c) {
+        ScoutEntry prevScoutEntry = getPrevScoutEntry(c);
+
+        if (prevScoutEntry == null) {
+            return "";
+        } else {
+            return prevScoutEntry.getPreMatch().getScoutName();
+        }
+    }
+
+    /**
+     * @param c
+     * @return
+     */
+    public static ScoutEntry getPrevScoutEntry(Context c) {
+        Gson gson = new Gson();
+        List<ScoutEntry> entries;
+        Type listEntries = new TypeToken<List<ScoutEntry>>() {
+        }.getType(); //Example for deserializing an ArrayList of objects
+
+
+        StringBuilder existingData = new StringBuilder();
+
+        File file = getDataFilePath(c);
+
+        //Reads the raw data
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+            String row;
+
+            while ((row = reader.readLine()) != null) {
+                existingData.append(row);
+            }
+            reader.close();
+        } catch (IOException e) {
+            return null;
+        }
+
+        if (!existingData.toString().equals("")) {
+            Log.i("file export", "Attempting to parse data");
+            entries = gson.fromJson(existingData.toString(), listEntries);
+            return entries.get(entries.size() - 1);
+        } else {
+            return null;
         }
 
 
