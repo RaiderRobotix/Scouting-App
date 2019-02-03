@@ -12,17 +12,7 @@ public class PreMatch {
     private int matchNum, teamNum;
     private int startingLevel;
     private boolean robotNoShow;
-
-    public PreMatch(String scoutName, String scoutPos, String startingPos, int matchNum,
-                    int teamNum, int startingLevel, boolean robotNoShow) {
-        this.scoutName = scoutName;
-        this.scoutPos = scoutPos;
-        this.startingPos = startingPos;
-        this.matchNum = matchNum;
-        this.teamNum = teamNum;
-        this.startingLevel = startingLevel;
-        this.robotNoShow = robotNoShow;
-    }
+    private String startingGamePiece;
 
     public String getScoutName() {
         return scoutName;
@@ -52,11 +42,19 @@ public class PreMatch {
         return robotNoShow;
     }
 
+    public String getStartingGamePiece() {
+        return startingGamePiece;
+    }
 
-
-
-
-
-
-
+    public PreMatch(String scoutName, String scoutPos, String startingPos, int matchNum,
+                    int teamNum, int startingLevel, boolean robotNoShow, String startingGamePiece) {
+        this.scoutName = scoutName;
+        this.scoutPos = scoutPos;
+        this.startingPos = startingPos;
+        this.matchNum = matchNum;
+        this.teamNum = teamNum;
+        this.startingLevel = startingLevel;
+        this.robotNoShow = robotNoShow;
+        this.startingGamePiece = startingGamePiece;
+    }
 }

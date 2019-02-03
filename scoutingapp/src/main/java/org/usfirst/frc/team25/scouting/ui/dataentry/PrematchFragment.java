@@ -30,6 +30,7 @@ import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 
 import java.io.IOException;
 
@@ -37,6 +38,8 @@ public class PrematchFragment extends Fragment implements EntryFragment {
 
     private RadioButton[] startingPositionButtons;
     private RadioButton[] startingLevelButtons;
+    private RadioButton[] startingGamePiece;
+    private RadioGroup startingGamePieceGroup;
     private RadioGroup startingLevelButtonsGroup;
     private RadioGroup startingPositionButtonsGroup;
     private Button continueButton;
@@ -86,7 +89,11 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         startingPositionButtons[2] = view.findViewById(R.id.rightStart);
         startingLevelButtonsGroup = view.findViewById(R.id.starting_level);
         startingPositionButtonsGroup = view.findViewById(R.id.starting_position);
-
+        startingGamePiece = new RadioButton[3];
+        startingGamePiece[0] = view.findViewById(R.id.cargo_button);
+        startingGamePiece[1] = view.findViewById(R.id.hatch_panel_button);
+        startingGamePiece[2] = view.findViewById(R.id.none_button);
+        startingGamePieceGroup = view.findViewById(R.id.robot_starting_game_piece);
         autoPopulate();
 
         // Nudges the user to fill in the next unfilled text field
@@ -97,7 +104,6 @@ public class PrematchFragment extends Fragment implements EntryFragment {
         } else if (teamNumField.getText().toString().equals("")) {
             teamNumField.requestFocus();
         }
-
         startingLevelButtons[1].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -122,12 +128,16 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                     TeleOpFragment.radioButtonEnable(startingPositionButtonsGroup, false);
                     startingPositionButtonsGroup.clearCheck();
 
+                    TeleOpFragment.radioButtonEnable(startingGamePieceGroup, false);
+                    startingGamePieceGroup.clearCheck();
                 } else {
                     TeleOpFragment.radioButtonEnable(startingPositionButtonsGroup, true);
                     TeleOpFragment.radioButtonEnable(startingLevelButtonsGroup, true);
+                    TeleOpFragment.radioButtonEnable(startingGamePieceGroup, true);
                 }
 
             }
+
         });
 
 
@@ -172,6 +182,7 @@ public class PrematchFragment extends Fragment implements EntryFragment {
 
             boolean startingPositionSelected = false;
             boolean startingLevelSelected = false;
+            boolean startingGamePieceSelected = false;
             for (RadioButton button : startingPositionButtons) {
                 if (button.isChecked()) {
                     startingPositionSelected = true;
@@ -182,12 +193,16 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                     startingLevelSelected = true;
                 }
             }
+            for (RadioButton button3 : startingGamePiece) {
+                if (button3.isChecked()) {
+                    startingGamePieceSelected = true;
+                }
+            }
 
-
-            if (proceed && !robotNoShow.isChecked() && !(startingLevelSelected && startingPositionSelected)) {
+            if (proceed && !robotNoShow.isChecked() && !(startingLevelSelected && startingPositionSelected && startingGamePieceSelected)) {
                 proceed = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select robot starting level/position")
+                builder.setTitle("Select robot starting level/position/game piece")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
                             //do things
@@ -336,124 +351,135 @@ public class PrematchFragment extends Fragment implements EntryFragment {
                     button.setChecked(true);
                 }
             }
+            for (RadioButton button : startingGamePiece) {
+                if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
+                    button.setChecked(true);
+                }
+            }
+
+
             for (RadioButton button : startingLevelButtons) {
                 if (button.getText().toString().contains(Integer.toString(prevPreMatch.getStartingLevel()))) {
                     button.setChecked(true);
                 }
             }
             if (robotNoShow.isChecked()) {
-                    robotNoShow.setChecked(true);
+                robotNoShow.setChecked(true);
             }
-            if(prevPreMatch.getStartingLevel() == 2) {
+            if (prevPreMatch.getStartingLevel() == 2) {
                 startingPositionButtons[1].setEnabled(false);
-            }
-            else {
+            } else {
                 startingPositionButtons[1].setEnabled(true);
             }
 
-        }
-        else{
-                Settings set = Settings.newInstance(getActivity());
+        } else {
+            Settings set = Settings.newInstance(getActivity());
 
-                if (!set.getScoutPos().equals("DEFAULT")) {
-                    scoutPosSpinner.setText(set.getScoutPos());
+            if (!set.getScoutPos().equals("DEFAULT")) {
+                scoutPosSpinner.setText(set.getScoutPos());
 
-                    if (set.useTeamList() && set.getMatchType().equals("Q")) {
-                        try {
-                            teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
-                                    set.getScoutPos(), set.getMatchNum()));
-                        } catch (IOException e) {
+                if (set.useTeamList() && set.getMatchType().equals("Q")) {
+                    try {
+                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
+                                set.getScoutPos(), set.getMatchNum()));
+                    } catch (IOException e) {
 
-                            e.printStackTrace();
-                        }
+                        e.printStackTrace();
                     }
                 }
-
-                //Scout nameField is prompted for after a shift ends, but not during the first match
-                if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
-                    nameField.setText(set.getScoutName());
-
-                }
-
-                matchNumField.setText(String.valueOf(set.getMatchNum()));
-            }
-        }
-
-        @Override
-        public void saveState () {
-            String startPos = "";
-            for (RadioButton button : startingPositionButtons) {
-                if (button.isChecked()) {
-                    startPos = (String) button.getText();
-                }
             }
 
-            entry.setPreMatch(new PreMatch(nameField.getText().toString(),
-                    scoutPosSpinner.getText().toString(),
-                    startPos,
-                    Integer.parseInt(matchNumField.getText().toString()),
-                    Integer.parseInt(teamNumField.getText().toString()),
-                    TeleOpFragment.getHabLevelSelected(startingLevelButtons),
-                    robotNoShow.isChecked()
-            ));
-        }
+            //Scout nameField is prompted for after a shift ends, but not during the first match
+            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
+                nameField.setText(set.getScoutName());
 
-        private void continueToAuto () {
-
-
-            saveState();
-
-            Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
-
-            autoSetTheme();
-
-            hideKeyboard();
-            getFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
-                    .commit();
-        }
-
-        /**
-         * Hides the keyboard in the next fragment
-         */
-        private void hideKeyboard () {
-            try {
-                InputMethodManager inputManager =
-                        (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken()
-                        , InputMethodManager.HIDE_NOT_ALWAYS);
-            } catch (NullPointerException e) {
-                e.printStackTrace();
             }
-        }
 
-        private void autoSetTheme () {
-            switch (entry.getPreMatch().getTeamNum()) {
-                case 2590:
-                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
-                    break;
-                case 225:
-                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
-                    break;
-                case 303:
-                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
-                    break;
-                case 25:
-
-                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
-                    break;
-                case 1923:
-                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Black);
-                    break;
-                default:
-                    getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
-                    break;
-            }
-        }
-
-        @Override
-        public void onResume () {
-            super.onResume();
-            getActivity().setTitle("Add Entry - Pre-Match");
+            matchNumField.setText(String.valueOf(set.getMatchNum()));
         }
     }
+
+    @Override
+    public void saveState() {
+        String startPos = "";
+        for (RadioButton button : startingPositionButtons) {
+            if (button.isChecked()) {
+                startPos = (String) button.getText();
+            }
+        }
+        String startPiece = "";
+        for (RadioButton button2 : startingGamePiece) {
+            if (button2.isChecked()) {
+                startPiece = (String) button2.getText();
+            }
+        }
+
+        entry.setPreMatch(new PreMatch(nameField.getText().toString(),
+                scoutPosSpinner.getText().toString(),
+                startPos,
+                Integer.parseInt(matchNumField.getText().toString()),
+                Integer.parseInt(teamNumField.getText().toString()),
+                TeleOpFragment.getHabLevelSelected(startingLevelButtons),
+                robotNoShow.isChecked(), startPiece
+        ));
+    }
+
+    private void continueToAuto() {
+
+
+        saveState();
+
+        Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
+
+        autoSetTheme();
+
+        hideKeyboard();
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
+                .commit();
+    }
+
+    /**
+     * Hides the keyboard in the next fragment
+     */
+    private void hideKeyboard() {
+        try {
+            InputMethodManager inputManager =
+                    (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken()
+                    , InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void autoSetTheme() {
+        switch (entry.getPreMatch().getTeamNum()) {
+            case 2590:
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
+                break;
+            case 225:
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
+                break;
+            case 303:
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
+                break;
+            case 25:
+
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
+                break;
+            case 1923:
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Black);
+                break;
+            default:
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
+                break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Add Entry - Pre-Match");
+    }
+}
