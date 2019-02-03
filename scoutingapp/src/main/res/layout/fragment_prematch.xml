@@ -171,11 +171,49 @@
 
             </RadioGroup>
 
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/robot_starting_game_piece"
+            android:layout_below="@id/starting_position"
+            android:visibility="visible"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What game piece did the robot start with?"
+                android:textSize="18sp"
+                android:id="@+id/game_piece"
+                android:layout_below="@id/robot_starting_game_piece"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/game_piece"
+                android:id="@+id/cargo_button"
+                android:textSize="18sp"
+                android:text="Cargo"
+                android:padding="8dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cargo_button"
+                android:text="Hatch Panel"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:id="@+id/hatch_panel_button"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hatch_panel_button"
+                android:textSize="18sp"
+                android:text="None"
+                android:id="@+id/none_button"
+                android:padding="8dp"/>
             <Button
                 android:id="@+id/prematch_continue"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:layout_below="@id/starting_position"
+                android:layout_below="@id/none_button"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="20dp"
@@ -183,8 +221,6 @@
                 android:text="@string/continue_button"
                 android:textColor="#ffffff"
                 android:theme="@style/Widget.AppCompat.Button.Colored.blue" />
-
-
 
 
         </RelativeLayout>
