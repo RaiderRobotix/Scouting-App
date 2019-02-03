@@ -33,22 +33,23 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
     private final String[] ROBOT_COMMENT_VALUES = {
             "Scoring potential reached",
             "Shoots cargo",
-            "Slow hatch panel intake",
-            "Slow cargo intake",
-            "poor/inefficient robot",
+            "Effective defense",
+            "Fast HAB climb",
+            "Hatch floor intake",
             "Cargo floor intake",
-            "Low objectives only",
             "Higher rocket levels significantly slower",
             "Struggles to place in far rocket side",
-            "Fast HAB climb",
+            "Slow cargo intake",
             "Poorly-secured hatches",
             "Places extra cargo in bays",
-            "Effective defense",
+            "Slow hatch panel intake",
             "Lost communications",
             "Tipped over",
             "Commits (tech) fouls (explain)",
             "Do not pick (explain)",
-            "Possible inaccurate data (specify)"
+            "Possible inaccurate data (specify)",
+            "poor/inefficient robot",
+            "Low objectives only"
     };
     private ScoutEntry entry;
     private MaterialEditText robotComment;

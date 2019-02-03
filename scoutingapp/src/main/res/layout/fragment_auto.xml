@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reach_hab_line"
             android:orientation="vertical"
-            android:padding="0sp">
+            android:padding="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -103,9 +103,9 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="6dp"
                     android:text="Cargo ship"
                     android:textSize="18sp" />
 

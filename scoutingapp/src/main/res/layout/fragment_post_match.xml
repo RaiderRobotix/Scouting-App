@@ -16,53 +16,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/teleop_focus_text"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:paddingLeft="50sp">
 
-            <CheckBox
-                android:id="@+id/teleop_focus_hatches"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/inner_components_spacing"
-                android:text="Hatch panels"
-                android:textSize="18sp" />
+                android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/teleop_focus_cargo"
+                <CheckBox
+                    android:id="@+id/teleop_focus_cargo_ship"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/teleop_focus_cargo"
+                    android:padding="@dimen/inner_components_spacing"
+                    android:text="Cargo ship"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/teleop_focus_rocket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/teleop_focus_cargo_ship"
+                    android:padding="@dimen/inner_components_spacing"
+                    android:text="Rocket"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/teleop_focus_defense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/teleop_focus_rocket"
+                    android:padding="@dimen/inner_components_spacing"
+                    android:text="Defense"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/teleop_focus_hatches"
-                android:padding="@dimen/inner_components_spacing"
-                android:text="Cargo"
-                android:textSize="18sp" />
+                android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/teleop_focus_cargo_ship"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/teleop_focus_cargo"
-                android:padding="@dimen/inner_components_spacing"
-                android:text="Cargo ship"
-                android:textSize="18sp" />
+                <CheckBox
+                    android:id="@+id/teleop_focus_hatches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/inner_components_spacing"
+                    android:text="Hatch panels"
+                    android:textSize="18sp" />
 
-            <CheckBox
-                android:id="@+id/teleop_focus_rocket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/teleop_focus_cargo_ship"
-                android:padding="@dimen/inner_components_spacing"
-                android:text="Rocket"
-                android:textSize="18sp" />
+                <CheckBox
+                    android:id="@+id/teleop_focus_cargo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/teleop_focus_hatches"
+                    android:padding="@dimen/inner_components_spacing"
+                    android:text="Cargo"
+                    android:textSize="18sp" />
 
-            <CheckBox
-                android:id="@+id/teleop_focus_defense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/teleop_focus_rocket"
-                android:padding="@dimen/inner_components_spacing"
-                android:text="Defense"
-                android:textSize="18sp" />
-
+            </LinearLayout>
 
         </LinearLayout>
 
