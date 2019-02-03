@@ -272,7 +272,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    private static boolean checkIfButtonIsChecked(RadioButton[] groupToCheck) {
+    public static boolean checkIfButtonIsChecked(RadioButton[] groupToCheck) {
         for (RadioButton button : groupToCheck) {
             if (button.isChecked()) {
                 return true;
