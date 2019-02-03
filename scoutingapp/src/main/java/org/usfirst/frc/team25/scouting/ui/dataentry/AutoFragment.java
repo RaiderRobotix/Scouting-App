@@ -12,12 +12,14 @@ import android.widget.CheckBox;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecView rocketCargo, rocketHatches, cargoShipHatches, cargoShipCargo,
-            hatchesDropped, cargoDropped;
+    private ButtonIncDecSet rocketCargo, rocketHatches, cargoShipCargo, cargoShipHatches;
+
+    private ButtonIncDecView hatchesDropped, cargoDropped;
 
     private CheckBox reachHabLine, opponentCargoShipLineFoul, sideCargoShipHatchCapable,
             frontCargoShipHatchCapable, cargoDroppedCargoShip, cargoDroppedRocket,
@@ -51,6 +53,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
         rocketCargo = view.findViewById(R.id.rocket_cargo_auto);
+        rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
         cargoDropped = view.findViewById(R.id.cargo_dropped_auto);
         reachHabLine = view.findViewById(R.id.reach_hab_line);
@@ -59,7 +62,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
         frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
         sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
         cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
-        rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
         cargoDroppedCargoShip = view.findViewById(R.id.cargo_dropped_cargo_ship);
         cargoDroppedRocket = view.findViewById(R.id.cargo_dropped_rocket);
         hatchesDroppedCargoShip = view.findViewById(R.id.hatches_dropped_cargo_ship);
@@ -72,7 +74,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
         opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> {
-            reachHabLineState();
+            crossHabLineState();
         });
 
         rocketHatches.incButton.setOnClickListener(view17 -> {
@@ -81,7 +83,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         rocketHatches.decButton.setOnClickListener(view16 -> {
             rocketHatches.decrement();
-            reachHabLineState();
+            crossHabLineState();
         });
 
         cargoShipHatches.incButton.setOnClickListener(view17 -> {
@@ -91,7 +93,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         cargoShipHatches.decButton.setOnClickListener(view16 -> {
             cargoShipHatches.decrement();
-            reachHabLineState();
+            crossHabLineState();
             enableHatchPlacement();
         });
 
@@ -101,7 +103,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         rocketCargo.decButton.setOnClickListener(view14 -> {
             rocketCargo.decrement();
-            reachHabLineState();
+            crossHabLineState();
         });
         cargoShipCargo.incButton.setOnClickListener(view15 -> {
             cargoShipCargo.increment();
@@ -109,7 +111,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         });
         cargoShipCargo.decButton.setOnClickListener(view14 -> {
             cargoShipCargo.decrement();
-            reachHabLineState();
+            crossHabLineState();
         });
 
         hatchesDropped.incButton.setOnClickListener(view15 -> {
@@ -208,7 +210,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     }
 
-    private void reachHabLineState() {
+    private void crossHabLineState() {
         if (rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
                 || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
                 frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()) {
@@ -216,7 +218,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             reachHabLine.setEnabled(false);
         } else {
             reachHabLine.setEnabled(true);
-            reachHabLine.setChecked(false);
+            reachHabLine.setChecked(true);
         }
     }
 

@@ -11,64 +11,147 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/level_one_layout_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reach_hab_line"
+            android:orientation="vertical"
+            android:padding="0sp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Cargo"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Rocket"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Cargo"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                        android:id="@+id/rocket_cargo_auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:initialValueSet="0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Hatches"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                        android:id="@+id/rocket_hatches_auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:initialValueSet="0" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="Cargo ship"
+                    android:textSize="18sp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cargo_ship_cargo_auto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cargo_ship_hatches_auto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/reach_hab_line"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Reached HAB line"
+            android:padding="3sp"
+            android:text="Crossed HAB line"
             android:textSize="18sp" />
 
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_ship_cargo_auto"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/cargo_ship_hatch_placement"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reach_hab_line"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo Ship - Cargo" />
+            android:layout_below="@id/level_one_layout_auto"
+            android:layout_marginLeft="30sp"
+            android:padding="3sp"
+            android:text="Cargo ship hatch placement"
+            android:textSize="18sp"
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/rocket_cargo_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_ship_cargo_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Rocket - Cargo" />
-
-
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/rocket_hatches_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rocket_cargo_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Rocket - Hatches" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_ship_hatches_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rocket_hatches_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo Ship - Hatches" />
-
+            />
         <CheckBox
             android:id="@+id/hatches_front_cargo_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_ship_hatches_auto"
+            android:layout_below="@id/cargo_ship_hatch_placement"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="0dp"
             android:enabled="false"
