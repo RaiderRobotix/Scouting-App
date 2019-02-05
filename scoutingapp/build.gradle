@@ -1,10 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-        }
-    }
     lintOptions {
           abortOnError false
     }
@@ -15,7 +11,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
-        versionName '2.01'
+        versionName '3.0'
         multiDexEnabled true
 
 
