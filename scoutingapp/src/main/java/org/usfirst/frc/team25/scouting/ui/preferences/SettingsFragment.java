@@ -79,11 +79,10 @@ public class SettingsFragment extends PreferenceFragment {
 
 
         deleteFiles.setOnPreferenceClickListener(preference -> {
-            if (settings.getHashedPass().equals("DEFAULT"))
+            if (settings.getHashedPass().equals("DEFAULT")) {
                 Toast.makeText(getActivity(), "Password needs to be settings before deleting data",
                         Toast.LENGTH_SHORT).show();
-
-            else {
+            } else {
                 Intent i = new Intent(getActivity(), EnterPasswordActivity.class);
                 startActivity(i);
             }

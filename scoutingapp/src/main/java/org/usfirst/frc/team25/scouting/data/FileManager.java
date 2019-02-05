@@ -29,6 +29,30 @@ public class FileManager {
 
     public static final String DIRECTORY_DATA = "Raider Robotix Scouting";
 
+    /**
+     * Deletes all scouting data from the data directory
+     * Executes a backup as well
+     * Should not be used until the end of the season
+     *
+     * @param c <code>Context</code> of the running stack
+     */
+    public static void deleteData(Context c) {
+        backup(c);
+        try {
+            File[] directoryFiles = getDirectory().listFiles();
+            for (File file : directoryFiles) {
+                if (file.getName().contains("Data")) {
+                    if (file.delete()) {
+                        Log.i("delete", file.getName() + " deleted");
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * Backs up the contents of the main data directory to Documents
@@ -51,79 +75,22 @@ public class FileManager {
 
     }
 
-    /**
-     * Deletes all scouting data from the data directory
-     * Executes a backup as well
-     * Should not be used until the end of the season
-     *
-     * @param c <code>Context</code> of the running stack
-     */
-    public static void deleteData(Context c) {
-        backup(c);
-        try {
-            File[] directoryFiles = getDirectory().listFiles();
-            for (File file : directoryFiles)
-                if (file.getName().contains("Data"))
-                    if (file.delete())
-                        Log.i("delete", file.getName() + " deleted");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private static File getDirectory() {
         File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
                 DIRECTORY_DATA);
-        if (!directory.exists())
+        if (!directory.exists()) {
             directory.mkdir();
+        }
         return directory;
-    }
-
-    private static File getDataFilePath(Context c) {
-        return new File(getDirectory(), getDataFilename(c));
-    }
-
-    /**
-     * Generates the filename for the general team list, based on the current event
-     * Should be consistent with the desktop client
-     *
-     * @param c <code>Context</code> of the running stack
-     * @return The filename of the team list file
-     */
-    private static String getTeamListFilename(Context c) {
-        Settings set = Settings.newInstance(c);
-        return "Teams - " + set.getYear() + set.getCurrentEvent() + ".csv";
-    }
-
-    public static File getTeamListFilePath(Context c) {
-        return new File(getDirectory(), getTeamListFilename(c));
-    }
-
-    private static String getScoreBreakdownFilename(Context c) {
-        Settings set = Settings.newInstance(c);
-        return "ScoreBreakdown - " + set.getYear() + set.getCurrentEvent() + ".json";
     }
 
     public static File getScoreBreakdownFilePath(Context c) {
         return new File(getDirectory(), getScoreBreakdownFilename(c));
     }
 
-    /**
-     * Generates the filename for the match list, based on the current event
-     * Should be consistent with the desktop client
-     *
-     * @param c <code>Context</code> of the running stack
-     * @return The filename of the team list file
-     */
-    private static String getMatchListFilename(Context c) {
+    private static String getScoreBreakdownFilename(Context c) {
         Settings set = Settings.newInstance(c);
-        return "Matches - " + set.getYear() + set.getCurrentEvent() + ".csv";
-    }
-
-    public static File getMatchListFilePath(Context c) {
-        return new File(getDirectory(), getMatchListFilename(c));
+        return "ScoreBreakdown - " + set.getYear() + set.getCurrentEvent() + ".json";
     }
 
     /**
@@ -137,22 +104,40 @@ public class FileManager {
 
         File file = getMatchListFilePath(c);
 
-        if (!file.exists())
+        if (!file.exists()) {
             return 150;
+        }
 
         int maxMatches = 0;
         try {
             FileInputStream inputStream = new FileInputStream(file);
             BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
 
-            while ((reader.readLine()) != null)
+            while ((reader.readLine()) != null) {
                 maxMatches++; //Incremented for each new line; each line contains match info
+            }
 
         } catch (IOException e) {
             Log.i("file import", "no matchlist available");
         }
 
         return maxMatches;
+    }
+
+    public static File getMatchListFilePath(Context c) {
+        return new File(getDirectory(), getMatchListFilename(c));
+    }
+
+    /**
+     * Generates the filename for the match list, based on the current event
+     * Should be consistent with the desktop client
+     *
+     * @param c <code>Context</code> of the running stack
+     * @return The filename of the team list file
+     */
+    private static String getMatchListFilename(Context c) {
+        Settings set = Settings.newInstance(c);
+        return "Matches - " + set.getYear() + set.getCurrentEvent() + ".csv";
     }
 
     /**
@@ -168,16 +153,18 @@ public class FileManager {
 
         File file = getMatchListFilePath(c);
 
-        if (!file.exists())
+        if (!file.exists()) {
             throw new IOException("Match file does not exist");
+        }
 
         FileInputStream inputStream = new FileInputStream(file);
         BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
 
         String row;
         ArrayList<String> rows = new ArrayList<>();
-        while ((row = reader.readLine()) != null)
+        while ((row = reader.readLine()) != null) {
             rows.add(row);
+        }
 
 
         for (String r : rows) {
@@ -186,18 +173,24 @@ public class FileManager {
             //Each row in match list formatted as [match number], [red 1 team number], [red 2],
             // [red 3], [blue 1], [blue 2], [blue 3]
             if (Integer.parseInt(dataEntries[0]) == matchNum) {
-                if (scoutPos.equals("Red 1"))
+                if (scoutPos.equals("Red 1")) {
                     return dataEntries[1];
-                if (scoutPos.equals("Red 2"))
+                }
+                if (scoutPos.equals("Red 2")) {
                     return dataEntries[2];
-                if (scoutPos.equals("Red 3"))
+                }
+                if (scoutPos.equals("Red 3")) {
                     return dataEntries[3];
-                if (scoutPos.equals("Blue 1"))
+                }
+                if (scoutPos.equals("Blue 1")) {
                     return dataEntries[4];
-                if (scoutPos.equals("Blue 2"))
+                }
+                if (scoutPos.equals("Blue 2")) {
                     return dataEntries[5];
-                if (scoutPos.equals("Blue 3"))
+                }
+                if (scoutPos.equals("Blue 3")) {
                     return dataEntries[6];
+                }
             }
 
         }
@@ -211,6 +204,22 @@ public class FileManager {
 
         File file = getTeamListFilePath(c);
         return file.exists();
+    }
+
+    public static File getTeamListFilePath(Context c) {
+        return new File(getDirectory(), getTeamListFilename(c));
+    }
+
+    /**
+     * Generates the filename for the general team list, based on the current event
+     * Should be consistent with the desktop client
+     *
+     * @param c <code>Context</code> of the running stack
+     * @return The filename of the team list file
+     */
+    private static String getTeamListFilename(Context c) {
+        Settings set = Settings.newInstance(c);
+        return "Teams - " + set.getYear() + set.getCurrentEvent() + ".csv";
     }
 
     public static boolean matchScheduleExists(Context c) {
@@ -234,8 +243,9 @@ public class FileManager {
 
             File file = getTeamListFilePath(c);
 
-            if (!file.exists())
+            if (!file.exists()) {
                 return true; //default case to prevent user from being stuck if team list does
+            }
             // not exist
 
 
@@ -244,8 +254,9 @@ public class FileManager {
                 BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
                 String row;
 
-                while ((row = reader.readLine()) != null)
+                while ((row = reader.readLine()) != null) {
                     existingData.append(row);
+                }
                 reader.close();
             } catch (IOException e) {
                 Log.i("file export", "no teamlist available");
@@ -253,9 +264,11 @@ public class FileManager {
 
             //Team list is a single row, comma separated file of team numbers
             String[] teamList = existingData.toString().split(",");
-            for (String team : teamList)
-                if (team.equals(teamNum))
+            for (String team : teamList) {
+                if (team.equals(teamNum)) {
                     return true;
+                }
+            }
             return false;
 
         } catch (Exception e) {
@@ -288,6 +301,57 @@ public class FileManager {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Saves a new entry to the JSON data file
+     *
+     * @param entry <code>ScoutEntry</code> object to be saved to data file
+     * @param c     Context of current activity
+     */
+    public static void saveData(ScoutEntry entry, Context c) {
+        Gson gson = new Gson();
+        List<ScoutEntry> entries = new ArrayList<>();
+        Type listEntries = new TypeToken<List<ScoutEntry>>() {
+        }.getType(); //Example for deserializing an ArrayList of objects
+
+
+        StringBuilder existingData = new StringBuilder();
+
+        File file = getDataFilePath(c);
+
+        //Reads the raw data
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+            String row;
+
+
+            while ((row = reader.readLine()) != null) {
+                existingData.append(row);
+            }
+            reader.close();
+        } catch (IOException e) {
+            Log.i("file export", "no previously existing data");
+        }
+
+        if (existingData.length() != 0) {
+            Log.i("file export", "Attempting to parse data");
+            entries = gson.fromJson(existingData.toString(), listEntries);
+        }
+
+        entries.add(entry);
+
+        String output = gson.toJson(entries);
+        Log.i("file export", "File converted to JSON");
+
+        saveFile(file, output, c);
+
+
+    }
+
+    private static File getDataFilePath(Context c) {
+        return new File(getDirectory(), getDataFilename(c));
     }
 
     public static void saveFile(File filePath, String contents, Context c) {
@@ -324,52 +388,6 @@ public class FileManager {
                 ".json";
     }
 
-    /**
-     * Saves a new entry to the JSON data file
-     *
-     * @param entry <code>ScoutEntry</code> object to be saved to data file
-     * @param c     Context of current activity
-     */
-    public static void saveData(ScoutEntry entry, Context c) {
-        Gson gson = new Gson();
-        List<ScoutEntry> entries = new ArrayList<>();
-        Type listEntries = new TypeToken<List<ScoutEntry>>() {
-        }.getType(); //Example for deserializing an ArrayList of objects
-
-
-        StringBuilder existingData = new StringBuilder();
-
-        File file = getDataFilePath(c);
-
-        //Reads the raw data
-        try {
-            FileInputStream inputStream = new FileInputStream(file);
-            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
-            String row;
-
-
-            while ((row = reader.readLine()) != null)
-                existingData.append(row);
-            reader.close();
-        } catch (IOException e) {
-            Log.i("file export", "no previously existing data");
-        }
-
-        if (existingData.length() != 0) {
-            Log.i("file export", "Attempting to parse data");
-            entries = gson.fromJson(existingData.toString(), listEntries);
-        }
-
-        entries.add(entry);
-
-        String output = gson.toJson(entries);
-        Log.i("file export", "File converted to JSON");
-
-        saveFile(file, output, c);
-
-
-    }
-
     public static int getPrevTeamNumber(Context c) {
         Gson gson = new Gson();
         List<ScoutEntry> entries;
@@ -387,9 +405,9 @@ public class FileManager {
             BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
             String row;
 
-
-            while ((row = reader.readLine()) != null)
+            while ((row = reader.readLine()) != null) {
                 existingData.append(row);
+            }
             reader.close();
         } catch (IOException e) {
             return 0;
@@ -399,8 +417,59 @@ public class FileManager {
             Log.i("file export", "Attempting to parse data");
             entries = gson.fromJson(existingData.toString(), listEntries);
             return entries.get(entries.size() - 1).getPreMatch().getTeamNum();
-        } else
+        } else {
             return 0;
+        }
+
+
+    }
+
+    public static String getPrevScoutName(Context c) {
+        ScoutEntry prevScoutEntry = getPrevScoutEntry(c);
+
+        if (prevScoutEntry == null) {
+            return "";
+        } else {
+            return prevScoutEntry.getPreMatch().getScoutName();
+        }
+    }
+
+    /**
+     * @param c
+     * @return
+     */
+    public static ScoutEntry getPrevScoutEntry(Context c) {
+        Gson gson = new Gson();
+        List<ScoutEntry> entries;
+        Type listEntries = new TypeToken<List<ScoutEntry>>() {
+        }.getType(); //Example for deserializing an ArrayList of objects
+
+
+        StringBuilder existingData = new StringBuilder();
+
+        File file = getDataFilePath(c);
+
+        //Reads the raw data
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+            String row;
+
+            while ((row = reader.readLine()) != null) {
+                existingData.append(row);
+            }
+            reader.close();
+        } catch (IOException e) {
+            return null;
+        }
+
+        if (!existingData.toString().equals("")) {
+            Log.i("file export", "Attempting to parse data");
+            entries = gson.fromJson(existingData.toString(), listEntries);
+            return entries.get(entries.size() - 1);
+        } else {
+            return null;
+        }
 
 
     }

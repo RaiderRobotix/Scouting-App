@@ -72,8 +72,9 @@ public class Settings extends PreferenceFragment {
     }
 
     public void setShiftDur(int shiftDur) {
-        if (shiftDur < 1 || shiftDur > 150)
+        if (shiftDur < 1 || shiftDur > 150) {
             shiftDur = 1;
+        }
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("shift_dur", shiftDur);
         editor.apply();
@@ -84,8 +85,9 @@ public class Settings extends PreferenceFragment {
     }
 
     public void setMatchNum(int matchNum) {
-        if (matchNum < 1 || matchNum > 200)
+        if (matchNum < 1 || matchNum > 200) {
             matchNum = 1;
+        }
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("match_num", matchNum);
         editor.apply();
@@ -140,26 +142,29 @@ public class Settings extends PreferenceFragment {
         return String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
     }
 
-    public String getHashedPass() {
-        return sp.getString("change_pass", "DEFAULT");
-    }
-
     //Note: the hashed password is the value of the "change password" preference
     //Method hashes plaintext with SHA-1, then sets it to the value
     public void setPassword(String plainPass) {
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("change_pass", new String(Hex.encodeHex(DigestUtils.sha1(plainPass))).toLowerCase());
+        editor.putString("change_pass",
+                new String(Hex.encodeHex(DigestUtils.sha1(plainPass))).toLowerCase());
         editor.apply();
     }
 
     public boolean matchesPassword(String plainPass) {
         String hash = new String(Hex.encodeHex(DigestUtils.sha1(plainPass))).toLowerCase();
-        return (hash.equals(getHashedPass()) || hash.equals("f98960d9aae06c642bae4f24b5152e1bd5cc2c42")); //User-set password or master password will work
+        return (hash.equals(getHashedPass()) || hash.equals(
+                "f98960d9aae06c642bae4f24b5152e1bd5cc2c42")); //User-set password or master
+        // password will work
     }
 
+    public String getHashedPass() {
+        return sp.getString("change_pass", "DEFAULT");
+    }
 
     /**
-     * Method to intelligently detect changes or irregularities in scouting pattern for the next match
+     * Method to intelligently detect changes or irregularities in scouting pattern for the next
+     * match
      *
      * @param preMatch - a PreMatch object with all data fields filled in
      */

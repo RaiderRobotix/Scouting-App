@@ -35,7 +35,9 @@ public class ConfirmPasswordActivity extends EnterPasswordActivity {
                 finish();
                 Intent i = new Intent(getBaseContext(), SetPasswordActivity.class);
                 startActivity(i);
-            } else passwordField.setError("Incorrect password");
+            } else {
+                passwordField.setError("Incorrect password");
+            }
 
         });
     }

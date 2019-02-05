@@ -6,70 +6,96 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    private final int switchCubes;
-    private final int scaleCubes;
-    private final int exchangeCubes;
-    private final int powerCubePilePickup;
-    private final int switchAdjacentPickup;
-    private final int cubesDropped;
-    private final boolean autoLineCross;
-    private final boolean nullTerritoryFoul;
-    private final boolean cubeDropOpponentSwitchPlate;
-    private final boolean isCubeDropOpponentScalePlate;
+    private int rocketCargo;
+    private int rocketHatches;
+    private int cargoShipHatches;
+    private int cargoShipCargo;
+    private int hatchesDropped;
+    private int cargoDropped;
+    private boolean reachHabLine;
+    private boolean opponentCargoShipLineFoul;
+    private boolean sideCargoShipHatchCapable;
+    private boolean frontCargoShipHatchCapable;
+    private boolean cargoDroppedCargoShip;
+    private boolean cargoDroppedRocket;
+    private boolean hatchesDroppedRocket;
+    private boolean hatchesDroppedCargoShip;
 
-    public Autonomous(int switchCubes, int scaleCubes, int exchangeCubes, int powerCubePilePickup, int switchAdjacentPickup,
-                      int cubesDropped, boolean autoLineCross, boolean nullTerritoryFoul, boolean cubeDropOpponentSwitchPlate, boolean isCubeDropOpponentScalePlate) {
-        this.switchCubes = switchCubes;
-        this.scaleCubes = scaleCubes;
-        this.exchangeCubes = exchangeCubes;
-        this.powerCubePilePickup = powerCubePilePickup;
-        this.switchAdjacentPickup = switchAdjacentPickup;
-        this.cubesDropped = cubesDropped;
-        this.autoLineCross = autoLineCross;
-        this.nullTerritoryFoul = nullTerritoryFoul;
-        this.cubeDropOpponentSwitchPlate = cubeDropOpponentSwitchPlate;
-        this.isCubeDropOpponentScalePlate = isCubeDropOpponentScalePlate;
+    public int getRocketCargo() {
+        return rocketCargo;
     }
 
-    public int getSwitchCubes() {
-        return switchCubes;
+    public int getRocketHatches() {
+        return rocketHatches;
     }
 
-    public int getScaleCubes() {
-        return scaleCubes;
+    public int getCargoShipHatches() {
+        return cargoShipHatches;
     }
 
-    public int getExchangeCubes() {
-        return exchangeCubes;
+    public int getCargoShipCargo() {
+        return cargoShipCargo;
     }
 
-    public int getPowerCubePilePickup() {
-        return powerCubePilePickup;
+    public int getHatchesDropped() {
+        return hatchesDropped;
     }
 
-    public int getSwitchAdjacentPickup() {
-        return switchAdjacentPickup;
+    public int getCargoDropped() {
+        return cargoDropped;
     }
 
-    public int getCubesDropped() {
-        return cubesDropped;
+    public boolean isReachHabLine() {
+        return reachHabLine;
     }
 
-    public boolean isAutoLineCross() {
-        return autoLineCross;
+    public boolean isOpponentCargoShipLineFoul() {
+        return opponentCargoShipLineFoul;
     }
 
-    public boolean isNullTerritoryFoul() {
-        return nullTerritoryFoul;
+    public boolean isSideCargoShipHatchCapable() {
+        return sideCargoShipHatchCapable;
     }
 
-    public boolean isCubeDropOpponentSwitchPlate() {
-        return cubeDropOpponentSwitchPlate;
+    public boolean isFrontCargoShipHatchCapable() {
+        return frontCargoShipHatchCapable;
     }
 
-    public boolean isCubeDropOpponentScalePlate() {
-        return isCubeDropOpponentScalePlate;
+    public Autonomous(int rocketCargo, int rocketHatches, int cargoShipHatches,
+                      int cargoShipCargo, int hatchesDropped, int cargoDropped,
+                      boolean reachHabLine, boolean opponentCargoShipLineFoul,
+                      boolean sideCargoShipHatchCapable, boolean frontCargoShipHatchCapable,
+                      boolean cargoDroppedCargoShip, boolean cargoDroppedRocket,
+                      boolean hatchesDroppedRocket, boolean hatchesDroppedCargoShip) {
+        this.rocketCargo = rocketCargo;
+        this.rocketHatches = rocketHatches;
+        this.cargoShipHatches = cargoShipHatches;
+        this.cargoShipCargo = cargoShipCargo;
+        this.hatchesDropped = hatchesDropped;
+        this.cargoDropped = cargoDropped;
+        this.reachHabLine = reachHabLine;
+        this.opponentCargoShipLineFoul = opponentCargoShipLineFoul;
+        this.sideCargoShipHatchCapable = sideCargoShipHatchCapable;
+        this.frontCargoShipHatchCapable = frontCargoShipHatchCapable;
+        this.cargoDroppedCargoShip = cargoDroppedCargoShip;
+        this.cargoDroppedRocket = cargoDroppedRocket;
+        this.hatchesDroppedRocket = hatchesDroppedRocket;
+        this.hatchesDroppedCargoShip = hatchesDroppedCargoShip;
     }
 
+    public boolean isCargoDroppedCargoShip() {
+        return cargoDroppedCargoShip;
+    }
 
+    public boolean isCargoDroppedRocket() {
+        return cargoDroppedRocket;
+    }
+
+    public boolean isHatchesDroppedRocket() {
+        return hatchesDroppedRocket;
+    }
+
+    public boolean isHatchesDroppedCargoShip() {
+        return hatchesDroppedCargoShip;
+    }
 }

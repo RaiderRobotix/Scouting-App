@@ -9,29 +9,32 @@ env:
   - ANDROID_ABI=armeabi-v7a
   - ANDROID_TAB=google_apis
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 before_install:
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - yes | sdkmanager "platforms;android-28"
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+- mkdir "$ANDROID_HOME/licenses" || true
+- yes | sdkmanager "platforms;android-28"
+- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-28.0.3
-    - android-27
-    - android-28
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - addon-google_apis-google-28
-    - addon-google_apis-google-27
+  - tools
+  - platform-tools
+  - build-tools-28.0.3
+  - android-27
+  - android-28
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-28
+  - addon-google_apis-google-27
 install: nvm install 7
 before_script:
-  - chmod +x gradlew
+- chmod +x gradlew
+notifications:
+  slack:
+    secure: vLNSzY9SDmCmJ3Fg/mo2UwLZGSx6EwzOSppKId6ZSXqDozuK8dpEhDNEQqx/R8cxG5tQ5QHgFbCrcb+lRumOaYGTnZCje8mVQS4Hut5JiRHjP3sqNVk7cEcfg1CP0jXbS1k0LPjNTvlfdwGBoPBc/89uuUYuapY0AknhFRNMAYNaQdZoI+EE9bVCiKETPD/uxiN+D3MXntnXRYd6ua4wc0y6WZpzE5jWxjbBeL47/DpV2ab/fh2nI1g18NOz4mFjzJKc40SqcFGuRcUVBRzlvFLCBbtBl0j9IN7xPlWfzedcXMJd/C+Cgbn00KpQpAGWyIBU96m0cd4HTUSjOB9AFR/noh0UVkyUfldChYdOoyobCNQA+PwzKbAAXefz2M2eLrG9zZCTo/+KgufPinukU+uyHEik4HKbtEnc25QtDPR9qWcEp7B086MsYoTkkH2sxBHzDunsG1X3qhvQ1+4jM76H21HwvH3vTkoPIM0Wv20cj7FzV+YJ6GgQ85VAOtxtOTienrhOLye3iRnb3XqFxTYGKHfoF2i9TMvzHycYd08/X3Q8OJlTnvJGWXCy+vbqTqyzuHxIQ81HmmH9LlXESxMlRJl64jWe62LYR0GyYIHuOODqcfBizLfjob8GDjg/NNauRtz1NuD1u24LLoTe3C/1Cww7c61bOfslSB2LN2E=

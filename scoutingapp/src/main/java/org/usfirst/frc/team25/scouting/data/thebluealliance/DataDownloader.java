@@ -55,18 +55,24 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
 
             eventCode = currentYear + currentEvent;
 
-            if (currentEvent.equals("Mount Olive"))
+            if (currentEvent.equals("Mount Olive")) {
                 eventCode = currentYear + "njfla";
-            if (currentEvent.equals("Montgomery"))
+            }
+            if (currentEvent.equals("Montgomery")) {
                 eventCode = currentYear + "njski";
-            if (currentEvent.equals("Mid-Atlantic"))
+            }
+            if (currentEvent.equals("Mid-Atlantic")) {
                 eventCode = currentYear + "mrcmp";
-            if (currentEvent.equals("Carson"))
+            }
+            if (currentEvent.equals("Carson")) {
                 eventCode = currentYear + "cars";
-            if (currentEvent.equals("Week 0"))
+            }
+            if (currentEvent.equals("Week 0")) {
                 eventCode = currentYear + "week0";
-            if (currentEvent.equals("Brunswick Eruption"))
+            }
+            if (currentEvent.equals("Brunswick Eruption")) {
                 eventCode = currentYear + "njbe";
+            }
 
             try {
                 TBA tba = new TBA(apiKey);
@@ -114,6 +120,10 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
 
     }
 
+    private String getEventMatchData(String eventCode) throws IOException {
+        return new Gson().toJson(Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode))))));
+    }
+
     private String getTeamList(String eventCode) throws IOException {
         StringBuilder teamList = new StringBuilder();
         ArrayList<Team> teams =
@@ -125,16 +135,6 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
         StringBuilder output = new StringBuilder(teamList.toString());
         output.setCharAt(output.length() - 1, ' ');
         return teamList.toString();
-    }
-
-    private String getEventMatchData(String eventCode) throws IOException {
-        return new Gson().toJson(Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode))))));
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        Log.i("download", "Executing download task");
     }
 
     /**
@@ -168,6 +168,12 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
 
         return matchList.toString();
 
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        Log.i("download", "Executing download task");
     }
 
     @Override

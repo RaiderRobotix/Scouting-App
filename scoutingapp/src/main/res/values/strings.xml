@@ -11,7 +11,7 @@
         note that there is no trailing zero for the patch version. Tags on GitHub follow the same scheme,
         except the letter "v" is appended to the version number.
         Version 1.0 was created for the 2017 FRC season (FIRST Steamworks).-->
-    <string name="version_number">v2.12</string>
+    <string name="version_number">v3.0</string>
 
     <!-- Name of the cheatsheet file in /assets-->
     <string name="cheatsheet_filename">Deep Space Cheatsheet.pdf</string>
@@ -31,7 +31,7 @@
     <!--Add Match Interface-->
     <string name="team_number">Team number</string>
     <string name="team_number_prompt">Enter team number</string>
-    <string name="auto">Autonomous</string>
+    <string name="autonomous">Autonomous</string>
     <string name="tele">Tele-Op</string>
     <string name="post">Post Game</string>
 
@@ -120,6 +120,7 @@
     <string name="minus_button">-</string>
     <string name="plus_button">+</string>
     <string name="button_timer_default_val">0.00 sec</string>
+    <string name="robot_show_show_confirmation">Are you sure the match has started and the robot is not on the field? If so, type &quot;YES&quot; below.</string>
 
 </resources>
 

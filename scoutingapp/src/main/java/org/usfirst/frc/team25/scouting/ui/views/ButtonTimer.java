@@ -52,11 +52,37 @@ public class ButtonTimer extends RelativeLayout {
 
     }
 
+    private void initializeViews(Context c) {
+        LayoutInflater inflater =
+                (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.view_button_timer, this);
+    }
+
+    /**
+     * @param title - title of the left TextView
+     */
+    private void setTitle(CharSequence title) {
+        titleView.setText(title);
+    }
+
+    private void setMinValue(float minValue) {
+        this.minValue = minValue;
+    }
+
+    private void setMaxValue(float maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public void setIncDecAmount(float incDecAmount) {
+        this.incDecAmount = incDecAmount;
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP && (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER || event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-            if (listener != null)
+            if (listener != null) {
                 listener.onClick(this);
+            }
         }
         return super.dispatchKeyEvent(event);
     }
@@ -72,58 +98,6 @@ public class ButtonTimer extends RelativeLayout {
 
     public void setOnClickListener(OnClickListener listener) {
         this.listener = listener;
-    }
-
-    private void initializeViews(Context c) {
-        LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.view_button_timer, this);
-    }
-
-    /**
-     * @param title - title of the left TextView
-     */
-    private void setTitle(CharSequence title) {
-        titleView.setText(title);
-    }
-
-    /**
-     * @return Float value of the displayed number
-     */
-    public float getValue() {
-        valueView = findViewById(R.id.button_timer_value);
-        String value = valueView.getText().toString().split(" ")[0];
-        return Float.parseFloat(value);
-    }
-
-    /**
-     * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
-     */
-    public void setValue(float value) {
-        if (value > maxValue)
-            value = maxValue;
-
-        if (value < minValue)
-            value = minValue;
-
-        BigDecimal bd = new BigDecimal(value);
-
-
-        //Rounds the decimal to the tenths place
-        String displayText = bd.setScale(1, BigDecimal.ROUND_HALF_EVEN).toPlainString() + " sec";
-        valueView = findViewById(R.id.button_timer_value);
-        valueView.setText(displayText);
-    }
-
-    public void setIncDecAmount(float incDecAmount) {
-        this.incDecAmount = incDecAmount;
-    }
-
-    private void setMinValue(float minValue) {
-        this.minValue = minValue;
-    }
-
-    private void setMaxValue(float maxValue) {
-        this.maxValue = maxValue;
     }
 
     @Override
@@ -175,5 +149,35 @@ public class ButtonTimer extends RelativeLayout {
 
     private void decrement() {
         setValue(getValue() - incDecAmount);
+    }
+
+    /**
+     * @return Float value of the displayed number
+     */
+    public float getValue() {
+        valueView = findViewById(R.id.button_timer_value);
+        String value = valueView.getText().toString().split(" ")[0];
+        return Float.parseFloat(value);
+    }
+
+    /**
+     * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
+     */
+    public void setValue(float value) {
+        if (value > maxValue) {
+            value = maxValue;
+        }
+
+        if (value < minValue) {
+            value = minValue;
+        }
+
+        BigDecimal bd = new BigDecimal(value);
+
+
+        //Rounds the decimal to the tenths place
+        String displayText = bd.setScale(1, BigDecimal.ROUND_HALF_EVEN).toPlainString() + " sec";
+        valueView = findViewById(R.id.button_timer_value);
+        valueView.setText(displayText);
     }
 }

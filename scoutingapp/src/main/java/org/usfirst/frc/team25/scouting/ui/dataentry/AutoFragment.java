@@ -12,17 +12,21 @@ import android.widget.CheckBox;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecInt;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
+import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecInt ownSwitchCubes, ownScaleCubes, exchangeCubes, powerCubePilePickup,
-            switchAdjacentPickup, cubesDropped;
-    private CheckBox reachAutoLine, cubesOpponentPlate, opponentSwitchPlate,
-            opponentScalePlate, nullTerritoryFoul;
+    private ButtonIncDecSet rocketCargo, rocketHatches, cargoShipCargo, cargoShipHatches;
+
+    private ButtonIncDecView hatchesDropped, cargoDropped;
+
+    private CheckBox reachHabLine, opponentCargoShipLineFoul, sideCargoShipHatchCapable,
+            frontCargoShipHatchCapable, cargoDroppedCargoShip, cargoDroppedRocket,
+            hatchesDroppedCargoShip, hatchesDroppedRocket;
+
 
     private ScoutEntry entry;
-
 
 
     public static AutoFragment getInstance(ScoutEntry entry) {
@@ -41,99 +45,106 @@ public class AutoFragment extends Fragment implements EntryFragment {
         this.entry = entry;
     }
 
-    private boolean shouldDisableReachAutoLine() {
-        return ownSwitchCubes.getValue() > 0 || ownScaleCubes.getValue() > 0 || switchAdjacentPickup
-                .getValue() > 0 || cubesOpponentPlate.isChecked() || nullTerritoryFoul.isChecked();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
-        ownScaleCubes = view.findViewById(R.id.own_scale_auto);
-        ownSwitchCubes = view.findViewById(R.id.own_switch_auto);
-        exchangeCubes = view.findViewById(R.id.exchange_auto);
-        reachAutoLine = view.findViewById(R.id.reach_auto_line);
-        powerCubePilePickup = view.findViewById(R.id.power_cube_pile_pickup_auto);
-        switchAdjacentPickup = view.findViewById(R.id.six_switch_pickup_auto);
-        cubesDropped = view.findViewById(R.id.cubes_dropped_auto);
-        cubesOpponentPlate = view.findViewById(R.id.cubes_wrong_plate_auto);
-        opponentScalePlate = view.findViewById(R.id.scale_wrong_plate_auto);
-        opponentSwitchPlate = view.findViewById(R.id.switch_wrong_plate_auto);
-        nullTerritoryFoul = view.findViewById(R.id.null_territory_auto_foul);
+
+        rocketCargo = view.findViewById(R.id.rocket_cargo_auto);
+        rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
+        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
+        cargoDropped = view.findViewById(R.id.cargo_dropped_auto);
+        reachHabLine = view.findViewById(R.id.reach_hab_line);
+        hatchesDropped = view.findViewById(R.id.hatches_dropped_auto);
+        opponentCargoShipLineFoul = view.findViewById(R.id.opponent_cargo_ship_line);
+        frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
+        sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
+        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
+        cargoDroppedCargoShip = view.findViewById(R.id.cargo_dropped_cargo_ship);
+        cargoDroppedRocket = view.findViewById(R.id.cargo_dropped_rocket);
+        hatchesDroppedCargoShip = view.findViewById(R.id.hatches_dropped_cargo_ship);
+        hatchesDroppedRocket = view.findViewById(R.id.hatches_dropped_rocket);
+
 
         Button continueButton = view.findViewById(R.id.auto_continue);
 
 
+        opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> {
+            crossHabLineState();
+        });
+
+        rocketHatches.incButton.setOnClickListener(view17 -> {
+            rocketHatches.increment();
+            disableReachHabLine();
+        });
+        rocketHatches.decButton.setOnClickListener(view16 -> {
+            rocketHatches.decrement();
+            crossHabLineState();
+        });
+
+        cargoShipHatches.incButton.setOnClickListener(view17 -> {
+            cargoShipHatches.increment();
+            disableReachHabLine();
+            enableHatchPlacement();
+        });
+        cargoShipHatches.decButton.setOnClickListener(view16 -> {
+            cargoShipHatches.decrement();
+            crossHabLineState();
+            enableHatchPlacement();
+        });
+
+        rocketCargo.incButton.setOnClickListener(view15 -> {
+            rocketCargo.increment();
+            disableReachHabLine();
+        });
+        rocketCargo.decButton.setOnClickListener(view14 -> {
+            rocketCargo.decrement();
+            crossHabLineState();
+        });
+        cargoShipCargo.incButton.setOnClickListener(view15 -> {
+            cargoShipCargo.increment();
+            disableReachHabLine();
+        });
+        cargoShipCargo.decButton.setOnClickListener(view14 -> {
+            cargoShipCargo.decrement();
+            crossHabLineState();
+        });
+
+        hatchesDropped.incButton.setOnClickListener(view15 -> {
+            hatchesDropped.increment();
+            hatchesDroppedLocation();
+        });
+
+        hatchesDropped.decButton.setOnClickListener(view15 -> {
+            hatchesDropped.decrement();
+            hatchesDroppedLocation();
+        });
+        cargoDropped.incButton.setOnClickListener(view15 -> {
+            cargoDropped.increment();
+            cargoDroppedLocation();
+        });
+
+        cargoDropped.decButton.setOnClickListener(view15 -> {
+            cargoDropped.decrement();
+            cargoDroppedLocation();
+        });
+
         autoPopulate();
 
-
-        nullTerritoryFoul.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b)
-                disableReachAutoLine();
-            else if (!shouldDisableReachAutoLine())
-                enableReachAutoLine();
-        });
-
-        ownScaleCubes.incButton.setOnClickListener(view17 -> {
-            ownScaleCubes.increment();
-            disableReachAutoLine();
-        });
-        ownScaleCubes.decButton.setOnClickListener(view16 -> {
-            ownScaleCubes.decrement();
-            if (ownScaleCubes.getValue() < 1 && !shouldDisableReachAutoLine())
-                enableReachAutoLine();
-        });
-
-
-        ownSwitchCubes.incButton.setOnClickListener(view15 -> {
-            ownSwitchCubes.increment();
-            disableReachAutoLine();
-        });
-        ownSwitchCubes.decButton.setOnClickListener(view14 -> {
-            ownSwitchCubes.decrement();
-            if (ownSwitchCubes.getValue() < 1 && !shouldDisableReachAutoLine())
-                enableReachAutoLine();
-        });
-
-        switchAdjacentPickup.incButton.setOnClickListener(view13 -> {
-            switchAdjacentPickup.increment();
-            disableReachAutoLine();
-        });
-        switchAdjacentPickup.decButton.setOnClickListener(view12 -> {
-            switchAdjacentPickup.decrement();
-            if (switchAdjacentPickup.getValue() < 1 && !shouldDisableReachAutoLine())
-                enableReachAutoLine();
-        });
-
-        cubesOpponentPlate.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b) {
-                disableReachAutoLine();
-                enableOpponentPlateLocationCheckboxes(true);
-            } else if (!shouldDisableReachAutoLine()) {
-                enableReachAutoLine();
-                enableOpponentPlateLocationCheckboxes(false);
-            } else {
-                enableOpponentPlateLocationCheckboxes(false);
-            }
-        });
-
-
         continueButton.setOnClickListener(view1 -> {
-            if (cubesOpponentPlate.isChecked() && !(opponentSwitchPlate.isChecked()
-                    || opponentScalePlate.isChecked())) {
+            if (cargoShipHatches.getValue() > 0 && !frontCargoShipHatchCapable.isChecked() &&
+                    !sideCargoShipHatchCapable.isChecked() || cargoDropped.getValue() > 0 && !cargoDroppedCargoShip.isChecked()
+                    && !cargoDroppedRocket.isChecked() || hatchesDropped.getValue() > 0 && !hatchesDroppedCargoShip.isChecked() && !hatchesDroppedRocket.isChecked()) {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Select where the robot dropped cubes on its opponents' plate(s)")
-                        .setMessage("Scale and/or own switch")
+                        .setTitle("Select where game pieces were placed/dropped")
                         .setPositiveButton("OK", (dialogInterface, i) -> {
 
                         })
                         .show();
             } else {
                 saveState();
-
                 getFragmentManager().beginTransaction()
                         .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
                         .commit();
@@ -141,42 +152,109 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         });
 
+        if (entry.getPreMatch().isRobotNoShow()) {
+            continueButton.callOnClick();
+
+        }
+
         return view;
     }
 
-    private void disableReachAutoLine() {
-
-        reachAutoLine.setChecked(true);
-        reachAutoLine.setEnabled(false);
-
-    }
-
-    private void enableReachAutoLine() {
-        reachAutoLine.setEnabled(true);
-    }
-
-    private void enableOpponentPlateLocationCheckboxes(boolean enable) {
-
-        if (enable) {// checked
-            opponentSwitchPlate.setEnabled(true);
-            opponentScalePlate.setEnabled(true);
+    private void crossHabLineState() {
+        if (rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
+                || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
+                frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()) {
+            reachHabLine.setChecked(true);
+            reachHabLine.setEnabled(false);
         } else {
-            opponentSwitchPlate.setEnabled(false);
-            opponentScalePlate.setEnabled(false);
-            opponentScalePlate.setChecked(false);
-            opponentSwitchPlate.setChecked(false);
+            reachHabLine.setEnabled(true);
+            reachHabLine.setChecked(true);
         }
+    }
+
+    private void disableReachHabLine() {
+
+        reachHabLine.setChecked(true);
+        reachHabLine.setEnabled(false);
+
+    }
+
+    @Override
+    public void autoPopulate() {
+        if (entry.getAutonomous() != null) {
+
+            Autonomous prevAuto = entry.getAutonomous();
+            cargoShipCargo.setValue(prevAuto.getCargoShipCargo());
+            rocketCargo.setValue(prevAuto.getRocketCargo());
+            rocketHatches.setValue(prevAuto.getRocketHatches());
+            cargoShipHatches.setValue(prevAuto.getCargoShipHatches());
+            hatchesDropped.setValue(prevAuto.getHatchesDropped());
+            cargoDropped.setValue(prevAuto.getCargoDropped());
+            sideCargoShipHatchCapable.setChecked(prevAuto.isSideCargoShipHatchCapable());
+            frontCargoShipHatchCapable.setChecked(prevAuto.isFrontCargoShipHatchCapable());
+            reachHabLine.setChecked(prevAuto.isReachHabLine());
+            opponentCargoShipLineFoul.setChecked(prevAuto.isOpponentCargoShipLineFoul());
+            cargoDroppedCargoShip.setChecked(prevAuto.isCargoDroppedCargoShip());
+            cargoDroppedRocket.setChecked(prevAuto.isCargoDroppedRocket());
+            hatchesDroppedCargoShip.setChecked(prevAuto.isHatchesDroppedCargoShip());
+            hatchesDroppedRocket.setChecked(prevAuto.isHatchesDroppedRocket());
+
+            enableHatchPlacement();
+            cargoDroppedLocation();
+            hatchesDroppedLocation();
+
+        }
+
     }
 
     @Override
     public void saveState() {
-        entry.setAuto(new Autonomous(ownSwitchCubes.getValue(), ownScaleCubes.getValue(),
-                exchangeCubes.getValue(),
-                powerCubePilePickup.getValue(),
-                switchAdjacentPickup.getValue(),
-                cubesDropped.getValue(), reachAutoLine.isChecked(), nullTerritoryFoul.isChecked(),
-                opponentSwitchPlate.isChecked(), opponentScalePlate.isChecked()));
+        entry.setAutonomous(new Autonomous(rocketCargo.getValue(), rocketHatches.getValue(),
+                cargoShipHatches.getValue(),
+                cargoShipCargo.getValue(),
+                hatchesDropped.getValue(),
+                cargoDropped.getValue(), reachHabLine.isChecked(),
+                opponentCargoShipLineFoul.isChecked(), sideCargoShipHatchCapable.isChecked(),
+                frontCargoShipHatchCapable.isChecked(), cargoDroppedCargoShip.isChecked(),
+                cargoDroppedRocket.isChecked(), hatchesDroppedRocket.isChecked(),
+                hatchesDroppedCargoShip.isChecked()));
+    }
 
+    private void enableHatchPlacement() {
+
+        if (cargoShipHatches.getValue() > 0) {
+            frontCargoShipHatchCapable.setEnabled(true);
+            sideCargoShipHatchCapable.setEnabled(true);
+        } else {
+            frontCargoShipHatchCapable.setEnabled(false);
+            sideCargoShipHatchCapable.setEnabled(false);
+            frontCargoShipHatchCapable.setChecked(false);
+            sideCargoShipHatchCapable.setChecked(false);
+        }
+    }
+
+    private void hatchesDroppedLocation() {
+        if (hatchesDropped.getValue() > 0) {
+            hatchesDroppedCargoShip.setEnabled(true);
+            hatchesDroppedRocket.setEnabled(true);
+        } else {
+            hatchesDroppedCargoShip.setEnabled(false);
+            hatchesDroppedRocket.setEnabled(false);
+            hatchesDroppedCargoShip.setChecked(false);
+            hatchesDroppedRocket.setChecked(false);
+        }
+    }
+
+    private void cargoDroppedLocation() {
+        if (cargoDropped.getValue() > 0) {
+            cargoDroppedRocket.setEnabled(true);
+            cargoDroppedCargoShip.setEnabled(true);
+        } else {
+            cargoDroppedRocket.setEnabled(false);
+            cargoDroppedCargoShip.setEnabled(false);
+            cargoDroppedRocket.setChecked(false);
+            cargoDroppedCargoShip.setChecked(false);
+        }
     }
 
     @Override
@@ -184,30 +262,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
         super.onResume();
 
         getActivity().setTitle("Add Entry - Sandstorm");
-    }
-
-    @Override
-    public void autoPopulate() {
-        if (entry.getAuto() != null) {
-
-            Autonomous prevAuto = entry.getAuto();
-            enableOpponentPlateLocationCheckboxes(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
-            cubesOpponentPlate.setChecked(prevAuto.isCubeDropOpponentScalePlate() || prevAuto.isCubeDropOpponentSwitchPlate());
-            ownSwitchCubes.setValue(prevAuto.getSwitchCubes());
-            ownScaleCubes.setValue(prevAuto.getScaleCubes());
-            exchangeCubes.setValue(prevAuto.getExchangeCubes());
-            reachAutoLine.setChecked(prevAuto.isAutoLineCross());
-            powerCubePilePickup.setValue(prevAuto.getPowerCubePilePickup());
-            switchAdjacentPickup.setValue(prevAuto.getSwitchAdjacentPickup());
-            cubesDropped.setValue(prevAuto.getCubesDropped());
-            opponentSwitchPlate.setChecked(prevAuto.isCubeDropOpponentSwitchPlate());
-            opponentScalePlate.setChecked(prevAuto.isCubeDropOpponentScalePlate());
-            nullTerritoryFoul.setChecked(prevAuto.isNullTerritoryFoul());
-            if (shouldDisableReachAutoLine())
-                disableReachAutoLine();
-
-        }
-
     }
 
 }
