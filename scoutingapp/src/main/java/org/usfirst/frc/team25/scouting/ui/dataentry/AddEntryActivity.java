@@ -24,7 +24,7 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
         ScoutEntry entry = new ScoutEntry();
         getFragmentManager()
                 .beginTransaction()
-                .replace(android.R.id.content, PrematchFragment.getInstance(entry), "PREMATCH")
+                .replace(android.R.id.content, PreMatchFragment.getInstance(entry), "PREMATCH")
                 .commit();
     }
 
@@ -32,11 +32,11 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        PrematchFragment prematch = (PrematchFragment) getFragmentManager().findFragmentByTag(
+        PreMatchFragment prematch = (PreMatchFragment) getFragmentManager().findFragmentByTag(
                 "PREMATCH");
         AutoFragment auto = (AutoFragment) getFragmentManager().findFragmentByTag("AUTO");
         TeleOpFragment teleop = (TeleOpFragment) getFragmentManager().findFragmentByTag("TELEOP");
-        PostmatchFragment postmatch = (PostmatchFragment) getFragmentManager().findFragmentByTag(
+        PostMatchFragment postmatch = (PostMatchFragment) getFragmentManager().findFragmentByTag(
                 "POST");
 
         if (prematch != null && prematch.isVisible()) {
@@ -56,7 +56,7 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
             auto.saveState();
             getFragmentManager()
                     .beginTransaction()
-                    .replace(android.R.id.content, PrematchFragment.getInstance(auto.getEntry()),
+                    .replace(android.R.id.content, PreMatchFragment.getInstance(auto.getEntry()),
                             "PREMATCH")
                     .commit();
 

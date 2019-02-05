@@ -111,6 +111,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 radioButtonEnable(highestAssistedClimbLevelGroup, true);
             }
 
+            autoDisableSuccessGroup();
+
         }
     }
 
@@ -269,7 +271,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 saveState();
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(android.R.id.content, PostmatchFragment.getInstance(entry), "POST")
+                        .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
                         .commit();
             }
         });

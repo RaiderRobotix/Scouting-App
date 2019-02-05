@@ -9,7 +9,7 @@
 
     android:fillViewport="true"
     android:orientation="vertical"
-    tools:context=".ui.dataentry.PrematchFragment">
+    tools:context=".ui.dataentry.PreMatchFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                 android:id="@+id/robot_no_show_checkbox"
                 android:text="The match has started, and the robot did not show up"
                 android:textSize="18sp"
-                android:layout_marginVertical="10dp"/>
+                android:layout_marginVertical="10dp" />
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -182,15 +182,13 @@
                     android:id="@+id/game_piece"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/robot_starting_game_piece"
-                    android:text="What game piece did the robot start with?"
+                    android:text="Robot starting game piece"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/cargo_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/game_piece"
                     android:padding="8dp"
                     android:text="Cargo"
                     android:textSize="18sp" />
@@ -199,16 +197,14 @@
                     android:id="@+id/hatch_panel_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cargo_button"
                     android:padding="8dp"
-                    android:text="Hatch Panel"
+                    android:text="Hatch panel"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/none_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/hatch_panel_button"
                     android:padding="8dp"
                     android:text="None"
                     android:textSize="18sp" />
@@ -221,7 +217,7 @@
                 android:layout_height="60dp"
                 android:layout_below="@id/robot_starting_game_piece"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginTop="20dp"
                 android:elevation="6dp"
                 android:text="@string/continue_button"

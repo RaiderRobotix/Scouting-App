@@ -24,32 +24,32 @@ import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import java.util.ArrayList;
 
 
-public class PostmatchFragment extends Fragment implements EntryFragment {
+public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
     private final CheckBox[] focusButtons = new CheckBox[5];
     private final RadioButton[] comparisonButtons = new RadioButton[3];
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
     private final String[] ROBOT_COMMENT_VALUES = {
+            "Low objectives only",
             "Scoring potential reached",
+            "Hatch panel floor intake",
+            "Cargo floor intake",
+            "Fast HAB climb",
             "Shoots cargo",
             "Effective defense",
-            "Fast HAB climb",
-            "Hatch floor intake",
-            "Cargo floor intake",
             "Higher rocket levels significantly slower",
             "Struggles to place in far rocket side",
-            "Slow cargo intake",
             "Poorly-secured hatches",
             "Places extra cargo in bays",
+            "Slow cargo intake",
             "Slow hatch panel intake",
             "Lost communications",
             "Tipped over",
             "Commits (tech) fouls (explain)",
             "Do not pick (explain)",
             "Possible inaccurate data (specify)",
-            "poor/inefficient robot",
-            "Low objectives only"
+
     };
     private ScoutEntry entry;
     private MaterialEditText robotComment;
@@ -57,8 +57,8 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
     private ArrayList<CheckBox> robotQuickComments;
 
 
-    public static PostmatchFragment getInstance(ScoutEntry entry) {
-        PostmatchFragment postmatchFragment = new PostmatchFragment();
+    public static PostMatchFragment getInstance(ScoutEntry entry) {
+        PostMatchFragment postmatchFragment = new PostMatchFragment();
         postmatchFragment.setEntry(entry);
         return postmatchFragment;
     }
@@ -173,7 +173,7 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
         comparisonButtons[1].setText(prevRobotCompareStr);
 
         // No previous data found, so remove it as an option
-        if (prevTeamNum == 0 || this.entry.getPreMatch().getScoutName().equals(FileManager.getPrevScoutName(getActivity()))) {
+        if (prevTeamNum == 0 || !this.entry.getPreMatch().getScoutName().equals(FileManager.getPrevScoutName(getActivity()))) {
             comparisonButtons[2].setChecked(true);
             view.findViewById(R.id.prev_team_comparison_group).setVisibility(View.GONE);
         }
@@ -216,7 +216,7 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
                 alert.show();
             } else if (!comparisonSelected) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Compare the robot to the previous one or select no opinion")
+                builder.setTitle("Compare the robot to the previous one")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
                             //do things
@@ -228,7 +228,7 @@ public class PostmatchFragment extends Fragment implements EntryFragment {
                 builder.setTitle("Select which pick this robot would be")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
-                            //do things
+
                         });
                 AlertDialog alert = builder.create();
                 alert.show();

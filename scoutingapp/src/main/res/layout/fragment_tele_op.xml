@@ -181,48 +181,30 @@
         </LinearLayout>
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_dropped_teleop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_below="@id/level_one_layout_teleop"
-            app:initialValue="0"
-            app:titlePrompt="Accidentally dropped hatches" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/cargo_dropped_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_teleop"
-            android:padding="@dimen/default_padding_bottom"
+            android:layout_below="@id/level_one_layout_teleop"
+            android:padding="8dp"
             app:initialValue="0"
             app:titlePrompt="Accidentally dropped cargo" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/fouls_committed"
+            android:id="@+id/hatches_dropped_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_teleop"
             android:padding="@dimen/default_padding_bottom"
-            android:visibility="gone"
+            android:layout_below="@id/cargo_dropped_teleop"
             app:initialValue="0"
-            app:titlePrompt="Fouls committed in teleop" />
+            app:titlePrompt="Accidentally dropped hatches" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/tech_fouls_committed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fouls_committed"
-            android:padding="@dimen/default_padding_bottom"
-            android:visibility="gone"
-            app:initialValue="0"
-            app:titlePrompt="Tech fouls committed" />
+
 
         <CheckBox
             android:id="@+id/attempt_hab_climb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_teleop"
+            android:layout_below="@id/hatches_dropped_teleop"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:padding="@dimen/default_padding_bottom"
             android:text="Attempts to climb"

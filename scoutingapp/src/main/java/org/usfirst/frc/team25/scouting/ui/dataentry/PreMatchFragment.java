@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -30,11 +29,10 @@ import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 
 import java.io.IOException;
 
-public class PrematchFragment extends Fragment implements EntryFragment {
+public class PreMatchFragment extends Fragment implements EntryFragment {
 
     private RadioButton[] startingPositionButtons;
     private RadioButton[] startingLevelButtons;
@@ -48,8 +46,8 @@ public class PrematchFragment extends Fragment implements EntryFragment {
     private ScoutEntry entry;
     private CheckBox robotNoShow;
 
-    public static PrematchFragment getInstance(ScoutEntry entry) {
-        PrematchFragment prematchFragment = new PrematchFragment();
+    public static PreMatchFragment getInstance(ScoutEntry entry) {
+        PreMatchFragment prematchFragment = new PreMatchFragment();
         prematchFragment.setEntry(entry);
         return prematchFragment;
     }

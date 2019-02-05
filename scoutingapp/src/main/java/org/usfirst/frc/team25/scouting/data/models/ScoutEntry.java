@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class ScoutEntry implements Serializable {
 
     private PreMatch preMatch;
-    private Autonomous auto;
+    private Autonomous autonomous;
     private TeleOp teleOp;
     private PostMatch postMatch;
 
@@ -23,12 +23,12 @@ public class ScoutEntry implements Serializable {
         this.preMatch = preMatch;
     }
 
-    public Autonomous getAuto() {
-        return auto;
+    public Autonomous getAutonomous() {
+        return autonomous;
     }
 
-    public void setAuto(Autonomous auto) {
-        this.auto = auto;
+    public void setAutonomous(Autonomous autonomous) {
+        this.autonomous = autonomous;
     }
 
     public TeleOp getTeleOp() {
