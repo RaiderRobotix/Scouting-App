@@ -364,7 +364,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle("Add Entry - Tele-Op");
-        autoPopulate();
     }
 
 }
