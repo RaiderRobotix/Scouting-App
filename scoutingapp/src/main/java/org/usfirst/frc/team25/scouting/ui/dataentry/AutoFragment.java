@@ -162,7 +162,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     private void crossHabLineState() {
         if (rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
-                || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
+                || cargoShipHatches.getValue() > 0 || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
                 frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()) {
             reachHabLine.setChecked(true);
             reachHabLine.setEnabled(false);
