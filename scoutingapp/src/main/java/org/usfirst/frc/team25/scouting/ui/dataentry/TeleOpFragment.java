@@ -65,95 +65,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     }
 
     @Override
-    public void autoPopulate() {
-        if (entry.getTeleOp() != null) {
-            TeleOp tele = entry.getTeleOp();
-
-            cargoShipHatches.setValue(tele.getCargoShipHatches());
-            rocketLevelOneHatches.setValue(tele.getCargoShipCargo());
-            rocketLevelOneCargo.setValue(tele.getRocketLevelOneCargo());
-            cargoShipCargo.setValue(tele.getRocketLevelOneHatches());
-            rocketLevelTwoCargo.setValue(tele.getRocketLevelTwoCargo());
-            rocketLevelTwoHatches.setValue(tele.getRocketLevelTwoHatches());
-            rocketLevelThreeCargo.setValue(tele.getRocketLevelThreeCargo());
-            rocketLevelThreeHatches.setValue(tele.getRocketLevelThreeHatches());
-
-            climbAssistedByPartners.setChecked(tele.isClimbAssistedByPartners());
-            partnerClimbsAssisted.setValue(tele.getNumberOfPartnerClimbsAssisted());
-            hatchesDropped.setValue(tele.getHatchesDropped());
-            cargoDropped.setValue(tele.getCargoDropped());
-            attemptHabClimb.setChecked(tele.isAttemptHabClimb());
-            successHabClimb.setChecked(tele.isSuccessHabClimb());
-
-            if (tele.getAssistingClimbTeamNumber() != 0) {
-                teamNumberThatAssistedClimb.setText(Integer.toString(tele.getAssistingClimbTeamNumber()));
-            }
-
-            for (int i = 2; i <= 3; i++) {
-                if (i == tele.getHighestClimbAssisted()) {
-                    highestAssistedClimbLevel[i - 2].setChecked(true);
-                }
-            }
-
-            for (int i = 1; i <= successHabClimbLevel.length; i++) {
-                if (i == tele.getSuccessHabClimbLevel()) {
-                    successHabClimbLevel[i - 1].setChecked(true);
-                }
-            }
-
-            for (int i = 1; i <= attemptHabClimbLevel.length; i++) {
-                if (i == tele.getAttemptHabClimbLevel()) {
-                    attemptHabClimbLevel[i - 1].setChecked(true);
-                }
-            }
-
-            if (partnerClimbsAssisted.getValue() >= 1) {
-                radioButtonEnable(highestAssistedClimbLevelGroup, true);
-            }
-
-            autoDisableSuccessGroup();
-
-        }
-    }
-
-    @Override
-    public void saveState() {
-
-        entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
-                cargoShipCargo.getValue(),
-                rocketLevelOneCargo.getValue(),
-                rocketLevelOneHatches.getValue(),
-                rocketLevelTwoCargo.getValue(),
-                rocketLevelTwoHatches.getValue(),
-                rocketLevelThreeCargo.getValue(),
-                rocketLevelThreeHatches.getValue(),
-                hatchesDropped.getValue(),
-                cargoDropped.getValue(),
-                climbAssistedByPartners.isChecked(),
-                getHabLevelSelected(attemptHabClimbLevel),
-                getHabLevelSelected(successHabClimbLevel),
-                attemptHabClimb.isChecked(),
-                successHabClimb.isChecked(),
-                getIntegerFromTextBox(teamNumberThatAssistedClimb),
-                partnerClimbsAssisted.getValue(),
-                getHighestHabLevelSelected(highestAssistedClimbLevel)));
-
-    }
-
-    public static void radioButtonEnable(RadioGroup groupToEnableOrDisable, boolean modeSelected) {
-        if (modeSelected) {
-            for (int i = 0; i < groupToEnableOrDisable.getChildCount(); i++) {
-                groupToEnableOrDisable.getChildAt(i).setEnabled(true);
-            }
-        } else {
-            for (int i = 0; i < groupToEnableOrDisable.getChildCount(); i++) {
-                groupToEnableOrDisable.getChildAt(i).setEnabled(false);
-                groupToEnableOrDisable.clearCheck();
-            }
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -252,6 +163,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         });
 
+        autoPopulate();
 
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard();
@@ -281,6 +193,95 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void saveState() {
+
+        entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(),
+                cargoShipCargo.getValue(),
+                rocketLevelOneCargo.getValue(),
+                rocketLevelOneHatches.getValue(),
+                rocketLevelTwoCargo.getValue(),
+                rocketLevelTwoHatches.getValue(),
+                rocketLevelThreeCargo.getValue(),
+                rocketLevelThreeHatches.getValue(),
+                hatchesDropped.getValue(),
+                cargoDropped.getValue(),
+                climbAssistedByPartners.isChecked(),
+                getHabLevelSelected(attemptHabClimbLevel),
+                getHabLevelSelected(successHabClimbLevel),
+                attemptHabClimb.isChecked(),
+                successHabClimb.isChecked(),
+                getIntegerFromTextBox(teamNumberThatAssistedClimb),
+                partnerClimbsAssisted.getValue(),
+                getHighestHabLevelSelected(highestAssistedClimbLevel)));
+
+    }
+
+    public static void radioButtonEnable(RadioGroup groupToEnableOrDisable, boolean modeSelected) {
+        if (modeSelected) {
+            for (int i = 0; i < groupToEnableOrDisable.getChildCount(); i++) {
+                groupToEnableOrDisable.getChildAt(i).setEnabled(true);
+            }
+        } else {
+            for (int i = 0; i < groupToEnableOrDisable.getChildCount(); i++) {
+                groupToEnableOrDisable.getChildAt(i).setEnabled(false);
+                groupToEnableOrDisable.clearCheck();
+            }
+        }
+    }
+
+    @Override
+    public void autoPopulate() {
+        if (entry.getTeleOp() != null) {
+            TeleOp tele = entry.getTeleOp();
+
+            cargoShipHatches.setValue(tele.getCargoShipHatches());
+            cargoShipCargo.setValue(tele.getCargoShipCargo());
+            rocketLevelOneCargo.setValue(tele.getRocketLevelOneCargo());
+            rocketLevelOneHatches.setValue(tele.getRocketLevelOneHatches());
+            rocketLevelTwoCargo.setValue(tele.getRocketLevelTwoCargo());
+            rocketLevelTwoHatches.setValue(tele.getRocketLevelTwoHatches());
+            rocketLevelThreeCargo.setValue(tele.getRocketLevelThreeCargo());
+            rocketLevelThreeHatches.setValue(tele.getRocketLevelThreeHatches());
+
+            climbAssistedByPartners.setChecked(tele.isClimbAssistedByPartners());
+            partnerClimbsAssisted.setValue(tele.getNumberOfPartnerClimbsAssisted());
+            hatchesDropped.setValue(tele.getHatchesDropped());
+            cargoDropped.setValue(tele.getCargoDropped());
+            attemptHabClimb.setChecked(tele.isAttemptHabClimb());
+            successHabClimb.setChecked(tele.isSuccessHabClimb());
+
+            if (tele.getAssistingClimbTeamNumber() != 0) {
+                teamNumberThatAssistedClimb.setText(Integer.toString(tele.getAssistingClimbTeamNumber()));
+            }
+
+            for (int i = 2; i <= 3; i++) {
+                if (i == tele.getHighestClimbAssisted()) {
+                    highestAssistedClimbLevel[i - 2].setChecked(true);
+                }
+            }
+
+            for (int i = 1; i <= successHabClimbLevel.length; i++) {
+                if (i == tele.getSuccessHabClimbLevel()) {
+                    successHabClimbLevel[i - 1].setChecked(true);
+                }
+            }
+
+            for (int i = 1; i <= attemptHabClimbLevel.length; i++) {
+                if (i == tele.getAttemptHabClimbLevel()) {
+                    attemptHabClimbLevel[i - 1].setChecked(true);
+                }
+            }
+
+            if (partnerClimbsAssisted.getValue() >= 1) {
+                radioButtonEnable(highestAssistedClimbLevelGroup, true);
+            }
+
+            autoDisableSuccessGroup();
+
+        }
     }
 
     public static boolean checkIfButtonIsChecked(RadioButton[] groupToCheck) {
