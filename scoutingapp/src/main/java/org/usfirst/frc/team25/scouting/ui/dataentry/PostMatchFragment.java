@@ -277,7 +277,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             try {
                 checkSetValues.add(ROBOT_COMMENT_VALUES[i * 2 + 1]);
             } catch (IndexOutOfBoundsException e) {
-
+                e.printStackTrace();
             }
 
             LinearLayout checkSet = new LinearLayout(getActivity());

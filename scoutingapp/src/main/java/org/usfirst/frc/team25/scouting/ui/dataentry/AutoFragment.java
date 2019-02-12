@@ -71,9 +71,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         Button continueButton = view.findViewById(R.id.auto_continue);
 
 
-        opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> {
-            crossHabLineState();
-        });
+        opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> crossHabLineState());
 
         rocketHatches.incButton.setOnClickListener(view17 -> {
             rocketHatches.increment();

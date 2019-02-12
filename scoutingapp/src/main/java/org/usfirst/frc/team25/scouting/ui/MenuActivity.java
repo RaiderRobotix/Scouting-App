@@ -128,7 +128,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
      * Checks if the app has permission to write to device storage
      * If the app does not has permission then the user will be prompted to grant permissions
      *
-     * @param activity
+     * @param activity Handle to the current activity, where the prompt appears
      */
     private static void verifyStoragePermissions(Activity activity) {
         // Check if the app has write permission

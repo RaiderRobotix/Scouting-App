@@ -29,7 +29,6 @@
         <item name="android:textColor">#ffffff</item>
     </style>
 
-    <style name="AppTheme.NoActionBar"></style>
 
     <style name="Widget.AppCompat.Button.Colored.blue" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/blue_500</item>

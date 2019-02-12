@@ -88,7 +88,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
                 try {
                     FileManager.saveFile(scoreBreakdownFilePath, getEventMatchData(eventCode), c);
                 } catch (IOException e) {
-
+                    e.printStackTrace();
                 }
 
 
@@ -132,8 +132,8 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
         for (Team team : teams) {
             teamList.append(team.getTeamNumber()).append(",");
         }
-        StringBuilder output = new StringBuilder(teamList.toString());
-        output.setCharAt(output.length() - 1, ' ');
+
+        teamList.setCharAt(teamList.length() - 1, ' ');
         return teamList.toString();
     }
 

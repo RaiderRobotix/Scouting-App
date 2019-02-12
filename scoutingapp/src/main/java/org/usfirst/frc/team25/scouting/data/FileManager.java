@@ -434,10 +434,7 @@ public class FileManager {
         }
     }
 
-    /**
-     * @param c
-     * @return
-     */
+
     public static ScoutEntry getPrevScoutEntry(Context c) {
         Gson gson = new Gson();
         List<ScoutEntry> entries;
