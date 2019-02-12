@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/teleop_focus_text"
             android:orientation="horizontal"
-            android:paddingLeft="50sp">
+            android:paddingStart="50sp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -40,7 +40,6 @@
                     android:id="@+id/teleop_focus_cargo_ship"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/teleop_focus_cargo"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Cargo ship"
                     android:textSize="18sp" />
@@ -49,7 +48,6 @@
                     android:id="@+id/teleop_focus_rocket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/teleop_focus_cargo_ship"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Rocket"
                     android:textSize="18sp" />
@@ -58,7 +56,6 @@
                     android:id="@+id/teleop_focus_defense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/teleop_focus_rocket"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Defense"
                     android:textSize="18sp" />
@@ -82,7 +79,6 @@
                     android:id="@+id/teleop_focus_cargo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/teleop_focus_hatches"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Cargo"
                     android:textSize="18sp" />

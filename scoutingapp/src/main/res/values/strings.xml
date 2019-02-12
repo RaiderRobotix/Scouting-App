@@ -11,7 +11,7 @@
         note that there is no trailing zero for the patch version. Tags on GitHub follow the same scheme,
         except the letter "v" is appended to the version number.
         Version 1.0 was created for the 2017 FRC season (FIRST Steamworks).-->
-    <string name="version_number">v3.02</string>
+    <string name="version_number">v3.03</string>
 
     <!-- Name of the cheatsheet file in /assets-->
     <string name="cheatsheet_filename">Deep Space Cheatsheet.pdf</string>

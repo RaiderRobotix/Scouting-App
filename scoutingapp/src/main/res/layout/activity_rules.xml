@@ -18,7 +18,6 @@
         android:layout_width="15dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:background="@android:color/transparent"
         app:sb_handlerColor="#000000"
         app:sb_indicatorColor="#000000"

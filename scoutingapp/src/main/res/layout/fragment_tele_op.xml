@@ -21,7 +21,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -236,7 +237,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/alliance_partner_climbs_assisted"
-            android:layout_alignLeft="@id/highest_climb_assist_radio_group"
+            android:layout_alignStart="@id/highest_climb_assist_radio_group"
             android:padding="8dp"
             android:text="Highest successful assisted climb level"
             android:textSize="18sp" />
@@ -246,7 +247,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/highest_climb_assisted_text_view"
-            android:layout_alignLeft="@id/success_hab_climb_level"
+            android:layout_alignStart="@id/success_hab_climb_level"
             android:orientation="horizontal">
 
             <RadioButton
@@ -276,7 +277,7 @@
                 android:layout_below="@id/success_hab_climb_level"
                 android:enabled="true"
                 android:padding="8dp"
-                android:layout_alignLeft="@id/success_hab_climb"
+                android:layout_alignStart="@id/success_hab_climb"
                 android:text="Climb assisted by partner"
                 android:textSize="18sp" />
 
@@ -286,7 +287,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:layout_below="@id/climb_assisted_by_alliance_partner_checkbox"
-                android:layout_alignLeft="@id/success_hab_climb_level"
+                android:layout_alignStart="@id/success_hab_climb_level"
                 android:layout_marginTop="-15dp"
                 android:textSize="18sp"
                 android:layout_marginBottom="-15dp"
@@ -301,7 +302,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/attempt_hab_climb"
-            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
             android:orientation="horizontal"
             android:visibility="visible">
 
@@ -339,7 +340,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/success_hab_climb"
-            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
             android:orientation="horizontal"
             android:visibility="visible">
 

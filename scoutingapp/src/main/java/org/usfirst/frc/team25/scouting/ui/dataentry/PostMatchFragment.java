@@ -155,9 +155,11 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         focusButtons[2] = view.findViewById(R.id.teleop_focus_cargo_ship);
         focusButtons[3] = view.findViewById(R.id.teleop_focus_rocket);
         focusButtons[4] = view.findViewById(R.id.teleop_focus_defense);
+
         comparisonButtons[0] = view.findViewById(R.id.current_team_comparison);
         comparisonButtons[1] = view.findViewById(R.id.prev_team_comparison);
         comparisonButtons[2] = view.findViewById(R.id.either_team_comparison);
+
         pickNumberButtons[0] = view.findViewById(R.id.first_pick);
         pickNumberButtons[1] = view.findViewById(R.id.second_pick);
         pickNumberButtons[2] = view.findViewById(R.id.dnp);
@@ -169,6 +171,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 "robot scouted)";
 
         String prevRobotCompareStr = "Team " + prevTeamNum + " (previous robot scouted)";
+
         comparisonButtons[0].setText(currentRobotCompareStr);
         comparisonButtons[1].setText(prevRobotCompareStr);
 
@@ -206,34 +209,38 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             }
 
             if (!focusChecked && !entry.getPreMatch().isRobotNoShow()) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select the robot's focus for this match")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
-                            //do things
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             } else if (!comparisonSelected) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Compare the robot to the previous one")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
-                            //do things
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             } else if (!pickNumberSelected) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select which pick this robot would be")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
-
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             } else {
                 saveState();
+
                 final PostMatch pm = entry.getPostMatch();
                 pm.finalizeComment();
                 entry.setPostMatch(pm);

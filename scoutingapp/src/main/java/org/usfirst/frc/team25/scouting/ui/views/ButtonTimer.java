@@ -21,7 +21,9 @@ import java.math.BigDecimal;
 
 public class ButtonTimer extends RelativeLayout {
 
-    public final Button startStopButton, incButton, decButton;
+    private final Button startStopButton;
+    private final Button incButton;
+    private final Button decButton;
     private final TextView titleView;
     private TextView valueView;
     private float incDecAmount, minValue, maxValue;
@@ -73,7 +75,7 @@ public class ButtonTimer extends RelativeLayout {
         this.maxValue = maxValue;
     }
 
-    public void setIncDecAmount(float incDecAmount) {
+    private void setIncDecAmount(float incDecAmount) {
         this.incDecAmount = incDecAmount;
     }
 
@@ -154,7 +156,7 @@ public class ButtonTimer extends RelativeLayout {
     /**
      * @return Float value of the displayed number
      */
-    public float getValue() {
+    private float getValue() {
         valueView = findViewById(R.id.button_timer_value);
         String value = valueView.getText().toString().split(" ")[0];
         return Float.parseFloat(value);
@@ -163,7 +165,7 @@ public class ButtonTimer extends RelativeLayout {
     /**
      * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
      */
-    public void setValue(float value) {
+    private void setValue(float value) {
         if (value > maxValue) {
             value = maxValue;
         }

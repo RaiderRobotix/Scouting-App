@@ -25,25 +25,14 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private RadioButton[] attemptHabClimbLevel;
-    private RadioButton[] successHabClimbLevel;
-    private RadioButton[] highestAssistedClimbLevel;
-    private RadioGroup attemptHabClimbLevelGroup;
-    private RadioGroup successHabClimbLevelGroup;
-    private RadioGroup highestAssistedClimbLevelGroup;
-    private ButtonIncDecSet cargoShipHatches;
-    private ButtonIncDecSet cargoShipCargo;
-    private ButtonIncDecSet rocketLevelOneHatches;
-    private ButtonIncDecSet rocketLevelOneCargo;
-    private ButtonIncDecSet rocketLevelTwoHatches;
-    private ButtonIncDecSet rocketLevelTwoCargo;
-    private ButtonIncDecSet rocketLevelThreeHatches;
-    private ButtonIncDecSet rocketLevelThreeCargo;
-    private ButtonIncDecView hatchesDropped;
-    private ButtonIncDecView cargoDropped;
-    private CheckBox attemptHabClimb;
-    private CheckBox successHabClimb;
-    private ButtonIncDecView partnerClimbsAssisted;
+    private RadioButton[] attemptHabClimbLevel, successHabClimbLevel, highestAssistedClimbLevel;
+    private RadioGroup attemptHabClimbLevelGroup, successHabClimbLevelGroup,
+            highestAssistedClimbLevelGroup;
+    private ButtonIncDecSet cargoShipHatches, cargoShipCargo, rocketLevelOneHatches,
+            rocketLevelOneCargo, rocketLevelTwoHatches, rocketLevelTwoCargo,
+            rocketLevelThreeHatches, rocketLevelThreeCargo;
+    private CheckBox attemptHabClimb, successHabClimb;
+    private ButtonIncDecView partnerClimbsAssisted, hatchesDropped, cargoDropped;
     private CheckBox climbAssistedByPartners;
     private EditText teamNumberThatAssistedClimb;
 
@@ -151,7 +140,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             partnerClimbsAssisted.decrement();
         });
 
-        partnerClimbsAssisted.incButton.setOnClickListener(view2 -> {
+        partnerClimbsAssisted.incButton.setOnClickListener(view1 -> {
             if (partnerClimbsAssisted.getValue() >= 0) {
                 UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, true);
             }
@@ -163,11 +152,33 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard(getActivity());
-            if (climbAssistedByPartners.isChecked() && teamNumberThatAssistedClimb
-                    .getText().toString().isEmpty() || partnerClimbsAssisted.getValue() >= 1 &&
+
+            boolean proceed = true;
+
+            if (climbAssistedByPartners.isChecked()) {
+                if (teamNumberThatAssistedClimb.getText().toString().isEmpty()) {
+                    teamNumberThatAssistedClimb.setError("Enter the assisting team's number");
+                    proceed = false;
+
+                } else {
+                    int inputTeamNum =
+                            Integer.parseInt(teamNumberThatAssistedClimb.getText().toString());
+                    if (inputTeamNum <= 0 || inputTeamNum > 9999) {
+                        teamNumberThatAssistedClimb.setError("Enter a valid team number");
+                        proceed = false;
+                    }
+                }
+
+
+            }
+
+            if (proceed && partnerClimbsAssisted.getValue() >= 1 &&
                     !UiHelper.checkIfButtonIsChecked(highestAssistedClimbLevel)
                     || attemptHabClimb.isChecked() && !UiHelper.checkIfButtonIsChecked(attemptHabClimbLevel) || successHabClimb.isChecked()
                     && !UiHelper.checkIfButtonIsChecked(successHabClimbLevel)) {
+
+                proceed = false;
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Please fill in any empty HAB climb fields")
                         .setCancelable(false)
@@ -175,7 +186,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
-            } else {
+            }
+
+            if (proceed) {
                 saveState();
                 getFragmentManager()
                         .beginTransaction()

@@ -65,7 +65,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
             try {
                 File directory =
                         new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
-                        FileManager.DIRECTORY_DATA);
+                                FileManager.DIRECTORY_DATA);
 
                 if (!directory.exists()) {
                     directory.mkdir();
@@ -167,8 +167,7 @@ public class MenuActivity extends NoBackgroundPortraitAppCompatActivity {
 
         String info =
                 set.getScoutName() + " - " + set.getScoutPos() + " - Match " + set.getMatchType() + set.getMatchNum();
-        if (info.contains("DEFAULT")) //App settings not yet changed
-        {
+        if (info.contains("DEFAULT")) {
             info = "";
         }
         statusText.setText(info);

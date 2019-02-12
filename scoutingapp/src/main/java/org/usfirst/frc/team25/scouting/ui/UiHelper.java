@@ -7,6 +7,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import org.usfirst.frc.team25.scouting.R;
+
+import java.util.HashMap;
+
 public class UiHelper {
 
     public static void hideKeyboard(Activity activity) {
@@ -75,6 +79,27 @@ public class UiHelper {
             }
         }
         return false;
+    }
+
+    public static void autoSetTheme(Activity activity, int teamNum) {
+        HashMap<Integer, Integer> teamNumThemePairs = new HashMap<>();
+
+        int selectedTheme;
+
+        teamNumThemePairs.put(2590, R.style.AppTheme_NoLauncher_Red);
+        teamNumThemePairs.put(225, R.style.AppTheme_NoLauncher_Red);
+        teamNumThemePairs.put(303, R.style.AppTheme_NoLauncher_Green);
+        teamNumThemePairs.put(25, R.style.AppTheme_NoLauncher_Raider);
+        teamNumThemePairs.put(1923, R.style.AppTheme_NoLauncher_Black);
+
+        if (!teamNumThemePairs.containsKey(teamNum)) {
+            selectedTheme = R.style.AppTheme_NoLauncher_Blue;
+        } else {
+            selectedTheme = teamNumThemePairs.get(teamNum);
+        }
+
+        activity.setTheme(selectedTheme);
+
     }
 }
 

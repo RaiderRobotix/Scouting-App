@@ -35,7 +35,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
     private RadioButton[] startingPositionButtons, startingLevelButtons, startingGamePieceButtons;
     private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup,
             startingPositionButtonsGroup;
-    private Button continueButton;
     private MaterialEditText nameField, matchNumField, teamNumField;
     private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
@@ -62,7 +61,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         final View view = inflater.inflate(R.layout.fragment_prematch, container, false);
 
 
-        continueButton = view.findViewById(R.id.prematch_continue);
+        Button continueButton = view.findViewById(R.id.prematch_continue);
 
         scoutPosSpinner = view.findViewById(R.id.scout_pos_spin);
         scoutPosSpinner.setAdapter(new ArrayAdapter<>(getActivity(),
@@ -201,11 +200,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setNegativeButton("No", ((dialogInterface, i) -> {
                 }))
-                        .setPositiveButton("Yes", ((dialogInterface, i) -> {
-
-                            continueToAuto();
-
-                        }));
+                        .setPositiveButton("Yes", ((dialogInterface, i) -> continueToAuto()));
 
                 View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
                 builder.setView(dialogBox);
@@ -267,19 +262,9 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                                 .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
                                 .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is " +
                                         scoutPosSpinner.getText().toString() + " in match " + matchNumField.getText().toString() + "?")
-                                .setPositiveButton("Yes", (dialog, which) -> {
-
-                                    saveState();
-                                    Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
-
-                                    UiHelper.hideKeyboard(getActivity());
-                                    getFragmentManager().beginTransaction()
-                                            .replace(android.R.id.content,
-                                                    AutoFragment.getInstance(entry), "AUTO")
-                                            .commit();
-                                })
+                                .setPositiveButton("Yes", (dialog, which) -> continueToAuto())
                                 .setNegativeButton("No", (dialog, which) -> {
-                                    // do nothing
+
                                 })
                                 .create()
                                 .show();
@@ -301,7 +286,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                                 FileManager.addToTeamList(teamNumField.getText().toString(),
                                         getActivity());
 
-                                continueButton.callOnClick();
+                                continueToAuto();
                             })
                             .setNegativeButton("No", (dialog, which) -> {
 
@@ -418,7 +403,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
 
-        autoSetTheme();
+        UiHelper.autoSetTheme(getActivity(), entry.getPreMatch().getTeamNum());
 
         UiHelper.hideKeyboard(getActivity());
         getFragmentManager().beginTransaction()
@@ -426,30 +411,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 .commit();
     }
 
-
-    private void autoSetTheme() {
-        switch (entry.getPreMatch().getTeamNum()) {
-            case 2590:
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
-                break;
-            case 225:
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Red);
-                break;
-            case 303:
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Green);
-                break;
-            case 25:
-
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Raider);
-                break;
-            case 1923:
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Black);
-                break;
-            default:
-                getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
-                break;
-        }
-    }
 
     @Override
     public void onResume() {

@@ -20,8 +20,10 @@ import org.usfirst.frc.team25.scouting.R;
 public class ButtonIncDecSet extends RelativeLayout {
 
     public Button incButton, decButton;
-    protected int incDecAmount, minValue, maxValue;
-    protected TextView valueView;
+    private int incDecAmount;
+    private int minValue;
+    private int maxValue;
+    private TextView valueView;
 
     private OnClickListener listener;
 

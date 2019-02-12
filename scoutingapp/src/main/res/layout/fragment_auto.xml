@@ -34,7 +34,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -80,6 +81,7 @@
                         android:id="@+id/rocket_cargo_auto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:maxValueSet="3"
                         app:initialValueSet="0" />
                 </LinearLayout>
 
@@ -101,6 +103,7 @@
                         android:id="@+id/rocket_hatches_auto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:maxValueSet="3"
                         app:initialValueSet="0" />
 
                 </LinearLayout>
@@ -115,9 +118,9 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
                     android:text="Cargo ship"
                     android:textSize="18sp" />
 
@@ -125,12 +128,14 @@
                     android:id="@+id/cargo_ship_cargo_auto"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:maxValueSet="3"
                     android:layout_weight="1.5" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                     android:id="@+id/cargo_ship_hatches_auto"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:maxValueSet="3"
                     android:layout_weight="1.5" />
 
             </LinearLayout>
@@ -138,42 +143,41 @@
         </LinearLayout>
 
 
-
         <TextView
             android:id="@+id/cargo_ship_hatch_placement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/level_one_layout_auto"
-            android:layout_marginLeft="30sp"
-            android:padding="3sp"
+            android:layout_marginStart="30sp"
+            android:padding="8sp"
             android:text="Cargo ship hatch placement"
             android:textSize="18sp"
 
             />
+
         <CheckBox
             android:id="@+id/hatches_front_cargo_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cargo_ship_hatch_placement"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="0dp"
             android:enabled="false"
-            android:textSize="18sp"
             android:padding="3dp"
-            android:text="Front cargo ship" />
+            android:text="Front cargo ship"
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/hatches_side_cargo_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below = "@id/hatches_front_cargo_auto"
+            android:layout_below="@id/hatches_front_cargo_auto"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="5sp"
-            android:layout_marginLeft="50dp"
             android:enabled="false"
             android:padding="3dp"
             android:text="Side cargo ship"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/cargo_dropped_auto"
@@ -189,11 +193,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cargo_dropped_auto"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="5sp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="0sp"
             android:enabled="false"
-            android:text="Cargo ship"
             android:padding="3dp"
+            android:text="Cargo ship"
             android:textSize="18sp" />
 
         <CheckBox
@@ -201,11 +205,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cargo_dropped_cargo_ship"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="5sp"
             android:enabled="false"
-            android:text="Rocket"
             android:padding="3sp"
+            android:text="Rocket"
             android:textSize="18sp" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
@@ -222,11 +226,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hatches_dropped_auto"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="0sp"
             android:enabled="false"
-            android:text="Cargo ship"
             android:padding="3dp"
+            android:text="Cargo ship"
             android:textSize="18sp" />
 
         <CheckBox
@@ -234,11 +238,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hatches_dropped_cargo_ship"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="5sp"
             android:enabled="false"
-            android:text="Rocket"
             android:padding="3sp"
+            android:text="Rocket"
             android:textSize="18sp" />
 
 

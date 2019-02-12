@@ -36,7 +36,7 @@
                 android:hint="@string/scout_name"
                 android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top"
                 android:singleLine="true"
                 app:met_floatingLabel="normal" />
@@ -49,7 +49,7 @@
                 android:hint="@string/event"
                 android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top"
                 android:visibility="gone" />
 
@@ -62,7 +62,7 @@
                 android:inputType="number"
                 android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top"
                 android:singleLine="true"
                 app:met_floatingLabel="normal" />
@@ -76,7 +76,7 @@
                 android:hint="@string/scout_position"
                 android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -88,7 +88,7 @@
                 android:inputType="number"
                 android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingRight="@dimen/inner_padding_right"
+                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top"
                 android:singleLine="true"
                 app:met_floatingLabel="normal" />
@@ -112,7 +112,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Robot HAB starting level"
-                    android:layout_below="@id/team_num_field"
                     android:textSize="18sp"
                     android:id="@+id/robot_starting_level"/>
                 <RadioButton
