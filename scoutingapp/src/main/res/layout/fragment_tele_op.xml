@@ -65,9 +65,9 @@
                         android:textSize="18sp" />
 
                     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                        android:id="@+id/rocket_level_three_cargo_teleop"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rocket_level_three_cargo_teleop"
                         app:initialValueSet="0" />
                 </LinearLayout>
 
@@ -138,8 +138,8 @@
                     android:textSize="18sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:layout_width="0dp"
                     android:id="@+id/rocket_level_one_cargo_teleop"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5" />
 
@@ -166,15 +166,15 @@
                     android:textSize="18sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cargo_ship_cargo_teleop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cargo_ship_cargo_teleop"
                     android:layout_weight="1.5" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cargo_ship_hatches_teleop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cargo_ship_hatches_teleop"
                     android:layout_weight="1.5" />
 
             </LinearLayout>
@@ -194,11 +194,10 @@
             android:id="@+id/hatches_dropped_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding_bottom"
             android:layout_below="@id/cargo_dropped_teleop"
+            android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Accidentally dropped hatches" />
-
 
 
         <CheckBox
@@ -222,80 +221,6 @@
             android:text="Successful in hab climb"
             android:textSize="18sp" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/alliance_partner_climbs_assisted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/team_number_text_input"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:maxValue="2"
-            app:titlePrompt="Partner climbs assisted" />
-
-        <TextView
-            android:id="@+id/highest_climb_assisted_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/alliance_partner_climbs_assisted"
-            android:layout_alignStart="@id/highest_climb_assist_radio_group"
-            android:padding="8dp"
-            android:text="Highest successful assisted climb level"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/highest_climb_assist_radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/highest_climb_assisted_text_view"
-            android:layout_alignStart="@id/success_hab_climb_level"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/highest_assisted_climb_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 2"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/highest_assisted_climb_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 3"
-                android:textSize="18sp" />
-
-        </RadioGroup>
-
-            <CheckBox
-                android:id="@+id/climb_assisted_by_alliance_partner_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/success_hab_climb_level"
-                android:enabled="true"
-                android:padding="8dp"
-                android:layout_alignStart="@id/success_hab_climb"
-                android:text="Climb assisted by partner"
-                android:textSize="18sp" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/team_number_text_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:layout_below="@id/climb_assisted_by_alliance_partner_checkbox"
-                android:layout_alignStart="@id/success_hab_climb_level"
-                android:layout_marginTop="-15dp"
-                android:textSize="18sp"
-                android:layout_marginBottom="-15dp"
-                android:hint="Assisting team's number"
-                android:inputType="number"
-                android:padding="8dp"
-                android:text=""
-                app:met_floatingLabel="normal" />
 
         <RadioGroup
             android:id="@+id/attempt_hab_climb_level"
@@ -373,11 +298,134 @@
 
         </RadioGroup>
 
+        <CheckBox
+            android:id="@+id/climb_assisted_by_alliance_partner_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/success_hab_climb_level"
+            android:layout_alignStart="@id/success_hab_climb"
+            android:enabled="true"
+            android:padding="8dp"
+            android:text="Climb assisted by partner"
+            android:textSize="18sp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/team_number_text_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/climb_assisted_by_alliance_partner_checkbox"
+            android:layout_alignStart="@id/success_hab_climb_level"
+            android:layout_marginTop="-15dp"
+            android:layout_marginBottom="-15dp"
+            android:enabled="false"
+            android:hint="Assisting team's number"
+            android:inputType="number"
+            android:padding="8dp"
+            android:text=""
+            android:textSize="18sp"
+            app:met_floatingLabel="normal" />
+
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+            android:id="@+id/alliance_partner_climbs_assisted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/team_number_text_input"
+            android:padding="@dimen/default_padding_bottom"
+            app:initialValue="0"
+            app:maxValue="2"
+            app:titlePrompt="Partner climbs assisted" />
+
+
+        <TextView
+            android:id="@+id/highest_climb_assisted_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alliance_partner_climbs_assisted"
+            android:layout_alignStart="@id/highest_climb_assist_radio_group"
+            android:padding="8dp"
+            android:text="Highest partner ending level"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/highest_climb_assist_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/highest_climb_assisted_text_view"
+            android:layout_alignStart="@id/success_hab_climb_level"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/highest_assisted_climb_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:padding="8dp"
+                android:text="Level 2"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/highest_assisted_climb_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:padding="8dp"
+                android:text="Level 3"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/climb_assist_starting_level_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/highest_climb_assist_radio_group"
+            android:layout_alignStart="@id/highest_climb_assist_radio_group"
+            android:padding="8dp"
+            android:text="Partner starting level"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/climb_assist_starting_level_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/climb_assist_starting_level_view"
+            android:layout_alignStart="@id/success_hab_climb_level"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/climb_assist_starting_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:padding="8dp"
+                android:text="N/A"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/climb_assist_starting_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:padding="8dp"
+                android:text="Level 1"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/climb_assist_starting_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:padding="8dp"
+                android:text="Level 2"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
         <Button
             android:id="@+id/tele_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/highest_climb_assist_radio_group"
+            android:layout_below="@id/climb_assist_starting_level_group"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"

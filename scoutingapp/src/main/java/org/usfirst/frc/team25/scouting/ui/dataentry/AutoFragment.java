@@ -21,7 +21,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     private ButtonIncDecView hatchesDropped, cargoDropped;
 
-    private CheckBox reachHabLine, opponentCargoShipLineFoul, sideCargoShipHatchCapable,
+    private CheckBox crossHabLine, opponentCargoShipLineFoul, sideCargoShipHatchCapable,
             frontCargoShipHatchCapable, cargoDroppedCargoShip, cargoDroppedRocket,
             hatchesDroppedCargoShip, hatchesDroppedRocket;
 
@@ -56,7 +56,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
         cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
         cargoDropped = view.findViewById(R.id.cargo_dropped_auto);
-        reachHabLine = view.findViewById(R.id.reach_hab_line);
+        crossHabLine = view.findViewById(R.id.cross_hab_line);
         hatchesDropped = view.findViewById(R.id.hatches_dropped_auto);
         opponentCargoShipLineFoul = view.findViewById(R.id.opponent_cargo_ship_line);
         frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
@@ -149,10 +149,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
         if (rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
                 || cargoShipHatches.getValue() > 0 || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
                 frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()) {
-            reachHabLine.setChecked(true);
-            reachHabLine.setEnabled(false);
+            crossHabLine.setChecked(true);
+            crossHabLine.setEnabled(false);
         } else {
-            reachHabLine.setEnabled(true);
+            crossHabLine.setEnabled(true);
         }
     }
 
@@ -206,7 +206,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             cargoDropped.setValue(prevAuto.getCargoDropped());
             sideCargoShipHatchCapable.setChecked(prevAuto.isSideCargoShipHatchCapable());
             frontCargoShipHatchCapable.setChecked(prevAuto.isFrontCargoShipHatchCapable());
-            reachHabLine.setChecked(prevAuto.isReachHabLine());
+            crossHabLine.setChecked(prevAuto.isCrossHabLine());
             opponentCargoShipLineFoul.setChecked(prevAuto.isOpponentCargoShipLineFoul());
             cargoDroppedCargoShip.setChecked(prevAuto.isCargoDroppedCargoShip());
             cargoDroppedRocket.setChecked(prevAuto.isCargoDroppedRocket());
@@ -229,7 +229,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
                 cargoShipHatches.getValue(),
                 cargoShipCargo.getValue(),
                 hatchesDropped.getValue(),
-                cargoDropped.getValue(), reachHabLine.isChecked(),
+                cargoDropped.getValue(), crossHabLine.isChecked(),
                 opponentCargoShipLineFoul.isChecked(), sideCargoShipHatchCapable.isChecked(),
                 frontCargoShipHatchCapable.isChecked(), cargoDroppedCargoShip.isChecked(),
                 cargoDroppedRocket.isChecked(), hatchesDroppedRocket.isChecked(),

@@ -40,21 +40,21 @@ public class UiHelper {
         return 0;
     }
 
+    public static int getHabLevelSelected(RadioButton[] habLevelArray, int shiftIndex) {
+        for (int i = 0; i < habLevelArray.length; i++) {
+            if (habLevelArray[i].isChecked()) {
+                return i + shiftIndex;
+            }
+        }
+        return 0;
+    }
+
     public static int getIntegerFromTextBox(EditText numberEditText) {
         if (numberEditText.getText().toString().isEmpty()) {
             return 0;
         } else {
             return Integer.parseInt(numberEditText.getText().toString());
         }
-    }
-
-    public static int getHighestHabLevelSelected(RadioButton[] highestHabLevelArray) {
-        for (int i = 0; i < 2; i++) {
-            if (highestHabLevelArray[i].isChecked()) {
-                return i + 2;
-            }
-        }
-        return 0;
     }
 
 

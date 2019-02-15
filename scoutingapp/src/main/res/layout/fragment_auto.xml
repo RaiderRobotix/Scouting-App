@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <CheckBox
-            android:id="@+id/reach_hab_line"
+            android:id="@+id/cross_hab_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
@@ -26,7 +26,7 @@
             android:id="@+id/level_one_layout_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reach_hab_line"
+            android:layout_below="@id/cross_hab_line"
             android:layout_marginTop="-10dp"
             android:orientation="vertical"
             android:padding="8dp">

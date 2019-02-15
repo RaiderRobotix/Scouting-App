@@ -55,7 +55,7 @@ Contains several user-friendly inputs to add and save match data, across differe
 
 #### Prematch
 
-Contains all information that can be obtained before the match starts, with all fields required to proceed to autonomous. Usually consistent between seasons.
+Contains all information that can be obtained before the match starts, with all fields required to proceed to sandstorm. Usually consistent between seasons.
 
 * **Scout name** - pulled from the settings. Left blank at the start of a new rotation.
 * **Match number** - pulled from the settings and incremented after match data is saved. Determines team number verification and auto-fill.
