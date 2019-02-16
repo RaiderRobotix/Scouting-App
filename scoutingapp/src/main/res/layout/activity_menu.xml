@@ -163,24 +163,32 @@
         android:layout_above="@+id/current_info_label"
         android:layout_below="@id/settings"
         android:layout_centerHorizontal="true"
+
         android:layout_marginTop="60dp">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
 
-        <ImageView
-            android:id="@+id/raider_robotix_logo"
-            android:layout_width="175dp"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="30dp"
-            android:src="@drawable/team_25_logo" />
+            <ImageView
+                android:id="@+id/raider_robotix_logo"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
 
-        <ImageView
-            android:id="@+id/game_logo_view"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/raider_robotix_logo"
-            android:src="@drawable/deep_space_logo" />
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/team_25_logo" />
+
+            <ImageView
+                android:id="@+id/game_logo_view"
+                android:layout_width="250dp"
+
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/raider_robotix_logo"
+                android:src="@drawable/deep_space_logo" />
+        </LinearLayout>
 
     </RelativeLayout>
 </RelativeLayout>

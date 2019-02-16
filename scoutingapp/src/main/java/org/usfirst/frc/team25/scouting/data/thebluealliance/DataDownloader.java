@@ -83,7 +83,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
                 return "Invalid Blue Alliance API key";
             }
 
-            if (!eventCode.equals("")) {
+            if (!eventCode.isEmpty()) {
 
                 try {
                     FileManager.saveFile(scoreBreakdownFilePath, getEventMatchData(eventCode), c);
@@ -93,7 +93,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
 
 
                 String teamList = getTeamList(eventCode);
-                if (teamList.equals("")) {
+                if (teamList.isEmpty()) {
                     return "Event data not found on The Blue Alliance";
                 } else {
                     FileManager.saveFile(teamListFilePath, teamList, c);
@@ -101,7 +101,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
 
 
                 String matchList = getMatchList(eventCode);
-                if (matchList.equals("")) {
+                if (matchList.isEmpty()) {
                     return "Only team list downloaded";
                 } else {
                     FileManager.saveFile(matchListFilePath, matchList, c);
@@ -160,8 +160,10 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
                         matchList.append(match.getBlueAlliance().getTeamKeys()[j].split("frc")[1]).append(",");
                     }
                 }
-                matchList.append(",\n");
+
             }
+
+            matchList.append("\n");
 
 
         }
@@ -181,7 +183,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
         super.onPostExecute(message);
 
         // Display response message, if any
-        if (!message.equals("")) {
+        if (!message.isEmpty()) {
             Toast.makeText(c, message, Toast.LENGTH_SHORT).show();
         }
     }
