@@ -2,6 +2,8 @@
 
 Team 25's base scouting app for the 2017 FRC season and beyond
 
+Screenshots are available to view [here](https://drive.google.com/open?id=1OIr1L-rgLHhspDdjrONZxoT7Zo1xAWoa)
+
 ## Key features 
 
 * Material design UI and easy data input and verification
@@ -15,7 +17,7 @@ Opening the app to the main menu will reveal four icons, the current game logo, 
 
 ### Rules
 
-A cheat sheet of the game rules (usually the one created by Andy Smith from Team 5546) and common fouls (created by Team 25 at the beginning of the season) is available to view here. The information should have nearly everything a scouter needs to know to add match data and scout accurately.
+A cheat sheet of the game rules and common fouls (created by Team 25 at the beginning of the season) is available to view here. The information should have nearly everything a scouter needs to know to add match data and scout accurately.
 
 ### Export data
 
@@ -34,10 +36,6 @@ A cheat sheet of the game rules (usually the one created by Andy Smith from Team
 * **Match number** - current (or next) match being played. This value automatically updates, and its maximum value depends on the event.
 * **Current event** - current event that is being scouted. It is critical that this does not change throughout an event, as the event data is downloaded for and the file to which data is saved is dependent on this value.
 * **Year** - current season, automatically updated based on the system calendar. The downloaded event data is dependent on this value.
-
-#### Game-specific settings (Destination: Deep Space)
-
-* **Left alliance color** - the left alliance station color, from the scouter's point of view. Determines the orientation of the plate lighting graphic when adding match data.
 
 
 #### Data transfer
