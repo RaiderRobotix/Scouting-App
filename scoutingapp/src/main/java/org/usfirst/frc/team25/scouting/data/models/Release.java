@@ -1,32 +1,20 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
+import lombok.Data;
+
 /**
  * Created by sng on 2/18/2018.
  */
 
+@Data
 public class Release {
 
-    private String tag_name;
+    private String tagName;
     private Asset[] assets;
 
-    public String getTagName() {
-        return tag_name;
-    }
-
-    public Asset[] getAssets() {
-        return assets;
-    }
-
+    @Data
     public class Asset {
-        String browser_download_url;
+        String browserDownloadUrl;
         String name;
-
-        public String getBrowserDownloadUrl() {
-            return browser_download_url;
-        }
-
-        public String getName() {
-            return name;
-        }
     }
 }

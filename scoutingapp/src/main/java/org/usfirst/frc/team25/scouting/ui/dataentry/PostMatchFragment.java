@@ -134,9 +134,18 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), robotQuickComments,
-                ROBOT_COMMENT_VALUES, focus.toString(), entry.getPreMatch().getTeamNum(),
-                FileManager.getPrevTeamNumber(getActivity()), comparison, pickNumber));
+        entry.setPostMatch(new PostMatch
+                (
+                        robotComment.getText().toString(),
+                        robotQuickComments,
+                        ROBOT_COMMENT_VALUES,
+                        focus.toString(),
+                        entry.getPreMatch().getTeamNum(),
+                        FileManager.getPrevTeamNumber(getActivity()),
+                        comparison,
+                        pickNumber
+                )
+        );
     }
 
     @Override

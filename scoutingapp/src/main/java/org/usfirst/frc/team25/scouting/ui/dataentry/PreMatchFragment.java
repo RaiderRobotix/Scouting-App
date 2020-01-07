@@ -386,13 +386,15 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        entry.setPreMatch(new PreMatch(nameField.getText().toString(),
+        entry.setPreMatch(new PreMatch(
+                nameField.getText().toString(),
                 scoutPosSpinner.getText().toString(),
                 startPos,
+                UiHelper.getHabLevelSelected(startingLevelButtons),
                 Integer.parseInt(matchNumField.getText().toString()),
                 Integer.parseInt(teamNumField.getText().toString()),
-                UiHelper.getHabLevelSelected(startingLevelButtons),
-                robotNoShow.isChecked(), startPiece
+                robotNoShow.isChecked(),
+                startPiece
         ));
     }
 

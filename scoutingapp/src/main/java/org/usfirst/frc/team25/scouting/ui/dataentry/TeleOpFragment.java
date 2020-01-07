@@ -305,8 +305,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 climbAssistedByPartners.isChecked(),
                 UiHelper.getIntegerFromTextBox(assistingClimbTeamNum),
                 partnerClimbsAssisted.getValue(),
-                UiHelper.getHabLevelSelected(highestAssistedClimbLevel, 2),
-                UiHelper.getHabLevelSelected(climbAssistStartingLevel, 0)
+                UiHelper.getHabLevelSelected(climbAssistStartingLevel, 0),
+                UiHelper.getHabLevelSelected(highestAssistedClimbLevel, 2)
+
         ));
 
 
