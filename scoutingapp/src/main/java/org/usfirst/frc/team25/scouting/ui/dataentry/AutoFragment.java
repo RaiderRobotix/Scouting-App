@@ -225,15 +225,26 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        entry.setAutonomous(new Autonomous(rocketCargo.getValue(), rocketHatches.getValue(),
-                cargoShipHatches.getValue(),
+        entry.setAutonomous(new Autonomous(
+                rocketCargo.getValue(),
+                rocketHatches.getValue(),
                 cargoShipCargo.getValue(),
+                cargoShipHatches.getValue(),
+
+                cargoDroppedRocket.isChecked(),
+                hatchesDroppedRocket.isChecked(),
+                cargoDroppedCargoShip.isChecked(),
+                hatchesDroppedCargoShip.isChecked(),
+
+                cargoDropped.getValue(),
                 hatchesDropped.getValue(),
-                cargoDropped.getValue(), crossHabLine.isChecked(),
-                opponentCargoShipLineFoul.isChecked(), sideCargoShipHatchCapable.isChecked(),
-                frontCargoShipHatchCapable.isChecked(), cargoDroppedCargoShip.isChecked(),
-                cargoDroppedRocket.isChecked(), hatchesDroppedRocket.isChecked(),
-                hatchesDroppedCargoShip.isChecked()));
+
+                frontCargoShipHatchCapable.isChecked(),
+                sideCargoShipHatchCapable.isChecked(),
+
+                crossHabLine.isChecked(),
+                opponentCargoShipLineFoul.isChecked()
+        ));
     }
 
     @Override

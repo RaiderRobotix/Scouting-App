@@ -62,5 +62,7 @@ dependencies {
         exclude module: 'commons-io:commons-io:+'
         exclude group: 'com.google.android'
     }
+    implementation 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 }
 
