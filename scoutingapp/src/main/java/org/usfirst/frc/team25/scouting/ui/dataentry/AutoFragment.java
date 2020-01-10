@@ -52,20 +52,20 @@ public class AutoFragment extends Fragment implements EntryFragment {
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
 
-        rocketCargo = view.findViewById(R.id.rocket_cargo_auto);
-        rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
-        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
-        cargoDropped = view.findViewById(R.id.cargo_dropped_auto);
-        crossHabLine = view.findViewById(R.id.cross_hab_line);
-        hatchesDropped = view.findViewById(R.id.hatches_dropped_auto);
-        opponentCargoShipLineFoul = view.findViewById(R.id.opponent_cargo_ship_line);
-        frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
-        sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
-        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
-        cargoDroppedCargoShip = view.findViewById(R.id.cargo_dropped_cargo_ship);
-        cargoDroppedRocket = view.findViewById(R.id.cargo_dropped_rocket);
-        hatchesDroppedCargoShip = view.findViewById(R.id.hatches_dropped_cargo_ship);
-        hatchesDroppedRocket = view.findViewById(R.id.hatches_dropped_rocket);
+//        rocketCargo = view.findViewById(R.id.rocket_cargo_auto);
+//        rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
+//        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
+//        cargoDropped = view.findViewById(R.id.cargo_dropped_auto);
+//        crossHabLine = view.findViewById(R.id.cross_hab_line);
+//        hatchesDropped = view.findViewById(R.id.hatches_dropped_auto);
+//        opponentCargoShipLineFoul = view.findViewById(R.id.opponent_cargo_ship_line);
+//        frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
+//        sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
+//        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
+//        cargoDroppedCargoShip = view.findViewById(R.id.cargo_dropped_cargo_ship);
+//        cargoDroppedRocket = view.findViewById(R.id.cargo_dropped_rocket);
+//        hatchesDroppedCargoShip = view.findViewById(R.id.hatches_dropped_cargo_ship);
+//        hatchesDroppedRocket = view.findViewById(R.id.hatches_dropped_rocket);
 
 
         Button continueButton = view.findViewById(R.id.auto_continue);

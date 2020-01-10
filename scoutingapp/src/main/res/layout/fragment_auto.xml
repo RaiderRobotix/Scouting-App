@@ -106,11 +106,12 @@
             android:textSize="18sp" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_dropped_auto"
+            android:id="@+id/cells_dropped_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cell_pickup_trench_incdec_auto"
-            android:padding="@dimen/default_padding_bottom"
+            android:layout_marginRight="150sp"
+            android:layout_marginLeft="30sp"
             app:initialValue="0"
             app:titlePrompt="Cargo dropped" />
 
@@ -118,7 +119,7 @@
             android:id="@+id/cargo_dropped_cargo_ship"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_auto"
+            android:layout_below="@id/cells_dropped_auto"
             android:layout_marginStart="50dp"
             android:layout_marginTop="0sp"
             android:enabled="false"
