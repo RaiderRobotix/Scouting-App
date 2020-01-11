@@ -1,6 +1,5 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,17 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class AutoFragment extends Fragment implements EntryFragment {
-
-//    -----Future Reference inc dec set
-//    private ButtonIncDecSet cellsScoredBottom, cellsScoredInner, cellsScoredOuter;
 
     private ButtonIncDecView cellsScoredBottom, cellsScoredInner, cellsScoredOuter,
             cellPickupRpoint, cellPickupTrench, cellsDropped;
@@ -50,7 +46,15 @@ public class AutoFragment extends Fragment implements EntryFragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
-
+//        RelativeLayout cells_scored_auto = view.findViewById(R.id.layout_auto);
+//        for (int child_index=0;child_index<cells_scored_auto.getChildCount();child_index++) {
+//            View child = cells_scored_auto.getChildAt(child_index;
+//                if (child instanceof ButtonIncDecView) {
+//                    child.incButton.setOnClickListener(view1 -> {
+//                        autoEnableHatchesDroppedLocationSet();
+//                    });
+//                }
+//        }
 
         cellsScoredBottom = view.findViewById(R.id.power_cells_scored_botom_incdec);
         cellsScoredInner = view.findViewById(R.id.power_cells_scored_inner_incdec);
@@ -63,54 +67,15 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         Button continueButton = view.findViewById(R.id.auto_continue);
 
-//TODO implement changeListeners here
-//        opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> autoEnableCrossHabLine());
-//
-//        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{rocketHatches,
-//                cargoShipHatches, rocketCargo, cargoShipCargo};
-//
-//        for (ButtonIncDecSet set : enablingCrossHabLineMetrics) {
-//            set.incButton.setOnClickListener(view1 -> {
-//                set.increment();
-//                autoEnableCrossHabLine();
-//                if (set.equals(cargoShipHatches)) {
-//                    autoEnableCargoShipHatchPlacementSet();
-//                }
-//
-//            });
-//            set.decButton.setOnClickListener(view1 -> {
-//                set.decrement();
-//                autoEnableCrossHabLine();
-//                if (set.equals(cargoShipHatches)) {
-//                    autoEnableCargoShipHatchPlacementSet();
-//                }
-//
-//            });
-//        }
-// TODO create AUTO onClick methods
-
 
         autoPopulate();
 
-//TODO Create AUTO continue button protection
-//        continueButton.setOnClickListener(view1 -> {
-//            if (cargoShipHatches.getValue() > 0 && !frontCargoShipHatchCapable.isChecked() &&
-//                    !sideCargoShipHatchCapable.isChecked() || cargoDropped.getValue() > 0 && !cargoDroppedCargoShip.isChecked()
-//                    && !cargoDroppedRocket.isChecked() || hatchesDropped.getValue() > 0 && !hatchesDroppedCargoShip.isChecked() && !hatchesDroppedRocket.isChecked()) {
-//                new AlertDialog.Builder(getActivity())
-//                        .setTitle("Select where game pieces were placed/dropped")
-//                        .setPositiveButton("OK", (dialogInterface, i) -> {
-//
-//                        })
-//                        .show();
-//            } else {
-//                saveState();
-//                getFragmentManager().beginTransaction()
-//                        .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
-//                        .commit();
-//            }
-//
-//        });
+        continueButton.setOnClickListener(view1 -> {
+            saveState();
+            getFragmentManager().beginTransaction()
+                    .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
+                    .commit();
+        });
 
         if (entry.getPreMatch().isRobotNoShow()) {
             continueButton.callOnClick();
@@ -119,30 +84,17 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         return view;
     }
-//TODO Auto Enable AUTO views if value/state of others are changed
-//    private void autoEnableCrossHabLine() {
-//        if (rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
-//                || cargoShipHatches.getValue() > 0 || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
-//                frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()) {
-//            crossHabLine.setChecked(true);
-//            crossHabLine.setEnabled(false);
-//        } else {
-//            crossHabLine.setEnabled(true);
-//        }
-//    }
-//
-//    private void autoEnableCargoShipHatchPlacementSet() {
-//
-//        if (cargoShipHatches.getValue() > 0) {
-//            frontCargoShipHatchCapable.setEnabled(true);
-//            sideCargoShipHatchCapable.setEnabled(true);
-//        } else {
-//            frontCargoShipHatchCapable.setEnabled(false);
-//            sideCargoShipHatchCapable.setEnabled(false);
-//            frontCargoShipHatchCapable.setChecked(false);
-//            sideCargoShipHatchCapable.setChecked(false);
-//        }
-//    }
+
+    private void autoEnableCrossInitationLine() {
+        if (crossOpponentSector.isChecked() || cellsScoredBottom.getValue() > 0
+                || cellsScoredInner.getValue() > 0 || cellsScoredOuter.getValue() > 0
+                || cellPickupRpoint.getValue() > 0 || cellPickupTrench.getValue() > 0) {
+            crossInitLine.setChecked(true);
+            crossInitLine.setEnabled(false);
+        } else {
+            crossInitLine.setEnabled(true);
+        }
+    }
 
     @Override
     public void autoPopulate() {
@@ -158,11 +110,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             crossInitLine.setChecked(prevAuto.isCrossInitLine());
             crossOpponentSector.setChecked(prevAuto.isCrossOpponentSector());
 
-//TODO add autoEnablers here
-//            autoEnableCargoShipHatchPlacementSet();
-//            autoEnableCargoDroppedLocationSet();
-//            autoEnableHatchesDroppedLocationSet();
-//            autoEnableCrossHabLine();
+            autoEnableCrossInitationLine();
 
         }
 

@@ -31,7 +31,7 @@
             android:layout_below="@id/cross_init_line_checkbox_auto" />
 
         <RelativeLayout
-            android:id="@+id/balls_scored_layout_auto"
+            android:id="@+id/layout_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -52,7 +52,7 @@
                 android:layout_below="@id/power_cells_scored_text"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="0dp"
-                android:layout_marginRight="150sp"
+                android:layout_marginRight="50sp"
                 app:titlePrompt="Bottom" />
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:titlePrompt="Inner"
-                android:layout_marginRight="150sp"
+                android:layout_marginRight="50sp"
                 android:layout_below="@id/power_cells_scored_botom_incdec"
                 android:layout_marginLeft="50dp"/>
 
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:titlePrompt="Outer"
-                android:layout_marginRight="150sp"
+                android:layout_marginRight="50sp"
                 android:layout_below="@id/power_cells_scored_inner_incdec"
                 android:layout_marginLeft="50dp"/>
 
@@ -79,8 +79,9 @@
             android:id="@+id/power_cells_picked_up_text_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/balls_scored_layout_auto"
+            android:layout_below="@id/layout_auto"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="20dp"
             android:padding="8sp"
             android:text="Power Cells Picked Up (Locations)"
             android:textSize="18sp" />
@@ -93,7 +94,7 @@
             android:layout_marginLeft="50dp"
             app:titlePrompt="Rendezvous Point"
             android:textSize="18sp"
-            android:layout_marginRight="150sp"/>
+            android:layout_marginRight="50sp"/>
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/cell_pickup_trench_incdec_auto"
@@ -101,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cell_pickup_rpoint_incdec_auto"
             android:layout_marginLeft="50sp"
-            android:layout_marginRight="150sp"
+            android:layout_marginRight="50sp"
             app:titlePrompt="Trench"
             android:textSize="18sp" />
 
@@ -110,10 +111,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cell_pickup_trench_incdec_auto"
-            android:layout_marginRight="150sp"
+            android:layout_marginRight="50sp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="20dp"
             app:initialValue="0"
-            app:titlePrompt="Power Cells dropped" />
+            app:titlePrompt="Power Cells Dropped" />
 
         <Button
             android:id="@+id/auto_continue"
