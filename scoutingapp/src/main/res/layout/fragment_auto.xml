@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="5sp"
-            android:text="Crossed INITIATION line"
+            android:text="Crossed INITIATION Line"
             android:textSize="18sp" />
 
         <CheckBox
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="Crossed into opponent's sector"
+            android:text="Crossed into Opponent's SECTOR"
             android:textSize="18sp"
             android:layout_below="@id/cross_init_line_checkbox_auto" />
 
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/power_cells_scored_text"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="150sp"
                 app:titlePrompt="Bottom" />
@@ -62,7 +62,7 @@
                 app:titlePrompt="Inner"
                 android:layout_marginRight="150sp"
                 android:layout_below="@id/power_cells_scored_botom_incdec"
-                android:layout_marginLeft="30dp"/>
+                android:layout_marginLeft="50dp"/>
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
                 android:id="@+id/power_cells_scored_outer_incdec"
@@ -71,7 +71,7 @@
                 app:titlePrompt="Outer"
                 android:layout_marginRight="150sp"
                 android:layout_below="@id/power_cells_scored_inner_incdec"
-                android:layout_marginLeft="30dp"/>
+                android:layout_marginLeft="50dp"/>
 
         </RelativeLayout>
 
@@ -82,16 +82,16 @@
             android:layout_below="@id/balls_scored_layout_auto"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:padding="8sp"
-            android:text="Power Cells Picked Up"
+            android:text="Power Cells Picked Up (Locations)"
             android:textSize="18sp" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cell_pickup_generator_incdec_auto"
+            android:id="@+id/cell_pickup_rpoint_incdec_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/power_cells_picked_up_text_auto"
-            android:layout_marginLeft="30dp"
-            app:titlePrompt="Below Generator"
+            android:layout_marginLeft="50dp"
+            app:titlePrompt="Rendezvous Point"
             android:textSize="18sp"
             android:layout_marginRight="150sp"/>
 
@@ -99,8 +99,8 @@
             android:id="@+id/cell_pickup_trench_incdec_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cell_pickup_generator_incdec_auto"
-            android:layout_marginLeft="30sp"
+            android:layout_below="@id/cell_pickup_rpoint_incdec_auto"
+            android:layout_marginLeft="50sp"
             android:layout_marginRight="150sp"
             app:titlePrompt="Trench"
             android:textSize="18sp" />
@@ -111,85 +111,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cell_pickup_trench_incdec_auto"
             android:layout_marginRight="150sp"
-            android:layout_marginLeft="30sp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             app:initialValue="0"
-            app:titlePrompt="Cargo dropped" />
-
-        <CheckBox
-            android:id="@+id/cargo_dropped_cargo_ship"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cells_dropped_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="0sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Cargo ship"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/cargo_dropped_rocket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_cargo_ship"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3sp"
-            android:text="Rocket"
-            android:textSize="18sp" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_dropped_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_rocket"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
-
-        <CheckBox
-            android:id="@+id/hatches_dropped_cargo_ship"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="0sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Cargo ship"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/hatches_dropped_rocket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_cargo_ship"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3sp"
-            android:text="Rocket"
-            android:textSize="18sp" />
-
-
-        <CheckBox
-            android:id="@+id/opponent_cargo_ship_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_rocket"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5sp"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Crossed opponent cargo ship line"
-            android:textSize="18sp" />
-
+            app:titlePrompt="Power Cells dropped" />
 
         <Button
             android:id="@+id/auto_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/opponent_cargo_ship_line"
+            android:layout_below="@id/cells_dropped_auto"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
