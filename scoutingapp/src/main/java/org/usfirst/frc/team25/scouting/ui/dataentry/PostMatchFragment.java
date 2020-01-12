@@ -34,16 +34,18 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             "Low objectives only",
             "Scoring potential reached",
             "Hatch panel floor intake",
-            "Cargo floor intake",
-            "Fast HAB climb",
-            "Shoots cargo",
+            "Fast intake",
+            "Fast climb",
+            "Struggles to play under defense",
             "Effective defense",
-            "Higher rocket levels significantly slower",
-            "Struggles to place in far rocket side",
-            "Poorly-secured hatches",
-            "Places extra cargo in bays",
-            "Slow cargo intake",
-            "Slow hatch panel intake",
+            "Higher port levels significantly slower",
+            "Struggles to level",
+            "Slow climb",
+            "Fast drive",
+            "Assists in climbs",
+            "Fast control panel",
+            "Middle Hang",
+            "Every-bot",
             "Lost communications",
             "Tipped over",
             "Commits (tech) fouls (explain)",
@@ -159,10 +161,10 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         robotCommentView = view.findViewById(R.id.robotDriverCommentView);
 
         Button finish = view.findViewById(R.id.post_finish);
-        focusButtons[0] = view.findViewById(R.id.teleop_focus_hatches);
-        focusButtons[1] = view.findViewById(R.id.teleop_focus_cargo);
-        focusButtons[2] = view.findViewById(R.id.teleop_focus_cargo_ship);
-        focusButtons[3] = view.findViewById(R.id.teleop_focus_rocket);
+        focusButtons[0] = view.findViewById(R.id.teleop_focus_bottom_port);
+        focusButtons[1] = view.findViewById(R.id.teleop_focus_top_port);
+        focusButtons[2] = view.findViewById(R.id.teleop_focus_collecting_cells);
+        focusButtons[3] = view.findViewById(R.id.teleop_focus_control_panel);
         focusButtons[4] = view.findViewById(R.id.teleop_focus_defense);
 
         comparisonButtons[0] = view.findViewById(R.id.current_team_comparison);

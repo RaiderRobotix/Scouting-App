@@ -37,19 +37,19 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_cargo_ship"
+                    android:id="@+id/teleop_focus_bottom_port"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo ship"
+                    android:text="Bottom Port"
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_rocket"
+                    android:id="@+id/teleop_focus_top_port"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Rocket"
+                    android:text="Top Port"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -68,19 +68,19 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_hatches"
+                    android:id="@+id/teleop_focus_collecting_cells"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Hatch panels"
+                    android:text="Collecting Cells"
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_cargo"
+                    android:id="@+id/teleop_focus_control_panel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo"
+                    android:text="Control Panel"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -106,6 +106,7 @@
                 android:text="Robot and driver comments"
                 android:textSize="24sp" />
 
+
             <TextView
                 android:id="@+id/robotDriverQuickCommentHint"
                 android:layout_width="wrap_content"
@@ -115,7 +116,6 @@
                 android:text="Select these options, then fill in below"
                 android:textColor="@color/first_gray"
                 android:textSize="16sp" />
-
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/robotDriverComment"
