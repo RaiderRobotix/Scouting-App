@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cell_pickup_trench_incdec_auto"
-            android:layout_marginRight="50sp"
+            android:layout_marginRight="66sp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginTop="20dp"
             app:initialValue="0"

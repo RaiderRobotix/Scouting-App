@@ -46,15 +46,21 @@ public class AutoFragment extends Fragment implements EntryFragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
-//        RelativeLayout cells_scored_auto = view.findViewById(R.id.layout_auto);
-//        for (int child_index=0;child_index<cells_scored_auto.getChildCount();child_index++) {
-//            View child = cells_scored_auto.getChildAt(child_index;
-//                if (child instanceof ButtonIncDecView) {
-//                    child.incButton.setOnClickListener(view1 -> {
-//                        autoEnableHatchesDroppedLocationSet();
-//                    });
-//                }
-//        }
+        RelativeLayout cells_scored_auto = view.findViewById(R.id.layout_auto);
+        for (int child_index=0;child_index<cells_scored_auto.getChildCount();child_index++) {
+            View child = cells_scored_auto.getChildAt(child_index);
+                if (child instanceof ButtonIncDecView) {
+                    ButtonIncDecView child_view = (ButtonIncDecView) child;
+                    child_view.incButton.setOnClickListener(view1 -> {
+                        child_view.increment();
+                        autoEnableCrossInitationLine();
+                    });
+                    child_view.decButton.setOnClickListener(view1 -> {
+                        child_view.decrement();
+                        autoEnableCrossInitationLine();
+                    });
+                }
+        }
 
         cellsScoredBottom = view.findViewById(R.id.power_cells_scored_botom_incdec);
         cellsScoredInner = view.findViewById(R.id.power_cells_scored_inner_incdec);
