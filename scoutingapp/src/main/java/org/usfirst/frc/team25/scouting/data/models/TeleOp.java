@@ -12,26 +12,18 @@ import lombok.Data;
 @AllArgsConstructor
 public class TeleOp {
 
-    private int cargoShipHatches;
-    private int rocketLevelOneHatches;
-    private int rocketLevelTwoHatches;
-    private int rocketLevelThreeHatches;
-    private int cargoShipCargo;
-    private int rocketLevelOneCargo;
-    private int rocketLevelTwoCargo;
-    private int rocketLevelThreeCargo;
+    private int cellsScoredBottom;
+    private int cellsScoredInner;
+    private int cellsScoredOuter;
+    private int cellsDropped;
+    private int assistedClimbs;
 
-    private int hatchesDropped;
-    private int cargoDropped;
-
-    private boolean attemptHabClimb;
-    private int attemptHabClimbLevel;
-    private boolean successHabClimb;
-    private int successHabClimbLevel;
-    private boolean climbAssistedByPartner;
     private int assistingClimbTeamNum;
-    private int numPartnerClimbAssists;
-    private int partnerClimbAssistStartLevel;
-    private int partnerClimbAssistEndLevel;
 
+    private boolean rungLevel;
+    private boolean attemptedClimb;
+    private boolean successClimb;
+    private boolean rotationControl;
+    private boolean positionControl;
+    private boolean rotationOverspun;
 }

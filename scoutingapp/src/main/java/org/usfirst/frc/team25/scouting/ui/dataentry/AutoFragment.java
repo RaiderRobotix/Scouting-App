@@ -14,6 +14,8 @@ import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
+import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
+
 public class AutoFragment extends Fragment implements EntryFragment {
 
     private ButtonIncDecView cellsScoredBottom, cellsScoredInner, cellsScoredOuter,
@@ -141,7 +143,8 @@ public class AutoFragment extends Fragment implements EntryFragment {
     public void onResume() {
         super.onResume();
 
-        getActivity().setTitle("Add Entry - Sandstorm");
+        getActivity().setTitle("Add Entry - Autonomous");
+        hideKeyboard(getActivity());
     }
 
 }
