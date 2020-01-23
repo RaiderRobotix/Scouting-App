@@ -11,312 +11,141 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/level_one_layout_teleop"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/power_cells_scored_teleop"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/default_padding_bottom">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:baselineAligned="false">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Cargo"
-                        android:textAlignment="center"
-                        android:textSize="18sp"
-                        android:visibility="invisible" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="Rocket level 3"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Cargo"
-                        android:textAlignment="center"
-                        android:textSize="18sp" />
-
-                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/rocket_level_three_cargo_teleop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:initialValueSet="0" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Hatches"
-                        android:textAlignment="center"
-                        android:textSize="18sp" />
-
-                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/rocket_level_three_hatches_teleop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:initialValueSet="0" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp">
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:text="Rocket level 2"
-                    android:textSize="18sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/rocket_level_two_cargo_teleop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/rocket_level_two_hatches_teleop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:text="Rocket level 1"
-                    android:textSize="18sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/rocket_level_one_cargo_teleop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/rocket_level_one_hatches_teleop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp">
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:text="Cargo ship"
-                    android:textSize="18sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/cargo_ship_cargo_teleop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/cargo_ship_hatches_teleop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_marginTop="20dp"
+            android:padding="8sp"
+            android:text="POWER CELLS Scored"
+            android:textSize="18sp" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_dropped_teleop"
+            android:id="@+id/bottom_power_port_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/level_one_layout_teleop"
-            android:padding="8dp"
+            android:layout_below="@id/power_cells_scored_teleop"
             app:initialValue="0"
-            app:titlePrompt="Accidentally dropped cargo" />
-
+            app:titlePrompt="BOTTOM PORT" />
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_dropped_teleop"
+            android:id="@+id/outer_power_port_teleop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_teleop"
-            android:padding="@dimen/default_padding_bottom"
+            android:layout_below="@id/bottom_power_port_teleop"
             app:initialValue="0"
-            app:titlePrompt="Accidentally dropped hatches" />
+            app:titlePrompt="OUTER PORT" />
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+            android:id="@+id/inner_power_port_teleop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/outer_power_port_teleop"
+            app:initialValue="0"
+            app:titlePrompt="INNER PORT" />
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+            android:id="@+id/power_cells_dropped_teleop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inner_power_port_teleop"
+            app:initialValue="0"
+            app:titlePrompt="CELLS Dropped" />
 
-
-        <CheckBox
-            android:id="@+id/attempt_hab_climb"
+        <TextView
+            android:id="@+id/control_panel_teleop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_teleop"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Attempts to climb"
+            android:layout_below="@id/power_cells_dropped_teleop"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8sp"
+            android:padding="8sp"
+            android:text="Control Panel Objectives"
             android:textSize="18sp" />
 
         <CheckBox
-            android:id="@+id/success_hab_climb"
+            android:id="@+id/rotation_control_teleop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/attempt_hab_climb_level"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:enabled="false"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Successful in hab climb"
+            android:text="Rotation Control"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
+            android:textSize="18sp"
+            android:layout_below="@id/control_panel_teleop" />
+
+        <CheckBox
+            android:id="@+id/rotation_control_overspin_teleop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotation Overspun"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100sp"
+            android:textSize="18sp"
+            android:layout_below="@id/rotation_control_teleop" />
+
+        <CheckBox
+            android:id="@+id/position_control_teleop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Position Control"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
+            android:textSize="18sp"
+            android:layout_below="@id/rotation_control_overspin_teleop" />
+
+
+        <TextView
+            android:id="@+id/endgame_objectives_teleop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/position_control_teleop"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8sp"
+            android:padding="8sp"
+            android:text="Endgame Objectives"
             android:textSize="18sp" />
 
 
-        <RadioGroup
-            android:id="@+id/attempt_hab_climb_level"
+        <CheckBox
+            android:id="@+id/attempts_climb_teleop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/attempt_hab_climb"
-            android:layout_marginStart="45dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <RadioButton
-                android:id="@+id/attempt_hab_level_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 1"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/attempt_hab_level_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 2"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/attempt_hab_level_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 3"
-                android:textSize="18sp" />
-
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/success_hab_climb_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/success_hab_climb"
-            android:layout_marginStart="45dp"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <RadioButton
-                android:id="@+id/success_hab_level_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 1"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/success_hab_level_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 2"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/success_hab_level_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 3"
-                android:textSize="18sp" />
-
-        </RadioGroup>
+            android:text="Attempts To Hang"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
+            android:textSize="18sp"
+            android:layout_below="@id/endgame_objectives_teleop"/>
 
         <CheckBox
-            android:id="@+id/climb_assisted_by_alliance_partner_checkbox"
+            android:id="@+id/climb_success_teleop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/success_hab_climb_level"
-            android:layout_alignStart="@id/success_hab_climb"
-            android:enabled="true"
+            android:text="Successful Climb"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="50sp"
+            android:textSize="18sp"
+            android:layout_below="@id/attempts_climb_teleop" />
+        <CheckBox
+            android:id="@+id/rung_is_level_teleop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rung Is Level"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100sp"
+            android:textSize="18sp"
+            android:layout_below="@id/climb_success_teleop" />
+        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+            android:id="@+id/assisted_climbs_teleop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Climb assisted by partner"
-            android:textSize="18sp" />
+            app:initialValue="0"
+            android:layout_below="@id/rung_is_level_teleop"
+            app:titlePrompt="# of Assisted Climbs" />
+
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/team_number_text_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/climb_assisted_by_alliance_partner_checkbox"
-            android:layout_alignStart="@id/success_hab_climb_level"
-            android:layout_marginTop="-15dp"
-            android:layout_marginBottom="-15dp"
+            android:layout_below="@id/assisted_climbs_teleop"
             android:enabled="false"
             android:hint="Assisting team's number"
             android:inputType="number"
@@ -325,112 +154,17 @@
             android:textSize="18sp"
             app:met_floatingLabel="normal" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/alliance_partner_climbs_assisted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/team_number_text_input"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:maxValue="2"
-            app:titlePrompt="Partner climbs assisted" />
-
-
-        <TextView
-            android:id="@+id/highest_climb_assisted_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/alliance_partner_climbs_assisted"
-            android:layout_alignStart="@id/highest_climb_assist_radio_group"
-            android:padding="8dp"
-            android:text="Highest partner ending level"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/highest_climb_assist_radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/highest_climb_assisted_text_view"
-            android:layout_alignStart="@id/success_hab_climb_level"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/highest_assisted_climb_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 2"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/highest_assisted_climb_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 3"
-                android:textSize="18sp" />
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/climb_assist_starting_level_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/highest_climb_assist_radio_group"
-            android:layout_alignStart="@id/highest_climb_assist_radio_group"
-            android:padding="8dp"
-            android:text="Partner starting level"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/climb_assist_starting_level_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/climb_assist_starting_level_view"
-            android:layout_alignStart="@id/success_hab_climb_level"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/climb_assist_starting_zero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="N/A"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/climb_assist_starting_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 1"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/climb_assist_starting_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 2"
-                android:textSize="18sp" />
-
-        </RadioGroup>
-
         <Button
-            android:id="@+id/tele_continue"
+            android:id="@+id/teleop_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/climb_assist_starting_level_group"
+            android:layout_below="@id/team_number_text_input"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
             android:text="@string/continue_button"
             android:textColor="#ffffff" />
+
 
     </RelativeLayout>
 
