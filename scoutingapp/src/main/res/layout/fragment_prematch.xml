@@ -102,39 +102,12 @@
                 android:textSize="18sp"
                 android:layout_marginVertical="10dp" />
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/robot_no_show_checkbox"
-                android:visibility="visible"
-                android:id="@+id/starting_level">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Robot HAB starting level"
-                    android:textSize="18sp"
-                    android:id="@+id/robot_starting_level"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Level 1"
-                    android:textSize="18sp"
-                    android:id="@+id/hab_level_1"
-                    android:padding="8dp"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Level 2"
-                    android:textSize="18sp"
-                    android:padding="8dp"
-                    android:id="@+id/hab_level_2"/>
-            </RadioGroup>
 
             <RadioGroup
                 android:id="@+id/starting_position"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/starting_level"
+                android:layout_below="@id/robot_no_show_checkbox"
                 android:visibility="visible">
 
                 <TextView
@@ -181,25 +154,32 @@
                     android:id="@+id/game_piece"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Robot starting game piece"
+                    android:text="Number of starting game pieces"
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/cargo_button"
+                    android:id="@+id/one_piece"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Cargo"
+                    android:text="One piece"
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/hatch_panel_button"
+                    android:id="@+id/two_piece"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Hatch panel"
+                    android:text="Two pieces"
                     android:textSize="18sp" />
 
+                <RadioButton
+                    android:id="@+id/three_piece"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Three pieces"
+                    android:textSize="18sp" />
                 <RadioButton
                     android:id="@+id/none_button"
                     android:layout_width="wrap_content"
