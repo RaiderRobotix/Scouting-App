@@ -80,7 +80,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         startingPositionButtons[1] = view.findViewById(R.id.centerStart);
         startingPositionButtons[2] = view.findViewById(R.id.rightStart);
 
-        startingGamePieceButtons = new RadioButton[3];
+        startingGamePieceButtons = new RadioButton[4];
         startingGamePieceButtons[0] = view.findViewById(R.id.one_piece);
         startingGamePieceButtons[1] = view.findViewById(R.id.two_piece);
         startingGamePieceButtons[2] = view.findViewById(R.id.three_piece);
