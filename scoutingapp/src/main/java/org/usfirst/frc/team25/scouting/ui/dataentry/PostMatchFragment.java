@@ -2,7 +2,9 @@ package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,14 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.StringProcessing;
+import org.usfirst.frc.team25.scouting.data.models.Comparison;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
 import java.util.ArrayList;
 
 import lombok.val;
+import lombok.var;
 
 
 public class PostMatchFragment extends Fragment implements EntryFragment {
@@ -71,6 +75,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         this.entry = entry;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -173,17 +178,24 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             } else {
                 saveState();
 
-                final PostMatch unsaFePM = entry.getPostMatch();
-                val pm = unsaFePM.copy(
-                        unsaFePM.getComparison(),
-                        unsaFePM.getPickNumber(),
-                        // Escape user input for csv
-                        StringProcessing.removeCommasBreaks(unsaFePM.getRobotComment()),
-                        unsaFePM.getAutoFocus(),
-                        unsaFePM.getAutoFocus(),
-                        unsaFePM.getClimbType()
+                val unsaFePM = entry.getPostMatch();
+                val entry = getEntry();
+                setEntry(
+                        new ScoutEntry(
+                                entry.getPreMatch(),
+                                entry.getAutonomous(),
+                                entry.getTeleOp(),
+                                unsaFePM.copy(
+                                        unsaFePM.getComparison(),
+                                        unsaFePM.getPickNumber(),
+                                        // Escape user input for csv
+                                        StringProcessing.removeCommasBreaks(unsaFePM.getRobotComment()),
+                                        unsaFePM.getAutoFocus(),
+                                        unsaFePM.getAutoFocus(),
+                                        unsaFePM.getClimbType()
+                                )
+                        )
                 );
-                entry.setPostMatch(pm);
 
                 Settings set = Settings.newInstance(getActivity());
 
@@ -216,38 +228,43 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
     @Override
     public void autoPopulate() {
-        if (entry.getPostMatch() != null) {
-            val robotCheckedComments = entry.getPostMatch().getRobotQuickCommentSelections();
+        val robotCheckedComments = entry.getPostMatch().getRobotQuickCommentSelections();
+        for (int i = 0; i < ROBOT_COMMENT_VALUES.length; i++) {
+            // TODO use getOrDefault
+            var isChecked = robotCheckedComments.get(ROBOT_COMMENT_VALUES[i]);
+            isChecked = isChecked == null ? false : isChecked;
+            if (isChecked) {
+                robotQuickComments.get(i).setChecked(true);
+            }
+        }
+        for (int i = 0; i < robotCheckedComments.size(); i++) {
+            if (robotCheckedComments.get(i)) {
+                robotQuickComments.get(i).setChecked(true);
+            }
+        }
 
-            for (int i = 0; i < robotCheckedComments.size(); i++) {
-                if (robotCheckedComments.get(i)) {
-                    robotQuickComments.get(i).setChecked(true);
+        robotComment.setText(entry.getPostMatch().getRobotComment());
+
+        // Parse focus string
+        for (CheckBox cb : focusButtons) {
+            for (String item : entry.getPostMatch().getTeleopFocus().split("; ")) {
+                if (cb.getText().equals(item)) {
+                    cb.setChecked(true);
                 }
             }
+        }
 
-            robotComment.setText(entry.getPostMatch().getRobotComment());
-
-            // Parse focus string
-            for (CheckBox cb : focusButtons) {
-                for (String item : entry.getPostMatch().getTeleopFocus().split("; ")) {
-                    if (cb.getText().equals(item)) {
-                        cb.setChecked(true);
-                    }
-                }
+        String[] comparisonValues = {">", "<", "="};
+        for (int i = 0; i < comparisonValues.length; i++) {
+            if (entry.getPostMatch().getComparison().equals(comparisonValues[i])) {
+                comparisonButtons[i].setChecked(true);
             }
+        }
 
-            String[] comparisonValues = {">", "<", "="};
-            for (int i = 0; i < comparisonValues.length; i++) {
-                if (entry.getPostMatch().getComparison().equals(comparisonValues[i])) {
-                    comparisonButtons[i].setChecked(true);
-                }
-            }
-
-            try {
-                pickNumberButtons[2 - entry.getPostMatch().getPickNumber()].setChecked(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            pickNumberButtons[2 - entry.getPostMatch().getPickNumber()].setChecked(true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -262,13 +279,16 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        String comparison = "";
-        String[] comparisonValues = {">", "<", "="};
+        char comparator = '\0';
+        val comparisonValues = new char[]{'>', '<', '='};
         for (int i = 0; i < comparisonButtons.length; i++) {
             if (comparisonButtons[i].isChecked()) {
-                comparison = comparisonValues[i];
+                comparator = comparisonValues[i];
+                break;
             }
         }
+        // TODO Get team nums
+        val comp = new Comparison(0, 0, comparator);
 
         int pickNumber = -1;
         for (int i = 0; i < pickNumberButtons.length; i++) {
@@ -276,19 +296,27 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 pickNumber = 2 - i;
             }
         }
-
-        entry.setPostMatch(new PostMatch(
-                        null, // TODO Create comparison
-                        pickNumber,
-                        robotComment.getText().toString(),
-                        focus.toString(),
-                        focus.toString(),
-                        null // TODO Input ClimbType
+        val entry = getEntry();
+        setEntry(
+                new ScoutEntry(
+                        entry.getPreMatch(),
+                        entry.getAutonomous(),
+                        entry.getTeleOp(),
+                        new PostMatch(
+                                comp, // TODO Create comparison
+                                pickNumber,
+                                robotComment.getText().toString(),
+                                focus.toString(),
+                                focus.toString(),
+                                null // TODO Input ClimbType
+                        )
                 )
         );
-        val pm = entry.getPostMatch();
+        val quickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
         for (String comment : ROBOT_COMMENT_VALUES) {
-            pm.getRobotQuickCommentSelections().putIfAbsent(comment, false);
+            if (!quickCommentSelections.containsKey(comment)) {
+                quickCommentSelections.put(comment, false);
+            }
         }
     }
 

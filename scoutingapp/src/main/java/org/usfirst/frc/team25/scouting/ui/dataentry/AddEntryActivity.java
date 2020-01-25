@@ -21,7 +21,7 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
-        ScoutEntry entry = new ScoutEntry();
+        ScoutEntry entry = new ScoutEntry(null, null, null, null);
         getFragmentManager()
                 .beginTransaction()
                 .replace(android.R.id.content, PreMatchFragment.getInstance(entry), "PREMATCH")

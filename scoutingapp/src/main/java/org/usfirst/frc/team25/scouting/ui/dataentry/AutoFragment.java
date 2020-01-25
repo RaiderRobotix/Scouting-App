@@ -14,6 +14,8 @@ import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
+import lombok.val;
+
 import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 
 public class AutoFragment extends Fragment implements EntryFragment {
@@ -106,37 +108,42 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void autoPopulate() {
-        if (entry.getAutonomous() != null) {
+        entry.getAutonomous();
 
-            Autonomous prevAuto = entry.getAutonomous();
-            cellsScoredBottom.setValue(prevAuto.getCellsScoredBottom());
-            cellsScoredInner.setValue(prevAuto.getCellsScoredInner());
-            cellsScoredOuter.setValue(prevAuto.getCellsScoredOuter());
-            cellPickupRpoint.setValue(prevAuto.getCellPickupRpoint());
-            cellPickupTrench.setValue(prevAuto.getCellPickupTrench());
-            cellsDropped.setValue(prevAuto.getCellsDropped());
-            crossInitLine.setChecked(prevAuto.getCrossInitLine());
-            crossOpponentSector.setChecked(prevAuto.getCrossOpponentSector());
+        Autonomous prevAuto = entry.getAutonomous();
+        cellsScoredBottom.setValue(prevAuto.getCellsScoredBottom());
+        cellsScoredInner.setValue(prevAuto.getCellsScoredInner());
+        cellsScoredOuter.setValue(prevAuto.getCellsScoredOuter());
+        cellPickupRpoint.setValue(prevAuto.getCellPickupRpoint());
+        cellPickupTrench.setValue(prevAuto.getCellPickupTrench());
+        cellsDropped.setValue(prevAuto.getCellsDropped());
+        crossInitLine.setChecked(prevAuto.getCrossInitLine());
+        crossOpponentSector.setChecked(prevAuto.getCrossOpponentSector());
 
-            autoEnableCrossInitationLine();
-
-        }
+        autoEnableCrossInitationLine();
 
     }
 
     @Override
     public void saveState() {
-        entry.setAutonomous(new Autonomous(
-                cellsScoredBottom.getValue(),
-                cellsScoredInner.getValue(),
-                cellsScoredOuter.getValue(),
-                cellPickupRpoint.getValue(),
-                cellPickupTrench.getValue(),
-                cellsDropped.getValue(),
+        val entry = getEntry();
+        setEntry(
+                new ScoutEntry(
+                        entry.getPreMatch(),
+                        new Autonomous(
+                                cellsScoredBottom.getValue(),
+                                cellsScoredInner.getValue(),
+                                cellsScoredOuter.getValue(),
+                                cellPickupRpoint.getValue(),
+                                cellPickupTrench.getValue(),
+                                cellsDropped.getValue(),
 
-                crossInitLine.isChecked(),
-                crossOpponentSector.isChecked()
-        ));
+                                crossInitLine.isChecked(),
+                                crossOpponentSector.isChecked()),
+                        entry.getTeleOp(),
+                        entry.getPostMatch()
+                )
+        );
     }
 
     @Override

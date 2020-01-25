@@ -25,6 +25,8 @@ import org.usfirst.frc.team25.scouting.ui.UiHelper;
 
 import java.io.IOException;
 
+import lombok.val;
+
 public class PreMatchFragment extends Fragment implements EntryFragment {
 
     private RadioButton[] startingPositionButtons, startingGamePieceButtons;
@@ -289,53 +291,28 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
     public void autoPopulate() {
 
         //Manually filled data overrides preferences
-        if (entry.getPreMatch() != null) {
-            PreMatch prevPreMatch = entry.getPreMatch();
+        entry.getPreMatch();
+        PreMatch prevPreMatch = entry.getPreMatch();
 
-            nameField.setText(prevPreMatch.getScoutName());
-            scoutPosSpinner.setText(prevPreMatch.getScoutPos());
-            matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
-            teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
+        nameField.setText(prevPreMatch.getScoutName());
+        scoutPosSpinner.setText(prevPreMatch.getScoutPos());
+        matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
+        teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
 
 
-            for (RadioButton button : startingPositionButtons) {
-                if (button.getText().equals(prevPreMatch.getStartingPos())) {
-                    button.setChecked(true);
-                }
+        for (RadioButton button : startingPositionButtons) {
+            if (button.getText().equals(prevPreMatch.getStartingPos())) {
+                button.setChecked(true);
             }
-            //            for (RadioButton button : startingGamePieceButtons) {
-            //                if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
-            //                    button.setChecked(true);
-            //                }
-            //            }
-            // TODO restore based on number of starting cells
-
-
-        } else {
-            Settings set = Settings.newInstance(getActivity());
-
-            if (!set.getScoutPos().equals("DEFAULT")) {
-                scoutPosSpinner.setText(set.getScoutPos());
-
-                if (set.useTeamList() && set.getMatchType().equals("Q")) {
-                    try {
-                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
-                                set.getScoutPos(), set.getMatchNum()));
-                    } catch (IOException e) {
-
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            //Scout nameField is prompted for after a shift ends, but not during the first match
-            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
-                nameField.setText(set.getScoutName());
-
-            }
-
-            matchNumField.setText(String.valueOf(set.getMatchNum()));
         }
+        //            for (RadioButton button : startingGamePieceButtons) {
+        //                if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
+        //                    button.setChecked(true);
+        //                }
+        //            }
+        // TODO restore based on number of starting cells
+
+
     }
 
     @Override
@@ -348,23 +325,23 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        String startPiece = "";
-        for (RadioButton button : startingGamePieceButtons) {
-            if (button.isChecked()) {
-                startPiece = (String) button.getText();
-                break;
-            }
-        }
-
-        entry.setPreMatch(new PreMatch(
-                nameField.getText().toString(),
-                Integer.parseInt(teamNumField.getText().toString()),
-                Integer.parseInt(matchNumField.getText().toString()),
-                scoutPosSpinner.getText().toString(),
-                robotNoShow.isChecked(),
-                startPos,
-                0 // TODO starting cells
-        ));
+        val entry = getEntry();
+        setEntry(
+                new ScoutEntry(
+                        new PreMatch(
+                                nameField.getText().toString(),
+                                Integer.parseInt(teamNumField.getText().toString()),
+                                Integer.parseInt(matchNumField.getText().toString()),
+                                scoutPosSpinner.getText().toString(),
+                                robotNoShow.isChecked(),
+                                startPos,
+                                0 // TODO starting cells
+                        ),
+                        entry.getAutonomous(),
+                        entry.getTeleOp(),
+                        entry.getPostMatch()
+                )
+        );
     }
 
     private void continueToAuto() {

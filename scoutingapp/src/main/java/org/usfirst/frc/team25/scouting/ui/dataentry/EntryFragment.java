@@ -13,7 +13,6 @@ interface EntryFragment {
      * setter and getter methods
      * Entry should be a parameter in the constructor, when setEntry is called
      */
-    ScoutEntry entry = new ScoutEntry();
 
     /* Called when a fragment transaction is started to pass data onto the next fragment
      */
