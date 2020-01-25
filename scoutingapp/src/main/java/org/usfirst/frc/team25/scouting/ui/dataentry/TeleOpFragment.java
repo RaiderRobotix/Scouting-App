@@ -9,15 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.UiHelper;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
@@ -125,12 +121,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                     .commit();
         }
 
-        if(entry.getPreMatch().isRobotNoShow()){
+        if (entry.getPreMatch().getNoShow()) {
             continueButton.callOnClick();
         }
 
 
-        if (entry.getPreMatch().isRobotNoShow()) {
+        if (entry.getPreMatch().getNoShow()) {
             continueButton.callOnClick();
         }
 
@@ -145,12 +141,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             cellsScoredInner.setValue(tele.getCellsScoredInner());
             cellsScoredBottom.setValue(tele.getCellsScoredBottom());
             cellsDropped.setValue(tele.getCellsDropped());
-            climbAssistedByPartners.setValue(tele.getAssistedClimbs());
-            rungLevel.setChecked(tele.isRungLevel());
-            attemptedClimb.setChecked(tele.isAttemptedClimb());
-            successClimb.setChecked(tele.isSuccessClimb());
-            rotationControl.setChecked(tele.isRotationControl());
-            rotationOverspun.setChecked(tele.isRotationOverspun());
+            climbAssistedByPartners.setValue(tele.getNumPartnerClimbAssists());
+            rungLevel.setChecked(tele.getRungLevel());
+            attemptedClimb.setChecked(tele.getAttemptHang());
+            successClimb.setChecked(tele.getSuccessHang());
+            rotationControl.setChecked(tele.getRotationControl());
+            rotationOverspun.setChecked(tele.getRotationOverspun());
 
 
             if (tele.getAssistingClimbTeamNum() != 0) {
@@ -163,10 +159,19 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     @Override
     public void saveState() {
 
-        entry.setTeleOp(new TeleOp(cellsScoredBottom.getValue(), cellsScoredInner.getValue(),
-                cellsScoredOuter.getValue(), cellsDropped.getValue(),
-                climbAssistedByPartners.getValue(),UiHelper.getIntegerFromTextBox(assistingClimbTeamNum), rungLevel.isChecked(), attemptedClimb.isChecked(),
-                successClimb.isChecked(), rotationControl.isChecked(), positionControl.isChecked(), rotationOverspun.isChecked()
+        entry.setTeleOp(new TeleOp(
+                        cellsScoredBottom.getValue(),
+                        cellsScoredInner.getValue(),
+                        cellsScoredOuter.getValue(),
+                        cellsDropped.getValue(),
+                        rotationControl.isChecked(),
+                        rotationOverspun.isChecked(),
+                        positionControl.isChecked(),
+                        attemptedClimb.isChecked(),
+                        successClimb.isChecked(),
+                        rungLevel.isChecked(),
+                        climbAssistedByPartners.getValue(),
+                        UiHelper.getIntegerFromTextBox(assistingClimbTeamNum)
                 )
         );
 
