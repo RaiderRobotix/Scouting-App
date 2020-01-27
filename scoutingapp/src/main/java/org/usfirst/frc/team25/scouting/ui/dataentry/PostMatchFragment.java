@@ -6,22 +6,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
+import org.usfirst.frc.team25.scouting.data.StringProcessing;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
 import java.util.ArrayList;
+
+import lombok.val;
 
 
 public class PostMatchFragment extends Fragment implements EntryFragment {
@@ -71,83 +69,6 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
     public void setEntry(ScoutEntry entry) {
         this.entry = entry;
-    }
-
-    @Override
-    public void autoPopulate() {
-        if (entry.getPostMatch() != null) {
-            ArrayList<CheckBox> robotCheckedComments = entry.getPostMatch().getRobotQuickComments();
-
-            for (int i = 0; i < robotCheckedComments.size(); i++) {
-                if (robotCheckedComments.get(i).isChecked()) {
-                    robotQuickComments.get(i).setChecked(true);
-                }
-            }
-
-            robotComment.setText(entry.getPostMatch().getRobotComment());
-
-            // Parse focus string
-            for (CheckBox cb : focusButtons) {
-                for (String item : entry.getPostMatch().getFocus().split("; ")) {
-                    if (cb.getText().equals(item)) {
-                        cb.setChecked(true);
-                    }
-                }
-            }
-
-            String[] comparisonValues = {">", "<", "="};
-            for (int i = 0; i < comparisonValues.length; i++) {
-                if (entry.getPostMatch().getComparison().equals(comparisonValues[i])) {
-                    comparisonButtons[i].setChecked(true);
-                }
-            }
-
-            try {
-                pickNumberButtons[2 - entry.getPostMatch().getPickNumber()].setChecked(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void saveState() {
-        StringBuilder focus = new StringBuilder();
-        for (CheckBox cb : focusButtons) {
-            if (cb.isChecked()) {
-                if (!focus.toString().equals("")) {
-                    focus.append("; ");
-                }
-                focus.append((String) cb.getText());
-            }
-        }
-
-        String comparison = "";
-        String[] comparisonValues = {">", "<", "="};
-        for (int i = 0; i < comparisonButtons.length; i++) {
-            if (comparisonButtons[i].isChecked()) {
-                comparison = comparisonValues[i];
-            }
-        }
-
-        int pickNumber = -1;
-        for (int i = 0; i < pickNumberButtons.length; i++) {
-            if (pickNumberButtons[i].isChecked()) {
-                pickNumber = 2 - i;
-            }
-        }
-
-        entry.setPostMatch(new PostMatch
-                (
-                        robotComment.getText().toString(),
-                        robotQuickComments,
-                        ROBOT_COMMENT_VALUES,
-                        focus.toString(),
-                        entry.getPreMatch().getTeamNum(),
-                        FileManager.getPrevTeamNumber(getActivity()),
-                        comparison,
-                        pickNumber
-                )
-        );
     }
 
     @Override
@@ -219,7 +140,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 }
             }
 
-            if (!focusChecked && !entry.getPreMatch().isRobotNoShow()) {
+            if (!focusChecked && !entry.getPreMatch().getNoShow()) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Select the robot's focus for this match")
@@ -252,8 +173,16 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             } else {
                 saveState();
 
-                final PostMatch pm = entry.getPostMatch();
-                pm.finalizeComment();
+                final PostMatch unsaFePM = entry.getPostMatch();
+                val pm = unsaFePM.copy(
+                        unsaFePM.getComparison(),
+                        unsaFePM.getPickNumber(),
+                        // Escape user input for csv
+                        StringProcessing.removeCommasBreaks(unsaFePM.getRobotComment()),
+                        unsaFePM.getAutoFocus(),
+                        unsaFePM.getAutoFocus(),
+                        unsaFePM.getClimbType()
+                );
                 entry.setPostMatch(pm);
 
                 Settings set = Settings.newInstance(getActivity());
@@ -276,13 +205,91 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         });
 
-        if (entry.getPreMatch().isRobotNoShow()) {
+        if (entry.getPreMatch().getNoShow()) {
             comparisonButtons[1].setChecked(true);
             pickNumberButtons[2].setChecked(true);
             finish.callOnClick();
         }
 
         return view;
+    }
+
+    @Override
+    public void autoPopulate() {
+        if (entry.getPostMatch() != null) {
+            val robotCheckedComments = entry.getPostMatch().getRobotQuickCommentSelections();
+
+            for (int i = 0; i < robotCheckedComments.size(); i++) {
+                if (robotCheckedComments.get(i)) {
+                    robotQuickComments.get(i).setChecked(true);
+                }
+            }
+
+            robotComment.setText(entry.getPostMatch().getRobotComment());
+
+            // Parse focus string
+            for (CheckBox cb : focusButtons) {
+                for (String item : entry.getPostMatch().getTeleopFocus().split("; ")) {
+                    if (cb.getText().equals(item)) {
+                        cb.setChecked(true);
+                    }
+                }
+            }
+
+            String[] comparisonValues = {">", "<", "="};
+            for (int i = 0; i < comparisonValues.length; i++) {
+                if (entry.getPostMatch().getComparison().equals(comparisonValues[i])) {
+                    comparisonButtons[i].setChecked(true);
+                }
+            }
+
+            try {
+                pickNumberButtons[2 - entry.getPostMatch().getPickNumber()].setChecked(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveState() {
+        StringBuilder focus = new StringBuilder();
+        for (CheckBox cb : focusButtons) {
+            if (cb.isChecked()) {
+                if (!focus.toString().equals("")) {
+                    focus.append("; ");
+                }
+                focus.append((String) cb.getText());
+            }
+        }
+
+        String comparison = "";
+        String[] comparisonValues = {">", "<", "="};
+        for (int i = 0; i < comparisonButtons.length; i++) {
+            if (comparisonButtons[i].isChecked()) {
+                comparison = comparisonValues[i];
+            }
+        }
+
+        int pickNumber = -1;
+        for (int i = 0; i < pickNumberButtons.length; i++) {
+            if (pickNumberButtons[i].isChecked()) {
+                pickNumber = 2 - i;
+            }
+        }
+
+        entry.setPostMatch(new PostMatch(
+                        null, // TODO Create comparison
+                        pickNumber,
+                        robotComment.getText().toString(),
+                        focus.toString(),
+                        focus.toString(),
+                        null // TODO Input ClimbType
+                )
+        );
+        val pm = entry.getPostMatch();
+        for (String comment : ROBOT_COMMENT_VALUES) {
+            pm.getRobotQuickCommentSelections().putIfAbsent(comment, false);
+        }
     }
 
     private void generateRobotQuickComments() {

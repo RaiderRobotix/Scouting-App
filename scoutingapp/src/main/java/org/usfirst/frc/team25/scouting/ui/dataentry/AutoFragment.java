@@ -85,7 +85,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
                     .commit();
         });
 
-        if (entry.getPreMatch().isRobotNoShow()) {
+        if (entry.getPreMatch().getNoShow()) {
             continueButton.callOnClick();
 
         }

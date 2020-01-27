@@ -10,12 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.*;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -308,12 +303,12 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                     button.setChecked(true);
                 }
             }
-            for (RadioButton button : startingGamePieceButtons) {
-                if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
-                    button.setChecked(true);
-                }
-            }
-
+            //            for (RadioButton button : startingGamePieceButtons) {
+            //                if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
+            //                    button.setChecked(true);
+            //                }
+            //            }
+            // TODO restore based on number of starting cells
 
 
         } else {
@@ -361,12 +356,14 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        entry.setPreMatch(new PreMatch(nameField.getText().toString(),
-                scoutPosSpinner.getText().toString(),
-                startPos,
-                Integer.parseInt(matchNumField.getText().toString()),
+        entry.setPreMatch(new PreMatch(
+                nameField.getText().toString(),
                 Integer.parseInt(teamNumField.getText().toString()),
-                robotNoShow.isChecked(), startPiece
+                Integer.parseInt(matchNumField.getText().toString()),
+                scoutPosSpinner.getText().toString(),
+                robotNoShow.isChecked(),
+                startPos,
+                0 // TODO starting cells
         ));
     }
 
