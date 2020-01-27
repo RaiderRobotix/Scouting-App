@@ -115,8 +115,8 @@ public class AutoFragment extends Fragment implements EntryFragment {
             cellPickupRpoint.setValue(prevAuto.getCellPickupRpoint());
             cellPickupTrench.setValue(prevAuto.getCellPickupTrench());
             cellsDropped.setValue(prevAuto.getCellsDropped());
-            crossInitLine.setChecked(prevAuto.isCrossInitLine());
-            crossOpponentSector.setChecked(prevAuto.isCrossOpponentSector());
+            crossInitLine.setChecked(prevAuto.getCrossInitLine());
+            crossOpponentSector.setChecked(prevAuto.getCrossOpponentSector());
 
             autoEnableCrossInitationLine();
 
