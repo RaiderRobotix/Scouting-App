@@ -66,65 +66,48 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         autoPopulate();
 
         continueButton.setOnClickListener(view1 -> {
-          hideKeyboard(getActivity());
-        });
+            hideKeyboard(getActivity());
 
-        boolean proceed = true;
+            boolean proceed = true;
 
-        if (climbAssistedByPartners.getValue() > 0) {
-            if (assistingClimbTeamNum.getText().toString().isEmpty()) {
-                assistingClimbTeamNum.setError("Enter the assisting team's number");
-                proceed = false;
-
-            } else {
-                int inputTeamNum =
-                        Integer.parseInt(assistingClimbTeamNum.getText().toString());
-                if (inputTeamNum <= 0 || inputTeamNum > 9999) {
-                    assistingClimbTeamNum.setError("Enter a valid team number");
+            if (climbAssistedByPartners.getValue() > 0) {
+                if (assistingClimbTeamNum.getText().toString().isEmpty()) {
+                    assistingClimbTeamNum.setError("Enter the assisting team's number");
                     proceed = false;
+
+                } else {
+                    int inputTeamNum =
+                            Integer.parseInt(assistingClimbTeamNum.getText().toString());
+                    if (inputTeamNum <= 0 || inputTeamNum > 9999) {
+                        assistingClimbTeamNum.setError("Enter a valid team number");
+                        proceed = false;
+                    }
                 }
+
+
             }
 
+            if (proceed && successClimb.isChecked() && rungLevel.isChecked() && !(attemptedClimb.isChecked())) {
 
-        }
+                proceed = false;
 
-        if (proceed && successClimb.isChecked() && rungLevel.isChecked()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Please fill in any empty hang fields")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, id) -> {
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
 
-            proceed = false;
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Please fill in any empty hang fields")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", (dialog, id) -> {
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-        if (proceed && rotationOverspun.isChecked()) {
-
-            proceed = false;
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Please fill in any empty fields")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", (dialog, id) -> {
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-
-        if (proceed) {
-            saveState();
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
-                    .commit();
-        }
-
-        if (entry.getPreMatch().getNoShow()) {
-            continueButton.callOnClick();
-        }
-
+            if (proceed) {
+                saveState();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
+                        .commit();
+            }
+        });
 
         if (entry.getPreMatch().getNoShow()) {
             continueButton.callOnClick();
@@ -141,7 +124,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             cellsScoredInner.setValue(tele.getCellsScoredInner());
             cellsScoredBottom.setValue(tele.getCellsScoredBottom());
             cellsDropped.setValue(tele.getCellsDropped());
-            climbAssistedByPartners.setValue(tele.getNumPartnerClimbAssists());
+            climbAssistedByPartners.setValue(tele.getAssistedClimbs());
             rungLevel.setChecked(tele.getRungLevel());
             attemptedClimb.setChecked(tele.getAttemptHang());
             successClimb.setChecked(tele.getSuccessHang());
