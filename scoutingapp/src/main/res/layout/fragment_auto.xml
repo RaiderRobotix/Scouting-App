@@ -15,18 +15,17 @@
             android:id="@+id/cross_init_line_checkbox_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:padding="8sp"
             android:layout_marginTop="5sp"
-            android:text="Crossed INITIATION Line"
+            android:text="Moved off INITIATION Line"
             android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/crossed_into_opponent_sector_checkbox_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="Crossed into Opponent's SECTOR"
+            android:padding="8sp"
+            android:text="Crossed into Own SECTOR"
             android:textSize="18sp"
             android:layout_below="@id/cross_init_line_checkbox_auto" />
 
@@ -43,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="Power Cells Scored"
                 android:textSize="18sp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                android:padding="8sp"/>
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
                 android:id="@+id/power_cells_scored_botom_incdec"
@@ -51,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/power_cells_scored_text"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="50sp"
                 app:titlePrompt="Bottom" />
 
@@ -80,7 +79,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_auto"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="20dp"
             android:padding="8sp"
             android:text="Power Cells Picked Up (Locations)"
@@ -90,6 +88,7 @@
             android:id="@+id/cell_pickup_rpoint_incdec_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
             android:layout_below="@id/power_cells_picked_up_text_auto"
             android:layout_marginLeft="50dp"
             app:titlePrompt="Rendezvous Point"
@@ -112,7 +111,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cell_pickup_trench_incdec_auto"
             android:layout_marginRight="66sp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:padding="8sp"
+            android:layout_marginLeft="-15sp"
             android:layout_marginTop="20dp"
             app:initialValue="0"
             app:titlePrompt="Power Cells Dropped" />
