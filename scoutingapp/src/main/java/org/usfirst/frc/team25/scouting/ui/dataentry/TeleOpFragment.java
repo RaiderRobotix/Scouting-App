@@ -16,8 +16,6 @@ import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.UiHelper;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
-import lombok.val;
-
 import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 
 
@@ -67,64 +65,49 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         autoPopulate();
 
-        continueButton.setOnClickListener(view1 -> hideKeyboard(getActivity()));
+        continueButton.setOnClickListener(view1 -> {
+            hideKeyboard(getActivity());
 
-        boolean proceed = true;
+            boolean proceed = true;
 
-        if (climbAssistedByPartners.getValue() > 0) {
-            if (assistingClimbTeamNum.getText().toString().isEmpty()) {
-                assistingClimbTeamNum.setError("Enter the assisting team's number");
-                proceed = false;
-
-            } else {
-                int inputTeamNum =
-                        Integer.parseInt(assistingClimbTeamNum.getText().toString());
-                if (inputTeamNum <= 0 || inputTeamNum > 9999) {
-                    assistingClimbTeamNum.setError("Enter a valid team number");
+            if (climbAssistedByPartners.getValue() > 0) {
+                if (assistingClimbTeamNum.getText().toString().isEmpty()) {
+                    assistingClimbTeamNum.setError("Enter the assisting team's number");
                     proceed = false;
+
+                } else {
+                    int inputTeamNum =
+                            Integer.parseInt(assistingClimbTeamNum.getText().toString());
+                    if (inputTeamNum <= 0 || inputTeamNum > 9999) {
+                        assistingClimbTeamNum.setError("Enter a valid team number");
+                        proceed = false;
+                    }
                 }
+
+
             }
 
+            if (proceed && successClimb.isChecked() && rungLevel.isChecked() && !(attemptedClimb.isChecked())) {
 
-        }
+                proceed = false;
 
-        if (proceed && successClimb.isChecked() && rungLevel.isChecked()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Please fill in any empty hang fields")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, id) -> {
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
 
-            proceed = false;
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Please fill in any empty hang fields")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", (dialog, id) -> {
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-        if (proceed && rotationOverspun.isChecked()) {
-
-            proceed = false;
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Please fill in any empty fields")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", (dialog, id) -> {
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-
-        if (proceed) {
-            saveState();
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
-                    .commit();
-        }
-
-        if (entry.getPreMatch().getNoShow()) {
-            continueButton.callOnClick();
-        }
-
+            if (proceed) {
+                saveState();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
+                        .commit();
+            }
+        });
 
         if (entry.getPreMatch().getNoShow()) {
             continueButton.callOnClick();
@@ -134,52 +117,44 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     }
     @Override
     public void autoPopulate() {
-        entry.getTeleOp();
-        TeleOp tele = entry.getTeleOp();
+        if (entry.getTeleOp() != null) {
+            TeleOp tele = entry.getTeleOp();
 
-        cellsScoredOuter.setValue(tele.getCellsScoredOuter());
-        cellsScoredInner.setValue(tele.getCellsScoredInner());
-        cellsScoredBottom.setValue(tele.getCellsScoredBottom());
-        cellsDropped.setValue(tele.getCellsDropped());
-        // TODO Add  this gui and model prop
-        //            climbAssistedByPartners.setValue(tele.getNumPartnerClimbAssists());
-        rungLevel.setChecked(tele.getRungLevel());
-        attemptedClimb.setChecked(tele.getAttemptHang());
-        successClimb.setChecked(tele.getSuccessHang());
-        rotationControl.setChecked(tele.getRotationControl());
-        rotationOverspun.setChecked(tele.getRotationOverspun());
+            cellsScoredOuter.setValue(tele.getCellsScoredOuter());
+            cellsScoredInner.setValue(tele.getCellsScoredInner());
+            cellsScoredBottom.setValue(tele.getCellsScoredBottom());
+            cellsDropped.setValue(tele.getCellsDropped());
+            climbAssistedByPartners.setValue(tele.getAssistedClimbs());
+            rungLevel.setChecked(tele.getRungLevel());
+            attemptedClimb.setChecked(tele.getAttemptHang());
+            successClimb.setChecked(tele.getSuccessHang());
+            rotationControl.setChecked(tele.getRotationControl());
+            rotationOverspun.setChecked(tele.getRotationOverspun());
 
 
-        if (tele.getAssistingClimbTeamNum() != 0) {
-            assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
+            if (tele.getAssistingClimbTeamNum() != 0) {
+                assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
+            }
+
         }
-
     }
 
     @Override
     public void saveState() {
 
-
-        val entry = getEntry();
-        setEntry(
-                new ScoutEntry(
-                        entry.getPreMatch(),
-                        entry.getAutonomous(),
-                        new TeleOp(
-                                cellsScoredBottom.getValue(),
-                                cellsScoredInner.getValue(),
-                                cellsScoredOuter.getValue(),
-                                cellsDropped.getValue(),
-                                rotationControl.isChecked(),
-                                rotationOverspun.isChecked(),
-                                positionControl.isChecked(),
-                                attemptedClimb.isChecked(),
-                                successClimb.isChecked(),
-                                rungLevel.isChecked(),
-                                climbAssistedByPartners.getValue(),
-                                UiHelper.getIntegerFromTextBox(assistingClimbTeamNum)
-                        ),
-                        entry.getPostMatch()
+        entry.setTeleOp(new TeleOp(
+                        cellsScoredBottom.getValue(),
+                        cellsScoredInner.getValue(),
+                        cellsScoredOuter.getValue(),
+                        cellsDropped.getValue(),
+                        rotationControl.isChecked(),
+                        rotationOverspun.isChecked(),
+                        positionControl.isChecked(),
+                        attemptedClimb.isChecked(),
+                        successClimb.isChecked(),
+                        rungLevel.isChecked(),
+                        climbAssistedByPartners.getValue(),
+                        UiHelper.getIntegerFromTextBox(assistingClimbTeamNum)
                 )
         );
 
