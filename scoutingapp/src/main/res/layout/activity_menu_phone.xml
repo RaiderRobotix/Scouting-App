@@ -164,7 +164,7 @@
             android:layout_height="fill_parent"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/deep_space_logo"
+            android:src="@drawable/infinite_recharge_logo"
             android:textAlignment="center" />
     </RelativeLayout>
 
