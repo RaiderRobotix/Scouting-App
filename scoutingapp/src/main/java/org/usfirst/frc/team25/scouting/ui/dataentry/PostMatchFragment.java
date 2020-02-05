@@ -35,7 +35,6 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     private final String[] ROBOT_COMMENT_VALUES = {
             "Low objectives only",
             "Scoring potential reached",
-            "Hatch panel floor intake",
             "Fast intake",
             "Fast climb",
             "Struggles to play under defense",
