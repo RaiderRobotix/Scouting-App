@@ -15,7 +15,6 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
-import org.usfirst.frc.team25.scouting.data.StringProcessing;
 import org.usfirst.frc.team25.scouting.data.models.Comparison;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
@@ -188,7 +187,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                                         unsaFePM.getComparison(),
                                         unsaFePM.getPickNumber(),
                                         // Escape user input for csv
-                                        StringProcessing.removeCommasBreaks(unsaFePM.getRobotComment()),
+                                        unsaFePM.getRobotComment().replaceAll("[\n,]", ";"),
                                         unsaFePM.getAutoFocus(),
                                         unsaFePM.getAutoFocus(),
                                         unsaFePM.getClimbType()
