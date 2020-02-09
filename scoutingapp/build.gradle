@@ -43,7 +43,6 @@ repositories{
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.13'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
