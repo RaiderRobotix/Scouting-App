@@ -158,8 +158,8 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 3; j++) { //iterate through teams in alliance
                     if (i == 0) {
-                        val all = match.getAlliances().get("blue");
-                        all.getTeam_keys();
+                       val all = match.getAlliances().get("blue");
+                       all.getTeam_keys();
                         matchList.append(match.getBlueAlliance().getTeam_keys()[j].split("frc")[1]).append(",");
                     } else {
                         matchList.append(match.getRedAlliance().getTeam_keys()[j].split("frc")[1]).append(",");
