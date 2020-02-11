@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.woxthebox:draglistview:1.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b0ab1488a7057d9aa4eb526319c2e763/draglistview-1.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b0ab1488a7057d9aa4eb526319c2e763/draglistview-1.4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

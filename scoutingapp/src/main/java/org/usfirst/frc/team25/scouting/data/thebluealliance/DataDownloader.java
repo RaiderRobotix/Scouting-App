@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.thebluealliance.api.v3.TBA;
 import com.thebluealliance.api.v3.models.Match;
+import com.thebluealliance.api.v3.models.SimpleMatch;
 import com.thebluealliance.api.v3.models.Team;
 
 import org.usfirst.frc.team25.scouting.R;
@@ -19,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import lombok.val;
 
 
 public class DataDownloader extends AsyncTask<Void, Void, String> {
@@ -130,7 +133,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
                 Sorters.sortByTeamNum(new ArrayList<>(Arrays.asList(new TBA(apiKey).eventRequest.getTeams(eventCode))));
 
         for (Team team : teams) {
-            teamList.append(team.getTeamNumber()).append(",");
+            teamList.append(team.getTeam_number()).append(",");
         }
 
         teamList.setCharAt(teamList.length() - 1, ' ');
@@ -149,15 +152,17 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
         for (Match match :
                 Sorters.sortByMatchNum(Sorters.filterQualification(new ArrayList<>(Arrays.asList(new TBA(apiKey).eventRequest.getMatches(eventCode)))))) {
 
-            matchList.append(match.getMatchNumber()).append(",");
+            matchList.append(match.getMatch_number()).append(",");
 
             //iterate through two alliances
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 3; j++) { //iterate through teams in alliance
                     if (i == 0) {
-                        matchList.append(match.getRedAlliance().getTeamKeys()[j].split("frc")[1]).append(",");
+                        val all = match.getAlliances().get("blue");
+                        all.getTeam_keys();
+                        matchList.append(match.getBlueAlliance().getTeam_keys()[j].split("frc")[1]).append(",");
                     } else {
-                        matchList.append(match.getBlueAlliance().getTeamKeys()[j].split("frc")[1]).append(",");
+                        matchList.append(match.getRedAlliance().getTeam_keys()[j].split("frc")[1]).append(",");
                     }
                 }
 
