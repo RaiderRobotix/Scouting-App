@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 app:titlePrompt="Inner"
                 android:layout_marginRight="50sp"
-                android:layout_below="@id/power_cells_scored_botom_incdec"
+                android:layout_below="@id/power_cells_scored_outer_incdec"
                 android:layout_marginLeft="50dp"/>
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 app:titlePrompt="Outer"
                 android:layout_marginRight="50sp"
-                android:layout_below="@id/power_cells_scored_inner_incdec"
+                android:layout_below="@id/power_cells_scored_botom_incdec"
                 android:layout_marginLeft="50dp"/>
 
         </RelativeLayout>
