@@ -122,20 +122,23 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         entry.getTeleOp();
         TeleOp tele = entry.getTeleOp();
 
-        cellsScoredOuter.setValue(tele.getCellsScoredOuter());
-        cellsScoredInner.setValue(tele.getCellsScoredInner());
-        cellsScoredBottom.setValue(tele.getCellsScoredBottom());
-        cellsDropped.setValue(tele.getCellsDropped());
-        climbAssistedByPartners.setValue(tele.getAssistedClimbs());
-        rungLevel.setChecked(tele.getRungLevel());
-        attemptedClimb.setChecked(tele.getAttemptHang());
-        successClimb.setChecked(tele.getSuccessHang());
-        rotationControl.setChecked(tele.getRotationControl());
-        rotationOverspun.setChecked(tele.getRotationOverspun());
+        if(tele != null) {
+
+            cellsScoredOuter.setValue(tele.getCellsScoredOuter());
+            cellsScoredInner.setValue(tele.getCellsScoredInner());
+            cellsScoredBottom.setValue(tele.getCellsScoredBottom());
+            cellsDropped.setValue(tele.getCellsDropped());
+            climbAssistedByPartners.setValue(tele.getAssistedClimbs());
+            rungLevel.setChecked(tele.getRungLevel());
+            attemptedClimb.setChecked(tele.getAttemptHang());
+            successClimb.setChecked(tele.getSuccessHang());
+            rotationControl.setChecked(tele.getRotationControl());
+            rotationOverspun.setChecked(tele.getRotationOverspun());
 
 
-        if (tele.getAssistingClimbTeamNum() != 0) {
-            assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
+            if (tele.getAssistingClimbTeamNum() != 0) {
+                assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
+            }
         }
 
     }

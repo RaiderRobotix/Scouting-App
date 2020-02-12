@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.thebluealliance.api.v3.TBA;
 import com.thebluealliance.api.v3.models.Match;
-import com.thebluealliance.api.v3.models.SimpleMatch;
 import com.thebluealliance.api.v3.models.Team;
 
 import org.usfirst.frc.team25.scouting.R;
