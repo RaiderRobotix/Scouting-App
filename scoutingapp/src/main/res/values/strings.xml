@@ -1,8 +1,8 @@
 <resources>
 
     <!-- Versioning constants -->
-    <string name="app_name">Raider Deep Space Scout</string>
-    <string name="game_name">Destination: Deep Space</string>
+    <string name="app_name">Raider Infinite Recharge Scout</string>
+    <string name="game_name">Infinite Recharge</string>
 
     <!--Follows a modified version of Semantic Versioning, where
         there is no dot separator between minor and patch version numbers. Patch versions are incremented whenever
@@ -31,7 +31,7 @@
     <!--Add Match Interface-->
     <string name="team_number">Team number</string>
     <string name="team_number_prompt">Enter team number</string>
-    <string name="sandstorm">Autonomous</string>
+    <string name="autonomous">Autonomous</string>
     <string name="tele">Tele-Op</string>
     <string name="post">Post Game</string>
 
@@ -60,15 +60,19 @@
 
     <!--Event Spinner Options-->
     <string-array name="event_options">
+        <item>"Bridgewater"</item>
+        <item>"Robinsville"</item>
         <item>"Mount Olive"</item>
         <item>"Montgomery"</item>
-        <item>"Mid-Atlantic District Championship</item>
+        <item>"Mid-Atlantic District Championship"</item>
         <item>"FIRST Championship"</item>
         <item>"Brunswick Eruption"</item>
         <item>"Week 0"</item>
     </string-array>
 
     <string-array name="event_options_values">
+        <item>"njrob"</item>
+        <item>"njbri"</item>
         <item>"njfla"</item>
         <item>"njski"</item>
         <item>"mrcmp"</item>
