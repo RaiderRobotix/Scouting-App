@@ -134,7 +134,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             successClimb.setChecked(tele.getSuccessHang());
             rotationControl.setChecked(tele.getRotationControl());
             rotationOverspun.setChecked(tele.getRotationOverspun());
-
+            positionControl.setChecked(tele.getPositionControl());
 
             if (tele.getAssistingClimbTeamNum() != 0) {
                 assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
