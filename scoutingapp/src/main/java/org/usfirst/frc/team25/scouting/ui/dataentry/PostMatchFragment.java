@@ -308,16 +308,19 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                                 robotComment.getText().toString(),
                                 focus.toString(),
                                 focus.toString(),
-                                null // TODO Input ClimbType
+                                "" // TODO Input ClimbType
                         )
                 )
         );
-        val quickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
-        for (String comment : ROBOT_COMMENT_VALUES) {
-            if (!quickCommentSelections.containsKey(comment)) {
-                quickCommentSelections.put(comment, false);
+        if (entry.getPostMatch() != null) {
+            val quickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
+            for (String comment : ROBOT_COMMENT_VALUES) {
+                if (!quickCommentSelections.containsKey(comment)) {
+                    quickCommentSelections.put(comment, false);
+                }
             }
         }
+
     }
 
     private void generateRobotQuickComments() {
