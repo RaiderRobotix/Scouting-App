@@ -111,16 +111,18 @@ public class AutoFragment extends Fragment implements EntryFragment {
         entry.getAutonomous();
 
         Autonomous prevAuto = entry.getAutonomous();
-        cellsScoredBottom.setValue(prevAuto.getCellsScoredBottom());
-        cellsScoredInner.setValue(prevAuto.getCellsScoredInner());
-        cellsScoredOuter.setValue(prevAuto.getCellsScoredOuter());
-        cellPickupRpoint.setValue(prevAuto.getCellPickupRpoint());
-        cellPickupTrench.setValue(prevAuto.getCellPickupTrench());
-        cellsDropped.setValue(prevAuto.getCellsDropped());
-        crossInitLine.setChecked(prevAuto.getCrossInitLine());
-        crossOpponentSector.setChecked(prevAuto.getCrossOpponentSector());
+        if(prevAuto != null) {
+            cellsScoredBottom.setValue(prevAuto.getCellsScoredBottom());
+            cellsScoredInner.setValue(prevAuto.getCellsScoredInner());
+            cellsScoredOuter.setValue(prevAuto.getCellsScoredOuter());
+            cellPickupRpoint.setValue(prevAuto.getCellPickupRpoint());
+            cellPickupTrench.setValue(prevAuto.getCellPickupTrench());
+            cellsDropped.setValue(prevAuto.getCellsDropped());
+            crossInitLine.setChecked(prevAuto.getCrossInitLine());
+            crossOpponentSector.setChecked(prevAuto.getCrossOpponentSector());
 
-        autoEnableCrossInitationLine();
+            autoEnableCrossInitationLine();
+        }
 
     }
 

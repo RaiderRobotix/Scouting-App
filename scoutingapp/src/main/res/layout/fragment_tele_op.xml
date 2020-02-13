@@ -117,7 +117,7 @@
             android:id="@+id/climb_success_teleop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Successful Climb"
+            android:text="Successful Hang"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="50sp"
             android:textSize="18sp"

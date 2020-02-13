@@ -8,7 +8,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId 'org.usfirst.frc.team25.scouting'
-        minSdkVersion 25
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName '3.02'
@@ -57,7 +57,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
     implementation 'com.github.woxthebox:draglistview:1.4'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.github.RaiderRobotix:blue-alliance-api-java-library:2.1'
+    implementation 'com.github.RaiderRobotix:blue-alliance-api-java-library:250d943c99'
     implementation('org.kohsuke:github-api:1.92') {
         exclude module: 'commons-io:commons-io:+'
         exclude group: 'com.google.android'

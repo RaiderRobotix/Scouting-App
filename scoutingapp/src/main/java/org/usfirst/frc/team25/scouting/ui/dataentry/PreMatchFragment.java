@@ -292,19 +292,22 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         //Manually filled data overrides preferences
         entry.getPreMatch();
-        PreMatch prevPreMatch = entry.getPreMatch();
-
-        nameField.setText(prevPreMatch.getScoutName());
-        scoutPosSpinner.setText(prevPreMatch.getScoutPos());
-        matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
-        teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
-
-
-        for (RadioButton button : startingPositionButtons) {
-            if (button.getText().equals(prevPreMatch.getStartingPos())) {
-                button.setChecked(true);
+        PreMatch  prevPreMatch = entry.getPreMatch();
+        if(prevPreMatch!= null) {
+            nameField.setText(prevPreMatch.getScoutName());
+            scoutPosSpinner.setText(prevPreMatch.getScoutPos());
+            matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
+            teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
+            for (RadioButton button : startingPositionButtons) {
+                if (button.getText().equals(prevPreMatch.getStartingPos())) {
+                    button.setChecked(true);
+                }
             }
         }
+
+
+
+
         //            for (RadioButton button : startingGamePieceButtons) {
         //                if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
         //                    button.setChecked(true);

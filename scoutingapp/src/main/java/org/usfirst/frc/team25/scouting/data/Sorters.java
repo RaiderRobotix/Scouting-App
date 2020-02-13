@@ -22,7 +22,7 @@ public class Sorters {
      */
     public static ArrayList<Match> sortByMatchNum(ArrayList<Match> matches) {
 
-        Collections.sort(matches, (m1, m2) -> m1.getMatchNumber() - m2.getMatchNumber());
+        Collections.sort(matches, (m1, m2) -> m1.getMatch_number() - m2.getMatch_number());
         return matches;
     }
 
@@ -34,7 +34,7 @@ public class Sorters {
      */
     public static ArrayList<Team> sortByTeamNum(ArrayList<Team> events) {
 
-        Collections.sort(events, (t1, t2) -> t1.getTeamNumber() - t2.getTeamNumber());
+        Collections.sort(events, (t1, t2) -> t1.getTeam_number() - t2.getTeam_number());
         return events;
     }
 
@@ -48,7 +48,7 @@ public class Sorters {
     public static ArrayList<Match> filterQualification(ArrayList<Match> matches) {
         for (int i = 0; i < matches.size(); i++) {
 
-            if (!matches.get(i).getCompLevel().equals("qm")) {
+            if (!matches.get(i).getComp_level().equals("qm")) {
                 matches.remove(i);
                 i--;
             }
