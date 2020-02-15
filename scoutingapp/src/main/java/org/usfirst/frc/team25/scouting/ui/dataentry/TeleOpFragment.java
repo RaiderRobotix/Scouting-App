@@ -68,6 +68,19 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         autoPopulate();
 
+        climbAssistedByPartners.incButton.setOnClickListener(view1 -> {
+            climbAssistedByPartners.increment();
+            assistingClimbTeamNum.setEnabled(true);
+        });
+        climbAssistedByPartners.decButton.setOnClickListener(view1 -> {
+            climbAssistedByPartners.decrement();
+            if (climbAssistedByPartners.getValue() != 0) {
+                assistingClimbTeamNum.setEnabled(true);
+            } else if (climbAssistedByPartners.getValue() == 0) {
+                assistingClimbTeamNum.setEnabled(false);
+            }
+        });
+
         continueButton.setOnClickListener(view1 -> {
             hideKeyboard(getActivity());
 
