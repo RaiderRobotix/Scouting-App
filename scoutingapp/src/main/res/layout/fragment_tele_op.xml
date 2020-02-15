@@ -102,6 +102,16 @@
             android:text="Endgame Objectives"
             android:textSize="18sp" />
 
+        <CheckBox
+            android:id="@+id/parks_teleop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parks"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50sp"
+            android:textSize="18sp"
+            android:layout_below="@id/endgame_objectives_teleop"/>
+
 
         <CheckBox
             android:id="@+id/attempts_climb_teleop"
@@ -111,7 +121,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50sp"
             android:textSize="18sp"
-            android:layout_below="@id/endgame_objectives_teleop"/>
+            android:layout_below="@id/parks_teleop"/>
 
         <CheckBox
             android:id="@+id/climb_success_teleop"

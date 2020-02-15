@@ -24,7 +24,7 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private CheckBox rotationControl, rotationOverspun, positionControl,rungLevel, attemptedClimb, successClimb;
+    private CheckBox rotationControl, rotationOverspun, positionControl,rungLevel, attemptedClimb, successClimb, park;
     private ButtonIncDecView cellsScoredBottom, cellsScoredInner, cellsScoredOuter, cellsDropped,climbAssistedByPartners;
     private EditText assistingClimbTeamNum;
 
@@ -63,6 +63,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         cellsDropped = view.findViewById(R.id.power_cells_dropped_teleop);
         climbAssistedByPartners = view.findViewById(R.id.assisted_climbs_teleop);
         assistingClimbTeamNum = view.findViewById(R.id.team_number_text_input);
+        park = view.findViewById(R.id.parks_teleop);
         Button continueButton = view.findViewById(R.id.teleop_continue);
 
         autoPopulate();
@@ -135,6 +136,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             rotationControl.setChecked(tele.getRotationControl());
             rotationOverspun.setChecked(tele.getRotationOverspun());
             positionControl.setChecked(tele.getPositionControl());
+            park.setChecked(tele.getParked());
 
             if (tele.getAssistingClimbTeamNum() != 0) {
                 assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
@@ -162,7 +164,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                                 successClimb.isChecked(),
                                 rungLevel.isChecked(),
                                 climbAssistedByPartners.getValue(),
-                                UiHelper.getIntegerFromTextBox(assistingClimbTeamNum)
+                                UiHelper.getIntegerFromTextBox(assistingClimbTeamNum),
+                                park.isChecked()
                         ),
                         entry.getPostMatch()
                 )
