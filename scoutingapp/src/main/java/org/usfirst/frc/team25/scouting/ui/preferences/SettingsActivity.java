@@ -9,7 +9,7 @@ import android.util.Log;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.ui.views.AppCompatPreferenceActivity;
 
-/**
+/**Z
  * Activity that holds the fragment for settings/preferences
  */
 

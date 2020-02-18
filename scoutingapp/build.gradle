@@ -60,13 +60,13 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
     implementation 'com.github.woxthebox:draglistview:1.4'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.github.RaiderRobotix:blue-alliance-api-java-library:250d943c99'
+    implementation 'com.github.RaiderRobotix:blue-alliance-api-java-library:5f389981b4'
     implementation('org.kohsuke:github-api:1.92') {
         exclude module: 'commons-io:commons-io:+'
         exclude group: 'com.google.android'
     }
     implementation 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
-    implementation 'com.github.RaiderRobotix:Scouting-Models:master-SNAPSHOT'
+    implementation 'com.github.RaiderRobotix:Scouting-Models:c7a526a482'
 }
 
