@@ -8,6 +8,7 @@ import android.util.Log;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.usfirst.frc.team25.scouting.BuildConfig;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 
@@ -177,7 +178,7 @@ public class Settings extends PreferenceFragment {
     }
 
     public String getAPIKey() {
-        return getString(R.string.tba_api_key);
+        return BuildConfig.TBA_KEY;
     }
 
     public void setAPIKey(String key) {

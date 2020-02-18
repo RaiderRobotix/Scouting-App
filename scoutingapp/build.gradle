@@ -34,6 +34,9 @@ android {
         exclude 'org/apache/commons/codec/language/bm/*'
 
     }
+    defaultConfig {
+		buildConfigField("String", "TBA_KEY", project['apikey'])
+    }
 
 }
 

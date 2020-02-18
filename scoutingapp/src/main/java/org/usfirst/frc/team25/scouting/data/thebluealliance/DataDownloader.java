@@ -10,6 +10,7 @@ import com.thebluealliance.api.v3.TBA;
 import com.thebluealliance.api.v3.models.Match;
 import com.thebluealliance.api.v3.models.Team;
 
+import org.usfirst.frc.team25.scouting.BuildConfig;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -36,7 +37,7 @@ public class DataDownloader extends AsyncTask<Void, Void, String> {
     public DataDownloader(Context c) {
         this.c = c;
         set = Settings.newInstance(c);
-        apiKey = c.getResources().getString(R.string.tba_api_key);
+        apiKey = BuildConfig.TBA_KEY;
         teamListFilePath = FileManager.getTeamListFilePath(c);
         matchListFilePath = FileManager.getMatchListFilePath(c);
         scoreBreakdownFilePath = FileManager.getScoreBreakdownFilePath(c);
