@@ -29,6 +29,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private EditText assistingClimbTeamNum;
 
 
+
     public static TeleOpFragment getInstance(ScoutEntry entry) {
         TeleOpFragment tof = new TeleOpFragment();
         tof.setEntry(entry);
@@ -68,6 +69,30 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         autoPopulate();
 
+        if (climbAssistedByPartners.getValue() != 0) {
+            assistingClimbTeamNum.setEnabled(true);
+        } else if (climbAssistedByPartners.getValue() == 0) {
+            assistingClimbTeamNum.setEnabled(false);
+        }
+        if (park.isChecked()) {
+            attemptedClimb.setEnabled(true);
+            successClimb.setEnabled(false);
+	        rungLevel.setEnabled(false);
+            successClimb.setChecked(false);
+            rungLevel.setChecked(false);
+        }
+        if (successClimb.isChecked()) {
+	        attemptedClimb.setEnabled(false);
+            attemptedClimb.setChecked(true);
+        }
+        if (rungLevel.isChecked()) {
+            attemptedClimb.setEnabled(false);
+            attemptedClimb.setChecked(true);
+            successClimb.setEnabled(false);
+            successClimb.setChecked(true);
+        }
+
+
         climbAssistedByPartners.incButton.setOnClickListener(view1 -> {
             climbAssistedByPartners.increment();
             assistingClimbTeamNum.setEnabled(true);
@@ -77,8 +102,45 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             if (climbAssistedByPartners.getValue() != 0) {
                 assistingClimbTeamNum.setEnabled(true);
             } else if (climbAssistedByPartners.getValue() == 0) {
+            	assistingClimbTeamNum.setText("");
                 assistingClimbTeamNum.setEnabled(false);
             }
+        });
+
+        park.setOnClickListener(view1 -> {
+            if (park.isChecked()) {
+                attemptedClimb.setEnabled(true);
+                successClimb.setEnabled(false);
+                successClimb.setChecked(false);
+                rungLevel.setEnabled(false);
+                rungLevel.setChecked(false);
+            } else {
+                attemptedClimb.setEnabled(true);
+                successClimb.setEnabled(true);
+                rungLevel.setEnabled(true);
+            }
+
+        });
+        successClimb.setOnClickListener(view1 -> {
+            if (successClimb.isChecked()) {
+                attemptedClimb.setEnabled(false);
+                attemptedClimb.setChecked(true);
+            } else {
+                attemptedClimb.setEnabled(true);
+            }
+
+        });
+        rungLevel.setOnClickListener(view1 -> {
+            if (rungLevel.isChecked()) {
+                attemptedClimb.setEnabled(false);
+                attemptedClimb.setChecked(true);
+                successClimb.setEnabled(false);
+                successClimb.setChecked(true);
+            } else {
+            	attemptedClimb.setEnabled(false);
+                successClimb.setEnabled(true);
+            }
+
         });
 
         continueButton.setOnClickListener(view1 -> {
@@ -151,6 +213,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             positionControl.setChecked(tele.getPositionControl());
             park.setChecked(tele.getParked());
 
+
             if (tele.getAssistingClimbTeamNum() != 0) {
                 assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
             }
@@ -176,8 +239,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                                 attemptedClimb.isChecked(),
                                 successClimb.isChecked(),
                                 rungLevel.isChecked(),
-                                climbAssistedByPartners.getValue(),
                                 UiHelper.getIntegerFromTextBox(assistingClimbTeamNum),
+                                climbAssistedByPartners.getValue(),
                                 park.isChecked()
                         ),
                         entry.getPostMatch()

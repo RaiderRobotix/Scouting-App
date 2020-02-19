@@ -188,9 +188,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                                         unsaFePM.getPickNumber(),
                                         // Escape user input for csv
                                         unsaFePM.getRobotComment().replaceAll("[\n,]", ";"),
-                                        unsaFePM.getAutoFocus(),
-                                        unsaFePM.getAutoFocus(),
-                                        unsaFePM.getClimbType()
+		                                unsaFePM.getTeleopFocus()
                                 )
                         )
                 );
@@ -265,6 +263,19 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+// Experimenting with a way of saving the state of the check box quick comments
+//
+//	        for (CheckBox b : robotQuickComments) {
+//		        for (String comment : ROBOT_COMMENT_VALUES) {
+//			        if (b.getText().toString().equals(comment)) {
+//			        	if (robotCheckedComments.get(comment) == true) {
+//			        		b.setChecked(true);
+//				        } else {
+//			        		b.setChecked(false);
+//				        }
+//			        }
+//		        }
+//	        }
         }
     }
 
@@ -303,17 +314,26 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                         entry.getAutonomous(),
                         entry.getTeleOp(),
                         new PostMatch(
-                                comp, // TODO Create comparison
+                                comp,                                       // TODO Create comparison
                                 pickNumber,
                                 robotComment.getText().toString(),
-                                focus.toString(),
-                                focus.toString(),
-                                "" // TODO Input ClimbType
+                                focus.toString()
                         )
                 )
         );
         if (entry.getPostMatch() != null) {
             val quickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
+
+            for (CheckBox a : robotQuickComments) {
+	            for (String comment : ROBOT_COMMENT_VALUES) {
+	            	if (a.getText().toString().equals(comment)) {
+			            quickCommentSelections.put(comment, a.isChecked());
+
+		            }
+	            }
+
+            }
+
             for (String comment : ROBOT_COMMENT_VALUES) {
                 if (!quickCommentSelections.containsKey(comment)) {
                     quickCommentSelections.put(comment, false);

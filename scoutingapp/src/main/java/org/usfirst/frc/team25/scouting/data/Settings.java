@@ -14,10 +14,7 @@ import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 
 import java.util.Calendar;
 
-/**
- * Object to access SharedPreferences and global user settings
- * Must be initialized with a Context
- */
+
 public class Settings extends PreferenceFragment {
 
     private SharedPreferences sp;

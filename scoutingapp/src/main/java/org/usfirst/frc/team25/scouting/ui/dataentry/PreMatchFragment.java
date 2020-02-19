@@ -303,28 +303,50 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                     button.setChecked(true);
                 }
             }
+            for (RadioButton button : startingGamePieceButtons) {
+                if (button.getText().equals("One piece")) {
+                    if (prevPreMatch.getNumStartingCells() == 1) {
+                        button.setChecked(true);
+                    }
+                } else if (button.getText().equals("Two pieces")) {
+                    if (prevPreMatch.getNumStartingCells() == 2) {
+                        button.setChecked(true);
+                    }
+                } else if (button.getText().equals("Three pieces")) {
+                    if (prevPreMatch.getNumStartingCells() == 3) {
+                        button.setChecked(true);
+                    }
+                } else if (button.getText().equals("None")){
+                    if (prevPreMatch.getNumStartingCells() == 0) {
+                        button.setChecked(true);
+                    }
+                }
+            }
         }
-
-
-
-
-        //            for (RadioButton button : startingGamePieceButtons) {
-        //                if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
-        //                    button.setChecked(true);
-        //                }
-        //            }
-        // TODO restore based on number of starting cells
-
-
     }
 
     @Override
     public void saveState() {
         String startPos = "";
+        int startGamePieces = 0;
         for (RadioButton button : startingPositionButtons) {
             if (button.isChecked()) {
                 startPos = (String) button.getText();
-                break;
+            }
+        }
+        for (RadioButton button : startingGamePieceButtons) {
+            if (button.isChecked()) {
+                String gamePiecesNum = (String) button.getText();
+                if (gamePiecesNum.contains("One")) {
+                    startGamePieces = 1;
+                } else if (gamePiecesNum.contains("Two")) {
+                    startGamePieces = 2;
+                } else if (gamePiecesNum.contains("Three")) {
+                    startGamePieces = 3;
+                } else if (gamePiecesNum.contains("None")){
+                    startGamePieces = 0;
+                }
+
             }
         }
 
@@ -338,7 +360,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                                 scoutPosSpinner.getText().toString(),
                                 robotNoShow.isChecked(),
                                 startPos,
-                                0 // TODO starting cells
+                                startGamePieces
                         ),
                         entry.getAutonomous(),
                         entry.getTeleOp(),

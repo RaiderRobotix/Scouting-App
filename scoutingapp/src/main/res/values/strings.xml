@@ -20,7 +20,6 @@
          and the repository name ("Scouting-App")-->
     <string name="repository_name">RaiderRobotix/Scouting-App</string>
 
-
     <!--Main Menu-->
     <string name="add_match_menu_label">Add Match</string>
     <string name="export_data_menu_label">Export Data</string>
