@@ -20,6 +20,7 @@ import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import lombok.val;
 import lombok.var;
@@ -57,6 +58,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     private MaterialEditText robotComment;
     private RelativeLayout robotCommentView;
     private ArrayList<CheckBox> robotQuickComments;
+
 
 
     public static PostMatchFragment getInstance(ScoutEntry entry) {
@@ -225,20 +227,43 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     @Override
     public void autoPopulate() {
         if(entry.getPostMatch() != null) {
-            val robotCheckedComments = entry.getPostMatch().getRobotQuickCommentSelections();
-            for (int i = 0; i < ROBOT_COMMENT_VALUES.length; i++) {
-                // TODO use getOrDefault
-                var isChecked = robotCheckedComments.get(ROBOT_COMMENT_VALUES[i]);
-                isChecked = isChecked == null ? false : isChecked;
-                if (isChecked) {
-                    robotQuickComments.get(i).setChecked(true);
-                }
-            }
-            for (int i = 0; i < robotCheckedComments.size(); i++) {
-                if (robotCheckedComments.get(i)) {
-                    robotQuickComments.get(i).setChecked(true);
-                }
-            }
+            val robotQuickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
+
+// Just a couple experiments on how to get this to work
+// TODO Get quickComment autoPopulate to work
+//            for (int i = 0; i < robotQuickCommentSelections.size(); i++) {
+//            	if (robotQuickComments.get(i).isChecked()) {
+//            		robotQuickComments.get(i).setChecked(true);
+//	            }
+//            }
+
+
+//            for (int i = 0; i < ROBOT_COMMENT_VALUES.length; i++) {
+//                // TODO use getOrDefault
+//                var isChecked = robotQuickCommentSelections.get(ROBOT_COMMENT_VALUES[i]);
+//                isChecked = isChecked == null ? false : isChecked;
+//                if (isChecked) {
+//                    robotQuickComments.get(i).setChecked(true);
+//                }
+//            }
+//            for (int i = 0; i < robotQuickCommentSelections.size(); i++) {
+//                if (robotQuickCommentSelections.get(i)) {
+//                    robotQuickComments.get(i).setChecked(true);
+//                }
+//            }
+
+
+// 	        for (CheckBox b : robotQuickComments) {
+//		        for (String comment : ROBOT_COMMENT_VALUES) {
+//			        if (b.getText().toString().equals(comment)) {
+//			        	if (robotQuickCommentSelections.get(comment) == true) {
+//			        		b.setChecked(true);
+//				        } else {
+//			        		b.setChecked(false);
+//				        }
+//			        }
+//		        }
+//	        }
 
             robotComment.setText(entry.getPostMatch().getRobotComment());
 
@@ -263,19 +288,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-// Experimenting with a way of saving the state of the check box quick comments
-//
-//	        for (CheckBox b : robotQuickComments) {
-//		        for (String comment : ROBOT_COMMENT_VALUES) {
-//			        if (b.getText().toString().equals(comment)) {
-//			        	if (robotCheckedComments.get(comment) == true) {
-//			        		b.setChecked(true);
-//				        } else {
-//			        		b.setChecked(false);
-//				        }
-//			        }
-//		        }
-//	        }
+
         }
     }
 
@@ -314,7 +327,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                         entry.getAutonomous(),
                         entry.getTeleOp(),
                         new PostMatch(
-                                comp,                                       // TODO Create comparison
+                                comp,
                                 pickNumber,
                                 robotComment.getText().toString(),
                                 focus.toString()
@@ -322,21 +335,21 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 )
         );
         if (entry.getPostMatch() != null) {
-            val quickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
-
-            for (CheckBox a : robotQuickComments) {
-	            for (String comment : ROBOT_COMMENT_VALUES) {
-	            	if (a.getText().toString().equals(comment)) {
-			            quickCommentSelections.put(comment, a.isChecked());
-
-		            }
-	            }
-
-            }
+            val robotQuickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
+// TODO Get the quickComments to save correctly
+//            for (CheckBox a : robotQuickComments) {
+//	            for (String comment : ROBOT_COMMENT_VALUES) {
+//	            	if (a.getText().toString().equals(comment)) {
+//			            robotQuickCommentSelections.put(comment, a.isChecked());
+//
+//		            }
+//	            }
+//
+//            }
 
             for (String comment : ROBOT_COMMENT_VALUES) {
-                if (!quickCommentSelections.containsKey(comment)) {
-                    quickCommentSelections.put(comment, false);
+                if (!robotQuickCommentSelections.containsKey(comment)) {
+                    robotQuickCommentSelections.put(comment, true);
                 }
             }
         }
