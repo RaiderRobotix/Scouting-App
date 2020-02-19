@@ -253,17 +253,17 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 //            }
 
 
-// 	        for (CheckBox b : robotQuickComments) {
-//		        for (String comment : ROBOT_COMMENT_VALUES) {
-//			        if (b.getText().toString().equals(comment)) {
-//			        	if (robotQuickCommentSelections.get(comment) == true) {
-//			        		b.setChecked(true);
-//				        } else {
-//			        		b.setChecked(false);
-//				        }
-//			        }
-//		        }
-//	        }
+ 	        for (CheckBox b : robotQuickComments) {
+		        for (String comment : ROBOT_COMMENT_VALUES) {
+			        if (b.getText().toString().equals(comment)) {                //Error:
+			        	if (robotQuickCommentSelections.get(comment) == true) { //Attempt to invoke virtual method 'boolean java.lang.Boolean.booleanValue()' on a null object reference
+			        		b.setChecked(true);
+				        } else {
+			        		b.setChecked(false);
+				        }
+			        }
+		        }
+	        }
 
             robotComment.setText(entry.getPostMatch().getRobotComment());
 
@@ -336,20 +336,25 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         );
         if (entry.getPostMatch() != null) {
             val robotQuickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
-// TODO Get the quickComments to save correctly
-//            for (CheckBox a : robotQuickComments) {
-//	            for (String comment : ROBOT_COMMENT_VALUES) {
-//	            	if (a.getText().toString().equals(comment)) {
-//			            robotQuickCommentSelections.put(comment, a.isChecked());
-//
-//		            }
-//	            }
-//
-//            }
+
+            for (CheckBox a : robotQuickComments) {
+	            for (String comment : ROBOT_COMMENT_VALUES) {
+	            	if (a.getText().toString().equals(comment)) {
+	            		if (a.isChecked())  {
+				            robotQuickCommentSelections.put(comment, true);
+			            } else {
+				            robotQuickCommentSelections.put(comment, false);
+			            }
+
+
+		            }
+	            }
+
+            }
 
             for (String comment : ROBOT_COMMENT_VALUES) {
                 if (!robotQuickCommentSelections.containsKey(comment)) {
-                    robotQuickCommentSelections.put(comment, true);
+                    robotQuickCommentSelections.put(comment, false);
                 }
             }
         }
