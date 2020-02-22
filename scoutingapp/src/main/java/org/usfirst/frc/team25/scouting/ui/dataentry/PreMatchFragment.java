@@ -291,9 +291,9 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
     public void autoPopulate() {
 
         //Manually filled data overrides preferences
-        entry.getPreMatch();
-        PreMatch  prevPreMatch = entry.getPreMatch();
-        if(prevPreMatch!= null) {
+        if (entry.getPreMatch() != null) {
+            PreMatch prevPreMatch = entry.getPreMatch();
+
             nameField.setText(prevPreMatch.getScoutName());
             scoutPosSpinner.setText(prevPreMatch.getScoutPos());
             matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
@@ -316,14 +316,39 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                     if (prevPreMatch.getNumStartingCells() == 3) {
                         button.setChecked(true);
                     }
-                } else if (button.getText().equals("None")){
+                } else if (button.getText().equals("None")) {
                     if (prevPreMatch.getNumStartingCells() == 0) {
                         button.setChecked(true);
                     }
                 }
             }
+        } else {
+            Settings set = Settings.newInstance(getActivity());
+
+            if (!set.getScoutPos().equals("DEFAULT")) {
+                scoutPosSpinner.setText(set.getScoutPos());
+
+                if (set.useTeamList() && set.getMatchType().equals("Q")) {
+                    try {
+                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
+                                set.getScoutPos(), set.getMatchNum()));
+                    } catch (IOException e) {
+
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            //Scout nameField is prompted for after a shift ends, but not during the first match
+            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
+                nameField.setText(set.getScoutName());
+
+            }
+
+            matchNumField.setText(String.valueOf(set.getMatchNum()));
         }
     }
+
 
     @Override
     public void saveState() {
