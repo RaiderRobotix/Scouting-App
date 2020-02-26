@@ -235,11 +235,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
  	        for (CheckBox b : robotQuickComments) {
 		        for (String comment : ROBOT_COMMENT_VALUES) {
 			        if (b.getText().toString().equals(comment)) {
-			        	if (robotQuickCommentSelections.get(comment) == null) {
-			        		b.setChecked(false);
-				        } else {
-			        		b.setChecked(robotQuickCommentSelections.get(comment));
-				        }
+			        	b.setChecked(robotQuickCommentSelections.get(comment));
 			        }
 		        }
 	        }
@@ -274,7 +270,6 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     }
 
     public void saveState() {
-    	Log.wtf("IDK", "SAvteSTAte Acually Ran Yahoo");
         StringBuilder focus = new StringBuilder();
         for (CheckBox cb : focusButtons) {
             if (cb.isChecked()) {
@@ -339,7 +334,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         int prevId = -1;
 
-        for (int i = 0; i < ROBOT_COMMENT_VALUES.length / 2; i++) {
+        for (int i = 0; i < Math.ceil(ROBOT_COMMENT_VALUES.length / 2.0); i++) {
             ArrayList<String> checkSetValues = new ArrayList<>();
             checkSetValues.add(ROBOT_COMMENT_VALUES[i * 2]);
             try {
