@@ -40,7 +40,7 @@ public class UpdateChecker extends AsyncTask<String, Integer, Boolean> {
     }
 
     @Override
-    protected java.lang.Boolean doInBackground(java.lang.String... arg0) {
+    protected Boolean doInBackground(java.lang.String... arg0) {
 
         try {
             URL url = new URL("https://api.github.com/repos/"
