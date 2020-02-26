@@ -67,6 +67,6 @@ dependencies {
     }
     implementation 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
-	implementation 'com.github.RaiderRobotix:Scouting-Models:acaf54cf46'
+	implementation 'com.github.RaiderRobotix:Scouting-Models:97a5a1d8d0'
 }
 

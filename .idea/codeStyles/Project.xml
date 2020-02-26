@@ -8,9 +8,6 @@
       </value>
     </option>
     <option name="RIGHT_MARGIN" value="0" />
-    <AndroidXmlCodeStyleSettings>
-      <option name="ARRANGEMENT_SETTINGS_MIGRATED_TO_191" value="true" />
-    </AndroidXmlCodeStyleSettings>
     <codeStyleSettings language="EditorConfig">
       <option name="SPACE_AFTER_COLON" value="true" />
     </codeStyleSettings>

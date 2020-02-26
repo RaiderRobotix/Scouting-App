@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import lombok.val;
 import lombok.var;
@@ -67,10 +69,12 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         return postmatchFragment;
     }
 
+    @Override
     public ScoutEntry getEntry() {
         return entry;
     }
 
+    @Override
     public void setEntry(ScoutEntry entry) {
         this.entry = entry;
     }
@@ -190,7 +194,8 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                                         unsaFePM.getPickNumber(),
                                         // Escape user input for csv
                                         unsaFePM.getRobotComment().replaceAll("[\n,]", ";"),
-		                                unsaFePM.getTeleopFocus()
+		                                unsaFePM.getTeleopFocus(),
+		                                unsaFePM.getRobotQuickCommentSelections()
                                 )
                         )
                 );
@@ -206,12 +211,10 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                             Toast.LENGTH_LONG).show();
                 }
 
-
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
                 set.setMatchNum(set.getMatchNum() + 1);
                 getActivity().finish();
             }
-
 
         });
 
@@ -227,39 +230,15 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     @Override
     public void autoPopulate() {
         if(entry.getPostMatch() != null) {
-            val robotQuickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
-
-// Just a couple experiments on how to get this to work
-// TODO Get quickComment autoPopulate to work
-//            for (int i = 0; i < robotQuickCommentSelections.size(); i++) {
-//            	if (robotQuickComments.get(i).isChecked()) {
-//            		robotQuickComments.get(i).setChecked(true);
-//	            }
-//            }
-
-
-//            for (int i = 0; i < ROBOT_COMMENT_VALUES.length; i++) {
-//                // TODO use getOrDefault
-//                var isChecked = robotQuickCommentSelections.get(ROBOT_COMMENT_VALUES[i]);
-//                isChecked = isChecked == null ? false : isChecked;
-//                if (isChecked) {
-//                    robotQuickComments.get(i).setChecked(true);
-//                }
-//            }
-//            for (int i = 0; i < robotQuickCommentSelections.size(); i++) {
-//                if (robotQuickCommentSelections.get(i)) {
-//                    robotQuickComments.get(i).setChecked(true);
-//                }
-//            }
-
+            val robotQuickCommentSelections = new HashMap<String, Boolean>(entry.getPostMatch().getRobotQuickCommentSelections());
 
  	        for (CheckBox b : robotQuickComments) {
 		        for (String comment : ROBOT_COMMENT_VALUES) {
-			        if (b.getText().toString().equals(comment)) {                //Error:
-			        	if (robotQuickCommentSelections.get(comment) == true) { //Attempt to invoke virtual method 'boolean java.lang.Boolean.booleanValue()' on a null object reference
-			        		b.setChecked(true);
-				        } else {
+			        if (b.getText().toString().equals(comment)) {
+			        	if (robotQuickCommentSelections.get(comment) == null) {
 			        		b.setChecked(false);
+				        } else {
+			        		b.setChecked(robotQuickCommentSelections.get(comment));
 				        }
 			        }
 		        }
@@ -277,10 +256,12 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             }
 
             String[] comparisonValues = {">", "<", "="};
-            for (int i = 0; i < comparisonValues.length; i++) {
-                if (entry.getPostMatch().getComparison().equals(comparisonValues[i])) {
-                    comparisonButtons[i].setChecked(true);
-                }
+            if (!entry.getPostMatch().getComparison().equals(null)) {
+	            for (int i = 0; i < comparisonValues.length; i++) {
+		            if (entry.getPostMatch().getComparison().equals(comparisonValues[i])) {
+			            comparisonButtons[i].setChecked(true);
+		            }
+	            }
             }
 
             try {
@@ -293,6 +274,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     }
 
     public void saveState() {
+    	Log.wtf("IDK", "SAvteSTAte Acually Ran Yahoo");
         StringBuilder focus = new StringBuilder();
         for (CheckBox cb : focusButtons) {
             if (cb.isChecked()) {
@@ -311,6 +293,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 break;
             }
         }
+
         // TODO Get team nums
         val comp = new Comparison(0, 0, comparator);
 
@@ -320,52 +303,43 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 pickNumber = 2 - i;
             }
         }
-        val entry = getEntry();
-        setEntry(
-                new ScoutEntry(
-                        entry.getPreMatch(),
-                        entry.getAutonomous(),
-                        entry.getTeleOp(),
-                        new PostMatch(
-                                comp,
-                                pickNumber,
-                                robotComment.getText().toString(),
-                                focus.toString()
-                        )
-                )
-        );
-        if (entry.getPostMatch() != null) {
-            val robotQuickCommentSelections = entry.getPostMatch().getRobotQuickCommentSelections();
 
-            for (CheckBox a : robotQuickComments) {
-	            for (String comment : ROBOT_COMMENT_VALUES) {
-	            	if (a.getText().toString().equals(comment)) {
-	            		if (a.isChecked())  {
-				            robotQuickCommentSelections.put(comment, true);
-			            } else {
-				            robotQuickCommentSelections.put(comment, false);
-			            }
+        var robotQuickCommentSelections = new HashMap<String, Boolean>();
 
+		for (CheckBox a : robotQuickComments) {
+			for (String comment : ROBOT_COMMENT_VALUES) {
+				if (a.getText().toString().equals(comment)) {
+					if (a.isChecked()) {
+						robotQuickCommentSelections.put(comment, true);
+					} else {
+						robotQuickCommentSelections.put(comment, false);
+					}
+				}
+			}
+		}
+		val entry = getEntry();
+		setEntry(
+				new ScoutEntry(
+						entry.getPreMatch(),
+						entry.getAutonomous(),
+						entry.getTeleOp(),
+						new PostMatch(
+								comp,
+								pickNumber,
+								robotComment.getText().toString(),
+								focus.toString(),
+								robotQuickCommentSelections
+						)
+				)
+		);
+	}
 
-		            }
-	            }
-
-            }
-
-            for (String comment : ROBOT_COMMENT_VALUES) {
-                if (!robotQuickCommentSelections.containsKey(comment)) {
-                    robotQuickCommentSelections.put(comment, false);
-                }
-            }
-        }
-
-    }
 
     private void generateRobotQuickComments() {
 
         int prevId = -1;
 
-        for (int i = 0; i < Math.ceil(ROBOT_COMMENT_VALUES.length / 2.0); i++) {
+        for (int i = 0; i < ROBOT_COMMENT_VALUES.length / 2; i++) {
             ArrayList<String> checkSetValues = new ArrayList<>();
             checkSetValues.add(ROBOT_COMMENT_VALUES[i * 2]);
             try {
