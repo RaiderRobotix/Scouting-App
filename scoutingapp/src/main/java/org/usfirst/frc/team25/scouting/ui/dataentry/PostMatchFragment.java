@@ -20,6 +20,7 @@ import org.usfirst.frc.team25.scouting.data.models.Comparison;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -96,6 +97,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         focusButtons[2] = view.findViewById(R.id.teleop_focus_collecting_cells);
         focusButtons[3] = view.findViewById(R.id.teleop_focus_control_panel);
         focusButtons[4] = view.findViewById(R.id.teleop_focus_defense);
+        focusButtons[5] = view.findViewById(R.id.teleop_focus_its_stupid);
 
         comparisonButtons[0] = view.findViewById(R.id.current_team_comparison);
         comparisonButtons[1] = view.findViewById(R.id.prev_team_comparison);
@@ -289,8 +291,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        // TODO Get team nums
-        val comp = new Comparison(0, 0, comparator);
+        val comp = new Comparison(FileManager.getPrevTeamNumber(getActivity()), entry.getPreMatch().getTeamNum(), comparator);
 
         int pickNumber = -1;
         for (int i = 0; i < pickNumberButtons.length; i++) {

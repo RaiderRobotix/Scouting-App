@@ -64,6 +64,7 @@ public class UpdateChecker extends AsyncTask<String, Integer, Boolean> {
 
 
             if (!context.getString(R.string.version_number).equals(release.getTagName())) {
+
                 return true;
             } else {
                 new File(Environment.getExternalStorageDirectory() + "/Download/" +

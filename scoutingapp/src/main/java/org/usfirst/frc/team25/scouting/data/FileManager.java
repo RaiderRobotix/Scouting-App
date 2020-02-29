@@ -421,7 +421,6 @@ public class FileManager {
             return 0;
         }
 
-
     }
 
     public static String getPrevScoutName(Context c) {

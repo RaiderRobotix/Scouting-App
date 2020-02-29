@@ -83,6 +83,14 @@
                     android:text="Control Panel"
                     android:textSize="18sp" />
 
+                <CheckBox
+                        android:id="@+id/teleop_focus_its_stupid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/inner_components_spacing"
+                        android:text="Literally Nothing"
+                        android:textSize="18sp" />
+
             </LinearLayout>
 
         </LinearLayout>
