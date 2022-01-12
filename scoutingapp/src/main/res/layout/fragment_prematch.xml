@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:padding="8dp">
+            android:padding="8dp"
+            tools:ignore="ExtraText">
 
             <!-- Dummy item to prevent EditText from receiving focus -->
             <LinearLayout
@@ -60,10 +61,10 @@
                 android:layout_below="@id/event_spin"
                 android:hint="@string/match_number"
                 android:inputType="number"
-                android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
                 android:singleLine="true"
                 app:met_floatingLabel="normal" />
 
@@ -74,10 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/match_num_field"
                 android:hint="@string/scout_position"
-                android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
                 android:paddingEnd="@dimen/inner_padding_right"
-                android:paddingTop="@dimen/default_padding_top" />
+                android:paddingBottom="@dimen/default_padding_bottom" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/team_num_field"
@@ -94,42 +95,51 @@
                 app:met_floatingLabel="normal" />
 
             <CheckBox
+                android:id="@+id/robot_no_show_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/team_num_field"
-                android:id="@+id/robot_no_show_checkbox"
+                android:layout_marginVertical="10dp"
                 android:text="The match has started, and the robot did not show up"
-                android:textSize="18sp"
-                android:layout_marginVertical="10dp" />
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/robot_no_show_checkbox"
                 android:visibility="visible"
-                android:id="@+id/starting_level">
+                android:id="@+id/starting_location">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Robot HAB starting level"
+                    android:text="Robot Starting Location"
                     android:textSize="18sp"
-                    android:id="@+id/robot_starting_level"/>
+                    android:id="@+id/robot_starting_location"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Level 1"
+                    android:text="Robot is near Terminal"
                     android:textSize="18sp"
-                    android:id="@+id/hab_level_1"
+                    android:id="@+id/near_terminal"
                     android:padding="8dp"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Level 2"
+                    android:text="Robot is near Hanger"
                     android:textSize="18sp"
                     android:padding="8dp"
-                    android:id="@+id/hab_level_2"/>
+                    android:id="@+id/near_hanger"/>
             </RadioGroup>
 
+            <CheckBox
+                android:id="@+id/robot_starting_with_ball"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/starting_location"
+                android:layout_marginVertical="10dp"
+                android:text="Robot Started With Ball"
+                android:textSize="18sp" />
+    <!--
             <RadioGroup
                 android:id="@+id/starting_position"
                 android:layout_width="match_parent"
@@ -209,12 +219,12 @@
                     android:textSize="18sp" />
 
             </RadioGroup>
-
+        -->
             <Button
                 android:id="@+id/prematch_continue"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:layout_below="@id/robot_starting_game_piece"
+                android:layout_below="@id/robot_starting_with_ball"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="20dp"

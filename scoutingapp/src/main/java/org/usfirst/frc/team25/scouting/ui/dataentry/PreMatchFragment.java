@@ -32,13 +32,13 @@ import java.io.IOException;
 
 public class PreMatchFragment extends Fragment implements EntryFragment {
 
-    private RadioButton[] startingPositionButtons, startingLevelButtons, startingGamePieceButtons;
-    private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup,
+    private RadioButton[] startingPositionButtons, startingLocationButtons, startingGamePieceButtons;
+    private RadioGroup startingGamePieceGroup, startingLocationButtonsGroup,
             startingPositionButtonsGroup;
     private MaterialEditText nameField, matchNumField, teamNumField;
     private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
-    private CheckBox robotNoShow;
+    private CheckBox robotNoShow,robotStartedBall;
 
     public static PreMatchFragment getInstance(ScoutEntry entry) {
         PreMatchFragment prematchFragment = new PreMatchFragment();
@@ -70,16 +70,17 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         scoutPosSpinner.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
 
         robotNoShow = view.findViewById(R.id.robot_no_show_checkbox);
+        robotStartedBall = view.findViewById(R.id.robot_starting_with_ball);
 
-        startingLevelButtons = new RadioButton[2];
-        startingLevelButtons[0] = view.findViewById(R.id.hab_level_1);
-        startingLevelButtons[1] = view.findViewById(R.id.hab_level_2);
+        startingLocationButtons = new RadioButton[2];
+        startingLocationButtons[0] = view.findViewById(R.id.near_terminal);
+        startingLocationButtons[1] = view.findViewById(R.id.near_hanger);
 
         nameField = view.findViewById(R.id.scout_name_field);
         matchNumField = view.findViewById(R.id.match_num_field);
         teamNumField = view.findViewById(R.id.team_num_field);
 
-        startingPositionButtons = new RadioButton[3];
+        /*startingPositionButtons = new RadioButton[3];
         startingPositionButtons[0] = view.findViewById(R.id.leftStart);
         startingPositionButtons[1] = view.findViewById(R.id.centerStart);
         startingPositionButtons[2] = view.findViewById(R.id.rightStart);
@@ -87,11 +88,11 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         startingGamePieceButtons = new RadioButton[3];
         startingGamePieceButtons[0] = view.findViewById(R.id.cargo_button);
         startingGamePieceButtons[1] = view.findViewById(R.id.hatch_panel_button);
-        startingGamePieceButtons[2] = view.findViewById(R.id.none_button);
+        startingGamePieceButtons[2] = view.findViewById(R.id.none_button);*/
 
-        startingLevelButtonsGroup = view.findViewById(R.id.starting_level);
-        startingPositionButtonsGroup = view.findViewById(R.id.starting_position);
-        startingGamePieceGroup = view.findViewById(R.id.robot_starting_game_piece);
+        startingLocationButtonsGroup = view.findViewById(R.id.starting_location);
+        //startingPositionButtonsGroup = view.findViewById(R.id.starting_position);
+        //startingGamePieceGroup = view.findViewById(R.id.robot_starting_game_piece);
 
         autoPopulate();
 
@@ -104,7 +105,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        startingLevelButtons[1].setOnCheckedChangeListener((compoundButton, b) -> {
+        startingLocationButtons[1].setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 startingPositionButtons[1].setEnabled(false);
                 startingPositionButtons[1].setChecked(false);
@@ -114,13 +115,23 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         });
 
-        robotNoShow.setOnCheckedChangeListener((compoundButton, becameChecked) -> {
+        robotNoShow.setOnCheckedChangeListener((compoundButton, a) -> {
 
-            UiHelper.radioButtonEnable(startingLevelButtonsGroup, !becameChecked);
-            UiHelper.radioButtonEnable(startingPositionButtonsGroup, !becameChecked);
-            UiHelper.radioButtonEnable(startingGamePieceGroup, !becameChecked);
+            UiHelper.radioButtonEnable(startingLocationButtonsGroup, !a);
+        if(a) {
+            robotStartedBall.setEnabled(false);
+        } else {
+            robotStartedBall.setEnabled(true);
+        }
+
 
         });
+
+
+
+
+
+
 
 
         continueButton.setOnClickListener(view1 -> {
@@ -165,9 +176,9 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             boolean startingValuesSelected = true;
 
 
-            RadioButton[][] startingValueButtons = new RadioButton[][]{startingPositionButtons,
-                    startingLevelButtons, startingGamePieceButtons};
-
+            RadioButton[][] startingValueButtons = new RadioButton[][]{
+                    startingLocationButtons };
+            System.out.println("*************THIS WORKS***********");
             for (RadioButton[] startingValueSet : startingValueButtons) {
                 boolean buttonSelectedInSet = false;
                 for (RadioButton button : startingValueSet) {
@@ -186,7 +197,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             if (proceed && !robotNoShow.isChecked() && !startingValuesSelected) {
                 proceed = false;
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select robot starting level/position/game piece")
+                builder.setTitle("Select robot starting location and if robot has a ball")
                         .setCancelable(false)
                         .setPositiveButton("OK", (dialog, id) -> {
 
@@ -318,19 +329,19 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
 
 
-            for (RadioButton button : startingPositionButtons) {
+            /*for (RadioButton button : startingPositionButtons) {
                 if (button.getText().equals(prevPreMatch.getStartingPos())) {
                     button.setChecked(true);
                 }
-            }
-            for (RadioButton button : startingGamePieceButtons) {
+            }*/
+            /*for (RadioButton button : startingGamePieceButtons) {
                 if (button.getText().toString().equals(prevPreMatch.getStartingGamePiece())) {
                     button.setChecked(true);
                 }
-            }
+            }*/
 
 
-            for (RadioButton button : startingLevelButtons) {
+            for (RadioButton button : startingLocationButtons) {
                 if (button.getText().toString().contains(Integer.toString(prevPreMatch.getStartingLevel()))) {
                     button.setChecked(true);
                 }
@@ -370,29 +381,30 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        String startPos = "";
-        for (RadioButton button : startingPositionButtons) {
+        String startLoc = "";
+        for (RadioButton button : startingLocationButtons) {
             if (button.isChecked()) {
-                startPos = (String) button.getText();
+                startLoc = (String) button.getText();
                 break;
             }
         }
 
-        String startPiece = "";
-        for (RadioButton button : startingGamePieceButtons) {
+       // String startPiece = "";
+        /*for (RadioButton button : startingGamePieceButtons) {
             if (button.isChecked()) {
                 startPiece = (String) button.getText();
                 break;
             }
-        }
+        }*/
 
         entry.setPreMatch(new PreMatch(nameField.getText().toString(),
                 scoutPosSpinner.getText().toString(),
-                startPos,
+                startLoc,
                 Integer.parseInt(matchNumField.getText().toString()),
                 Integer.parseInt(teamNumField.getText().toString()),
-                UiHelper.getHabLevelSelected(startingLevelButtons),
-                robotNoShow.isChecked(), startPiece
+                UiHelper.getHabLevelSelected(startingLocationButtons),
+                robotNoShow.isChecked(), robotStartedBall.isChecked()
+
         ));
     }
 
