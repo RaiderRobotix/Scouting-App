@@ -160,11 +160,11 @@
 
         <ImageView
             android:id="@+id/game_logo_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="352dp"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/deep_space_logo"
+            android:src="@drawable/rapid_react_logo"
             android:textAlignment="center" />
     </RelativeLayout>
 
