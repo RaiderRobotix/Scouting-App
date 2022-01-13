@@ -105,7 +105,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        startingLocationButtons[1].setOnCheckedChangeListener((compoundButton, b) -> {
+        /*startingLocationButtons[1].setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 startingPositionButtons[1].setEnabled(false);
                 startingPositionButtons[1].setChecked(false);
@@ -113,13 +113,14 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 startingPositionButtons[1].setEnabled(true);
             }
 
-        });
+        });*/
 
         robotNoShow.setOnCheckedChangeListener((compoundButton, a) -> {
 
             UiHelper.radioButtonEnable(startingLocationButtonsGroup, !a);
         if(a) {
             robotStartedBall.setEnabled(false);
+            robotStartedBall.setChecked(false);
         } else {
             robotStartedBall.setEnabled(true);
         }
