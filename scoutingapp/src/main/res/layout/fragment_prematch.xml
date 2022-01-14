@@ -126,7 +126,7 @@
                     android:text="Robot Starting Location"
                     android:padding="20sp"
                     android:textSize="26sp" />
-
+                <!-- INCREASE SIZE OF RADIO BUTTON -->
                 <RadioButton
                     android:id="@+id/near_terminal"
                     android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
                     android:padding="8dp"
                     android:text="Robot is near Terminal"
                     android:textSize="24sp" />
-
+                <!-- INCREASE SIZE OF RADIO BUTTON -->
                 <RadioButton
                     android:id="@+id/near_hanger"
                     android:layout_width="wrap_content"
@@ -226,6 +226,8 @@
 
             </RadioGroup>
         -->
+
+
             <Button
                 android:id="@+id/prematch_continue"
                 android:layout_width="190dp"
