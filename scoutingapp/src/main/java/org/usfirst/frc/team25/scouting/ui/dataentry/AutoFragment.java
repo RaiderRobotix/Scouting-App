@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
+import org.usfirst.frc.team25.scouting.ui.UiHelper;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
@@ -76,6 +77,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
         Button continueButton = view.findViewById(R.id.auto_continue);
+
 
 
         //opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> autoEnableCrossHabLine());
@@ -166,15 +168,19 @@ public class AutoFragment extends Fragment implements EntryFragment {
         autoPopulate();
 
         continueButton.setOnClickListener(view1 -> {
-            if (cargoShipHatches.getValue() > 0 && !frontCargoShipHatchCapable.isChecked() &&
-                    !sideCargoShipHatchCapable.isChecked() ||  !cargoDroppedCargoShip.isChecked()
-                    && !cargoDroppedRocket.isChecked() || !hatchesDroppedCargoShip.isChecked() && !hatchesDroppedRocket.isChecked()) {
+            //FIX THE ROBOT PASS TARMAC CHECK BUTTON SO IF IT IS NOT CHECKED THEN IT GIVES AND ALERT
+            if (robotcargoPickedup.getValue() == 0 && (robotCargoScoredLowerHub.getValue() > 1 ||
+                    robotCargoScoredUpperHub.getValue() > 1) && (robotPassTarmac.isChecked()==false &&
+                    (robotCargoScoredLowerHub.getValue()>0 || robotCargoScoredUpperHub.getValue() > 0 ||
+                            robotcargoPickedup.getValue() > 0))) {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Select where game pieces were placed/dropped")
+                        .setTitle("Select How many Balls the robot picked up / Select if the Robot Crossed the Tarmac")
                         .setPositiveButton("OK", (dialogInterface, i) -> {
 
                         })
                         .show();
+
+
             } else {
                 saveState();
                 getFragmentManager().beginTransaction()
@@ -276,17 +282,11 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        entry.setAutonomous(new Autonomous(rocketCargo.getValue(), rocketHatches.getValue(),
-                cargoShipHatches.getValue(),
-                cargoShipCargo.getValue(),
+        entry.setAutonomous(new Autonomous(
                 robotcargoPickedup.getValue(), robotCargoScoredUpperHub.getValue(),
                 robotCargoScoredLowerHub.getValue(), robotCargoDropped.getValue(),
                 humanCargoScored.getValue(), humanCargoMissed.getValue(),
-                crossHabLine.isChecked(),
-                robotPassTarmac.isChecked(), sideCargoShipHatchCapable.isChecked(),
-                frontCargoShipHatchCapable.isChecked(), cargoDroppedCargoShip.isChecked(),
-                cargoDroppedRocket.isChecked(), hatchesDroppedRocket.isChecked(),
-                hatchesDroppedCargoShip.isChecked()));
+                robotPassTarmac.isChecked()));
     }
 
     @Override
