@@ -70,7 +70,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         scoutPosSpinner.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
 
         robotNoShow = view.findViewById(R.id.robot_no_show_checkbox);
-        robotStartedBall = view.findViewById(R.id.robot_starting_with_ball);
+        robotStartedBall = view.findViewById(R.id.robot_starting_with_Cargo);
 
         startingLocationButtons = new RadioButton[2];
         startingLocationButtons[0] = view.findViewById(R.id.near_terminal);

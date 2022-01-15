@@ -19,9 +19,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     private ButtonIncDecSet rocketCargo, rocketHatches, cargoShipCargo, cargoShipHatches;
 
-    private ButtonIncDecView hatchesDropped, cargoDropped;
+    private ButtonIncDecView robotCargoScoredUpperHub,  robotcargoPickedup, robotCargoScoredLowerHub ,
+            robotCargoDropped , humanCargoScored , humanCargoMissed;
 
-    private CheckBox crossHabLine, opponentCargoShipLineFoul, sideCargoShipHatchCapable,
+    private CheckBox crossHabLine, robotPassTarmac, sideCargoShipHatchCapable,
             frontCargoShipHatchCapable, cargoDroppedCargoShip, cargoDroppedRocket,
             hatchesDroppedCargoShip, hatchesDroppedRocket;
 
@@ -52,28 +53,34 @@ public class AutoFragment extends Fragment implements EntryFragment {
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
 
-        rocketCargo = view.findViewById(R.id.rocket_cargo_auto);
-        rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
-        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
-        cargoDropped = view.findViewById(R.id.cargo_dropped_auto);
-        crossHabLine = view.findViewById(R.id.cross_hab_line);
-        hatchesDropped = view.findViewById(R.id.hatches_dropped_auto);
-        opponentCargoShipLineFoul = view.findViewById(R.id.opponent_cargo_ship_line);
-        frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
-        sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
-        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
-        cargoDroppedCargoShip = view.findViewById(R.id.cargo_dropped_cargo_ship);
-        cargoDroppedRocket = view.findViewById(R.id.cargo_dropped_rocket);
-        hatchesDroppedCargoShip = view.findViewById(R.id.hatches_dropped_cargo_ship);
-        hatchesDroppedRocket = view.findViewById(R.id.hatches_dropped_rocket);
+       // rocketCargo = view.findViewById(R.id.rocket_cargo_auto);
+       // rocketHatches = view.findViewById(R.id.rocket_hatches_auto);
+        //cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_auto);
+        robotcargoPickedup = view.findViewById(R.id.Cargo_robot_picked_up);
+        //crossHabLine = view.findViewById(R.id.cross_hab_line);
+        robotCargoScoredUpperHub = view.findViewById(R.id.Robot_balls_scored_upperHub);
+        robotCargoScoredLowerHub = view.findViewById(R.id.Robot_Cargo_scored_lowerHub);
+        robotCargoDropped = view.findViewById(R.id.Cargo_robot_dropped);
+        humanCargoScored = view.findViewById(R.id.cargo_Human_scored);
+        humanCargoMissed = view.findViewById(R.id.cargo_Human_missed);
+
+
+        robotPassTarmac = view.findViewById(R.id.Robot_pass_tarmac);
+        //frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
+        //sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
+        //cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
+        //cargoDroppedCargoShip = view.findViewById(R.id.cargo_dropped_cargo_ship);
+        //cargoDroppedRocket = view.findViewById(R.id.cargo_dropped_rocket);
+       // hatchesDroppedCargoShip = view.findViewById(R.id.hatches_dropped_cargo_ship);
+       // hatchesDroppedRocket = view.findViewById(R.id.hatches_dropped_rocket);
 
 
         Button continueButton = view.findViewById(R.id.auto_continue);
 
 
-        opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> autoEnableCrossHabLine());
+        //opponentCargoShipLineFoul.setOnCheckedChangeListener((compoundButton, b) -> autoEnableCrossHabLine());
 
-        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{rocketHatches,
+       /* ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{rocketHatches,
                 cargoShipHatches, rocketCargo, cargoShipCargo};
 
         for (ButtonIncDecSet set : enablingCrossHabLineMetrics) {
@@ -93,26 +100,66 @@ public class AutoFragment extends Fragment implements EntryFragment {
                 }
 
             });
-        }
+        }*/
 
-        hatchesDropped.incButton.setOnClickListener(view1 -> {
-            hatchesDropped.increment();
-            autoEnableHatchesDroppedLocationSet();
+        robotcargoPickedup.incButton.setOnClickListener(view1 -> {
+            robotcargoPickedup.increment();
+            //autoEnableHatchesDroppedLocationSet();
         });
 
-        hatchesDropped.decButton.setOnClickListener(view1 -> {
-            hatchesDropped.decrement();
-            autoEnableHatchesDroppedLocationSet();
+        robotcargoPickedup.decButton.setOnClickListener(view1 -> {
+            robotcargoPickedup.decrement();
+            //autoEnableHatchesDroppedLocationSet();
         });
 
-        cargoDropped.incButton.setOnClickListener(view1 -> {
-            cargoDropped.increment();
-            autoEnableCargoDroppedLocationSet();
+        robotCargoScoredUpperHub.incButton.setOnClickListener(view1 -> {
+            robotCargoScoredUpperHub.increment();
+            //autoEnableCargoDroppedLocationSet();
         });
 
-        cargoDropped.decButton.setOnClickListener(view1 -> {
-            cargoDropped.decrement();
-            autoEnableCargoDroppedLocationSet();
+        robotCargoScoredUpperHub.decButton.setOnClickListener(view1 -> {
+            robotCargoScoredUpperHub.decrement();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        robotCargoScoredLowerHub.incButton.setOnClickListener(view1 -> {
+            robotCargoScoredLowerHub.increment();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        robotCargoScoredLowerHub.decButton.setOnClickListener(view1 -> {
+            robotCargoScoredLowerHub.decrement();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        robotCargoDropped.incButton.setOnClickListener(view1 -> {
+            robotCargoDropped.increment();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        robotCargoDropped.decButton.setOnClickListener(view1 -> {
+            robotCargoDropped.decrement();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        humanCargoScored.incButton.setOnClickListener(view1 -> {
+            humanCargoScored.increment();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        humanCargoScored.decButton.setOnClickListener(view1 -> {
+            humanCargoScored.decrement();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        humanCargoMissed.incButton.setOnClickListener(view1 -> {
+            humanCargoMissed.increment();
+            //autoEnableCargoDroppedLocationSet();
+        });
+
+        humanCargoMissed.decButton.setOnClickListener(view1 -> {
+            humanCargoMissed.decrement();
+            //autoEnableCargoDroppedLocationSet();
         });
 
 
@@ -120,8 +167,8 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         continueButton.setOnClickListener(view1 -> {
             if (cargoShipHatches.getValue() > 0 && !frontCargoShipHatchCapable.isChecked() &&
-                    !sideCargoShipHatchCapable.isChecked() || cargoDropped.getValue() > 0 && !cargoDroppedCargoShip.isChecked()
-                    && !cargoDroppedRocket.isChecked() || hatchesDropped.getValue() > 0 && !hatchesDroppedCargoShip.isChecked() && !hatchesDroppedRocket.isChecked()) {
+                    !sideCargoShipHatchCapable.isChecked() ||  !cargoDroppedCargoShip.isChecked()
+                    && !cargoDroppedRocket.isChecked() || !hatchesDroppedCargoShip.isChecked() && !hatchesDroppedRocket.isChecked()) {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Select where game pieces were placed/dropped")
                         .setPositiveButton("OK", (dialogInterface, i) -> {
@@ -145,10 +192,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    private void autoEnableCrossHabLine() {
+   /* private void autoEnableCrossHabLine() {
         if (rocketCargo.getValue() > 0 || cargoShipCargo.getValue() > 0
                 || cargoShipHatches.getValue() > 0 || rocketHatches.getValue() > 0 || sideCargoShipHatchCapable.isChecked() ||
-                frontCargoShipHatchCapable.isChecked() || opponentCargoShipLineFoul.isChecked()) {
+                frontCargoShipHatchCapable.isChecked() || robotPassTarmac.isChecked()) {
             crossHabLine.setChecked(true);
             crossHabLine.setEnabled(false);
         } else {
@@ -191,7 +238,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             cargoDroppedRocket.setChecked(false);
             cargoDroppedCargoShip.setChecked(false);
         }
-    }
+    }*/
 
     @Override
     public void autoPopulate() {
@@ -202,22 +249,26 @@ public class AutoFragment extends Fragment implements EntryFragment {
             rocketCargo.setValue(prevAuto.getRocketCargo());
             rocketHatches.setValue(prevAuto.getRocketHatches());
             cargoShipHatches.setValue(prevAuto.getCargoShipHatches());
-            hatchesDropped.setValue(prevAuto.getHatchesDropped());
-            cargoDropped.setValue(prevAuto.getCargoDropped());
+            robotcargoPickedup.setValue(prevAuto.getRobotCargoPickedup());
+            robotCargoScoredUpperHub.setValue(prevAuto.getRobotCargoScoredUpperHub());
+            robotCargoScoredLowerHub.setValue(prevAuto.getRobotCargoScoredLowerHub());
+            robotCargoDropped.setValue(prevAuto.getRobotCargoDropped());
+            humanCargoScored.setValue(prevAuto.getHumanCargoScored());
+            humanCargoMissed.setValue(prevAuto.getHumanCargoMissed());
             sideCargoShipHatchCapable.setChecked(prevAuto.isSideCargoShipHatchCapable());
             frontCargoShipHatchCapable.setChecked(prevAuto.isFrontCargoShipHatchCapable());
             crossHabLine.setChecked(prevAuto.isCrossHabLine());
-            opponentCargoShipLineFoul.setChecked(prevAuto.isOpponentCargoShipLineFoul());
+            robotPassTarmac.setChecked(prevAuto.isRobotPassTarmac());
             cargoDroppedCargoShip.setChecked(prevAuto.isCargoDroppedCargoShip());
             cargoDroppedRocket.setChecked(prevAuto.isCargoDroppedRocket());
             hatchesDroppedCargoShip.setChecked(prevAuto.isHatchesDroppedCargoShip());
             hatchesDroppedRocket.setChecked(prevAuto.isHatchesDroppedRocket());
 
-            autoEnableCargoShipHatchPlacementSet();
-            autoEnableCargoDroppedLocationSet();
-            autoEnableHatchesDroppedLocationSet();
+            //autoEnableCargoShipHatchPlacementSet();
+            //autoEnableCargoDroppedLocationSet();
+            //autoEnableHatchesDroppedLocationSet();
 
-            autoEnableCrossHabLine();
+            //autoEnableCrossHabLine();
 
         }
 
@@ -228,9 +279,11 @@ public class AutoFragment extends Fragment implements EntryFragment {
         entry.setAutonomous(new Autonomous(rocketCargo.getValue(), rocketHatches.getValue(),
                 cargoShipHatches.getValue(),
                 cargoShipCargo.getValue(),
-                hatchesDropped.getValue(),
-                cargoDropped.getValue(), crossHabLine.isChecked(),
-                opponentCargoShipLineFoul.isChecked(), sideCargoShipHatchCapable.isChecked(),
+                robotcargoPickedup.getValue(), robotCargoScoredUpperHub.getValue(),
+                robotCargoScoredLowerHub.getValue(), robotCargoDropped.getValue(),
+                humanCargoScored.getValue(), humanCargoMissed.getValue(),
+                crossHabLine.isChecked(),
+                robotPassTarmac.isChecked(), sideCargoShipHatchCapable.isChecked(),
                 frontCargoShipHatchCapable.isChecked(), cargoDroppedCargoShip.isChecked(),
                 cargoDroppedRocket.isChecked(), hatchesDroppedRocket.isChecked(),
                 hatchesDroppedCargoShip.isChecked()));

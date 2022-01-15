@@ -104,19 +104,19 @@
                 android:textSize="24sp" />
             <!-- CHANGE SIZE OF CHECKBOX-->
             <CheckBox
-                android:id="@+id/robot_starting_with_ball"
+                android:id="@+id/robot_starting_with_Cargo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/robot_no_show_checkbox"
                 android:layout_marginVertical="10dp"
-                android:text="Robot Started With Ball"
+                android:text="Robot Started With Cargo"
                 android:textSize="24sp" />
 
             <RadioGroup
                 android:id="@+id/starting_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/robot_starting_with_ball"
+                android:layout_below="@id/robot_starting_with_Cargo"
                 android:visibility="visible">
 
                 <TextView

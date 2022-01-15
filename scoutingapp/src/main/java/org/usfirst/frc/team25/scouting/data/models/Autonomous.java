@@ -17,20 +17,25 @@ public class Autonomous {
     private boolean frontCargoShipHatchCapable;
     private boolean sideCargoShipHatchCapable;
 
-    private int hatchesDropped;
-    private int cargoDropped;
+    private int RobotCargoPickedup;
+    private int RobotCargoScoredUpperHub;
+    private int RobotCargoScoredLowerHub;
+    private int robotCargoDropped;
+    private int humanCargoScored;
+    private int humanCargoMissed;
 
     private boolean hatchesDroppedCargoShip;
     private boolean hatchesDroppedRocket;
     private boolean cargoDroppedCargoShip;
     private boolean cargoDroppedRocket;
 
-    private boolean opponentCargoShipLineFoul;
+    private boolean robotPassTarmac;
 
 
     public Autonomous(int rocketCargo, int rocketHatches, int cargoShipHatches,
-                      int cargoShipCargo, int hatchesDropped, int cargoDropped,
-                      boolean crossHabLine, boolean opponentCargoShipLineFoul,
+                      int cargoShipCargo, int RobotCargoPickedup, int RobotCargoScoredUpperHub,
+                      int RobotCargoScoredLowerHub, int robotCargoDropped,int humanCargoScored, int humanCargoMissed,
+                      boolean crossHabLine, boolean robotPassTarmac,
                       boolean sideCargoShipHatchCapable, boolean frontCargoShipHatchCapable,
                       boolean cargoDroppedCargoShip, boolean cargoDroppedRocket,
                       boolean hatchesDroppedRocket, boolean hatchesDroppedCargoShip) {
@@ -38,10 +43,14 @@ public class Autonomous {
         this.rocketHatches = rocketHatches;
         this.cargoShipHatches = cargoShipHatches;
         this.cargoShipCargo = cargoShipCargo;
-        this.hatchesDropped = hatchesDropped;
-        this.cargoDropped = cargoDropped;
+        this.RobotCargoPickedup = RobotCargoPickedup;
+        this.RobotCargoScoredUpperHub = RobotCargoScoredUpperHub;
+        this.RobotCargoScoredLowerHub = RobotCargoScoredLowerHub;
+        this.robotCargoDropped = robotCargoDropped;
+        this.humanCargoScored = humanCargoScored;
+        this.humanCargoMissed = humanCargoMissed;
         this.crossHabLine = crossHabLine;
-        this.opponentCargoShipLineFoul = opponentCargoShipLineFoul;
+        this.robotPassTarmac = robotPassTarmac;
         this.sideCargoShipHatchCapable = sideCargoShipHatchCapable;
         this.frontCargoShipHatchCapable = frontCargoShipHatchCapable;
         this.cargoDroppedCargoShip = cargoDroppedCargoShip;
@@ -66,20 +75,36 @@ public class Autonomous {
         return cargoShipCargo;
     }
 
-    public int getHatchesDropped() {
-        return hatchesDropped;
+    public int getRobotCargoPickedup() {
+        return RobotCargoPickedup;
     }
 
-    public int getCargoDropped() {
-        return cargoDropped;
+    public int getRobotCargoScoredUpperHub() {
+        return RobotCargoScoredUpperHub;
+    }
+
+    public int getRobotCargoScoredLowerHub() {
+        return RobotCargoScoredLowerHub;
+    }
+
+    public int getRobotCargoDropped() {
+        return robotCargoDropped;
+    }
+
+    public int getHumanCargoScored() {
+        return humanCargoScored;
+    }
+
+    public int getHumanCargoMissed() {
+        return humanCargoMissed;
     }
 
     public boolean isCrossHabLine() {
         return crossHabLine;
     }
 
-    public boolean isOpponentCargoShipLineFoul() {
-        return opponentCargoShipLineFoul;
+    public boolean isRobotPassTarmac() {
+        return robotPassTarmac;
     }
 
     public boolean isSideCargoShipHatchCapable() {

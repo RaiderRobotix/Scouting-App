@@ -180,13 +180,13 @@
             android:textSize="18sp" /> -->
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_dropped_auto"
+            android:id="@+id/Cargo_robot_picked_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Robot_pass_tarmac"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Cargo dropped" />
+            app:titlePrompt="Cargo Picked Up" />
 
        <!-- <CheckBox
             android:id="@+id/cargo_dropped_cargo_ship"
@@ -212,38 +212,38 @@
             android:text="Rocket"
             android:textSize="18sp" /> -->
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_dropped_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
+      <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+          android:id="@+id/Robot_balls_scored_upperHub"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/Cargo_robot_picked_up"
+          android:padding="@dimen/default_padding_bottom"
+          app:initialValue="0"
+          app:titlePrompt="Cargo Scored In Upperhub" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/test1"
+            android:id="@+id/Robot_Cargo_scored_lowerHub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_auto"
+            android:layout_below="@id/Robot_balls_scored_upperHub"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
+            app:titlePrompt="Cargo Scored In LowerHub" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/test2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/test1"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
+      <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+          android:id="@+id/Cargo_robot_dropped"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/Robot_Cargo_scored_lowerHub"
+          android:padding="@dimen/default_padding_bottom"
+          app:initialValue="0"
+          app:titlePrompt="Cargo Dropped" />
 
         <TextView
             android:id="@+id/Human_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/test2"
+            android:layout_below="@id/Cargo_robot_dropped"
             android:layout_centerHorizontal="true"
             android:padding="8sp"
             android:text="Human Section"
@@ -252,22 +252,22 @@
             />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/test3"
+            android:id="@+id/cargo_Human_scored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/Human_label"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
+            app:titlePrompt="Cargo Scored" />
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/test4"
+            android:id="@+id/cargo_Human_missed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/test3"
+            android:layout_below="@id/cargo_Human_scored"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
+            app:titlePrompt="Cargo Missed" />
 
        <!-- <CheckBox
             android:id="@+id/hatches_dropped_cargo_ship"
@@ -294,24 +294,24 @@
             android:textSize="18sp" /> -->
 
 
-        <CheckBox
-            android:id="@+id/Robot_pass_tarmac"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Robot_label"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5sp"
-            android:padding="@dimen/default_padding_bottom"
-            android:layout_centerHorizontal="true"
-            android:text="Did the Robot Pass the Tarmac"
-            android:textSize="18sp" />
+      <CheckBox
+          android:id="@+id/Robot_pass_tarmac"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/Robot_label"
+          android:layout_centerHorizontal="true"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginTop="5sp"
+          android:padding="@dimen/default_padding_bottom"
+          android:text="Did the Robot Pass the Tarmac"
+          android:textSize="18sp" />
 
 
         <Button
             android:id="@+id/auto_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/test4"
+            android:layout_below="@id/cargo_Human_missed"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
