@@ -170,7 +170,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         continueButton.setOnClickListener(view1 -> {
             //FIX THE ROBOT PASS TARMAC CHECK BUTTON SO IF IT IS NOT CHECKED THEN IT GIVES AND ALERT
             if (robotcargoPickedup.getValue() == 0 && (robotCargoScoredLowerHub.getValue() > 1 ||
-                    robotCargoScoredUpperHub.getValue() > 1) && (robotPassTarmac.isChecked()==false &&
+                    robotCargoScoredUpperHub.getValue() > 1) || (robotPassTarmac.isChecked()==false &&
                     (robotCargoScoredLowerHub.getValue()>0 || robotCargoScoredUpperHub.getValue() > 0 ||
                             robotcargoPickedup.getValue() > 0))) {
                 new AlertDialog.Builder(getActivity())
