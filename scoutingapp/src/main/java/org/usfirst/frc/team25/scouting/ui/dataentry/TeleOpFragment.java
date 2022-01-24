@@ -135,7 +135,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 for(RadioButton button : successRungClimbLevel) {
                     button.setEnabled(false);
                     button.setChecked(false);
-                    attemptRungClimb.setChecked(false);
                     attemptRungClimb.setEnabled(true);
                 }
             }

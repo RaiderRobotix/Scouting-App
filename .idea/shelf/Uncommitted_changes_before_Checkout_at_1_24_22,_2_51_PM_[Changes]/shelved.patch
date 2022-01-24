@@ -1,0 +1,61 @@
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <compositeConfiguration>\n          <compositeBuild compositeDefinitionSource=\"SCRIPT\" />\n        </compositeConfiguration>\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/scoutingapp\" />\n          </set>\n        </option>\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	
++++ b/.idea/gradle.xml	
+@@ -1,11 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+-        <compositeConfiguration>
+-          <compositeBuild compositeDefinitionSource="SCRIPT" />
+-        </compositeConfiguration>
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="modules">
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectModuleManager\">\n    <modules>\n      <module fileurl=\"file://$PROJECT_DIR$/Scouting-App.iml\" filepath=\"$PROJECT_DIR$/Scouting-App.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/scoutingapp/scoutingapp.iml\" filepath=\"$PROJECT_DIR$/scoutingapp/scoutingapp.iml\" />\n    </modules>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	
++++ b/.idea/modules.xml	
+@@ -3,6 +3,8 @@
+   <component name="ProjectModuleManager">
+     <modules>
+       <module fileurl="file://$PROJECT_DIR$/Scouting-App.iml" filepath="$PROJECT_DIR$/Scouting-App.iml" />
++      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scouting-App-2022_V2.iml" filepath="$PROJECT_DIR$/.idea/modules/Scouting-App-2022_V2.iml" />
++      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2022_V2.scoutingapp.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2022_V2.scoutingapp.iml" />
+       <module fileurl="file://$PROJECT_DIR$/scoutingapp/scoutingapp.iml" filepath="$PROJECT_DIR$/scoutingapp/scoutingapp.iml" />
+     </modules>
+   </component>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CMakeSettings\">\n    <configurations>\n      <configuration PROFILE_NAME=\"Debug\" CONFIG_NAME=\"Debug\" />\n    </configurations>\n  </component>\n  <component name=\"MarkdownProjectSettings\">\n    <PreviewSettings splitEditorLayout=\"SPLIT\" splitEditorPreview=\"PREVIEW\" useGrayscaleRendering=\"false\" zoomFactor=\"1.0\" maxImageWidth=\"0\" showGitHubPageIfSynced=\"false\" allowBrowsingInPreview=\"false\" synchronizePreviewPosition=\"true\" highlightPreviewType=\"NONE\" highlightFadeOut=\"5\" highlightOnTyping=\"true\" synchronizeSourcePosition=\"true\" verticallyAlignSourceAndPreviewSyncPosition=\"true\" showSearchHighlightsInPreview=\"false\" showSelectionInPreview=\"true\">\n      <PanelProvider>\n        <provider providerId=\"com.vladsch.idea.multimarkdown.editor.swing.html.panel\" providerName=\"Default - Swing\" />\n      </PanelProvider>\n    </PreviewSettings>\n    <ParserSettings gitHubSyntaxChange=\"false\">\n      <PegdownExtensions>\n        <option name=\"ABBREVIATIONS\" value=\"false\" />\n        <option name=\"ANCHORLINKS\" value=\"true\" />\n        <option name=\"ASIDE\" value=\"false\" />\n        <option name=\"ATXHEADERSPACE\" value=\"true\" />\n        <option name=\"AUTOLINKS\" value=\"true\" />\n        <option name=\"DEFINITIONS\" value=\"false\" />\n        <option name=\"DEFINITION_BREAK_DOUBLE_BLANK_LINE\" value=\"false\" />\n        <option name=\"FENCED_CODE_BLOCKS\" value=\"true\" />\n        <option name=\"FOOTNOTES\" value=\"false\" />\n        <option name=\"HARDWRAPS\" value=\"false\" />\n        <option name=\"HTML_DEEP_PARSER\" value=\"false\" />\n        <option name=\"INSERTED\" value=\"false\" />\n        <option name=\"QUOTES\" value=\"false\" />\n        <option name=\"RELAXEDHRULES\" value=\"true\" />\n        <option name=\"SMARTS\" value=\"false\" />\n        <option name=\"STRIKETHROUGH\" value=\"true\" />\n        <option name=\"SUBSCRIPT\" value=\"false\" />\n        <option name=\"SUPERSCRIPT\" value=\"false\" />\n        <option name=\"SUPPRESS_HTML_BLOCKS\" value=\"false\" />\n        <option name=\"SUPPRESS_INLINE_HTML\" value=\"false\" />\n        <option name=\"TABLES\" value=\"true\" />\n        <option name=\"TASKLISTITEMS\" value=\"true\" />\n        <option name=\"TOC\" value=\"false\" />\n        <option name=\"WIKILINKS\" value=\"true\" />\n      </PegdownExtensions>\n      <ParserOptions>\n        <option name=\"COMMONMARK_LISTS\" value=\"true\" />\n        <option name=\"DUMMY\" value=\"false\" />\n        <option name=\"EMOJI_SHORTCUTS\" value=\"true\" />\n        <option name=\"FLEXMARK_FRONT_MATTER\" value=\"false\" />\n        <option name=\"GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA\" value=\"false\" />\n        <option name=\"GFM_TABLE_RENDERING\" value=\"true\" />\n        <option name=\"GITBOOK_URL_ENCODING\" value=\"false\" />\n        <option name=\"GITHUB_EMOJI_URL\" value=\"false\" />\n        <option name=\"GITHUB_LISTS\" value=\"false\" />\n        <option name=\"GITHUB_WIKI_LINKS\" value=\"true\" />\n        <option name=\"JEKYLL_FRONT_MATTER\" value=\"false\" />\n        <option name=\"SIM_TOC_BLANK_LINE_SPACER\" value=\"true\" />\n      </ParserOptions>\n    </ParserSettings>\n    <HtmlSettings headerTopEnabled=\"false\" headerBottomEnabled=\"false\" bodyTopEnabled=\"false\" bodyBottomEnabled=\"false\" embedUrlContent=\"false\" addPageHeader=\"true\">\n      <GeneratorProvider>\n        <provider providerId=\"com.vladsch.idea.multimarkdown.editor.swing.html.generator\" providerName=\"Default Swing HTML Generator\" />\n      </GeneratorProvider>\n      <headerTop />\n      <headerBottom />\n      <bodyTop />\n      <bodyBottom />\n    </HtmlSettings>\n    <CssSettings previewScheme=\"UI_SCHEME\" cssUri=\"\" isCssUriEnabled=\"false\" isCssTextEnabled=\"false\" isDynamicPageWidth=\"true\">\n      <StylesheetProvider>\n        <provider providerId=\"com.vladsch.idea.multimarkdown.editor.swing.html.css\" providerName=\"Default Swing Stylesheet\" />\n      </StylesheetProvider>\n      <ScriptProviders />\n      <cssText />\n    </CssSettings>\n    <HtmlExportSettings updateOnSave=\"false\" parentDir=\"$ProjectFileDir$\" targetDir=\"$ProjectFileDir$\" cssDir=\"\" scriptDir=\"\" plainHtml=\"false\" imageDir=\"\" copyLinkedImages=\"false\" imageUniquifyType=\"0\" targetExt=\"\" useTargetExt=\"false\" noCssNoScripts=\"false\" linkToExportedHtml=\"true\" exportOnSettingsChange=\"true\" regenerateOnProjectOpen=\"false\" />\n    <LinkMapSettings>\n      <textMaps />\n    </LinkMapSettings>\n  </component>\n  <component name=\"NullableNotNullManager\">\n    <option name=\"myDefaultNullable\" value=\"android.support.annotation.Nullable\" />\n    <option name=\"myDefaultNotNull\" value=\"android.support.annotation.NonNull\" />\n    <option name=\"myNullables\">\n      <value>\n        <list size=\"10\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.Nullable\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nullable\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"javax.annotation.CheckForNull\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.Nullable\" />\n          <item index=\"4\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.Nullable\" />\n          <item index=\"5\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.Nullable\" />\n          <item index=\"6\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.RecentlyNullable\" />\n          <item index=\"7\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.qual.Nullable\" />\n          <item index=\"8\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NullableDecl\" />\n          <item index=\"9\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NullableType\" />\n        </list>\n      </value>\n    </option>\n    <option name=\"myNotNulls\">\n      <value>\n        <list size=\"9\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.NotNull\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nonnull\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.NonNull\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.NonNull\" />\n          <item index=\"4\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.NonNull\" />\n          <item index=\"5\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.RecentlyNonNull\" />\n          <item index=\"6\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.qual.NonNull\" />\n          <item index=\"7\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NonNullDecl\" />\n          <item index=\"8\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NonNullType\" />\n        </list>\n      </value>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -109,7 +109,7 @@
+       </value>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
