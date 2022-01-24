@@ -1,13 +1,15 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
+import org.usfirst.frc.team25.scouting.R;
+
 /**
  * Container holding data from the tele-operated period
  * Includes endgame data
  */
 public class TeleOp {
 
-    private int cargoShipHatches;
+    /*private int cargoShipHatches;
     private int rocketLevelOneHatches;
     private int rocketLevelTwoHatches;
     private int rocketLevelThreeHatches;
@@ -27,111 +29,67 @@ public class TeleOp {
     private int assistingClimbTeamNum;
     private int numPartnerClimbAssists;
     private int partnerClimbAssistStartLevel;
-    private int partnerClimbAssistEndLevel;
+    private int partnerClimbAssistEndLevel;*/
 
-    public TeleOp(int cargoShipHatches, int rocketLevelOneHatches, int rocketLevelTwoHatches,
-                  int rocketLevelThreeHatches, int cargoShipCargo, int rocketLevelOneCargo,
-                  int rocketLevelTwoCargo, int rocketLevelThreeCargo, int hatchesDropped,
-                  int cargoDropped, boolean attemptHabClimb, int attemptHabClimbLevel,
-                  boolean successHabClimb, int successHabClimbLevel,
-                  boolean climbAssistedByPartner, int assistingClimbTeamNum,
-                  int numPartnerClimbAssists, int partnerClimbAssistEndLevel,
-                  int partnerClimbAssistStartLevel) {
-        this.cargoShipHatches = cargoShipHatches;
-        this.rocketLevelOneHatches = rocketLevelOneHatches;
-        this.rocketLevelTwoHatches = rocketLevelTwoHatches;
-        this.rocketLevelThreeHatches = rocketLevelThreeHatches;
-        this.cargoShipCargo = cargoShipCargo;
-        this.rocketLevelOneCargo = rocketLevelOneCargo;
-        this.rocketLevelTwoCargo = rocketLevelTwoCargo;
-        this.rocketLevelThreeCargo = rocketLevelThreeCargo;
-        this.hatchesDropped = hatchesDropped;
-        this.cargoDropped = cargoDropped;
-        this.attemptHabClimb = attemptHabClimb;
-        this.attemptHabClimbLevel = attemptHabClimbLevel;
-        this.successHabClimb = successHabClimb;
-        this.successHabClimbLevel = successHabClimbLevel;
-        this.climbAssistedByPartner = climbAssistedByPartner;
-        this.assistingClimbTeamNum = assistingClimbTeamNum;
-        this.numPartnerClimbAssists = numPartnerClimbAssists;
-        this.partnerClimbAssistEndLevel = partnerClimbAssistEndLevel;
-        this.partnerClimbAssistStartLevel = partnerClimbAssistStartLevel;
+    private int humanCargoScored;
+    private int humanCargoMissed;
+    private int robotCargoPickedUp;
+    private int robotCargoScoredUpperHub;
+    private int robotCargoScoredLowerHub;
+    private int robotCargoDropped;
+    private int successRungClimbLevel;
+
+    private boolean attemptRungClimb;
+    private boolean successRungClimb;
+
+
+    public TeleOp(int robotCargoPickedUp , int robotCargoScoredUpperHub , int robotCargoScoredLowerHub ,
+                  int robotCargoDropped , int humanCargoScored , int humanCargoMissed , int successRungClimbLevel ,
+                  boolean attemptRungClimb , boolean successRungClimb) {
+       this.robotCargoPickedUp = robotCargoPickedUp;
+       this.robotCargoScoredUpperHub = robotCargoScoredUpperHub;
+       this.robotCargoScoredLowerHub = robotCargoScoredLowerHub;
+       this.robotCargoDropped = robotCargoDropped;
+       this.humanCargoScored = humanCargoScored;
+       this.humanCargoMissed = humanCargoMissed;
+       this.successRungClimbLevel = successRungClimbLevel;
+       this.attemptRungClimb = attemptRungClimb;
+       this.successRungClimb = successRungClimb;
     }
 
-
-    public int getCargoShipHatches() {
-        return cargoShipHatches;
+    public int getRobotCargoPickedUp() {
+        return robotCargoPickedUp;
     }
 
-    public int getRocketLevelOneHatches() {
-        return rocketLevelOneHatches;
+    public int getRobotCargoScoredUpperHub() {
+        return robotCargoScoredUpperHub;
     }
 
-    public int getRocketLevelTwoHatches() {
-        return rocketLevelTwoHatches;
+    public int getRobotCargoScoredLowerHub() {
+        return robotCargoScoredLowerHub;
     }
 
-    public int getRocketLevelThreeHatches() {
-        return rocketLevelThreeHatches;
+    public int getRobotCargoDropped() {
+        return robotCargoDropped;
     }
 
-    public int getCargoShipCargo() {
-        return cargoShipCargo;
+    public int getHumanCargoScored() {
+        return humanCargoScored;
     }
 
-    public int getRocketLevelOneCargo() {
-        return rocketLevelOneCargo;
+    public int getHumanCargoMissed() {
+        return humanCargoMissed;
     }
 
-    public int getRocketLevelTwoCargo() {
-        return rocketLevelTwoCargo;
+    public int getSuccessRungClimbLevel() {
+        return successRungClimbLevel;
     }
 
-    public int getRocketLevelThreeCargo() {
-        return rocketLevelThreeCargo;
+    public boolean isAttemptRungClimb() {
+        return attemptRungClimb;
     }
 
-    public int getHatchesDropped() {
-        return hatchesDropped;
-    }
-
-    public int getCargoDropped() {
-        return cargoDropped;
-    }
-
-    public boolean isAttemptHabClimb() {
-        return attemptHabClimb;
-    }
-
-    public int getAttemptHabClimbLevel() {
-        return attemptHabClimbLevel;
-    }
-
-    public boolean isSuccessHabClimb() {
-        return successHabClimb;
-    }
-
-    public int getSuccessHabClimbLevel() {
-        return successHabClimbLevel;
-    }
-
-    public boolean isClimbAssistedByPartner() {
-        return climbAssistedByPartner;
-    }
-
-    public int getAssistingClimbTeamNum() {
-        return assistingClimbTeamNum;
-    }
-
-    public int getNumPartnerClimbAssists() {
-        return numPartnerClimbAssists;
-    }
-
-    public int getPartnerClimbAssistEndLevel() {
-        return partnerClimbAssistEndLevel;
-    }
-
-    public int getPartnerClimbAssistStartLevel() {
-        return partnerClimbAssistStartLevel;
+    public boolean isSuccessRungClimb() {
+        return successRungClimb;
     }
 }

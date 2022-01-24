@@ -19,23 +19,29 @@ import org.usfirst.frc.team25.scouting.ui.UiHelper;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
+import java.util.Arrays;
+
 import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 
 
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private RadioButton[] attemptHabClimbLevel, successHabClimbLevel, highestAssistedClimbLevel,
-            climbAssistStartingLevel;
-    private RadioGroup attemptHabClimbLevelGroup, successHabClimbLevelGroup,
+    /*private RadioButton[] attemptHabClimbLevel, successRungClimbLevel, highestAssistedClimbLevel,
+            climbAssistStartingLevel;*/
+    private RadioButton[] successRungClimbLevel;
+    private RadioGroup successRungClimbLevelGroup;
+
+    /*private RadioGroup attemptHabClimbLevelGroup, successRungClimbLevelGroup,
             highestAssistedClimbLevelGroup, climbAssistStartingLevelGroup;
     private ButtonIncDecSet cargoShipHatches, cargoShipCargo, rocketLevelOneHatches,
             rocketLevelOneCargo, rocketLevelTwoHatches, rocketLevelTwoCargo,
-            rocketLevelThreeHatches, rocketLevelThreeCargo;
-    private CheckBox attemptHabClimb, successHabClimb;
-    private ButtonIncDecView partnerClimbsAssisted, hatchesDropped, cargoDropped;
-    private CheckBox climbAssistedByPartners;
-    private EditText assistingClimbTeamNum;
+            rocketLevelThreeHatches, rocketLevelThreeCargo;*/
+    private CheckBox attemptRungClimb, successRungClimb;
+    private ButtonIncDecView HumanCargoScored, RobotCargoScoredUpperHub, RobotCargoPickedUp,
+            RobotCargoScoredLowerHub, RobotCargoDropped , HumanCargoMissed;
+    //private CheckBox climbAssistedByPartners;
+    //private EditText assistingClimbTeamNum;
 
 
     public static TeleOpFragment getInstance(ScoutEntry entry) {
@@ -60,7 +66,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_teleop);
+        /*cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_teleop);
         rocketLevelOneHatches = view.findViewById(R.id.rocket_level_one_hatches_teleop);
         rocketLevelOneCargo = view.findViewById(R.id.rocket_level_one_cargo_teleop);
         rocketLevelTwoHatches = view.findViewById(R.id.rocket_level_two_hatches_teleop);
@@ -70,40 +76,44 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         assistingClimbTeamNum = view.findViewById(R.id.team_number_text_input);
         climbAssistedByPartners =
-                view.findViewById(R.id.climb_assisted_by_alliance_partner_checkbox);
-        partnerClimbsAssisted = view.findViewById(R.id.alliance_partner_climbs_assisted);
-        attemptHabClimb = view.findViewById(R.id.attempt_hab_climb);
-        successHabClimb = view.findViewById(R.id.success_hab_climb);
-        cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
-        hatchesDropped = view.findViewById(R.id.hatches_dropped_teleop);
-        cargoDropped = view.findViewById(R.id.cargo_dropped_teleop);
+                view.findViewById(R.id.climb_assisted_by_alliance_partner_checkbox);*/
+        HumanCargoScored = view.findViewById(R.id.Human_Cargo_Scored);
+        HumanCargoMissed = view.findViewById(R.id.Human_Cargo_Missed);
+        attemptRungClimb = view.findViewById(R.id.attempt_rung_climb);
+        successRungClimb = view.findViewById(R.id.success_rung_climb);
+        //cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
+        RobotCargoScoredUpperHub = view.findViewById(R.id.Robot_Cargo_scored_upperHub);
+        RobotCargoPickedUp = view.findViewById(R.id.Robot_cargo_pick_up);
+        RobotCargoScoredLowerHub = view.findViewById(R.id.Robot_cargo_scored_lowerHub);
+        RobotCargoDropped = view.findViewById(R.id.Robot_Cargo_dropped);
         Button continueButton = view.findViewById(R.id.tele_continue);
-        attemptHabClimbLevelGroup = view.findViewById(R.id.attempt_hab_climb_level);
-        successHabClimbLevelGroup = view.findViewById(R.id.success_hab_climb_level);
-        highestAssistedClimbLevelGroup = view.findViewById(R.id.highest_climb_assist_radio_group);
+        //attemptHabClimbLevelGroup = view.findViewById(R.id.attempt_hab_climb_level);
+        successRungClimbLevelGroup = view.findViewById(R.id.success_rung_climb_level);
+        /*highestAssistedClimbLevelGroup = view.findViewById(R.id.highest_climb_assist_radio_group);
         climbAssistStartingLevelGroup = view.findViewById(R.id.climb_assist_starting_level_group);
 
         attemptHabClimbLevel = new RadioButton[3];
         attemptHabClimbLevel[0] = view.findViewById(R.id.attempt_hab_level_1);
         attemptHabClimbLevel[1] = view.findViewById(R.id.attempt_hab_level_2);
-        attemptHabClimbLevel[2] = view.findViewById(R.id.attempt_hab_level_3);
+        attemptHabClimbLevel[2] = view.findViewById(R.id.attempt_hab_level_3);*/
 
-        successHabClimbLevel = new RadioButton[3];
-        successHabClimbLevel[0] = view.findViewById(R.id.success_hab_level_1);
-        successHabClimbLevel[1] = view.findViewById(R.id.success_hab_level_2);
-        successHabClimbLevel[2] = view.findViewById(R.id.success_hab_level_3);
+        successRungClimbLevel = new RadioButton[4];
+        successRungClimbLevel[0] = view.findViewById(R.id.Low_Rung);
+        successRungClimbLevel[1] = view.findViewById(R.id.Mid_Rung);
+        successRungClimbLevel[2] = view.findViewById(R.id.High_Rung);
+        successRungClimbLevel[3] = view.findViewById(R.id.Traversal_Rung);
 
-        highestAssistedClimbLevel = new RadioButton[2];
+       /* highestAssistedClimbLevel = new RadioButton[2];
         highestAssistedClimbLevel[0] = view.findViewById(R.id.highest_assisted_climb_one);
         highestAssistedClimbLevel[1] = view.findViewById(R.id.highest_assisted_climb_two);
 
         climbAssistStartingLevel = new RadioButton[3];
         climbAssistStartingLevel[0] = view.findViewById(R.id.climb_assist_starting_zero);
         climbAssistStartingLevel[1] = view.findViewById(R.id.climb_assist_starting_one);
-        climbAssistStartingLevel[2] = view.findViewById(R.id.climb_assist_starting_two);
+        climbAssistStartingLevel[2] = view.findViewById(R.id.climb_assist_starting_two);*/
 
 
-        for (RadioButton anAttemptHabClimbLevel : attemptHabClimbLevel) {
+        /*for (RadioButton anAttemptHabClimbLevel : attemptHabClimbLevel) {
             anAttemptHabClimbLevel.setOnClickListener(view1 -> autoDisableSuccessGroup());
         }
 
@@ -111,55 +121,78 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             button.setOnClickListener((view1 -> {
                 autoDisableClimbAssistStartingLevelGroup();
             }));
+        }*/
+
+        successRungClimb.setOnCheckedChangeListener((compoundButton, b) -> {
+
+            if (b) {
+               for(RadioButton button : successRungClimbLevel) {
+                   button.setEnabled(true);
+                   attemptRungClimb.setChecked(true);
+                   attemptRungClimb.setEnabled(false);
+               }
+            } else {
+                for(RadioButton button : successRungClimbLevel) {
+                    button.setEnabled(false);
+                    button.setChecked(false);
+                    attemptRungClimb.setChecked(false);
+                    attemptRungClimb.setEnabled(true);
+                }
+            }
+        });
+
+        for(RadioButton button:successRungClimbLevel) {
+            button.setOnClickListener((view1 -> {
+                for (RadioButton bttn : successRungClimbLevel){
+                    if (bttn == button) {
+                        bttn.setChecked(true);
+                    }
+
+                    else {
+                        bttn.setChecked(false);
+                    }
+                }
+            }));
         }
 
-        successHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
+
+        attemptRungClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-                UiHelper.radioButtonEnable(successHabClimbLevelGroup, true);
-                autoDisableSuccessGroup();
+                successRungClimb.setEnabled(true);
+                //UiHelper.radioButtonEnable(attemptHabClimbLevelGroup, true);
             } else {
-                UiHelper.radioButtonEnable(successHabClimbLevelGroup, false);
+                successRungClimb.setEnabled(false);
+                successRungClimb.setChecked(false);
+                //UiHelper.radioButtonEnable(attemptHabClimbLevelGroup, false);
+                UiHelper.radioButtonEnable(successRungClimbLevelGroup, false);
             }
         });
 
 
-        attemptHabClimb.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b) {
-                successHabClimb.setEnabled(true);
-                UiHelper.radioButtonEnable(attemptHabClimbLevelGroup, true);
-            } else {
-                successHabClimb.setEnabled(false);
-                successHabClimb.setChecked(false);
-                UiHelper.radioButtonEnable(attemptHabClimbLevelGroup, false);
-                UiHelper.radioButtonEnable(successHabClimbLevelGroup, false);
-            }
-        });
-
-
-        climbAssistedByPartners.setOnCheckedChangeListener((compoundButton, b) -> {
+        /*climbAssistedByPartners.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 assistingClimbTeamNum.setEnabled(true);
             } else {
                 assistingClimbTeamNum.setEnabled(false);
                 assistingClimbTeamNum.setText("");
             }
-        });
+        });*/
 
 
-        partnerClimbsAssisted.decButton.setOnClickListener(view1 -> {
-            partnerClimbsAssisted.decrement();
-            if (partnerClimbsAssisted.getValue() == 0) {
+        HumanCargoScored.decButton.setOnClickListener(view1 -> {
+            HumanCargoScored.decrement();
+           /* if (HumanCargoScored.getValue() == 0) {
                 UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, false);
                 UiHelper.radioButtonEnable(climbAssistStartingLevelGroup, false);
-            }
+            }*/
         });
 
-        partnerClimbsAssisted.incButton.setOnClickListener(view1 -> {
-            partnerClimbsAssisted.increment();
-            if (partnerClimbsAssisted.getValue() > 0) {
+        HumanCargoScored.incButton.setOnClickListener(view1 -> {
+            HumanCargoScored.increment();
+            /*if (HumanCargoScored.getValue() > 0) {
                 UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, true);
                 UiHelper.radioButtonEnable(climbAssistStartingLevelGroup, true);
-            }
+            }*/
         });
 
         autoPopulate();
@@ -169,7 +202,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
             boolean proceed = true;
 
-            if (climbAssistedByPartners.isChecked()) {
+            /*if (climbAssistedByPartners.isChecked()) {
                 if (assistingClimbTeamNum.getText().toString().isEmpty()) {
                     assistingClimbTeamNum.setError("Enter the assisting team's number");
                     proceed = false;
@@ -184,12 +217,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 }
 
 
-            }
+            }*/
 
-            if (proceed && partnerClimbsAssisted.getValue() >= 1 &&
+            /*if (proceed && HumanCargoScored.getValue() >= 1 &&
                     !(UiHelper.checkIfButtonIsChecked(highestAssistedClimbLevel) && UiHelper.checkIfButtonIsChecked(climbAssistStartingLevel))
-                    || attemptHabClimb.isChecked() && !UiHelper.checkIfButtonIsChecked(attemptHabClimbLevel) || successHabClimb.isChecked()
-                    && !UiHelper.checkIfButtonIsChecked(successHabClimbLevel)) {
+                    || attemptRungClimb.isChecked() && !UiHelper.checkIfButtonIsChecked(attemptHabClimbLevel) || successRungClimb.isChecked()
+                    && !UiHelper.checkIfButtonIsChecked(successRungClimbLevel)) {
 
                 proceed = false;
 
@@ -200,7 +233,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
+            }*/
 
             if (proceed) {
                 saveState();
@@ -218,25 +251,35 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         return view;
     }
 
-    private void autoDisableClimbAssistStartingLevelGroup() {
+    /*private void autoDisableClimbAssistStartingLevelGroup() {
         if (highestAssistedClimbLevel[0].isChecked()) {
             if (climbAssistStartingLevel[2].isChecked()) {
                 climbAssistStartingLevelGroup.clearCheck();
 
             }
             climbAssistStartingLevel[2].setEnabled(false);
-        } else if (partnerClimbsAssisted.getValue() > 0) {
+        } else if (HumanCargoScored.getValue() > 0) {
             climbAssistStartingLevel[2].setEnabled(true);
         }
 
-    }
+    }*/
 
     @Override
     public void autoPopulate() {
         if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
 
-            cargoShipHatches.setValue(tele.getCargoShipHatches());
+            RobotCargoPickedUp.setValue(tele.getRobotCargoPickedUp());
+            RobotCargoScoredUpperHub.setValue(tele.getRobotCargoScoredUpperHub());
+            RobotCargoScoredLowerHub.setValue(tele.getRobotCargoScoredLowerHub());
+            RobotCargoDropped.setValue(tele.getRobotCargoDropped());
+            HumanCargoScored.setValue(tele.getHumanCargoScored());
+            HumanCargoMissed.setValue(tele.getHumanCargoMissed());
+
+            attemptRungClimb.setChecked(tele.isAttemptRungClimb());
+            successRungClimb.setChecked(tele.isSuccessRungClimb());
+
+            /*cargoShipHatches.setValue(tele.getCargoShipHatches());
             cargoShipCargo.setValue(tele.getCargoShipCargo());
             rocketLevelOneCargo.setValue(tele.getRocketLevelOneCargo());
             rocketLevelOneHatches.setValue(tele.getRocketLevelOneHatches());
@@ -246,13 +289,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             rocketLevelThreeHatches.setValue(tele.getRocketLevelThreeHatches());
 
             climbAssistedByPartners.setChecked(tele.isClimbAssistedByPartner());
-            partnerClimbsAssisted.setValue(tele.getNumPartnerClimbAssists());
-            hatchesDropped.setValue(tele.getHatchesDropped());
-            cargoDropped.setValue(tele.getCargoDropped());
-            attemptHabClimb.setChecked(tele.isAttemptHabClimb());
-            successHabClimb.setChecked(tele.isSuccessHabClimb());
+            HumanCargoScored.setValue(tele.getNumPartnerClimbAssists());
+            RobotCargoScoredUpperHub.setValue(tele.getHatchesDropped());
+            RobotCargoPickedUp.setValue(tele.getCargoDropped());
+            attemptRungClimb.setChecked(tele.isAttemptHabClimb());
+            successRungClimb.setChecked(tele.isSuccessHabClimb());*/
 
-            if (tele.getAssistingClimbTeamNum() != 0) {
+            /*if (tele.getAssistingClimbTeamNum() != 0) {
                 assistingClimbTeamNum.setText(Integer.toString(tele.getAssistingClimbTeamNum()));
             }
 
@@ -266,26 +309,26 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 if (i == tele.getPartnerClimbAssistStartLevel()) {
                     climbAssistStartingLevel[i].setChecked(true);
                 }
-            }
+            }*/
 
-            for (int i = 1; i <= successHabClimbLevel.length; i++) {
-                if (i == tele.getSuccessHabClimbLevel()) {
-                    successHabClimbLevel[i - 1].setChecked(true);
+            for (int i = 1; i <= successRungClimbLevel.length; i++) {
+                if (i == tele.getSuccessRungClimbLevel()) {
+                    successRungClimbLevel[i - 1].setChecked(true);
                 }
             }
 
-            for (int i = 1; i <= attemptHabClimbLevel.length; i++) {
+            /*for (int i = 1; i <= attemptHabClimbLevel.length; i++) {
                 if (i == tele.getAttemptHabClimbLevel()) {
                     attemptHabClimbLevel[i - 1].setChecked(true);
                 }
+            }*/
+
+            if (HumanCargoScored.getValue() >= 1) {
+               // UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, true);
+                //UiHelper.radioButtonEnable(climbAssistStartingLevelGroup, true);
             }
 
-            if (partnerClimbsAssisted.getValue() >= 1) {
-                UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, true);
-                UiHelper.radioButtonEnable(climbAssistStartingLevelGroup, true);
-            }
-
-            autoDisableClimbAssistStartingLevelGroup();
+            //autoDisableClimbAssistStartingLevelGroup();
 
             autoDisableSuccessGroup();
 
@@ -295,40 +338,31 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     @Override
     public void saveState() {
 
-        entry.setTeleOp(new TeleOp(cargoShipHatches.getValue(), rocketLevelOneHatches.getValue(),
-                rocketLevelTwoHatches.getValue(), rocketLevelThreeHatches.getValue(),
-                cargoShipCargo.getValue(), rocketLevelOneCargo.getValue(),
-                rocketLevelTwoCargo.getValue(), rocketLevelThreeCargo.getValue(),
-                hatchesDropped.getValue(), cargoDropped.getValue(), attemptHabClimb.isChecked(),
-                UiHelper.getHabLevelSelected(attemptHabClimbLevel), successHabClimb.isChecked(),
-                UiHelper.getHabLevelSelected(successHabClimbLevel),
-                climbAssistedByPartners.isChecked(),
-                UiHelper.getIntegerFromTextBox(assistingClimbTeamNum),
-                partnerClimbsAssisted.getValue(),
-                UiHelper.getHabLevelSelected(highestAssistedClimbLevel, 2),
-                UiHelper.getHabLevelSelected(climbAssistStartingLevel, 0)
-        ));
+        entry.setTeleOp(new TeleOp(RobotCargoPickedUp.getValue(), RobotCargoScoredUpperHub.getValue() ,
+                RobotCargoScoredLowerHub.getValue() , RobotCargoDropped.getValue() , HumanCargoScored.getValue() ,
+                HumanCargoMissed.getValue() , UiHelper.getHabLevelSelected(successRungClimbLevel) ,
+                attemptRungClimb.isChecked() , successRungClimb.isChecked()));
 
 
     }
 
     private void autoDisableSuccessGroup() {
         int attemptLevel = -1;
-        for (int i = 0; i < attemptHabClimbLevel.length; i++) {
+        /*for (int i = 0; i < attemptHabClimbLevel.length; i++) {
             if (attemptHabClimbLevel[i].isChecked()) {
                 attemptLevel = i;
             }
 
-        }
-        if (successHabClimb.isChecked()) {
-            for (int j = 0; j < successHabClimbLevel.length; j++) {
+        }*/
+        if (successRungClimb.isChecked()) {
+            for (int j = 0; j < successRungClimbLevel.length; j++) {
                 if (j > attemptLevel) {
-                    successHabClimbLevel[j].setEnabled(false);
-                    if (successHabClimbLevel[j].isChecked()) {
-                        successHabClimbLevelGroup.clearCheck();
+                    successRungClimbLevel[j].setEnabled(false);
+                    if (successRungClimbLevel[j].isChecked()) {
+                        successRungClimbLevelGroup.clearCheck();
                     }
                 } else {
-                    successHabClimbLevel[j].setEnabled(true);
+                    successRungClimbLevel[j].setEnabled(true);
                 }
             }
         }
