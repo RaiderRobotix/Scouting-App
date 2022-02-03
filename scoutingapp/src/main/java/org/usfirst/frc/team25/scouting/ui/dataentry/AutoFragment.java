@@ -23,7 +23,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
     private ButtonIncDecView robotCargoScoredUpperHub,  robotcargoPickedup, robotCargoScoredLowerHub ,
             robotCargoDropped , humanCargoScored , humanCargoMissed;
 
-    private CheckBox crossHabLine, robotPassTarmac, sideCargoShipHatchCapable,
+    private CheckBox crossHabLine, robotPassTarmac,robotCommitedFoul, sideCargoShipHatchCapable,
             frontCargoShipHatchCapable, cargoDroppedCargoShip, cargoDroppedRocket,
             hatchesDroppedCargoShip, hatchesDroppedRocket;
 
@@ -67,6 +67,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
         robotPassTarmac = view.findViewById(R.id.Robot_pass_tarmac);
+        robotCommitedFoul = view.findViewById(R.id.Robot_got_foul);
         //frontCargoShipHatchCapable = view.findViewById(R.id.hatches_front_cargo_auto);
         //sideCargoShipHatchCapable = view.findViewById(R.id.hatches_side_cargo_auto);
         //cargoShipHatches = view.findViewById(R.id.cargo_ship_hatches_auto);
@@ -104,65 +105,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
             });
         }*/
 
-        robotcargoPickedup.incButton.setOnClickListener(view1 -> {
-            robotcargoPickedup.increment();
-            //autoEnableHatchesDroppedLocationSet();
-        });
 
-        robotcargoPickedup.decButton.setOnClickListener(view1 -> {
-            robotcargoPickedup.decrement();
-            //autoEnableHatchesDroppedLocationSet();
-        });
-
-        robotCargoScoredUpperHub.incButton.setOnClickListener(view1 -> {
-            robotCargoScoredUpperHub.increment();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        robotCargoScoredUpperHub.decButton.setOnClickListener(view1 -> {
-            robotCargoScoredUpperHub.decrement();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        robotCargoScoredLowerHub.incButton.setOnClickListener(view1 -> {
-            robotCargoScoredLowerHub.increment();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        robotCargoScoredLowerHub.decButton.setOnClickListener(view1 -> {
-            robotCargoScoredLowerHub.decrement();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        robotCargoDropped.incButton.setOnClickListener(view1 -> {
-            robotCargoDropped.increment();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        robotCargoDropped.decButton.setOnClickListener(view1 -> {
-            robotCargoDropped.decrement();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        humanCargoScored.incButton.setOnClickListener(view1 -> {
-            humanCargoScored.increment();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        humanCargoScored.decButton.setOnClickListener(view1 -> {
-            humanCargoScored.decrement();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        humanCargoMissed.incButton.setOnClickListener(view1 -> {
-            humanCargoMissed.increment();
-            //autoEnableCargoDroppedLocationSet();
-        });
-
-        humanCargoMissed.decButton.setOnClickListener(view1 -> {
-            humanCargoMissed.decrement();
-            //autoEnableCargoDroppedLocationSet();
-        });
 
 
         autoPopulate();
@@ -251,24 +194,25 @@ public class AutoFragment extends Fragment implements EntryFragment {
         if (entry.getAutonomous() != null) {
 
             Autonomous prevAuto = entry.getAutonomous();
-            cargoShipCargo.setValue(prevAuto.getCargoShipCargo());
+            /*cargoShipCargo.setValue(prevAuto.getCargoShipCargo());
             rocketCargo.setValue(prevAuto.getRocketCargo());
             rocketHatches.setValue(prevAuto.getRocketHatches());
-            cargoShipHatches.setValue(prevAuto.getCargoShipHatches());
+            cargoShipHatches.setValue(prevAuto.getCargoShipHatches());*/
             robotcargoPickedup.setValue(prevAuto.getRobotCargoPickedup());
             robotCargoScoredUpperHub.setValue(prevAuto.getRobotCargoScoredUpperHub());
             robotCargoScoredLowerHub.setValue(prevAuto.getRobotCargoScoredLowerHub());
             robotCargoDropped.setValue(prevAuto.getRobotCargoDropped());
             humanCargoScored.setValue(prevAuto.getHumanCargoScored());
             humanCargoMissed.setValue(prevAuto.getHumanCargoMissed());
-            sideCargoShipHatchCapable.setChecked(prevAuto.isSideCargoShipHatchCapable());
+            /*sideCargoShipHatchCapable.setChecked(prevAuto.isSideCargoShipHatchCapable());
             frontCargoShipHatchCapable.setChecked(prevAuto.isFrontCargoShipHatchCapable());
-            crossHabLine.setChecked(prevAuto.isCrossHabLine());
+            crossHabLine.setChecked(prevAuto.isCrossHabLine());*/
             robotPassTarmac.setChecked(prevAuto.isRobotPassTarmac());
-            cargoDroppedCargoShip.setChecked(prevAuto.isCargoDroppedCargoShip());
+            /*cargoDroppedCargoShip.setChecked(prevAuto.isCargoDroppedCargoShip());
             cargoDroppedRocket.setChecked(prevAuto.isCargoDroppedRocket());
             hatchesDroppedCargoShip.setChecked(prevAuto.isHatchesDroppedCargoShip());
-            hatchesDroppedRocket.setChecked(prevAuto.isHatchesDroppedRocket());
+            hatchesDroppedRocket.setChecked(prevAuto.isHatchesDroppedRocket());*/
+            robotCommitedFoul.setChecked(prevAuto.isRobotCommitFoul());
 
             //autoEnableCargoShipHatchPlacementSet();
             //autoEnableCargoDroppedLocationSet();
@@ -286,14 +230,14 @@ public class AutoFragment extends Fragment implements EntryFragment {
                 robotcargoPickedup.getValue(), robotCargoScoredUpperHub.getValue(),
                 robotCargoScoredLowerHub.getValue(), robotCargoDropped.getValue(),
                 humanCargoScored.getValue(), humanCargoMissed.getValue(),
-                robotPassTarmac.isChecked()));
+                robotPassTarmac.isChecked(), robotCommitedFoul.isChecked()));
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        getActivity().setTitle("Add Entry - Sandstorm");
+        getActivity().setTitle("Add Entry - Auton");
     }
 
 }

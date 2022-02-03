@@ -37,28 +37,21 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_cargo_ship"
+                    android:id="@+id/teleop_focus_scoring_in_LowerHub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo ship"
+                    android:text="Scoring In LowerHub"
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_rocket"
+                    android:id="@+id/teleop_focus_climbing_rungs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Rocket"
+                    android:text="Climbing"
                     android:textSize="18sp" />
 
-                <CheckBox
-                    android:id="@+id/teleop_focus_defense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/inner_components_spacing"
-                    android:text="Defense"
-                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -68,19 +61,19 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_hatches"
+                    android:id="@+id/teleop_focus_scoring_in_Upperhub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Hatch panels"
+                    android:text="Scoring in UpperHub"
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_cargo"
+                    android:id="@+id/teleop_focus_defense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo"
+                    android:text="Defense"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -182,13 +175,6 @@
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:visibility="visible">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="This robot is..."
-                android:textSize="18sp" />
-
             <RadioButton
                 android:id="@+id/first_pick"
                 android:layout_width="wrap_content"
@@ -214,6 +200,13 @@
                 android:layout_marginStart="40dp"
                 android:padding="8dp"
                 android:text="Not a good pick"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="This robot is..."
                 android:textSize="18sp" />
 
         </RadioGroup>

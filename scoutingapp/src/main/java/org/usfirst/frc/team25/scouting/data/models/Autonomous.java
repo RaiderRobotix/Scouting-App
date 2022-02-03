@@ -30,15 +30,17 @@ public class Autonomous {
     private boolean cargoDroppedRocket;
 
     private boolean robotPassTarmac;
+    private boolean robotCommitFoul;
 
 
     public Autonomous( int RobotCargoPickedup, int RobotCargoScoredUpperHub,
                       int RobotCargoScoredLowerHub, int robotCargoDropped,int humanCargoScored, int humanCargoMissed,
-                      boolean robotPassTarmac) {
+                      boolean robotPassTarmac, boolean robotCommitFoul) {
        /* this.rocketCargo = rocketCargo;
         this.rocketHatches = rocketHatches;
         this.cargoShipHatches = cargoShipHatches;
         this.cargoShipCargo = cargoShipCargo;*/
+        this.robotCommitFoul = robotCommitFoul;
         this.RobotCargoPickedup = RobotCargoPickedup;
         this.RobotCargoScoredUpperHub = RobotCargoScoredUpperHub;
         this.RobotCargoScoredLowerHub = RobotCargoScoredLowerHub;
@@ -57,6 +59,10 @@ public class Autonomous {
 
     public int getRocketCargo() {
         return rocketCargo;
+    }
+
+    public boolean isRobotCommitFoul() {
+        return robotCommitFoul;
     }
 
     public int getRocketHatches() {

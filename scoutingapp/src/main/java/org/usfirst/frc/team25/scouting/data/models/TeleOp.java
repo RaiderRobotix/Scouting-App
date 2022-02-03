@@ -38,20 +38,21 @@ public class TeleOp {
     private int robotCargoScoredLowerHub;
     private int robotCargoDropped;
     private int successRungClimbLevel;
+    private int attemptRungClimbLevel;
 
     private boolean attemptRungClimb;
     private boolean successRungClimb;
 
 
+
     public TeleOp(int robotCargoPickedUp , int robotCargoScoredUpperHub , int robotCargoScoredLowerHub ,
-                  int robotCargoDropped , int humanCargoScored , int humanCargoMissed , int successRungClimbLevel ,
-                  boolean attemptRungClimb , boolean successRungClimb) {
+                  int robotCargoDropped , int successRungClimbLevel ,
+                  boolean attemptRungClimb , boolean successRungClimb , int attemptRungClimbLevel) {
        this.robotCargoPickedUp = robotCargoPickedUp;
        this.robotCargoScoredUpperHub = robotCargoScoredUpperHub;
        this.robotCargoScoredLowerHub = robotCargoScoredLowerHub;
        this.robotCargoDropped = robotCargoDropped;
-       this.humanCargoScored = humanCargoScored;
-       this.humanCargoMissed = humanCargoMissed;
+       this.attemptRungClimbLevel = attemptRungClimbLevel;
        this.successRungClimbLevel = successRungClimbLevel;
        this.attemptRungClimb = attemptRungClimb;
        this.successRungClimb = successRungClimb;
@@ -73,12 +74,8 @@ public class TeleOp {
         return robotCargoDropped;
     }
 
-    public int getHumanCargoScored() {
-        return humanCargoScored;
-    }
-
-    public int getHumanCargoMissed() {
-        return humanCargoMissed;
+    public int getAttemptRungClimbLevel() {
+        return attemptRungClimbLevel;
     }
 
     public int getSuccessRungClimbLevel() {

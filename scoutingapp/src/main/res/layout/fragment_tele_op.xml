@@ -244,7 +244,7 @@
             android:id="@+id/success_rung_climb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/attempt_rung_climb"
+            android:layout_below="@id/attempt_rung_climb_level"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:enabled="false"
             android:padding="@dimen/default_padding_bottom"
@@ -252,43 +252,48 @@
             android:textSize="18sp" />
 
 
-       <!-- <RadioGroup
-            android:id="@+id/attempt_hab_climb_level"
+       <RadioGroup
+            android:id="@+id/attempt_rung_climb_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/attempt_hab_climb"
+            android:layout_below="@id/attempt_rung_climb"
             android:layout_marginStart="45dp"
             android:orientation="horizontal"
             android:visibility="visible">
 
+           <TextView
+               android:id="@+id/rung_label"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+
+               android:padding="8sp"
+               android:text="Starting Rung Level:"
+               android:textSize="18sp"
+
+               />
+
             <RadioButton
-                android:id="@+id/attempt_hab_level_1"
+                android:id="@+id/attempt_low_rung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:padding="8dp"
-                android:text="Level 1"
+                android:text="Low Rung"
                 android:textSize="18sp" />
 
             <RadioButton
-                android:id="@+id/attempt_hab_level_2"
+                android:id="@+id/attempt_mid_rung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:padding="8dp"
-                android:text="Level 2"
+                android:text="Medium Rung"
                 android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/attempt_hab_level_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Level 3"
-                android:textSize="18sp" />
 
-        </RadioGroup> -->
+
+        </RadioGroup>
 
         <RadioGroup
             android:id="@+id/success_rung_climb_level"
@@ -324,7 +329,7 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:padding="8dp"
-                            android:text="MedIum RUng"
+                            android:text="Medium Rung"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -383,7 +388,7 @@
             android:textSize="18sp"
             app:met_floatingLabel="normal" /> -->
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/Human_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -413,7 +418,7 @@
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:maxValue="2"
-            app:titlePrompt="Cargo Missed" />
+            app:titlePrompt="Cargo Missed" /> -->
 
 
         <!--<TextView
@@ -505,9 +510,12 @@
             android:id="@+id/tele_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/Human_Cargo_Missed"
+            android:layout_below="@id/success_rung_climb_level"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
             android:text="@string/continue_button"
             android:textColor="#ffffff" />

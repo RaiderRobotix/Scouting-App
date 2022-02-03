@@ -27,21 +27,21 @@ import java.util.ArrayList;
 public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
-    private final CheckBox[] focusButtons = new CheckBox[5];
+    private final CheckBox[] focusButtons = new CheckBox[4];
     private final RadioButton[] comparisonButtons = new RadioButton[3];
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
     private final String[] ROBOT_COMMENT_VALUES = {
-            "Low objectives only",
-            "Scoring potential reached",
+            "Team got a few fouls",
+            "Parts fell of/broke during game ",
             "Hatch panel floor intake",
             "Cargo floor intake",
-            "Fast HAB climb",
-            "Shoots cargo",
+            "Team did not get any fouls",
+            "Robot In Great Control",
             "Effective defense",
             "Higher rocket levels significantly slower",
-            "Struggles to place in far rocket side",
-            "Poorly-secured hatches",
-            "Places extra cargo in bays",
+            "Slow Rung Climb",
+            "Fast Rung Climb",
+            "Great Accuracy",
             "Slow cargo intake",
             "Slow hatch panel intake",
             "Lost communications",
@@ -150,11 +150,10 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         robotCommentView = view.findViewById(R.id.robotDriverCommentView);
 
         Button finish = view.findViewById(R.id.post_finish);
-        focusButtons[0] = view.findViewById(R.id.teleop_focus_hatches);
-        focusButtons[1] = view.findViewById(R.id.teleop_focus_cargo);
-        focusButtons[2] = view.findViewById(R.id.teleop_focus_cargo_ship);
-        focusButtons[3] = view.findViewById(R.id.teleop_focus_rocket);
-        focusButtons[4] = view.findViewById(R.id.teleop_focus_defense);
+        focusButtons[0] = view.findViewById(R.id.teleop_focus_scoring_in_LowerHub);
+        focusButtons[1] = view.findViewById(R.id.teleop_focus_scoring_in_Upperhub);
+        focusButtons[2] = view.findViewById(R.id.teleop_focus_climbing_rungs);
+        focusButtons[3] = view.findViewById(R.id.teleop_focus_defense);
 
         comparisonButtons[0] = view.findViewById(R.id.current_team_comparison);
         comparisonButtons[1] = view.findViewById(R.id.prev_team_comparison);

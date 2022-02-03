@@ -29,8 +29,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private ScoutEntry entry;
     /*private RadioButton[] attemptHabClimbLevel, successRungClimbLevel, highestAssistedClimbLevel,
             climbAssistStartingLevel;*/
-    private RadioButton[] successRungClimbLevel;
-    private RadioGroup successRungClimbLevelGroup;
+    private RadioButton[] successRungClimbLevel, attemptRungClimbLevel;
+    private RadioGroup successRungClimbLevelGroup , attemptRungClimbLevelGroup;
 
     /*private RadioGroup attemptHabClimbLevelGroup, successRungClimbLevelGroup,
             highestAssistedClimbLevelGroup, climbAssistStartingLevelGroup;
@@ -77,8 +77,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         assistingClimbTeamNum = view.findViewById(R.id.team_number_text_input);
         climbAssistedByPartners =
                 view.findViewById(R.id.climb_assisted_by_alliance_partner_checkbox);*/
-        HumanCargoScored = view.findViewById(R.id.Human_Cargo_Scored);
-        HumanCargoMissed = view.findViewById(R.id.Human_Cargo_Missed);
+        //HumanCargoScored = view.findViewById(R.id.Human_Cargo_Scored);
+        //HumanCargoMissed = view.findViewById(R.id.Human_Cargo_Missed);
         attemptRungClimb = view.findViewById(R.id.attempt_rung_climb);
         successRungClimb = view.findViewById(R.id.success_rung_climb);
         //cargoShipCargo = view.findViewById(R.id.cargo_ship_cargo_teleop);
@@ -87,21 +87,22 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         RobotCargoScoredLowerHub = view.findViewById(R.id.Robot_cargo_scored_lowerHub);
         RobotCargoDropped = view.findViewById(R.id.Robot_Cargo_dropped);
         Button continueButton = view.findViewById(R.id.tele_continue);
-        //attemptHabClimbLevelGroup = view.findViewById(R.id.attempt_hab_climb_level);
+        attemptRungClimbLevelGroup = view.findViewById(R.id.attempt_rung_climb_level);
         successRungClimbLevelGroup = view.findViewById(R.id.success_rung_climb_level);
         /*highestAssistedClimbLevelGroup = view.findViewById(R.id.highest_climb_assist_radio_group);
-        climbAssistStartingLevelGroup = view.findViewById(R.id.climb_assist_starting_level_group);
+        climbAssistStartingLevelGroup = view.findViewById(R.id.climb_assist_starting_level_group);*/
 
-        attemptHabClimbLevel = new RadioButton[3];
-        attemptHabClimbLevel[0] = view.findViewById(R.id.attempt_hab_level_1);
-        attemptHabClimbLevel[1] = view.findViewById(R.id.attempt_hab_level_2);
-        attemptHabClimbLevel[2] = view.findViewById(R.id.attempt_hab_level_3);*/
+        attemptRungClimbLevel = new RadioButton[2];
+        attemptRungClimbLevel[0] = view.findViewById(R.id.attempt_low_rung);
+        attemptRungClimbLevel[1] = view.findViewById(R.id.attempt_mid_rung);
+
 
         successRungClimbLevel = new RadioButton[4];
         successRungClimbLevel[0] = view.findViewById(R.id.Low_Rung);
         successRungClimbLevel[1] = view.findViewById(R.id.Mid_Rung);
         successRungClimbLevel[2] = view.findViewById(R.id.High_Rung);
         successRungClimbLevel[3] = view.findViewById(R.id.Traversal_Rung);
+        //successRungClimbLevel[4] = view.findViewById(R.id.robot_fell);
 
        /* highestAssistedClimbLevel = new RadioButton[2];
         highestAssistedClimbLevel[0] = view.findViewById(R.id.highest_assisted_climb_one);
@@ -157,12 +158,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         attemptRungClimb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
+
                 successRungClimb.setEnabled(true);
-                //UiHelper.radioButtonEnable(attemptHabClimbLevelGroup, true);
+                UiHelper.radioButtonEnable(attemptRungClimbLevelGroup, true);
             } else {
+
                 successRungClimb.setEnabled(false);
                 successRungClimb.setChecked(false);
-                //UiHelper.radioButtonEnable(attemptHabClimbLevelGroup, false);
+                UiHelper.radioButtonEnable(attemptRungClimbLevelGroup, false);
                 UiHelper.radioButtonEnable(successRungClimbLevelGroup, false);
             }
         });
@@ -178,21 +181,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         });*/
 
 
-        HumanCargoScored.decButton.setOnClickListener(view1 -> {
-            HumanCargoScored.decrement();
-           /* if (HumanCargoScored.getValue() == 0) {
-                UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, false);
-                UiHelper.radioButtonEnable(climbAssistStartingLevelGroup, false);
-            }*/
-        });
 
-        HumanCargoScored.incButton.setOnClickListener(view1 -> {
-            HumanCargoScored.increment();
-            /*if (HumanCargoScored.getValue() > 0) {
-                UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, true);
-                UiHelper.radioButtonEnable(climbAssistStartingLevelGroup, true);
-            }*/
-        });
+
+
 
         autoPopulate();
 
@@ -272,8 +263,6 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             RobotCargoScoredUpperHub.setValue(tele.getRobotCargoScoredUpperHub());
             RobotCargoScoredLowerHub.setValue(tele.getRobotCargoScoredLowerHub());
             RobotCargoDropped.setValue(tele.getRobotCargoDropped());
-            HumanCargoScored.setValue(tele.getHumanCargoScored());
-            HumanCargoMissed.setValue(tele.getHumanCargoMissed());
 
             attemptRungClimb.setChecked(tele.isAttemptRungClimb());
             successRungClimb.setChecked(tele.isSuccessRungClimb());
@@ -316,16 +305,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 }
             }
 
-            /*for (int i = 1; i <= attemptHabClimbLevel.length; i++) {
-                if (i == tele.getAttemptHabClimbLevel()) {
-                    attemptHabClimbLevel[i - 1].setChecked(true);
+            for (int i = 1; i <= attemptRungClimbLevel.length; i++) {
+                if (i == tele.getAttemptRungClimbLevel()) {
+                    attemptRungClimbLevel[i - 1].setChecked(true);
                 }
-            }*/
-
-            if (HumanCargoScored.getValue() >= 1) {
-               // UiHelper.radioButtonEnable(highestAssistedClimbLevelGroup, true);
-                //UiHelper.radioButtonEnable(climbAssistStartingLevelGroup, true);
             }
+
 
             //autoDisableClimbAssistStartingLevelGroup();
 
@@ -338,9 +323,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     public void saveState() {
 
         entry.setTeleOp(new TeleOp(RobotCargoPickedUp.getValue(), RobotCargoScoredUpperHub.getValue() ,
-                RobotCargoScoredLowerHub.getValue() , RobotCargoDropped.getValue() , HumanCargoScored.getValue() ,
-                HumanCargoMissed.getValue() , UiHelper.getHabLevelSelected(successRungClimbLevel) ,
-                attemptRungClimb.isChecked() , successRungClimb.isChecked()));
+                RobotCargoScoredLowerHub.getValue() , RobotCargoDropped.getValue() , UiHelper.getHabLevelSelected(successRungClimbLevel) ,
+                attemptRungClimb.isChecked() , successRungClimb.isChecked() , UiHelper.getHabLevelSelected(attemptRungClimbLevel)));
 
 
     }

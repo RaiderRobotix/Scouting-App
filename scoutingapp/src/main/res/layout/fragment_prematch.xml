@@ -109,9 +109,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/robot_no_show_checkbox"
                 android:layout_marginVertical="10dp"
-                android:text="Robot Started With Cargo"
+                android:text="Robot started with cargo"
                 android:textSize="24sp" />
 
+            <!--
             <RadioGroup
                 android:id="@+id/starting_location"
                 android:layout_width="wrap_content"
@@ -126,7 +127,7 @@
                     android:text="Robot Starting Location"
                     android:padding="20sp"
                     android:textSize="26sp" />
-                <!-- INCREASE SIZE OF RADIO BUTTON -->
+
                 <RadioButton
                     android:id="@+id/near_terminal"
                     android:layout_width="wrap_content"
@@ -134,7 +135,7 @@
                     android:padding="8dp"
                     android:text="Robot is near Terminal"
                     android:textSize="24sp" />
-                <!-- INCREASE SIZE OF RADIO BUTTON -->
+
                 <RadioButton
                     android:id="@+id/near_hanger"
                     android:layout_width="wrap_content"
@@ -144,6 +145,7 @@
                     android:textSize="24sp" />
 
             </RadioGroup>
+        -->
 
     <!--
             <RadioGroup
@@ -232,7 +234,7 @@
                 android:id="@+id/prematch_continue"
                 android:layout_width="190dp"
                 android:layout_height="76dp"
-                android:layout_below="@id/starting_location"
+                android:layout_below="@id/robot_starting_with_Cargo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="16dp"

@@ -217,34 +217,46 @@
           android:id="@+id/Robot_balls_scored_upperHub"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_below="@id/Cargo_robot_picked_up"
+          android:layout_below="@id/Cargo_robot_dropped"
           android:padding="@dimen/default_padding_bottom"
           app:initialValue="0"
-          app:titlePrompt="Cargo Scored In Upperhub" />
+          app:titlePrompt="Cargo Scored In Upper Hub" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/Robot_Cargo_scored_lowerHub"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Robot_balls_scored_upperHub"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo Scored In LowerHub" />
+      <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
+          android:id="@+id/Robot_Cargo_scored_lowerHub"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/Robot_balls_scored_upperHub"
+          android:padding="@dimen/default_padding_bottom"
+          app:initialValue="0"
+          app:titlePrompt="Cargo Scored In Lower Hub" />
 
       <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
           android:id="@+id/Cargo_robot_dropped"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_below="@id/Robot_Cargo_scored_lowerHub"
+          android:layout_below="@id/Cargo_robot_picked_up"
           android:padding="@dimen/default_padding_bottom"
           app:initialValue="0"
           app:titlePrompt="Cargo Dropped" />
+
+      <CheckBox
+          android:id="@+id/Robot_got_foul"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/Robot_Cargo_scored_lowerHub"
+          android:layout_centerHorizontal="true"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginTop="5sp"
+          android:padding="@dimen/default_padding_bottom"
+          android:text="Robot Commited a Foul"
+          android:textSize="20sp" />
 
       <TextView
           android:id="@+id/Human_label"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_below="@id/Cargo_robot_dropped"
+          android:layout_below="@id/Robot_got_foul"
           android:layout_centerHorizontal="true"
           android:padding="8sp"
           android:text="Human Section"

@@ -11,13 +11,18 @@
         <entry key="..\:/Kavinraj/Robotix/Scouting-App-2022/scoutingapp/src/main/res/layout/fragment_auto.xml" value="0.32447916666666665" />
         <entry key="..\:/Kavinraj/Robotix/Scouting-App-2022/scoutingapp/src/main/res/layout/fragment_tele_op.xml" value="0.32447916666666665" />
         <entry key="scoutingapp/src/main/res/drawable/ic_rr_logo.xml" value="0.17239583333333333" />
+        <entry key="scoutingapp/src/main/res/drawable/rapid_react_logo.xml" value="0.153" />
         <entry key="scoutingapp/src/main/res/layout/activity_add_entry.xml" value="0.159375" />
         <entry key="scoutingapp/src/main/res/layout/activity_enter_password.xml" value="0.159375" />
-        <entry key="scoutingapp/src/main/res/layout/activity_menu.xml" value="0.15625" />
+        <entry key="scoutingapp/src/main/res/layout/activity_menu.xml" value="0.375" />
         <entry key="scoutingapp/src/main/res/layout/activity_menu_phone.xml" value="0.15625" />
         <entry key="scoutingapp/src/main/res/layout/fragment_auto.xml" value="0.375" />
+        <entry key="scoutingapp/src/main/res/layout/fragment_post_match.xml" value="0.45" />
         <entry key="scoutingapp/src/main/res/layout/fragment_prematch.xml" value="0.45" />
-        <entry key="scoutingapp/src/main/res/layout/fragment_tele_op.xml" value="0.159375" />
+        <entry key="scoutingapp/src/main/res/layout/fragment_tele_op.xml" value="0.335" />
+        <entry key="scoutingapp/src/main/res/layout/list_item_checkable.xml" value="0.30546875" />
+        <entry key="scoutingapp/src/main/res/layout/preference_category_normal.xml" value="0.30546875" />
+        <entry key="scoutingapp/src/main/res/layout/preference_normal.xml" value="0.30546875" />
       </map>
     </option>
   </component>
