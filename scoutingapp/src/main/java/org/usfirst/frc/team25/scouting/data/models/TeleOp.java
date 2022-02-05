@@ -47,7 +47,7 @@ public class TeleOp {
 
     public TeleOp(int robotCargoPickedUp , int robotCargoScoredUpperHub , int robotCargoScoredLowerHub ,
                   int robotCargoDropped , int successRungClimbLevel ,
-                  boolean attemptRungClimb , boolean successRungClimb , int attemptRungClimbLevel) {
+                  boolean attemptRungClimb , int attemptRungClimbLevel) {
        this.robotCargoPickedUp = robotCargoPickedUp;
        this.robotCargoScoredUpperHub = robotCargoScoredUpperHub;
        this.robotCargoScoredLowerHub = robotCargoScoredLowerHub;

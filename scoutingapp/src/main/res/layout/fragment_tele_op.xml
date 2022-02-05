@@ -237,10 +237,10 @@
             android:layout_below="@id/Robot_Cargo_dropped"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:padding="@dimen/default_padding_bottom"
-            android:text="Attempts to climb Rung"
+            android:text="Attempts To Climb Rung"
             android:textSize="18sp" />
 
-        <CheckBox
+        <!--<CheckBox
             android:id="@+id/success_rung_climb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
             android:enabled="false"
             android:padding="@dimen/default_padding_bottom"
             android:text="Successful in Rung climb"
-            android:textSize="18sp" />
+            android:textSize="18sp" /> -->
 
 
        <RadioGroup
@@ -259,60 +259,97 @@
             android:layout_below="@id/attempt_rung_climb"
             android:layout_marginStart="45dp"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="visible">\
 
-           <TextView
-               android:id="@+id/rung_label"
+           <LinearLayout
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_centerHorizontal="true"
+               android:orientation="vertical">
 
-               android:padding="8sp"
-               android:text="Starting Rung Level:"
-               android:textSize="18sp"
+               <TextView
+                   android:id="@+id/rung_label"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerHorizontal="true"
+                   android:padding="8sp"
+                   android:text="Starting Rung Level:"
+                   android:textSize="18sp" />
 
-               />
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/Layout2">
 
-            <RadioButton
-                android:id="@+id/attempt_low_rung"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Low Rung"
-                android:textSize="18sp" />
+                    <RadioButton
+                        android:id="@+id/attempt_low_rung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:padding="8dp"
+                        android:text="Low Rung"
+                        android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/attempt_mid_rung"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:padding="8dp"
-                android:text="Medium Rung"
-                android:textSize="18sp" />
+                    <RadioButton
+                        android:id="@+id/attempt_mid_rung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:padding="8dp"
+                        android:text="Medium Rung"
+                        android:textSize="18sp" />
+             </LinearLayout>
 
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/Layout3">
 
+                   <RadioButton
+                       android:id="@+id/not_success_in_rung"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:enabled="false"
+                       android:padding="8dp"
+                       android:text="Not Successfull In Rung Climb"
+                       android:textSize="18sp" />
 
+            </LinearLayout>
+           </LinearLayout>
         </RadioGroup>
 
         <RadioGroup
             android:id="@+id/success_rung_climb_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/success_rung_climb"
+            android:layout_below="@id/attempt_rung_climb_level"
             android:layout_marginStart="45dp"
             android:orientation="horizontal"
             android:visibility="visible">
+
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/end_rung_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+
+                        android:padding="8sp"
+                        android:text="Which Rung Did The Robot End At?"
+                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/Layout1">
+
+
+
+
 
                         <RadioButton
                             android:id="@+id/Low_Rung"
@@ -332,12 +369,6 @@
                             android:text="Medium Rung"
                             android:textSize="18sp" />
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below = "@id/Layout1">
-
                         <RadioButton
                             android:id="@+id/High_Rung"
                             android:layout_width="wrap_content"
@@ -347,6 +378,13 @@
                             android:text="High Rung"
                             android:textSize="18sp" />
 
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below = "@id/Layout1">
+
+
                         <RadioButton
                             android:id="@+id/Traversal_Rung"
                             android:layout_width="wrap_content"
@@ -354,6 +392,15 @@
                             android:enabled="false"
                             android:padding="8dp"
                             android:text="Traversal Rung"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/robot_fell_off"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:padding="8dp"
+                            android:text="Robot Fell Off Rung"
                             android:textSize="18sp" />
 
 
