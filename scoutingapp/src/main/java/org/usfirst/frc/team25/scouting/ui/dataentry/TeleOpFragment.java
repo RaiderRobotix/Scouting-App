@@ -46,10 +46,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             RobotCargoScoredLowerHub, RobotCargoDropped , HumanCargoMissed;
     //private CheckBox climbAssistedByPartners;
     //private EditText assistingClimbTeamNum;
-   //private long startTime = 0;
-    //private long stopTime = 0;
-    //private long reaction = 0;
-    //private Timer timer = new Timer();
+   private long startTime = 0;
+    private long stopTime = 0;
+    private long reaction = 0;
+    private Timer timer = new Timer();
     private TimerTask timerTask;
     private double time = 0.0;
 
@@ -181,22 +181,49 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         for(RadioButton button:attemptRungClimbLevel) {
             button.setOnClickListener((view1 -> {
                 for (RadioButton bttn : attemptRungClimbLevel){
+                    // Save the current time. This will get called
+                    // 3 times as it gets called per button but it
+                    // shouldn't be an issue
+                    // kavinraj does not want this code :(
+                    /*System.out.println("sjfgknkjngsk");
+                    startTime = System.currentTimeMillis();
+
+                    // Is bttn the only button that should be checked?
+                    bttn.setChecked(bttn == button);*/
+
+                    // but kavin wants this code
                     if (bttn == button) {
+                        System.out.println("sjfgknkjngsk");
+                        startTime = System.currentTimeMillis();
                         bttn.setChecked(true);
                     }
-
                     else {
                         bttn.setChecked(false);
+                    }
+
+                    if(attemptRungClimbLevel[0].isChecked() || attemptRungClimbLevel[1].isChecked()){
+                        for(RadioButton bttn1 : successRungClimbLevel) {
+                            bttn1.setEnabled(true);
+
+
+                        }
+                    }
+                    else{
+                        for(RadioButton bttn1 : successRungClimbLevel) {
+                            bttn1.setEnabled(false);
+                            bttn1.setChecked(false);
+                        }
+
                     }
                 }
             }));
         }
 
-        for (RadioButton bttn : attemptRungClimbLevel) {
-            bttn.setOnCheckedChangeListener((compoundButton, b) -> {
+        /*for (RadioButton bttn : attemptRungClimbLevel) {
+            bttn.setOnClickListener((compoundButton) -> {
                 System.out.println("sjfgknkjngsk");
-                //startTime = System.currentTimeMillis();
-                startTimer();
+                startTime = System.currentTimeMillis();
+                // startTimer();
                 if(attemptRungClimbLevel[0].isChecked() || attemptRungClimbLevel[1].isChecked()){
                     for(RadioButton button : successRungClimbLevel) {
                         button.setEnabled(true);
@@ -212,7 +239,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
                 }
             });
-        }
+        }*/
 
         /*attemptRungClimbLevelGroup.setOnCheckedChangeListener((compoundButton, b) -> {
                 System.out.println("sjfgknkjngsk");
@@ -234,9 +261,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         for(RadioButton button:successRungClimbLevel) {
             button.setOnClickListener((view1 -> {
-                //stopTime = System.currentTimeMillis();
-                //reaction = (stopTime-startTime)/1000;
-                //System.out.println("Time Robot Took is " + reaction);
+                stopTime = System.currentTimeMillis();
+                reaction = (stopTime-startTime)/1000;
+                System.out.println("Time Robot Took is " + reaction);
                 for (RadioButton bttn : successRungClimbLevel){
                     if (bttn == button) {
                         bttn.setChecked(true);
@@ -447,7 +474,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
 
    public void startTimer(){
-       Timer timer = new Timer();
+       //Timer timer = new Timer();
         timerTask = new TimerTask() {
             @Override
             public void run() {
