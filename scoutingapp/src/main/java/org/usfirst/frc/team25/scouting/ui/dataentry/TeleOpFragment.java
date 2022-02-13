@@ -261,9 +261,26 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         for(RadioButton button:successRungClimbLevel) {
             button.setOnClickListener((view1 -> {
-                stopTime = System.currentTimeMillis();
-                reaction = (stopTime-startTime)/1000;
-                System.out.println("Time Robot Took is " + reaction);
+
+                if(attemptRungClimbLevel[0].isChecked() && successRungClimbLevel[0].isChecked()){
+                    reaction = 0;
+                    System.out.println("Time Robot Took is " + reaction);
+                }
+                else if(attemptRungClimbLevel[1].isChecked() && successRungClimbLevel[1].isChecked()){
+                    reaction = 0;
+                    System.out.println("Time Robot Took is " + reaction);
+                }
+                else{
+                    stopTime = System.currentTimeMillis();
+                    reaction = (int) ((stopTime-startTime)/1000);
+                    if(reaction > 30){
+                        reaction = 0;
+                        System.out.println("Time Robot Took is " + reaction);
+                    }
+                    else {
+                        System.out.println("Time Robot Took is " + reaction);
+                    }
+                }
                 for (RadioButton bttn : successRungClimbLevel){
                     if (bttn == button) {
                         bttn.setChecked(true);
@@ -407,6 +424,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             RobotCargoScoredLowerHub.setValue(tele.getRobotCargoScoredLowerHub());
             RobotCargoDropped.setValue(tele.getRobotCargoDropped());
 
+
             attemptRungClimb.setChecked(tele.isAttemptRungClimb());
             //successRungClimb.setChecked(tele.isSuccessRungClimb());
 
@@ -467,13 +485,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         entry.setTeleOp(new TeleOp(RobotCargoPickedUp.getValue(), RobotCargoScoredUpperHub.getValue() ,
                 RobotCargoScoredLowerHub.getValue() , RobotCargoDropped.getValue() , UiHelper.getHabLevelSelected(successRungClimbLevel) ,
-                attemptRungClimb.isChecked()  , UiHelper.getHabLevelSelected(attemptRungClimbLevel)));
+                attemptRungClimb.isChecked()  , UiHelper.getHabLevelSelected(attemptRungClimbLevel) , (int) reaction));
 
 
     }
 
 
-   public void startTimer(){
+   /*public void startTimer(){
        //Timer timer = new Timer();
         timerTask = new TimerTask() {
             @Override
@@ -499,10 +517,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 }
             }
         };
-       timer.schedule(timerTask,0,1000);
+       timer.schedule(timerTask,0,1000);*/
 
 
-   }
+
 
    /*public void stopTimer(){
         timer.cancel();

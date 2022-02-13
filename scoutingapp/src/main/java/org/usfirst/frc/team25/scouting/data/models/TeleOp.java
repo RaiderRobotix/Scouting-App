@@ -39,6 +39,7 @@ public class TeleOp {
     private int robotCargoDropped;
     private int successRungClimbLevel;
     private int attemptRungClimbLevel;
+    private int climbTime;
 
     private boolean attemptRungClimb;
     private boolean successRungClimb;
@@ -47,7 +48,7 @@ public class TeleOp {
 
     public TeleOp(int robotCargoPickedUp , int robotCargoScoredUpperHub , int robotCargoScoredLowerHub ,
                   int robotCargoDropped , int successRungClimbLevel ,
-                  boolean attemptRungClimb , int attemptRungClimbLevel) {
+                  boolean attemptRungClimb , int attemptRungClimbLevel , int climbTime) {
        this.robotCargoPickedUp = robotCargoPickedUp;
        this.robotCargoScoredUpperHub = robotCargoScoredUpperHub;
        this.robotCargoScoredLowerHub = robotCargoScoredLowerHub;
@@ -56,8 +57,10 @@ public class TeleOp {
        this.successRungClimbLevel = successRungClimbLevel;
        this.attemptRungClimb = attemptRungClimb;
        this.successRungClimb = successRungClimb;
+       this.climbTime = climbTime;
     }
 
+    public int getClimbTime(){return climbTime;}
     public int getRobotCargoPickedUp() {
         return robotCargoPickedUp;
     }
