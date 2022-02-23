@@ -310,7 +310,7 @@
                        android:layout_height="wrap_content"
                        android:enabled="false"
                        android:padding="8dp"
-                       android:text="Not Successfull In Rung Climb"
+                       android:text="Not Successful In Rung Climb"
                        android:textSize="18sp" />
 
             </LinearLayout>

@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Scoring In LowerHub"
+                    android:text="Scoring In Lower Hub"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Scoring in UpperHub"
+                    android:text="Scoring in Upper Hub"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -175,6 +175,13 @@
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:visibility="visible">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="This robot is..."
+                android:textSize="18sp" />
+
             <RadioButton
                 android:id="@+id/first_pick"
                 android:layout_width="wrap_content"
@@ -200,13 +207,6 @@
                 android:layout_marginStart="40dp"
                 android:padding="8dp"
                 android:text="Not a good pick"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="This robot is..."
                 android:textSize="18sp" />
 
         </RadioGroup>

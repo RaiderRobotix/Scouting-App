@@ -115,6 +115,28 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         });*/
 
+        robotNoShow.setOnCheckedChangeListener(((compoundButton, b) -> {
+            if (b) {
+                robotStartedBall.setEnabled(false);
+                robotStartedBall.setChecked(false);
+            }
+            else{
+                robotStartedBall.setEnabled(true);
+            }
+
+        }));
+        /*robotStartedBall.setOnCheckedChangeListener(((compoundButton, b) -> {
+            if (b) {
+                robotNoShow.setEnabled(false);
+                robotNoShow.setChecked(true);
+            }
+            else{
+                robotNoShow.setEnabled(true);
+            }
+
+
+        }));*/
+
 
 
 
@@ -339,7 +361,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
             robotNoShow.setChecked(robotNoShow.isChecked());
 
-            startingPositionButtons[1].setEnabled(prevPreMatch.getStartingLevel() == 1);
+            //startingPositionButtons[1].setEnabled(prevPreMatch.getStartingLevel() == 1);
 
 
         } else {

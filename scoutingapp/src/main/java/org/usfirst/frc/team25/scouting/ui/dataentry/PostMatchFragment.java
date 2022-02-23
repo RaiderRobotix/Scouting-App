@@ -32,11 +32,11 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
     private final String[] ROBOT_COMMENT_VALUES = {
             "Team got a few fouls",
-            "Parts fell of/broke during game ",
+            "Parts fell off/broke during game ",
             "Team did not get any fouls",
             "Robot In Great Control",
-            "Effective defense",
             "Higher rung levels significantly slower",
+            "Effective defense",
             "Slow Rung Climb",
             "Fast Rung Climb",
             "Great Accuracy",

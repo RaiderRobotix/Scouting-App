@@ -21,6 +21,8 @@ import org.usfirst.frc.team25.scouting.ui.UiHelper;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,10 +50,11 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     //private EditText assistingClimbTeamNum;
    private long startTime = 0;
     private long stopTime = 0;
-    private long reaction = 0;
+    private int reaction = 0;
+    private ArrayList<Integer> Time= new ArrayList<Integer>();
     private Timer timer = new Timer();
     private TimerTask timerTask;
-    private double time = 0.0;
+    //private double time = 0.0;
 
 
 
@@ -117,13 +120,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         successRungClimbLevel[4] = view.findViewById(R.id.robot_fell_off);
         //successRungClimbLevel[4] = view.findViewById(R.id.robot_fell);
 
+        Time.add(0);
        /* highestAssistedClimbLevel = new RadioButton[2];
         highestAssistedClimbLevel[0] = view.findViewById(R.id.highest_assisted_climb_one);
         highestAssistedClimbLevel[1] = view.findViewById(R.id.highest_assisted_climb_two);
 
         climbAssistStartingLevel = new RadioButton[3];
         climbAssistStartingLevel[0] = view.findViewById(R.id.climb_assist_starting_zero);
-        climbAssistStartingLevel[1] = view.findViewById(R.id.climb_assist_starting_one);
+        climbAssistStartingLevel[1] = view.finViewById(R.id.climb_assist_starting_one);
         climbAssistStartingLevel[2] = view.findViewById(R.id.climb_assist_starting_two);*/
 
 
@@ -168,12 +172,23 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             } else {
                 for(RadioButton button : attemptRungClimbLevel) {
                     button.setEnabled(false);
+                    button.setChecked(false);
+                }
+                for(RadioButton button : successRungClimbLevel) {
+                    button.setEnabled(false);
+                    button.setChecked(false);
                 }
                 //successRungClimb.setEnabled(false);
                 //successRungClimb.setChecked(false);
                 //UiHelper.radioButtonEnable(attemptRungClimbLevelGroup, false);
                 //UiHelper.radioButtonEnable(successRungClimbLevelGroup, false);
             }
+
+            // this was david
+            // kavin does not know how to optimize his code :(
+            /*for(RadioButton button : attemptRungClimbLevel) {
+                button.setEnabled(b);
+            }*/
 
 
         });
@@ -261,33 +276,26 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         for(RadioButton button:successRungClimbLevel) {
             button.setOnClickListener((view1 -> {
-
-                if(attemptRungClimbLevel[0].isChecked() && successRungClimbLevel[0].isChecked()){
-                    reaction = 0;
-                    System.out.println("Time Robot Took is " + reaction);
+                for (RadioButton bttn : successRungClimbLevel){
+                    bttn.setChecked(bttn == button);
                 }
-                else if(attemptRungClimbLevel[1].isChecked() && successRungClimbLevel[1].isChecked()){
-                    reaction = 0;
-                    System.out.println("Time Robot Took is " + reaction);
+                Time.add(0);
+                if((attemptRungClimbLevel[0].isChecked() && successRungClimbLevel[0].isChecked()) ||
+                        (attemptRungClimbLevel[1].isChecked() && successRungClimbLevel[1].isChecked())
+                        ||(successRungClimbLevel[4].isChecked())){
+                    Time.add(0);
+                    System.out.println("1Time Robot Took is " + Time.get(Time.size()-1));
                 }
                 else{
                     stopTime = System.currentTimeMillis();
-                    reaction = (int) ((stopTime-startTime)/1000);
+                    reaction = (int)((stopTime-startTime)/1000);
+                    Time.add(reaction);
                     if(reaction > 30){
-                        reaction = 0;
-                        System.out.println("Time Robot Took is " + reaction);
+                        Time.add(0);
+                        System.out.println("Time Robot Took is " + Time.get(Time.size()-1));
                     }
                     else {
-                        System.out.println("Time Robot Took is " + reaction);
-                    }
-                }
-                for (RadioButton bttn : successRungClimbLevel){
-                    if (bttn == button) {
-                        bttn.setChecked(true);
-                    }
-
-                    else {
-                        bttn.setChecked(false);
+                        System.out.println("Time Robot Took is " + Time.get(Time.size()-1));
                     }
                 }
             }));
@@ -426,6 +434,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
 
             attemptRungClimb.setChecked(tele.isAttemptRungClimb());
+
+
+
             //successRungClimb.setChecked(tele.isSuccessRungClimb());
 
             /*cargoShipHatches.setValue(tele.getCargoShipHatches());
@@ -462,7 +473,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
             for (int i = 1; i <= successRungClimbLevel.length; i++) {
                 if (i == tele.getSuccessRungClimbLevel()) {
-                    successRungClimbLevel[i - 1].setChecked(true);
+                    successRungClimbLevel[i-1].setChecked(true);
                 }
             }
 
@@ -470,11 +481,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 if (i == tele.getAttemptRungClimbLevel()) {
                     attemptRungClimbLevel[i - 1].setChecked(true);
                 }
+
+            }
+            if(attemptRungClimbLevel[0].isChecked()||attemptRungClimbLevel[1].isChecked()){
+                for(RadioButton button:successRungClimbLevel) {
+                    button.setEnabled(true);}
             }
 
 
             //autoDisableClimbAssistStartingLevelGroup();
-
             //autoDisableSuccessGroup();
 
         }
@@ -485,7 +500,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         entry.setTeleOp(new TeleOp(RobotCargoPickedUp.getValue(), RobotCargoScoredUpperHub.getValue() ,
                 RobotCargoScoredLowerHub.getValue() , RobotCargoDropped.getValue() , UiHelper.getHabLevelSelected(successRungClimbLevel) ,
-                attemptRungClimb.isChecked()  , UiHelper.getHabLevelSelected(attemptRungClimbLevel) , (int) reaction));
+                attemptRungClimb.isChecked()  , UiHelper.getHabLevelSelected(attemptRungClimbLevel) , Time.get(Time.size()-1)));
+
 
 
     }

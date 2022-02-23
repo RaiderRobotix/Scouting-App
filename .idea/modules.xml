@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scouting-App-2022.iml" filepath="$PROJECT_DIR$/.idea/modules/Scouting-App-2022.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2022.scoutingapp.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2022.scoutingapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scouting-App-2022_V2.iml" filepath="$PROJECT_DIR$/.idea/modules/Scouting-App-2022_V2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2022_V2.scoutingapp.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2022_V2.scoutingapp.iml" />
     </modules>
   </component>
 </project>

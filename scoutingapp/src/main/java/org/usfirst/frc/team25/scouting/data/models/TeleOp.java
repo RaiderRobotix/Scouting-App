@@ -60,7 +60,7 @@ public class TeleOp {
        this.climbTime = climbTime;
     }
 
-    public int getClimbTime(){return climbTime;}
+    public long getClimbTime(){return climbTime;}
     public int getRobotCargoPickedUp() {
         return robotCargoPickedUp;
     }
