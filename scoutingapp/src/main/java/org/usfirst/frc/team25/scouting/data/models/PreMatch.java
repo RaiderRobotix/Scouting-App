@@ -15,6 +15,19 @@ public class PreMatch {
     private int startingLocation;
     private String startingPos;
     private String startingGamePiece;
+    
+    public PreMatch(String scoutName, String scoutPos, int matchNum,
+                    int teamNum, boolean robotNoShow , boolean robotStartBall ) {
+        this.scoutName = scoutName;
+        this.scoutPos = scoutPos;
+        this.startingPos = startingPos;
+        this.matchNum = matchNum;
+        this.teamNum = teamNum;
+
+        this.robotNoShow = robotNoShow;
+        this.robotStartBall = robotStartBall;
+        //this.startingGamePiece = startingGamePiece;
+    }
 
     public String getScoutName() {
         return scoutName;
@@ -48,18 +61,5 @@ public class PreMatch {
 
     public String getStartingGamePiece() {
         return startingGamePiece;
-    }
-
-    public PreMatch(String scoutName, String scoutPos, int matchNum,
-                    int teamNum, boolean robotNoShow , boolean robotStartBall ) {
-        this.scoutName = scoutName;
-        this.scoutPos = scoutPos;
-        this.startingPos = startingPos;
-        this.matchNum = matchNum;
-        this.teamNum = teamNum;
-
-        this.robotNoShow = robotNoShow;
-        this.robotStartBall = robotStartBall;
-        //this.startingGamePiece = startingGamePiece;
     }
 }
