@@ -123,6 +123,7 @@ public class ButtonIncDecView extends RelativeLayout {
     /**
      * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
      */
+
     public void setValue(int value) {
         if (value > maxValue) {
             value = maxValue;

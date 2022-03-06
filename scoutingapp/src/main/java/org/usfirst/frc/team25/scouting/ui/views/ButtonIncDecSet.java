@@ -112,7 +112,6 @@ public class ButtonIncDecSet extends RelativeLayout {
         valueView = findViewById(R.id.button_inc_dec_value);
         return Integer.parseInt(valueView.getText().toString());
     }
-
     /**
      * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
      */

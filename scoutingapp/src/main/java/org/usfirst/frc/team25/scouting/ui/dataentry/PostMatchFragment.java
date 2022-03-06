@@ -83,7 +83,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
             // Parse focus string
             for (CheckBox cb : focusButtons) {
-                for (String item : entry.getPostMatch().getFocus().split("; ")) {
+                for (String item : entry.getPostMatch().getFocus().split(", ")) {
                     if (cb.getText().equals(item)) {
                         cb.setChecked(true);
                     }
@@ -110,7 +110,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         for (CheckBox cb : focusButtons) {
             if (cb.isChecked()) {
                 if (!focus.toString().equals("")) {
-                    focus.append("; ");
+                    focus.append(", ");
                 }
                 focus.append((String) cb.getText());
             }
