@@ -14,7 +14,7 @@
     <string name="version_number">v3.11</string>
 
     <!-- Name of the cheatsheet file in /assets-->
-    <string name="cheatsheet_filename">Deep Space Cheatsheet.pdf</string>
+    <string name="cheatsheet_filename">Rapid_React_Cheatsheet.pdf</string>
 
     <!-- Contains the GitHub username of the repository owner, followed by a forward slash
          and the repository name ("Scouting-App")-->
