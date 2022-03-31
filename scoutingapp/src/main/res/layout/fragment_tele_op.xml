@@ -193,20 +193,13 @@
 
             />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/Robot_cargo_pick_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Robot_label"
-            android:padding="8dp"
-            app:initialValue="0"
-            app:titlePrompt="Cargo Picked Up" />
+
 
         <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
             android:id="@+id/Robot_Cargo_scored_upperHub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Robot_cargo_pick_up"
+            android:layout_below="@id/Robot_label"
             android:padding="@dimen/default_padding_bottom"
             app:initialValue="0"
             app:titlePrompt="Cargo Scored In Upper Hub" />
@@ -220,21 +213,14 @@
             app:initialValue="0"
             app:titlePrompt="Cargo Scored In Lower Hub" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/Robot_Cargo_dropped"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Robot_cargo_scored_lowerHub"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Accidentally Dropped Cargo" />
+
 
 
         <CheckBox
             android:id="@+id/attempt_rung_climb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Robot_Cargo_dropped"
+            android:layout_below="@id/Robot_cargo_scored_lowerHub"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:padding="@dimen/default_padding_bottom"
             android:text="Attempts To Climb Rung"

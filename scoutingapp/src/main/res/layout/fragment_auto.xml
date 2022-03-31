@@ -179,16 +179,6 @@
             android:text="Side cargo ship"
             android:textSize="18sp" /> -->
 
-      <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-          android:id="@+id/Cargo_robot_picked_up"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/Robot_pass_tarmac"
-          android:padding="@dimen/default_padding_bottom"
-          app:initialValue="0"
-
-          app:titlePrompt="Cargo Picked Up" />
-
        <!-- <CheckBox
             android:id="@+id/cargo_dropped_cargo_ship"
             android:layout_width="wrap_content"
@@ -217,7 +207,7 @@
           android:id="@+id/Robot_balls_scored_upperHub"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_below="@id/Cargo_robot_dropped"
+          android:layout_below="@id/Robot_pass_tarmac"
           android:padding="@dimen/default_padding_bottom"
           app:initialValue="0"
           app:titlePrompt="Cargo Scored In Upper Hub" />
@@ -231,14 +221,7 @@
           app:initialValue="0"
           app:titlePrompt="Cargo Scored In Lower Hub" />
 
-      <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-          android:id="@+id/Cargo_robot_dropped"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/Cargo_robot_picked_up"
-          android:padding="@dimen/default_padding_bottom"
-          app:initialValue="0"
-          app:titlePrompt="Cargo Dropped" />
+
 
       <CheckBox
           android:id="@+id/Robot_got_foul"
@@ -273,14 +256,7 @@
             app:initialValue="0"
             app:titlePrompt="Cargo Scored" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_Human_missed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_Human_scored"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo Missed" />
+
 
        <!-- <CheckBox
             android:id="@+id/hatches_dropped_cargo_ship"
@@ -324,7 +300,7 @@
           android:id="@+id/auto_continue"
           android:layout_width="190dp"
           android:layout_height="76dp"
-          android:layout_below="@id/cargo_Human_missed"
+          android:layout_below="@id/cargo_Human_scored"
           android:layout_centerHorizontal="true"
           android:layout_marginStart="@dimen/activity_horizontal_margin"
           android:layout_marginTop="@dimen/activity_horizontal_margin"

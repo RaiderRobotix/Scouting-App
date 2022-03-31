@@ -23,8 +23,8 @@ import java.lang.reflect.Array;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecView robotCargoScoredUpperHub,  robotcargoPickedup, robotCargoScoredLowerHub ,
-            robotCargoDropped , humanCargoScored , humanCargoMissed;
+    private ButtonIncDecView robotCargoScoredUpperHub,  robotCargoScoredLowerHub ,
+             humanCargoScored ;
 
     private CheckBox robotPassTarmac, robotCommitedFoul;
 
@@ -56,12 +56,10 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
 
-        robotcargoPickedup = view.findViewById(R.id.Cargo_robot_picked_up);
+
         robotCargoScoredUpperHub = view.findViewById(R.id.Robot_balls_scored_upperHub);
         robotCargoScoredLowerHub = view.findViewById(R.id.Robot_Cargo_scored_lowerHub);
-        robotCargoDropped = view.findViewById(R.id.Cargo_robot_dropped);
         humanCargoScored = view.findViewById(R.id.cargo_Human_scored);
-        humanCargoMissed = view.findViewById(R.id.cargo_Human_missed);
 
 
         robotPassTarmac = view.findViewById(R.id.Robot_pass_tarmac);
@@ -75,31 +73,15 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         continueButton.setOnClickListener(view1 -> {
             //FIX THE ROBOT PASS TARMAC CHECK BUTTON SO IF IT IS NOT CHECKED THEN IT GIVES AND ALERT
-            if (robotcargoPickedup.getValue() > 0
-                || robotCargoDropped.getValue() > 0){
-                robotPassTarmac.setChecked(true);
-            }
-
-            if (robotcargoPickedup.getValue() == 0 && (robotCargoScoredLowerHub.getValue() > 1
-                    || robotCargoScoredUpperHub.getValue() > 1) && robotcargoPickedup.getValue() == 0) {
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Select How many Balls the robot picked up")
-                        .setPositiveButton("OK", (dialogInterface, i) -> {
-
-                        })
-                        .show();
 
 
-            } else {
                 saveState();
                 getFragmentManager().beginTransaction()
                         .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
                         .commit();
-            }
-
         });
 
-        View[] items = {robotCargoDropped,robotCargoScoredLowerHub,robotCargoScoredUpperHub,robotcargoPickedup};
+        View[] items = {robotCargoScoredLowerHub,robotCargoScoredUpperHub};
 
         if (entry.getPreMatch().isRobotNoShow()) {
             continueButton.callOnClick();
@@ -116,13 +98,12 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
             Autonomous prevAuto = entry.getAutonomous();
 
-            robotcargoPickedup.setValue(prevAuto.getRobotCargoPickedup());
             robotCargoScoredUpperHub.setValue(prevAuto.getRobotCargoScoredUpperHub());
             robotCargoScoredLowerHub.setValue(prevAuto.getRobotCargoScoredLowerHub());
-            robotCargoDropped.setValue(prevAuto.getRobotCargoDropped());
+
 
             humanCargoScored.setValue(prevAuto.getHumanCargoScored());
-            humanCargoMissed.setValue(prevAuto.getHumanCargoMissed());
+
 
             robotPassTarmac.setChecked(prevAuto.isRobotPassTarmac());
             robotCommitedFoul.setChecked(prevAuto.isRobotCommitFoul());
@@ -133,9 +114,9 @@ public class AutoFragment extends Fragment implements EntryFragment {
     @Override
     public void saveState() {
         entry.setAutonomous(new Autonomous(
-                robotcargoPickedup.getValue(), robotCargoScoredUpperHub.getValue(),
-                robotCargoScoredLowerHub.getValue(), robotCargoDropped.getValue(),
-                humanCargoScored.getValue(), humanCargoMissed.getValue(),
+                 robotCargoScoredUpperHub.getValue(),
+                robotCargoScoredLowerHub.getValue(),
+                humanCargoScored.getValue(),
                 robotPassTarmac.isChecked(), robotCommitedFoul.isChecked()));
     }
 
