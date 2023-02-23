@@ -103,78 +103,10 @@
                 android:layout_marginVertical="10dp" />
 
             <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/robot_no_show_checkbox"
-                android:visibility="visible"
-                android:id="@+id/starting_level">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Robot HAB starting level"
-                    android:textSize="18sp"
-                    android:id="@+id/robot_starting_level"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Level 1"
-                    android:textSize="18sp"
-                    android:id="@+id/hab_level_1"
-                    android:padding="8dp"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Level 2"
-                    android:textSize="18sp"
-                    android:padding="8dp"
-                    android:id="@+id/hab_level_2"/>
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/starting_position"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/starting_level"
-                android:visibility="visible">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Robot starting position (from center driver station)"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/leftStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Left"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/centerStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Center"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/rightStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Right"
-                    android:textSize="18sp" />
-
-            </RadioGroup>
-
-            <RadioGroup
                 android:id="@+id/robot_starting_game_piece"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/starting_position"
+                android:layout_below="@id/robot_no_show_checkbox"
                 android:visibility="visible">
 
                 <TextView
@@ -185,24 +117,27 @@
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/cargo_button"
+                    android:id="@+id/cone_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Cargo"
+                    android:layout_marginLeft="30dp"
+                    android:text="Cone"
                     android:textSize="18sp" />
 
                 <RadioButton
-                    android:id="@+id/hatch_panel_button"
+                    android:id="@+id/cube_button"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="30dp"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Hatch panel"
+                    android:text="Cube"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/none_button"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="30dp"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="None"

@@ -1,137 +1,115 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
+import android.widget.CheckBox;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Container holding data from the tele-operated period
  * Includes endgame data
  */
 public class TeleOp {
 
-    private int cargoShipHatches;
-    private int rocketLevelOneHatches;
-    private int rocketLevelTwoHatches;
-    private int rocketLevelThreeHatches;
-    private int cargoShipCargo;
-    private int rocketLevelOneCargo;
-    private int rocketLevelTwoCargo;
-    private int rocketLevelThreeCargo;
+    private int coneTopTele;
+    private int cubeTopTele;
 
-    private int hatchesDropped;
-    private int cargoDropped;
+    private int coneMidTele;
+    private int cubeMidTele;
 
-    private boolean attemptHabClimb;
-    private int attemptHabClimbLevel;
-    private boolean successHabClimb;
-    private int successHabClimbLevel;
-    private boolean climbAssistedByPartner;
-    private int assistingClimbTeamNum;
-    private int numPartnerClimbAssists;
-    private int partnerClimbAssistStartLevel;
-    private int partnerClimbAssistEndLevel;
+    private int coneBttmTele;
+    private int cubeBttmTele;
 
-    public TeleOp(int cargoShipHatches, int rocketLevelOneHatches, int rocketLevelTwoHatches,
-                  int rocketLevelThreeHatches, int cargoShipCargo, int rocketLevelOneCargo,
-                  int rocketLevelTwoCargo, int rocketLevelThreeCargo, int hatchesDropped,
-                  int cargoDropped, boolean attemptHabClimb, int attemptHabClimbLevel,
-                  boolean successHabClimb, int successHabClimbLevel,
-                  boolean climbAssistedByPartner, int assistingClimbTeamNum,
-                  int numPartnerClimbAssists, int partnerClimbAssistEndLevel,
-                  int partnerClimbAssistStartLevel) {
-        this.cargoShipHatches = cargoShipHatches;
-        this.rocketLevelOneHatches = rocketLevelOneHatches;
-        this.rocketLevelTwoHatches = rocketLevelTwoHatches;
-        this.rocketLevelThreeHatches = rocketLevelThreeHatches;
-        this.cargoShipCargo = cargoShipCargo;
-        this.rocketLevelOneCargo = rocketLevelOneCargo;
-        this.rocketLevelTwoCargo = rocketLevelTwoCargo;
-        this.rocketLevelThreeCargo = rocketLevelThreeCargo;
-        this.hatchesDropped = hatchesDropped;
-        this.cargoDropped = cargoDropped;
-        this.attemptHabClimb = attemptHabClimb;
-        this.attemptHabClimbLevel = attemptHabClimbLevel;
-        this.successHabClimb = successHabClimb;
-        this.successHabClimbLevel = successHabClimbLevel;
-        this.climbAssistedByPartner = climbAssistedByPartner;
-        this.assistingClimbTeamNum = assistingClimbTeamNum;
-        this.numPartnerClimbAssists = numPartnerClimbAssists;
-        this.partnerClimbAssistEndLevel = partnerClimbAssistEndLevel;
-        this.partnerClimbAssistStartLevel = partnerClimbAssistStartLevel;
+    private int coneDroppedTele;
+    private int cubeDroppedTele;
+
+    private boolean dockAttemptTele;
+    private String dockStatusTele;
+
+    private boolean robotCommitedFoulTele;
+    private String foulTypeTele;
+
+    //private HashMap<CheckBox,Boolean> gridVals;
+    private ArrayList<Boolean> gridVals;
+
+    public TeleOp(int coneTop, int cubeTop, int coneMid,
+                  int cubeMid, int coneBttm, int cubeBttm,
+                  int coneDropped, int cubeDropped,
+                  boolean dockAttempt, String dockStatus,
+                  boolean robotCommitedFoul, String foulType
+                  //HashMap<CheckBox,Boolean> gridVals
+                  //ArrayList<Boolean> gridVals
+    ) {
+        this.coneTopTele = coneTop;
+        this.cubeTopTele = cubeTop;
+        this.coneMidTele = coneMid;
+        this.cubeMidTele = cubeMid;
+        this.coneBttmTele = coneBttm;
+        this.cubeBttmTele = cubeBttm;
+        this.coneDroppedTele = coneDropped;
+        this.cubeDroppedTele = cubeDropped;
+        this.dockAttemptTele = dockAttempt;
+        this.dockStatusTele = dockStatus;
+        this.robotCommitedFoulTele = robotCommitedFoul;
+        this.foulTypeTele = foulType;
+        //this.gridVals = gridVals;
     }
 
 
-    public int getCargoShipHatches() {
-        return cargoShipHatches;
+    public boolean isDockAttempt() {
+        return dockAttemptTele;
     }
 
-    public int getRocketLevelOneHatches() {
-        return rocketLevelOneHatches;
+    public int getConeBttm() {
+        return coneBttmTele;
     }
 
-    public int getRocketLevelTwoHatches() {
-        return rocketLevelTwoHatches;
+    public int getConeMid() {
+        return coneMidTele;
     }
 
-    public int getRocketLevelThreeHatches() {
-        return rocketLevelThreeHatches;
+    public int getConeTop() {
+        return coneTopTele;
     }
 
-    public int getCargoShipCargo() {
-        return cargoShipCargo;
+    public int getConeDropped() {
+        return coneDroppedTele;
     }
 
-    public int getRocketLevelOneCargo() {
-        return rocketLevelOneCargo;
+    public int getCubeBttm() {
+        return cubeBttmTele;
     }
 
-    public int getRocketLevelTwoCargo() {
-        return rocketLevelTwoCargo;
+    public int getCubeMid() {
+        return cubeMidTele;
     }
 
-    public int getRocketLevelThreeCargo() {
-        return rocketLevelThreeCargo;
+    public int getCubeTop() {
+        return cubeTopTele;
     }
 
-    public int getHatchesDropped() {
-        return hatchesDropped;
+    public int getCubeDropped() {
+        return cubeDroppedTele;
     }
 
-    public int getCargoDropped() {
-        return cargoDropped;
+    public String getDockStatus() {
+        return dockStatusTele;
     }
 
-    public boolean isAttemptHabClimb() {
-        return attemptHabClimb;
+    public boolean isRobotCommitedFoul() {
+        return robotCommitedFoulTele;
     }
 
-    public int getAttemptHabClimbLevel() {
-        return attemptHabClimbLevel;
+    public String getFoulType() {
+        return foulTypeTele;
     }
 
-    public boolean isSuccessHabClimb() {
-        return successHabClimb;
-    }
+//    public HashMap<CheckBox,Boolean> getGridVals() {
+//    return gridVals; }
 
-    public int getSuccessHabClimbLevel() {
-        return successHabClimbLevel;
-    }
 
-    public boolean isClimbAssistedByPartner() {
-        return climbAssistedByPartner;
-    }
-
-    public int getAssistingClimbTeamNum() {
-        return assistingClimbTeamNum;
-    }
-
-    public int getNumPartnerClimbAssists() {
-        return numPartnerClimbAssists;
-    }
-
-    public int getPartnerClimbAssistEndLevel() {
-        return partnerClimbAssistEndLevel;
-    }
-
-    public int getPartnerClimbAssistStartLevel() {
-        return partnerClimbAssistStartLevel;
-    }
+//    public ArrayList<Boolean> getGridVals() {
+//        return gridVals;
+//    }
 }

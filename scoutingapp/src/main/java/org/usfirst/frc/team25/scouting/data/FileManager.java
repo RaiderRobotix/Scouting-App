@@ -343,6 +343,7 @@ public class FileManager {
         entries.add(entry);
 
         String output = gson.toJson(entries);
+        Log.e("PASSED PROBLEM","PROBLEM SOLVED");
         Log.i("file export", "File converted to JSON");
 
         saveFile(file, output, c);

@@ -6,103 +6,86 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    private boolean crossHabLine;
+    private boolean robotExitCommunity;
 
-    private int cargoShipHatches;
-    private int rocketHatches;
+    private int coneTop;
+    private int cubeTop;
 
-    private int cargoShipCargo;
-    private int rocketCargo;
+    private int coneMid;
+    private int cubeMid;
 
-    private boolean frontCargoShipHatchCapable;
-    private boolean sideCargoShipHatchCapable;
+    private int coneBttm;
+    private int cubeBttm;
 
-    private int hatchesDropped;
-    private int cargoDropped;
+    private int coneDropped;
+    private int cubeDropped;
 
-    private boolean hatchesDroppedCargoShip;
-    private boolean hatchesDroppedRocket;
-    private boolean cargoDroppedCargoShip;
-    private boolean cargoDroppedRocket;
-
-    private boolean opponentCargoShipLineFoul;
+    private boolean dockAttempt;
+    private String dockStatus;
 
 
-    public Autonomous(int rocketCargo, int rocketHatches, int cargoShipHatches,
-                      int cargoShipCargo, int hatchesDropped, int cargoDropped,
-                      boolean crossHabLine, boolean opponentCargoShipLineFoul,
-                      boolean sideCargoShipHatchCapable, boolean frontCargoShipHatchCapable,
-                      boolean cargoDroppedCargoShip, boolean cargoDroppedRocket,
-                      boolean hatchesDroppedRocket, boolean hatchesDroppedCargoShip) {
-        this.rocketCargo = rocketCargo;
-        this.rocketHatches = rocketHatches;
-        this.cargoShipHatches = cargoShipHatches;
-        this.cargoShipCargo = cargoShipCargo;
-        this.hatchesDropped = hatchesDropped;
-        this.cargoDropped = cargoDropped;
-        this.crossHabLine = crossHabLine;
-        this.opponentCargoShipLineFoul = opponentCargoShipLineFoul;
-        this.sideCargoShipHatchCapable = sideCargoShipHatchCapable;
-        this.frontCargoShipHatchCapable = frontCargoShipHatchCapable;
-        this.cargoDroppedCargoShip = cargoDroppedCargoShip;
-        this.cargoDroppedRocket = cargoDroppedRocket;
-        this.hatchesDroppedRocket = hatchesDroppedRocket;
-        this.hatchesDroppedCargoShip = hatchesDroppedCargoShip;
+
+
+
+
+    public Autonomous(int coneTop, int cubeTop, int coneMid,
+                      int cubeMid, int coneBttm, int cubeBttm,
+                      int coneDropped, int cubeDropped,
+                      boolean robotExitCommunity, boolean dockAttempt, String dockStatus) {
+        this.coneTop = coneTop;
+        this.cubeTop = cubeTop;
+        this.coneMid = coneMid;
+        this.cubeMid = cubeMid;
+        this.coneBttm = coneBttm;
+        this.cubeBttm = cubeBttm;
+        this.coneDropped = coneDropped;
+        this.cubeDropped = cubeDropped;
+        this.robotExitCommunity = robotExitCommunity;
+        this.dockAttempt = dockAttempt;
+        this.dockStatus = dockStatus;
     }
 
-    public int getRocketCargo() {
-        return rocketCargo;
+    public boolean isDockAttempt() {
+        return dockAttempt;
     }
 
-    public int getRocketHatches() {
-        return rocketHatches;
+    public boolean isRobotExitCommunity() {
+        return robotExitCommunity;
     }
 
-    public int getCargoShipHatches() {
-        return cargoShipHatches;
+    public int getConeBttm() {
+        return coneBttm;
     }
 
-    public int getCargoShipCargo() {
-        return cargoShipCargo;
+    public int getConeMid() {
+        return coneMid;
     }
 
-    public int getHatchesDropped() {
-        return hatchesDropped;
+    public int getConeTop() {
+        return coneTop;
     }
 
-    public int getCargoDropped() {
-        return cargoDropped;
+    public int getConeDropped() {
+        return coneDropped;
     }
 
-    public boolean isCrossHabLine() {
-        return crossHabLine;
+    public int getCubeBttm() {
+        return cubeBttm;
     }
 
-    public boolean isOpponentCargoShipLineFoul() {
-        return opponentCargoShipLineFoul;
+    public int getCubeMid() {
+        return cubeMid;
     }
 
-    public boolean isSideCargoShipHatchCapable() {
-        return sideCargoShipHatchCapable;
+    public int getCubeTop() {
+        return cubeTop;
     }
 
-    public boolean isFrontCargoShipHatchCapable() {
-        return frontCargoShipHatchCapable;
+    public int getCubeDropped() {
+        return cubeDropped;
     }
 
-    public boolean isCargoDroppedCargoShip() {
-        return cargoDroppedCargoShip;
-    }
-
-    public boolean isCargoDroppedRocket() {
-        return cargoDroppedRocket;
-    }
-
-    public boolean isHatchesDroppedRocket() {
-        return hatchesDroppedRocket;
-    }
-
-    public boolean isHatchesDroppedCargoShip() {
-        return hatchesDroppedCargoShip;
+    public String getDockStatus() {
+        return dockStatus;
     }
 }

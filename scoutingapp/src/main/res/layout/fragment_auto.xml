@@ -12,21 +12,21 @@
         android:layout_height="wrap_content">
 
         <CheckBox
-            android:id="@+id/cross_hab_line"
+            android:id="@+id/robot_exit_community"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="5sp"
             android:padding="3sp"
-            android:text="Crossed HAB line"
+            android:text="Robot exits the community"
             android:textSize="18sp" />
 
         <LinearLayout
-            android:id="@+id/level_one_layout_auto"
+            android:id="@+id/auton_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cross_hab_line"
+            android:layout_below="@id/robot_exit_community"
             android:layout_marginTop="-10dp"
             android:orientation="vertical"
             android:padding="8dp">
@@ -58,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="Rocket"
+                        android:text="Top Row"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -73,12 +73,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Cargo"
+                        android:text="Cones"
                         android:textAlignment="center"
                         android:textSize="18sp" />
 
                     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/rocket_cargo_auto"
+                        android:id="@+id/cone_scored_top_row_auton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:maxValueSet="3"
@@ -95,12 +95,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Hatches"
+                        android:text="Cubes"
                         android:textAlignment="center"
                         android:textSize="18sp" />
 
                     <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/rocket_hatches_auto"
+                        android:id="@+id/cube_scored_top_row_auton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:maxValueSet="3"
@@ -121,18 +121,80 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="Cargo ship"
+                    android:text="Middle Row"
                     android:textSize="18sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/cargo_ship_cargo_auto"
+                    android:id="@+id/cone_scored_mid_row_auton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:maxValueSet="3"
                     android:layout_weight="1.5" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/cargo_ship_hatches_auto"
+                    android:id="@+id/cube_scored_mid_row_auton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:maxValueSet="3"
+                    android:layout_weight="1.5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="Hybrid Row"
+                    android:textSize="18sp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cone_scored_btt_row_auton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:maxValueSet="3"
+                    android:layout_weight="1.5" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cube_scored_btt_row_auton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:maxValueSet="3"
+                    android:layout_weight="1.5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="Pieces Dropped"
+                    android:textSize="18sp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cone_dropped_auton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:maxValueSet="3"
+                    android:layout_weight="1.5" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/cube_dropped_auton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:maxValueSet="3"
@@ -142,127 +204,56 @@
 
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/cargo_ship_hatch_placement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/level_one_layout_auto"
-            android:layout_marginStart="30sp"
-            android:padding="8sp"
-            android:text="Cargo ship hatch placement"
-            android:textSize="18sp"
-
-            />
-
         <CheckBox
-            android:id="@+id/hatches_front_cargo_auto"
+            android:id="@+id/robot_attempt_dock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_ship_hatch_placement"
-            android:layout_marginStart="50dp"
+            android:layout_below="@id/auton_main"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"
-            android:enabled="false"
             android:padding="3dp"
-            android:text="Front cargo ship"
+            android:text="Robot Attempts to Dock"
             android:textSize="18sp" />
 
-        <CheckBox
-            android:id="@+id/hatches_side_cargo_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_front_cargo_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Side cargo ship"
-            android:textSize="18sp" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_dropped_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_side_cargo_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo dropped" />
-
-        <CheckBox
-            android:id="@+id/cargo_dropped_cargo_ship"
+        <RadioGroup
+            android:id="@+id/robot_dock_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="0sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Cargo ship"
-            android:textSize="18sp" />
+            android:layout_below="@id/robot_attempt_dock"
+            android:layout_marginLeft="24dp"
+            android:visibility="visible">
 
-        <CheckBox
-            android:id="@+id/cargo_dropped_rocket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_cargo_ship"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3sp"
-            android:text="Rocket"
-            android:textSize="18sp" />
+            <RadioButton
+                android:id="@+id/docked_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginLeft="30dp"
+                android:text="Robot is docked"
+                android:enabled="false"
+                android:textSize="18sp" />
 
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_dropped_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_rocket"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
-
-        <CheckBox
-            android:id="@+id/hatches_dropped_cargo_ship"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="0sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Cargo ship"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/hatches_dropped_rocket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_cargo_ship"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3sp"
-            android:text="Rocket"
-            android:textSize="18sp" />
+            <RadioButton
+                android:id="@+id/docked_engaged_button"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:padding="8dp"
+                android:text="Robot is docked and engaged"
+                android:textSize="18sp" />
 
 
-        <CheckBox
-            android:id="@+id/opponent_cargo_ship_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_rocket"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5sp"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Crossed opponent cargo ship line"
-            android:textSize="18sp" />
+        </RadioGroup>
+
+
 
 
         <Button
             android:id="@+id/auto_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/opponent_cargo_ship_line"
+            android:layout_below="@id/robot_dock_group"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
