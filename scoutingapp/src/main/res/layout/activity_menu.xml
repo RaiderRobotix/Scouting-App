@@ -183,11 +183,11 @@
             <ImageView
                 android:id="@+id/game_logo_view"
                 android:layout_width="250dp"
-
+                android:layout_gravity="center_horizontal"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/raider_robotix_logo"
-                android:src="@drawable/deep_space_logo" />
+                android:src="@drawable/charged_up" />
         </LinearLayout>
 
     </RelativeLayout>

@@ -134,7 +134,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 //        GridButtons[26] = view.findViewById(R.id.checkBox27);
 
         //Row 1
-        topRow_leftComm_LeftCone = view.findViewById(R.id.checkBox1); // Cone
+        /*topRow_leftComm_LeftCone = view.findViewById(R.id.checkBox1); // Cone
         topRow_leftComm_MidCube = view.findViewById(R.id.checkBox2); // Cube
         topRow_leftComm_RightCone = view.findViewById(R.id.checkBox3); // Cone
         topRow_midComm_LeftCone = view.findViewById(R.id.checkBox4); // Cone
@@ -162,7 +162,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         bttmRow_midComm_RightCone = view.findViewById(R.id.checkBox24); // Cone
         bttmRow_rightComm_LeftCone = view.findViewById(R.id.checkBox25); // Cone
         bttmRow_rightComm_MidCube = view.findViewById(R.id.checkBox26); // Cube
-        bttmRow_rightComm_RightCone = view.findViewById(R.id.checkBox27); // Cone
+        bttmRow_rightComm_RightCone = view.findViewById(R.id.checkBox27); // Cone */
 
 
 
@@ -203,18 +203,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         try{
             continueButton.setOnClickListener(view1 -> {
                 hideKeyboard(getActivity());
-
-                boolean proceed = true;
-
-
-                if (proceed) {
                     saveState();
                     System.out.println("Passed");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
                             .commit();
-                }
             }); } catch (Exception e){
             e.printStackTrace();
         }
@@ -245,7 +239,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             cubeBttmTele.setValue(tele.getCubeBttm());
             coneDroppedTele.setValue(tele.getConeDropped());
             cubeDroppedTele.setValue(tele.getCubeDropped());
-            topRow_leftComm_LeftCone.setChecked(tele.getTopRow_leftComm_LeftCone());
+            /*topRow_leftComm_LeftCone.setChecked(tele.getTopRow_leftComm_LeftCone());
             topRow_leftComm_MidCube.setChecked(tele.getTopRow_leftComm_MidCube());
             topRow_leftComm_RightCone.setChecked(tele.getTopRow_leftComm_RightCone());
             topRow_midComm_LeftCone.setChecked(tele.getTopRow_midComm_LeftCone());
@@ -273,7 +267,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             bttmRow_midComm_RightCone.setChecked(tele.getBttmRow_midComm_RightCone());
             bttmRow_rightComm_LeftCone.setChecked(tele.getBttmRow_rightComm_LeftCone());
             bttmRow_rightComm_MidCube.setChecked(tele.getBttmRow_rightComm_MidCube());
-            bttmRow_rightComm_RightCone.setChecked(tele.getBttmRow_rightComm_RightCone());
+            bttmRow_rightComm_RightCone.setChecked(tele.getBttmRow_rightComm_RightCone());*/
 
 
             for (RadioButton button : robotDockButtons) {
@@ -334,8 +328,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         entry.setTeleOp(new TeleOp(coneTopTele.getValue(),cubeTopTele.getValue(),coneMidTele.getValue(),
                 cubeMidTele.getValue(), coneBttmTele.getValue(), cubeBttmTele.getValue(), coneDroppedTele.getValue(),
-                cubeDroppedTele.getValue(),robotDockAttempt.isChecked(),dockStatus, robotCommitFoul.isChecked(),foulType,
-                topRow_leftComm_LeftCone.isChecked(),topRow_leftComm_MidCube.isChecked(), topRow_leftComm_RightCone.isChecked(),topRow_midComm_LeftCone.isChecked(),
+                cubeDroppedTele.getValue(),robotDockAttempt.isChecked(),dockStatus, robotCommitFoul.isChecked(),foulType
+                /*topRow_leftComm_LeftCone.isChecked(),topRow_leftComm_MidCube.isChecked(), topRow_leftComm_RightCone.isChecked(),topRow_midComm_LeftCone.isChecked(),
                 topRow_midComm_MidCube.isChecked(), topRow_midComm_RightCone.isChecked(), topRow_rightComm_LeftCone.isChecked(),topRow_rightComm_MidCube.isChecked(),
                 topRow_rightComm_RightCone.isChecked(),
 
@@ -345,7 +339,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
                 bttmRow_leftComm_LeftCone.isChecked(),bttmRow_leftComm_MidCube.isChecked(), bttmRow_leftComm_RightCone.isChecked(),
                 bttmRow_midComm_LeftCone.isChecked(),bttmRow_midComm_MidCube.isChecked(), bttmRow_midComm_RightCone.isChecked(),
-                bttmRow_rightComm_LeftCone.isChecked(),bttmRow_rightComm_MidCube.isChecked(), bttmRow_rightComm_RightCone.isChecked()
+                bttmRow_rightComm_LeftCone.isChecked(),bttmRow_rightComm_MidCube.isChecked(), bttmRow_rightComm_RightCone.isChecked()*/
         ));
 
 

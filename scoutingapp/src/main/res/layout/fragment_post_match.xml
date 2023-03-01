@@ -37,19 +37,19 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_cargo_ship"
+                    android:id="@+id/teleop_focus_scoring_upper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo ship"
+                    android:text="Scoring Upper Row"
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_rocket"
+                    android:id="@+id/teleop_focus_scoring_hybrid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Rocket"
+                    android:text="Scoring Hybrid Row"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -68,19 +68,19 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_hatches"
+                    android:id="@+id/teleop_focus_scoring_middle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Hatch panels"
+                    android:text="Scoring Middle Row"
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_cargo"
+                    android:id="@+id/teleop_focus_docking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo"
+                    android:text=" Docking"
                     android:textSize="18sp" />
 
             </LinearLayout>

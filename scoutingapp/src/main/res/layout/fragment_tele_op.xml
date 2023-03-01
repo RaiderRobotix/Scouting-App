@@ -15,7 +15,7 @@
             android:id="@+id/tele_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/scoringMap"
+            android:layout_below="@id/robot_dock_group"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
@@ -44,7 +44,7 @@
             android:text="Robot Commits Foul"
             android:textSize="18sp" />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/scoringMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/comm_newlayo"
             android:scaleX="1"
-            android:scaleY="1" />
+            android:scaleY="1" /> -->
 
         <LinearLayout
             android:id="@+id/tele_main"
@@ -289,7 +289,7 @@
 
         </RadioGroup>
 
-        <TableLayout
+       <!-- <TableLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_alignTop="@+id/scoringMap"
@@ -557,7 +557,7 @@
                     android:text="" />
             </TableRow>
 
-        </TableLayout>
+        </TableLayout> -->
 
     </RelativeLayout>
 

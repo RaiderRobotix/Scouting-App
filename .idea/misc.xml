@@ -8,7 +8,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="scoutingapp/src/main/res/layout/fragment_tele_op.xml" value="0.5" />
+        <entry key="scoutingapp/src/main/res/drawable/circle_icon.xml" value="0.168" />
+        <entry key="scoutingapp/src/main/res/layout/activity_menu.xml" value="0.22916666666666666" />
+        <entry key="scoutingapp/src/main/res/layout/fragment_post_match.xml" value="0.25" />
+        <entry key="scoutingapp/src/main/res/layout/fragment_tele_op.xml" value="0.35309278350515466" />
       </map>
     </option>
   </component>
@@ -125,5 +128,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22916666666666666" />
+      </ProjectState>
+    </option>
   </component>
 </project>
