@@ -3,6 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Robotix.Scouting-App.iml" filepath="$PROJECT_DIR$/.idea/modules/Robotix.Scouting-App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Robotixs.Scouting-App.scoutingapp.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scouting-App.iml" filepath="$PROJECT_DIR$/.idea/modules/Scouting-App.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App.scoutingapp.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App.scoutingapp.iml" />
     </modules>
   </component>

@@ -31,7 +31,7 @@
     <!--Add Match Interface-->
     <string name="team_number">Team number</string>
     <string name="team_number_prompt">Enter team number</string>
-    <string name="sandstorm">Autonomous</string>
+    <string name="auton">Autonomous</string>
     <string name="tele">Tele-Op</string>
     <string name="post">Post Game</string>
 
