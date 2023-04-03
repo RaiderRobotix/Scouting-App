@@ -27,6 +27,8 @@ public class TeleOp {
     private boolean dockAttemptTele;
     private String dockStatusTele;
 
+    private boolean robotParkEnd;
+
     private boolean robotCommitedFoulTele;
     private String foulTypeTele;
 
@@ -40,7 +42,7 @@ public class TeleOp {
     //private ArrayList<Boolean> gridVals;
 
     public TeleOp(int coneTop, int cubeTop, int coneMid, int cubeMid, int coneBttm, int cubeBttm, int coneDropped,
-                  int cubeDropped, boolean dockAttempt, String dockStatus, boolean robotCommitedFoul, String foulType
+                  int cubeDropped, boolean dockAttempt, String dockStatus, boolean robotCommitedFoul, String foulType,boolean robotParkEnd
                   /*,boolean topRow_leftComm_LeftCone, boolean topRow_leftComm_MidCube, boolean topRow_leftComm_RightCone
             ,boolean topRow_midComm_LeftCone, boolean topRow_midComm_MidCube, boolean topRow_midComm_RightCone
             ,boolean topRow_rightComm_LeftCone, boolean topRow_rightComm_MidCube, boolean topRow_rightComm_RightCone
@@ -64,6 +66,7 @@ public class TeleOp {
         this.dockStatusTele = dockStatus;
         this.robotCommitedFoulTele = robotCommitedFoul;
         this.foulTypeTele = foulType;
+        this.robotParkEnd = robotParkEnd;
 //        this.gridVals = gridVals;
        /* this.topRow_leftComm_LeftCone = topRow_leftComm_LeftCone;
         this.topRow_leftComm_MidCube = topRow_leftComm_MidCube;
@@ -145,6 +148,10 @@ public class TeleOp {
 
     public String getFoulType() {
         return foulTypeTele;
+    }
+
+    public boolean isRobotParkEnd() {
+        return robotParkEnd;
     }
 
     //public HashMap<CheckBox,Boolean> getGridVals() { return gridVals; }

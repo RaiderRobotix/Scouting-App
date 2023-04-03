@@ -32,7 +32,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     private RadioButton[] robotFoulButtons, robotDockButtons;
     private RadioGroup robotFoulGroup, robotDockGroup;
     private ButtonIncDecSet coneTopTele, cubeTopTele, coneMidTele, cubeMidTele, coneBttmTele, cubeBttmTele, coneDroppedTele, cubeDroppedTele;
-    private CheckBox robotCommitFoul, robotDockAttempt;
+    private CheckBox robotCommitFoul, robotDockAttempt, robotParksEnd;
 
     private CheckBox topRow_leftComm_LeftCone,topRow_leftComm_MidCube, topRow_leftComm_RightCone,topRow_midComm_LeftCone,topRow_midComm_MidCube, topRow_midComm_RightCone,
             topRow_rightComm_LeftCone,topRow_rightComm_MidCube, topRow_rightComm_RightCone,midRow_leftComm_LeftCone,midRow_leftComm_MidCube, midRow_leftComm_RightCone,
@@ -40,11 +40,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             bttmRow_leftComm_LeftCone,bttmRow_leftComm_MidCube, bttmRow_leftComm_RightCone,bttmRow_midComm_LeftCone,bttmRow_midComm_MidCube, bttmRow_midComm_RightCone,
             bttmRow_rightComm_LeftCone,bttmRow_rightComm_MidCube, bttmRow_rightComm_RightCone;
 
-    private CheckBox[] GridButtons = {topRow_leftComm_LeftCone,topRow_leftComm_MidCube, topRow_leftComm_RightCone,topRow_midComm_LeftCone,topRow_midComm_MidCube, topRow_midComm_RightCone,
-            topRow_rightComm_LeftCone,topRow_rightComm_MidCube, topRow_rightComm_RightCone,midRow_leftComm_LeftCone,midRow_leftComm_MidCube, midRow_leftComm_RightCone,
-            midRow_midComm_LeftCone,midRow_midComm_MidCube, midRow_midComm_RightCone, midRow_rightComm_LeftCone,midRow_rightComm_MidCube, midRow_rightComm_RightCone,
-            bttmRow_leftComm_LeftCone,bttmRow_leftComm_MidCube, bttmRow_leftComm_RightCone,bttmRow_midComm_LeftCone,bttmRow_midComm_MidCube, bttmRow_midComm_RightCone,
-            bttmRow_rightComm_LeftCone,bttmRow_rightComm_MidCube, bttmRow_rightComm_RightCone};   //
+
 //    private int[] gamePieceHomeGrid = {1,2,1,1,2,1,1,2,1,1,2,1,1,2,1,1,2,1,0,0,0,0,0,0,0,0,0};
 //    private int[] bttmRowButtons = {19,20,21,22,23,24,25,26,27};
 
@@ -93,6 +89,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         robotDockGroup = view.findViewById(R.id.robot_dock_group);
 
         robotCommitFoul = view.findViewById(R.id.robot_commit_foul);
+
+        robotParksEnd = view.findViewById(R.id.robot_parks);
 
         robotFoulGroup = view.findViewById(R.id.robotFoulGroup);
 
@@ -199,6 +197,22 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             }
         });
 
+        robotParksEnd.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+               robotDockAttempt.setEnabled(false);
+               robotDockAttempt.setChecked(false);
+                for(RadioButton button : robotDockButtons) {
+                    button.setEnabled(false);
+                    button.setChecked(false);
+                }
+
+
+            } else {
+                robotDockAttempt.setEnabled(true);
+
+            }
+        });
+
         autoPopulate();
         try{
             continueButton.setOnClickListener(view1 -> {
@@ -231,6 +245,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
             robotDockAttempt.setChecked(tele.isDockAttempt());
             robotCommitFoul.setChecked(tele.isRobotCommitedFoul());
+            robotParksEnd.setChecked(tele.isRobotParkEnd());
             coneTopTele.setValue(tele.getConeTop());
             cubeTopTele.setValue(tele.getCubeTop());
             coneMidTele.setValue(tele.getConeMid());
@@ -276,6 +291,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
                 }
             }
 
+//            if(tele.getDockStatus() == 1){
+//                robotDockButtons[0].setChecked(true);
+//                robotDockButtons[1].setChecked(false);
+//            }
+//            if(tele.getDockStatus() == 2){
+//                robotDockButtons[0].setChecked(false);
+//                robotDockButtons[1].setChecked(true);
+//            }
+
             for (RadioButton button : robotFoulButtons) {
                 if (button.getText().toString().equals(tele.getFoulType())) {
                     button.setChecked(true);
@@ -316,6 +340,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             }
         }
 
+//        int dockStatus = 0;
+//        if(robotDockButtons[0].isChecked()){
+//            dockStatus = 1;
+//        }
+//        if(robotDockButtons[1].isChecked()){
+//            dockStatus = 2;
+//        }
+
         String foulType = "";
         for (RadioButton button : robotFoulButtons) {
             if (button.isChecked()) {
@@ -328,7 +360,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         entry.setTeleOp(new TeleOp(coneTopTele.getValue(),cubeTopTele.getValue(),coneMidTele.getValue(),
                 cubeMidTele.getValue(), coneBttmTele.getValue(), cubeBttmTele.getValue(), coneDroppedTele.getValue(),
-                cubeDroppedTele.getValue(),robotDockAttempt.isChecked(),dockStatus, robotCommitFoul.isChecked(),foulType
+                cubeDroppedTele.getValue(),robotDockAttempt.isChecked(),dockStatus, robotCommitFoul.isChecked(),foulType,robotParksEnd.isChecked()
                 /*topRow_leftComm_LeftCone.isChecked(),topRow_leftComm_MidCube.isChecked(), topRow_leftComm_RightCone.isChecked(),topRow_midComm_LeftCone.isChecked(),
                 topRow_midComm_MidCube.isChecked(), topRow_midComm_RightCone.isChecked(), topRow_rightComm_LeftCone.isChecked(),topRow_rightComm_MidCube.isChecked(),
                 topRow_rightComm_RightCone.isChecked(),

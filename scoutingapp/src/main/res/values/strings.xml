@@ -1,8 +1,8 @@
 <resources>
 
     <!-- Versioning constants -->
-    <string name="app_name">Raider Deep Space Scout</string>
-    <string name="game_name">Destination: Deep Space</string>
+    <string name="app_name">Raider Charged Up Scout</string>
+    <string name="game_name">Charged Up</string>
 
     <!--Follows a modified version of Semantic Versioning, where
         there is no dot separator between minor and patch version numbers. Patch versions are incremented whenever
@@ -60,8 +60,9 @@
 
     <!--Event Spinner Options-->
     <string-array name="event_options">
-        <item>"Mount Olive"</item>
+        <item>"Hatsboro Horsham"</item>
         <item>"Montgomery"</item>
+        <item>"Seneca"</item>
         <item>"Mid-Atlantic District Championship</item>
         <item>"FIRST Championship"</item>
         <item>"Brunswick Eruption"</item>
@@ -69,8 +70,9 @@
     </string-array>
 
     <string-array name="event_options_values">
-        <item>"njfla"</item>
+        <item>"pahat"</item>
         <item>"njski"</item>
+        <item>"njtab"</item>
         <item>"mrcmp"</item>
         <item>"cars"</item>
         <item>"njbe"</item>

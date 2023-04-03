@@ -15,9 +15,12 @@
             android:id="@+id/tele_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/robot_dock_group"
+            android:layout_below="@id/robot_parks"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
             android:text="@string/continue_button"
             android:textColor="#ffffff" />
@@ -288,6 +291,16 @@
 
 
         </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/robot_parks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/robot_dock_group"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/default_padding_bottom"
+            android:text="Robot Parks During Endgame"
+            android:textSize="18sp" />
 
        <!-- <TableLayout
             android:layout_width="match_parent"
