@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Scouting-App.iml" filepath="$PROJECT_DIR$/Scouting-App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/scoutingapp/scoutingapp.iml" filepath="$PROJECT_DIR$/scoutingapp/scoutingapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scouting-App-2024.iml" filepath="$PROJECT_DIR$/.idea/modules/Scouting-App-2024.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/scoutingapp/Scouting-App-2024.scoutingapp.unitTest.iml" />
     </modules>
   </component>
 </project>
