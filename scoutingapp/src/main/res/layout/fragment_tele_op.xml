@@ -13,11 +13,11 @@
 
         <LinearLayout
             android:id="@+id/teleop_layout_3"
-            android:layout_width="387dp"
-            android:layout_height="72dp"
-            android:layout_below="@+id/teleop_layout_2"
-            android:orientation="horizontal">
-
+            android:layout_width="383dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"            android:layout_below="@+id/teleop_layout_2"
+            >
             <TextView
                 android:id="@+id/speaker_notes_teleop_text"
                 android:layout_width="20dp"
@@ -35,11 +35,12 @@
 
         <LinearLayout
             android:id="@+id/teleop_layout_4"
-            android:layout_width="386dp"
-            android:layout_height="85dp"
+            android:layout_width="383dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_6"
-            android:orientation="horizontal">
-
+>
             <TextView
                 android:id="@+id/notes_drop_teleop_text"
                 android:layout_width="wrap_content"
@@ -56,12 +57,13 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/teleop_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teleop"
-            android:textSize="20sp" />
-
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Tele-operated"
+            android:textSize="40dp"
+            ></TextView>
         <Button
             android:id="@+id/teleop_continue"
             android:layout_width="150dp"
@@ -79,11 +81,12 @@
 
         <LinearLayout
             android:id="@+id/teleop_layout_2"
-            android:layout_width="386dp"
+            android:layout_width="383dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_5"
-            android:orientation="horizontal">
-
+            >
             <TextView
                 android:id="@+id/amp_scored_teleop_text"
                 android:layout_width="10dp"
@@ -101,11 +104,12 @@
 
         <LinearLayout
             android:id="@+id/teleop_layout_6"
-            android:layout_width="387dp"
-            android:layout_height="72dp"
+            android:layout_width="383dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_3"
-            android:orientation="horizontal">
-
+>
             <TextView
                 android:id="@+id/speaker_amplified_text"
                 android:layout_width="20dp"
@@ -125,9 +129,10 @@
             android:id="@+id/teleop_layout_1"
             android:layout_width="383dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_below="@+id/teleop_text"
-            android:orientation="horizontal">
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp"
+            >
 
             <TextView
                 android:id="@+id/note_pick_teleop_text"
@@ -146,11 +151,12 @@
 
         <LinearLayout
             android:id="@+id/teleop_layout_5"
-            android:layout_width="386dp"
-            android:layout_height="85dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_1"
-            android:orientation="horizontal">
-
+            >
             <TextView
                 android:id="@+id/notes_picked_ground_text"
                 android:layout_width="110dp"
