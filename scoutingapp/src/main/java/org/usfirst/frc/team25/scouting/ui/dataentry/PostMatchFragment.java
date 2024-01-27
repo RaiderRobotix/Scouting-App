@@ -1,5 +1,6 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
-    private final CheckBox[] focusButtons = new CheckBox[5];
+    private final CheckBox[] focusButtons = new CheckBox[4];
     private final RadioButton[] comparisonButtons = new RadioButton[3];
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
     private final String[] ROBOT_COMMENT_VALUES = {
@@ -139,6 +141,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 FileManager.getPrevTeamNumber(getActivity()), comparison, pickNumber));
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -150,11 +153,11 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         robotCommentView = view.findViewById(R.id.robotDriverCommentView);
 
         Button finish = view.findViewById(R.id.post_finish);
-        focusButtons[0] = view.findViewById(R.id.teleop_focus_hatches);
-        focusButtons[1] = view.findViewById(R.id.teleop_focus_cargo);
-        focusButtons[2] = view.findViewById(R.id.teleop_focus_cargo_ship);
-        focusButtons[3] = view.findViewById(R.id.teleop_focus_rocket);
-        focusButtons[4] = view.findViewById(R.id.teleop_focus_defense);
+        focusButtons[0] = view.findViewById(R.id.teleop_focus_onstage);
+       // focusButtons[1] = view.findViewById(R.id.teleop_focus_cargo);
+        focusButtons[1] = view.findViewById(R.id.teleop_focus_score_amp);
+        focusButtons[2] = view.findViewById(R.id.teleop_focus_score_speaker);
+        focusButtons[3] = view.findViewById(R.id.teleop_focus_defense);
 
         comparisonButtons[0] = view.findViewById(R.id.current_team_comparison);
         comparisonButtons[1] = view.findViewById(R.id.prev_team_comparison);
@@ -341,6 +344,39 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         robotComment.setLayoutParams(robotCommentParams);
     }
+
+
+    /**   -ROBOTO-             REWRITE THE SAVESTATE TELEOP BUTTONS INTO THE SAVESTATE POSTMATCH BUTTONS
+    @Override                  DON't USE GETVALUE (ints), USE A String Or Boolean version of getvalue */
+   /*
+    public void saveState() {
+
+        entry.setTeleOp(new TeleOp(notesPickedGround.getValue(), notesPickedHps.getValue(), ampNotesScoredTeleop.getValue(),
+                speakerNotesScoredTeleop.getValue(), ampSpeakerNotesScored.getValue(), notesDroppedTeleop.getValue()
+        ));
+
+
+    }
+
+    */
+
+    /**                      BUTToNS THAT NEED TO BE PUT INTO SAVESTATE
+    robotComment
+    robotCommentView
+    Button finish
+        focusButtons[0]
+    focusButtons[1]
+    focusButtons[2]
+    focusButtons[3]
+
+    comparisonButtons[0]
+    comparisonButtons[1]
+    comparisonButtons[2]
+
+    pickNumberButtons[0]
+    pickNumberButtons[1]
+    pickNumberButtons[2]
+*/
 
     @Override
     public void onResume() {

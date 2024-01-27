@@ -23,6 +23,7 @@ public class ButtonIncDecSet extends RelativeLayout {
     private int incDecAmount;
     private int minValue;
     private int maxValue;
+    /** -ROBOTO-    I tried making private boolean trueValue and private boolean falseValue     */
     private TextView valueView;
 
     private OnClickListener listener;
@@ -116,6 +117,9 @@ public class ButtonIncDecSet extends RelativeLayout {
     /**
      * @param value - the initial value of the integer between the buttons. Cannot be less than 0.
      */
+
+    /**   -ROBOTO-        I tried to switch (int value) to (boolean boolvalue). maxValue into boolValue, etc.*/
+
     public void setValue(int value) {
         if (value > maxValue) {
             value = maxValue;
@@ -124,6 +128,16 @@ public class ButtonIncDecSet extends RelativeLayout {
         if (value < minValue) {
             value = minValue;
         }
+
+        /**  -ROBOTO-                                (*^(&% WEIRD BOOLEAN "setvalue" CODE I MADE UP ^&$%#$
+        public void setValue(boolean boolvalue) {
+            if (boolvalue = falseValue) {
+                boolvalue = false;
+            }
+
+
+            if (boolvalue = minValue) {
+                boolvalue = true;     */
 
         valueView = findViewById(R.id.button_inc_dec_value);
         valueView.setText(String.valueOf(value));
