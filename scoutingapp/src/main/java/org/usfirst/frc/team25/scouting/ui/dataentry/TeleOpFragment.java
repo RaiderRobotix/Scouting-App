@@ -26,6 +26,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
     private ButtonIncDecSet notesPickedGround, notesPickedHps, ampNotesScoredTeleop, speakerNotesScoredTeleop, ampSpeakerNotesScored, notesDroppedTeleop;
+    private CheckBox park, onstage, spotlit, trap, harmony, ensemble;
 
 
     public static TeleOpFragment getInstance(ScoutEntry entry) {
@@ -56,6 +57,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         speakerNotesScoredTeleop = view.findViewById(R.id.speaker_scored_teleop);
         ampSpeakerNotesScored = view.findViewById(R.id.speaker_amplified_teleop);
         notesDroppedTeleop = view.findViewById(R.id.notes_dropped_teleop);
+        park = view.findViewById(R.id.park);
+        onstage = view.findViewById(R.id.onstage);
+        spotlit = view.findViewById(R.id.spotlit);
+        trap = view.findViewById(R.id.trap);
+        harmony = view.findViewById(R.id.harmony);
+        ensemble = view.findViewById(R.id.ensemble);
         Button continueButton = view.findViewById(R.id.teleop_continue);
 
 
@@ -96,6 +103,12 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             speakerNotesScoredTeleop.setValue(tele.getSpeakerNotesScoredTeleop());
             ampSpeakerNotesScored.setValue(tele.getAmpSpeakerNotesScored());
             notesDroppedTeleop.setValue(tele.getNotesDroppedTeleop());
+            park.setChecked(tele.isPark());
+            onstage.setChecked(tele.isOnstage());
+            spotlit.setChecked(tele.isSpotlit());
+            trap.setChecked(tele.isTrap());
+            harmony.setChecked(tele.isHarmony());
+            ensemble.setChecked(tele.isEnsemble());
 
 
         }
@@ -105,7 +118,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     public void saveState() {
 
         entry.setTeleOp(new TeleOp(notesPickedGround.getValue(), notesPickedHps.getValue(), ampNotesScoredTeleop.getValue(),
-                speakerNotesScoredTeleop.getValue(), ampSpeakerNotesScored.getValue(), notesDroppedTeleop.getValue()
+                speakerNotesScoredTeleop.getValue(), ampSpeakerNotesScored.getValue(), notesDroppedTeleop.getValue(), park.isChecked(), onstage.isChecked(),
+                spotlit.isChecked(), trap.isChecked(), harmony.isChecked(), ensemble.isChecked()
         ));
 
 

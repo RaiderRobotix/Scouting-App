@@ -16,26 +16,52 @@ public class PostMatch {
     private int teamTwoCompare;
     private int pickNumber;
     private String comparison;
-    private HashMap<String, Boolean> robotQuickCommentSelections;
-    private transient String[] robotQuickCommentValues;
     private String robotComment;
-    private String focus;
+    private boolean ampFocused;
+    private boolean speakerFocused;
+    private boolean defenseFocused;
+    private boolean onstageFocused;
+
+    private boolean missed;
+    private boolean commsLost;
+    private boolean tipped;
+
     private transient ArrayList<CheckBox> robotQuickComments;
 
-    public PostMatch(String robotComment, ArrayList<CheckBox> robotQuickComments,
-                     String[] robotQuickCommentValues, String focus, int teamOneCompare,
+    public PostMatch(String robotComment, boolean missed, boolean commsLost, boolean tipped, boolean ampFocused, boolean speakerFocused, boolean defenseFocused, boolean onstageFocused, int teamOneCompare,
                      int teamTwoCompare, String comparison, int pickNumber) {
         this.robotComment = robotComment;
-        this.robotQuickComments = robotQuickComments;
-        this.robotQuickCommentValues = robotQuickCommentValues;
-        this.focus = focus;
+        this.missed = missed;
+        this.commsLost = commsLost;
+        this.tipped = tipped;
+        this.ampFocused = ampFocused;
+        this.speakerFocused = speakerFocused;
+        this.defenseFocused = defenseFocused;
+        this.onstageFocused = onstageFocused;
         this.teamOneCompare = teamOneCompare;
         this.teamTwoCompare = teamTwoCompare;
         this.comparison = comparison;
-        robotQuickCommentSelections = new HashMap<>();
         this.pickNumber = pickNumber;
 
     }
+
+    public String getRobotComment() {
+        return robotComment;
+    }
+
+    public boolean isMissed() {return missed; }
+
+    public boolean isCommsLost() {return commsLost; }
+
+    public boolean isTipped() {return tipped; }
+
+    public boolean isAmpFocused() {return ampFocused; }
+
+    public boolean isSpeakerFocused() {return speakerFocused; }
+
+    public boolean isDefenseFocused() {return defenseFocused; }
+
+    public boolean isOnstageFocused() {return onstageFocused; }
 
     public int getTeamOneCompare() {
         return teamOneCompare;
@@ -45,73 +71,15 @@ public class PostMatch {
         return teamTwoCompare;
     }
 
-    public int getPickNumber() {
-        return pickNumber;
-    }
-
     public String getComparison() {
         return comparison;
     }
 
-    public HashMap<String, Boolean> getRobotQuickCommentSelections() {
-        return robotQuickCommentSelections;
-    }
-
-    public String[] getRobotQuickCommentValues() {
-        return robotQuickCommentValues;
-    }
-
-    public String getFocus() {
-        return focus;
-    }
-
-    public void setFocus(String focus) {
-        this.focus = focus;
-    }
-
-    public String getRobotComment() {
-        return robotComment;
-    }
-
-    private void setRobotComment(String robotComment) {
-        this.robotComment = robotComment;
+    public int getPickNumber() {
+        return pickNumber;
     }
 
 
-    public ArrayList<CheckBox> getRobotQuickComments() {
-        return robotQuickComments;
-    }
-
-    public void setRobotQuickComments(ArrayList<CheckBox> robotQuickComments) {
-        this.robotQuickComments = robotQuickComments;
-    }
-
-
-    public void finalizeComment() {
-
-        for (String value : robotQuickCommentValues) {
-            for (CheckBox cb : robotQuickComments) {
-                if (cb.getText().toString().equals(value)) {
-                    robotQuickCommentSelections.put(value, cb.isChecked());
-                }
-            }
-        }
-
-        StringBuilder newRobotComment = new StringBuilder();
-
-        for (int i = 0; i < robotComment.length(); i++) {
-            if (robotComment.charAt(i) == ',' || robotComment.charAt(i) == '\n') //prevent csv
-            // problems
-            {
-                newRobotComment.append(";");
-            } else {
-                newRobotComment.append(robotComment.charAt(i));
-            }
-        }
-
-        setRobotComment(newRobotComment.toString());
-
-    }
 }
 
 

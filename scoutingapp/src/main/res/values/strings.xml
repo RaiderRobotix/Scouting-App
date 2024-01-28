@@ -1,8 +1,8 @@
 <resources>
 
     <!-- Versioning constants -->
-    <string name="app_name">Raider Deep Space Scout</string>
-    <string name="game_name">Destination: Deep Space</string>
+    <string name="app_name">Raider Crescendo Scout</string>
+    <string name="game_name">Crescendo</string>
 
     <!--Follows a modified version of Semantic Versioning, where
         there is no dot separator between minor and patch version numbers. Patch versions are incremented whenever
@@ -14,7 +14,7 @@
     <string name="version_number">v3.11</string>
 
     <!-- Name of the cheatsheet file in /assets-->
-    <string name="cheatsheet_filename">Deep Space Cheatsheet.pdf</string>
+    <string name="cheatsheet_filename">Crescendo Cheatsheet.pdf</string>
 
     <!-- Contains the GitHub username of the repository owner, followed by a forward slash
          and the repository name ("Scouting-App")-->

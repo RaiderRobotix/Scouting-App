@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/telendgame_sv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
@@ -11,13 +12,83 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <CheckBox
+            android:id="@+id/ensemble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/harmony"
+            android:text="Ensemble Bonus"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/harmony"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trap"
+            android:minHeight="48dp"
+            android:text="Harmony Bonus"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/teleop_continue"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/ensemble"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:elevation="6dp"
+            android:text="@string/continue_button"
+            android:textColor="#ffffff"
+            tools:ignore="ExtraText" />
+
+        <CheckBox
+            android:id="@+id/trap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spotlit"
+            android:minHeight="48dp"
+            android:text="Note In Trap"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/spotlit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/onstage"
+            android:minHeight="48dp"
+            android:text="Spotlit"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/onstage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/park"
+            android:minHeight="48dp"
+            android:text="Onstage"
+            android:textSize="18sp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <CheckBox
+            android:id="@+id/park"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/endgame_text"
+            android:minHeight="48dp"
+            android:text="Parked"
+            android:textSize="18sp" />
+
         <LinearLayout
             android:id="@+id/teleop_layout_3"
             android:layout_width="383dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/teleop_layout_2"
             android:layout_centerHorizontal="true"
-            android:orientation="horizontal"            android:layout_below="@+id/teleop_layout_2"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/speaker_notes_teleop_text"
                 android:layout_width="20dp"
@@ -37,10 +108,10 @@
             android:id="@+id/teleop_layout_4"
             android:layout_width="383dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_6"
->
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/notes_drop_teleop_text"
                 android:layout_width="wrap_content"
@@ -56,37 +127,14 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="Tele-operated"
-            android:textSize="40dp"
-            ></TextView>
-        <Button
-            android:id="@+id/teleop_continue"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_below="@+id/teleop_layout_4"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:elevation="6dp"
-            android:text="@string/continue_button"
-            android:textColor="#ffffff"
-            tools:ignore="ExtraText" />
-
         <LinearLayout
             android:id="@+id/teleop_layout_2"
             android:layout_width="383dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_5"
-            >
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/amp_scored_teleop_text"
                 android:layout_width="10dp"
@@ -106,10 +154,10 @@
             android:id="@+id/teleop_layout_6"
             android:layout_width="383dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_3"
->
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/speaker_amplified_text"
                 android:layout_width="20dp"
@@ -130,9 +178,8 @@
             android:layout_width="383dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
             android:layout_marginTop="100dp"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/note_pick_teleop_text"
@@ -153,10 +200,10 @@
             android:id="@+id/teleop_layout_5"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
             android:layout_below="@+id/teleop_layout_1"
-            >
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/notes_picked_ground_text"
                 android:layout_width="110dp"
@@ -171,6 +218,24 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/endgame_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/teleop_layout_4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="EndGame Tasks"
+            android:textSize="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Tele-operated"
+            android:textSize="40dp"></TextView>
 
     </RelativeLayout>
 

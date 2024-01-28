@@ -37,9 +37,10 @@
                 android:orientation="vertical">
 
                 <CheckBox
-                    android:id="@+id/teleop_focus_score_amp"
+                    android:id="@+id/amp_focused"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Scoring on Amp"
                     android:textSize="18sp" />
@@ -48,6 +49,7 @@
                     android:id="@+id/teleop_focus_score_speaker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Scoring on Speaker"
                     android:textSize="18sp" />
@@ -56,6 +58,7 @@
                     android:id="@+id/teleop_focus_defense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Defense"
                     android:textSize="18sp" />
@@ -73,16 +76,8 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/inner_components_spacing"
                     android:text="Onstage"
-                    android:textSize="18sp" />
-
-              <!--  <CheckBox
-                    android:id="@+id/teleop_focus_cargo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo"
-                    android:textSize="18sp" />
--->
+                    android:textSize="18sp"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
         </LinearLayout>
@@ -95,6 +90,71 @@
             android:layout_below="@id/teleop_focus"
             android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/negative_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/innacurate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Possible Innacurate Data (Specify)"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/slow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Slow Intake"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/fouls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Commits (tech) Fouls (Specify)"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/missed_shots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:padding="@dimen/inner_components_spacing"
+                        android:text="Shots missed"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/comms_lost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:padding="@dimen/inner_components_spacing"
+                        android:text="Communications Lost"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/tipped"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:padding="@dimen/inner_components_spacing"
+                        android:text="Tipped Over"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/robotDriverQuickComment"
@@ -121,8 +181,11 @@
                 android:id="@+id/robotDriverComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/robotDriverQuickCommentHint"
-                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_below="@+id/negative_comments"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
                 android:hint="Additional robot and driver comments"
                 app:met_floatingLabel="normal" />
         </RelativeLayout>
@@ -150,6 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:minHeight="48dp"
                 android:padding="8dp"
                 android:text="Team 25 (current robot scouted)"
                 android:textSize="18sp" />
@@ -159,6 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:minHeight="48dp"
                 android:padding="8dp"
                 android:text="Team 1 (previous robot scouted)"
                 android:textSize="18sp" />
@@ -168,6 +233,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:minHeight="48dp"
                 android:padding="8dp"
                 android:text="Either team/no opinion"
                 android:textSize="18sp" />
@@ -194,6 +260,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:minHeight="48dp"
                 android:padding="8dp"
                 android:text="A good first pick"
                 android:textSize="18sp" />
@@ -203,6 +270,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:minHeight="48dp"
                 android:padding="8dp"
                 android:text="A good second pick"
                 android:textSize="18sp" />
@@ -212,6 +280,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:minHeight="48dp"
                 android:padding="8dp"
                 android:text="Not a good pick"
                 android:textSize="18sp" />
