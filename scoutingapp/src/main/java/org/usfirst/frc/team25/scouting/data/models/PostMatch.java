@@ -25,15 +25,29 @@ public class PostMatch {
     private boolean missed;
     private boolean commsLost;
     private boolean tipped;
+    private boolean fouls;
+    private boolean inaccurateData;
+    private boolean slowIntake;
+    private boolean aim;
+    private boolean coopertition;
+    private boolean hanging;
+    private boolean fastIntake;
 
     private transient ArrayList<CheckBox> robotQuickComments;
 
-    public PostMatch(String robotComment, boolean missed, boolean commsLost, boolean tipped, boolean ampFocused, boolean speakerFocused, boolean defenseFocused, boolean onstageFocused, int teamOneCompare,
+    public PostMatch(String robotComment, boolean missed, boolean commsLost, boolean tipped, boolean fouls, boolean inaccurateData, boolean slowIntake, boolean aim, boolean coopertition, boolean hanging, boolean fastIntake, boolean ampFocused, boolean speakerFocused, boolean defenseFocused, boolean onstageFocused, int teamOneCompare,
                      int teamTwoCompare, String comparison, int pickNumber) {
         this.robotComment = robotComment;
         this.missed = missed;
         this.commsLost = commsLost;
         this.tipped = tipped;
+        this.fouls = fouls;
+        this.inaccurateData = inaccurateData;
+        this.slowIntake = slowIntake;
+        this.aim = aim;
+        this.coopertition = coopertition;
+        this.hanging = hanging;
+        this.fastIntake = fastIntake;
         this.ampFocused = ampFocused;
         this.speakerFocused = speakerFocused;
         this.defenseFocused = defenseFocused;
@@ -54,6 +68,20 @@ public class PostMatch {
     public boolean isCommsLost() {return commsLost; }
 
     public boolean isTipped() {return tipped; }
+
+    public boolean isFouls() {return fouls; }
+
+    public boolean isInaccurateData() {return inaccurateData; }
+
+    public boolean isSlowIntake() {return slowIntake; }
+
+    public boolean isAim() {return aim; }
+
+    public boolean isCoopertition() {return coopertition; }
+
+    public boolean isHanging() {return hanging; }
+
+    public boolean isFastIntake() {return fastIntake; }
 
     public boolean isAmpFocused() {return ampFocused; }
 

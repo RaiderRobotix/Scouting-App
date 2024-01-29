@@ -20,22 +20,24 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
+import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
+import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 
 import java.util.ArrayList;
+
+import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 
 
 public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
-    private CheckBox ampFocused, speakerFocused, onstageFocused, defenseFocused, missed, tipped, commLost;
+    private CheckBox ampFocused, speakerFocused, onstageFocused, defenseFocused, missed, tipped, commLost, fouls, inaccurateData, slowIntake, aim, coopertition, hang, fastIntake;
     private final RadioButton[] comparisonButtons = new RadioButton[3];
     private final RadioButton[] pickNumberButtons = new RadioButton[3];
 
     private ScoutEntry entry;
     private MaterialEditText robotComment;
-    private RelativeLayout robotCommentView;
-    private ArrayList<CheckBox> robotQuickComments;
 
 
     public static PostMatchFragment getInstance(ScoutEntry entry) {
@@ -54,7 +56,28 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
     @Override
     public void autoPopulate() {
+        if (entry.getPostMatch() != null) {
+            PostMatch postMatch = entry.getPostMatch();
 
+            robotComment.setText(postMatch.getRobotComment());
+            missed.setChecked(postMatch.isMissed());
+            commLost.setChecked(postMatch.isCommsLost());
+            tipped.setChecked(postMatch.isTipped());
+            fouls.setChecked(postMatch.isFouls());
+            inaccurateData.setChecked(postMatch.isInaccurateData());
+            slowIntake.setChecked(postMatch.isSlowIntake());
+            aim.setChecked(postMatch.isAim());
+            coopertition.setChecked(postMatch.isCoopertition());
+            hang.setChecked(postMatch.isHanging());
+            fastIntake.setChecked(postMatch.isFastIntake());
+            ampFocused.setChecked(postMatch.isAmpFocused());
+            speakerFocused.setChecked(postMatch.isSpeakerFocused());
+            defenseFocused.setChecked(postMatch.isDefenseFocused());
+            onstageFocused.setChecked(postMatch.isOnstageFocused());
+
+
+
+        }
     }
 
     public void saveState() {
@@ -75,7 +98,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             }
         }
 
-        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), missed.isChecked(), commLost.isChecked(), tipped.isChecked(), ampFocused.isChecked(), speakerFocused.isChecked(),
+        entry.setPostMatch(new PostMatch(robotComment.getText().toString(), missed.isChecked(), commLost.isChecked(), tipped.isChecked(), fouls.isChecked(), inaccurateData.isChecked(), slowIntake.isChecked(), aim.isChecked(), coopertition.isChecked(), hang.isChecked(), fastIntake.isChecked(), ampFocused.isChecked(), speakerFocused.isChecked(),
                 defenseFocused.isChecked(), onstageFocused.isChecked(), entry.getPreMatch().getTeamNum(),
                 FileManager.getPrevTeamNumber(getActivity()), comparison, pickNumber));
     }
@@ -89,7 +112,6 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         robotComment = view.findViewById(R.id.robotDriverComment);
 
-        robotCommentView = view.findViewById(R.id.robotDriverCommentView);
 
         Button finish = view.findViewById(R.id.post_finish);
         onstageFocused = view.findViewById(R.id.teleop_focus_onstage);
@@ -97,9 +119,17 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         speakerFocused = view.findViewById(R.id.teleop_focus_score_speaker);
         defenseFocused = view.findViewById(R.id.teleop_focus_defense);
 
-        missed = view.findViewById(R.id.missed_shots);
         commLost = view.findViewById(R.id.comms_lost);
         tipped = view.findViewById(R.id.tipped);
+        fouls = view.findViewById(R.id.fouls);
+        inaccurateData = view.findViewById(R.id.innacurate);
+        slowIntake = view.findViewById(R.id.slow);
+        missed = view.findViewById(R.id.missed_shots);
+        aim = view.findViewById(R.id.sharp_aim);
+        coopertition = view.findViewById(R.id.coopertition);
+        hang = view.findViewById(R.id.hanging);
+        fastIntake = view.findViewById(R.id.quick_intake);
+
 
         comparisonButtons[0] = view.findViewById(R.id.current_team_comparison);
         comparisonButtons[1] = view.findViewById(R.id.prev_team_comparison);
@@ -126,33 +156,25 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             view.findViewById(R.id.prev_team_comparison_group).setVisibility(View.GONE);
         }
 
-        robotQuickComments = new ArrayList<>();
 
         generateRobotQuickComments();
 
         autoPopulate();
 
         finish.setOnClickListener(view1 -> {
-            boolean focusChecked = false;
-            boolean comparisonSelected = false;
-            boolean pickNumberSelected = false;
+            hideKeyboard(getActivity());
+
+            boolean proceed = true;
 
 
-            for (RadioButton button : comparisonButtons) {
-                if (button.isChecked()) {
-                    comparisonSelected = true;
-                }
+            if (proceed) {
+                saveState();
+                getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
+                getActivity().finish();
             }
-            for (RadioButton button : pickNumberButtons) {
-                if (button.isChecked()) {
-                    pickNumberSelected = true;
-                }
-            }
-
-
-
-
         });
+
+
 
         if (entry.getPreMatch().isRobotNoShow()) {
             comparisonButtons[1].setChecked(true);
@@ -173,6 +195,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
         robotComment.setLayoutParams(robotCommentParams);
     }
+
 
 
 

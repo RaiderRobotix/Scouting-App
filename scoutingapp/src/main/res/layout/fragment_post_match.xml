@@ -92,8 +92,10 @@
 
 
             <LinearLayout
+                android:id="@+id/layout_postmatch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/robotDriverQuickCommentHint"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -144,6 +146,14 @@
                         android:text="Communications Lost"
                         android:textSize="18sp" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/positive_comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
                     <CheckBox
                         android:id="@+id/tipped"
                         android:layout_width="wrap_content"
@@ -151,6 +161,38 @@
                         android:minHeight="48dp"
                         android:padding="@dimen/inner_components_spacing"
                         android:text="Tipped Over"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/sharp_aim"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Sharp Aim"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/coopertition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Coopertition"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/hanging"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Stable Hanging"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/quick_intake"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="Quick Intake"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -181,7 +223,7 @@
                 android:id="@+id/robotDriverComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/negative_comments"
+                android:layout_below="@+id/layout_postmatch"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"

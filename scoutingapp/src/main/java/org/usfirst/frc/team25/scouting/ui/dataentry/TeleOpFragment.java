@@ -111,6 +111,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             ensemble.setChecked(tele.isEnsemble());
 
 
+
         }
     }
 
