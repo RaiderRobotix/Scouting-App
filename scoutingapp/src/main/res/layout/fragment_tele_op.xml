@@ -198,7 +198,7 @@
 
         <LinearLayout
             android:id="@+id/teleop_layout_5"
-            android:layout_width="400dp"
+            android:layout_width="383dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/teleop_layout_1"
             android:layout_centerHorizontal="true"
@@ -206,7 +206,7 @@
 
             <TextView
                 android:id="@+id/notes_picked_ground_text"
-                android:layout_width="110dp"
+                android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Notes Picked From Ground"
@@ -214,9 +214,9 @@
 
             <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
                 android:id="@+id/notes_picked_ground"
-                android:layout_width="300dp"
+                android:layout_width="270dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="0.1" />
         </LinearLayout>
 
         <TextView
