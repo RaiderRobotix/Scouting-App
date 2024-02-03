@@ -25,8 +25,8 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private ButtonIncDecSet notesPickedGround, notesPickedHps, ampNotesScoredTeleop, speakerNotesScoredTeleop, ampSpeakerNotesScored, notesDroppedTeleop;
-    private CheckBox park, onstage, spotlit, trap, harmony, ensemble;
+    private ButtonIncDecSet zoneOneTeleop, zoneTwoTeleop, zoneThreeTeleop, zoneFourTeleop, ampZoneTeleop, missedTeleop;
+    private CheckBox foulTeleop;
 
 
     public static TeleOpFragment getInstance(ScoutEntry entry) {
@@ -51,18 +51,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        notesPickedGround = view.findViewById(R.id.notes_picked_ground);
-        notesPickedHps = view.findViewById(R.id.notes_picked_teleop);
-        ampNotesScoredTeleop = view.findViewById(R.id.amp_scored_teleop);
-        speakerNotesScoredTeleop = view.findViewById(R.id.speaker_scored_teleop);
-        ampSpeakerNotesScored = view.findViewById(R.id.speaker_amplified_teleop);
-        notesDroppedTeleop = view.findViewById(R.id.notes_dropped_teleop);
-        park = view.findViewById(R.id.park);
-        onstage = view.findViewById(R.id.onstage);
-        spotlit = view.findViewById(R.id.spotlit);
-        trap = view.findViewById(R.id.trap);
-        harmony = view.findViewById(R.id.harmony);
-        ensemble = view.findViewById(R.id.ensemble);
+        zoneOneTeleop = view.findViewById(R.id.teleop_zone_1);
+        zoneTwoTeleop = view.findViewById(R.id.teleop_zone_2);
+        zoneThreeTeleop = view.findViewById(R.id.teleop_zone_3);
+        zoneFourTeleop = view.findViewById(R.id.teleop_zone_4);
+        ampZoneTeleop = view.findViewById(R.id.teleop_zone_amp);
+        missedTeleop = view.findViewById(R.id.teleop_zone_missed);
+        foulTeleop = view.findViewById(R.id.foulTeleop);
+
         Button continueButton = view.findViewById(R.id.teleop_continue);
 
 
@@ -97,20 +93,13 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
 
-            notesPickedGround.setValue(tele.getNotesPickedGround());
-            notesPickedHps.setValue(tele.getNotesPickedHps());
-            ampNotesScoredTeleop.setValue(tele.getAmpNotesScoredTelop());
-            speakerNotesScoredTeleop.setValue(tele.getSpeakerNotesScoredTeleop());
-            ampSpeakerNotesScored.setValue(tele.getAmpSpeakerNotesScored());
-            notesDroppedTeleop.setValue(tele.getNotesDroppedTeleop());
-            park.setChecked(tele.isPark());
-            onstage.setChecked(tele.isOnstage());
-            spotlit.setChecked(tele.isSpotlit());
-            trap.setChecked(tele.isTrap());
-            harmony.setChecked(tele.isHarmony());
-            ensemble.setChecked(tele.isEnsemble());
-
-
+            ampZoneTeleop.setValue(tele.getAmpTeleop());
+            foulTeleop.setChecked(tele.isFoulTeleop());
+            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
+            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
+            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
+            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
+            missedTeleop.setValue(tele.getMissedTeleop());
 
         }
     }
@@ -118,9 +107,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     @Override
     public void saveState() {
 
-        entry.setTeleOp(new TeleOp(notesPickedGround.getValue(), notesPickedHps.getValue(), ampNotesScoredTeleop.getValue(),
-                speakerNotesScoredTeleop.getValue(), ampSpeakerNotesScored.getValue(), notesDroppedTeleop.getValue(), park.isChecked(), onstage.isChecked(),
-                spotlit.isChecked(), trap.isChecked(), harmony.isChecked(), ensemble.isChecked()
+        entry.setTeleOp(new TeleOp(ampZoneTeleop.getValue(), foulTeleop.isChecked(), zoneOneTeleop.getValue(), zoneTwoTeleop.getValue(), zoneThreeTeleop.getValue(), zoneFourTeleop.getValue(), missedTeleop.getValue()
         ));
 
 

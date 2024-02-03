@@ -75,15 +75,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         matchNumField = view.findViewById(R.id.match_num_field);
         teamNumField = view.findViewById(R.id.team_num_field);
 
-        startingPositionButtons = new RadioButton[3];
-        startingPositionButtons[0] = view.findViewById(R.id.leftStart);
-        startingPositionButtons[1] = view.findViewById(R.id.centerStart);
-        startingPositionButtons[2] = view.findViewById(R.id.rightStart);
 
-        startedWithNote = view.findViewById(R.id.started_with_note);
-
-        startingPositionButtonsGroup = view.findViewById(R.id.starting_position);
-        startingGamePieceGroup = view.findViewById(R.id.robot_starting_game_piece);
 
         autoPopulate();
 
@@ -303,14 +295,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
             teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
 
-
-            for (RadioButton button : startingPositionButtons) {
-                if (button.getText().equals(prevPreMatch.getStartingPos())) {
-                    button.setChecked(true);
-                }
-            }
-
-
             robotNoShow.setChecked(robotNoShow.isChecked());
 
 
@@ -357,10 +341,9 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         entry.setPreMatch(new PreMatch(nameField.getText().toString(),
                 scoutPosSpinner.getText().toString(),
-                startPos,
                 Integer.parseInt(matchNumField.getText().toString()),
                 Integer.parseInt(teamNumField.getText().toString()),
-                robotNoShow.isChecked(), startedWithNote.isChecked()
+                robotNoShow.isChecked()
         ));
     }
 

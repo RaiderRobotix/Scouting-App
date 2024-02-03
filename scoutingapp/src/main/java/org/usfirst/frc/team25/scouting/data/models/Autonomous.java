@@ -6,41 +6,44 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
+    private int ampAuto;
+    private boolean foulAuto;
     private boolean crossComLine;
-
-    private int notesPickedAuto;
-    private int ampScoredAuto;
-
-    private int speakerScoredAuto;
-    private int notesDroppedAuto;
-
+    private int zoneOne;
+    private int zoneTwo;
+    private int zoneThree;
+    private int zoneFour;
+    private int missedAuto;
 
 
-    public Autonomous(boolean crossComLine, int notesPickedAuto, int ampScoredAuto, int speakerScoredAuto, int notesDroppedAuto) {
+
+    public Autonomous(int ampAuto, boolean foulAuto, boolean crossComLine, int zoneOne, int zoneTwo, int zoneThree, int zoneFour, int missedAuto) {
+        this.ampAuto = ampAuto;
+        this.foulAuto = foulAuto;
         this.crossComLine = crossComLine;
-        this.notesPickedAuto = notesPickedAuto;
-        this.ampScoredAuto = ampScoredAuto;
-        this.speakerScoredAuto = speakerScoredAuto;
-        this.notesDroppedAuto = notesDroppedAuto;
+        this.zoneOne = zoneOne;
+        this.zoneTwo = zoneTwo;
+        this.zoneThree = zoneThree;
+        this.zoneFour = zoneFour;
+        this.missedAuto = missedAuto;
     }
 
-    public int getNotesPickedAuto() {
-        return notesPickedAuto;
-    }
+    public int getAmpAuto() {return  ampAuto;}
 
-    public int getAmpScoredAuto() {
-        return ampScoredAuto;
-    }
-
-    public int getSpeakerScoredAuto() {
-        return speakerScoredAuto;
-    }
-
-    public int getNotesDroppedAuto() {
-        return notesDroppedAuto;
-    }
+    public boolean isFoulAuto() {return foulAuto;}
 
     public boolean isCrossComLine() {
         return crossComLine;
     }
+
+    public int getZoneOne() {return zoneOne;}
+
+    public int getZoneTwo() {return zoneTwo;}
+
+    public int getZoneThree() {return zoneThree;}
+
+    public int getZoneFour() {return zoneFour;}
+
+    public int getMissedAuto() {return missedAuto;}
+
 }

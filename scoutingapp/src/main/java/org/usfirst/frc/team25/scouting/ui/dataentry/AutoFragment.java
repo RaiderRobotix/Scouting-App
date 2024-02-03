@@ -1,6 +1,5 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,15 +12,13 @@ import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.Autonomous;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecSet notesPickedAuto, ampNotesAuto, speakerNotesAuto, notesDroppedAuto;
+    private ButtonIncDecSet zoneOne, zoneTwo, zoneThree, zoneFour, ampAuto, missedAuto;
 
 
-
-    private CheckBox crossComLine;
+    private CheckBox crossComLine, foulAuto;
 
 
     private ScoutEntry entry;
@@ -49,19 +46,23 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
+        zoneOne = view.findViewById(R.id.teleop_zone_1);
+        zoneTwo = view.findViewById(R.id.auto_zone_2);
+        zoneThree = view.findViewById(R.id.auto_zone_3);
+        zoneFour = view.findViewById(R.id.teleop_zone_4);
+        ampAuto = view.findViewById(R.id.auto_zone_amp);
+        missedAuto = view.findViewById(R.id.auto_zone_missed);
+        crossComLine = view.findViewById(R.id.cross_com_line);
+        foulAuto = view.findViewById(R.id.foulTeleop);
 
-        notesPickedAuto=view.findViewById(R.id.notes_picked_auton);
-        ampNotesAuto=view.findViewById(R.id.amp_scored_auton);
-        speakerNotesAuto=view.findViewById(R.id.speaker_scored_auton);
-        notesDroppedAuto=view.findViewById(R.id.notes_dropped_auton);
-        crossComLine=view.findViewById(R.id.cross_com_line);
+
 
 
         Button continueButton = view.findViewById(R.id.auto_continue);
 
 
 
-        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{notesPickedAuto, ampNotesAuto, speakerNotesAuto, notesDroppedAuto};
+        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{ zoneOne, zoneTwo, zoneThree, zoneFour, ampAuto, missedAuto};
         /*
         for (ButtonIncDecSet set : enablingCrossHabLineMetrics) {
             set.incButton.setOnClickListener(view1 -> {
@@ -129,22 +130,22 @@ public class AutoFragment extends Fragment implements EntryFragment {
         if (entry.getAutonomous() != null) {
 
             Autonomous prevAuto = entry.getAutonomous();
+            ampAuto.setValue(prevAuto.getAmpAuto());
+            foulAuto.setChecked(prevAuto.isFoulAuto());
             crossComLine.setChecked(prevAuto.isCrossComLine());
-            notesPickedAuto.setValue(prevAuto.getNotesPickedAuto());
-            ampNotesAuto.setValue(prevAuto.getAmpScoredAuto());
-            speakerNotesAuto.setValue(prevAuto.getSpeakerScoredAuto());
-            notesDroppedAuto.setValue(prevAuto.getNotesDroppedAuto());
-
+            zoneOne.setValue(prevAuto.getZoneOne());
+            zoneTwo.setValue(prevAuto.getZoneTwo());
+            zoneThree.setValue(prevAuto.getZoneThree());
+            zoneFour.setValue(prevAuto.getZoneFour());
+            missedAuto.setValue(prevAuto.getMissedAuto());
         }
 
     }
 
     @Override
     public void saveState() {
-        entry.setAutonomous(new Autonomous(crossComLine.isChecked(), notesPickedAuto.getValue(),
-                ampNotesAuto.getValue(),
-                speakerNotesAuto.getValue(),
-                notesDroppedAuto.getValue()
+        entry.setAutonomous(new Autonomous(ampAuto.getValue(), foulAuto.isChecked(), crossComLine.isChecked(), zoneOne.getValue(), zoneTwo.getValue(), zoneThree.getValue(), zoneFour.getValue(),
+                missedAuto.getValue()
                 ));
     }
 
