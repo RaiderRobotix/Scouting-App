@@ -1,6 +1,8 @@
 package org.usfirst.frc.team25.scouting.data.models;
 
 
+import android.sax.EndElementListener;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,7 @@ public class ScoutEntry implements Serializable {
     private PreMatch preMatch;
     private Autonomous sandstorm;
     private TeleOp teleOp;
+    private EndGame endgame;
     private PostMatch postMatch;
 
 
@@ -38,6 +41,10 @@ public class ScoutEntry implements Serializable {
     public void setTeleOp(TeleOp teleOp) {
         this.teleOp = teleOp;
     }
+
+    public EndGame getEndgame() { return endgame; }
+
+    public void setEndgame(EndGame endgame) {this.endgame = endgame;}
 
     public PostMatch getPostMatch() {
         return postMatch;

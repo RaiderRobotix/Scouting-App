@@ -23,6 +23,21 @@
             android:padding="8dp">
 
             <!-- Dummy item to prevent EditText from receiving focus -->
+
+            <Button
+                android:id="@+id/prematch_continue"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/robot_no_show_checkbox"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="16dp"
+                android:elevation="6dp"
+                android:text="@string/continue_button"
+                android:textColor="#ffffff"
+                android:theme="@style/Widget.AppCompat.Button.Colored.blue"
+                tools:ignore="DuplicateClickableBoundsCheck" />
+
             <LinearLayout
                 android:layout_width="0px"
                 android:layout_height="0px"
@@ -101,19 +116,6 @@
                 android:text="The match has started, and the robot did not show up"
                 android:textSize="18sp"
                 android:layout_marginVertical="10dp" />
-
-            <Button
-                android:id="@+id/prematch_continue"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/robot_no_show_checkbox"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="16dp"
-                android:elevation="6dp"
-                android:text="@string/continue_button"
-                android:textColor="#ffffff"
-                android:theme="@style/Widget.AppCompat.Button.Colored.blue" />
 
         </RelativeLayout>
     </ScrollView>

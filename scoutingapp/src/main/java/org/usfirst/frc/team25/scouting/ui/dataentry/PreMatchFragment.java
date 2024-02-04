@@ -14,8 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -32,12 +31,11 @@ import java.io.IOException;
 
 public class PreMatchFragment extends Fragment implements EntryFragment {
 
-    private RadioButton[] startingPositionButtons;
-    private RadioGroup startingGamePieceGroup, startingPositionButtonsGroup;
+
     private MaterialEditText nameField, matchNumField, teamNumField;
     private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
-    private CheckBox robotNoShow, startedWithNote;
+    private CheckBox robotNoShow;
 
     public static PreMatchFragment getInstance(ScoutEntry entry) {
         PreMatchFragment prematchFragment = new PreMatchFragment();
@@ -91,15 +89,11 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         robotNoShow.setOnCheckedChangeListener((compoundButton, becameChecked) -> {
 
-            UiHelper.radioButtonEnable(startingPositionButtonsGroup, !becameChecked);
-            UiHelper.radioButtonEnable(startingGamePieceGroup, !becameChecked);
-
-        });
-
-        startedWithNote.setOnCheckedChangeListener((compoundButton, becameChecked) -> {
 
 
         });
+
+
 
 
         continueButton.setOnClickListener(view1 -> {
@@ -144,21 +138,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             boolean startingValuesSelected = true;
 
 
-            RadioButton[][] startingValueButtons = new RadioButton[][]{startingPositionButtons};
 
-            for (RadioButton[] startingValueSet : startingValueButtons) {
-                boolean buttonSelectedInSet = false;
-                for (RadioButton button : startingValueSet) {
-                    if (button.isChecked()) {
-                        buttonSelectedInSet = true;
-                        break;
-                    }
-                }
-                if (!buttonSelectedInSet) {
-                    startingValuesSelected = false;
-                    break;
-                }
-            }
 
 
             if (proceed && !robotNoShow.isChecked() && !startingValuesSelected) {
@@ -330,12 +310,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
     @Override
     public void saveState() {
         String startPos = "";
-        for (RadioButton button : startingPositionButtons) {
-            if (button.isChecked()) {
-                startPos = (String) button.getText();
-                break;
-            }
-        }
+
 
 
 

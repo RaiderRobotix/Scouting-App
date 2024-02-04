@@ -62,7 +62,7 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/hps_text"
+                        android:id="@+id/endgame_hps_text"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -73,13 +73,49 @@
                         android:id="@+id/endgame_hps"
                         android:layout_width="220dp"
                         android:layout_height="50dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="1">
+
+                    </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/endgame_layout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/endgame_park"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Park"
+                        android:textSize="24sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <CheckBox
+                        android:id="@+id/endgame_climb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Climb"
+                        android:textSize="24sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/endgame_harmony"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="Harmony"
+                    android:textSize="24sp" />
+
             </LinearLayout>
 
             <Button
-                android:id="@+id/prematch_continue"
+                android:id="@+id/endgame_continue"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/endgame_layout_main"
