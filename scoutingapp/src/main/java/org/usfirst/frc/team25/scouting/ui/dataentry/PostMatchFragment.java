@@ -38,7 +38,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     private CheckBox winRanking, melody, ensemble;
     private TextInputEditText allianceScore;
     private ScoutEntry entry;
-    private int ranking;
+    private int ranking, score;
 
 
     public static PostMatchFragment getInstance(ScoutEntry entry) {
@@ -60,6 +60,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         if (entry.getPostMatch() != null) {
             PostMatch postMatch = entry.getPostMatch();
 
+            score = postMatch.getAllianceScore();
             winRanking.setChecked(postMatch.isWinRanking());
             melody.setChecked(postMatch.isMelody());
             ensemble.setChecked(postMatch.isEnsemble());
@@ -67,7 +68,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             speed.setValue(postMatch.getSpeed());
             manuver.setValue(postMatch.getManuver());
             hpEfficiency.setValue(postMatch.getHpEfficiency());
-
+            ranking = postMatch.getRanking();
 
         }
     }
@@ -85,22 +86,15 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
         allianceScore = view.findViewById(R.id.alliance_score);
+        score = Integer.parseInt(String.valueOf(allianceScore.getText()));
         winRanking = view.findViewById(R.id.win_rp);
         melody = view.findViewById(R.id.melody_bonus);
         ensemble = view.findViewById(R.id.ensemble_bonus);
         defensive = view.findViewById(R.id.defensive);
         speed = view.findViewById(R.id.speed);
-        manuver = view.findViewById(R.id.speed);
+        manuver = view.findViewById(R.id.manuver);
         hpEfficiency = view.findViewById(R.id.hp_efficiency);
-        if(winRanking.isChecked()){
-            ranking = ranking+2;
-        }
-        if(melody.isChecked()){
-            ranking = ranking+1;
-        }
-        if(ensemble.isChecked()){
-            ranking = ranking+1;
-        }
+
 
 
 
@@ -113,7 +107,15 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             hideKeyboard(getActivity());
 
             boolean proceed = true;
-
+            if(winRanking.isChecked()){
+                ranking = ranking+2;
+            }
+            if(melody.isChecked()){
+                ranking++;
+            }
+            if(ensemble.isChecked()){
+                ranking++;
+            }
 
             if (proceed) {
                 saveState();
