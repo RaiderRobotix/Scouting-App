@@ -94,6 +94,11 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         speed = view.findViewById(R.id.speed);
         manuver = view.findViewById(R.id.manuver);
         hpEfficiency = view.findViewById(R.id.hp_efficiency);
+        defensive.setValue(3);
+        speed.setValue(3);
+        manuver.setValue(3);
+        hpEfficiency.setValue(3);
+
 
 
 
@@ -125,6 +130,8 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                         .beginTransaction()
                         .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
                         .commit();
+                Toast.makeText(getActivity().getBaseContext(), "Match data saved",
+                        Toast.LENGTH_LONG).show();
                 getActivity().finish();
             }
         });

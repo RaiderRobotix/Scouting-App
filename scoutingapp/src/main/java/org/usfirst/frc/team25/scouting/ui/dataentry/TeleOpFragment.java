@@ -96,9 +96,9 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             ampZoneTeleop.setValue(tele.getAmpTeleop());
             foulTeleop.setChecked(tele.isFoulTeleop());
             zoneOneTeleop.setValue(tele.getZoneOneTeleop());
-            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
-            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
-            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
+            zoneTwoTeleop.setValue(tele.getZoneTwoTeleop());
+            zoneThreeTeleop.setValue(tele.getZoneThreeTeleop());
+            zoneFourTeleop.setValue(tele.getZoneFourTeleop());
             missedTeleop.setValue(tele.getMissedTeleop());
 
         }

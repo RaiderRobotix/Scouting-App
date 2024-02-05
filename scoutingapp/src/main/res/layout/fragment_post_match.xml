@@ -13,11 +13,19 @@
         android:layout_height="wrap_content">
 
 
+        <TextView
+            android:id="@+id/grading_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/grading_text"
+            android:text="Rate the following qualities on a scale of 1-5 (Worst to Best)"
+            android:textSize="22sp" />
+
         <LinearLayout
             android:id="@+id/postgame_layout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/grading_text"
+            android:layout_below="@id/grading_hint"
             android:orientation="horizontal">
 
             <LinearLayout

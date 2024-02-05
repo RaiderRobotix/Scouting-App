@@ -61,6 +61,7 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
                             "PREMATCH")
                     .commit();
 
+
         } else if (teleop != null && teleop.isVisible()) {
             teleop.saveState();
             getFragmentManager()
@@ -72,15 +73,15 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
             endgame.saveState();
             getFragmentManager()
                     .beginTransaction()
-                    .replace(android.R.id.content, EndGameFragment.getInstance(endgame.getEntry()),
-                            "ENDGAME")
+                    .replace(android.R.id.content, TeleOpFragment.getInstance(endgame.getEntry()),
+                            "TELEOP")
                     .commit();
         } else if (postmatch != null && postmatch.isVisible()) {
             postmatch.saveState();
             getFragmentManager()
                     .beginTransaction()
                     .replace(android.R.id.content,
-                            TeleOpFragment.getInstance(postmatch.getEntry()), "TELEOP")
+                            EndGameFragment.getInstance(postmatch.getEntry()), "ENDGAME")
                     .commit();
 
         }
