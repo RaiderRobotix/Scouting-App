@@ -15,10 +15,10 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecSet zoneOne, zoneTwo, zoneThree, zoneFour, ampAuto, missedAuto;
+    private ButtonIncDecSet zoneOne, zoneTwo, zoneThree, zoneFour, ampAuto, missedAuto, foulAuto;
 
 
-    private CheckBox crossComLine, foulAuto;
+    private CheckBox crossComLine;
 
 
     private ScoutEntry entry;
@@ -53,7 +53,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         ampAuto = view.findViewById(R.id.auto_zone_amp);
         missedAuto = view.findViewById(R.id.auto_zone_missed);
         crossComLine = view.findViewById(R.id.cross_com_line);
-        foulAuto = view.findViewById(R.id.foulTeleop);
+        foulAuto = view.findViewById(R.id.foul_auton);
 
 
 
@@ -110,6 +110,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
                 saveState();
                 getFragmentManager().beginTransaction()
+
                         .replace(android.R.id.content, TeleOpFragment.getInstance(entry), "TELEOP")
                         .commit();
 
@@ -131,7 +132,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
             Autonomous prevAuto = entry.getAutonomous();
             ampAuto.setValue(prevAuto.getAmpAuto());
-            foulAuto.setChecked(prevAuto.isFoulAuto());
+            foulAuto.setValue(prevAuto.getFoulAuto());
             crossComLine.setChecked(prevAuto.isCrossComLine());
             zoneOne.setValue(prevAuto.getZoneOne());
             zoneTwo.setValue(prevAuto.getZoneTwo());
@@ -144,7 +145,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        entry.setAutonomous(new Autonomous(ampAuto.getValue(), foulAuto.isChecked(), crossComLine.isChecked(), zoneOne.getValue(), zoneTwo.getValue(), zoneThree.getValue(), zoneFour.getValue(),
+        entry.setAutonomous(new Autonomous(ampAuto.getValue(), foulAuto.getValue(), crossComLine.isChecked(), zoneOne.getValue(), zoneTwo.getValue(), zoneThree.getValue(), zoneFour.getValue(),
                 missedAuto.getValue()
                 ));
     }

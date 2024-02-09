@@ -7,7 +7,7 @@ package org.usfirst.frc.team25.scouting.data.models;
 public class Autonomous {
 
     private int ampAuto;
-    private boolean foulAuto;
+    private int foulAuto;
     private boolean crossComLine;
     private int zoneOne;
     private int zoneTwo;
@@ -17,7 +17,7 @@ public class Autonomous {
 
 
 
-    public Autonomous(int ampAuto, boolean foulAuto, boolean crossComLine, int zoneOne, int zoneTwo, int zoneThree, int zoneFour, int missedAuto) {
+    public Autonomous(int ampAuto, int foulAuto, boolean crossComLine, int zoneOne, int zoneTwo, int zoneThree, int zoneFour, int missedAuto) {
         this.ampAuto = ampAuto;
         this.foulAuto = foulAuto;
         this.crossComLine = crossComLine;
@@ -28,9 +28,9 @@ public class Autonomous {
         this.missedAuto = missedAuto;
     }
 
-    public int getAmpAuto() {return  ampAuto;}
+    public int getAmpAuto() {return ampAuto;}
 
-    public boolean isFoulAuto() {return foulAuto;}
+    public int getFoulAuto() {return foulAuto;}
 
     public boolean isCrossComLine() {
         return crossComLine;

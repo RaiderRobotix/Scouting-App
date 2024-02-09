@@ -87,7 +87,6 @@ public class EndGameFragment extends Fragment implements EntryFragment {
             if (proceed) {
                 saveState();
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
-                FileManager.saveData(entry, getActivity());
                 getFragmentManager()
                         .beginTransaction()
                         .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")

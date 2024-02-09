@@ -32,15 +32,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/foulTeleop"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/foul_tele_text"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Foul"
-                    android:textSize="24sp"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:text="Fouls"
+                    android:textSize="24sp" />
 
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/foul_teleop"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout

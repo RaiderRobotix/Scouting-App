@@ -21,12 +21,14 @@ public class PostMatch {
     private int manuver;
     private int hpEfficiency;
     private int ranking;
+    private boolean lostComms;
 
-    public PostMatch(int allianceScore, boolean winRanking, boolean melody, boolean ensemble, int defensive, int speed, int manuver, int hpEfficiency, int ranking) {
+    public PostMatch(int allianceScore, boolean winRanking, boolean melody, boolean ensemble, boolean lostComms, int defensive, int speed, int manuver, int hpEfficiency, int ranking) {
         this.allianceScore = allianceScore;
         this.winRanking = winRanking;
         this.melody = melody;
         this.ensemble = ensemble;
+        this.lostComms = lostComms;
         this.defensive = defensive;
         this.speed = speed;
         this.manuver = manuver;
@@ -44,6 +46,7 @@ public class PostMatch {
     public boolean isEnsemble() {
         return ensemble;
     }
+    public boolean isLostComms() {return lostComms;}
     public int getDefensive() {
         return defensive;
     }

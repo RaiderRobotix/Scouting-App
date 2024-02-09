@@ -35,7 +35,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
     private ButtonIncDecSet defensive, speed, manuver, hpEfficiency;
-    private CheckBox winRanking, melody, ensemble;
+    private CheckBox winRanking, melody, ensemble, lostComms;
     private TextInputEditText allianceScore;
     private ScoutEntry entry;
     private int ranking, score;
@@ -65,6 +65,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             melody.setChecked(postMatch.isMelody());
             ensemble.setChecked(postMatch.isEnsemble());
             defensive.setValue(postMatch.getDefensive());
+            lostComms.setChecked(postMatch.isLostComms());
             speed.setValue(postMatch.getSpeed());
             manuver.setValue(postMatch.getManuver());
             hpEfficiency.setValue(postMatch.getHpEfficiency());
@@ -74,7 +75,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
     }
 
     public void saveState() {
-        entry.setPostMatch(new PostMatch(Integer.parseInt(String.valueOf(allianceScore.getText())), winRanking.isChecked(), melody.isChecked(), ensemble.isChecked(), defensive.getValue(), speed.getValue(), manuver.getValue(), hpEfficiency.getValue(), ranking));
+        entry.setPostMatch(new PostMatch(Integer.parseInt(String.valueOf(allianceScore.getText())), winRanking.isChecked(), melody.isChecked(), ensemble.isChecked(), lostComms.isChecked(), defensive.getValue(), speed.getValue(), manuver.getValue(), hpEfficiency.getValue(), ranking));
     }
 
     @SuppressLint("MissingInflatedId")
@@ -94,6 +95,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         speed = view.findViewById(R.id.speed);
         manuver = view.findViewById(R.id.manuver);
         hpEfficiency = view.findViewById(R.id.hp_efficiency);
+        lostComms = view.findViewById(R.id.lost_coms);
         defensive.setValue(3);
         speed.setValue(3);
         manuver.setValue(3);
@@ -126,10 +128,6 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
                 saveState();
                 getActivity().setTheme(R.style.AppTheme_NoLauncher_Blue);
                 FileManager.saveData(entry, getActivity());
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(android.R.id.content, PostMatchFragment.getInstance(entry), "POST")
-                        .commit();
                 Toast.makeText(getActivity().getBaseContext(), "Match data saved",
                         Toast.LENGTH_LONG).show();
                 getActivity().finish();

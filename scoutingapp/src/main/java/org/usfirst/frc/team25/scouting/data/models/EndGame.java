@@ -16,7 +16,6 @@ public class EndGame {
     private boolean park;
     private boolean harmony;
 
-    private transient ArrayList<CheckBox> robotQuickComments;
 
     public EndGame(int hps, int trap, boolean climb, boolean park, boolean harmony) {
         this.hps = hps;

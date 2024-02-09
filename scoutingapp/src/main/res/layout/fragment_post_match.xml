@@ -212,6 +212,14 @@
                 android:text="Ensemble"
                 android:textSize="24sp" />
 
+            <CheckBox
+                android:id="@+id/lost_coms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Lost Comms"
+                android:textSize="24sp" />
+
         </LinearLayout>
 
         <TextView

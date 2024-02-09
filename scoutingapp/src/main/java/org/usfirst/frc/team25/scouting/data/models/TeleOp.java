@@ -8,14 +8,14 @@ package org.usfirst.frc.team25.scouting.data.models;
 public class TeleOp {
 
     private int ampTeleop;
-    private boolean foulTeleop;
+    private int foulTeleop;
     private int zoneOneTeleop;
     private int zoneTwoTeleop;
     private int zoneThreeTeleop;
     private int zoneFourTeleop;
     private int missedTeleop;
 
-    public TeleOp(int ampTeleop, boolean foulTeleop, int zoneOneTeleop, int zoneTwoTeleop, int zoneThreeTeleop, int zoneFourTeleop, int missedTeleop) {
+    public TeleOp(int ampTeleop, int foulTeleop, int zoneOneTeleop, int zoneTwoTeleop, int zoneThreeTeleop, int zoneFourTeleop, int missedTeleop) {
         this.ampTeleop = ampTeleop;
         this.foulTeleop = foulTeleop;
         this.zoneOneTeleop = zoneOneTeleop;
@@ -27,7 +27,7 @@ public class TeleOp {
 
     public int getAmpTeleop() {return  ampTeleop;}
 
-    public boolean isFoulTeleop() {return foulTeleop;}
+    public int getFoulTeleop() {return foulTeleop;}
 
     public int getZoneOneTeleop() {return zoneOneTeleop;}
 
