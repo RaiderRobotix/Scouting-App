@@ -1,0 +1,148 @@
+This is just supposed to be a guide for whoever makes the next app. 
+If you finished the new scouting app, keep this in and commit the project to github.
+If not, Im not gonna drag this on ill just get to it
+
+---------------Prologue-----------------
+So before I show you how to get started, youre gonna want to know what we use the scouting app for.
+The scouting app is basically a data entry app which we use to choose what teams we might want to pick. Now, the way we do
+this is by watching the match and checking their performance. The scouts use the app to take quick notes on how the teams
+perform, and then share the data with the head scout at the end of the match, through bluetooth. We then send that data to
+Microsoft Excel and use built in formulas to automatically create graphs.
+
+So in short, the data goes from the Scouting App -> Computer -> Excel -> Graphs
+
+Now the data we want to collect varies from game to game, and I have no clue what your game is gonna be. At the moment,
+I'm writing this guide in 2024 so I have no clue what your game is going to be. But don't worry, it isn't that bad... or maybe it is idk.
+
+---------Before you get started----------
+
+Before you do any programming, you want to first take a look at the game trailer, and look at things from two perspectives:
+Quantative and Qualitive. Quantative is mostly numerical, like how many times you score. Qualitive is more complicated. It
+can involve anything from location to mechanisms.
+
+After checking both perspectives, you're going to want to talk to the head scout and see what kind of data they want to use.
+Together, you'll want to make a chart devising what kind of data you want to collect in different stages of the match:
+	Pregame - Before the match starts, what do you notice about the robot?
+	Auton - The first part of the match, not controlled by drivers
+	Teleop - The second part of the match, controlled by drivers
+	Endgame - The third part of the match, where teams race to complete an objective
+	Postgame - After the match, how did the robot perform
+It's only after you've talked with the head scout and created a chart to detail what kind of data you want when you should
+continue to the main portion of the app, programming. 
+
+----------Step 1. XML-------------
+
+XML stands for extensible markup language. You're gonna wanna get used to it because it's also how we make literally any
+graphical parts of the app. If I don't have the answers to whatever problem you're facing, tell whoever made the app last
+time. 
+
+First, you're gonna want to edit your layout.
+You can choose from any one of the "fragments" like fragment_auto.xml or fragment_prematch.xml
+Familiarize yourself with the environment and come back to the
+We usually ask questions in forms of checkboxes or "inc dec set"
+Now you may be asking what the hell an "inc dec set" is, and you'd be right to ask but it's basically a counter with a +
+and - button. But those two are stored as values of integers and strings
+
+For those who don't know, those are data types and I'm not getting into those here but you check those out online
+
+When creating a checkbox, in the design view, go to the palette menu and open the button toolbar and drag a checkbox
+from there. Then, scroll to the attributes menu, you give it an id, and some text to help people understand.
+An example of an id would be score_auton or ranking_teleop 
+Scrolling futher down the attributes menu, you'll find the "layout_below" feature. This lets you organize your buttons
+quicker by putting them directly underneath other features. You can experiment with width and height but if you have
+any questions, ask whoever made the app before you.
+
+It's the same process for an inc dec set, but this time you don't get a text attribute to describe what it's for. You have to manually 
+add that in next to the inc dec set. Still, just give it an id and change the width and height to your liking.
+
+After you've finished an xml, we continue to java part 1.
+
+----------Java Part 1-----------
+
+To start, open the corresponding java fragment to your xml fragment. For example, fragment_prematch.xml corresponds to
+PreMatchFragment.java. When you open the java fragment, you'll see a lot of code, and it might be scary, but don't worry
+about it. 
+
+To start, take a look at lines like "private ButtonIncDecSet (arguments);". 
+In the section labeled arguments, you might see different features for last years game. Since we don't want any features
+from last years game, you're going to want to replace those arguments with ones that you're using. If you aren't using
+any features of that kind at all, then remove them. Remember, you have to replace both lines for the inc dec set AND 
+Check Boxes.
+
+If you don't see a line like that, and you need a certain feature, write "private (feature_type) (feature_name[s]);"
+
+Next, scroll down until you see a class called "onCreateView"
+this is where we link the ids for our attributes in the xml with the variables you just created in the java file. 
+I'll show an example here for what a line should look like.
+
+javaName = view.findViewById.(R.id.xml_name);
+
+also be sure to delete any of those lines that are red, as they are unused features that were used in the previous
+iteration of the app.
+
+If you've made it past that, you can now move onto Java Part 2
+
+-----------Java Part 2-------
+
+Now, you want to open another file, this time it will just be called whatever phase of the match you're working on.
+For example, fragment_prematch.xml or prematchFragment.java will correspond to PreMatch.java.
+Open that file and observe the contents of the file. This time, there is much less code and you feel less worried. 
+In the file, you'll see many private ints and booleans being declared. You'll want to do that for each feature of the xml
+For example...
+	private int allianceScore;
+or...
+	private boolean crossLine;
+pretty straightforward
+
+then move to the public (matchSection) line
+you'll see a long line of variables, but it's also a simple change. 
+Just remove the variables you see and replace them with your variables you made just before. BE SURE TO DECLARE THE DATA
+TYPE (Int, Boolean, String).
+
+then move to the lines like "this.blank = blank;"
+same logic, replace whatever you see there with your custom variable types.
+	"this.newvar = newvar;"
+
+then go to the final section with the lines like public int getInt or isBoolean
+
+once again, same logic. However, you'll want to be careful when replacing those. You'll notice that they also declare data
+types which you have to change, but you also have to change the function name
+for example if the feature is an integer data type, the line would be
+public int getInt() {return int;}
+
+Now you can move onto Java Part 3
+----------Java Part 3----------
+
+Open up that previous java file called matchSectionFragment.java
+
+move down to the autoPopulate function and replace the lines of code like "score.setValue(postMatch.getScore());"
+replace "score" with one of your variable names and replace "getScore()" with the corresponding function
+name from Java Part 2. Rinse and repeat. Be sure to make the order you write the names identical to that of the previous file
+
+Then scroll  down to the saveState function.
+
+again, replace the variables in the "new PostMatch(args go here) function"
+make them in the exact same order you wrote them in the previous file.
+for integer variables, use variable.getValue() and for boolean variables, use variable.getChecked()
+
+---------Building and Running--------------
+
+Once you finished, check the files you edited for any errors. If you get any, it's probably a spelling mistake or a
+direction error. If you need help, ask the previous creator for help but if not, fix it yourself or use Stack Overflow
+Once all errors are gone, build the project by going to the top bar of the screen, navigating to the Build menu, select
+"Build Bundles and APK's", and hit Build APK(s). Then go to the bottom and select the build menu to watch the build process
+if you get any errors afterwards, find help from someone to troubleshoot and continue. If it builds successfully, you can
+now try to run the program. 
+
+To run the program, you need one of the scouting tablets plugged into the computer. Turn the tablet on and you might recieve
+a message like "Enable USB Debugging". Select yes and continue with my directions. 
+Go to the playbutton at the top of the screen and hit play. Same thing, go to the build menu and watch the progress.
+
+When it loads, it'll take some time to thoroughly test it out, and debugging can be a pain. I don't have enough time to
+explain all the possible bugs that could occur, but if you run into any snags, just ask the previous scouting app 
+creator. Hello, this is Mr. Roboto. The last coder writing this, Sameer, got sick (how unfortunate), and I will substitue his explanation 
+for a little while. Here's a list of some bugs you may encounter: Starting the app makes it crash immediately, the tablet's back button in the bottom
+of the screen does not go back, imputted values in a page may not be saved once you go back to that page later, buttons implemented into the screen 
+may be misplaced or organized as not intended (likely due to using the wrong tablet or phone model for reference while on xml). I'm gonna leave this back to Sameer, now.
+
+-------

@@ -35,7 +35,8 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
 
 
     private ButtonIncDecSet defensive, speed, manuver, hpEfficiency;
-    private CheckBox winRanking, melody, ensemble, lostComms;
+    private CheckBox melody, ensemble, lostComms;
+    private RadioButton winRanking, tieRanking;
     private TextInputEditText allianceScore;
     private ScoutEntry entry;
     private int ranking, score;
@@ -96,6 +97,7 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
         manuver = view.findViewById(R.id.manuver);
         hpEfficiency = view.findViewById(R.id.hp_efficiency);
         lostComms = view.findViewById(R.id.lost_coms);
+        tieRanking = view.findViewById(R.id.tie_rp);
         defensive.setValue(3);
         speed.setValue(3);
         manuver.setValue(3);
@@ -117,11 +119,17 @@ public class PostMatchFragment extends Fragment implements EntryFragment {
             if(winRanking.isChecked()){
                 ranking = ranking+2;
             }
+            if(tieRanking.isChecked()){
+                ranking = ranking+1;
+            }
             if(melody.isChecked()){
                 ranking++;
             }
             if(ensemble.isChecked()){
                 ranking++;
+            }
+            if(winRanking.isChecked() && tieRanking.isChecked()){
+                tieRanking.setChecked(false);
             }
 
             if (proceed) {
