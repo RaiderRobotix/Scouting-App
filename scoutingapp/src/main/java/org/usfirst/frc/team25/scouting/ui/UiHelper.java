@@ -92,6 +92,7 @@ public class UiHelper {
         teamNumThemePairs.put(25, R.style.AppTheme_NoLauncher_Raider);
         teamNumThemePairs.put(1923, R.style.AppTheme_NoLauncher_Black);
 
+
         if (!teamNumThemePairs.containsKey(teamNum)) {
             selectedTheme = R.style.AppTheme_NoLauncher_Blue;
         } else {

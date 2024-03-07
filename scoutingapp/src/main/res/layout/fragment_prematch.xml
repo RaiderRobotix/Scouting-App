@@ -109,10 +109,10 @@
                 app:met_floatingLabel="normal" />
 
             <CheckBox
+                android:id="@+id/robot_no_show_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/team_num_field"
-                android:id="@+id/robot_no_show_checkbox"
                 android:text="The match has started, and the robot did not show up"
                 android:textSize="18sp"
                 android:layout_marginVertical="10dp" />

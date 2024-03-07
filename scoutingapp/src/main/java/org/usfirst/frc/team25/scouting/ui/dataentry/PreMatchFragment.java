@@ -327,6 +327,8 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         saveState();
 
+
+
         Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
 
         UiHelper.autoSetTheme(getActivity(), entry.getPreMatch().getTeamNum());
