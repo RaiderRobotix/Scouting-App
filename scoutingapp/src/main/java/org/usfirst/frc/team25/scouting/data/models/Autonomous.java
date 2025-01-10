@@ -6,103 +6,44 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    private boolean crossHabLine;
-
-    private int cargoShipHatches;
-    private int rocketHatches;
-
-    private int cargoShipCargo;
-    private int rocketCargo;
-
-    private boolean frontCargoShipHatchCapable;
-    private boolean sideCargoShipHatchCapable;
-
-    private int hatchesDropped;
-    private int cargoDropped;
-
-    private boolean hatchesDroppedCargoShip;
-    private boolean hatchesDroppedRocket;
-    private boolean cargoDroppedCargoShip;
-    private boolean cargoDroppedRocket;
-
-    private boolean opponentCargoShipLineFoul;
+    private int ampAuto;
+    private int foulAuto;
+    private boolean crossComLine;
+    private int zoneOne;
+    private int zoneTwo;
+    private int zoneThree;
+    private int zoneFour;
+    private int missedAuto;
 
 
-    public Autonomous(int rocketCargo, int rocketHatches, int cargoShipHatches,
-                      int cargoShipCargo, int hatchesDropped, int cargoDropped,
-                      boolean crossHabLine, boolean opponentCargoShipLineFoul,
-                      boolean sideCargoShipHatchCapable, boolean frontCargoShipHatchCapable,
-                      boolean cargoDroppedCargoShip, boolean cargoDroppedRocket,
-                      boolean hatchesDroppedRocket, boolean hatchesDroppedCargoShip) {
-        this.rocketCargo = rocketCargo;
-        this.rocketHatches = rocketHatches;
-        this.cargoShipHatches = cargoShipHatches;
-        this.cargoShipCargo = cargoShipCargo;
-        this.hatchesDropped = hatchesDropped;
-        this.cargoDropped = cargoDropped;
-        this.crossHabLine = crossHabLine;
-        this.opponentCargoShipLineFoul = opponentCargoShipLineFoul;
-        this.sideCargoShipHatchCapable = sideCargoShipHatchCapable;
-        this.frontCargoShipHatchCapable = frontCargoShipHatchCapable;
-        this.cargoDroppedCargoShip = cargoDroppedCargoShip;
-        this.cargoDroppedRocket = cargoDroppedRocket;
-        this.hatchesDroppedRocket = hatchesDroppedRocket;
-        this.hatchesDroppedCargoShip = hatchesDroppedCargoShip;
+
+    public Autonomous(int ampAuto, int foulAuto, boolean crossComLine, int zoneOne, int zoneTwo, int zoneThree, int zoneFour, int missedAuto) {
+        this.ampAuto = ampAuto;
+        this.foulAuto = foulAuto;
+        this.crossComLine = crossComLine;
+        this.zoneOne = zoneOne;
+        this.zoneTwo = zoneTwo;
+        this.zoneThree = zoneThree;
+        this.zoneFour = zoneFour;
+        this.missedAuto = missedAuto;
     }
 
-    public int getRocketCargo() {
-        return rocketCargo;
+    public int getAmpAuto() {return ampAuto;}
+
+    public int getFoulAuto() {return foulAuto;}
+
+    public boolean isCrossComLine() {
+        return crossComLine;
     }
 
-    public int getRocketHatches() {
-        return rocketHatches;
-    }
+    public int getZoneOne() {return zoneOne;}
 
-    public int getCargoShipHatches() {
-        return cargoShipHatches;
-    }
+    public int getZoneTwo() {return zoneTwo;}
 
-    public int getCargoShipCargo() {
-        return cargoShipCargo;
-    }
+    public int getZoneThree() {return zoneThree;}
 
-    public int getHatchesDropped() {
-        return hatchesDropped;
-    }
+    public int getZoneFour() {return zoneFour;}
 
-    public int getCargoDropped() {
-        return cargoDropped;
-    }
+    public int getMissedAuto() {return missedAuto;}
 
-    public boolean isCrossHabLine() {
-        return crossHabLine;
-    }
-
-    public boolean isOpponentCargoShipLineFoul() {
-        return opponentCargoShipLineFoul;
-    }
-
-    public boolean isSideCargoShipHatchCapable() {
-        return sideCargoShipHatchCapable;
-    }
-
-    public boolean isFrontCargoShipHatchCapable() {
-        return frontCargoShipHatchCapable;
-    }
-
-    public boolean isCargoDroppedCargoShip() {
-        return cargoDroppedCargoShip;
-    }
-
-    public boolean isCargoDroppedRocket() {
-        return cargoDroppedRocket;
-    }
-
-    public boolean isHatchesDroppedRocket() {
-        return hatchesDroppedRocket;
-    }
-
-    public boolean isHatchesDroppedCargoShip() {
-        return hatchesDroppedCargoShip;
-    }
 }

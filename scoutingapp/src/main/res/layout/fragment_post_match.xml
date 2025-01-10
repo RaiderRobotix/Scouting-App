@@ -12,224 +12,251 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <TextView
-            android:id="@+id/teleop_focus_text"
+            android:id="@+id/grading_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:padding="@dimen/inner_components_spacing"
-            android:text="Tele-Op primary focus(es)"
-            android:textSize="19sp" />
-
+            android:layout_below="@id/grading_text"
+            android:text="Rate the following qualities on a scale of 1-5 (Worst to Best)"
+            android:textSize="22sp" />
 
         <LinearLayout
-            android:id="@+id/teleop_focus"
-            android:layout_width="wrap_content"
+            android:id="@+id/postgame_layout_main"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/teleop_focus_text"
-            android:orientation="horizontal"
-            android:paddingStart="50sp">
+            android:layout_below="@id/grading_hint"
+            android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/postgame_layout_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/teleop_focus_cargo_ship"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/defensive_text"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo ship"
-                    android:textSize="18sp" />
+                    android:text="Defensive"
+                    android:textSize="24sp"
+                    android:translationX="92dp" />
 
-                <CheckBox
-                    android:id="@+id/teleop_focus_rocket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/inner_components_spacing"
-                    android:text="Rocket"
-                    android:textSize="18sp" />
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/defensive"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    app:initialValueSet="3"
+                    app:maxValueSet="5"
+                    app:minValueSet="1">
 
-                <CheckBox
-                    android:id="@+id/teleop_focus_defense"
-                    android:layout_width="wrap_content"
+                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+
+                <TextView
+                    android:id="@+id/manuverability_text"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/inner_components_spacing"
-                    android:text="Defense"
-                    android:textSize="18sp" />
+                    android:text="Manuverability"
+                    android:textSize="24sp"
+                    android:translationX="70dp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/manuver"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:initialValueSet="3"
+                    app:maxValueSet="5"
+                    app:minValueSet="1" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/postgame_layout_4"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/teleop_focus_hatches"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/speed_text"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/inner_components_spacing"
-                    android:text="Hatch panels"
-                    android:textSize="18sp" />
+                    android:text="Speed"
+                    android:textSize="24sp"
+                    android:translationX="92dp" />
 
-                <CheckBox
-                    android:id="@+id/teleop_focus_cargo"
-                    android:layout_width="wrap_content"
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/speed"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/inner_components_spacing"
-                    android:text="Cargo"
-                    android:textSize="18sp" />
+                    app:initialValueSet="3"
+                    app:maxValueSet="5"
+                    app:minValueSet="1">
+
+                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+
+                <TextView
+                    android:id="@+id/hp_efficiency_text"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:text="HP Efficiency"
+                    android:textSize="24sp"
+                    android:translationX="70dp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/hp_efficiency"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:initialValueSet="3"
+                    app:maxValueSet="5"
+                    app:minValueSet="1" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-
-        <RelativeLayout
-            android:id="@+id/robotDriverCommentView"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/grading_text"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/teleop_focus"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
+            android:layout_below="@id/postgame_layout_2"
+            android:text="Grading"
+            android:textSize="30sp"
+            android:translationX="245dp" />
 
-
-            <TextView
-                android:id="@+id/robotDriverQuickComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_alignParentTop="true"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:text="Robot and driver comments"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/robotDriverQuickCommentHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/robotDriverQuickComment"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:text="Select these options, then fill in below"
-                android:textColor="@color/first_gray"
-                android:textSize="16sp" />
-
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/robotDriverComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/robotDriverQuickCommentHint"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:hint="Additional robot and driver comments"
-                app:met_floatingLabel="normal" />
-        </RelativeLayout>
-
-
-        <RadioGroup
-            android:id="@+id/prev_team_comparison_group"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/overview_text"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/robotDriverCommentView"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="For playoffs, I would rather pick"
-                android:textSize="18sp"
-
-                />
-
-            <RadioButton
-                android:id="@+id/current_team_comparison"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:padding="8dp"
-                android:text="Team 25 (current robot scouted)"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/prev_team_comparison"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:padding="8dp"
-                android:text="Team 1 (previous robot scouted)"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/either_team_comparison"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:padding="8dp"
-                android:text="Either team/no opinion"
-                android:textSize="18sp" />
-
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/pick_number_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/prev_team_comparison_group"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="This robot is..."
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/first_pick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:padding="8dp"
-                android:text="A good first pick"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/second_pick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:padding="8dp"
-                android:text="A good second pick"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/dnp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:padding="8dp"
-                android:text="Not a good pick"
-                android:textSize="18sp" />
-
-        </RadioGroup>
-
+            android:layout_below="@id/postgame_text"
+            android:text="Overview"
+            android:textSize="30sp"
+            android:translationX="245dp" />
 
         <Button
             android:id="@+id/post_finish"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/pick_number_group"
 
+            android:layout_below="@id/postgame_layout_main"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
             android:text="@string/finish_button"
             android:textColor="#ffffff" />
+
+        <LinearLayout
+            android:id="@+id/postgame_layout_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/overview_text"
+            android:orientation="horizontal"
+            android:translationX="100dp">
+
+            <TextView
+                android:id="@+id/alliance_score_text"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Alliance Score:"
+                android:textSize="24sp"
+                android:translationY="15dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/alliance_score_layout"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/alliance_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Alliance Score"
+                    android:inputType="number"
+                    android:text="0"
+                    android:translationX="0dp"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/postgame_layout_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/postgame_layout_1"
+            android:orientation="vertical"
+            android:translationX="180dp">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <RadioButton
+                    android:id="@+id/win_rp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Win"
+                    android:textSize="24sp"
+                    android:translationX="0dp"
+                    tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+                <RadioButton
+                    android:id="@+id/lose_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="Lose"
+                    android:textSize="24sp" />
+
+                <RadioButton
+                    android:id="@+id/tie_rp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="Tie"
+                    android:textSize="24sp" />
+            </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/melody_bonus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Melody"
+                android:textSize="24sp" />
+
+            <CheckBox
+                android:id="@+id/ensemble_bonus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Ensemble"
+                android:textSize="24sp" />
+
+            <CheckBox
+                android:id="@+id/lost_coms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Lost Comms"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/postgame_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Post Match"
+            android:textSize="40dp"></TextView>
 
     </RelativeLayout>
 

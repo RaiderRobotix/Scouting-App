@@ -36,6 +36,7 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
                 "PREMATCH");
         AutoFragment auto = (AutoFragment) getFragmentManager().findFragmentByTag("AUTO");
         TeleOpFragment teleop = (TeleOpFragment) getFragmentManager().findFragmentByTag("TELEOP");
+        EndGameFragment endgame = (EndGameFragment) getFragmentManager().findFragmentByTag("ENDGAME");
         PostMatchFragment postmatch = (PostMatchFragment) getFragmentManager().findFragmentByTag(
                 "POST");
 
@@ -60,6 +61,7 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
                             "PREMATCH")
                     .commit();
 
+
         } else if (teleop != null && teleop.isVisible()) {
             teleop.saveState();
             getFragmentManager()
@@ -67,13 +69,19 @@ public class AddEntryActivity extends NoBackgroundPortraitAppCompatActivity {
                     .replace(android.R.id.content, AutoFragment.getInstance(teleop.getEntry()),
                             "AUTO")
                     .commit();
-
+        } else if (endgame != null && endgame.isVisible()) {
+            endgame.saveState();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(android.R.id.content, TeleOpFragment.getInstance(endgame.getEntry()),
+                            "TELEOP")
+                    .commit();
         } else if (postmatch != null && postmatch.isVisible()) {
             postmatch.saveState();
             getFragmentManager()
                     .beginTransaction()
                     .replace(android.R.id.content,
-                            TeleOpFragment.getInstance(postmatch.getEntry()), "TELEOP")
+                            EndGameFragment.getInstance(postmatch.getEntry()), "ENDGAME")
                     .commit();
 
         }

@@ -12,106 +12,53 @@ import java.util.HashMap;
 public class PostMatch {
 
 
-    private int teamOneCompare;
-    private int teamTwoCompare;
-    private int pickNumber;
-    private String comparison;
-    private HashMap<String, Boolean> robotQuickCommentSelections;
-    private transient String[] robotQuickCommentValues;
-    private String robotComment;
-    private String focus;
-    private transient ArrayList<CheckBox> robotQuickComments;
-
-    public PostMatch(String robotComment, ArrayList<CheckBox> robotQuickComments,
-                     String[] robotQuickCommentValues, String focus, int teamOneCompare,
-                     int teamTwoCompare, String comparison, int pickNumber) {
-        this.robotComment = robotComment;
-        this.robotQuickComments = robotQuickComments;
-        this.robotQuickCommentValues = robotQuickCommentValues;
-        this.focus = focus;
-        this.teamOneCompare = teamOneCompare;
-        this.teamTwoCompare = teamTwoCompare;
-        this.comparison = comparison;
-        robotQuickCommentSelections = new HashMap<>();
-        this.pickNumber = pickNumber;
-
+    private int allianceScore;
+    private boolean winRanking;
+    private boolean melody;
+    private boolean ensemble;
+    private int defensive;
+    private int speed;
+    private int manuver;
+    private int hpEfficiency;
+    private int ranking;
+    private boolean lostComms;
+    public PostMatch(int allianceScore, boolean winRanking, boolean melody, boolean ensemble, boolean lostComms, int defensive, int speed, int manuver, int hpEfficiency, int ranking) {
+        this.allianceScore = allianceScore;
+        this.winRanking = winRanking;
+        this.melody = melody;
+        this.ensemble = ensemble;
+        this.lostComms = lostComms;
+        this.defensive = defensive;
+        this.speed = speed;
+        this.manuver = manuver;
+        this.hpEfficiency = hpEfficiency;
+        this.ranking = ranking;
     }
 
-    public int getTeamOneCompare() {
-        return teamOneCompare;
+    public int getAllianceScore() {
+        return allianceScore;
     }
-
-    public int getTeamTwoCompare() {
-        return teamTwoCompare;
+    public boolean isWinRanking() {return winRanking;}
+    public boolean isMelody() {
+        return melody;
     }
-
-    public int getPickNumber() {
-        return pickNumber;
+    public boolean isEnsemble() {
+        return ensemble;
     }
-
-    public String getComparison() {
-        return comparison;
+    public boolean isLostComms() {return lostComms;  }
+    public int getDefensive() {
+        return defensive;
     }
-
-    public HashMap<String, Boolean> getRobotQuickCommentSelections() {
-        return robotQuickCommentSelections;
+    public int getSpeed() {
+        return speed;
     }
-
-    public String[] getRobotQuickCommentValues() {
-        return robotQuickCommentValues;
+    public int getManuver() {
+        return manuver;
     }
-
-    public String getFocus() {
-        return focus;
+    public int getHpEfficiency() {
+        return hpEfficiency;
     }
-
-    public void setFocus(String focus) {
-        this.focus = focus;
-    }
-
-    public String getRobotComment() {
-        return robotComment;
-    }
-
-    private void setRobotComment(String robotComment) {
-        this.robotComment = robotComment;
-    }
-
-
-    public ArrayList<CheckBox> getRobotQuickComments() {
-        return robotQuickComments;
-    }
-
-    public void setRobotQuickComments(ArrayList<CheckBox> robotQuickComments) {
-        this.robotQuickComments = robotQuickComments;
-    }
-
-
-    public void finalizeComment() {
-
-        for (String value : robotQuickCommentValues) {
-            for (CheckBox cb : robotQuickComments) {
-                if (cb.getText().toString().equals(value)) {
-                    robotQuickCommentSelections.put(value, cb.isChecked());
-                }
-            }
-        }
-
-        StringBuilder newRobotComment = new StringBuilder();
-
-        for (int i = 0; i < robotComment.length(); i++) {
-            if (robotComment.charAt(i) == ',' || robotComment.charAt(i) == '\n') //prevent csv
-            // problems
-            {
-                newRobotComment.append(";");
-            } else {
-                newRobotComment.append(robotComment.charAt(i));
-            }
-        }
-
-        setRobotComment(newRobotComment.toString());
-
-    }
+    public int getRanking() {return ranking; }
 }
 
 

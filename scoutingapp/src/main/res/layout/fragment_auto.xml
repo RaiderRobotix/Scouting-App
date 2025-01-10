@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auto_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
@@ -11,263 +12,192 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/cross_hab_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5sp"
-            android:padding="3sp"
-            android:text="Crossed HAB line"
-            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="433dp"
+            android:layout_below="@id/auto_continue"
+            android:src="@drawable/map" />
 
         <LinearLayout
-            android:id="@+id/level_one_layout_auto"
-            android:layout_width="match_parent"
+            android:id="@+id/teleop_layout_main"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cross_hab_line"
-            android:layout_marginTop="-10dp"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_below="@id/auto_text"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/teleop_layout_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:baselineAligned="false">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="5dp"
+                <TextView
+                    android:id="@+id/foul_auton_text"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:text="Foul"
+                    android:textSize="24sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Cargo"
-                        android:textAlignment="center"
-                        android:textSize="18sp"
-                        android:visibility="invisible" />
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/foul_auton"
+                    android:layout_width="220dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="Rocket"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/cross_com_line"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:text="Cross Line"
+                    android:textSize="24sp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Cargo"
-                        android:textAlignment="center"
-                        android:textSize="18sp" />
-
-                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/rocket_cargo_auto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:maxValueSet="3"
-                        app:initialValueSet="0" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Hatches"
-                        android:textAlignment="center"
-                        android:textSize="18sp" />
-
-                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/rocket_hatches_auto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:maxValueSet="3"
-                        app:initialValueSet="0" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp">
+                android:id="@+id/auton_layout_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="5dp"
+                    android:id="@+id/teleop_zone_one_text"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Cargo ship"
-                    android:textSize="18sp" />
+                    android:text="Zone 1"
+                    android:textSize="24sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/cargo_ship_cargo_auto"
-                    android:layout_width="0dp"
+                    android:id="@+id/teleop_zone_1"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1">
+
+                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+
+                <TextView
+                    android:id="@+id/teleop_zone_text_4"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    app:maxValueSet="3"
-                    android:layout_weight="1.5" />
+                    android:layout_weight="1"
+                    android:text="Zone 4"
+                    android:textSize="24sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/cargo_ship_hatches_auto"
-                    android:layout_width="0dp"
+                    android:id="@+id/teleop_zone_4"
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1" >
+
+                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/teleop_layout_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/auto_zone_two_text"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Zone 2"
+                    android:textSize="24sp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/auto_zone_2"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1">
+
+                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+
+                <TextView
+                    android:id="@+id/auto_zone_text_amp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    app:maxValueSet="3"
-                    android:layout_weight="1.5" />
+                    android:layout_weight="1"
+                    android:text="Amp"
+                    android:textSize="24sp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/auto_zone_amp"
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auton_layout_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/auto_zone_three_text"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Zone 3"
+                    android:textSize="24sp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/auto_zone_3"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1">
+
+                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+
+                <TextView
+                    android:id="@+id/auto_zone_text_missed"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Shots Missed"
+                    android:textSize="24sp" />
+
+                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
+                    android:id="@+id/auto_zone_missed"
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/cargo_ship_hatch_placement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/level_one_layout_auto"
-            android:layout_marginStart="30sp"
-            android:padding="8sp"
-            android:text="Cargo ship hatch placement"
-            android:textSize="18sp"
-
-            />
-
-        <CheckBox
-            android:id="@+id/hatches_front_cargo_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_ship_hatch_placement"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="0dp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Front cargo ship"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/hatches_side_cargo_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_front_cargo_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Side cargo ship"
-            android:textSize="18sp" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/cargo_dropped_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_side_cargo_auto"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Cargo dropped" />
-
-        <CheckBox
-            android:id="@+id/cargo_dropped_cargo_ship"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="0sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Cargo ship"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/cargo_dropped_rocket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_cargo_ship"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3sp"
-            android:text="Rocket"
-            android:textSize="18sp" />
-
-        <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecView
-            android:id="@+id/hatches_dropped_auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cargo_dropped_rocket"
-            android:padding="@dimen/default_padding_bottom"
-            app:initialValue="0"
-            app:titlePrompt="Hatches dropped" />
-
-        <CheckBox
-            android:id="@+id/hatches_dropped_cargo_ship"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_auto"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="0sp"
-            android:enabled="false"
-            android:padding="3dp"
-            android:text="Cargo ship"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/hatches_dropped_rocket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_cargo_ship"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="5sp"
-            android:enabled="false"
-            android:padding="3sp"
-            android:text="Rocket"
-            android:textSize="18sp" />
-
-
-        <CheckBox
-            android:id="@+id/opponent_cargo_ship_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/hatches_dropped_rocket"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5sp"
-            android:padding="@dimen/default_padding_bottom"
-            android:text="Crossed opponent cargo ship line"
-            android:textSize="18sp" />
-
-
         <Button
             android:id="@+id/auto_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_below="@id/opponent_cargo_ship_line"
+            android:layout_below="@id/teleop_layout_main"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:elevation="6dp"
             android:text="@string/continue_button"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            tools:ignore="ExtraText" />
+
+        <TextView
+            android:id="@+id/auto_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Autonomous"
+            android:textSize="40dp"></TextView>
 
 
     </RelativeLayout>
