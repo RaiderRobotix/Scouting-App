@@ -32,19 +32,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/foul_auton_text"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="Foul"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/foul_auton"
-                    android:layout_width="220dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
 
                 <CheckBox
                     android:id="@+id/cross_com_line"
@@ -59,46 +46,31 @@
 
             <LinearLayout
                 android:id="@+id/auton_layout_2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/teleop_zone_one_text"
+                    android:id="@+id/auto_zone_one_text"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Zone 1"
+                    android:text="Level 1"
                     android:textSize="24sp" />
 
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/teleop_zone_1"
-                    android:layout_width="220dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1">
-
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
 
                 <TextView
-                    android:id="@+id/teleop_zone_text_4"
+                    android:id="@+id/auto_zone_text_coral"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Zone 4"
+                    android:text="Coral"
                     android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/teleop_zone_4"
-                    android:layout_width="220dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" >
-
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/teleop_layout_3"
+                android:id="@+id/auto_layout_3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -108,35 +80,27 @@
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Zone 2"
+                    android:text="Level 2"
                     android:textSize="24sp" />
 
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_2"
-                    android:layout_width="220dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1">
 
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+
 
                 <TextView
-                    android:id="@+id/auto_zone_text_amp"
+                    android:id="@+id/auto_zone_text_processor"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Amp"
+                    android:text="Processor"
                     android:textSize="24sp" />
 
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_amp"
-                    android:layout_width="220dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
+
+
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/auton_layout_4"
+                android:id="@+id/auto_layout_4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -146,16 +110,34 @@
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Zone 3"
+                    android:text="Level 3"
                     android:textSize="24sp" />
 
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_3"
-                    android:layout_width="220dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1">
 
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
+                <TextView
+                    android:id="@+id/auto_zone_text_made"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Shots Made"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sigmatemp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/auto_zone_four_text"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Level 4"
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/auto_zone_text_missed"
@@ -164,13 +146,30 @@
                     android:layout_weight="1"
                     android:text="Shots Missed"
                     android:textSize="24sp" />
+            </LinearLayout>
 
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_missed"
-                    android:layout_width="220dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/major_foul_auto_text"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Major Foul"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/minor_foul_auto_text"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minor Foul"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -182,7 +181,7 @@
             android:layout_below="@id/teleop_layout_main"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="43dp"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:elevation="6dp"

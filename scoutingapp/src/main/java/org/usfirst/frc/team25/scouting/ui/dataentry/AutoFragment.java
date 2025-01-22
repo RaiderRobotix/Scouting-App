@@ -15,7 +15,7 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecSet zoneOne, zoneTwo, zoneThree, zoneFour, ampAuto, missedAuto, foulAuto;
+    private ButtonIncDecSet levelOne, levelTwo, levelThree, levelFour, coral, processorAuto, missedAuto, madeAuto, minorFoulAuto, majorFoulAuto;
 
 
     private CheckBox crossComLine;
@@ -46,14 +46,16 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_auto, container, false);
 
-        zoneOne = view.findViewById(R.id.teleop_zone_1);
-        zoneTwo = view.findViewById(R.id.auto_zone_2);
-        zoneThree = view.findViewById(R.id.auto_zone_3);
-        zoneFour = view.findViewById(R.id.teleop_zone_4);
-        ampAuto = view.findViewById(R.id.auto_zone_amp);
-        missedAuto = view.findViewById(R.id.auto_zone_missed);
+        levelOne = view.findViewById(R.id.auto_zone_one_text);
+        coral = view.findViewById(R.id.auto_zone_text_coral);
+        levelTwo = view.findViewById(R.id.auto_zone_two_text);
+        levelThree = view.findViewById(R.id.auto_zone_three_text);
+        levelFour = view.findViewById(R.id.auto_zone_four_text);
+        processorAuto = view.findViewById(R.id.auto_zone_text_processor);
+        missedAuto = view.findViewById(R.id.auto_zone_text_missed);
         crossComLine = view.findViewById(R.id.cross_com_line);
-        foulAuto = view.findViewById(R.id.foul_auton);
+        minorFoulAuto = view.findViewById(R.id.minor_foul_auto_text);
+        majorFoulAuto = view.findViewById(R.id.major_foul_auto_text);
 
 
 
@@ -62,7 +64,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
 
-        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{ zoneOne, zoneTwo, zoneThree, zoneFour, ampAuto, missedAuto};
+        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{ levelOne, levelTwo, levelThree, levelFour, Auto, missedAuto};
         /*
         for (ButtonIncDecSet set : enablingCrossHabLineMetrics) {
             set.incButton.setOnClickListener(view1 -> {
