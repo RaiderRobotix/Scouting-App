@@ -35,7 +35,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
     private RadioButton[] startingPositionButtons, startingLevelButtons, startingGamePieceButtons;
     private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup,
             startingPositionButtonsGroup;
-    private MaterialEditText nameField, matchNumField, teamNumField;
+    private MaterialEditText nameField, nameField2,matchNumField, teamNumField;
     private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
     private CheckBox robotNoShow;
@@ -76,6 +76,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         startingLevelButtons[1] = view.findViewById(R.id.hab_level_2);
 
         nameField = view.findViewById(R.id.scout_name_field);
+        nameField2 = view.findViewById(R.id.scout_name_field_2);
         matchNumField = view.findViewById(R.id.match_num_field);
         teamNumField = view.findViewById(R.id.team_num_field);
 

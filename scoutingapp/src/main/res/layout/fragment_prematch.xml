@@ -29,15 +29,136 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true" />
 
+            <Spinner
+                android:id="@+id/coursesspinner"
+                android:layout_height="50dp"
+                android:layout_width="160dp"
+                android:layout_marginTop="425dp"
+                android:layout_marginStart="140dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="425dp"
+                android:padding="8sp"
+                android:text="Type of Motors"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/type_swerve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="210dp"
+                android:layout_marginTop="378dp"
+                android:padding="10dp"
+                android:text="Swerve"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/type_tank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="125dp"
+                android:layout_marginTop="378dp"
+                android:padding="10dp"
+                android:text="Tank"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="375dp"
+                android:padding="8sp"
+                android:text="Tank/Swerve"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/speed_meter_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="73dp"
+                android:layout_marginTop="500dp"
+                android:padding="10dp"
+                android:text="m/s"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/speed_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="152dp"
+                android:layout_marginTop="500dp"
+                android:padding="10dp"
+                android:text="N/A"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="500dp"
+                android:padding="8sp"
+                android:text="Speed:"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="350dp"
+                android:padding="8sp"
+                android:text="Drive Base"
+                android:textSize="18sp" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/scout_name_field_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:hint="@string/scout_name_3"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/scout_name_field_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:hint="@string/scout_name_2"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true" />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/scout_name_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/scout_name"
-                android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true"
+                app:met_floatingLabel="normal" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/match_num_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_spin"
+                android:layout_marginTop="200dp"
+                android:hint="@string/match_number"
+                android:inputType="number"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
                 android:singleLine="true"
                 app:met_floatingLabel="normal" />
 
@@ -47,181 +168,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/scout_name_field"
                 android:hint="@string/event"
-                android:paddingBottom="@dimen/default_padding_bottom"
                 android:paddingStart="@dimen/inner_padding_left"
-                android:paddingEnd="@dimen/inner_padding_right"
                 android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
                 android:visibility="gone" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/match_num_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/event_spin"
-                android:hint="@string/match_number"
-                android:inputType="number"
-                android:paddingBottom="@dimen/default_padding_bottom"
-                android:paddingStart="@dimen/inner_padding_left"
-                android:paddingEnd="@dimen/inner_padding_right"
-                android:paddingTop="@dimen/default_padding_top"
-                android:singleLine="true"
-                app:met_floatingLabel="normal" />
-
-
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:id="@+id/scout_pos_spin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/match_num_field"
-                android:hint="@string/scout_position"
-                android:paddingBottom="@dimen/default_padding_bottom"
-                android:paddingStart="@dimen/inner_padding_left"
-                android:paddingEnd="@dimen/inner_padding_right"
-                android:paddingTop="@dimen/default_padding_top" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/team_num_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/scout_pos_spin"
-                android:hint="@string/team_number"
-                android:inputType="number"
-                android:paddingBottom="@dimen/default_padding_bottom"
-                android:paddingStart="@dimen/inner_padding_left"
-                android:paddingEnd="@dimen/inner_padding_right"
-                android:paddingTop="@dimen/default_padding_top"
-                android:singleLine="true"
-                app:met_floatingLabel="normal" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/team_num_field"
-                android:id="@+id/robot_no_show_checkbox"
-                android:text="The match has started, and the robot did not show up"
-                android:textSize="18sp"
-                android:layout_marginVertical="10dp" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/robot_no_show_checkbox"
-                android:visibility="visible"
-                android:id="@+id/starting_level">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Robot HAB starting level"
-                    android:textSize="18sp"
-                    android:id="@+id/robot_starting_level"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Level 1"
-                    android:textSize="18sp"
-                    android:id="@+id/hab_level_1"
-                    android:padding="8dp"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Level 2"
-                    android:textSize="18sp"
-                    android:padding="8dp"
-                    android:id="@+id/hab_level_2"/>
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/starting_position"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/starting_level"
-                android:visibility="visible">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Robot starting position (from center driver station)"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/leftStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Left"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/centerStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Center"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/rightStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Right"
-                    android:textSize="18sp" />
-
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/robot_starting_game_piece"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/starting_position"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/game_piece"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Robot starting game piece"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/cargo_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Cargo"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/hatch_panel_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Hatch panel"
-                    android:textSize="18sp" />
-
-                <RadioButton
-                    android:id="@+id/none_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="None"
-                    android:textSize="18sp" />
-
-            </RadioGroup>
-
-            <Button
-                android:id="@+id/prematch_continue"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/robot_starting_game_piece"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="20dp"
-                android:elevation="6dp"
-                android:text="@string/continue_button"
-                android:textColor="#ffffff"
-                android:theme="@style/Widget.AppCompat.Button.Colored.blue" />
 
         </RelativeLayout>
     </ScrollView>
