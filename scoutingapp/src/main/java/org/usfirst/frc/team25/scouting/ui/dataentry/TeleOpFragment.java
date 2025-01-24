@@ -19,7 +19,7 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private ButtonIncDecSet zoneOneTeleop, zoneTwoTeleop, zoneThreeTeleop, zoneFourTeleop, ampZoneTeleop, missedTeleop, foulTeleop;
+    private ButtonIncDecSet levelOneTeleop, levelTwoTeleop, levelThreeTeleop, levelFourTeleop, levelFiveTeleop, netTeleop, missedTeleop, minFoulTeleop, majFoulTeleop;
 
 
 
@@ -45,13 +45,15 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        zoneOneTeleop = view.findViewById(R.id.teleop_zone_1);
-        zoneTwoTeleop = view.findViewById(R.id.teleop_zone_2);
-        zoneThreeTeleop = view.findViewById(R.id.teleop_zone_3);
-        zoneFourTeleop = view.findViewById(R.id.teleop_zone_4);
-        ampZoneTeleop = view.findViewById(R.id.teleop_zone_amp);
+        levelOneTeleop = view.findViewById(R.id.teleop_zone_1);
+        levelTwoTeleop = view.findViewById(R.id.teleop_zone_2);
+        levelThreeTeleop = view.findViewById(R.id.teleop_zone_3);
+        levelFourTeleop = view.findViewById(R.id.teleop_zone_4);
+        levelFiveTeleop = view.findViewById(R.id.teleop_zone_amp);
+        netTeleop = view.findViewById(R.id.teleop_zone_net);
         missedTeleop = view.findViewById(R.id.teleop_zone_missed);
-        foulTeleop = view.findViewById(R.id.foul_teleop);
+        minFoulTeleop = view.findViewById(R.id.foul_teleop);
+        majFoulTeleop = view.findViewById(R.id.foul_teleop);
 
         Button continueButton = view.findViewById(R.id.teleop_continue);
 
@@ -87,12 +89,14 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
         if (entry.getTeleOp() != null) {
             TeleOp tele = entry.getTeleOp();
 
-            ampZoneTeleop.setValue(tele.getAmpTeleop());
-            foulTeleop.setValue(tele.getFoulTeleop());
-            zoneOneTeleop.setValue(tele.getZoneOneTeleop());
-            zoneTwoTeleop.setValue(tele.getZoneTwoTeleop());
-            zoneThreeTeleop.setValue(tele.getZoneThreeTeleop());
-            zoneFourTeleop.setValue(tele.getZoneFourTeleop());
+            netTeleop.setValue(tele.getNetTeleop());
+            minFoulTeleop.setValue(tele.getMinFoulTeleop());
+            majFoulTeleop.setValue(tele.getMajFoulTeleop());
+            levelOneTeleop.setValue(tele.getLevelOneTeleop());
+            levelTwoTeleop.setValue(tele.getLevelTwoTeleop());
+            levelThreeTeleop.setValue(tele.getLevelThreeTeleop());
+            levelFourTeleop.setValue(tele.getLevelFourTeleop());
+            levelFiveTeleop.setValue(tele.getLevelFiveTeleop());
             missedTeleop.setValue(tele.getMissedTeleop());
 
         }
@@ -101,7 +105,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     @Override
     public void saveState() {
 
-        entry.setTeleOp(new TeleOp(ampZoneTeleop.getValue(), foulTeleop.getValue(), zoneOneTeleop.getValue(), zoneTwoTeleop.getValue(), zoneThreeTeleop.getValue(), zoneFourTeleop.getValue(), missedTeleop.getValue()
+        entry.setTeleOp(new TeleOp(netTeleop.getValue(), minFoulTeleop.getValue(), majFoulTeleop.getValue(), levelOneTeleop.getValue(), levelTwoTeleop.getValue(), levelThreeTeleop.getValue(), levelFourTeleop.getValue(), levelFiveTeleop.getValue(), missedTeleop.getValue()
         ));
 
 

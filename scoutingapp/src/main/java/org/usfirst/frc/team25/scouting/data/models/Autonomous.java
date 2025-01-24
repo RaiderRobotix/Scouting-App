@@ -6,43 +6,54 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class Autonomous {
 
-    private int ampAuto;
-    private int foulAuto;
+    private int processorAuto;
+    private int majorFoulAuto;
+    private int minorFoulAuto;
     private boolean crossComLine;
-    private int zoneOne;
-    private int zoneTwo;
-    private int zoneThree;
-    private int zoneFour;
+    private int levelOne;
+    private int levelTwo;
+    private int levelThree;
+    private int levelFour;
+    private int coral;
+    private int madeAuto;
     private int missedAuto;
 
 
 
-    public Autonomous(int ampAuto, int foulAuto, boolean crossComLine, int zoneOne, int zoneTwo, int zoneThree, int zoneFour, int missedAuto) {
-        this.ampAuto = ampAuto;
-        this.foulAuto = foulAuto;
+    public Autonomous(int processorAuto, int majorFoulAuto, int minoFoulAuto, boolean crossComLine, int levelOne, int levelTwo, int levelThree, int levelFour, int coral, int madeAuto, int missedAuto) {
+        this.processorAuto = processorAuto;
+        this.majorFoulAuto = majorFoulAuto;
+        this.minorFoulAuto = minorFoulAuto;
         this.crossComLine = crossComLine;
-        this.zoneOne = zoneOne;
-        this.zoneTwo = zoneTwo;
-        this.zoneThree = zoneThree;
-        this.zoneFour = zoneFour;
+        this.levelOne = levelOne;
+        this.levelTwo = levelTwo;
+        this.levelThree = levelThree;
+        this.levelFour = levelFour;
+        this.madeAuto = madeAuto;
         this.missedAuto = missedAuto;
     }
 
-    public int getAmpAuto() {return ampAuto;}
+    public int getProcessorAuto() {return processorAuto;}
 
-    public int getFoulAuto() {return foulAuto;}
+    public int getMajorFoulAuto() {return majorFoulAuto;}
+
+    public int getMinorFoulAuto() {return minorFoulAuto;}
 
     public boolean isCrossComLine() {
         return crossComLine;
     }
 
-    public int getZoneOne() {return zoneOne;}
+    public int getLevelOne() {return levelOne;}
 
-    public int getZoneTwo() {return zoneTwo;}
+    public int getLevelTwo() {return levelTwo;}
 
-    public int getZoneThree() {return zoneThree;}
+    public int getLevelThree() {return levelThree;}
 
-    public int getZoneFour() {return zoneFour;}
+    public int getLevelFour() {return levelFour;}
+
+    public int getCoral() {return coral;}
+
+    public int getMadeAuto() {return madeAuto;}
 
     public int getMissedAuto() {return missedAuto;}
 

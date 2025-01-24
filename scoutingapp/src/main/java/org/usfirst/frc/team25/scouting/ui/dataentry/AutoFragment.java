@@ -52,6 +52,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
         levelThree = view.findViewById(R.id.auto_zone_three_text);
         levelFour = view.findViewById(R.id.auto_zone_four_text);
         processorAuto = view.findViewById(R.id.auto_zone_text_processor);
+        madeAuto = view.findViewById(R.id.auto_zone_text_made);
         missedAuto = view.findViewById(R.id.auto_zone_text_missed);
         crossComLine = view.findViewById(R.id.cross_com_line);
         minorFoulAuto = view.findViewById(R.id.minor_foul_auto_text);
@@ -64,7 +65,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
 
-        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{ levelOne, levelTwo, levelThree, levelFour, Auto, missedAuto};
+        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{ levelOne, levelTwo, levelThree, levelFour, coral, madeAuto, missedAuto};
         /*
         for (ButtonIncDecSet set : enablingCrossHabLineMetrics) {
             set.incButton.setOnClickListener(view1 -> {
@@ -133,13 +134,16 @@ public class AutoFragment extends Fragment implements EntryFragment {
         if (entry.getAutonomous() != null) {
 
             Autonomous prevAuto = entry.getAutonomous();
-            ampAuto.setValue(prevAuto.getAmpAuto());
-            foulAuto.setValue(prevAuto.getFoulAuto());
+            processorAuto.setValue(prevAuto.getProcessorAuto());
+            majorFoulAuto.setValue(prevAuto.getMajorFoulAuto());
+            minorFoulAuto.setValue(prevAuto.getMinorFoulAuto());
             crossComLine.setChecked(prevAuto.isCrossComLine());
-            zoneOne.setValue(prevAuto.getZoneOne());
-            zoneTwo.setValue(prevAuto.getZoneTwo());
-            zoneThree.setValue(prevAuto.getZoneThree());
-            zoneFour.setValue(prevAuto.getZoneFour());
+            levelOne.setValue(prevAuto.getLevelOne());
+            levelTwo.setValue(prevAuto.getLevelTwo());
+            levelThree.setValue(prevAuto.getLevelThree());
+            levelFour.setValue(prevAuto.getLevelFour());
+            coral.setValue(prevAuto.getCoral());
+            madeAuto.setValue(prevAuto.getMadeAuto());
             missedAuto.setValue(prevAuto.getMissedAuto());
         }
 
@@ -147,8 +151,8 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        entry.setAutonomous(new Autonomous(ampAuto.getValue(), foulAuto.getValue(), crossComLine.isChecked(), zoneOne.getValue(), zoneTwo.getValue(), zoneThree.getValue(), zoneFour.getValue(),
-                missedAuto.getValue()
+        entry.setAutonomous(new Autonomous(processorAuto.getValue(), majorFoulAuto.getValue(), minorFoulAuto.getValue(), crossComLine.isChecked(), levelOne.getValue(), levelTwo.getValue(), levelThree.getValue(), levelFour.getValue(), coral.getValue(),
+                madeAuto.getValue(), missedAuto.getValue()
                 ));
     }
 

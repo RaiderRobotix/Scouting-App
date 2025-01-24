@@ -53,15 +53,15 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/teleop_zone_one_text"
+                    android:id="@+id/teleop_level_one_text"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Zone 1"
+                    android:text="Level 1"
                     android:textSize="24sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/teleop_zone_1"
+                    android:id="@+id/teleop_level_1"
                     android:layout_width="220dp"
                     android:layout_height="50dp"
                     android:layout_weight="1">
@@ -109,15 +109,15 @@
                 </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
 
                 <TextView
-                    android:id="@+id/teleop_zone_text_amp"
+                    android:id="@+id/teleop_zone_text_net"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Amp"
+                    android:text="Net"
                     android:textSize="24sp" />
 
                 <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/teleop_zone_amp"
+                    android:id="@+id/teleop_zone_net"
                     android:layout_width="220dp"
                     android:layout_height="80dp"
                     android:layout_weight="1" />

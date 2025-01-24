@@ -7,35 +7,43 @@ package org.usfirst.frc.team25.scouting.data.models;
  */
 public class TeleOp {
 
-    private int ampTeleop;
-    private int foulTeleop;
-    private int zoneOneTeleop;
-    private int zoneTwoTeleop;
-    private int zoneThreeTeleop;
-    private int zoneFourTeleop;
+    private int netTeleop;
+    private int minFoulTeleop;
+    private int majFoulTeleop;
+    private int levelOneTeleop;
+    private int levelTwoTeleop;
+    private int levelThreeTeleop;
+    private int levelFourTeleop;
+    private int levelFiveTeleop;
     private int missedTeleop;
 
-    public TeleOp(int ampTeleop, int foulTeleop, int zoneOneTeleop, int zoneTwoTeleop, int zoneThreeTeleop, int zoneFourTeleop, int missedTeleop) {
-        this.ampTeleop = ampTeleop;
-        this.foulTeleop = foulTeleop;
-        this.zoneOneTeleop = zoneOneTeleop;
-        this.zoneTwoTeleop = zoneTwoTeleop;
-        this.zoneThreeTeleop = zoneThreeTeleop;
-        this.zoneFourTeleop = zoneFourTeleop;
+    public TeleOp(int netTeleop, int minFoulTeleop, int majFoulTeleop, int levelOneTeleop, int levelTwoTeleop, int levelThreeTeleop, int levelFourTeleop, int levelFiveTeleop, int missedTeleop) {
+        this.netTeleop = netTeleop;
+        this.minFoulTeleop = minFoulTeleop;
+        this.majFoulTeleop = majFoulTeleop;
+        this.levelOneTeleop = levelOneTeleop;
+        this.levelTwoTeleop = levelTwoTeleop;
+        this.levelThreeTeleop = levelThreeTeleop;
+        this.levelFourTeleop = levelFourTeleop;
+        this.levelFiveTeleop = levelFiveTeleop;
         this.missedTeleop = missedTeleop;
     }
 
-    public int getAmpTeleop() {return  ampTeleop;}
+    public int getNetTeleop() {return netTeleop;}
 
-    public int getFoulTeleop() {return foulTeleop;}
+    public int getMinFoulTeleop() {return minFoulTeleop;}
 
-    public int getZoneOneTeleop() {return zoneOneTeleop;}
+    public int getMajFoulTeleop() {return majFoulTeleop;}
 
-    public int getZoneTwoTeleop() {return zoneTwoTeleop;}
+    public int getLevelOneTeleop() {return levelOneTeleop;}
 
-    public int getZoneThreeTeleop() {return zoneThreeTeleop;}
+    public int getLevelTwoTeleop() {return levelTwoTeleop;}
 
-    public int getZoneFourTeleop() {return zoneFourTeleop;}
+    public int getLevelThreeTeleop() {return levelThreeTeleop;}
+
+    public int getLevelFourTeleop() {return levelFourTeleop;}
+
+    public int getLevelFiveTeleop() {return levelFiveTeleop;}
 
     public int getMissedTeleop() {return missedTeleop;}
 }
