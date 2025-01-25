@@ -31,9 +31,14 @@ android {
     productFlavors {
     }
     packagingOptions {
-        exclude 'org/apache/commons/codec/language/bm/*'
-
+        jniLibs {
+            excludes += ['org/apache/commons/codec/language/bm/*']
+        }
+        resources {
+            excludes += ['org/apache/commons/codec/language/bm/*']
+        }
     }
+    namespace 'org.usfirst.frc.team25.scouting'
 
 }
 

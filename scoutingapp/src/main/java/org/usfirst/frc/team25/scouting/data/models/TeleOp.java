@@ -14,10 +14,11 @@ public class TeleOp {
     private int levelTwoTeleop;
     private int levelThreeTeleop;
     private int levelFourTeleop;
-    private int levelFiveTeleop;
+    private int coralCount;
+    private int processorTeleop;
     private int missedTeleop;
 
-    public TeleOp(int netTeleop, int minFoulTeleop, int majFoulTeleop, int levelOneTeleop, int levelTwoTeleop, int levelThreeTeleop, int levelFourTeleop, int levelFiveTeleop, int missedTeleop) {
+    public TeleOp(int netTeleop, int minFoulTeleop, int majFoulTeleop, int levelOneTeleop, int levelTwoTeleop, int levelThreeTeleop, int levelFourTeleop, int coralCount, int processorTeleop, int missedTeleop) {
         this.netTeleop = netTeleop;
         this.minFoulTeleop = minFoulTeleop;
         this.majFoulTeleop = majFoulTeleop;
@@ -25,7 +26,8 @@ public class TeleOp {
         this.levelTwoTeleop = levelTwoTeleop;
         this.levelThreeTeleop = levelThreeTeleop;
         this.levelFourTeleop = levelFourTeleop;
-        this.levelFiveTeleop = levelFiveTeleop;
+        this.coralCount = coralCount;
+        this.processorTeleop = processorTeleop;
         this.missedTeleop = missedTeleop;
     }
 
@@ -43,7 +45,9 @@ public class TeleOp {
 
     public int getLevelFourTeleop() {return levelFourTeleop;}
 
-    public int getLevelFiveTeleop() {return levelFiveTeleop;}
+    public int getCoralCount() {return coralCount;}
+
+    public int getProcessorTeleop() {return processorTeleop;}
 
     public int getMissedTeleop() {return missedTeleop;}
 }

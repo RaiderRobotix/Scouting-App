@@ -19,7 +19,7 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private ButtonIncDecSet levelOneTeleop, levelTwoTeleop, levelThreeTeleop, levelFourTeleop, levelFiveTeleop, netTeleop, missedTeleop, minFoulTeleop, majFoulTeleop;
+    private ButtonIncDecSet levelOneTeleop, levelTwoTeleop, levelThreeTeleop, levelFourTeleop, coralCount, netTeleop, processorTeleop, missedTeleop, minFoulTeleop, majFoulTeleop;
 
 
 
@@ -45,15 +45,16 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        levelOneTeleop = view.findViewById(R.id.teleop_zone_1);
-        levelTwoTeleop = view.findViewById(R.id.teleop_zone_2);
-        levelThreeTeleop = view.findViewById(R.id.teleop_zone_3);
-        levelFourTeleop = view.findViewById(R.id.teleop_zone_4);
-        levelFiveTeleop = view.findViewById(R.id.teleop_zone_amp);
-        netTeleop = view.findViewById(R.id.teleop_zone_net);
+        levelOneTeleop = view.findViewById(R.id.teleop_level_one_text);
+        levelTwoTeleop = view.findViewById(R.id.teleop_level_two_text);
+        levelThreeTeleop = view.findViewById(R.id.teleop_level_three_text);
+        levelFourTeleop = view.findViewById(R.id.teleop_level_four_text);
+        coralCount = view.findViewById(R.id.teleop_coral);
+        netTeleop = view.findViewById(R.id.teleop_net);
+        processorTeleop = view.findViewById(R.id.teleop_processor);
         missedTeleop = view.findViewById(R.id.teleop_zone_missed);
-        minFoulTeleop = view.findViewById(R.id.foul_teleop);
-        majFoulTeleop = view.findViewById(R.id.foul_teleop);
+        minFoulTeleop = view.findViewById(R.id.minor_foul_teleop_text);
+        majFoulTeleop = view.findViewById(R.id.major_foul_teleop_text);
 
         Button continueButton = view.findViewById(R.id.teleop_continue);
 
@@ -96,7 +97,8 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
             levelTwoTeleop.setValue(tele.getLevelTwoTeleop());
             levelThreeTeleop.setValue(tele.getLevelThreeTeleop());
             levelFourTeleop.setValue(tele.getLevelFourTeleop());
-            levelFiveTeleop.setValue(tele.getLevelFiveTeleop());
+            coralCount.setValue(tele.getCoralCount());
+            processorTeleop.setValue(tele.getProcessorTeleop());
             missedTeleop.setValue(tele.getMissedTeleop());
 
         }
@@ -105,7 +107,7 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
     @Override
     public void saveState() {
 
-        entry.setTeleOp(new TeleOp(netTeleop.getValue(), minFoulTeleop.getValue(), majFoulTeleop.getValue(), levelOneTeleop.getValue(), levelTwoTeleop.getValue(), levelThreeTeleop.getValue(), levelFourTeleop.getValue(), levelFiveTeleop.getValue(), missedTeleop.getValue()
+        entry.setTeleOp(new TeleOp(netTeleop.getValue(), minFoulTeleop.getValue(), majFoulTeleop.getValue(), levelOneTeleop.getValue(), levelTwoTeleop.getValue(), levelThreeTeleop.getValue(), levelFourTeleop.getValue(), coralCount.getValue(), processorTeleop.getValue(), missedTeleop.getValue()
         ));
 
 
