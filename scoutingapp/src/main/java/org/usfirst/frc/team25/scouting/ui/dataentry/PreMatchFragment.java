@@ -35,8 +35,8 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
     private RadioButton[] startingPositionButtons, startingLevelButtons, startingGamePieceButtons;
     private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup,
             startingPositionButtonsGroup;
-    private MaterialEditText nameField, nameField2,matchNumField, teamNumField;
-    private MaterialBetterSpinner scoutPosSpinner;
+    private MaterialEditText nameField, nameField2, teamNumField;
+    private MaterialBetterSpinner scoutPosSpinner, motorTypeSpinner;
     private ScoutEntry entry;
     private CheckBox robotNoShow;
 
@@ -77,7 +77,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         nameField = view.findViewById(R.id.scout_name_field);
         nameField2 = view.findViewById(R.id.scout_name_field_2);
-        matchNumField = view.findViewById(R.id.match_num_field);
         teamNumField = view.findViewById(R.id.team_num_field);
 
         startingPositionButtons = new RadioButton[3];
@@ -94,10 +93,12 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         startingPositionButtonsGroup = view.findViewById(R.id.starting_position);
         startingGamePieceGroup = view.findViewById(R.id.robot_starting_game_piece);
 
+        motorTypeSpinner = view.findViewById(R.id.motor_type_spinner);
+
         autoPopulate();
 
         // Nudges the user to fill in the next unfilled text field
-        EditText[] fields = new EditText[]{nameField, matchNumField, teamNumField};
+        EditText[] fields = new EditText[]{nameField, teamNumField};
 
         for (EditText field : fields) {
             if (field.getText().toString().isEmpty()) {
@@ -142,15 +143,17 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 proceed = false;
             }
 
-            if (matchNumField.getText().toString().isEmpty()) {
-                matchNumField.setError("Match number required");
-                proceed = false;
+            if (motorTypeSpinner.getText().toString().isEmpty())
 
-            } else if (Integer.parseInt(matchNumField.getText().toString()) < 1 ||
-                    Integer.parseInt(matchNumField.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()) {
-                matchNumField.setError("Invalid match number value");
-                proceed = false;
-            }
+//            if (matchNumField.getText().toString().isEmpty()) {
+//                matchNumField.setError("Match number required");
+//                proceed = false;
+//
+//            } else if (Integer.parseInt(matchNumField.getText().toString()) < 1 ||
+//                    Integer.parseInt(matchNumField.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()) {
+//                matchNumField.setError("Invalid match number value");
+//                proceed = false;
+//            }
 
 
             if (teamNumField.getText().toString().length() == 0 || Integer.parseInt(teamNumField.getText().toString()) < 1
@@ -395,6 +398,8 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 UiHelper.getHabLevelSelected(startingLevelButtons),
                 robotNoShow.isChecked(), startPiece
         ));
+
+
     }
 
     private void continueToAuto() {

@@ -29,29 +29,155 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true" />
 
-            <Spinner
-                android:id="@+id/coursesspinner"
-                android:layout_height="50dp"
-                android:layout_width="160dp"
-                android:layout_marginTop="425dp"
-                android:layout_marginStart="140dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="73dp"
+                android:layout_below="@id/Hanging"
+                android:padding="10dp"
+                android:text="m/s"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/Hanging"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Length_Extend_Inwards"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="pick up:"
+                android:textSize="18sp"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/height_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/length_base"
+                android:layout_marginTop="10dp"
+                android:hint="@string/base_height"
+                android:inputType="number"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true"
+                app:met_floatingLabel="normal"
+                />
+
+            <CheckBox
+                android:id="@+id/Check_If_Extend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/height_base"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="25dp"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="Does the Robot Extend?"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Extend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Check_If_Extend"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:padding="@dimen/inner_components_spacing"
+                android:text="How Far Does It Extend?"
+                android:textSize="18sp"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Length_Extend_Outwards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Extend"
+                android:layout_marginTop="10dp"
+                android:hint="Length Outwards"
+                android:inputType="number"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true"
+                app:met_floatingLabel="normal"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Length_Extend_Inwards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Length_Extend_Outwards"
+                android:layout_marginTop="10dp"
+                android:hint="Length Inwards"
+                android:inputType="number"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true"
+                app:met_floatingLabel="normal"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/length_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/width_base"
+                android:layout_marginTop="10dp"
+                android:hint="@string/base_length"
+                android:inputType="number"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true"
+                app:met_floatingLabel="normal"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/width_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_spin"
+                android:layout_marginTop="600dp"
+                android:hint="@string/base_width"
+                android:inputType="number"
+                android:paddingStart="@dimen/inner_padding_left"
+                android:paddingTop="@dimen/default_padding_top"
+                android:paddingEnd="@dimen/inner_padding_right"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:singleLine="true"
+                app:met_floatingLabel="normal"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="425dp"
+                android:layout_marginTop="550dp"
+                android:layout_centerHorizontal="true"
                 android:padding="8sp"
-                android:text="Type of Motors"
+                android:text="Other Mechanics"
                 android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="610dp"
+                android:padding="8sp"
+                android:text="Base:"
+                android:textSize="18sp" />
+
+
 
             <RadioButton
                 android:id="@+id/type_swerve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="210dp"
-                android:layout_marginTop="378dp"
+                android:layout_marginTop="40dp"
+                android:layout_below="@id/team_num_field"
                 android:padding="10dp"
                 android:text="Swerve"
                 android:textSize="12sp" />
@@ -61,38 +187,64 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="125dp"
-                android:layout_marginTop="378dp"
+                android:layout_marginTop="40dp"
+                android:layout_below="@id/team_num_field"
                 android:padding="10dp"
                 android:text="Tank"
                 android:textSize="12sp" />
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/speed_meter_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="73dp"
+                    android:layout_marginTop="500dp"
+                    android:padding="10dp"
+                    android:text="m/s"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/speed_none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="500dp"
+                    android:padding="10dp"
+                    android:text="N/A"
+                    android:textSize="12sp" />
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/motor_type_spinner"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/type_tank"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="375dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/type_tank"
                 android:padding="8sp"
-                android:text="Tank/Swerve"
+                android:text="Type of Motors:"
                 android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/speed_meter_second"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="73dp"
-                android:layout_marginTop="500dp"
-                android:padding="10dp"
-                android:text="m/s"
-                android:textSize="12sp" />
-
-            <RadioButton
-                android:id="@+id/speed_none"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="152dp"
-                android:layout_marginTop="500dp"
-                android:padding="10dp"
-                android:text="N/A"
-                android:textSize="12sp" />
+                android:layout_below="@id/team_num_field"
+                android:layout_marginTop="40dp"
+                android:padding="8sp"
+                android:text="Tank/Swerve:"
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,12 +300,12 @@
                 app:met_floatingLabel="normal" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/match_num_field"
+                android:id="@+id/team_num_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/event_spin"
                 android:layout_marginTop="200dp"
-                android:hint="@string/match_number"
+                android:hint="@string/team_number"
                 android:inputType="number"
                 android:paddingStart="@dimen/inner_padding_left"
                 android:paddingTop="@dimen/default_padding_top"

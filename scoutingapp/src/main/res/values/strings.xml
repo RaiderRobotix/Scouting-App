@@ -41,6 +41,9 @@
     <string name="scout_name">Scout name</string>
     <string name="scout_name_2">Scout name 2 (optional)</string>
     <string name="scout_name_3">Scout name 3 (optional)</string>
+    <string name="base_width">Width</string>
+    <string name="base_length">Length</string>
+    <string name="base_height">Height</string>
     <string name="match_number">Match number</string>
     <string name="event">Current event</string>
     <string name="match_type">Match type</string>
