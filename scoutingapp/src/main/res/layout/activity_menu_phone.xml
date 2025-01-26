@@ -41,8 +41,7 @@
             android:enabled="true"
             android:text="@string/add_match_menu_label"
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
             android:textStyle="normal" />
 
     </RelativeLayout>
@@ -76,8 +75,7 @@
             android:text="@string/export_data_menu_label"
 
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
             android:textStyle="normal" />
 
     </RelativeLayout>
@@ -111,8 +109,7 @@
             android:enabled="true"
             android:text="@string/rules_menu_label"
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
             android:textStyle="normal" />
     </RelativeLayout>
 
@@ -145,8 +142,7 @@
             android:enabled="true"
             android:text="@string/settings_menu_label"
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
             android:textStyle="normal" />
     </RelativeLayout>
 
@@ -164,7 +160,7 @@
             android:layout_height="fill_parent"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/deep_space_logo"
+            android:src="@drawable/frc_reefscape"
             android:textAlignment="center" />
     </RelativeLayout>
 
@@ -178,6 +174,6 @@
         android:text="@string/default_status"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/bright_foreground_material_light"
+
         android:textSize="20sp" />
 </RelativeLayout>

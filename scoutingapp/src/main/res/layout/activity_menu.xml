@@ -40,8 +40,8 @@
             android:enabled="true"
             android:text="@string/add_match_menu_label"
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
+            android:textSize="30sp"
             android:textStyle="normal" />
 
     </RelativeLayout>
@@ -72,8 +72,8 @@
             android:enabled="true"
             android:text="@string/export_data_menu_label"
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
+            android:textSize="30sp"
             android:textStyle="normal" />
 
     </RelativeLayout>
@@ -105,8 +105,8 @@
             android:enabled="true"
             android:text="@string/rules_menu_label"
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
+            android:textSize="30sp"
             android:textStyle="normal" />
 
     </RelativeLayout>
@@ -139,8 +139,8 @@
             android:enabled="true"
             android:text="@string/settings_menu_label"
             android:textAlignment="center"
-            android:textColor="@color/bright_foreground_material_light"
-            android:textSize="@dimen/abc_text_size_large_material"
+
+            android:textSize="30sp"
             android:textStyle="normal" />
 
     </RelativeLayout>
@@ -154,7 +154,7 @@
         android:layout_marginBottom="20dp"
         android:text="@string/default_status"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/bright_foreground_material_light"
+
         android:textSize="30sp" />
 
     <RelativeLayout
@@ -182,12 +182,11 @@
 
             <ImageView
                 android:id="@+id/game_logo_view"
-                android:layout_width="250dp"
-
-                android:layout_height="match_parent"
+                android:layout_width="100dp"
+                android:layout_height="125dp"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/raider_robotix_logo"
-                android:src="@drawable/crescendologo" />
+                android:src="@drawable/frc_reefscape" />
         </LinearLayout>
 
     </RelativeLayout>

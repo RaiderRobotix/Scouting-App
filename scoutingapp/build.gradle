@@ -4,12 +4,11 @@ android {
     lintOptions {
           abortOnError false
     }
-    compileSdkVersion 27
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 34
     defaultConfig {
         applicationId 'org.usfirst.frc.team25.scouting'
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 34
         versionCode 1
         versionName '3.02'
         multiDexEnabled true
@@ -49,11 +48,11 @@ repositories{
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:34.1.1'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'com.github.barteksc:android-pdf-viewer:1.1.2'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:design:34.1.1'
+    implementation 'com.android.support:support-v4:34.1.1'
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'commons-io:commons-io:2.6'
     implementation 'com.google.code.gson:gson:2.8.2'
