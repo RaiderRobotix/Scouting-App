@@ -1,8 +1,8 @@
 <resources>
 
     <!-- Versioning constants -->
-    <string name="app_name">Raider Crescendo Scout</string>
-    <string name="game_name">Crescendo</string>
+    <string name="app_name">Raider Deep Space Scout</string>
+    <string name="game_name">Destination: Deep Space</string>
 
     <!--Follows a modified version of Semantic Versioning, where
         there is no dot separator between minor and patch version numbers. Patch versions are incremented whenever
@@ -14,7 +14,7 @@
     <string name="version_number">v3.11</string>
 
     <!-- Name of the cheatsheet file in /assets-->
-    <string name="cheatsheet_filename">Crescendo Cheatsheet.pdf</string>
+    <string name="cheatsheet_filename">Deep Space Cheatsheet.pdf</string>
 
     <!-- Contains the GitHub username of the repository owner, followed by a forward slash
          and the repository name ("Scouting-App")-->
@@ -39,6 +39,11 @@
 
     <!--Settings Menu Strings-->
     <string name="scout_name">Scout name</string>
+    <string name="scout_name_2">Scout name 2 (optional)</string>
+    <string name="scout_name_3">Scout name 3 (optional)</string>
+    <string name="base_width">Width</string>
+    <string name="base_length">Length</string>
+    <string name="base_height">Height</string>
     <string name="match_number">Match number</string>
     <string name="event">Current event</string>
     <string name="match_type">Match type</string>
@@ -47,6 +52,11 @@
     <string name="change_pass">Change password</string>
     <string name="delete_data">Delete scouting data</string>
     <string name="shift_dur">Shift duration</string>
+
+    <!--DriveBase-->
+    <string name="drive_base_motor_type">Drive Base Motor</string>
+    <string name="length_outward_drive_base">Length Outwards</string>
+    <string name="length_inward_drive_base">Length Inwards</string>
 
     <!--Scout Position Spinner Options-->
     <string-array name="position_options">

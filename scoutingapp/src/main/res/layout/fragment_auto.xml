@@ -10,195 +10,72 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="433dp"
-            android:layout_below="@id/auto_continue"
-            android:src="@drawable/map" />
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp">
+    >
 
         <LinearLayout
-            android:id="@+id/teleop_layout_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/auto_text"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:id="@+id/teleop_layout_1"
-                android:layout_width="wrap_content"
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/Scout_Name_Pit_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="1dp"
+            android:inputType="textPersonName"
+            android:outlineProvider="bounds"
+            android:paddingBottom="@dimen/default_padding_bottom"
+            android:text="Pit Scout Name 1"
+            android:textColor="@color/first_gray" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/Scout_Name_Pit_2_Optional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="1dp"
+            android:inputType="textPersonName"
+            android:outlineProvider="bounds"
+            android:paddingBottom="@dimen/default_padding_bottom"
+            android:text="Pit Scout Name 2 (optional)"
+            android:textColor="@color/first_gray" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Scout_Name_Pit_3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                android:inputType="textPersonName"
+                android:outlineProvider="bounds"
+                android:paddingBottom="@dimen/default_padding_bottom"
+                android:text="Pit Scout Name 3 (optional)"
+                android:textColor="@color/first_gray" />
 
-                <TextView
-                    android:id="@+id/foul_auton_text"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="Foul"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/foul_auton"
-                    android:layout_width="220dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <CheckBox
-                    android:id="@+id/cross_com_line"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Cross Line"
-                    android:textSize="24sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/auton_layout_2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/teleop_zone_one_text"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="Zone 1"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/teleop_zone_1"
-                    android:layout_width="220dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1">
-
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
-
-                <TextView
-                    android:id="@+id/teleop_zone_text_4"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Zone 4"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/teleop_zone_4"
-                    android:layout_width="220dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" >
-
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/teleop_layout_3"
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Team_Num_Pit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/auto_zone_two_text"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="Zone 2"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_2"
-                    android:layout_width="220dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1">
-
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
-
-                <TextView
-                    android:id="@+id/auto_zone_text_amp"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Amp"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_amp"
-                    android:layout_width="220dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/auton_layout_4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/auto_zone_three_text"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:text="Zone 3"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_3"
-                    android:layout_width="220dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1">
-
-                </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
-
-                <TextView
-                    android:id="@+id/auto_zone_text_missed"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Shots Missed"
-                    android:textSize="24sp" />
-
-                <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                    android:id="@+id/auto_zone_missed"
-                    android:layout_width="220dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/auto_continue"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_below="@id/teleop_layout_main"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:elevation="6dp"
-            android:text="@string/continue_button"
-            android:textColor="#ffffff"
-            tools:ignore="ExtraText" />
-
-        <TextView
-            android:id="@+id/auto_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="Autonomous"
-            android:textSize="40dp"></TextView>
-
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                android:inputType="number"
+                android:outlineProvider="bounds"
+                android:paddingLeft="@dimen/inner_padding_left"
+                android:layout_centerHorizontal="true"
+                android:text="Pit Team Number"
+                android:textColor="@color/first_gray" />
 
     </RelativeLayout>
 

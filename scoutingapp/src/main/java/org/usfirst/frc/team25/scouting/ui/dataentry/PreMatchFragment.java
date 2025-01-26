@@ -31,9 +31,11 @@ import java.io.IOException;
 
 public class PreMatchFragment extends Fragment implements EntryFragment {
 
+    private RadioButton[] typeTank, typeSwerve;
+//    private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup, startingPositionButtonsGroup;
 
-    private MaterialEditText nameField, matchNumField, teamNumField;
-    private MaterialBetterSpinner scoutPosSpinner;
+    private MaterialEditText nameField,nameField2, nameField3, teamNumField;
+//    private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
     private CheckBox robotNoShow;
 
@@ -57,20 +59,12 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_prematch, container, false);
 
-
-        Button continueButton = view.findViewById(R.id.prematch_continue);
-
-        scoutPosSpinner = view.findViewById(R.id.scout_pos_spin);
-        scoutPosSpinner.setAdapter(new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line,
-                getResources().getStringArray(R.array.position_options)));
-        scoutPosSpinner.setFloatingLabel(MaterialAutoCompleteTextView.FLOATING_LABEL_NORMAL);
-
-        robotNoShow = view.findViewById(R.id.robot_no_show_checkbox);
-
+//        Button continueButton = view.findViewById(R.id.prematch_continue);
 
         nameField = view.findViewById(R.id.scout_name_field);
-        matchNumField = view.findViewById(R.id.match_num_field);
+        nameField2 = view.findViewById(R.id.scout_name_field_2);
+        nameField3 = view.findViewById(R.id.scout_name_field_3);
+
         teamNumField = view.findViewById(R.id.team_num_field);
 
 
@@ -78,7 +72,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         autoPopulate();
 
         // Nudges the user to fill in the next unfilled text field
-        EditText[] fields = new EditText[]{nameField, matchNumField, teamNumField};
+        EditText[] fields = new EditText[]{nameField, nameField2, nameField3, teamNumField};
 
         for (EditText field : fields) {
             if (field.getText().toString().isEmpty()) {
@@ -109,22 +103,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 proceed = false;
             }
 
-            if (scoutPosSpinner.getText().toString().isEmpty()) {
-                scoutPosSpinner.setError("Scout position required");
-                proceed = false;
-            }
-
-            if (matchNumField.getText().toString().isEmpty()) {
-                matchNumField.setError("Match number required");
-                proceed = false;
-
-            } else if (Integer.parseInt(matchNumField.getText().toString()) < 1 ||
-                    Integer.parseInt(matchNumField.getText().toString()) > Settings.newInstance(getActivity()).getMaxMatchNum()) {
-                matchNumField.setError("Invalid match number value");
-                proceed = false;
-            }
-
-
             if (teamNumField.getText().toString().length() == 0 || Integer.parseInt(teamNumField.getText().toString()) < 1
                     || Integer.parseInt(teamNumField.getText().toString()) > 9999) {
                 if (teamNumField.getText().length() == 0) {
@@ -136,10 +114,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             }
 
             boolean startingValuesSelected = true;
-
-
-
-
 
             if (proceed && !robotNoShow.isChecked() && !startingValuesSelected) {
                 proceed = false;
@@ -271,8 +245,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             PreMatch prevPreMatch = entry.getPreMatch();
 
             nameField.setText(prevPreMatch.getScoutName());
-            scoutPosSpinner.setText(prevPreMatch.getScoutPos());
-            matchNumField.setText(String.valueOf(prevPreMatch.getMatchNum()));
             teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
 
             robotNoShow.setChecked(robotNoShow.isChecked());
