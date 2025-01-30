@@ -71,7 +71,7 @@
 
             <LinearLayout
                 android:id="@+id/auto_layout_3"
-                android:layout_width="match_parent"
+                android:layout_width="569dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
@@ -84,8 +84,6 @@
                     android:textSize="24sp" />
 
 
-
-
                 <TextView
                     android:id="@+id/auto_zone_text_processor"
                     android:layout_width="80dp"
@@ -93,8 +91,6 @@
                     android:layout_weight="1"
                     android:text="Processor"
                     android:textSize="24sp" />
-
-
 
 
             </LinearLayout>
@@ -181,12 +177,16 @@
             android:layout_below="@id/teleop_layout_main"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="43dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:FillColor="#fffff"
+            android:background="#2196F3"
             android:elevation="6dp"
             android:text="@string/continue_button"
-            android:textColor="#ffffff"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
             tools:ignore="ExtraText" />
 
         <TextView

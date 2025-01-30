@@ -47,36 +47,6 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/endgame_trap_text"
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="Trap"
-                        android:textSize="24sp" />
-
-                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/endgame_trap"
-                        android:layout_width="220dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/endgame_hps_text"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="HPS"
-                        android:textSize="24sp" />
-
-                    <org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet
-                        android:id="@+id/endgame_hps"
-                        android:layout_width="220dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1">
-
-                    </org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -86,31 +56,32 @@
                     android:orientation="horizontal">
 
                     <CheckBox
-                        android:id="@+id/endgame_park"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/endgame_deepBarge"
+                        android:layout_width="241dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Park"
-                        android:textSize="24sp"
+                        android:text="Deep Barge"
+                        android:textSize="30sp"
                         tools:ignore="TouchTargetSizeCheck" />
 
-                    <CheckBox
-                        android:id="@+id/endgame_climb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Climb"
-                        android:textSize="24sp"
-                        tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
 
                 <CheckBox
-                    android:id="@+id/endgame_harmony"
+                    android:id="@+id/endgame_shallowBarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Shallow Barge"
+                    android:textSize="30sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <CheckBox
+                    android:id="@+id/endgame_park"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
-                    android:text="Harmony"
-                    android:textSize="24sp" />
+                    android:text="Park"
+                    android:textSize="30sp" />
 
             </LinearLayout>
 

@@ -23,8 +23,7 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 
 public class EndGameFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecSet trap, hps;
-    private CheckBox climb, park, harmony;
+    private CheckBox park, deepBarge, shallowBarge;
     private ScoutEntry entry;
 
 
@@ -47,11 +46,9 @@ public class EndGameFragment extends Fragment implements EntryFragment {
         if (entry.getEndgame() != null) {
             EndGame endgame = entry.getEndgame();
 
-            hps.setValue(endgame.getHps());
-            trap.setValue(endgame.getTrap());
-            climb.setChecked(endgame.isClimb());
             park.setChecked(endgame.isPark());
-            harmony.setChecked(endgame.isHarmony());
+            deepBarge.setChecked(endgame.isDeepBarge());
+            shallowBarge.setChecked(endgame.isShallowBarge());
 
 
         }
@@ -59,7 +56,7 @@ public class EndGameFragment extends Fragment implements EntryFragment {
 
     public void saveState() {
 
-        entry.setEndgame(new EndGame(hps.getValue(), trap.getValue(), climb.isChecked(), park.isChecked(), harmony.isChecked()));
+        entry.setEndgame(new EndGame(park.isChecked(), deepBarge.isChecked(), shallowBarge.isChecked()));
     }
 
     @SuppressLint("MissingInflatedId")
@@ -70,11 +67,9 @@ public class EndGameFragment extends Fragment implements EntryFragment {
         final View view = inflater.inflate(R.layout.fragment_endgame, container, false);
 
         Button continueButton = view.findViewById(R.id.endgame_continue);
-        hps = view.findViewById(R.id.endgame_hps);
-        trap = view.findViewById(R.id.endgame_trap);
-        climb = view.findViewById(R.id.endgame_climb);
         park = view.findViewById(R.id.endgame_park);
-        harmony = view.findViewById(R.id.endgame_harmony);
+        deepBarge = view.findViewById(R.id.endgame_deepBarge);
+        shallowBarge = view.findViewById(R.id.endgame_shallowBarge);
 
         autoPopulate();
 

@@ -9,32 +9,23 @@ import java.util.ArrayList;
  */
 public class EndGame {
 
-
-    private int hps;
-    private int trap;
-    private boolean climb;
     private boolean park;
-    private boolean harmony;
+    private boolean deepBarge;
+    private boolean shallowBarge;
 
 
-    public EndGame(int hps, int trap, boolean climb, boolean park, boolean harmony) {
-        this.hps = hps;
-        this.trap = trap;
-        this.climb = climb;
+    public EndGame(int hps, int trap, boolean park, boolean deepBarge, boolean shallowBarge) {
         this.park = park;
-        this.harmony = harmony;
+        this.deepBarge = deepBarge;
+        this.shallowBarge = shallowBarge;
 
     }
 
-    public int getHps() {return hps; }
-
-    public int getTrap() {return trap; }
-
-    public boolean isClimb() {return climb; }
-
     public boolean isPark() {return park; }
 
-    public boolean isHarmony() {return harmony; }
+    public boolean isDeepBarge() {return deepBarge; }
+
+    public boolean isShallowBarge() {return shallowBarge; }
 
 
 
