@@ -31,7 +31,7 @@ import java.io.IOException;
 
 public class PreMatchFragment extends Fragment implements EntryFragment {
 
-    private RadioButton[] typeTank, typeSwerve;
+    private RadioButton[] typeTank, typeSwerve, speedMeterSecond, speedNone;
 //    private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup, startingPositionButtonsGroup;
 
     private MaterialEditText nameField,nameField2, nameField3, teamNumField;
@@ -67,6 +67,8 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
         teamNumField = view.findViewById(R.id.team_num_field);
 
+      //  speedMeterSecond = view.findViewById(R.id.speed_meter_second);
+      //  speedNone = view.findViewById(R.id.speed_none);
 
 
         autoPopulate();
