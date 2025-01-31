@@ -1,0 +1,298 @@
+Index: scoutingapp/src/main/java/org/usfirst/frc/team25/scouting/ui/dataentry/PreMatchFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.usfirst.frc.team25.scouting.ui.dataentry;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.app.Fragment;\r\nimport android.content.DialogInterface;\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.EditText;\r\n\r\n\r\nimport com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;\r\nimport com.rengwuxian.materialedittext.MaterialEditText;\r\nimport com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;\r\n\r\nimport org.usfirst.frc.team25.scouting.R;\r\nimport org.usfirst.frc.team25.scouting.data.FileManager;\r\nimport org.usfirst.frc.team25.scouting.data.Settings;\r\nimport org.usfirst.frc.team25.scouting.data.models.PreMatch;\r\nimport org.usfirst.frc.team25.scouting.data.models.ScoutEntry;\r\nimport org.usfirst.frc.team25.scouting.ui.UiHelper;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class PreMatchFragment extends Fragment implements EntryFragment {\r\n\r\n    private RadioButton[] typeTank, typeSwerve, speedMeterSecond, speedNone;\r\n//    private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup, startingPositionButtonsGroup;\r\n\r\n    private MaterialEditText nameField,nameField2, nameField3, teamNumField;\r\n//    private MaterialBetterSpinner scoutPosSpinner;\r\n    private ScoutEntry entry;\r\n    private CheckBox robotNoShow;\r\n\r\n    public static PreMatchFragment getInstance(ScoutEntry entry) {\r\n        PreMatchFragment prematchFragment = new PreMatchFragment();\r\n        prematchFragment.setEntry(entry);\r\n        return prematchFragment;\r\n    }\r\n\r\n    @Override\r\n    public ScoutEntry getEntry() {\r\n        return entry;\r\n    }\r\n\r\n    public void setEntry(ScoutEntry entry) {\r\n        this.entry = entry;\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        final View view = inflater.inflate(R.layout.fragment_prematch, container, false);\r\n\r\n//        Button continueButton = view.findViewById(R.id.prematch_continue);\r\n\r\n        nameField = view.findViewById(R.id.scout_name_field);\r\n        nameField2 = view.findViewById(R.id.scout_name_field_2);\r\n        nameField3 = view.findViewById(R.id.scout_name_field_3);\r\n\r\n        teamNumField = view.findViewById(R.id.team_num_field);\r\n\r\n      //  speedMeterSecond = view.findViewById(R.id.speed_meter_second);\r\n      //  speedNone = view.findViewById(R.id.speed_none);\r\n\r\n\r\n        autoPopulate();\r\n\r\n        // Nudges the user to fill in the next unfilled text field\r\n        EditText[] fields = new EditText[]{nameField, nameField2, nameField3, teamNumField};\r\n\r\n        for (EditText field : fields) {\r\n            if (field.getText().toString().isEmpty()) {\r\n                field.requestFocus();\r\n            }\r\n        }\r\n\r\n\r\n        robotNoShow.setOnCheckedChangeListener((compoundButton, becameChecked) -> {\r\n\r\n\r\n\r\n        });\r\n\r\n\r\n\r\n\r\n        continueButton.setOnClickListener(view1 -> {\r\n\r\n            boolean proceed = true;\r\n            Settings set = Settings.newInstance(getActivity());\r\n\r\n            set.setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));\r\n\r\n            // Sequentially verifies that user inputted a value\r\n            if (nameField.getText().toString().isEmpty()) {\r\n                nameField.setError(\"Scout name required\");\r\n                proceed = false;\r\n            }\r\n\r\n            if (teamNumField.getText().toString().length() == 0 || Integer.parseInt(teamNumField.getText().toString()) < 1\r\n                    || Integer.parseInt(teamNumField.getText().toString()) > 9999) {\r\n                if (teamNumField.getText().length() == 0) {\r\n                    teamNumField.setError(\"Team number required\");\r\n                } else {\r\n                    teamNumField.setError(\"Invalid team number\");\r\n                }\r\n                proceed = false;\r\n            }\r\n\r\n            boolean startingValuesSelected = true;\r\n\r\n            if (proceed && !robotNoShow.isChecked() && !startingValuesSelected) {\r\n                proceed = false;\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());\r\n                builder.setTitle(\"Select robot starting level/position/game piece\")\r\n                        .setCancelable(false)\r\n                        .setPositiveButton(\"OK\", (dialog, id) -> {\r\n\r\n                        });\r\n                AlertDialog alert = builder.create();\r\n                alert.show();\r\n            }\r\n\r\n            if (proceed && robotNoShow.isChecked()) {\r\n                proceed = false;\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());\r\n                builder.setNegativeButton(\"No\", ((dialogInterface, i) -> {\r\n                }))\r\n                        .setPositiveButton(\"Yes\", ((dialogInterface, i) -> continueToAuto()));\r\n\r\n                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);\r\n                builder.setView(dialogBox);\r\n                AlertDialog alertDialog = builder.show();\r\n\r\n                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);\r\n                button.setEnabled(false);\r\n\r\n                button.setTextColor(Color.parseColor(\"#c3c3c3\"));\r\n\r\n                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);\r\n                yesConfirmation.addTextChangedListener(new TextWatcher() {\r\n                    @Override\r\n                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,\r\n                                                  int i2) {\r\n\r\n                    }\r\n\r\n                    @Override\r\n                    public void onTextChanged(CharSequence charSequence, int i, int i1,\r\n                                              int i2) {\r\n\r\n                    }\r\n\r\n                    @Override\r\n                    public void afterTextChanged(Editable editable) {\r\n                        if (editable.toString().equals(\"YES\")) {\r\n                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)\r\n                                    .setEnabled(true);\r\n                            button.setTextColor(Color.parseColor(\"#000000\"));\r\n                        } else {\r\n                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)\r\n                                    .setEnabled(false);\r\n                            button.setTextColor(Color.parseColor(\"#c3c3c3\"));\r\n                        }\r\n\r\n                    }\r\n\r\n                });\r\n\r\n\r\n            }\r\n\r\n            // If all normal checks pass, verify against team lists or match schedule\r\n            if (Settings.newInstance(getActivity()).useTeamList() && proceed) {\r\n                boolean checkTeamList = false;\r\n                try {\r\n\r\n                    // Non-quals matches don't get checked against match schedule\r\n                    if (!Settings.newInstance(getActivity()).getMatchType().equals(\"Q\")) {\r\n                        checkTeamList = true;\r\n                    } else if (!FileManager.getTeamPlaying(getActivity(),\r\n                            scoutPosSpinner.getText().toString(),\r\n                            Integer.parseInt(matchNumField.getText().toString())).equals(teamNumField.getText().toString())) {\r\n                        proceed = false;\r\n\r\n\r\n                        new AlertDialog.Builder(getActivity())\r\n                                .setTitle(\"Confirm team number against the field, \" + nameField.getText().toString() + \"!!\")\r\n                                .setMessage(\"Are you sure that team \" + teamNumField.getText().toString() + \" is \" +\r\n                                        scoutPosSpinner.getText().toString() + \" in match \" + matchNumField.getText().toString() + \"?\")\r\n                                .setPositiveButton(\"Yes\", (dialog, which) -> continueToAuto())\r\n                                .setNegativeButton(\"No\", (dialog, which) -> {\r\n\r\n                                })\r\n                                .create()\r\n                                .show();\r\n                        continueToAuto();\r\n\r\n                    }\r\n\r\n                } catch (IOException e) {\r\n                    //Match list does not exist; looking for team list\r\n                    checkTeamList = true;\r\n                }\r\n                if (checkTeamList && !FileManager.isOnTeamlist(teamNumField.getText().toString(),\r\n                        getActivity())) {\r\n                    proceed = false;\r\n                    new AlertDialog.Builder(getActivity())\r\n                            .setTitle(\"Confirm team number against the field, \" + nameField.getText().toString() + \"!!\")\r\n                            .setMessage(\"Are you sure that team \" + teamNumField.getText().toString() + \" is playing at \" + set.getCurrentEvent() + \"?\")\r\n                            .setPositiveButton(\"Yes\", (dialog, which) -> {\r\n                                FileManager.addToTeamList(teamNumField.getText().toString(),\r\n                                        getActivity());\r\n\r\n                                continueToAuto();\r\n                            })\r\n                            .setNegativeButton(\"No\", (dialog, which) -> {\r\n\r\n                            })\r\n                            .create()\r\n                            .show();\r\n                }\r\n            }\r\n\r\n\r\n            if (proceed) {\r\n                continueToAuto();\r\n\r\n            }\r\n        });\r\n\r\n        return view;\r\n    }\r\n\r\n    public void autoPopulate() {\r\n\r\n        //Manually filled data overrides preferences\r\n        if (entry.getPreMatch() != null) {\r\n            PreMatch prevPreMatch = entry.getPreMatch();\r\n\r\n            nameField.setText(prevPreMatch.getScoutName());\r\n            teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));\r\n\r\n            robotNoShow.setChecked(robotNoShow.isChecked());\r\n\r\n\r\n\r\n\r\n        } else {\r\n            Settings set = Settings.newInstance(getActivity());\r\n\r\n            if (!set.getScoutPos().equals(\"DEFAULT\")) {\r\n                scoutPosSpinner.setText(set.getScoutPos());\r\n\r\n                if (set.useTeamList() && set.getMatchType().equals(\"Q\")) {\r\n                    try {\r\n                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),\r\n                                set.getScoutPos(), set.getMatchNum()));\r\n                    } catch (IOException e) {\r\n\r\n                        e.printStackTrace();\r\n                    }\r\n                }\r\n            }\r\n\r\n            //Scout nameField is prompted for after a shift ends, but not during the first match\r\n            if ((!set.getScoutName().equals(\"DEFAULT\") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {\r\n                nameField.setText(set.getScoutName());\r\n\r\n            }\r\n\r\n            matchNumField.setText(String.valueOf(set.getMatchNum()));\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void saveState() {\r\n        String startPos = \"\";\r\n\r\n\r\n\r\n\r\n        entry.setPreMatch(new PreMatch(nameField.getText().toString(),\r\n                scoutPosSpinner.getText().toString(),\r\n                Integer.parseInt(matchNumField.getText().toString()),\r\n                Integer.parseInt(teamNumField.getText().toString()),\r\n                robotNoShow.isChecked()\r\n        ));\r\n    }\r\n\r\n    private void continueToAuto() {\r\n\r\n\r\n        saveState();\r\n\r\n\r\n\r\n        Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());\r\n\r\n        UiHelper.autoSetTheme(getActivity(), entry.getPreMatch().getTeamNum());\r\n\r\n        UiHelper.hideKeyboard(getActivity());\r\n        getFragmentManager().beginTransaction()\r\n                .replace(android.R.id.content, AutoFragment.getInstance(entry), \"AUTO\")\r\n                .commit();\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onResume() {\r\n        super.onResume();\r\n        getActivity().setTitle(\"Add Entry - Pre-Match\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scoutingapp/src/main/java/org/usfirst/frc/team25/scouting/ui/dataentry/PreMatchFragment.java b/scoutingapp/src/main/java/org/usfirst/frc/team25/scouting/ui/dataentry/PreMatchFragment.java
+--- a/scoutingapp/src/main/java/org/usfirst/frc/team25/scouting/ui/dataentry/PreMatchFragment.java	(revision eac338d5a0e105207b50038348b8112827df9b3e)
++++ b/scoutingapp/src/main/java/org/usfirst/frc/team25/scouting/ui/dataentry/PreMatchFragment.java	(date 1738356423339)
+@@ -59,7 +59,8 @@
+                              Bundle savedInstanceState) {
+         final View view = inflater.inflate(R.layout.fragment_prematch, container, false);
+ 
+-//        Button continueButton = view.findViewById(R.id.prematch_continue);
++        Button finishButton = view.findViewById(R.id.post_finish);
++
+ 
+         nameField = view.findViewById(R.id.scout_name_field);
+         nameField2 = view.findViewById(R.id.scout_name_field_2);
+@@ -92,12 +93,9 @@
+ 
+ 
+ 
+-        continueButton.setOnClickListener(view1 -> {
++        finishButton.setOnClickListener(view1 -> {
+ 
+             boolean proceed = true;
+-            Settings set = Settings.newInstance(getActivity());
+-
+-            set.setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
+ 
+             // Sequentially verifies that user inputted a value
+             if (nameField.getText().toString().isEmpty()) {
+@@ -117,123 +115,55 @@
+ 
+             boolean startingValuesSelected = true;
+ 
+-            if (proceed && !robotNoShow.isChecked() && !startingValuesSelected) {
+-                proceed = false;
+-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+-                builder.setTitle("Select robot starting level/position/game piece")
+-                        .setCancelable(false)
+-                        .setPositiveButton("OK", (dialog, id) -> {
+-
+-                        });
+-                AlertDialog alert = builder.create();
+-                alert.show();
+-            }
+-
+-            if (proceed && robotNoShow.isChecked()) {
+-                proceed = false;
+-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+-                builder.setNegativeButton("No", ((dialogInterface, i) -> {
+-                }))
+-                        .setPositiveButton("Yes", ((dialogInterface, i) -> continueToAuto()));
+-
+-                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
+-                builder.setView(dialogBox);
+-                AlertDialog alertDialog = builder.show();
+-
+-                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+-                button.setEnabled(false);
++//            if (proceed && robotNoShow.isChecked()) {
++//                proceed = false;
++//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
++//                builder.setNegativeButton("No", ((dialogInterface, i) -> {
++//                        }))
++//                        .setPositiveButton("Yes", ((dialogInterface, i) -> continueToAuto()));
+ 
+-                button.setTextColor(Color.parseColor("#c3c3c3"));
++//                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
++//                builder.setView(dialogBox);
++//                AlertDialog alertDialog = builder.show();
+ 
+-                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
+-                yesConfirmation.addTextChangedListener(new TextWatcher() {
+-                    @Override
+-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
+-                                                  int i2) {
++//                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
++//                button.setEnabled(false);
++//
++//                button.setTextColor(Color.parseColor("#c3c3c3"));
++//
++//                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
+ 
+-                    }
+-
+-                    @Override
+-                    public void onTextChanged(CharSequence charSequence, int i, int i1,
+-                                              int i2) {
+-
+-                    }
+-
+-                    @Override
+-                    public void afterTextChanged(Editable editable) {
+-                        if (editable.toString().equals("YES")) {
+-                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+-                                    .setEnabled(true);
+-                            button.setTextColor(Color.parseColor("#000000"));
+-                        } else {
+-                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+-                                    .setEnabled(false);
+-                            button.setTextColor(Color.parseColor("#c3c3c3"));
+-                        }
+-
+-                    }
+-
+-                });
+-
+-
+-            }
+-
+-            // If all normal checks pass, verify against team lists or match schedule
+-            if (Settings.newInstance(getActivity()).useTeamList() && proceed) {
+-                boolean checkTeamList = false;
+-                try {
+-
+-                    // Non-quals matches don't get checked against match schedule
+-                    if (!Settings.newInstance(getActivity()).getMatchType().equals("Q")) {
+-                        checkTeamList = true;
+-                    } else if (!FileManager.getTeamPlaying(getActivity(),
+-                            scoutPosSpinner.getText().toString(),
+-                            Integer.parseInt(matchNumField.getText().toString())).equals(teamNumField.getText().toString())) {
+-                        proceed = false;
+-
+-
+-                        new AlertDialog.Builder(getActivity())
+-                                .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
+-                                .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is " +
+-                                        scoutPosSpinner.getText().toString() + " in match " + matchNumField.getText().toString() + "?")
+-                                .setPositiveButton("Yes", (dialog, which) -> continueToAuto())
+-                                .setNegativeButton("No", (dialog, which) -> {
+-
+-                                })
+-                                .create()
+-                                .show();
+-                        continueToAuto();
+-
+-                    }
+-
+-                } catch (IOException e) {
+-                    //Match list does not exist; looking for team list
+-                    checkTeamList = true;
+-                }
+-                if (checkTeamList && !FileManager.isOnTeamlist(teamNumField.getText().toString(),
+-                        getActivity())) {
+-                    proceed = false;
+-                    new AlertDialog.Builder(getActivity())
+-                            .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
+-                            .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
+-                            .setPositiveButton("Yes", (dialog, which) -> {
+-                                FileManager.addToTeamList(teamNumField.getText().toString(),
+-                                        getActivity());
+-
+-                                continueToAuto();
+-                            })
+-                            .setNegativeButton("No", (dialog, which) -> {
+-
+-                            })
+-                            .create()
+-                            .show();
+-                }
+-            }
+-
++//                yesConfirmation.addTextChangedListener(new TextWatcher() {
++//                    @Override
++//                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
++//                                                  int i2) {
++//
++//                    }
++//
++//                    @Override
++//                    public void onTextChanged(CharSequence charSequence, int i, int i1,
++//                                              int i2) {
++//
++//                    }
++//
++//                    @Override
++//                    public void afterTextChanged(Editable editable) {
++//                        if (editable.toString().equals("YES")) {
++//                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
++//                                    .setEnabled(true);
++//                            button.setTextColor(Color.parseColor("#000000"));
++//                        } else {
++//                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
++//                                    .setEnabled(false);
++//                            button.setTextColor(Color.parseColor("#c3c3c3"));
++//                        }
++//
++//                    }
++//
++//                });
+ 
+             if (proceed) {
+-                continueToAuto();
+-
++                continueToFinish();
+             }
+         });
+ 
+@@ -247,37 +177,39 @@
+             PreMatch prevPreMatch = entry.getPreMatch();
+ 
+             nameField.setText(prevPreMatch.getScoutName());
++            nameField2.setText(prevPreMatch.getScoutName());
++            nameField3.setText(prevPreMatch.getScoutName());
++
+             teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
+ 
+-            robotNoShow.setChecked(robotNoShow.isChecked());
+-
++            
+ 
+ 
+ 
+         } else {
+-            Settings set = Settings.newInstance(getActivity());
+-
+-            if (!set.getScoutPos().equals("DEFAULT")) {
+-                scoutPosSpinner.setText(set.getScoutPos());
+-
+-                if (set.useTeamList() && set.getMatchType().equals("Q")) {
+-                    try {
+-                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
+-                                set.getScoutPos(), set.getMatchNum()));
+-                    } catch (IOException e) {
+-
+-                        e.printStackTrace();
+-                    }
+-                }
+-            }
+-
+-            //Scout nameField is prompted for after a shift ends, but not during the first match
+-            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
+-                nameField.setText(set.getScoutName());
+-
+-            }
+-
+-            matchNumField.setText(String.valueOf(set.getMatchNum()));
++//            Settings set = Settings.newInstance(getActivity());
++//
++//            if (!set.getScoutPos().equals("DEFAULT")) {
++//                scoutPosSpinner.setText(set.getScoutPos());
++//
++//                if (set.useTeamList() && set.getMatchType().equals("Q")) {
++//                    try {
++//                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
++//                                set.getScoutPos(), set.getMatchNum()));
++//                    } catch (IOException e) {
++//
++//                        e.printStackTrace();
++//                    }
++//                }
++//            }
++//
++//            //Scout nameField is prompted for after a shift ends, but not during the first match
++//            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
++//                nameField.setText(set.getScoutName());
++//
++//            }
++//
++//            matchNumField.setText(String.valueOf(set.getMatchNum()));
+         }
+     }
+ 
+@@ -289,20 +221,18 @@
+ 
+ 
+         entry.setPreMatch(new PreMatch(nameField.getText().toString(),
+-                scoutPosSpinner.getText().toString(),
++//                scoutPosSpinner.getText().toString(),
+                 Integer.parseInt(matchNumField.getText().toString()),
+                 Integer.parseInt(teamNumField.getText().toString()),
+                 robotNoShow.isChecked()
+         ));
+     }
+ 
+-    private void continueToAuto() {
++    private void continueToFinish() {
+ 
+ 
+         saveState();
+ 
+-
+-
+         Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
+ 
+         UiHelper.autoSetTheme(getActivity(), entry.getPreMatch().getTeamNum());
+@@ -313,7 +243,6 @@
+                 .commit();
+     }
+ 
+-
+     @Override
+     public void onResume() {
+         super.onResume();

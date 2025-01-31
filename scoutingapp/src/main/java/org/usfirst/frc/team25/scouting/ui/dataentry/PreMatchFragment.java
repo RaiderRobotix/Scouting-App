@@ -59,7 +59,8 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_prematch, container, false);
 
-//        Button continueButton = view.findViewById(R.id.prematch_continue);
+        Button finishButton = view.findViewById(R.id.post_finish);
+
 
         nameField = view.findViewById(R.id.scout_name_field);
         nameField2 = view.findViewById(R.id.scout_name_field_2);
@@ -92,12 +93,9 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
 
 
-        continueButton.setOnClickListener(view1 -> {
+        finishButton.setOnClickListener(view1 -> {
 
             boolean proceed = true;
-            Settings set = Settings.newInstance(getActivity());
-
-            set.setMaxMatchNum(FileManager.getMaxMatchNum(getActivity()));
 
             // Sequentially verifies that user inputted a value
             if (nameField.getText().toString().isEmpty()) {
@@ -117,123 +115,55 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
             boolean startingValuesSelected = true;
 
-            if (proceed && !robotNoShow.isChecked() && !startingValuesSelected) {
-                proceed = false;
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select robot starting level/position/game piece")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", (dialog, id) -> {
+//            if (proceed && robotNoShow.isChecked()) {
+//                proceed = false;
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setNegativeButton("No", ((dialogInterface, i) -> {
+//                        }))
+//                        .setPositiveButton("Yes", ((dialogInterface, i) -> continueToAuto()));
 
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
+//                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
+//                builder.setView(dialogBox);
+//                AlertDialog alertDialog = builder.show();
 
-            if (proceed && robotNoShow.isChecked()) {
-                proceed = false;
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setNegativeButton("No", ((dialogInterface, i) -> {
-                }))
-                        .setPositiveButton("Yes", ((dialogInterface, i) -> continueToAuto()));
+//                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//                button.setEnabled(false);
+//
+//                button.setTextColor(Color.parseColor("#c3c3c3"));
+//
+//                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
 
-                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
-                builder.setView(dialogBox);
-                AlertDialog alertDialog = builder.show();
-
-                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                button.setEnabled(false);
-
-                button.setTextColor(Color.parseColor("#c3c3c3"));
-
-                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
-                yesConfirmation.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
-                                                  int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1,
-                                              int i2) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                        if (editable.toString().equals("YES")) {
-                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-                                    .setEnabled(true);
-                            button.setTextColor(Color.parseColor("#000000"));
-                        } else {
-                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-                                    .setEnabled(false);
-                            button.setTextColor(Color.parseColor("#c3c3c3"));
-                        }
-
-                    }
-
-                });
-
-
-            }
-
-            // If all normal checks pass, verify against team lists or match schedule
-            if (Settings.newInstance(getActivity()).useTeamList() && proceed) {
-                boolean checkTeamList = false;
-                try {
-
-                    // Non-quals matches don't get checked against match schedule
-                    if (!Settings.newInstance(getActivity()).getMatchType().equals("Q")) {
-                        checkTeamList = true;
-                    } else if (!FileManager.getTeamPlaying(getActivity(),
-                            scoutPosSpinner.getText().toString(),
-                            Integer.parseInt(matchNumField.getText().toString())).equals(teamNumField.getText().toString())) {
-                        proceed = false;
-
-
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
-                                .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is " +
-                                        scoutPosSpinner.getText().toString() + " in match " + matchNumField.getText().toString() + "?")
-                                .setPositiveButton("Yes", (dialog, which) -> continueToAuto())
-                                .setNegativeButton("No", (dialog, which) -> {
-
-                                })
-                                .create()
-                                .show();
-                        continueToAuto();
-
-                    }
-
-                } catch (IOException e) {
-                    //Match list does not exist; looking for team list
-                    checkTeamList = true;
-                }
-                if (checkTeamList && !FileManager.isOnTeamlist(teamNumField.getText().toString(),
-                        getActivity())) {
-                    proceed = false;
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("Confirm team number against the field, " + nameField.getText().toString() + "!!")
-                            .setMessage("Are you sure that team " + teamNumField.getText().toString() + " is playing at " + set.getCurrentEvent() + "?")
-                            .setPositiveButton("Yes", (dialog, which) -> {
-                                FileManager.addToTeamList(teamNumField.getText().toString(),
-                                        getActivity());
-
-                                continueToAuto();
-                            })
-                            .setNegativeButton("No", (dialog, which) -> {
-
-                            })
-                            .create()
-                            .show();
-                }
-            }
-
+//                yesConfirmation.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
+//                                                  int i2) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence charSequence, int i, int i1,
+//                                              int i2) {
+//
+//                    }
+//
+//                    @Override
+//                    public void afterTextChanged(Editable editable) {
+//                        if (editable.toString().equals("YES")) {
+//                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+//                                    .setEnabled(true);
+//                            button.setTextColor(Color.parseColor("#000000"));
+//                        } else {
+//                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+//                                    .setEnabled(false);
+//                            button.setTextColor(Color.parseColor("#c3c3c3"));
+//                        }
+//
+//                    }
+//
+//                });
 
             if (proceed) {
-                continueToAuto();
-
+                continueToFinish();
             }
         });
 
@@ -247,37 +177,39 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
             PreMatch prevPreMatch = entry.getPreMatch();
 
             nameField.setText(prevPreMatch.getScoutName());
+            nameField2.setText(prevPreMatch.getScoutName());
+            nameField3.setText(prevPreMatch.getScoutName());
+
             teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
 
-            robotNoShow.setChecked(robotNoShow.isChecked());
-
+            
 
 
 
         } else {
-            Settings set = Settings.newInstance(getActivity());
-
-            if (!set.getScoutPos().equals("DEFAULT")) {
-                scoutPosSpinner.setText(set.getScoutPos());
-
-                if (set.useTeamList() && set.getMatchType().equals("Q")) {
-                    try {
-                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
-                                set.getScoutPos(), set.getMatchNum()));
-                    } catch (IOException e) {
-
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            //Scout nameField is prompted for after a shift ends, but not during the first match
-            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
-                nameField.setText(set.getScoutName());
-
-            }
-
-            matchNumField.setText(String.valueOf(set.getMatchNum()));
+//            Settings set = Settings.newInstance(getActivity());
+//
+//            if (!set.getScoutPos().equals("DEFAULT")) {
+//                scoutPosSpinner.setText(set.getScoutPos());
+//
+//                if (set.useTeamList() && set.getMatchType().equals("Q")) {
+//                    try {
+//                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
+//                                set.getScoutPos(), set.getMatchNum()));
+//                    } catch (IOException e) {
+//
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            //Scout nameField is prompted for after a shift ends, but not during the first match
+//            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
+//                nameField.setText(set.getScoutName());
+//
+//            }
+//
+//            matchNumField.setText(String.valueOf(set.getMatchNum()));
         }
     }
 
@@ -289,19 +221,17 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
 
         entry.setPreMatch(new PreMatch(nameField.getText().toString(),
-                scoutPosSpinner.getText().toString(),
+//                scoutPosSpinner.getText().toString(),
                 Integer.parseInt(matchNumField.getText().toString()),
                 Integer.parseInt(teamNumField.getText().toString()),
                 robotNoShow.isChecked()
         ));
     }
 
-    private void continueToAuto() {
+    private void continueToFinish() {
 
 
         saveState();
-
-
 
         Settings.newInstance(getActivity()).autoSetPreferences(entry.getPreMatch());
 
@@ -312,7 +242,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 .replace(android.R.id.content, AutoFragment.getInstance(entry), "AUTO")
                 .commit();
     }
-
 
     @Override
     public void onResume() {
