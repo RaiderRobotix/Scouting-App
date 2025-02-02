@@ -42,6 +42,7 @@
                     android:textSize="24sp"
                     tools:ignore="TouchTargetSizeCheck" />
 
+
             </LinearLayout>
 
             <LinearLayout
