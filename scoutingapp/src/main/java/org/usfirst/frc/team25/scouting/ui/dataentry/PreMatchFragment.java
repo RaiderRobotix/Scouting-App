@@ -14,12 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.Settings;
@@ -31,13 +33,13 @@ import java.io.IOException;
 
 public class PreMatchFragment extends Fragment implements EntryFragment {
 
-    private RadioButton[] typeTank, typeSwerve, speedMeterSecond, speedNone;
-//    private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup, startingPositionButtonsGroup;
+    private RadioButton typeTank, typeSwerve, speedMeterSecond, speedNone, oftenScoreAlgae, oftenScoreCoral, hpStationPickUp, floorPickUp, bothPickUp, hangShallow, hangDeep;
+    //    private RadioGroup startingGamePieceGroup, startingLevelButtonsGroup, startingPositionButtonsGroup;
 
-    private MaterialEditText nameField,nameField2, nameField3, teamNumField;
-//    private MaterialBetterSpinner scoutPosSpinner;
+    private MaterialEditText nameField,nameField2, nameField3, teamNumField, driveBaseMotorsType, baseWidth, baseLength, baseHeight, lengthExtOut, lengthExtIn;
+    //    private MaterialBetterSpinner scoutPosSpinner;
     private ScoutEntry entry;
-    private CheckBox robotNoShow;
+    private CheckBox robotNoShow, checkIfHang;
 
     public static PreMatchFragment getInstance(ScoutEntry entry) {
         PreMatchFragment prematchFragment = new PreMatchFragment();
@@ -62,14 +64,50 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
         Button finishButton = view.findViewById(R.id.post_finish);
 
 
+        /*
+                          MaterialEditText
+         */
+
         nameField = view.findViewById(R.id.scout_name_field);
         nameField2 = view.findViewById(R.id.scout_name_field_2);
         nameField3 = view.findViewById(R.id.scout_name_field_3);
 
+        driveBaseMotorsType = view.findViewById(R.id.Text_Input_DriveBase_Motor);
+
+        baseHeight = view.findViewById(R.id.height_base);
+        baseLength = view.findViewById(R.id.length_base);
+        baseWidth = view.findViewById(R.id.width_base);
+
+        lengthExtIn = view.findViewById(R.id.Length_Extend_Inwards);
+        lengthExtOut = view.findViewById(R.id.Length_Extend_Outwards);
+
         teamNumField = view.findViewById(R.id.team_num_field);
 
-      //  speedMeterSecond = view.findViewById(R.id.speed_meter_second);
-      //  speedNone = view.findViewById(R.id.speed_none);
+        /*
+                          Radio Buttons
+         */
+
+        speedMeterSecond = view.findViewById(R.id.speed_meter_second);
+        speedNone = view.findViewById(R.id.speed_none);
+
+        typeTank = view.findViewById(R.id.type_tank);
+        typeSwerve = view.findViewById(R.id.type_swerve);
+
+        oftenScoreAlgae = view.findViewById(R.id.Often_Score_Algae_Radio_Button);
+        oftenScoreCoral = view.findViewById(R.id.Often_Score_Coral_Radio_Button);
+
+        hpStationPickUp = view.findViewById(R.id.Pick_Up_Hp_Station_Radio_Button);
+        floorPickUp = view.findViewById(R.id.Pick_Up_Floor_Radio_Button);
+        bothPickUp = view.findViewById(R.id.Pick_Up_Both_Radio_Button);
+
+        hangShallow = view.findViewById(R.id.Hang_Shallow_Radio_Button);
+        hangDeep = view.findViewById(R.id.Hang_Deep_Radio_Button);
+
+        /*
+                            Checkbox
+         */
+
+        checkIfHang = view.findViewById(R.id.Check_If_Hang);
 
 
         autoPopulate();
@@ -89,9 +127,6 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
 
         });
-
-
-
 
         finishButton.setOnClickListener(view1 -> {
 
@@ -113,54 +148,100 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
                 proceed = false;
             }
 
+            if (checkIfHang.isChecked() && !hangDeep.isChecked() && !hangShallow.isChecked()) {
+                hangDeep.setError("Required");
+                proceed = false;
+            }
+
+            if (driveBaseMotorsType.getText().toString().isEmpty()) {
+                driveBaseMotorsType.setError("Type of Drivebase motor required");
+                proceed = false;
+            }
+
+            if (baseLength.getText().toString().isEmpty() || baseHeight.getText().toString().isEmpty() || baseWidth.getText().toString().isEmpty()) {
+                proceed = false;
+            }
+
+            if (lengthExtOut.getText().toString().isEmpty()) {
+                lengthExtOut.setError("Required");
+                proceed = false;
+            }
+
+            if (lengthExtIn.getText().toString().isEmpty()) {
+                lengthExtIn.setError("Required");
+                proceed = false;
+            }
+
+            if (!speedMeterSecond.isChecked() && !speedNone.isChecked()) {
+                speedNone.setError("Speed selection required");
+                proceed = false;
+            }
+
+            if (!typeSwerve.isChecked() && !typeTank.isChecked()) {
+                typeSwerve.setError("Type selection required");
+                proceed = false;
+            }
+
+            if (!oftenScoreCoral.isChecked() && !oftenScoreAlgae.isChecked()) {
+                oftenScoreCoral.setError("Often Score selection required");
+                proceed = false;
+            }
+
+            if (!bothPickUp.isChecked() && !hpStationPickUp.isChecked() && !floorPickUp.isChecked()) {
+                bothPickUp.setError("Pick up selection required");
+                proceed = false;
+            }
+
+            //TODO: Add verification for the entire score section
+
             boolean startingValuesSelected = true;
 
-//            if (proceed && robotNoShow.isChecked()) {
-//                proceed = false;
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                builder.setNegativeButton("No", ((dialogInterface, i) -> {
-//                        }))
-//                        .setPositiveButton("Yes", ((dialogInterface, i) -> continueToAuto()));
+            //            if (proceed && robotNoShow.isChecked()) {
+            //                proceed = false;
+            //                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            //                builder.setNegativeButton("No", ((dialogInterface, i) -> {
+            //                        }))
+            //                        .setPositiveButton("Yes", ((dialogInterface, i) -> continueToAuto()));
 
-//                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
-//                builder.setView(dialogBox);
-//                AlertDialog alertDialog = builder.show();
+            //                View dialogBox = inflater.inflate(R.layout.view_robot_no_show, null);
+            //                builder.setView(dialogBox);
+            //                AlertDialog alertDialog = builder.show();
 
-//                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-//                button.setEnabled(false);
-//
-//                button.setTextColor(Color.parseColor("#c3c3c3"));
-//
-//                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
+            //                Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            //                button.setEnabled(false);
+            //
+            //                button.setTextColor(Color.parseColor("#c3c3c3"));
+            //
+            //                EditText yesConfirmation = dialogBox.findViewById(R.id.yes_text_input);
 
-//                yesConfirmation.addTextChangedListener(new TextWatcher() {
-//                    @Override
-//                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
-//                                                  int i2) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onTextChanged(CharSequence charSequence, int i, int i1,
-//                                              int i2) {
-//
-//                    }
-//
-//                    @Override
-//                    public void afterTextChanged(Editable editable) {
-//                        if (editable.toString().equals("YES")) {
-//                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-//                                    .setEnabled(true);
-//                            button.setTextColor(Color.parseColor("#000000"));
-//                        } else {
-//                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-//                                    .setEnabled(false);
-//                            button.setTextColor(Color.parseColor("#c3c3c3"));
-//                        }
-//
-//                    }
-//
-//                });
+            //                yesConfirmation.addTextChangedListener(new TextWatcher() {
+            //                    @Override
+            //                    public void beforeTextChanged(CharSequence charSequence, int i, int i1,
+            //                                                  int i2) {
+            //
+            //                    }
+            //
+            //                    @Override
+            //                    public void onTextChanged(CharSequence charSequence, int i, int i1,
+            //                                              int i2) {
+            //
+            //                    }
+            //
+            //                    @Override
+            //                    public void afterTextChanged(Editable editable) {
+            //                        if (editable.toString().equals("YES")) {
+            //                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+            //                                    .setEnabled(true);
+            //                            button.setTextColor(Color.parseColor("#000000"));
+            //                        } else {
+            //                            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+            //                                    .setEnabled(false);
+            //                            button.setTextColor(Color.parseColor("#c3c3c3"));
+            //                        }
+            //
+            //                    }
+            //
+            //                });
 
             if (proceed) {
                 continueToFinish();
@@ -182,34 +263,34 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
             teamNumField.setText(String.valueOf(prevPreMatch.getTeamNum()));
 
-            
+
 
 
 
         } else {
-//            Settings set = Settings.newInstance(getActivity());
-//
-//            if (!set.getScoutPos().equals("DEFAULT")) {
-//                scoutPosSpinner.setText(set.getScoutPos());
-//
-//                if (set.useTeamList() && set.getMatchType().equals("Q")) {
-//                    try {
-//                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
-//                                set.getScoutPos(), set.getMatchNum()));
-//                    } catch (IOException e) {
-//
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            //Scout nameField is prompted for after a shift ends, but not during the first match
-//            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
-//                nameField.setText(set.getScoutName());
-//
-//            }
-//
-//            matchNumField.setText(String.valueOf(set.getMatchNum()));
+            //            Settings set = Settings.newInstance(getActivity());
+            //
+            //            if (!set.getScoutPos().equals("DEFAULT")) {
+            //                scoutPosSpinner.setText(set.getScoutPos());
+            //
+            //                if (set.useTeamList() && set.getMatchType().equals("Q")) {
+            //                    try {
+            //                        teamNumField.setText(FileManager.getTeamPlaying(getActivity(),
+            //                                set.getScoutPos(), set.getMatchNum()));
+            //                    } catch (IOException e) {
+            //
+            //                        e.printStackTrace();
+            //                    }
+            //                }
+            //            }
+            //
+            //            //Scout nameField is prompted for after a shift ends, but not during the first match
+            //            if ((!set.getScoutName().equals("DEFAULT") && !((set.getMatchNum() - 1) % set.getShiftDur() == 0)) || set.getMatchNum() == 1) {
+            //                nameField.setText(set.getScoutName());
+            //
+            //            }
+            //
+            //            matchNumField.setText(String.valueOf(set.getMatchNum()));
         }
     }
 
@@ -221,7 +302,7 @@ public class PreMatchFragment extends Fragment implements EntryFragment {
 
 
         entry.setPreMatch(new PreMatch(nameField.getText().toString(),
-//                scoutPosSpinner.getText().toString(),
+                //                scoutPosSpinner.getText().toString(),
                 Integer.parseInt(matchNumField.getText().toString()),
                 Integer.parseInt(teamNumField.getText().toString()),
                 robotNoShow.isChecked()
