@@ -51,27 +51,58 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/auto_zone_one_text"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Level 1"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/auton_layout_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_1"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_one_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
                 <TextView
-                    android:id="@+id/auto_zone_one_text"
-                    android:layout_width="80dp"
+                    android:id="@+id/button_inc_dec_value_level_1"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_one_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_level_1"
+                    android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Level 1"
-                    android:textSize="24sp" />
-
-
-                <TextView
-                    android:id="@+id/auto_zone_text_coral"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Coral"
-                    android:textSize="24sp" />
-
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/auto_zone_one_text"
+                    android:background="@drawable/border"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/auto_layout_3"
+                android:id="@+id/auto_layout_2"
                 android:layout_width="569dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -84,7 +115,6 @@
                     android:text="Level 2"
                     android:textSize="24sp" />
 
-
                 <TextView
                     android:id="@+id/auto_zone_text_processor"
                     android:layout_width="80dp"
@@ -93,6 +123,46 @@
                     android:text="Processor"
                     android:textSize="24sp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_2"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_two_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_level_2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_two_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_level_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/auto_zone_two_text"
+                    android:background="@drawable/border"/>
 
             </LinearLayout>
 
@@ -110,32 +180,6 @@
                     android:text="Level 3"
                     android:textSize="24sp" />
 
-
-                <TextView
-                    android:id="@+id/auto_zone_text_made"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Shots Made"
-                    android:textSize="24sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/sigmatemp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/auto_zone_four_text"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Level 4"
-                    android:textSize="24sp" />
-
                 <TextView
                     android:id="@+id/auto_zone_text_missed"
                     android:layout_width="80dp"
@@ -143,9 +187,119 @@
                     android:layout_weight="1"
                     android:text="Shots Missed"
                     android:textSize="24sp" />
+
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/auto_layout_5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_3"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_three_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_level_3"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_three_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_level_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/auto_zone_three_text"
+                    android:background="@drawable/border"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/auto_zone_four_text"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Level 4"
+                    android:textSize="24sp" />
+
+
+                <TextView
+                    android:id="@+id/auto_zone_text_coral"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Coral"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_4"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_four_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_level_4"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_four_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_level_4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/auto_zone_four_text"
+                    android:background="@drawable/border"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -159,14 +313,101 @@
                     android:layout_marginTop="10dp"
                     android:textSize="24sp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/_auto_layout_9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/inc_button_major_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/major_foul_auto_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_major_foul"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/major_foul_auto_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_major_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/major_foul_auto_text"
+                    android:background="@drawable/border"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/minor_foul_auto_text"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="Minor Foul"
-                    android:layout_marginTop="10dp"
                     android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/inc_button_minor_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/minor_foul_auto_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_minor_foul"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/minor_foul_auto_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_minor_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/minor_foul_auto_text"
+                    android:background="@drawable/border"/>
+
             </LinearLayout>
 
         </LinearLayout>

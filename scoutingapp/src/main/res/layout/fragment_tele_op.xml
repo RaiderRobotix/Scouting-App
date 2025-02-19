@@ -1,420 +1,204 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/teleop_scroll"
+    android:id="@+id/auto_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
     android:fillViewport="true"
-    tools:context=".ui.dataentry.TeleOpFragment">
+    tools:context=".ui.dataentry.AutoFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="433dp"-->
-<!--            android:layout_below="@id/teleop_continue"-->
-<!--            android:src="@drawable/map" />-->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="433dp"
+            android:layout_below="@id/auto_continue"
+            android:layout_marginTop="-33dp"
+            android:src="@drawable/map" />
 
         <LinearLayout
             android:id="@+id/teleop_layout_main"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/teleop_text"
+            android:layout_below="@id/auto_text"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/teleop_layout_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-            </TextView>
+
+
+                <CheckBox
+                    android:id="@+id/cross_com_line"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cross Line"
+                    android:textSize="24sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+
+            </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/teleop_layout_2"
+                android:id="@+id/auton_layout_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/teleop_level_one_text"
+                    android:id="@+id/auto_zone_one_text"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="Level 1"
                     android:textSize="24sp" />
-            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/teleop_layout_3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/inc_button_level_1"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/teleop_text"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                />
-
-            <TextView
-                android:id="@+id/button_inc_dec_value_level_1"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/teleop_text"
-                android:gravity="center"
-                android:textSize="10sp"/>
-
-            <Button
-                android:id="@+id/dec_button_level_1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="-"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_below="@+id/teleop_text"
-                android:background="@drawable/border"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/teleop_layout_4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/teleop_level_two_text"
+                    android:id="@+id/auto_zone_text_coral"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Coral"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_3"
+                android:layout_width="569dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/auto_zone_two_text"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="Level 2"
                     android:textSize="24sp" />
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/teleop_layout_5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/inc_button_level_2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/check_box_level_1"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="+"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/border"/>
-
-            <TextView
-                android:id="@+id/button_inc_dec_value_level_2"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/teleop_text"
-                android:gravity="center"
-                android:textSize="10sp"/>
-
-            <Button
-                android:id="@+id/dec_button_level_2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:text="-"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_below="@+id/teleop_text"
-                android:background="@drawable/border"/>
+                <TextView
+                    android:id="@+id/auto_zone_text_processor"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Processor"
+                    android:textSize="24sp" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/teleop_layout_6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/teleop_level_three_text"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="Level 3"
-                android:textSize="24sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/teleop_layout_7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/inc_button_level_3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/check_box_level_2"
-                android:layout_marginTop="10dp"
-
-                android:gravity="center"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:background="@drawable/border"/>
-
-            <TextView
-                android:id="@+id/button_inc_dec_value_level_3"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/teleop_text"
-                android:gravity="center"
-                android:textSize="10sp"/>
-
-            <Button
-                android:id="@+id/dec_button_level_3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-
-                android:layout_marginTop="10dp"
-                android:text="-"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_below="@+id/teleop_text"
-                android:background="@drawable/border"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/teleop_layout_8"
+            <LinearLayout
+                android:id="@+id/auto_layout_4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/teleop_level_four_text"
+                    android:id="@+id/auto_zone_three_text"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Level 3"
+                    android:textSize="24sp" />
+
+
+                <TextView
+                    android:id="@+id/auto_zone_text_made"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Net"
+                    android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sigmatemp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/auto_zone_four_text"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Level 4"
                     android:textSize="24sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/auto_zone_text_missed"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Shots Missed"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/teleop_layout_9"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/inc_button_level_4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/check_box_level_3"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:background="@drawable/border"/>
-
-            <TextView
-                android:id="@+id/button_inc_dec_value_level_4"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/teleop_text"
-                android:gravity="center"
-                android:textSize="10sp"/>
-
-            <Button
-                android:id="@+id/dec_button_level_4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:text="-"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_below="@+id/teleop_text"
-                android:background="@drawable/border"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/teleop_layout_10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/major_foul_teleop_text"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:text="Major Foul"
-                android:textSize="24sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/teleop_layout_11"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/inc_button_tele_major_foul"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/check_box_level_3"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:background="@drawable/border"/>
-
-            <TextView
-                android:id="@+id/button_inc_dec_value_level_4"
-                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/teleop_text"
-                android:gravity="center"
-                android:textSize="10sp"/>
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/dec_button_tele_major_foul"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:text="-"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_below="@+id/teleop_text"
-                android:background="@drawable/border"/>
+                <TextView
+                    android:id="@+id/major_foul_auto_text"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Major Foul"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24sp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/teleop_layout_12"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/minor_foul_teleop_text"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:text="Minor Foul"
-                android:textSize="24sp" />
-
+                <TextView
+                    android:id="@+id/minor_foul_auto_text"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Minor Foul"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/teleop_layout_13"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/inc_button_level_4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/check_box_level_3"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:background="@drawable/border"/>
-
-            <TextView
-                android:id="@+id/button_inc_dec_value_tele_minor_foul"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/teleop_text"
-                android:gravity="center"
-                android:textSize="10sp"/>
-
-            <Button
-                android:id="@+id/dec_button_tele_minor_foul"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:text="-"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_below="@+id/teleop_text"
-                android:background="@drawable/border"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
         <Button
-            android:id="@+id/teleop_continue"
+            android:id="@+id/auto_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_below="@id/teleop_layout_main"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="43dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:FillColor="#fffff"
+            android:background="#2196F3"
             android:elevation="6dp"
             android:text="@string/continue_button"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:background="@color/frc_blue"
-            tools:ignore="ExtraText"
-            />
-
+            android:textSize="20dp"
+            tools:ignore="ExtraText" />
 
         <TextView
-            android:id="@+id/teleop_text"
+            android:id="@+id/auto_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:text="TeleOp"
             android:textSize="40dp"></TextView>
-
 
 
     </RelativeLayout>
