@@ -15,12 +15,11 @@ public class Autonomous {
     private int levelThree;
     private int levelFour;
     private int coral;
-    private int madeAuto;
     private int missedAuto;
 
 
 
-    public Autonomous(int processorAuto, int majorFoulAuto, int minoFoulAuto, boolean crossComLine, int levelOne, int levelTwo, int levelThree, int levelFour, int coral, int madeAuto, int missedAuto) {
+    public Autonomous(int processorAuto, int majorFoulAuto, int minorFoulAuto, boolean crossComLine, int levelOne, int levelTwo, int levelThree, int levelFour, int coral, int missedAuto) {
         this.processorAuto = processorAuto;
         this.majorFoulAuto = majorFoulAuto;
         this.minorFoulAuto = minorFoulAuto;
@@ -29,7 +28,6 @@ public class Autonomous {
         this.levelTwo = levelTwo;
         this.levelThree = levelThree;
         this.levelFour = levelFour;
-        this.madeAuto = madeAuto;
         this.missedAuto = missedAuto;
     }
 
@@ -52,8 +50,6 @@ public class Autonomous {
     public int getLevelFour() {return levelFour;}
 
     public int getCoral() {return coral;}
-
-    public int getMadeAuto() {return madeAuto;}
 
     public int getMissedAuto() {return missedAuto;}
 

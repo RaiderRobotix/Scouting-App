@@ -19,7 +19,7 @@ import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 
 public class AutoFragment extends Fragment implements EntryFragment {
 
-    private ButtonIncDecSet levelOne, levelTwo, levelThree, levelFour, coral, processorAuto, missedAuto, madeAuto, minorFoulAuto, majorFoulAuto;
+    private ButtonIncDecSet levelOne, levelTwo, levelThree, levelFour, coral, processorAuto, missedAuto, minorFoulAuto, majorFoulAuto;
 
 
     private CheckBox crossComLine;
@@ -56,7 +56,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
         levelThree = view.findViewById(R.id.auto_zone_three_text);
         levelFour = view.findViewById(R.id.auto_zone_four_text);
         processorAuto = view.findViewById(R.id.auto_zone_text_processor);
-        madeAuto = view.findViewById(R.id.auto_zone_text_made);
         missedAuto = view.findViewById(R.id.auto_zone_text_missed);
         crossComLine = view.findViewById(R.id.cross_com_line);
         minorFoulAuto = view.findViewById(R.id.minor_foul_auto_text);
@@ -69,7 +68,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
 
 
-        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{ levelOne, levelTwo, levelThree, levelFour, coral, madeAuto, missedAuto};
+        ButtonIncDecSet[] enablingCrossHabLineMetrics = new ButtonIncDecSet[]{ levelOne, levelTwo, levelThree, levelFour, coral, missedAuto};
         /*
         for (ButtonIncDecSet set : enablingCrossHabLineMetrics) {
             set.incButton.setOnClickListener(view1 -> {
@@ -147,7 +146,6 @@ public class AutoFragment extends Fragment implements EntryFragment {
             levelThree.setValue(prevAuto.getLevelThree());
             levelFour.setValue(prevAuto.getLevelFour());
             coral.setValue(prevAuto.getCoral());
-            madeAuto.setValue(prevAuto.getMadeAuto());
             missedAuto.setValue(prevAuto.getMissedAuto());
         }
 
@@ -155,9 +153,7 @@ public class AutoFragment extends Fragment implements EntryFragment {
 
     @Override
     public void saveState() {
-        entry.setAutonomous(new Autonomous(processorAuto.getValue(), majorFoulAuto.getValue(), minorFoulAuto.getValue(), crossComLine.isChecked(), levelOne.getValue(), levelTwo.getValue(), levelThree.getValue(), levelFour.getValue(), coral.getValue(),
-                madeAuto.getValue(), missedAuto.getValue()
-                ));
+        entry.setAutonomous(new Autonomous(processorAuto.getValue(), majorFoulAuto.getValue(), minorFoulAuto.getValue(), crossComLine.isChecked(), levelOne.getValue(), levelTwo.getValue(), levelThree.getValue(), levelFour.getValue(), coral.getValue(), missedAuto.getValue()));
     }
 
     @Override

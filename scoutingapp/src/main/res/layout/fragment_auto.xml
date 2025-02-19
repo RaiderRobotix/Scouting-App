@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="433dp"
             android:layout_below="@id/auto_continue"
-            android:src="@drawable/map" />
+            android:src="@drawable/reef" />
 
         <LinearLayout
             android:id="@+id/teleop_layout_main"
@@ -115,14 +115,6 @@
                     android:text="Level 2"
                     android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/auto_zone_text_processor"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Processor"
-                    android:textSize="24sp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -180,13 +172,6 @@
                     android:text="Level 3"
                     android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/auto_zone_text_missed"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Shots Missed"
-                    android:textSize="24sp" />
 
 
             </LinearLayout>
@@ -246,15 +231,6 @@
                     android:text="Level 4"
                     android:textSize="24sp" />
 
-
-                <TextView
-                    android:id="@+id/auto_zone_text_coral"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Coral"
-                    android:textSize="24sp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -307,7 +283,7 @@
                 <TextView
                     android:id="@+id/major_foul_auto_text"
                     android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="Major Foul"
                     android:layout_marginTop="10dp"
@@ -362,7 +338,7 @@
                 <TextView
                     android:id="@+id/minor_foul_auto_text"
                     android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="Minor Foul"
@@ -408,6 +384,62 @@
                     android:layout_below="@+id/minor_foul_auto_text"
                     android:background="@drawable/border"/>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/auto_zone_text_processor"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Processor"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/auto_layout_13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_processor"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_text_processor"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_processor"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/auto_zone_text_processor"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_processor"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/auto_zone_text_processor"
+                    android:background="@drawable/border"/>
             </LinearLayout>
 
         </LinearLayout>
