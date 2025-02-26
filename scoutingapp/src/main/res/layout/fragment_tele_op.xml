@@ -1,12 +1,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/auto_scroll"
+    android:id="@+id/tele_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
     android:fillViewport="true"
-    tools:context=".ui.dataentry.AutoFragment">
+    tools:context=".ui.dataentry.TeleOpFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,15 +16,14 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="433dp"
-            android:layout_below="@id/auto_continue"
-            android:layout_marginTop="-33dp"
-            android:src="@drawable/map" />
+            android:layout_below="@id/tele_continue"
+            android:src="@drawable/reef" />
 
         <LinearLayout
             android:id="@+id/teleop_layout_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/auto_text"
+            android:layout_below="@id/teleop_text"
             android:orientation="vertical">
 
             <LinearLayout
@@ -47,64 +46,128 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/auton_layout_2"
+                android:id="@+id/tele_layout_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/auto_zone_one_text"
-                    android:layout_width="80dp"
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tele_level_one_text"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Level 1"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/tele_layout_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_1"
+                    android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="Level 1"
-                    android:textSize="24sp" />
-
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/tele_level_one_text"
+                    android:background="@drawable/border"/>
 
                 <TextView
-                    android:id="@+id/auto_zone_text_coral"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Coral"
-                    android:textSize="24sp" />
+                    android:id="@+id/button_inc_dec_value_level_1"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_level_one_text"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textSize="10sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
+
+                <Button
+                    android:id="@+id/dec_button_level_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/tele_level_one_text"
+                    android:background="@drawable/border"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/auto_layout_3"
+                android:id="@+id/tele_layout_4"
                 android:layout_width="569dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/auto_zone_two_text"
+                    android:id="@+id/tele_level_two_text"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="Level 2"
                     android:textSize="24sp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_2"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_level_two_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
 
                 <TextView
-                    android:id="@+id/auto_zone_text_processor"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Processor"
-                    android:textSize="24sp" />
+                    android:id="@+id/button_inc_dec_value_level_2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_level_two_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
 
+
+                <Button
+                    android:id="@+id/dec_button_level_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/tele_level_two_text"
+                    android:background="@drawable/border"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/auto_layout_4"
+                android:id="@+id/tele_layout_6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/auto_zone_three_text"
+                    android:id="@+id/tele_level_three_text"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
@@ -112,68 +175,336 @@
                     android:textSize="24sp" />
 
 
-                <TextView
-                    android:id="@+id/auto_zone_text_made"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Net"
-                    android:textSize="24sp" />
-
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sigmatemp"
+                android:id="@+id/tele_layout_7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_3"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_level_three_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_level_3"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_level_three_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_level_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/tele_level_three_text"
+                    android:background="@drawable/border"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/auto_zone_four_text"
+                    android:id="@+id/tele_level_four_text"
                     android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="Level 4"
                     android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/auto_zone_text_missed"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Shots Missed"
-                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tele_layout_9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_level_4"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_level_four_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_level_4"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_level_four_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_level_4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/tele_level_four_text"
+                    android:background="@drawable/border"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/major_foul_auto_text"
+                    android:id="@+id/major_foul_tele_text"
                     android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="Major Foul"
                     android:layout_marginTop="10dp"
                     android:textSize="24sp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/inc_button_major_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/major_foul_tele_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
                 <TextView
-                    android:id="@+id/minor_foul_auto_text"
+                    android:id="@+id/button_inc_dec_value_major_foul"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/major_foul_tele_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_major_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/major_foul_tele_text"
+                    android:background="@drawable/border"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/minor_foul_tele_text"
                     android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="Minor Foul"
-                    android:layout_marginTop="10dp"
                     android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/inc_button_minor_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/minor_foul_tele_text"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_minor_foul"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/minor_foul_tele_text"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_minor_foul"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/minor_foul_tele_text"
+                    android:background="@drawable/border"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tele_zone_text_processor"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Processor"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_15"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/inc_button_processor"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_zone_text_processor"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/button_inc_dec_value_processor"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tele_zone_text_processor"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+
+                <Button
+                    android:id="@+id/dec_button_processor"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_below="@+id/tele_zone_text_processor"
+                    android:background="@drawable/border"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tele_zone_text_end_game"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:text="End Game"
+                    android:gravity="center"
+                    android:textSize="36sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tele_layout_17"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioGroup
+                    android:id="@+id/end_game_radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/park_button"
+                        android:layout_width="3400dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="Park"
+                        android:textSize="24sp"
+                        tools:ignore="TouchTargetSizeCheck">
+
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/endgame_shallowBarge"
+                        android:layout_width="400dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="Shallow"
+                        android:textSize="24sp">
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/endgame_deepBarge_button"
+                        android:layout_width="400dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:text="Deep"
+                        android:textSize="24sp">
+                    </RadioButton>
+
+                </RadioGroup>
             </LinearLayout>
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/auto_continue"
+            android:id="@+id/tele_continue"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_below="@id/teleop_layout_main"
@@ -192,12 +523,12 @@
             tools:ignore="ExtraText" />
 
         <TextView
-            android:id="@+id/auto_text"
+            android:id="@+id/teleop_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:text="TeleOp"
+            android:text="Tele-Operated"
             android:textSize="40dp"></TextView>
 
 

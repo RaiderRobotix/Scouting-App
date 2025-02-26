@@ -19,7 +19,7 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private ButtonIncDecSet levelOneTeleop, levelTwoTeleop, levelThreeTeleop, levelFourTeleop, coralCount, netTeleop, processorTeleop, missedTeleop, minFoulTeleop, majFoulTeleop;
+    private ButtonIncDecSet levelOne, levelOneTeleopInc, levelOneTeleopDec, levelTwoTeleopInc, levelTwoTeleopDec, levelThreeTeleop, levelFourTeleop, coralCount, netTeleop, processorTeleop, missedTeleop, minFoulTeleop, majFoulTeleop;
 
 
 
@@ -45,8 +45,11 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         final View view = inflater.inflate(R.layout.fragment_tele_op, container, false);
 
-        levelOneTeleop = view.findViewById(R.id.teleop_level_one_text);
-        levelTwoTeleop = view.findViewById(R.id.teleop_level_two_text);
+        levelOneTeleopInc = view.findViewById(R.id.inc_button_level_1);
+        levelOneTeleopDec = view.findViewById(R.id.dec_button_level_1);
+        levelOneTeleopInc = Integer.parseInt(levelOneTeleopInc);
+        levelTwoTeleopInc = view.findViewById(R.id.inc_button_level_2);
+        levelTwoTeleopDec = view.findViewById(R.id.dec_button_level_2);
         levelThreeTeleop = view.findViewById(R.id.teleop_level_three_text);
         levelFourTeleop = view.findViewById(R.id.teleop_level_four_text);
         coralCount = view.findViewById(R.id.teleop_coral);
