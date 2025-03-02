@@ -10,13 +10,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 
-import com.rengwuxian.materialedittext.MaterialEditText;
-
 import org.usfirst.frc.team25.scouting.R;
-import org.usfirst.frc.team25.scouting.data.FileManager;
 import org.usfirst.frc.team25.scouting.data.models.EndGame;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
 
 import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 

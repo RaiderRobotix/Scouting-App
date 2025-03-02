@@ -130,6 +130,7 @@ public class ButtonIncDecSet extends RelativeLayout {
         }
 
         /**  -ROBOTO-                                (*^(&% WEIRD BOOLEAN "setvalue" CODE I MADE UP ^&$%#$
+         *   -Tawfish-                               HAVING PROBLEM WITH BUTTONINCDECSET XML TAG WHAT THE @#$%
         public void setValue(boolean boolvalue) {
             if (boolvalue = falseValue) {
                 boolvalue = false;

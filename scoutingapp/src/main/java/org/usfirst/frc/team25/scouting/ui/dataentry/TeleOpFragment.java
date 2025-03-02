@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
@@ -19,7 +18,9 @@ import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 public class TeleOpFragment extends Fragment implements EntryFragment {
 
     private ScoutEntry entry;
-    private ButtonIncDecSet levelOne, levelOneTeleopInc, levelOneTeleopDec, levelTwoTeleopInc, levelTwoTeleopDec, levelThreeTeleop, levelFourTeleop, coralCount, netTeleop, processorTeleop, missedTeleop, minFoulTeleop, majFoulTeleop;
+    private ButtonIncDecSet levelOne, levelOneTeleopInc, levelOneTeleopDec, levelTwoTeleopInc, levelTwoTeleopDec,
+            levelThreeTeleop, levelFourTeleop, coralCount, netTeleop, processorTeleop, missedTeleop, minFoulTeleop,
+            majFoulTeleop, buttonProcessorInc, buttonProcessorDec;
 
 
 
@@ -47,6 +48,10 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         levelOneTeleopInc = view.findViewById(R.id.inc_button_level_1);
         levelOneTeleopDec = view.findViewById(R.id.dec_button_level_1);
+
+        buttonProcessorInc = view.findViewById(R.id.inc_button_processor);
+        buttonProcessorDec = view.findViewById(R.id.dec_button_processor);
+
         levelOneTeleopInc = Integer.parseInt(levelOneTeleopInc);
         levelTwoTeleopInc = view.findViewById(R.id.inc_button_level_2);
         levelTwoTeleopDec = view.findViewById(R.id.dec_button_level_2);
@@ -61,6 +66,24 @@ public class TeleOpFragment extends Fragment implements EntryFragment {
 
         Button continueButton = view.findViewById(R.id.teleop_continue);
 
+        ButtonIncDecSet[] enablingMetrics = new ButtonIncDecSet[]{buttonProcessorDec, buttonProcessorInc};
+
+        for  (ButtonIncDecSet set : enablingMetrics) {
+            set.incButton.setOnClickListener(view1 -> {
+                set.increment();
+            });
+            set.decButton.setOnClickListener(view1 -> {
+                set.decrement();
+            });
+        }
+
+        buttonProcessorInc.incButton.setOnClickListener(view1 -> {
+            buttonProcessorInc.increment();
+        });
+
+        buttonProcessorDec.decButton.setOnClickListener(view1 -> {
+            buttonProcessorDec.decrement();
+        });
 
         autoPopulate();
 

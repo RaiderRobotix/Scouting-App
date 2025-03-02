@@ -1,7 +1,6 @@
 package org.usfirst.frc.team25.scouting.ui.dataentry;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -10,23 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.usfirst.frc.team25.scouting.R;
 import org.usfirst.frc.team25.scouting.data.FileManager;
-import org.usfirst.frc.team25.scouting.data.Settings;
 import org.usfirst.frc.team25.scouting.data.models.PostMatch;
-import org.usfirst.frc.team25.scouting.data.models.PreMatch;
 import org.usfirst.frc.team25.scouting.data.models.ScoutEntry;
-import org.usfirst.frc.team25.scouting.data.models.TeleOp;
 import org.usfirst.frc.team25.scouting.ui.views.ButtonIncDecSet;
-
-import java.util.ArrayList;
 
 import static org.usfirst.frc.team25.scouting.ui.UiHelper.hideKeyboard;
 
